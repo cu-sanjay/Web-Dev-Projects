@@ -20,8 +20,11 @@
         aria-label="City name"
         autocomplete="off"
       />
+      <button id="locate-btn" class="btn btn--icon" aria-label="Use my location">📍</button>
       <button id="search-btn" class="btn">Search</button>
     </div>
+
+    <div id="history" class="history" aria-label="Recent searches"></div>
 
     <p id="error" class="error" hidden></p>
 
@@ -55,6 +58,8 @@
           <span id="visibility" class="detail-value"></span>
         </div>
       </div>
+
+      <div id="forecast" class="forecast" aria-label="5-day forecast"></div>
     </section>
   </main>
 
