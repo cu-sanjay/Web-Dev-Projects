@@ -27,8 +27,6 @@ NSoC '26, GSSoC, GSoC and Hacktoberfest along the way.
 
 </div>
 
----
-
 ## What is this?
 
 `Web-Dev-Projects` is a community repository where developers — especially
@@ -78,12 +76,14 @@ Four reference projects ship with the repo so you can see the expected shape:
 Open any of them, read the README, copy the structure.
 
 ## The showcase page
-
-The file `index.html` at the repo root is a fully responsive, classic UI that
+>[!IMPORTANT]
+> The file `index.html` at the repo root is a fully responsive, classic UI that
 lists every project under `Projects/`. It reads from `projects.json`, which is
 regenerated on every push by
 [`.github/workflows/index-projects.yml`](./.github/workflows/index-projects.yml).
-You never edit `projects.json` by hand — just ship your folder and the index
+
+>[!WARNING]
+> You never edit `projects.json` by hand — just ship your folder and the index
 takes care of itself.
 
 The page is published with GitHub Pages from the `main` branch.
