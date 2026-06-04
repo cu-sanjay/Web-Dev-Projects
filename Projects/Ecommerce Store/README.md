@@ -1,6 +1,6 @@
-# E-commerce Store
+# Ecommerce Store
 
-A premium e-commerce storefront built with vanilla HTML, CSS, and JavaScript. Features a dynamic product catalog with multi-attribute filtering, glassmorphic cart drawer, and step-based checkout with validation.
+A premium Ecommerce store built with vanilla HTML, CSS, and JavaScript. Features a dynamic product catalog with multi-attribute filtering, glassmorphic cart drawer, and step-based checkout with validation.
 
 ## Features
 
