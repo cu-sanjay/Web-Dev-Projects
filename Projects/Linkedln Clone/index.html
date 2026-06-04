@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LinkedIn Clone</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <div class="nav-left">
+        <div class="nav-logo">
+          <svg viewBox="0 0 24 24" fill="#fff" width="22" height="22"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+        </div>
+        <div class="nav-search">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="search" placeholder="Search" aria-label="Search">
+        </div>
+      </div>
+      <div class="nav-icons">
+        <button class="nav-icon active" data-tab="home" title="Home">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3L3 9v12h7v-5h4v5h7V9z"/></svg>
+          <span class="nav-label">Home</span>
+        </button>
+        <button class="nav-icon" data-tab="network" title="Network">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span class="nav-label">Network</span>
+        </button>
+        <button class="nav-icon" data-tab="jobs" title="Jobs">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          <span class="nav-label">Jobs</span>
+        </button>
+        <button class="nav-icon" data-tab="messages" title="Messages">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <span class="nav-label">Messages</span>
+        </button>
+        <button class="nav-icon nav-avatar" id="navAvatar" aria-label="Profile">
+          <img src="" alt="Profile" id="navAvatarImg">
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="layout">
+    <aside class="left-panel">
+      <div class="card profile-mini">
+        <div class="profile-mini-banner">
+          <img src="" alt="" id="miniBannerImg" class="profile-mini-banner-img">
+        </div>
+        <div class="profile-mini-avatar" id="miniAvatar">
+          <img src="" alt="Avatar" id="miniAvatarImg">
+        </div>
+        <div class="profile-mini-info">
+          <h3 id="miniName">You</h3>
+          <p id="miniHeadline">Full Stack Developer</p>
+        </div>
+        <div class="profile-mini-analytics">
+          <div class="stat-row">
+            <span>Profile viewers</span>
+            <span class="stat-num">142</span>
+          </div>
+          <div class="stat-row">
+            <span>Post impressions</span>
+            <span class="stat-num">1.2K</span>
+          </div>
+          <div class="stat-row" style="border-top:1px solid var(--border);padding-top:8px;margin-top:4px">
+            <span>Connections</span>
+            <span class="stat-num" id="connectionsCount">50</span>
+          </div>
+        </div>
+      </div>
+      <div class="card saved-items">
+        <div class="saved-header">
+          <span>📌 Saved items</span>
+          <span class="stat-num">3</span>
+        </div>
+        <div class="saved-header">
+          <span>👥 Groups</span>
+          <span class="stat-num">2</span>
+        </div>
+        <div class="saved-header">
+          <span>📅 Events</span>
+          <span class="stat-num">1</span>
+        </div>
+        <div class="saved-header">
+          <span># Hashtags</span>
+          <span class="stat-num">5</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="center-panel">
+      <div class="card profile-banner">
+        <div class="banner-bg" id="bannerBg">
+          <img src="" alt="" id="bannerBgImg" class="banner-bg-img">
+        </div>
+        <div class="banner-content">
+          <div class="banner-avatar" id="bannerAvatar">
+            <img src="" alt="Avatar" id="bannerAvatarImg">
+          </div>
+          <button class="edit-btn" id="editProfileBtn" aria-label="Edit profile">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </button>
+          <div class="banner-info">
+            <h1 id="bannerName">Your Name</h1>
+            <p class="banner-headline" id="bannerHeadline">Full Stack Developer | React & Node.js Enthusiast</p>
+            <p class="banner-detail" id="bannerLocation">📍 San Francisco Bay Area</p>
+            <p class="banner-detail" id="bannerCompany">💼 Open Source Contributor</p>
+            <p class="banner-detail" id="bannerEducation">🎓 University of California</p>
+            <p class="banner-connections" id="bannerConnections"><span id="connectionsDisplay">50</span> connections</p>
+            <div class="banner-actions">
+              <button class="btn-primary">Open to</button>
+              <button class="btn-secondary">Add profile section</button>
+              <button class="btn-secondary" id="exportBtn">More</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card post-input-card">
+        <div class="post-input-row">
+          <img src="" alt="You" id="postAvatarImg" class="post-avatar-img">
+          <button class="post-input-btn" id="openPostModal">Start a post</button>
+        </div>
+        <div class="post-actions-row">
+          <button class="post-action" data-action="photo">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#378fe9" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>Photo</span>
+          </button>
+          <button class="post-action" data-action="video">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5f9b41" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+            <span>Video</span>
+          </button>
+          <button class="post-action" data-action="event">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c37d16" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <span>Event</span>
+          </button>
+          <button class="post-action" data-action="article">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e16745" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            <span>Article</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="card feed-card">
+        <div class="feed-sort">
+          <span>Sort by: <strong>Recent</strong> ▼</span>
+        </div>
+        <div class="feed-list" id="feedList">
+          <div class="feed-empty">No posts yet. Share something!</div>
+        </div>
+      </div>
+    </main>
+
+    <aside class="right-panel">
+      <div class="card news-card">
+        <h3>LinkedIn News <span style="font-size:0.7rem;color:var(--text-muted)">▼</span></h3>
+        <div class="news-item"><span class="news-dot">•</span> Tech hiring surges in Q2</div>
+        <div class="news-item"><span class="news-dot">•</span> Remote work trends 2026</div>
+        <div class="news-item"><span class="news-dot">•</span> AI tools for developers</div>
+        <div class="news-item"><span class="news-dot">•</span> Startup funding rebounds</div>
+        <div class="news-item"><span class="news-dot">•</span> Open source communities grow</div>
+      </div>
+      <div class="card people-card">
+        <h3>People you may know</h3>
+        <div class="people-list" id="peopleList"></div>
+      </div>
+    </aside>
+  </div>
+
+  <div class="modal-overlay" id="editModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Edit Profile</h2>
+        <button class="modal-close" id="modalClose">&times;</button>
+      </div>
+      <form class="modal-body" id="editForm">
+        <div class="form-group">
+          <label for="editName">Full Name</label>
+          <input type="text" id="editName" required>
+        </div>
+        <div class="form-group">
+          <label for="editHeadline">Headline</label>
+          <input type="text" id="editHeadline" required>
+        </div>
+        <div class="form-group">
+          <label for="editLocation">Location</label>
+          <input type="text" id="editLocation" required>
+        </div>
+        <div class="form-group">
+          <label for="editCompany">Current Company</label>
+          <input type="text" id="editCompany" required>
+        </div>
+        <div class="form-group">
+          <label for="editEducation">Education</label>
+          <input type="text" id="editEducation">
+        </div>
+        <div class="form-group">
+          <label for="editAvatarUrl">Profile Photo URL</label>
+          <input type="url" id="editAvatarUrl" placeholder="https://images.unsplash.com/photo-...">
+        </div>
+        <div class="form-group">
+          <label for="editBannerUrl">Banner Background URL</label>
+          <input type="url" id="editBannerUrl" placeholder="https://images.unsplash.com/photo-...">
+        </div>
+        <div class="form-group">
+          <label for="editConnections">Connections</label>
+          <input type="number" id="editConnections" min="0" required>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary" id="modalCancel">Cancel</button>
+          <button type="submit" class="btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="postModal">
+    <div class="modal post-modal">
+      <div class="modal-header">
+        <h2>Create a post</h2>
+        <button class="modal-close" id="postModalClose">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="post-modal-user">
+          <img src="" alt="You" id="postModalAvatar">
+          <span id="postModalName">Your Name</span>
+        </div>
+        <textarea class="post-textarea" id="postTextarea" placeholder="What do you want to talk about?" rows="4"></textarea>
+        <div class="post-emoji-bar">
+          <button class="post-emoji-btn" data-emoji="💡">💡</button>
+          <button class="post-emoji-btn" data-emoji="🚀">🚀</button>
+          <button class="post-emoji-btn" data-emoji="🔥">🔥</button>
+          <button class="post-emoji-btn" data-emoji="💻">💻</button>
+          <button class="post-emoji-btn" data-emoji="🎯">🎯</button>
+          <button class="post-emoji-btn" data-emoji="📢">📢</button>
+          <button class="post-emoji-btn" data-emoji="❤️">❤️</button>
+          <button class="post-emoji-btn" data-emoji="👍">👍</button>
+          <button class="post-emoji-btn" data-emoji="✨">✨</button>
+          <button class="post-emoji-btn" data-emoji="🤖">🤖</button>
+        </div>
+        <div class="modal-actions" style="margin-top:12px">
+          <button class="btn-primary" id="postSubmit" style="width:100%">Post</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+  <script src="script.js"></script>
+</body>
+</html>
