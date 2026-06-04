@@ -1,11 +1,16 @@
 {
   "title": "Chat Room",
-  "description": "A real-time multi-tab chat room using BroadcastChannel API and localStorage — no server needed.",
+  "description": "A real-time multi-tab chat room using BroadcastChannel API and localStorage \u2014 no server needed.",
+  "entry": "index.html",
+  "tags": [
+    "chat",
+    "real-time",
+    "broadcastchannel",
+    "vanilla-js",
+    "localstorage"
+  ],
   "author": {
     "name": "Shubham Upadhyay",
     "github": "SHUBHAM2775"
-  },
-  "tags": ["chat", "real-time", "broadcastchannel", "vanilla-js", "localstorage"],
-  "entry": "index.html",
-  "thumbnail": "thumbnail.svg"
+  }
 }

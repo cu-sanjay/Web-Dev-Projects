@@ -1,6 +1,6 @@
-# Resume Builder Form
+# Developer Portfolio Builder
 
-A powerful, modern resume builder with real-time preview, multiple templates, and print-to-PDF functionality.
+A premium developer portfolio builder with live preview, customizable sections, and responsive export-ready layouts.
 
 ## Features
 

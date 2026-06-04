@@ -1,11 +1,8 @@
 {
-  "name": "Habit-Tracker",
+  "title": "Habit Tracker",
   "description": "habit-bloom is a beautiful habit-tracking web app that help users build consistency",
-  "author": {
-    "name": "amandeep kujur",
-    "github": "aman-bot06"
-  },
-  "tags":[
+  "entry": "index.js",
+  "tags": [
     "Responsive UI",
     "Local Storage",
     "Dark Mode",
@@ -13,7 +10,9 @@
     "GitHub Contribution Graph",
     "API Integration"
   ],
-  "entry": "index.js",
-  "thumbnail": "thumbnail.png"
+  "author": {
+    "name": "amandeep kujur",
+    "github": "aman-bot06"
+  }
 }
 

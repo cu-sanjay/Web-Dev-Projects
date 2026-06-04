@@ -1,4 +1,4 @@
-# Calendar & Scheduling App
+# Calendar And Scheduling App
 
 A production-grade organizational timeline application designed to compute calendar layouts completely on client-side threads. Handles dynamic cell creation structures alongside targeted local databank storage schemas.
 
