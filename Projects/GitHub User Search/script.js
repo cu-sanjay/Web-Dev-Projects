@@ -15,6 +15,15 @@ const errorTitle = document.getElementById('errorTitle');
 const errorDesc = document.getElementById('errorDesc');
 const profileDashboard = document.getElementById('profileDashboard');
 
+// Pagination State
+let allRepos = [];
+let currentPage = 1;
+const reposPerPage = 6;
+
+const prevPageBtn = document.getElementById('prevPageBtn');
+const nextPageBtn = document.getElementById('nextPageBtn');
+const pageIndicator = document.getElementById('pageIndicator');
+
 // Theme Switcher Logic
 function setTheme(theme) {
   htmlDoc.setAttribute('data-theme', theme);
@@ -39,7 +48,7 @@ themeToggleBtn.addEventListener('click', () => {
   setTheme(currentTheme === 'dark' ? 'light' : 'dark');
 });
 
-// Update dynamic activity graphs to match light/dark settings
+// Update dynamic activity graphs to match light/dark settings with orange theme colors
 function updateGraphThemes(theme) {
   const username = usernameInput.value.trim();
   if (!username) return;
@@ -61,9 +70,8 @@ function updateGraphThemes(theme) {
       const container = document.querySelector('.heatmap-img-container');
       if (container) container.innerHTML = '<p class="no-data-msg">Contribution graph unavailable</p>';
     };
-    heatmapImg.src = theme === 'light'
-      ? `https://ghchart.rshah.org/0891b2/${username}`
-      : `https://ghchart.rshah.org/06b6d4/${username}`;
+    // Render chart with orange theme color (ea580c)
+    heatmapImg.src = `https://ghchart.rshah.org/ea580c/${username}`;
   }
   
   // Recreate line graph image if missing
@@ -81,8 +89,8 @@ function updateGraphThemes(theme) {
       if (container) container.innerHTML = '<p class="no-data-msg">Activity graph unavailable</p>';
     };
     lineGraphImg.src = theme === 'light'
-      ? `https://github-readme-activity-graph.vercel.app/graph?username=${username}&bg_color=ffffff&color=0891b2&line=2563eb&point=1a1824&area=true&hide_border=true`
-      : `https://github-readme-activity-graph.vercel.app/graph?username=${username}&bg_color=12101e&color=06b6d4&line=3b82f6&point=fdfdfd&area=true&hide_border=true`;
+      ? `https://github-readme-activity-graph.vercel.app/graph?username=${username}&bg_color=ffffff&color=ea580c&line=c2410c&point=09090b&area=true&hide_border=true`
+      : `https://github-readme-activity-graph.vercel.app/graph?username=${username}&bg_color=18181b&color=ff7b00&line=ea580c&point=fafafa&area=true&hide_border=true`;
   }
 }
 
@@ -179,7 +187,7 @@ function formatJoinedDate(isoString) {
   return `Joined ${month} ${day < 10 ? '0' + day : day}, ${year}`;
 }
 
-// Language Color Mapping
+// Language Color Mapping (Orange and neutral theme variations)
 function getLanguageColor(language) {
   const colors = {
     JavaScript: '#f1e05a',
@@ -197,7 +205,7 @@ function getLanguageColor(language) {
     PHP: '#4F5D95',
     Shell: '#89e051'
   };
-  return colors[language] || '#8d8a9e';
+  return colors[language] || '#71717a';
 }
 
 // Update Meta Row Helper
@@ -289,7 +297,6 @@ function populateLanguages(repos) {
     return;
   }
   
-  // Sort languages by count
   const sortedLangs = Object.keys(languageCounts).map(lang => ({
     name: lang,
     count: languageCounts[lang],
@@ -299,7 +306,6 @@ function populateLanguages(repos) {
   sortedLangs.forEach(lang => {
     const item = document.createElement('div');
     item.className = 'language-item';
-    
     const color = getLanguageColor(lang.name);
     
     item.innerHTML = `
@@ -378,27 +384,20 @@ function populateAchievements(profileData, repos) {
   });
 }
 
-// Populate Pinned/Top and Recent Repositories lists
+// Populate repositories grids and handle local pagination logic
 function populateRepos(repos) {
   const pinnedReposGrid = document.getElementById('pinnedReposGrid');
-  const reposGrid = document.getElementById('reposGrid');
-  
   pinnedReposGrid.innerHTML = '';
-  reposGrid.innerHTML = '';
-
+  
   if (!repos || repos.length === 0) {
     const emptyMarkup = '<div style="grid-column: 1 / -1; text-align: center; color: var(--text-muted); padding: 24px;">No repositories available.</div>';
     pinnedReposGrid.innerHTML = emptyMarkup;
-    reposGrid.innerHTML = emptyMarkup;
     return;
   }
-
-  // Sort repos by stars to get "Pinned / Top Starred"
+  
+  // Sort repos by stars to get "Pinned / Top Starred" (Max 4 items)
   const topStarred = [...repos].sort((a, b) => b.stargazers_count - a.stargazers_count).slice(0, 4);
   
-  // Sort repos by updated_at date to get "Recent Active"
-  const recentActive = [...repos].sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at)).slice(0, 4);
-
   const makeCard = (repo) => {
     const card = document.createElement('article');
     card.className = 'repo-card card';
@@ -424,10 +423,81 @@ function populateRepos(repos) {
     `;
     return card;
   };
-
+  
   topStarred.forEach(repo => pinnedReposGrid.appendChild(makeCard(repo)));
-  recentActive.forEach(repo => reposGrid.appendChild(makeCard(repo)));
 }
+
+// Renders the current active page for all repositories grid
+function renderPaginatedRepos() {
+  const reposGrid = document.getElementById('reposGrid');
+  reposGrid.innerHTML = '';
+  
+  if (!allRepos || allRepos.length === 0) {
+    reposGrid.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; color: var(--text-muted); padding: 24px;">No repositories available.</div>';
+    prevPageBtn.disabled = true;
+    nextPageBtn.disabled = true;
+    pageIndicator.textContent = 'Page 1 of 1';
+    return;
+  }
+  
+  const sortedRepos = [...allRepos].sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+  const totalPages = Math.ceil(sortedRepos.length / reposPerPage);
+  
+  if (currentPage > totalPages) currentPage = totalPages;
+  if (currentPage < 1) currentPage = 1;
+  
+  const startIndex = (currentPage - 1) * reposPerPage;
+  const endIndex = startIndex + reposPerPage;
+  const paginatedRepos = sortedRepos.slice(startIndex, endIndex);
+  
+  const makeCard = (repo) => {
+    const card = document.createElement('article');
+    card.className = 'repo-card card';
+    const langSection = repo.language ? `
+      <span class="repo-lang-dot" style="background-color: ${getLanguageColor(repo.language)}"></span>
+      <span>${repo.language}</span>
+    ` : '';
+    
+    card.innerHTML = `
+      <div class="repo-card-title">
+        <h4><a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">${repo.name}</a></h4>
+      </div>
+      <p class="repo-desc">${repo.description || 'No description provided.'}</p>
+      <div class="repo-meta">
+        <div class="repo-left-meta">
+          ${langSection}
+        </div>
+        <div style="display: flex; gap: 12px; align-items: center;">
+          <span class="repo-stars" title="Stars">⭐ ${repo.stargazers_count}</span>
+          <span title="Forks">🍴 ${repo.forks_count}</span>
+        </div>
+      </div>
+    `;
+    return card;
+  };
+  
+  paginatedRepos.forEach(repo => reposGrid.appendChild(makeCard(repo)));
+  
+  pageIndicator.textContent = `Page ${currentPage} of ${totalPages}`;
+  prevPageBtn.disabled = currentPage === 1;
+  nextPageBtn.disabled = currentPage === totalPages;
+}
+
+// Bind pagination navigation listeners
+prevPageBtn.addEventListener('click', () => {
+  if (currentPage > 1) {
+    currentPage--;
+    renderPaginatedRepos();
+  }
+});
+
+nextPageBtn.addEventListener('click', () => {
+  const totalPages = Math.ceil(allRepos.length / reposPerPage);
+  if (currentPage < totalPages) {
+    currentPage++;
+    renderPaginatedRepos();
+  }
+});
 
 // Fetch Profile README (.github or special username profile repo README)
 async function fetchProfileReadme(username) {
@@ -563,11 +633,15 @@ async function performSearch(username) {
       console.error('Failed to fetch repositories', repoErr);
     }
 
+    allRepos = reposData;
+    currentPage = 1;
+
     // Populate dashboard fields
     populateProfile(userData);
     populateLanguages(reposData);
     populateAchievements(userData, reposData);
     populateRepos(reposData);
+    renderPaginatedRepos();
     
     // Update Theme Graphs & fetch timeline data
     updateGraphThemes(htmlDoc.getAttribute('data-theme'));

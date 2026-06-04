@@ -164,8 +164,15 @@
             <h3>Pinned & Top Starred Repositories</h3>
             <div id="pinnedReposGrid" class="repos-grid"></div>
             
-            <h3 style="margin-top: 32px;">Recent Active Repositories</h3>
+            <h3 style="margin-top: 32px;">All Public Repositories</h3>
             <div id="reposGrid" class="repos-grid"></div>
+            
+            <!-- Pagination controls container -->
+            <div id="reposPagination" class="pagination-container">
+              <button type="button" id="prevPageBtn" class="btn btn-secondary" disabled>Previous</button>
+              <span id="pageIndicator" class="page-indicator">Page 1 of 1</span>
+              <button type="button" id="nextPageBtn" class="btn btn-secondary" disabled>Next</button>
+            </div>
           </section>
         </div>
 
