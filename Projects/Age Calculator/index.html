@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Precision Age Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="calculator-card">
+        <header class="card-header">
+            <h2>Age Calculator</h2>
+            <p>Discover your exact life duration and birthday metrics</p>
+        </header>
+
+        <div class="input-block">
+            <label for="birth-date">Select Your Date of Birth</label>
+            <div class="input-row">
+                <input type="date" id="birth-date" max="">
+                <button id="calculate-btn">Calculate Age</button>
+            </div>
+            <p id="error-message" class="error-msg" hidden>Please select a valid date in the past.</p>
+        </div>
+
+        <div class="results-dashboard" id="results-panel" hidden>
+            <div class="primary-metrics">
+                <div class="metric-box">
+                    <span id="res-years" class="metric-value">00</span>
+                    <span class="metric-label">Years</span>
+                </div>
+                <div class="metric-box">
+                    <span id="res-months" class="metric-value">00</span>
+                    <span class="metric-label">Months</span>
+                </div>
+                <div class="metric-box">
+                    <span id="res-days" class="metric-value">00</span>
+                    <span class="metric-label">Days</span>
+                </div>
+            </div>
+
+            <div class="birthday-countdown-banner">
+                <h3>🎉 Next Birthday Countdown</h3>
+                <div class="countdown-digits">
+                    <span id="next-months">0</span> months and <span id="next-days">0</span> days left
+                </div>
+            </div>
+
+            <div class="lifetime-stats">
+                <h3>📊 Lifetime Statistics</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-label">Total Months Lived</span>
+                        <span id="stat-months" class="stat-value">—</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Total Weeks Lived</span>
+                        <span id="stat-weeks" class="stat-value">—</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Total Days Lived</span>
+                        <span id="stat-days" class="stat-value">—</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Total Hours Lived (Approx)</span>
+                        <span id="stat-hours" class="stat-value">—</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

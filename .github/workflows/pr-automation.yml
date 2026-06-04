@@ -1,0 +1,81 @@
+name: PR Automation
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  pull-requests: write
+  contents: write
+  issues: write
+
+jobs:
+  manage-prs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Process PR Logic
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const prNum = context.payload.pull_request.number;
+
+            const { data: files } = await github.rest.pulls.listFiles({ owner, repo, pull_number: prNum });
+
+            const rootProjectJsonModified = files.some(f => f.filename === 'project.json');
+
+            let validFolderFound = false;
+            const directories = {};
+
+            files.forEach(f => {
+              const parts = f.filename.split('/');
+              if (parts.length > 1) {
+                const dir = parts.slice(0, -1).join('/');
+                const file = parts[parts.length - 1].toLowerCase();
+                if (!directories[dir]) directories[dir] = [];
+                directories[dir].push(file);
+              }
+            });
+
+            for (const dir in directories) {
+              const dirFiles = directories[dir];
+              const hasReadme = dirFiles.some(f => f.includes('readme'));
+              const hasProjectJson = dirFiles.some(f => f === 'project.json');
+              if (hasReadme && hasProjectJson) {
+                validFolderFound = true;
+                break;
+              }
+            }
+
+            if (rootProjectJsonModified) {
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: prNum,
+                body: 'PR failed checks: Modifications to the root `project.json` are not allowed. Please keep changes inside the new project folder only.'
+              });
+              return;
+            }
+
+            if (!validFolderFound) {
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: prNum,
+                body: 'PR failed checks: Ensure your new folder contains both a `README.md` and a `project.json` file.'
+              });
+              return;
+            }
+
+            await github.rest.issues.addLabels({
+              owner,
+              repo,
+              issue_number: prNum,
+              labels: ["NSoC'26", "NSoC'26 Accepted", 'level3']
+            });
+
+            await github.rest.pulls.merge({
+              owner,
+              repo,
+              pull_number: prNum,
+              merge_method: 'squash'
+            });

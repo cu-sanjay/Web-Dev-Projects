@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Booking Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        
+        <aside class="search-sidebar">
+            <header class="sidebar-header">
+                <h2>RoamPlan</h2>
+                <p>Explore your next destination</p>
+            </header>
+
+            <div class="search-tabs">
+                <button class="tab-btn active" data-mode="flights">✈️ Flights</button>
+                <button class="tab-btn" data-mode="hotels">🏨 Hotels</button>
+            </div>
+
+            <form id="search-form" onsubmit="event.preventDefault();">
+                <div class="input-group" id="origin-group">
+                    <label for="search-origin">From</label>
+                    <input type="text" id="search-origin" value="Nagpur (NAG)" readonly>
+                </div>
+                
+                <div class="input-group">
+                    <label id="destination-label" for="search-destination">To Destination</label>
+                    <input type="text" id="search-destination" value="bengaluru" placeholder="e.g., mumbai, berlin, london, paris" required>
+                </div>
+
+                <div class="input-grid">
+                    <div class="input-group">
+                        <label for="date-start">Departure</label>
+                        <input type="date" id="date-start" required>
+                    </div>
+                    <div class="input-group" id="date-end-group">
+                        <label for="date-end">Return</label>
+                        <input type="date" id="date-end">
+                    </div>
+                </div>
+
+                <button type="button" id="search-btn" class="primary-btn">Search Real-Time Deals</button>
+            </form>
+        </aside>
+
+        <main class="listings-workspace" id="workspace-panel">
+            <header class="workspace-header">
+                <div class="title-area">
+                    <h3 id="listings-title">Available Departures</h3>
+                    <p class="results-count" id="results-count">Enter a valid city slug to fetch real-time data</p>
+                </div>
+                <div id="weather-badge" class="weather-badge" hidden>
+                    <span class="pulse-dot"></span>
+                    <span id="weather-text">--°C</span>
+                </div>
+            </header>
+
+            <div class="cards-scroll-grid" id="listings-grid">
+                <div class="empty-state">
+                    <p>Click "Search Real-Time Deals" to load listings and pull live city data assets.</p>
+                </div>
+            </div>
+        </main>
+
+        <aside class="summary-sidebar">
+            <h3>Trip Overview</h3>
+            
+            <div class="summary-card">
+                <div class="summary-section">
+                    <h4>✈️ Flight Details</h4>
+                    <p id="summary-flight">No flight selected</p>
+                </div>
+
+                <div class="summary-section">
+                    <h4>🏨 Accommodation</h4>
+                    <p id="summary-hotel">No hotel selected</p>
+                </div>
+
+                <hr class="summary-divider">
+
+                <div class="price-row">
+                    <span>Base Fare</span>
+                    <span id="price-base">₹0</span>
+                </div>
+                <div class="price-row">
+                    <span>Taxes &amp; Fees (12%)</span>
+                    <span id="price-tax">₹0</span>
+                </div>
+                <div class="price-row total">
+                    <span>Total Estimated Cost</span>
+                    <span id="price-total">₹0</span>
+                </div>
+
+                <button id="book-now-btn" class="success-btn" disabled>Confirm Booking</button>
+            </div>
+        </aside>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Master - Premium MCQ App</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ================= AUTH VIEW ================= -->
+  <div id="authView" class="auth-wrapper">
+    <div class="auth-card">
+      <div class="auth-header">
+        <div class="logo">
+          <span class="logo-symbol">⚡</span>
+          <h1>QUIZ <span class="sub-logo">Master</span></h1>
+        </div>
+        <p>Your premium gateway to tech knowledge trivia</p>
+      </div>
+
+      <!-- Tab Buttons -->
+      <div class="auth-tabs">
+        <button type="button" id="loginTabBtn" class="auth-tab-btn active">Log In</button>
+        <button type="button" id="signupTabBtn" class="auth-tab-btn">Sign Up</button>
+      </div>
+
+      <!-- Login Form -->
+      <form id="loginForm" class="auth-form active">
+        <div class="form-group">
+          <label for="loginEmail">Email Address</label>
+          <input type="email" id="loginEmail" placeholder="you@example.com" required>
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" placeholder="••••••••" required>
+        </div>
+        <div id="loginError" class="auth-error-msg"></div>
+        <button type="submit" class="btn btn-primary btn-full">Sign In</button>
+      </form>
+
+      <!-- Signup Form -->
+      <form id="signupForm" class="auth-form">
+        <div class="form-group">
+          <label for="signupName">Full Name</label>
+          <input type="text" id="signupName" placeholder="Jane Doe" required>
+        </div>
+        <div class="form-group">
+          <label for="signupEmail">Email Address</label>
+          <input type="email" id="signupEmail" placeholder="you@example.com" required>
+        </div>
+        <div class="form-group">
+          <label for="signupPassword">Password</label>
+          <input type="password" id="signupPassword" placeholder="Minimum 6 characters" required>
+        </div>
+        <div id="signupError" class="auth-error-msg"></div>
+        <button type="submit" class="btn btn-primary btn-full">Create Account</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= MAIN DASHBOARD VIEW ================= -->
+  <div id="dashboardView" class="app-container hidden">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar-pane">
+      <div class="sidebar-top">
+        <div class="logo">
+          <span class="logo-symbol">⚡</span>
+          <h1>QUIZ</h1>
+        </div>
+      </div>
+
+      <!-- User Profile brief in sidebar -->
+      <div class="sidebar-user-profile">
+        <div class="user-avatar-upload-wrapper">
+          <div class="user-avatar-large" id="avatarPreview">JD</div>
+          <label for="avatarUploadInput" class="avatar-edit-badge" title="Change Avatar">📷</label>
+          <input type="file" id="avatarUploadInput" accept="image/*" class="hidden">
+        </div>
+        <div class="user-profile-details">
+          <div class="profile-name" id="profileNameLabel">Jane Doe</div>
+          <div class="profile-points" id="profilePointsLabel">0 PTS</div>
+        </div>
+      </div>
+
+      <nav class="sidebar-menu">
+        <button type="button" class="menu-item active" data-target="playTab">
+          <svg viewBox="0 0 24 24" class="icon-menu"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Start Quizzing
+        </button>
+        <button type="button" class="menu-item" data-target="aiGeneratorTab">
+          <svg viewBox="0 0 24 24" class="icon-menu"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          AI Custom Quiz
+        </button>
+        <button type="button" class="menu-item" data-target="leaderboardTab">
+          <svg viewBox="0 0 24 24" class="icon-menu"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          Leaderboard
+        </button>
+        <button type="button" class="menu-item" data-target="historyTab">
+          <svg viewBox="0 0 24 24" class="icon-menu"><path d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg>
+          Progress & Log
+        </button>
+        <button type="button" class="menu-item" data-target="settingsTab">
+          <svg viewBox="0 0 24 24" class="icon-menu"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          Account Settings
+        </button>
+      </nav>
+
+      <div class="sidebar-bottom-actions">
+        <button type="button" id="logoutBtn" class="btn btn-outline btn-full">Sign Out</button>
+      </div>
+    </aside>
+
+    <!-- Main Workspace -->
+    <main class="workspace-pane">
+      <header class="workspace-header">
+        <h2 id="tabTitle">Start Quizzing</h2>
+        <!-- Theme switcher -->
+        <button type="button" id="themeToggleBtn" class="theme-toggle-btn" title="Toggle Light/Dark Theme">
+          <svg id="moonIcon" viewBox="0 0 24 24" class="icon-theme"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg id="sunIcon" viewBox="0 0 24 24" class="icon-theme hidden"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+      </header>
+
+      <div class="workspace-content">
+        <!-- Tab: Start Quizzing -->
+        <div id="playTab" class="tab-content active">
+          <!-- Game options presets -->
+          <div class="setup-controls card">
+            <h3>Configure Quiz Session</h3>
+            <div class="setup-grid">
+              <div class="form-group">
+                <label for="quizDifficulty">Difficulty Level</label>
+                <select id="quizDifficulty">
+                  <option value="easy">Easy (10 pts per question)</option>
+                  <option value="medium" selected>Medium (20 pts per question)</option>
+                  <option value="hard">Hard (30 pts per question)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="quizTimer">Timer Mode</label>
+                <select id="quizTimer">
+                  <option value="15">15 Seconds / Question</option>
+                  <option value="30" selected>30 Seconds / Question</option>
+                  <option value="0">No Timer</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category grids list -->
+          <div class="categories-header">
+            <h3>Choose a Subject</h3>
+          </div>
+          <div class="categories-grid" id="categoriesGrid">
+            <!-- Rendered in script.js -->
+          </div>
+        </div>
+
+        <!-- Tab: AI Custom Quiz Generator -->
+        <div id="aiGeneratorTab" class="tab-content">
+          <div class="ai-banner">
+            <h3>🤖 AI Custom Quiz Engine</h3>
+            <p>Type any topic or technology and our AI emulator will synthesize a personalized MCQ quiz with appropriate challenges.</p>
+          </div>
+          <div class="card ai-card">
+            <form id="aiPromptForm">
+              <div class="form-group">
+                <label for="aiTopic">Custom Topic / Prompt</label>
+                <input type="text" id="aiTopic" placeholder="e.g. SQL Joins, Kubernetes Pods, Docker Volumes, Git Branching..." required>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="aiDifficulty">Difficulty</label>
+                  <select id="aiDifficulty">
+                    <option value="easy">Easy</option>
+                    <option value="medium" selected>Medium</option>
+                    <option value="hard">Hard</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="aiCount">Number of Questions</label>
+                  <select id="aiCount">
+                    <option value="5" selected>5 Questions</option>
+                    <option value="10">10 Questions</option>
+                  </select>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary btn-full">Generate & Launch AI Quiz</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Tab: Leaderboard -->
+        <div id="leaderboardTab" class="tab-content">
+          <div class="card leaderboard-card">
+            <h3>Global High Scores</h3>
+            <div class="leaderboard-container">
+              <table class="leaderboard-table">
+                <thead>
+                  <tr>
+                    <th>Rank</th>
+                    <th>User</th>
+                    <th align="right">Total Score</th>
+                  </tr>
+                </thead>
+                <tbody id="leaderboardList">
+                  <!-- Rendered dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab: Progress and History Log -->
+        <div id="historyTab" class="tab-content">
+          <!-- Achievement Badges Card -->
+          <div class="card achievements-card">
+            <h3>Unlocked Milestones</h3>
+            <div id="achievementsGrid" class="achievements-grid">
+              <!-- Badges list rendered in script -->
+            </div>
+          </div>
+
+          <!-- History Table logs -->
+          <div class="card history-card">
+            <h3>Detailed Progress History</h3>
+            <div class="history-container">
+              <table class="history-table">
+                <thead>
+                  <tr>
+                    <th>Subject</th>
+                    <th>Difficulty</th>
+                    <th>Accuracy</th>
+                    <th>Score</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody id="historyList">
+                  <!-- Rendered dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab: Account Settings -->
+        <div id="settingsTab" class="tab-content">
+          <div class="card settings-card">
+            <h3>Update Password</h3>
+            <form id="changePasswordForm">
+              <div class="form-group">
+                <label for="newPasswordInput">New Password</label>
+                <input type="password" id="newPasswordInput" placeholder="Minimum 6 characters" required>
+              </div>
+              <button type="submit" class="btn btn-secondary">Update Password</button>
+              <div id="passwordSuccessMsg" class="success-message"></div>
+            </form>
+          </div>
+          <div class="card settings-card danger-zone">
+            <h3>Danger Zone</h3>
+            <p>Deleting your account deletes your score progress and achievement history permanently.</p>
+            <button type="button" id="deleteAccountBtn" class="btn btn-dashed">Delete Account</button>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- ================= ACTIVE INTERACTIVE GAMEPLAY LAYOUT ================= -->
+    <div id="quizGameplayView" class="quiz-overlay hidden">
+      <div class="quiz-container-card">
+        <!-- Quiz Gameplay Header bar -->
+        <header class="quiz-gameplay-header">
+          <div class="quiz-header-left">
+            <span class="active-category-badge" id="activeCategoryBadge">JavaScript</span>
+            <span class="active-progress-text" id="activeProgressLabel">Question 1/5</span>
+          </div>
+          <div class="quiz-header-right">
+            <!-- Timer countdown Ring -->
+            <div class="timer-ring-container" id="timerContainer">
+              <svg class="timer-ring-svg" width="40" height="40">
+                <circle class="timer-ring-bg" cx="20" cy="20" r="16"></circle>
+                <circle class="timer-ring-bar" id="timerProgressRing" cx="20" cy="20" r="16"></circle>
+              </svg>
+              <span class="timer-label" id="timerCountLabel">30</span>
+            </div>
+            <button type="button" id="exitQuizBtn" class="quiz-close-btn" title="Exit Quiz">×</button>
+          </div>
+        </header>
+
+        <!-- Question Body Area -->
+        <div class="quiz-question-body">
+          <div class="progress-bar-container">
+            <div class="progress-bar-fill" id="progressBarFill"></div>
+          </div>
+          <h2 class="question-text" id="questionText">Which keyword is used to declare a block-scoped variable in JavaScript?</h2>
+        </div>
+
+        <!-- Options grids -->
+        <div class="quiz-options-grid" id="optionsGrid">
+          <!-- Rendered in script.js -->
+        </div>
+
+        <!-- Result Summary Card -->
+        <div id="quizResultPanel" class="quiz-result-panel hidden">
+          <div class="result-header">
+            <h2>Quiz Complete!</h2>
+            <div class="result-score-highlight" id="resultScoreText">100 PTS</div>
+            <p class="result-subtitle" id="resultSubtitle">Perfect score! You are a true JavaScript Master.</p>
+          </div>
+          <div class="result-stats">
+            <div class="result-stat-card">
+              <span class="result-stat-value" id="resultCorrectCount">5/5</span>
+              <span class="result-stat-label">Correct Answers</span>
+            </div>
+            <div class="result-stat-card">
+              <span class="result-stat-value" id="resultAccuracy">100%</span>
+              <span class="result-stat-label">Accuracy Ratio</span>
+            </div>
+          </div>
+          <div class="result-actions">
+            <button type="button" id="resultDoneBtn" class="btn btn-primary btn-full">Close & Return to Dashboard</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script src="script.js"></script>
+</body>
+</html>
