@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-06-03T13:04:58.178Z",
-  "count": 9,
+  "generatedAt": "2026-06-04T06:44:35.087Z",
+  "count": 13,
   "projects": [
     {
       "slug": "2048 Game",
@@ -18,7 +18,7 @@
       "entry": "Projects/2048%20Game/index.html",
       "folder": "Projects/2048%20Game",
       "thumbnail": "Projects/2048%20Game/thumbnail.svg",
-      "addedAt": "2026-06-03T13:04:53.824Z"
+      "addedAt": "2026-06-03T13:56:10.373Z"
     },
     {
       "slug": "Daily Wheels",
@@ -36,15 +36,15 @@
       "entry": "Projects/Daily%20Wheels/index.html",
       "folder": "Projects/Daily%20Wheels",
       "thumbnail": "Projects/Daily%20Wheels/thumbnail.svg",
-      "addedAt": "2026-06-03T13:04:53.824Z"
+      "addedAt": "2026-06-03T13:56:10.374Z"
     },
     {
       "slug": "Developer Portfolio Builder",
       "title": "Developer Portfolio Builder",
       "description": "An interactive tool to build, customize, preview, and download professional developer portfolios in real time.",
       "author": {
-        "name": "Mistry Vishwa",
-        "github": "MistryVishwa"
+        "name": "Girish Madarkar",
+        "github": "Girish0902"
       },
       "tags": [
         "productivity",
@@ -55,7 +55,7 @@
       "entry": "Projects/Developer%20Portfolio%20Builder/index.html",
       "folder": "Projects/Developer%20Portfolio%20Builder",
       "thumbnail": "Projects/Developer%20Portfolio%20Builder/thumbnail.svg",
-      "addedAt": "2026-06-03T13:04:53.824Z"
+      "addedAt": "2026-06-03T13:56:10.374Z"
     },
     {
       "slug": "Image Gallery",
@@ -74,7 +74,7 @@
       "entry": "Projects/Image%20Gallery/index.html",
       "folder": "Projects/Image%20Gallery",
       "thumbnail": "Projects/Image%20Gallery/thumbnail.svg",
-      "addedAt": "2026-06-03T13:04:53.825Z"
+      "addedAt": "2026-06-03T13:56:10.380Z"
     },
     {
       "slug": "Markdown Editor",
@@ -94,7 +94,48 @@
       "entry": "Projects/Markdown%20Editor/index.html",
       "folder": "Projects/Markdown%20Editor",
       "thumbnail": "Projects/Markdown%20Editor/thumbnail.svg",
-      "addedAt": "2026-06-03T13:04:53.825Z"
+      "addedAt": "2026-06-03T13:56:10.383Z"
+    },
+    {
+      "slug": "Memory Card Game",
+      "title": "Memory Card Game",
+      "description": "A gamified memory match card game with 3D flip animations, leveling system, combo streaks, XP progression, multiple realms, and localStorage persistence.",
+      "author": {
+        "name": "Girish Madarkar",
+        "github": "Girish0902"
+      },
+      "tags": [
+        "game",
+        "memory",
+        "vanilla-js",
+        "gamified",
+        "localstorage",
+        "css-3d"
+      ],
+      "entry": "Projects/Memory%20Card%20Game/index.html",
+      "folder": "Projects/Memory%20Card%20Game",
+      "thumbnail": null,
+      "addedAt": "2026-06-03T18:12:10.900Z"
+    },
+    {
+      "slug": "Movie Search App",
+      "title": "Movie Search App",
+      "description": "Search for movies using the OMDb API with a sleek dark glassmorphism UI and detailed modal view.",
+      "author": {
+        "name": "Girish Madarkar",
+        "github": "Girish0902"
+      },
+      "tags": [
+        "api",
+        "javascript",
+        "vanilla-js",
+        "search",
+        "glass-ui"
+      ],
+      "entry": "Projects/Movie%20Search%20App/index.html",
+      "folder": "Projects/Movie%20Search%20App",
+      "thumbnail": "Projects/Movie%20Search%20App/thumbnail.svg",
+      "addedAt": "2026-06-03T14:00:38.448Z"
     },
     {
       "slug": "Music Player",
@@ -114,7 +155,28 @@
       "entry": "Projects/Music%20Player/index.html",
       "folder": "Projects/Music%20Player",
       "thumbnail": "Projects/Music%20Player/thumbnail.svg",
-      "addedAt": "2026-06-03T13:04:53.826Z"
+      "addedAt": "2026-06-03T13:56:10.386Z"
+    },
+    {
+      "slug": "Netflix Clone",
+      "title": "Netflix Clone",
+      "description": "A premium Netflix-inspired streaming UI with cinematic hero banner, dynamic multi-row content rails from static JSON, hover-scale cards with inline metadata, and a detailed movie modal — all vanilla JS.",
+      "author": {
+        "name": "Girish Madarkar",
+        "github": "Girish0902"
+      },
+      "tags": [
+        "netflix",
+        "streaming",
+        "vanilla-js",
+        "carousel",
+        "cinematic",
+        "responsive"
+      ],
+      "entry": "Projects/Netflix%20Clone/index.html",
+      "folder": "Projects/Netflix%20Clone",
+      "thumbnail": "Projects/Netflix%20Clone/thumbnail.svg",
+      "addedAt": "2026-06-04T06:01:48.449Z"
     },
     {
       "slug": "Notes App",
@@ -132,7 +194,7 @@
       "entry": "Projects/Notes%20App/index.html",
       "folder": "Projects/Notes%20App",
       "thumbnail": "Projects/Notes%20App/thumbnail.svg",
-      "addedAt": "2026-06-03T13:04:53.826Z"
+      "addedAt": "2026-06-03T13:56:10.386Z"
     },
     {
       "slug": "Pomodoro Timer",
@@ -152,7 +214,28 @@
       "entry": "Projects/Pomodoro%20Timer/index.html",
       "folder": "Projects/Pomodoro%20Timer",
       "thumbnail": "Projects/Pomodoro%20Timer/thumbnail.svg",
-      "addedAt": "2026-06-03T13:04:53.826Z"
+      "addedAt": "2026-06-03T13:56:10.389Z"
+    },
+    {
+      "slug": "Resume Builder Form",
+      "title": "Resume Builder Form",
+      "description": "A dynamic resume builder with real-time preview, dual templates (Classic Minimalist & Modern Professional), customizable accent colors, tag-based skills/languages, photo upload via File Reader API, and print-to-PDF support.",
+      "author": {
+        "name": "Girish Madarkar",
+        "github": "Girish0902"
+      },
+      "tags": [
+        "resume",
+        "builder",
+        "vanilla-js",
+        "real-time",
+        "localstorage",
+        "print"
+      ],
+      "entry": "Projects/Resume%20Builder%20Form/index.html",
+      "folder": "Projects/Resume%20Builder%20Form",
+      "thumbnail": null,
+      "addedAt": "2026-06-03T18:58:55.945Z"
     },
     {
       "slug": "Weather Finder",
@@ -170,7 +253,7 @@
       "entry": "Projects/Weather%20Finder/index.html",
       "folder": "Projects/Weather%20Finder",
       "thumbnail": null,
-      "addedAt": "2026-06-03T13:04:53.826Z"
+      "addedAt": "2026-06-03T13:56:10.392Z"
     }
   ]
 }
