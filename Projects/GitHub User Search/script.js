@@ -26,6 +26,8 @@ function setTheme(theme) {
     sunIcon.classList.add('hidden');
     moonIcon.classList.remove('hidden');
   }
+  // Refresh graphs if dashboard is visible to match current theme
+  updateGraphThemes(theme);
 }
 
 // Initialize Theme
@@ -35,6 +37,39 @@ setTheme(savedTheme);
 themeToggleBtn.addEventListener('click', () => {
   const currentTheme = htmlDoc.getAttribute('data-theme');
   setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+});
+
+// Update dynamic activity graphs to match light/dark settings
+function updateGraphThemes(theme) {
+  const username = usernameInput.value.trim();
+  if (!username) return;
+  
+  const heatmapImg = document.getElementById('contributionHeatmap');
+  const lineGraphImg = document.getElementById('activityLineGraph');
+  
+  if (theme === 'light') {
+    heatmapImg.src = `https://ghchart.rshah.org/0891b2/${username}`;
+    lineGraphImg.src = `https://github-readme-activity-graph.vercel.app/graph?username=${username}&bg_color=ffffff&color=0891b2&line=2563eb&point=1a1824&area=true&hide_border=true`;
+  } else {
+    heatmapImg.src = `https://ghchart.rshah.org/06b6d4/${username}`;
+    lineGraphImg.src = `https://github-readme-activity-graph.vercel.app/graph?username=${username}&bg_color=12101e&color=06b6d4&line=3b82f6&point=fdfdfd&area=true&hide_border=true`;
+  }
+}
+
+// Tabbed Dashboard Pane Switcher
+const tabButtons = document.querySelectorAll('.tab-btn');
+const tabPanes = document.querySelectorAll('.tab-pane');
+
+tabButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const targetTab = button.getAttribute('data-tab');
+    
+    tabButtons.forEach(btn => btn.classList.remove('active'));
+    tabPanes.forEach(pane => pane.classList.remove('active'));
+    
+    button.classList.add('active');
+    document.getElementById(`tab-${targetTab}`).classList.add('active');
+  });
 });
 
 // Search History Logic
@@ -51,7 +86,6 @@ function loadHistory() {
 }
 
 function saveHistory(username) {
-  // Normalize search history array to unique items
   const existingIndex = searchHistory.findIndex(u => u.toLowerCase() === username.toLowerCase());
   if (existingIndex !== -1) {
     searchHistory.splice(existingIndex, 1);
@@ -148,6 +182,15 @@ function updateMetaRow(rowId, textId, value) {
   }
 }
 
+// Reset tabs back to "Overview" on search
+function resetTabs() {
+  tabButtons.forEach(btn => btn.classList.remove('active'));
+  tabPanes.forEach(pane => pane.classList.remove('active'));
+  
+  tabButtons[0].classList.add('active');
+  tabPanes[0].classList.add('active');
+}
+
 // Populate UI Profile Data
 function populateProfile(data) {
   document.getElementById('avatarImg').src = data.avatar_url || '';
@@ -191,25 +234,149 @@ function populateProfile(data) {
   document.getElementById('statFollowing').textContent = data.following ?? 0;
 }
 
-// Populate UI Repository Grid Data
+// Calculate and render primary language distribution
+function populateLanguages(repos) {
+  const container = document.getElementById('languagesContainer');
+  container.innerHTML = '';
+  
+  if (!repos || repos.length === 0) {
+    container.innerHTML = '<p class="no-data-msg">No repository language data available.</p>';
+    return;
+  }
+  
+  const languageCounts = {};
+  let totalValidRepos = 0;
+  
+  repos.forEach(repo => {
+    if (repo.language) {
+      languageCounts[repo.language] = (languageCounts[repo.language] || 0) + 1;
+      totalValidRepos++;
+    }
+  });
+  
+  if (totalValidRepos === 0) {
+    container.innerHTML = '<p class="no-data-msg">No language metrics reported.</p>';
+    return;
+  }
+  
+  // Sort languages by count
+  const sortedLangs = Object.keys(languageCounts).map(lang => ({
+    name: lang,
+    count: languageCounts[lang],
+    percentage: Math.round((languageCounts[lang] / totalValidRepos) * 100)
+  })).sort((a, b) => b.count - a.count);
+  
+  sortedLangs.forEach(lang => {
+    const item = document.createElement('div');
+    item.className = 'language-item';
+    
+    const color = getLanguageColor(lang.name);
+    
+    item.innerHTML = `
+      <div class="language-header">
+        <div class="language-name-dot">
+          <span class="repo-lang-dot" style="background-color: ${color}"></span>
+          <span>${lang.name}</span>
+        </div>
+        <span>${lang.percentage}%</span>
+      </div>
+      <div class="language-bar">
+        <div class="language-progress" style="width: ${lang.percentage}%; background-color: ${color}"></div>
+      </div>
+    `;
+    container.appendChild(item);
+  });
+}
+
+// Compute dynamic achievements based on user parameters
+function populateAchievements(profileData, repos) {
+  const container = document.getElementById('achievementsContainer');
+  container.innerHTML = '';
+  
+  const totalStars = repos.reduce((sum, r) => sum + r.stargazers_count, 0);
+  const joinYear = new Date(profileData.created_at).getUTCFullYear();
+  
+  const badges = [
+    {
+      id: 'early_adopter',
+      icon: '🚀',
+      title: 'Early Adopter',
+      desc: 'Joined before 2015',
+      unlocked: joinYear < 2015
+    },
+    {
+      id: 'pro_coder',
+      icon: '🏆',
+      title: 'Pro Coder',
+      desc: 'Over 50 repositories',
+      unlocked: (profileData.public_repos || 0) >= 50
+    },
+    {
+      id: 'star_magnet',
+      icon: '⭐',
+      title: 'Star Magnet',
+      desc: 'Top repos stars > 50',
+      unlocked: totalStars >= 50
+    },
+    {
+      id: 'community_leader',
+      icon: '👥',
+      title: 'Influencer',
+      desc: 'Over 100 followers',
+      unlocked: (profileData.followers || 0) >= 100
+    },
+    {
+      id: 'gist_creator',
+      icon: '💡',
+      title: 'Gist Master',
+      desc: 'Over 5 public gists',
+      unlocked: (profileData.public_gists || 0) >= 5
+    }
+  ];
+  
+  badges.forEach(badge => {
+    const badgeEl = document.createElement('div');
+    badgeEl.className = `achievement-badge ${badge.unlocked ? '' : 'locked'}`;
+    badgeEl.title = badge.unlocked ? 'Achievement Unlocked!' : 'Locked';
+    
+    badgeEl.innerHTML = `
+      <span class="badge-icon">${badge.icon}</span>
+      <span class="badge-title">${badge.title}</span>
+      <span class="badge-desc">${badge.desc}</span>
+    `;
+    container.appendChild(badgeEl);
+  });
+}
+
+// Populate Pinned/Top and Recent Repositories lists
 function populateRepos(repos) {
+  const pinnedReposGrid = document.getElementById('pinnedReposGrid');
   const reposGrid = document.getElementById('reposGrid');
+  
+  pinnedReposGrid.innerHTML = '';
   reposGrid.innerHTML = '';
 
   if (!repos || repos.length === 0) {
-    reposGrid.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; color: var(--text-muted); padding: 24px;">No public repositories available.</div>';
+    const emptyMarkup = '<div style="grid-column: 1 / -1; text-align: center; color: var(--text-muted); padding: 24px;">No repositories available.</div>';
+    pinnedReposGrid.innerHTML = emptyMarkup;
+    reposGrid.innerHTML = emptyMarkup;
     return;
   }
 
-  repos.forEach(repo => {
+  // Sort repos by stars to get "Pinned / Top Starred"
+  const topStarred = [...repos].sort((a, b) => b.stargazers_count - a.stargazers_count).slice(0, 4);
+  
+  // Sort repos by updated_at date to get "Recent Active"
+  const recentActive = [...repos].sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at)).slice(0, 4);
+
+  const makeCard = (repo) => {
     const card = document.createElement('article');
     card.className = 'repo-card card';
-    
     const langSection = repo.language ? `
       <span class="repo-lang-dot" style="background-color: ${getLanguageColor(repo.language)}"></span>
       <span>${repo.language}</span>
     ` : '';
-
+    
     card.innerHTML = `
       <div class="repo-card-title">
         <h4><a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">${repo.name}</a></h4>
@@ -225,8 +392,109 @@ function populateRepos(repos) {
         </div>
       </div>
     `;
-    reposGrid.appendChild(card);
-  });
+    return card;
+  };
+
+  topStarred.forEach(repo => pinnedReposGrid.appendChild(makeCard(repo)));
+  recentActive.forEach(repo => reposGrid.appendChild(makeCard(repo)));
+}
+
+// Fetch Profile README (.github or special username profile repo README)
+async function fetchProfileReadme(username) {
+  const readmeSection = document.getElementById('readmeSection');
+  const readmeContent = document.getElementById('readmeContent');
+  
+  readmeSection.classList.add('hidden');
+  readmeContent.innerHTML = '';
+  
+  try {
+    const response = await fetch(`https://api.github.com/repos/${username}/${username}/readme`, {
+      headers: { 'Accept': 'application/vnd.github.raw' }
+    });
+    
+    if (response.ok) {
+      const markdownText = await response.text();
+      if (markdownText && typeof marked !== 'undefined') {
+        readmeContent.innerHTML = marked.parse(markdownText);
+        readmeSection.classList.remove('hidden');
+      }
+    }
+  } catch (err) {
+    console.error('Error loading profile README:', err);
+  }
+}
+
+// Parse recent activity timeline logs
+async function fetchRecentActivity(username) {
+  const timelineContainer = document.getElementById('activityTimeline');
+  timelineContainer.innerHTML = '';
+  
+  try {
+    const response = await fetch(`https://api.github.com/users/${username}/events`);
+    if (!response.ok) {
+      timelineContainer.innerHTML = '<p class="no-data-msg">Unable to load event logs.</p>';
+      return;
+    }
+    
+    const events = await response.json();
+    const cleanEvents = events.slice(0, 10);
+    
+    if (cleanEvents.length === 0) {
+      timelineContainer.innerHTML = '<p class="no-data-msg">No recent activity events registered.</p>';
+      return;
+    }
+    
+    cleanEvents.forEach(event => {
+      const item = document.createElement('div');
+      item.className = 'timeline-item';
+      
+      let description = '';
+      const repoUrl = `https://github.com/${event.repo.name}`;
+      const repoLink = `<a href="${repoUrl}" target="_blank" rel="noopener">${event.repo.name}</a>`;
+      
+      switch (event.type) {
+        case 'PushEvent':
+          const commitCount = event.payload.commits ? event.payload.commits.length : 1;
+          description = `Pushed ${commitCount} commit(s) to branch <code>${event.payload.ref.replace('refs/heads/', '')}</code> in ${repoLink}`;
+          break;
+        case 'CreateEvent':
+          description = `Created <code>${event.payload.ref_type}</code> ${event.payload.ref || ''} in ${repoLink}`;
+          break;
+        case 'WatchEvent':
+          description = `Starred repository ${repoLink}`;
+          break;
+        case 'ForkEvent':
+          description = `Forked repository ${repoLink}`;
+          break;
+        case 'IssuesEvent':
+          const issueNum = event.payload.issue ? `#${event.payload.issue.number}` : '';
+          description = `${event.payload.action.charAt(0).toUpperCase() + event.payload.action.slice(1)} issue ${issueNum} in ${repoLink}`;
+          break;
+        case 'PullRequestEvent':
+          const prNum = event.payload.number ? `#${event.payload.number}` : '';
+          description = `${event.payload.action.charAt(0).toUpperCase() + event.payload.action.slice(1)} pull request ${prNum} in ${repoLink}`;
+          break;
+        default:
+          description = `${event.type.replace('Event', '')} interaction in ${repoLink}`;
+          break;
+      }
+      
+      const dateOptions = { month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit' };
+      const eventDate = new Date(event.created_at).toLocaleDateString('en-US', dateOptions);
+      
+      item.innerHTML = `
+        <span class="timeline-dot"></span>
+        <div class="timeline-content">
+          <span class="timeline-title">${description}</span>
+          <span class="timeline-date">${eventDate}</span>
+        </div>
+      `;
+      timelineContainer.appendChild(item);
+    });
+  } catch (err) {
+    console.error('Error fetching activity timeline:', err);
+    timelineContainer.innerHTML = '<p class="no-data-msg">Network error loading activity logs.</p>';
+  }
 }
 
 // Fetch Profile and Repo Info asynchronously
@@ -234,6 +502,7 @@ async function performSearch(username) {
   if (!username || username.trim() === '') return;
   const trimmedUsername = username.trim();
   showLoading();
+  resetTabs();
 
   try {
     const userResponse = await fetch(`https://api.github.com/users/${trimmedUsername}`);
@@ -253,10 +522,10 @@ async function performSearch(username) {
 
     const userData = await userResponse.json();
 
-    // Fetch top 5 recent repositories
+    // Fetch repositories
     let reposData = [];
     try {
-      const reposResponse = await fetch(`https://api.github.com/users/${trimmedUsername}/repos?sort=updated&per_page=5`);
+      const reposResponse = await fetch(`https://api.github.com/users/${trimmedUsername}/repos?per_page=100`);
       if (reposResponse.ok) {
         reposData = await reposResponse.json();
       }
@@ -264,8 +533,18 @@ async function performSearch(username) {
       console.error('Failed to fetch repositories', repoErr);
     }
 
+    // Populate dashboard fields
     populateProfile(userData);
+    populateLanguages(reposData);
+    populateAchievements(userData, reposData);
     populateRepos(reposData);
+    
+    // Update Theme Graphs & fetch timeline data
+    updateGraphThemes(htmlDoc.getAttribute('data-theme'));
+    fetchProfileReadme(trimmedUsername);
+    fetchRecentActivity(trimmedUsername);
+    
+    // Save history search log
     saveHistory(trimmedUsername);
     showDashboard();
   } catch (err) {

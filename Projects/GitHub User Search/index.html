@@ -10,6 +10,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
   <!-- Stylesheet -->
   <link rel="stylesheet" href="style.css">
+  <!-- Markdown parser for README -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
   <div class="search-app-container">
@@ -103,31 +105,100 @@
 
       <!-- Stats summaries and Repos lists (Right column) -->
       <main class="dashboard-main-content">
-        <!-- Stats numbers row -->
-        <section class="stats-row card">
-          <div class="stat-box">
-            <span class="stat-value" id="statRepos">0</span>
-            <span class="stat-label">Repositories</span>
-          </div>
-          <div class="stat-box">
-            <span class="stat-value" id="statGists">0</span>
-            <span class="stat-label">Gists</span>
-          </div>
-          <div class="stat-box">
-            <span class="stat-value" id="statFollowers">0</span>
-            <span class="stat-label">Followers</span>
-          </div>
-          <div class="stat-box">
-            <span class="stat-value" id="statFollowing">0</span>
-            <span class="stat-label">Following</span>
-          </div>
-        </section>
+        <!-- Dashboard Navigation Tabs -->
+        <div class="tabs-navigation">
+          <button type="button" class="tab-btn active" data-tab="overview">Overview</button>
+          <button type="button" class="tab-btn" data-tab="repositories">Repositories</button>
+          <button type="button" class="tab-btn" data-tab="activity">Analytics & Timeline</button>
+        </div>
 
-        <!-- Repositories Grid cards -->
-        <section class="repos-section">
-          <h3>Recent Active Repositories</h3>
-          <div id="reposGrid" class="repos-grid"></div>
-        </section>
+        <!-- Tab 1: Overview -->
+        <div id="tab-overview" class="tab-pane active">
+          <!-- Stats numbers row -->
+          <section class="stats-row card">
+            <div class="stat-box">
+              <span class="stat-value" id="statRepos">0</span>
+              <span class="stat-label">Repositories</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-value" id="statGists">0</span>
+              <span class="stat-label">Gists</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-value" id="statFollowers">0</span>
+              <span class="stat-label">Followers</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-value" id="statFollowing">0</span>
+              <span class="stat-label">Following</span>
+            </div>
+          </section>
+
+          <!-- Language distribution & Achievements Badges Grid -->
+          <div class="overview-analytics-grid">
+            <section class="languages-section card">
+              <h3>Languages Distribution</h3>
+              <div id="languagesContainer" class="languages-container">
+                <!-- Rendered dynamically -->
+              </div>
+            </section>
+            
+            <section class="achievements-section card">
+              <h3>Developer Achievements</h3>
+              <div id="achievementsContainer" class="achievements-container">
+                <!-- Rendered dynamically -->
+              </div>
+            </section>
+          </div>
+
+          <!-- Profile README Section -->
+          <section id="readmeSection" class="readme-section card hidden">
+            <h3>Profile README</h3>
+            <div id="readmeContent" class="readme-content"></div>
+          </section>
+        </div>
+
+        <!-- Tab 2: Repositories -->
+        <div id="tab-repositories" class="tab-pane">
+          <section class="repos-section">
+            <h3>Pinned & Top Starred Repositories</h3>
+            <div id="pinnedReposGrid" class="repos-grid"></div>
+            
+            <h3 style="margin-top: 32px;">Recent Active Repositories</h3>
+            <div id="reposGrid" class="repos-grid"></div>
+          </section>
+        </div>
+
+        <!-- Tab 3: Analytics & Timeline -->
+        <div id="tab-activity" class="tab-pane">
+          <!-- Visual activity graphs from external renderers -->
+          <section class="analytics-graphs card">
+            <h3>GitHub Activity Analytics</h3>
+            <div class="graphs-wrapper">
+              <div class="graph-card">
+                <h4>Contributions Heatmap</h4>
+                <div class="heatmap-img-container">
+                  <img id="contributionHeatmap" src="" alt="Contribution Heatmap Chart" onerror="this.parentElement.innerHTML='<p class=\'no-data-msg\'>Contribution graph unavailable</p>'">
+                </div>
+              </div>
+              
+              <div class="graph-card">
+                <h4>Weekly Activity Trend</h4>
+                <div class="trend-img-container">
+                  <img id="activityLineGraph" src="" alt="Weekly Activity Trend" onerror="this.parentElement.innerHTML='<p class=\'no-data-msg\'>Activity graph unavailable</p>'">
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Recent Activity Event Log timeline -->
+          <section class="timeline-section card">
+            <h3>Recent Activity Timeline</h3>
+            <div id="activityTimeline" class="timeline-container">
+              <!-- Rendered dynamically -->
+            </div>
+          </section>
+        </div>
       </main>
     </div>
   </div>
