@@ -44,15 +44,45 @@ function updateGraphThemes(theme) {
   const username = usernameInput.value.trim();
   if (!username) return;
   
-  const heatmapImg = document.getElementById('contributionHeatmap');
-  const lineGraphImg = document.getElementById('activityLineGraph');
+  let heatmapImg = document.getElementById('contributionHeatmap');
+  let lineGraphImg = document.getElementById('activityLineGraph');
   
-  if (theme === 'light') {
-    heatmapImg.src = `https://ghchart.rshah.org/0891b2/${username}`;
-    lineGraphImg.src = `https://github-readme-activity-graph.vercel.app/graph?username=${username}&bg_color=ffffff&color=0891b2&line=2563eb&point=1a1824&area=true&hide_border=true`;
-  } else {
-    heatmapImg.src = `https://ghchart.rshah.org/06b6d4/${username}`;
-    lineGraphImg.src = `https://github-readme-activity-graph.vercel.app/graph?username=${username}&bg_color=12101e&color=06b6d4&line=3b82f6&point=fdfdfd&area=true&hide_border=true`;
+  // Recreate heatmap image if missing
+  if (!heatmapImg) {
+    const container = document.querySelector('.heatmap-img-container');
+    if (container) {
+      container.innerHTML = '<img id="contributionHeatmap" alt="Contribution Heatmap Chart">';
+      heatmapImg = document.getElementById('contributionHeatmap');
+    }
+  }
+  
+  if (heatmapImg) {
+    heatmapImg.onerror = () => {
+      const container = document.querySelector('.heatmap-img-container');
+      if (container) container.innerHTML = '<p class="no-data-msg">Contribution graph unavailable</p>';
+    };
+    heatmapImg.src = theme === 'light'
+      ? `https://ghchart.rshah.org/0891b2/${username}`
+      : `https://ghchart.rshah.org/06b6d4/${username}`;
+  }
+  
+  // Recreate line graph image if missing
+  if (!lineGraphImg) {
+    const container = document.querySelector('.trend-img-container');
+    if (container) {
+      container.innerHTML = '<img id="activityLineGraph" alt="Weekly Activity Trend">';
+      lineGraphImg = document.getElementById('activityLineGraph');
+    }
+  }
+  
+  if (lineGraphImg) {
+    lineGraphImg.onerror = () => {
+      const container = document.querySelector('.trend-img-container');
+      if (container) container.innerHTML = '<p class="no-data-msg">Activity graph unavailable</p>';
+    };
+    lineGraphImg.src = theme === 'light'
+      ? `https://github-readme-activity-graph.vercel.app/graph?username=${username}&bg_color=ffffff&color=0891b2&line=2563eb&point=1a1824&area=true&hide_border=true`
+      : `https://github-readme-activity-graph.vercel.app/graph?username=${username}&bg_color=12101e&color=06b6d4&line=3b82f6&point=fdfdfd&area=true&hide_border=true`;
   }
 }
 
