@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-06-03T13:04:58.178Z",
-  "count": 9,
+  "generatedAt": "2026-06-04T02:31:13.864Z",
+  "count": 20,
   "projects": [
     {
       "slug": "2048 Game",
@@ -18,7 +18,46 @@
       "entry": "Projects/2048%20Game/index.html",
       "folder": "Projects/2048%20Game",
       "thumbnail": "Projects/2048%20Game/thumbnail.svg",
-      "addedAt": "2026-06-03T13:04:53.824Z"
+      "addedAt": "2026-06-04T02:31:08.966Z"
+    },
+    {
+      "slug": "Chat Room",
+      "title": "Chat Room",
+      "description": "A real-time multi-tab chat room using BroadcastChannel API and localStorage — no server needed.",
+      "author": {
+        "name": "Shubham Upadhyay",
+        "github": "SHUBHAM2775"
+      },
+      "tags": [
+        "chat",
+        "real-time",
+        "broadcastchannel",
+        "vanilla-js",
+        "localstorage"
+      ],
+      "entry": "Projects/Chat%20Room/index.html",
+      "folder": "Projects/Chat%20Room",
+      "thumbnail": "Projects/Chat%20Room/thumbnail.svg",
+      "addedAt": "2026-06-04T02:31:08.966Z"
+    },
+    {
+      "slug": "Color Palette Generator",
+      "title": "Color Palette Generator",
+      "description": "Generate beautiful, harmonious color palettes using color theory. Choose from analogous, complementary, triadic, and more. Lock colors you love and regenerate the rest — copy hex codes instantly.",
+      "author": {
+        "name": "Utkarsh Desale",
+        "github": "utkrsh29"
+      },
+      "tags": [
+        "color",
+        "design",
+        "utility",
+        "vanilla-js"
+      ],
+      "entry": "Projects/Color%20Palette%20Generator/index.html",
+      "folder": "Projects/Color%20Palette%20Generator",
+      "thumbnail": "Projects/Color%20Palette%20Generator/thumbnail.svg",
+      "addedAt": "2026-06-04T02:31:08.966Z"
     },
     {
       "slug": "Daily Wheels",
@@ -36,7 +75,7 @@
       "entry": "Projects/Daily%20Wheels/index.html",
       "folder": "Projects/Daily%20Wheels",
       "thumbnail": "Projects/Daily%20Wheels/thumbnail.svg",
-      "addedAt": "2026-06-03T13:04:53.824Z"
+      "addedAt": "2026-06-04T02:31:08.967Z"
     },
     {
       "slug": "Developer Portfolio Builder",
@@ -55,7 +94,44 @@
       "entry": "Projects/Developer%20Portfolio%20Builder/index.html",
       "folder": "Projects/Developer%20Portfolio%20Builder",
       "thumbnail": "Projects/Developer%20Portfolio%20Builder/thumbnail.svg",
-      "addedAt": "2026-06-03T13:04:53.824Z"
+      "addedAt": "2026-06-04T02:31:08.967Z"
+    },
+    {
+      "slug": "Digital Clock",
+      "title": "Digital Clock",
+      "description": "A sleek digital clock featuring live real-time updates through native JavaScript APIs, dynamic calendar views, and interactive 12/24 hour display formatting toggles.",
+      "author": {
+        "name": "Shruti Narsulwar",
+        "github": "Shrutiii01"
+      },
+      "tags": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "entry": "Projects/Digital%20Clock/index.html",
+      "folder": "Projects/Digital%20Clock",
+      "thumbnail": null,
+      "addedAt": "2026-06-04T02:31:08.968Z"
+    },
+    {
+      "slug": "Expense Tracker",
+      "title": "Expense Tracker",
+      "description": "A premium Black & Gold daily expense tracker with interactive SVG analytics and localStorage persistence.",
+      "author": {
+        "name": "Mistry Vishwa",
+        "github": "MistryVishwa"
+      },
+      "tags": [
+        "finance",
+        "analytics",
+        "svg",
+        "localstorage"
+      ],
+      "entry": "Projects/Expense%20Tracker/index.html",
+      "folder": "Projects/Expense%20Tracker",
+      "thumbnail": "Projects/Expense%20Tracker/thumbnail.svg",
+      "addedAt": "2026-06-04T02:31:08.968Z"
     },
     {
       "slug": "Image Gallery",
@@ -74,7 +150,7 @@
       "entry": "Projects/Image%20Gallery/index.html",
       "folder": "Projects/Image%20Gallery",
       "thumbnail": "Projects/Image%20Gallery/thumbnail.svg",
-      "addedAt": "2026-06-03T13:04:53.825Z"
+      "addedAt": "2026-06-04T02:31:08.968Z"
     },
     {
       "slug": "Markdown Editor",
@@ -94,7 +170,48 @@
       "entry": "Projects/Markdown%20Editor/index.html",
       "folder": "Projects/Markdown%20Editor",
       "thumbnail": "Projects/Markdown%20Editor/thumbnail.svg",
-      "addedAt": "2026-06-03T13:04:53.825Z"
+      "addedAt": "2026-06-04T02:31:08.969Z"
+    },
+    {
+      "slug": "Memory Card Game",
+      "title": "Memory Card Game",
+      "description": "A gamified memory match card game with 3D flip animations, leveling system, combo streaks, XP progression, multiple realms, and localStorage persistence.",
+      "author": {
+        "name": "Girish Madarkar",
+        "github": "Girish0902"
+      },
+      "tags": [
+        "game",
+        "memory",
+        "vanilla-js",
+        "gamified",
+        "localstorage",
+        "css-3d"
+      ],
+      "entry": "Projects/Memory%20Card%20Game/index.html",
+      "folder": "Projects/Memory%20Card%20Game",
+      "thumbnail": null,
+      "addedAt": "2026-06-04T02:31:08.969Z"
+    },
+    {
+      "slug": "Movie Search App",
+      "title": "Movie Search App",
+      "description": "Search for movies using the OMDb API with a sleek dark glassmorphism UI and detailed modal view.",
+      "author": {
+        "name": "Girish Madarkar",
+        "github": "Girish0902"
+      },
+      "tags": [
+        "api",
+        "javascript",
+        "vanilla-js",
+        "search",
+        "glass-ui"
+      ],
+      "entry": "Projects/Movie%20Search%20App/index.html",
+      "folder": "Projects/Movie%20Search%20App",
+      "thumbnail": "Projects/Movie%20Search%20App/thumbnail.svg",
+      "addedAt": "2026-06-04T02:31:08.970Z"
     },
     {
       "slug": "Music Player",
@@ -114,7 +231,7 @@
       "entry": "Projects/Music%20Player/index.html",
       "folder": "Projects/Music%20Player",
       "thumbnail": "Projects/Music%20Player/thumbnail.svg",
-      "addedAt": "2026-06-03T13:04:53.826Z"
+      "addedAt": "2026-06-04T02:31:08.970Z"
     },
     {
       "slug": "Notes App",
@@ -132,7 +249,26 @@
       "entry": "Projects/Notes%20App/index.html",
       "folder": "Projects/Notes%20App",
       "thumbnail": "Projects/Notes%20App/thumbnail.svg",
-      "addedAt": "2026-06-03T13:04:53.826Z"
+      "addedAt": "2026-06-04T02:31:08.970Z"
+    },
+    {
+      "slug": "Password Generator",
+      "title": "Password Generator",
+      "description": "A sleek, lightweight web app to create secure, randomized passwords with adjustable length and toggleable character types — uppercase, lowercase, numbers, and symbols.",
+      "author": {
+        "name": "Your Name",
+        "github": "your-github-username"
+      },
+      "tags": [
+        "password",
+        "security",
+        "productivity",
+        "vanilla-js"
+      ],
+      "entry": "Projects/Password%20Generator/index.html",
+      "folder": "Projects/Password%20Generator",
+      "thumbnail": "Projects/Password%20Generator/thumbnail.svg",
+      "addedAt": "2026-06-04T02:31:08.971Z"
     },
     {
       "slug": "Pomodoro Timer",
@@ -152,7 +288,80 @@
       "entry": "Projects/Pomodoro%20Timer/index.html",
       "folder": "Projects/Pomodoro%20Timer",
       "thumbnail": "Projects/Pomodoro%20Timer/thumbnail.svg",
-      "addedAt": "2026-06-03T13:04:53.826Z"
+      "addedAt": "2026-06-04T02:31:08.971Z"
+    },
+    {
+      "slug": "QR Code Generator",
+      "title": "QR Code Generator",
+      "description": "Generate custom QR codes dynamically using links, plain text, or small configuration file payloads with custom color layouts.",
+      "author": {
+        "name": "Shruti Narsulwar",
+        "github": "Shrutiii01"
+      },
+      "tags": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "entry": "Projects/QR%20Code%20Generator/index.html",
+      "folder": "Projects/QR%20Code%20Generator",
+      "thumbnail": null,
+      "addedAt": "2026-06-04T02:31:08.971Z"
+    },
+    {
+      "slug": "Quiz Master",
+      "title": "Quiz Master",
+      "description": "A premium Black & Orange MCQ Quiz App with local auth, score tracking, and an AI-mock topic generator.",
+      "author": {
+        "name": "Mistry Vishwa",
+        "github": "MistryVishwa"
+      },
+      "tags": [
+        "education",
+        "quiz",
+        "vanilla-js",
+        "localstorage"
+      ],
+      "entry": "Projects/Quiz%20Master/index.html",
+      "folder": "Projects/Quiz%20Master",
+      "thumbnail": "Projects/Quiz%20Master/thumbnail.svg",
+      "addedAt": "2026-06-04T02:31:08.972Z"
+    },
+    {
+      "slug": "Random Quote Generator",
+      "title": "Random Quote Generator",
+      "description": "Displays a random motivational or famous quote on button click.",
+      "author": {
+        "name": "Muskan Kumari",
+        "github": "Muskankr"
+      },
+      "tags": [
+        "utility",
+        "vanilla-js",
+        "api"
+      ],
+      "entry": "Projects/Random%20Quote%20Generator/index.html",
+      "folder": "Projects/Random%20Quote%20Generator",
+      "thumbnail": null,
+      "addedAt": "2026-06-04T02:31:08.972Z"
+    },
+    {
+      "slug": "Typing Speed Tester",
+      "title": "Typing Speed Tester",
+      "description": "Measure typing speed (WPM) and accuracy with a simple web app.",
+      "author": {
+        "name": "Muskan Kumari",
+        "github": "Muskankr"
+      },
+      "tags": [
+        "productivity",
+        "vanilla-js",
+        "learning"
+      ],
+      "entry": "Projects/Typing%20Speed%20Tester/index.html",
+      "folder": "Projects/Typing%20Speed%20Tester",
+      "thumbnail": null,
+      "addedAt": "2026-06-04T02:31:08.972Z"
     },
     {
       "slug": "Weather Finder",
@@ -170,7 +379,7 @@
       "entry": "Projects/Weather%20Finder/index.html",
       "folder": "Projects/Weather%20Finder",
       "thumbnail": null,
-      "addedAt": "2026-06-03T13:04:53.826Z"
+      "addedAt": "2026-06-04T02:31:08.972Z"
     }
   ]
 }
