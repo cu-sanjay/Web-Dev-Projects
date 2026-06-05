@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>News Aggregator Interface</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="news-container">
+        <header>
+            <h1>News Aggregator</h1>
+            <input type="text" id="searchInput" placeholder="Search news...">
+        </header>
+
+        <section id="trending">
+            <h2>🔥 Trending Topics</h2>
+            <div id="trendingTopics"></div>
+        </section>
+
+        <section id="categories">
+            <h2>📰 Categories</h2>
+            <button class="categoryBtn" data-category="technology">Technology</button>
+            <button class="categoryBtn" data-category="sports">Sports</button>
+            <button class="categoryBtn" data-category="business">Business</button>
+            <button class="categoryBtn" data-category="entertainment">Entertainment</button>
+        </section>
+
+        <section id="newsCards">
+            <!-- News cards will be injected here -->
+        </section>
+
+        <section id="bookmarks">
+            <h2>🔖 Bookmarked Articles</h2>
+            <div id="bookmarkList"></div>
+        </section>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitHub User Search - Premium Dashboard</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+  <!-- Markdown parser for README -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+  <div class="search-app-container">
+    <!-- Top Header bar -->
+    <header class="app-header">
+      <div class="header-left">
+        <div class="logo">
+          <span class="logo-symbol">🐙</span>
+          <h1>GitScope</h1>
+        </div>
+        <p class="header-tagline">Analyze and explore GitHub profiles in real time.</p>
+      </div>
+      <div class="header-right">
+        <!-- Light/Dark Mode Switcher -->
+        <button type="button" id="themeToggleBtn" class="theme-toggle-btn" title="Toggle Light/Dark Theme">
+          <svg id="moonIcon" viewBox="0 0 24 24" class="icon-theme"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg id="sunIcon" viewBox="0 0 24 24" class="icon-theme hidden"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Search panel search box -->
+    <section class="search-section card">
+      <form id="searchForm" class="search-form">
+        <div class="search-input-wrapper">
+          <svg viewBox="0 0 24 24" class="icon-search"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="usernameInput" placeholder="Search GitHub username..." required autofocus>
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+      </form>
+
+      <!-- History tags row -->
+      <div id="historyRow" class="history-tags-row hidden">
+        <span class="history-label">Recent:</span>
+        <div id="historyContainer" class="history-tags-container"></div>
+      </div>
+    </section>
+
+    <!-- Loader Skeleton UI -->
+    <div id="loadingState" class="loading-wrapper hidden">
+      <div class="loading-grid">
+        <div class="skeleton-card profile-skeleton"></div>
+        <div class="skeleton-card stats-skeleton"></div>
+        <div class="skeleton-card repos-skeleton"></div>
+      </div>
+    </div>
+
+    <!-- Error/No-data panel alerts -->
+    <div id="errorPanel" class="error-panel card hidden">
+      <span class="error-icon">⚠️</span>
+      <h3 id="errorTitle">User Not Found</h3>
+      <p id="errorDesc">Please check the spelling and try again.</p>
+    </div>
+
+    <!-- MAIN PROFILE DISPLAY DASHBOARD -->
+    <div id="profileDashboard" class="dashboard-grid hidden">
+      <!-- Profile Card Summary (Left column) -->
+      <aside class="profile-card card">
+        <div class="profile-avatar-wrapper">
+          <img id="avatarImg" src="" alt="avatar">
+        </div>
+        <div class="profile-names">
+          <h2 id="profileName">Jane Doe</h2>
+          <a id="profileLogin" href="" target="_blank" rel="noopener noreferrer">@janedoe</a>
+        </div>
+        <p id="profileBio" class="profile-bio">This is a short developer bio description detailing highlights.</p>
+        
+        <div class="profile-meta-list">
+          <div class="meta-item" id="metaLocationRow">
+            <span class="meta-icon">📍</span>
+            <span id="metaLocation">San Francisco, CA</span>
+          </div>
+          <div class="meta-item" id="metaCompanyRow">
+            <span class="meta-icon">🏢</span>
+            <span id="metaCompany">GitHub</span>
+          </div>
+          <div class="meta-item" id="metaBlogRow">
+            <span class="meta-icon">🔗</span>
+            <a id="metaBlog" href="" target="_blank" rel="noopener">website.com</a>
+          </div>
+          <div class="meta-item" id="metaTwitterRow">
+            <span class="meta-icon">🐦</span>
+            <a id="metaTwitter" href="" target="_blank" rel="noopener">@twitter</a>
+          </div>
+          <div class="meta-item">
+            <span class="meta-icon">📅</span>
+            <span id="metaJoined">Joined Jan 01, 2020</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Stats summaries and Repos lists (Right column) -->
+      <main class="dashboard-main-content">
+        <!-- Dashboard Navigation Tabs -->
+        <div class="tabs-navigation">
+          <button type="button" class="tab-btn active" data-tab="overview">Overview</button>
+          <button type="button" class="tab-btn" data-tab="repositories">Repositories</button>
+          <button type="button" class="tab-btn" data-tab="activity">Analytics & Timeline</button>
+        </div>
+
+        <!-- Tab 1: Overview -->
+        <div id="tab-overview" class="tab-pane active">
+          <!-- Stats numbers row -->
+          <section class="stats-row card">
+            <div class="stat-box">
+              <span class="stat-value" id="statRepos">0</span>
+              <span class="stat-label">Repositories</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-value" id="statGists">0</span>
+              <span class="stat-label">Gists</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-value" id="statFollowers">0</span>
+              <span class="stat-label">Followers</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-value" id="statFollowing">0</span>
+              <span class="stat-label">Following</span>
+            </div>
+          </section>
+
+          <!-- Language distribution & Achievements Badges Grid -->
+          <div class="overview-analytics-grid">
+            <section class="languages-section card">
+              <h3>Languages Distribution</h3>
+              <div id="languagesContainer" class="languages-container">
+                <!-- Rendered dynamically -->
+              </div>
+            </section>
+            
+            <section class="achievements-section card">
+              <h3>Developer Achievements</h3>
+              <div id="achievementsContainer" class="achievements-container">
+                <!-- Rendered dynamically -->
+              </div>
+            </section>
+          </div>
+
+          <!-- Profile README Section -->
+          <section id="readmeSection" class="readme-section card hidden">
+            <h3>Profile README</h3>
+            <div id="readmeContent" class="readme-content"></div>
+          </section>
+        </div>
+
+        <!-- Tab 2: Repositories -->
+        <div id="tab-repositories" class="tab-pane">
+          <section class="repos-section">
+            <h3>Pinned & Top Starred Repositories</h3>
+            <div id="pinnedReposGrid" class="repos-grid"></div>
+            
+            <h3 style="margin-top: 32px;">All Public Repositories</h3>
+            <div id="reposGrid" class="repos-grid"></div>
+            
+            <!-- Pagination controls container -->
+            <div id="reposPagination" class="pagination-container">
+              <button type="button" id="prevPageBtn" class="btn btn-secondary" disabled>Previous</button>
+              <span id="pageIndicator" class="page-indicator">Page 1 of 1</span>
+              <button type="button" id="nextPageBtn" class="btn btn-secondary" disabled>Next</button>
+            </div>
+          </section>
+        </div>
+
+        <!-- Tab 3: Analytics & Timeline -->
+        <div id="tab-activity" class="tab-pane">
+          <!-- Visual activity graphs from external renderers -->
+          <section class="analytics-graphs card">
+            <h3>GitHub Activity Analytics</h3>
+            <div class="graphs-wrapper">
+              <div class="graph-card">
+                <h4>Contributions Heatmap</h4>
+                <div class="heatmap-img-container">
+                  <img id="contributionHeatmap" alt="Contribution Heatmap Chart">
+                </div>
+              </div>
+              
+              <div class="graph-card">
+                <h4>Weekly Activity Trend</h4>
+                <div class="trend-img-container">
+                  <img id="activityLineGraph" alt="Weekly Activity Trend">
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Recent Activity Event Log timeline -->
+          <section class="timeline-section card">
+            <h3>Recent Activity Timeline</h3>
+            <div id="activityTimeline" class="timeline-container">
+              <!-- Rendered dynamically -->
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script src="script.js"></script>
+</body>
+</html>

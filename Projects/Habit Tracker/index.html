@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Habit Bloom Tracker</title>
+  <link rel="stylesheet" href="./style/common.css" />
+  <link rel="stylesheet" href="./style/index.css" />
+</head>
+<body>
+  <main class="app">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Daily Growth System</p>
+        <h1>Habit Bloom</h1>
+        <p class="subtitle" id="dailyQuote" data-fallback="Track your habits, build streaks, and watch your consistency grow.">
+          Track your habits, build streaks, and watch your consistency grow.
+        </p>
+      </div>
+
+      <div class="hero-actions">
+        <a href="progress.html" class="nav-link">Activity</a>
+        <button id="themeBtn" class="theme-btn">☾</button>
+      </div>
+    </section>
+
+    <section class="stats-grid">
+      <article class="stat-card">
+        <span>Total Habits</span>
+        <strong id="totalHabits">0</strong>
+      </article>
+      <article class="stat-card">
+        <span>Completed Today</span>
+        <strong id="completedToday">0</strong>
+      </article>
+      <article class="stat-card">
+        <span>Best Streak</span>
+        <strong id="bestStreak">0</strong>
+      </article>
+    </section>
+
+    <section class="panel">
+      <form id="habitForm" class="habit-form">
+        <input id="habitName" type="text" placeholder="Example: Code for 1 hour" required />
+        <div class="category-picker" id="categoryPicker">
+          <input type="hidden" id="habitCategory" value="Coding" />
+          <button
+            type="button"
+            class="category-trigger"
+            id="categoryTrigger"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+            aria-labelledby="categoryLabel"
+          >
+            <span class="category-dot" id="categoryDot" aria-hidden="true"></span>
+            <span class="category-label" id="categoryLabel">Coding</span>
+            <span class="category-chevron" aria-hidden="true"></span>
+          </button>
+          <div class="category-menu" id="categoryMenu" hidden>
+            <p class="category-menu-title">Category</p>
+            <ul class="category-menu-list" id="categoryList" role="listbox"></ul>
+            <div class="category-add">
+              <button type="button" class="category-add-toggle" id="addCategoryToggle">
+                <span aria-hidden="true">+</span> Add category
+              </button>
+              <div class="category-add-form" id="addCategoryForm" hidden>
+                <input
+                  type="text"
+                  id="newCategoryName"
+                  placeholder="New category"
+                  maxlength="24"
+                  autocomplete="off"
+                />
+                <button type="button" id="saveCategoryBtn">Add</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="add-habit-btn">Add Habit</button>
+      </form>
+    </section>
+
+    <section class="progress-panel">
+      <div class="progress-text">
+        <span>Today’s Progress</span>
+        <strong id="progressPercent">0%</strong>
+      </div>
+      <div class="progress-bar">
+        <div id="progressFill"></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h2>Your Habits</h2>
+        <p>Mark habits complete once per day.</p>
+      </div>
+      <div id="habitList" class="habit-list"></div>
+    </section>
+  </main>
+
+  <script src="./script/quote.js"></script>
+  <script src="./script/index.script.js"></script>
+</body>
+</html>

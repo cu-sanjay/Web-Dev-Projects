@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Retro Radio Digital Alarm Clock</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="radio-chassis-container">
+    <div class="radio-chassis">
+      <!-- 3D Faces -->
+      <div class="face chassis-back"></div>
+      <div class="face chassis-bottom"></div>
+      <div class="face chassis-left"></div>
+      <div class="face chassis-right"></div>
+      
+      <!-- Top Face -->
+      <div class="face chassis-top">
+        <div class="toggle-container">
+          <div class="toggle-label">PWR</div>
+          <div class="toggle-switch-wrapper">
+            <div class="toggle-switch" id="power-toggle">
+              <div class="toggle-knob"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Front Face -->
+      <div class="face chassis-front">
+        <div class="display-bezel">
+          <!-- Digital Clock (Left) -->
+          <div class="clock-panel" id="clock-panel">
+            <div class="time-display">
+              <span id="hours">12</span><span class="colon" id="colon">:</span><span id="minutes">00</span>
+            </div>
+            <div class="am-pm" id="ampm">AM</div>
+          </div>
+          
+          <!-- Radio Tuner (Right) -->
+          <div class="tuner-panel" id="tuner-panel">
+            <div class="tuner-top">
+              <span id="date-display">JUN '26</span>
+            </div>
+            <div class="tuner-middle">
+              <div class="tuner-track">
+                <div class="tuner-needle" id="needle"></div>
+              </div>
+            </div>
+            <div class="tuner-bottom">
+              <ul class="days-list" id="days-list">
+                <li data-day="1">MON</li>
+                <li data-day="2">TUE</li>
+                <li data-day="3">WED</li>
+                <li data-day="4">THU</li>
+                <li data-day="5">FRI</li>
+                <li data-day="6">SAT</li>
+                <li data-day="0">SUN</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Speaker Grille -->
+        <div class="speaker-grille">
+          <div class="grille-line"></div>
+          <div class="grille-line"></div>
+          <div class="grille-line"></div>
+          <div class="grille-line"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

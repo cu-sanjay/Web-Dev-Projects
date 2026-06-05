@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Color Palette Generator</title>
+    <meta name="description" content="Generate beautiful, harmonious color palettes instantly. Lock colors you love and regenerate the rest. Copy hex codes with one click." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-inner">
+        <div class="header-brand">
+          <svg class="brand-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="8"  cy="8"  r="4" fill="#e07b54"/>
+            <circle cx="16" cy="8"  r="4" fill="#5b8dee"/>
+            <circle cx="12" cy="15" r="4" fill="#54c7a2"/>
+          </svg>
+          <span>Palette</span>
+        </div>
+        <p class="header-hint">Press <kbd>Space</kbd> to generate &nbsp;·&nbsp; <kbd>L</kbd> to lock a swatch</p>
+      </div>
+    </header>
+
+    <main class="main">
+      <section class="palette" id="palette" aria-label="Color palette">
+        <!-- swatches injected by JS -->
+      </section>
+
+      <div class="controls">
+        <div class="controls-left">
+          <label class="select-wrap" for="scheme-select">
+            <span class="select-label">Scheme</span>
+            <select id="scheme-select">
+              <option value="analogous">Analogous</option>
+              <option value="complementary">Complementary</option>
+              <option value="triadic">Triadic</option>
+              <option value="split-complementary">Split-Complementary</option>
+              <option value="tetradic">Tetradic</option>
+              <option value="monochromatic">Monochromatic</option>
+              <option value="random">Random</option>
+            </select>
+          </label>
+
+          <label class="select-wrap" for="count-select">
+            <span class="select-label">Colors</span>
+            <select id="count-select">
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5" selected>5</option>
+              <option value="6">6</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="controls-right">
+          <button class="btn btn-ghost" id="export-btn" aria-label="Export palette">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Export
+          </button>
+          <button class="btn btn-primary" id="generate-btn" aria-label="Generate new palette">
+            Generate
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <polyline points="1 4 1 10 7 10"/>
+              <path d="M3.51 15a9 9 0 1 0 .49-3.51"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Export modal -->
+    <dialog class="modal" id="export-modal" aria-labelledby="modal-title">
+      <div class="modal-inner">
+        <div class="modal-header">
+          <h2 id="modal-title">Export Palette</h2>
+          <button class="modal-close" id="modal-close" aria-label="Close">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <line x1="18" y1="6" x2="6" y2="18"/>
+              <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="export-tabs" role="tablist">
+          <button class="export-tab active" role="tab" data-tab="hex" aria-selected="true">HEX</button>
+          <button class="export-tab" role="tab" data-tab="css" aria-selected="false">CSS</button>
+          <button class="export-tab" role="tab" data-tab="json" aria-selected="false">JSON</button>
+        </div>
+
+        <pre class="export-code" id="export-code" tabindex="0"></pre>
+
+        <button class="btn btn-primary" id="copy-export-btn" style="width:100%">Copy to Clipboard</button>
+      </div>
+    </dialog>
+
+    <!-- Toast -->
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

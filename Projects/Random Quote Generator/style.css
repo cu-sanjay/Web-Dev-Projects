@@ -1,0 +1,40 @@
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #1f6f3a, #c97a2b);
+  color: #fff;
+  margin: 0;
+}
+
+.quote-box {
+  text-align: center;
+  max-width: 500px;
+  padding: 20px;
+  background: rgba(0,0,0,0.4);
+  border-radius: 10px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #fff;
+  color: #1f6f3a;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #c97a2b;
+  color: #fff;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
