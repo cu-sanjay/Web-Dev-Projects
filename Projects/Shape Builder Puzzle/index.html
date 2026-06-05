@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShapeGrid - Shape Builder Puzzle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-purple">
+  <div class="game-container">
+    
+    <!-- Header Controls -->
+    <header class="game-header">
+      <div class="logo-area">
+        <span class="logo-icon">📐</span>
+        <h1>ShapeGrid</h1>
+      </div>
+
+      <div class="header-stats">
+        <div class="stat-box">
+          <span class="stat-lbl">SHAPES</span>
+          <span class="stat-val" id="shapes-completed">0 / 0</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-lbl">TIME</span>
+          <span class="stat-val" id="timer-counter">00:00</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Game Board Grid -->
+    <main class="game-layout">
+      
+      <!-- Grid Arena -->
+      <section class="grid-arena-card">
+        <div class="board-wrapper">
+          <div class="grid-container" id="grid-container">
+            <!-- Dynamically generated puzzle tiles will render here -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Sidebar Options -->
+      <aside class="sidebar-controls">
+        
+        <!-- Level Configuration -->
+        <div class="control-card">
+          <h3>Difficulty Setup</h3>
+          <div class="toggle-group" id="difficulty-toggle">
+            <button class="toggle-btn active" data-diff="easy">4x4 Easy</button>
+            <button class="toggle-btn" data-diff="medium">6x6 Medium</button>
+            <button class="toggle-btn" data-diff="hard">8x8 Hard</button>
+          </div>
+        </div>
+
+        <div class="control-card">
+          <h3>Select Puzzle Level</h3>
+          <div class="select-wrapper">
+            <select id="level-select">
+              <!-- Dynamically populated options -->
+            </select>
+          </div>
+        </div>
+
+        <!-- Quick Game Controls -->
+        <div class="control-card btn-controls-card">
+          <button class="action-btn" id="reset-level-btn">Reset Grid</button>
+          <button class="action-btn outline" id="hint-level-btn">Show Hint</button>
+        </div>
+
+        <!-- How To Play Instructions -->
+        <div class="control-card instruction-card">
+          <h3>How To Play</h3>
+          <ul>
+            <li>Press and drag from a numbered cell to draw a shape.</li>
+            <li>The shape's area must equal the cell's number (e.g. 4 creates 2x2 or 1x4).</li>
+            <li>Drawn shapes must contain exactly one numbered cell.</li>
+            <li>Cover the entire grid completely with no overlaps or gaps.</li>
+            <li>Double-click a shape to remove/clear it from the board.</li>
+          </ul>
+        </div>
+        
+      </aside>
+    </main>
+
+    <!-- Victory Modal Overlay -->
+    <div class="modal-overlay" id="victory-modal">
+      <div class="modal-card">
+        <div class="win-trophy">✨</div>
+        <h2>Perfect Alignment!</h2>
+        <p>You have successfully covered the board with no overlaps or gaps.</p>
+        
+        <div class="victory-stats">
+          <div class="v-stat">
+            <span class="v-num" id="victory-shapes">0/0</span>
+            <span class="v-lbl">Shapes Configured</span>
+          </div>
+          <div class="v-stat">
+            <span class="v-num" id="victory-time">00:00</span>
+            <span class="v-lbl">Elapsed Time</span>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button class="modal-btn" id="next-level-btn">Next Level</button>
+          <button class="modal-btn outline" id="modal-close-btn">View Grid</button>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <footer class="author-credits">
+    Designed and Developed by <span>Mistry Vishwa</span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

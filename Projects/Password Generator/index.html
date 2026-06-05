@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="card">
+        <h2>Password Generator</h2>
+        
+        <div class="result-container">
+            <input type="text" id="password-display" readonly placeholder="Your Secure Password">
+            <button id="copy-btn" title="Copy to clipboard">📋</button>
+        </div>
+
+        <div class="options">
+            <div class="option-group">
+                <label for="length-slider">Length: <span id="length-val">12</span></label>
+                <input type="range" id="length-slider" min="6" max="30" value="12">
+            </div>
+
+            <div class="checkbox-group">
+                <label>
+                    <input type="checkbox" id="uppercase" checked> Include Uppercase (A-Z)
+                </label>
+                <label>
+                    <input type="checkbox" id="lowercase" checked> Include Lowercase (a-z)
+                </label>
+                <label>
+                    <input type="checkbox" id="numbers" checked> Include Numbers (0-9)
+                </label>
+                <label>
+                    <input type="checkbox" id="symbols"> Include Symbols (!@#$%)
+                </label>
+            </div>
+        </div>
+
+        <button id="generate-btn">Generate Password</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

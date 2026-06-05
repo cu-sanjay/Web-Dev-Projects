@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Activity · Habit Bloom</title>
+  <link rel="stylesheet" href="./style/common.css" />
+  <link rel="stylesheet" href="./style/progress.css" />
+</head>
+<body>
+  <main class="app">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Contribution Graph</p>
+        <h1>Your Activity</h1>
+        <p class="subtitle" id="dailyQuote" data-fallback="Daily habit progress.">
+          Daily habit progress.
+        </p>
+      </div>
+
+      <div class="hero-actions">
+        <a href="index.html" class="nav-link">Habits</a>
+        <button id="themeBtn" class="theme-btn">☾</button>
+      </div>
+    </section>
+
+    <section class="github-panel">
+      <div class="github-header">
+        <div class="github-stats">
+          <span><strong id="activeDays">0</strong> active days in the last year</span>
+          <span class="github-stat-divider">·</span>
+          <span><strong id="currentStreak">0</strong> day current streak</span>
+          <span class="github-stat-divider">·</span>
+          <span><strong id="longestStreak">0</strong> day longest streak</span>
+        </div>
+        <p class="github-today">
+          <span id="todayLabel">Today</span>:
+          <strong id="todayCount">0</strong> / <strong id="todayTotal">0</strong> habits
+          (<strong id="todayPercent">0%</strong>)
+        </p>
+      </div>
+
+      <div class="contrib-wrap">
+        <div class="contrib-grid" id="contribGrid" role="img" aria-label="Habit completion heatmap for the past year"></div>
+      </div>
+
+      <div class="contrib-legend">
+        <span>Less</span>
+        <span class="contrib-cell level-0" aria-hidden="true"></span>
+        <span class="contrib-cell level-1" aria-hidden="true"></span>
+        <span class="contrib-cell level-2" aria-hidden="true"></span>
+        <span class="contrib-cell level-3" aria-hidden="true"></span>
+        <span class="contrib-cell level-4" aria-hidden="true"></span>
+        <span>More</span>
+      </div>
+    </section>
+
+    <section class="stats-grid github-summary">
+      <article class="stat-card">
+        <span>Completed Today</span>
+        <strong id="completedToday">0</strong>
+      </article>
+      <article class="stat-card">
+        <span>Current Streak</span>
+        <strong id="summaryCurrentStreak">0</strong>
+      </article>
+      <article class="stat-card">
+        <span>Best Streak</span>
+        <strong id="summaryBestStreak">0</strong>
+      </article>
+    </section>
+
+    <section class="panel">
+      <div class="section-title">
+        <h2>How levels work</h2>
+        <p>Square color reflects how many habits you completed that day.</p>
+      </div>
+      <ul class="level-guide">
+        <li><span class="contrib-cell level-0"></span> No habits completed</li>
+        <li><span class="contrib-cell level-1"></span> Up to 25% of habits</li>
+        <li><span class="contrib-cell level-2"></span> 26–50% of habits</li>
+        <li><span class="contrib-cell level-3"></span> 51–75% of habits</li>
+        <li><span class="contrib-cell level-4"></span> 76–100% of habits</li>
+      </ul>
+    </section>
+  </main>
+
+  <div id="contribTooltip" class="contrib-tooltip" hidden></div>
+
+  <script src="./script/quote.js"></script>
+  <script src="./script/progress.script.js"></script>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fitness Progress Dashboard - FitForge</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="logo">
+        <span class="logo-symbol">⚡</span>
+        <h1>FitForge</h1>
+      </div>
+      <p class="tagline">Personal Workouts & Hydration Progress Command Center</p>
+    </header>
+
+    <!-- Overview Metrics Row (Radial Rings/Progress Blocks) -->
+    <section class="metrics-row">
+      <!-- Active Minutes progress -->
+      <div class="metric-card card">
+        <div class="metric-ring-container">
+          <svg class="progress-ring" width="80" height="80">
+            <circle class="ring-bg" cx="40" cy="40" r="34"></circle>
+            <circle class="ring-bar" id="ringMinutes" cx="40" cy="40" r="34" stroke="#10b981" stroke-dasharray="213.6" stroke-dashoffset="213.6"></circle>
+          </svg>
+          <span class="ring-text" id="minsText">0m</span>
+        </div>
+        <div class="metric-info">
+          <span class="metric-label">Active Minutes</span>
+          <span class="metric-val" id="totalMinutesVal">0 / 30 mins</span>
+        </div>
+      </div>
+
+      <!-- Calories Burned progress -->
+      <div class="metric-card card">
+        <div class="metric-ring-container">
+          <svg class="progress-ring" width="80" height="80">
+            <circle class="ring-bg" cx="40" cy="40" r="34"></circle>
+            <circle class="ring-bar" id="ringCalories" cx="40" cy="40" r="34" stroke="#34d399" stroke-dasharray="213.6" stroke-dashoffset="213.6"></circle>
+          </svg>
+          <span class="ring-text" id="calsText">0</span>
+        </div>
+        <div class="metric-info">
+          <span class="metric-label">Active Burned</span>
+          <span class="metric-val" id="totalCaloriesVal">0 / 500 kcal</span>
+        </div>
+      </div>
+
+      <!-- Water Intake Tracker -->
+      <div class="metric-card card">
+        <div class="water-tracker-container">
+          <div class="water-pils" id="waterContainer">
+            <!-- Cups indicators rendered in script -->
+          </div>
+          <div class="water-controls">
+            <button type="button" class="btn-water" id="waterMinus">−</button>
+            <span id="waterText">0 / 8 cups</span>
+            <button type="button" class="btn-water" id="waterPlus">+</button>
+          </div>
+        </div>
+        <div class="metric-info">
+          <span class="metric-label">Hydration Target</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Workspace Layout Grid -->
+    <div class="dashboard-grid">
+      <!-- Left Column: Log inputs forms -->
+      <aside class="forms-panel">
+        <!-- Log Workout Form -->
+        <section class="log-card card">
+          <h2>Log Workout</h2>
+          <form id="workoutForm" class="log-form">
+            <div class="form-group">
+              <label for="workoutType">Activity Type</label>
+              <select id="workoutType" required>
+                <option value="Cardio">🏃 Cardio / Running</option>
+                <option value="Strength">🏋️ Strength Training</option>
+                <option value="Yoga">🧘 Yoga / Flexibility</option>
+                <option value="Sports">🏀 Sports / Recreation</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="workoutDuration">Duration (mins)</label>
+                <input type="number" id="workoutDuration" placeholder="30" min="1" required>
+              </div>
+              <div class="form-group">
+                <label for="workoutBurned">Burned (kcal)</label>
+                <input type="number" id="workoutBurned" placeholder="250" min="1" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="workoutDate">Date</label>
+              <input type="date" id="workoutDate" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Workout</button>
+          </form>
+        </section>
+
+        <!-- Log Calorie Intake Form -->
+        <section class="log-card card">
+          <h2>Log Calorie Intake</h2>
+          <form id="calorieForm" class="log-form">
+            <div class="form-group">
+              <label for="mealName">Meal / Item Name</label>
+              <input type="text" id="mealName" placeholder="e.g. Protein shake, salad" required>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="mealCalories">Calories (kcal)</label>
+                <input type="number" id="mealCalories" placeholder="350" min="1" required>
+              </div>
+              <div class="form-group">
+                <label for="mealDate">Date</label>
+                <input type="date" id="mealDate" required>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Calorie Entry</button>
+          </form>
+        </section>
+
+        <!-- Update Weight Form -->
+        <section class="log-card card">
+          <h2>Record Current Weight</h2>
+          <form id="weightForm" class="log-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="weightVal">Weight (kg)</label>
+                <input type="number" id="weightVal" placeholder="72.5" step="0.1" min="1" required>
+              </div>
+              <div class="form-group">
+                <label for="weightDate">Date</label>
+                <input type="date" id="weightDate" required>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Update Weight</button>
+          </form>
+        </section>
+      </aside>
+
+      <!-- Right Column: Interactive Charts and Activity Log Timeline -->
+      <main class="analytics-panel">
+        <!-- Chart Pane -->
+        <section class="chart-card card">
+          <div class="chart-header">
+            <nav class="chart-tabs">
+              <button type="button" class="tab-btn active" data-chart="workout">Workout Duration</button>
+              <button type="button" class="tab-btn" data-chart="calories">Calories Balance</button>
+              <button type="button" class="tab-btn" data-chart="weight">Weight Progress</button>
+            </nav>
+          </div>
+          <div class="chart-viewport">
+            <canvas id="fitnessChart"></canvas>
+          </div>
+        </section>
+
+        <!-- Timeline Activities logs lists -->
+        <section class="activities-card card">
+          <div class="activities-header">
+            <h2>Activity Logs</h2>
+            <button type="button" id="clearAllLogs" class="btn-clear-logs">Reset All Data</button>
+          </div>
+          <div class="activities-timeline" id="activityLogs">
+            <!-- Timeline entries rendered dynamically -->
+            <p class="empty-logs-msg">No logs recorded yet. Start by logging your workouts or calories above.</p>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- Script logic -->
+  <script src="script.js"></script>
+</body>
+</html>

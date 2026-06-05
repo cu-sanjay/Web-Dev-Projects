@@ -219,5 +219,70 @@
     </template>
 
     <script src="assets/app.js" type="module"></script>
+
+    <div class="nsoc-cursor-dot"></div>
+    <div class="nsoc-cursor-outline"></div>
+
+    <script>
+        const cursorDot = document.querySelector(".nsoc-cursor-dot");
+        const cursorOutline = document.querySelector(".nsoc-cursor-outline");
+
+        let mouseX = 0, mouseY = 0; 
+        let outlineX = 0, outlineY = 0; 
+
+        // Global Mouse Move Listener
+        window.addEventListener("mousemove", function (e) {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            cursorDot.style.left = mouseX + "px";
+            cursorDot.style.top = mouseY + "px";
+
+            // Ultimate Fallback: Agar kisi element ne runtime par cursor dikhane ki koshish ki, toh use instantly stop karega
+            if (e.target) {
+                e.target.style.setProperty('cursor', 'none', 'important');
+            }
+        });
+
+        // Smooth Lerp animation loop
+        function animateCursor() {
+            outlineX += (mouseX - outlineX) * 0.1;
+            outlineY += (mouseY - outlineY) * 0.1;
+
+            cursorOutline.style.left = outlineX + "px";
+            cursorOutline.style.top = outlineY + "px";
+
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        // Safe dynamic hover states detecting for dynamically generated components
+        document.addEventListener("mouseover", function(e) {
+            if (e.target && (
+                e.target.tagName === 'A' || 
+                e.target.tagName === 'BUTTON' || 
+                e.target.tagName === 'INPUT' || 
+                e.target.closest('.project-card') || 
+                e.target.closest('.tag')
+            )) {
+                cursorDot.classList.add("nsoc-hoveractive");
+                cursorOutline.classList.add("nsoc-hoveractive");
+            }
+        });
+
+        document.addEventListener("mouseout", function(e) {
+            if (e.target && (
+                e.target.tagName === 'A' || 
+                e.target.tagName === 'BUTTON' || 
+                e.target.tagName === 'INPUT' || 
+                e.target.closest('.project-card') || 
+                e.target.closest('.tag')
+            )) {
+                cursorDot.classList.remove("nsoc-hoveractive");
+                cursorOutline.classList.remove("nsoc-hoveractive");
+            }
+        });
+    </script>
+
   </body>
 </html>
