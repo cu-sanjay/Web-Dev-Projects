@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory Match — Card Quest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Inter:wght@400;600;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <canvas id="particles-canvas" aria-hidden="true"></canvas>
+
+  <div id="screen-shake">
+    <div class="container">
+      <!-- ─── HERO HEADER ─── -->
+      <header class="hero">
+        <div class="hero__badge">CARD QUEST</div>
+        <h1 class="hero__title">Memory<span class="hero__title-accent">Match</span></h1>
+        <p class="hero__subtitle">Find the pairs &amp; conquer the board</p>
+      </header>
+
+      <!-- ─── PLAYER HUD ─── -->
+      <section class="hud">
+        <div class="hud__player">
+          <div class="hud__level">
+            <span class="hud__level-badge" id="level-badge">1</span>
+            <span class="hud__rank" id="rank-title">Bronze</span>
+          </div>
+          <div class="hud__xp">
+            <div class="hud__xp-track">
+              <div class="hud__xp-fill" id="xp-fill"></div>
+            </div>
+            <span class="hud__xp-text"><span id="xp-current">0</span> / <span id="xp-next">500</span> XP</span>
+          </div>
+        </div>
+        <div class="hud__stats">
+          <div class="stat stat--moves">
+            <span class="stat__icon">⚔️</span>
+            <div class="stat__body">
+              <span class="stat__label">Moves</span>
+              <span class="stat__value" id="moves">0</span>
+            </div>
+          </div>
+          <div class="stat stat--score">
+            <span class="stat__icon">⭐</span>
+            <div class="stat__body">
+              <span class="stat__label">Score</span>
+              <span class="stat__value" id="score">0</span>
+            </div>
+          </div>
+          <div class="stat stat--combo">
+            <span class="stat__icon">🔥</span>
+            <div class="stat__body">
+              <span class="stat__label">Combo</span>
+              <span class="stat__value" id="combo">x0</span>
+            </div>
+            <div class="combo-meter" id="combo-meter">
+              <div class="combo-meter__fill" id="combo-fill"></div>
+            </div>
+          </div>
+          <div class="stat stat--best">
+            <span class="stat__icon">👑</span>
+            <div class="stat__body">
+              <span class="stat__label">Best</span>
+              <span class="stat__value" id="best-score">--</span>
+            </div>
+          </div>
+        </div>
+        <div class="hud__progress">
+          <div class="hud__progress-track">
+            <div class="hud__progress-fill" id="progress-fill"></div>
+          </div>
+          <span class="hud__progress-text"><span id="matched-count">0</span> / <span id="total-count">0</span>
+            pairs</span>
+        </div>
+      </section>
+
+      <!-- ─── CONTROLS ─── -->
+      <section class="controls">
+        <div class="control-group">
+          <label class="control-group__label" for="difficulty">Difficulty</label>
+          <div class="control-group__select-wrap">
+            <select class="control-group__select" id="difficulty">
+              <option value="easy">Easy 4×4</option>
+              <option value="medium">Medium 6×4</option>
+            </select>
+            <span class="control-group__arrow">▾</span>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-group__label" for="theme">Realm</label>
+          <div class="control-group__select-wrap">
+            <select class="control-group__select" id="theme">
+              <option value="space">🚀 Cosmos</option>
+              <option value="food">🍕 Feast</option>
+              <option value="tech">💻 Cyber</option>
+            </select>
+            <span class="control-group__arrow">▾</span>
+          </div>
+        </div>
+        <button class="btn btn--reset" id="reset-btn">
+          <span class="btn__icon">↻</span> New Game
+        </button>
+      </section>
+
+      <!-- ─── BOARD ─── -->
+      <main class="board" id="board" role="grid" aria-label="Memory card grid"></main>
+    </div>
+  </div>
+
+  <!-- ─── FLOATING SCORE CONTAINER ─── -->
+  <div id="float-container" aria-hidden="true"></div>
+
+  <!-- ─── TOAST CONTAINER ─── -->
+  <div id="toast-container" aria-live="polite"></div>
+
+  <!-- ─── VICTORY MODAL ─── -->
+  <section class="modal-overlay" id="modal-overlay">
+    <div class="modal">
+      <div class="modal__confetti" id="confetti-container"></div>
+      <div class="modal__content">
+        <div class="modal__stars" id="star-container">
+          <span class="star" data-i="0">★</span>
+          <span class="star" data-i="1">★</span>
+          <span class="star" data-i="2">★</span>
+        </div>
+        <h2 class="modal__title">VICTORY</h2>
+        <p class="modal__subtitle">Board Cleared!</p>
+        <div class="modal__stats">
+          <div class="modal-stat">
+            <span class="modal-stat__label">Moves</span>
+            <span class="modal-stat__value" id="modal-moves">0</span>
+          </div>
+          <div class="modal-stat">
+            <span class="modal-stat__label">Score</span>
+            <span class="modal-stat__value" id="modal-score">0</span>
+          </div>
+          <div class="modal-stat">
+            <span class="modal-stat__label" id="modal-best-label">Best</span>
+            <span class="modal-stat__value" id="modal-best-value">--</span>
+          </div>
+        </div>
+        <div class="modal__xp-bar">
+          <span class="modal__xp-label" id="modal-xp-label">XP</span>
+          <div class="modal__xp-track">
+            <div class="modal__xp-fill" id="modal-xp-fill"></div>
+          </div>
+          <span class="modal__xp-amount" id="modal-xp-amount">+0 XP</span>
+        </div>
+        <p class="modal__message" id="modal-message"></p>
+        <div class="modal__actions">
+          <button class="btn btn--play-again" id="play-again-btn">▶ Play Again</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie Search App</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header class="header">
+        <h1 class="logo">
+          <span class="logo-icon">&#9654;</span>
+          <span class="logo-text">CineSearch</span>
+        </h1>
+        <p class="tagline">Discover your next favorite movie</p>
+      </header>
+
+      <section class="search-section">
+        <form class="search-form" id="searchForm" role="search">
+          <div class="search-wrapper">
+            <input
+              type="text"
+              id="searchInput"
+              class="search-input"
+              placeholder="Search for movies, series, episodes..."
+              autocomplete="off"
+              aria-label="Search movies"
+            />
+            <button type="submit" class="search-btn" aria-label="Search">
+              <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <div id="loading" class="loading hidden" aria-busy="true">
+        <div class="spinner"></div>
+        <p>Searching movies...</p>
+      </div>
+
+      <div id="error" class="error-message hidden" role="alert"></div>
+
+      <section class="results-section">
+        <div id="resultsGrid" class="results-grid"></div>
+      </section>
+    </main>
+
+    <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content">
+        <button class="modal-close" aria-label="Close modal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+        <div class="modal-header">
+          <img id="modalPoster" class="modal-poster" alt="Movie poster" />
+          <div class="modal-title-section">
+            <h2 id="modalTitle" class="modal-title"></h2>
+            <div class="modal-meta">
+              <span id="modalYear" class="meta-item"></span>
+              <span id="modalType" class="meta-badge"></span>
+            </div>
+            <div id="modalRating" class="modal-rating"></div>
+          </div>
+        </div>
+        <div class="modal-body">
+          <div class="info-group">
+            <h3 class="info-label">Genre</h3>
+            <p id="modalGenre" class="info-value"></p>
+          </div>
+          <div class="info-group">
+            <h3 class="info-label">Director</h3>
+            <p id="modalDirector" class="info-value"></p>
+          </div>
+          <div class="info-group">
+            <h3 class="info-label">Actors</h3>
+            <p id="modalActors" class="info-value"></p>
+          </div>
+          <div class="info-group">
+            <h3 class="info-label">Plot</h3>
+            <p id="modalPlot" class="info-value plot-text"></p>
+          </div>
+        </div>
+        <div id="modalLoading" class="modal-loading hidden">
+          <div class="spinner"></div>
+          <p>Loading details...</p>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p>Powered by <a href="https://www.omdbapi.com/" target="_blank" rel="noopener noreferrer">OMDb API</a></p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

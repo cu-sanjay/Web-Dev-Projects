@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Currency Converter</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="bg-orb bg-orb-1"></div>
+  <div class="bg-orb bg-orb-2"></div>
+
+  <main class="container">
+    <header class="header">
+      <div class="header-icon">⟠</div>
+      <h1>Currency Converter</h1>
+      <p class="header-sub">Mid-market exchange rates</p>
+    </header>
+
+    <div class="converter-card" id="converterCard">
+      <div class="loader-overlay" id="loaderOverlay">
+        <div class="spinner"></div>
+        <span>Fetching live rates...</span>
+      </div>
+
+      <div class="currency-row">
+        <div class="currency-block">
+          <label class="currency-label">From</label>
+          <div class="currency-input-group">
+            <select class="currency-select" id="fromCurrency"></select>
+            <input type="text" class="amount-input" id="fromAmount" inputmode="decimal" autocomplete="off" value="1.00">
+          </div>
+        </div>
+
+        <button class="swap-btn" id="swapBtn" aria-label="Swap currencies">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="17 1 21 5 17 9"/>
+            <path d="M3 11V9a4 4 0 0 1 4-4h14"/>
+            <polyline points="7 23 3 19 7 15"/>
+            <path d="M21 13v2a4 4 0 0 1-4 4H3"/>
+          </svg>
+        </button>
+
+        <div class="currency-block">
+          <label class="currency-label">To</label>
+          <div class="currency-input-group">
+            <select class="currency-select" id="toCurrency"></select>
+            <input type="text" class="amount-input" id="toAmount" inputmode="decimal" autocomplete="off" placeholder="0.00">
+          </div>
+        </div>
+      </div>
+
+      <div class="rate-card" id="rateCard">
+        <div class="rate-row">
+          <span class="rate-label">Exchange Rate</span>
+          <span class="rate-value" id="rateValue">—</span>
+        </div>
+        <div class="rate-row secondary">
+          <span class="rate-label">Last Updated</span>
+          <span class="rate-value" id="rateTimestamp">—</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-cards">
+      <div class="info-card">
+        <div class="info-card-icon">↻</div>
+        <span class="info-card-label">Status</span>
+        <span class="info-card-value" id="statusText">Initializing...</span>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">⟁</div>
+        <span class="info-card-label">Inverse Rate</span>
+        <span class="info-card-value" id="inverseRate">—</span>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">⏱</div>
+        <span class="info-card-label">History</span>
+        <span class="info-card-value" id="historyCount">0</span>
+      </div>
+    </div>
+
+    <div class="history-section" id="historySection">
+      <div class="history-header">
+        <h3>Conversion History</h3>
+        <button class="clear-btn" id="clearHistory">Clear All</button>
+      </div>
+      <div class="history-list" id="historyList">
+        <div class="history-empty">No conversions yet.</div>
+      </div>
+    </div>
+  </main>
+
+  <div class="toast-container" id="toastContainer"></div>
+  <script src="script.js"></script>
+</body>
+</html>

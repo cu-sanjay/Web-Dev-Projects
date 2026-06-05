@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Umami // Premium Restaurant Ordering</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <aside class="sidebar-left">
+      <div class="brand">
+        <div class="brand-icon"></div>
+        <h2>Umami</h2>
+      </div>
+
+      <nav class="menu-nav">
+        <h3>Categories</h3>
+        <ul id="category-list">
+          </ul>
+      </nav>
+
+      <div class="dietary-filters">
+        <h3>Dietary Preference</h3>
+        <label class="filter-toggle">
+          <input type="checkbox" id="filter-veg-only">
+          <span class="toggle-slider"></span>
+          <span class="toggle-label">Vegetarian Only</span>
+        </label>
+      </div>
+    </aside>
+
+    <main class="menu-core">
+      <header class="menu-header">
+        <div class="header-title-wrap">
+          <h1 id="selected-category-title">All Curations</h1>
+          <p id="category-subtitle">Chef's artisanal choices prepared fresh daily.</p>
+        </div>
+        <div class="search-bar-wrap">
+          <input type="text" id="menu-search" placeholder="Search culinary creations...">
+        </div>
+      </header>
+
+      <div id="menu-grid" class="menu-grid">
+        </div>
+    </main>
+
+    <aside class="sidebar-right">
+      <div class="cart-header">
+        <h3>Your Order</h3>
+        <span id="cart-item-count" class="cart-count-badge">0 items</span>
+      </div>
+
+      <div id="cart-items-container" class="cart-items-container">
+        <div class="empty-cart">
+          <div class="empty-cart-icon">🛒</div>
+          <p>Your cart is empty.</p>
+          <span>Select items from the menu to customize your meal.</span>
+        </div>
+      </div>
+
+      <div class="order-summary-panel">
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span id="summary-subtotal" class="price-mono">$0.00</span>
+        </div>
+        <div class="summary-row">
+          <span>Artisanal Service &amp; Tax</span>
+          <span id="summary-tax" class="price-mono">$0.00</span>
+        </div>
+        <div class="summary-row delivery">
+          <span>Delivery Fee</span>
+          <span id="summary-delivery" class="price-mono">$0.00</span>
+        </div>
+        <hr class="summary-divider">
+        <div class="summary-row total">
+          <span>Total Estimate</span>
+          <span id="summary-total" class="price-mono">$0.00</span>
+        </div>
+
+        <button id="btn-checkout" class="btn-checkout" disabled>Proceed to Checkout</button>
+      </div>
+    </aside>
+
+  </div>
+
+  <div id="customization-modal" class="modal-overlay">
+    <div class="modal-content">
+      <header class="modal-header">
+        <div class="modal-title-wrap">
+          <h2 id="modal-item-name">Item Name</h2>
+          <p id="modal-item-description">Item Description</p>
+        </div>
+        <button id="modal-close" class="btn-close-modal">&times;</button>
+      </header>
+      
+      <form id="customization-form">
+        <input type="hidden" id="modal-item-id">
+        
+        <div id="modal-options-body" class="modal-options-body">
+          </div>
+
+        <footer class="modal-footer">
+          <div class="quantity-selector">
+            <button type="button" id="btn-qty-minus" class="btn-qty">-</button>
+            <span id="modal-qty-display" class="qty-display">1</span>
+            <button type="button" id="btn-qty-plus" class="btn-qty">+</button>
+          </div>
+          <button type="submit" id="btn-modal-submit" class="btn-modal-submit">
+            Add to Order — <span id="modal-total-price-display">$0.00</span>
+          </button>
+        </footer>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

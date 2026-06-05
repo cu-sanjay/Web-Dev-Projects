@@ -1,0 +1,787 @@
+/* --- RollForge CSS stylesheet --- */
+
+/* Theme Variables Definition */
+[data-theme="obsidian"] {
+  --bg-app: #09090b;
+  --bg-card: #18181b;
+  --bg-input: #09090b;
+  --border-color: #27272a;
+  --border-focus: #3f3f46;
+  --text-title: #fafafa;
+  --text-body: #a1a1aa;
+  --text-muted: #71717a;
+  --accent-color: #f97316;
+  --accent-gradient: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+  --felt-color: #111827;
+  --tray-border: #1f2937;
+}
+
+[data-theme="gold"] {
+  --bg-app: #0e0d0c;
+  --bg-card: #1a1714;
+  --bg-input: #0e0d0c;
+  --border-color: #d4af37;
+  --border-focus: #e5c158;
+  --text-title: #faf6eb;
+  --text-body: #d4cfc3;
+  --text-muted: #8c867a;
+  --accent-color: #d4af37;
+  --accent-gradient: linear-gradient(135deg, #f3e5ab 0%, #d4af37 100%);
+  --felt-color: #1e1411;
+  --tray-border: #33261a;
+}
+
+[data-theme="glass"] {
+  --bg-app: radial-gradient(circle at top left, #1c103f, #070417);
+  --bg-card: rgba(255, 255, 255, 0.03);
+  --bg-input: rgba(255, 255, 255, 0.02);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-focus: rgba(255, 255, 255, 0.2);
+  --text-title: #ffffff;
+  --text-body: #d1cbdc;
+  --text-muted: #8d859b;
+  --accent-color: #c084fc;
+  --accent-gradient: linear-gradient(135deg, #c084fc 0%, #a855f7 100%);
+  --felt-color: rgba(15, 10, 36, 0.6);
+  --tray-border: rgba(255, 255, 255, 0.15);
+  --backdrop-blur: blur(12px);
+}
+
+[data-theme="neon"] {
+  --bg-app: #000000;
+  --bg-card: #080810;
+  --bg-input: #000000;
+  --border-color: #00ffcc;
+  --border-focus: #39ff14;
+  --text-title: #ffffff;
+  --text-body: #a2e8dd;
+  --text-muted: #4e8c81;
+  --accent-color: #ff007f;
+  --accent-gradient: linear-gradient(135deg, #00ffcc 0%, #ff007f 100%);
+  --felt-color: #050512;
+  --tray-border: #00ffcc;
+}
+
+[data-theme="ruby"] {
+  --bg-app: #120306;
+  --bg-card: #1f0b0f;
+  --bg-input: #120306;
+  --border-color: #ef4444;
+  --border-focus: #f87171;
+  --text-title: #fef2f2;
+  --text-body: #eca1a6;
+  --text-muted: #8a585c;
+  --accent-color: #dc2626;
+  --accent-gradient: linear-gradient(135deg, #f87171 0%, #dc2626 100%);
+  --felt-color: #3b0712;
+  --tray-border: #5c0f1e;
+}
+
+/* Base resets */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  background: var(--bg-app);
+  color: var(--text-title);
+  min-height: 100vh;
+  line-height: 1.5;
+  transition: all 0.3s ease;
+  overflow-x: hidden;
+}
+
+.simulator-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Header UI */
+.sim-header {
+  border-bottom: 1.5px solid var(--border-color);
+  padding-bottom: 12px;
+  margin-bottom: 8px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-icon {
+  font-size: 2rem;
+  text-shadow: 0 0 10px rgba(249, 115, 22, 0.2);
+}
+
+.logo h1 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.tagline {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+/* Card layout wrapper */
+.card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
+}
+
+[data-theme="glass"] .card {
+  backdrop-filter: var(--backdrop-blur);
+}
+
+/* Workspace Grid System */
+.sim-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr 280px;
+  gap: 20px;
+  align-items: start;
+}
+
+/* LEFT SIDEBAR: CONFIG PANEL */
+.controls-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.controls-panel h2 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 8px;
+}
+
+.config-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.config-section h3 {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+/* Dice type grid button styles */
+.dice-type-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.type-btn {
+  background-color: var(--bg-input);
+  border: 1.5px solid var(--border-color);
+  color: var(--text-body);
+  border-radius: var(--border-radius-sm);
+  padding: 10px 8px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.type-btn span {
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.type-btn:hover {
+  border-color: var(--accent-color);
+  background-color: rgba(249, 115, 22, 0.04);
+}
+
+.type-btn.active {
+  border-color: var(--accent-color);
+  color: var(--text-title);
+  background-color: rgba(249, 115, 22, 0.08);
+  box-shadow: 0 0 10px rgba(249, 115, 22, 0.15);
+}
+
+/* Quantity Control Buttons */
+.qty-control {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--bg-input);
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  padding: 4px;
+}
+
+.qty-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-body);
+  font-size: 1.2rem;
+  font-weight: 800;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all 0.15s;
+}
+
+.qty-btn:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--accent-color);
+}
+
+#qtyVal {
+  font-weight: 800;
+  font-size: 1rem;
+}
+
+/* Dropdown themes switcher */
+.select-wrapper {
+  position: relative;
+}
+
+select {
+  width: 100%;
+  background-color: var(--bg-input);
+  border: 1.5px solid var(--border-color);
+  color: var(--text-title);
+  padding: 10px 14px;
+  border-radius: var(--border-radius-sm);
+  font-family: var(--font-family);
+  font-size: 0.85rem;
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+}
+
+select:focus {
+  border-color: var(--accent-color);
+}
+
+/* Slider physics settings */
+.slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#forceValue {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent-color);
+}
+
+.custom-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--border-color);
+  outline: none;
+  margin-top: 6px;
+}
+
+.custom-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--accent-color);
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+.custom-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+/* Audio Switch custom styles */
+.audio-toggle-row {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--border-color);
+  padding-top: 14px;
+}
+
+.toggle-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-body);
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider-toggle {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--bg-input);
+  border: 1.5px solid var(--border-color);
+  transition: .2s;
+  border-radius: 24px;
+}
+
+.slider-toggle:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 3px;
+  bottom: 2.5px;
+  background-color: var(--text-muted);
+  transition: .2s;
+  border-radius: 50%;
+}
+
+input:checked + .slider-toggle {
+  border-color: var(--accent-color);
+}
+
+input:checked + .slider-toggle:before {
+  transform: translateX(20px);
+  background-color: var(--accent-color);
+}
+
+/* Actions buttons group styling */
+.action-buttons-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.btn {
+  width: 100%;
+  padding: 12px;
+  font-weight: 700;
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+  font-size: 0.9rem;
+}
+
+.btn-primary {
+  background: var(--accent-gradient);
+  color: #000000;
+}
+
+.btn-primary:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background-color: var(--bg-input);
+  border: 1.5px solid var(--border-color);
+  color: var(--text-body);
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+  background-color: rgba(249, 115, 22, 0.04);
+}
+
+/* CENTER PANEL: DICE FELT TRAY */
+.tray-panel {
+  padding: 0;
+  height: 520px;
+  position: relative;
+  overflow: hidden;
+}
+
+.tray-felt-lining {
+  width: 100%;
+  height: 100%;
+  background-color: var(--felt-color);
+  background-image: radial-gradient(circle, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 16px 16px;
+  border: 12px solid var(--tray-border);
+  border-radius: var(--border-radius-md);
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 10px 30px rgba(0, 0, 0, 0.8);
+}
+
+.tray-instructions {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  pointer-events: none;
+  z-index: 10;
+  animation: pulseInstruction 2s infinite ease-in-out;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+}
+
+@keyframes pulseInstruction {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+.tray-viewport {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  perspective: 800px;
+}
+
+/* ================= 3D DICE STYLES (D6 Cube) ================= */
+.die-d6 {
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: transform 0.1s ease-out, left 0.1s linear, top 0.1s linear;
+  cursor: pointer;
+}
+
+.die-d6 .face {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background-color: var(--bg-card);
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: inset 0 0 12px rgba(0,0,0,0.5), 0 0 10px rgba(255, 123, 0, 0.1);
+  transition: border-color 0.3s;
+}
+
+/* Isometric mapping coordinates */
+.face.front  { transform: rotateY(0deg) translateZ(30px); }
+.face.back   { transform: rotateY(180deg) translateZ(30px); }
+.face.right  { transform: rotateY(90deg) translateZ(30px); }
+.face.left   { transform: rotateY(-90deg) translateZ(30px); }
+.face.top    { transform: rotateX(90deg) translateZ(30px); }
+.face.bottom { transform: rotateX(-90deg) translateZ(30px); }
+
+/* Pips configurations grids */
+.face-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  width: 100%;
+  height: 100%;
+  padding: 8px;
+}
+
+.pip {
+  background-color: var(--accent-color);
+  border-radius: 50%;
+  width: 8px;
+  height: 8px;
+  justify-self: center;
+  align-self: center;
+  box-shadow: 0 0 4px var(--accent-color);
+}
+
+/* Grid placement coordinates */
+.pip-c { grid-area: 2 / 2; }
+.pip-tl { grid-area: 1 / 1; }
+.pip-tr { grid-area: 1 / 3; }
+.pip-ml { grid-area: 2 / 1; }
+.pip-mr { grid-area: 2 / 3; }
+.pip-bl { grid-area: 3 / 1; }
+.pip-br { grid-area: 3 / 3; }
+
+/* ================= SVG POLYHEDRAL RPG DICE ================= */
+.polyhedral-die {
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.1s ease-out, left 0.1s linear, top 0.1s linear;
+  cursor: pointer;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+}
+
+.poly-svg {
+  width: 100%;
+  height: 100%;
+  fill: var(--bg-card);
+  stroke: var(--border-color);
+  stroke-width: 2;
+  transition: stroke 0.3s;
+}
+
+.polyhedral-die:hover .poly-svg {
+  stroke: var(--accent-color);
+}
+
+.poly-text {
+  position: absolute;
+  font-size: 0.95rem;
+  font-weight: 800;
+  fill: var(--accent-color);
+  text-anchor: middle;
+  dominant-baseline: central;
+  font-family: var(--font-family);
+  pointer-events: none;
+}
+
+/* Roll tumbling and bouncing animation frames */
+.rolling-animation {
+  animation: tumbleRoll 0.8s ease-out forwards;
+}
+
+@keyframes tumbleRoll {
+  0% { transform: scale(0.6) rotate(0deg); }
+  30% { transform: scale(1.3) rotate(360deg); }
+  60% { transform: scale(0.9) rotate(720deg); }
+  100% { transform: scale(1) rotate(1080deg); }
+}
+
+/* RIGHT PANEL: ANALYTICS & STATS */
+.analytics-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.analytics-panel h2 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 8px;
+}
+
+.sum-box {
+  background-color: var(--bg-input);
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+}
+
+.sum-title {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+.sum-value {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--accent-color);
+}
+
+.average-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-body);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 10px;
+}
+
+.average-row strong {
+  color: var(--accent-color);
+}
+
+.stats-section h3, .history-section h3 {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+/* Distributions Frequency bar chart styles */
+.frequency-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+  max-height: 150px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.frequency-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.freq-num {
+  min-width: 18px;
+  color: var(--text-body);
+}
+
+.freq-bar-track {
+  flex: 1;
+  height: 6px;
+  background-color: var(--bg-input);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.freq-bar-fill {
+  height: 100%;
+  background-color: var(--accent-color);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.freq-count {
+  min-width: 14px;
+  text-align: right;
+  color: var(--text-muted);
+}
+
+/* Roll history list timeline */
+.history-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-top: 1px solid var(--border-color);
+  padding-top: 14px;
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-clear-history {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.btn-clear-history:hover {
+  color: var(--accent-color);
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 140px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.empty-history-msg {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 10px;
+}
+
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  animation: slideDown 0.2s ease-out;
+}
+
+.hist-meta {
+  color: var(--text-body);
+}
+
+.hist-sum {
+  color: var(--accent-color);
+  font-weight: 800;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Layout responsiveness configurations */
+@media (max-width: 1024px) {
+  .sim-grid {
+    grid-template-columns: 1fr;
+  }
+  .controls-panel, .tray-panel, .analytics-panel {
+    grid-column: 1;
+  }
+}

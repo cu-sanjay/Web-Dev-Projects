@@ -1,0 +1,72 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  margin: 0;
+  padding: 20px;
+}
+
+.news-container {
+  max-width: 1000px;
+  margin: auto;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#searchInput {
+  padding: 8px;
+  width: 250px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+h2 {
+  margin-top: 20px;
+}
+
+.categoryBtn {
+  margin: 5px;
+  padding: 8px 12px;
+  background: #16f3aa;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.categoryBtn:hover {
+  background: #0dbf82;
+}
+
+.news-card {
+  background: #fff;
+  margin: 15px 0;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.news-card h3 {
+  margin: 0 0 10px;
+}
+
+.bookmarkBtn {
+  background: #c97ab7;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.bookmarkBtn:hover {
+  background: #a85a97;
+}
+
+#bookmarkList p {
+  background: #f4f6f8;
+  padding: 8px;
+  border-radius: 5px;
+  margin: 5px 0;
+}

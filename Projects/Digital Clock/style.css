@@ -1,0 +1,370 @@
+:root {
+  --bg-gradient-start: #5a2153;
+  --bg-gradient-end: #191428;
+  --top-face: #bd00ff;
+  --front-casing: #6b00b3;
+  --side-casing: #4a007a;
+  --display-bezel: #291570;
+  --clock-glow: #2dfde2;
+  --tuner-needle: #ff007c;
+  --text-dim: rgba(255, 255, 255, 0.3);
+  --text-active: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Orbitron', Consolas, ui-monospace, monospace;
+  overflow: hidden;
+  color: #fff;
+}
+
+/* 3D Scene Setup */
+.radio-chassis-container {
+  perspective: 2000px;
+}
+
+.radio-chassis {
+  position: relative;
+  width: 760px;
+  height: 380px;
+  transform: rotateX(-15deg) rotateY(-25deg);
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.radio-chassis:hover {
+  transform: rotateX(-5deg) rotateY(-15deg);
+}
+
+.face {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+/* Base Chassis construction using 3D transforms */
+.chassis-front {
+  width: 760px;
+  height: 380px;
+  margin-top: -190px;
+  margin-left: -380px;
+  transform: translateZ(75px);
+  background: linear-gradient(145deg, var(--front-casing), #4a0082);
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  border: 1px solid rgba(255,255,255,0.15);
+  box-shadow: inset -5px -5px 15px rgba(0,0,0,0.4), inset 5px 5px 15px rgba(255,255,255,0.1);
+}
+
+.chassis-back {
+  width: 760px;
+  height: 380px;
+  margin-top: -190px;
+  margin-left: -380px;
+  transform: rotateY(180deg) translateZ(75px);
+  background: #2a0040;
+}
+
+.chassis-top {
+  width: 760px;
+  height: 150px;
+  margin-top: -75px;
+  margin-left: -380px;
+  transform: rotateX(90deg) translateZ(190px);
+  background: linear-gradient(to bottom, #d24dff, var(--top-face));
+  border: 1px solid rgba(255,255,255,0.2);
+  box-shadow: inset 0 5px 20px rgba(255,255,255,0.3), inset 0 -10px 20px rgba(0,0,0,0.3);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 40px;
+}
+
+.chassis-bottom {
+  width: 760px;
+  height: 150px;
+  margin-top: -75px;
+  margin-left: -380px;
+  transform: rotateX(-90deg) translateZ(190px);
+  background: #1d002e;
+  box-shadow: 0 50px 70px rgba(0,0,0,0.9);
+}
+
+.chassis-right {
+  width: 150px;
+  height: 380px;
+  margin-top: -190px;
+  margin-left: -75px;
+  transform: rotateY(90deg) translateZ(380px);
+  background: var(--side-casing);
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: inset -10px 0 20px rgba(0,0,0,0.5), inset 5px 0 10px rgba(255,255,255,0.05);
+}
+
+.chassis-left {
+  width: 150px;
+  height: 380px;
+  margin-top: -190px;
+  margin-left: -75px;
+  transform: rotateY(-90deg) translateZ(380px);
+  background: var(--side-casing);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Power Toggle Interaction */
+.toggle-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.toggle-label {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255,255,255,0.5);
+  letter-spacing: 2px;
+}
+
+.toggle-switch-wrapper {
+  background: rgba(0,0,0,0.5);
+  padding: 8px;
+  border-radius: 30px;
+  box-shadow: inset 0 3px 8px rgba(0,0,0,0.8), 0 1px 1px rgba(255,255,255,0.1);
+}
+
+.toggle-switch {
+  width: 70px;
+  height: 34px;
+  background: #2a0040;
+  border-radius: 17px;
+  position: relative;
+  cursor: pointer;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.8);
+  transition: background 0.3s ease;
+}
+
+.toggle-switch.on {
+  background: var(--tuner-needle);
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.5), 0 0 15px var(--tuner-needle);
+}
+
+.toggle-knob {
+  width: 28px;
+  height: 28px;
+  background: #aaa;
+  border-radius: 50%;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.6), inset 0 -2px 4px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.8);
+}
+
+.toggle-switch.on .toggle-knob {
+  transform: translateX(36px);
+  background: #fff;
+}
+
+/* Display Bezel Sub-System */
+.display-bezel {
+  background-color: var(--display-bezel);
+  height: 190px;
+  border-radius: 8px;
+  box-shadow: 
+    inset 8px 8px 25px rgba(0,0,0,0.9), 
+    inset -4px -4px 15px rgba(255,255,255,0.1), 
+    0 10px 20px rgba(0,0,0,0.5);
+  display: flex;
+  padding: 25px 30px;
+  gap: 40px;
+  position: relative;
+  border: 4px solid #1c0e52;
+  overflow: hidden;
+}
+
+.display-bezel::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 40%, rgba(0,0,0,0.1) 100%);
+  pointer-events: none;
+  z-index: 20;
+}
+
+/* Clock Left Panel */
+.clock-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-right: 2px solid rgba(255,255,255,0.05);
+  padding-right: 30px;
+  transition: opacity 0.4s ease;
+}
+
+.time-display {
+  font-size: 5.5rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--clock-glow);
+  text-shadow: 0 0 10px var(--clock-glow), 0 0 20px var(--clock-glow), 0 0 40px rgba(45, 253, 226, 0.6);
+  letter-spacing: 2px;
+  display: flex;
+  align-items: center;
+  line-height: 1;
+}
+
+.colon {
+  margin: 0 2px;
+  position: relative;
+  top: -6px;
+  opacity: 1;
+  transition: opacity 0.1s;
+}
+
+.colon.blink {
+  opacity: 0.05;
+}
+
+.am-pm {
+  position: absolute;
+  bottom: 5px;
+  right: 25px;
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: var(--clock-glow);
+  text-shadow: 0 0 10px var(--clock-glow);
+  letter-spacing: 2px;
+}
+
+/* Tuner Right Panel */
+.tuner-panel {
+  flex: 1.5;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 5px 0;
+  transition: opacity 0.4s ease;
+}
+
+.tuner-top {
+  text-align: right;
+  font-size: 1.8rem;
+  color: var(--text-active);
+  font-weight: 900;
+  letter-spacing: 3px;
+  text-shadow: 0 0 15px rgba(255,255,255,0.6);
+}
+
+.tuner-middle {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.tuner-track {
+  width: 100%;
+  height: 6px;
+  background: rgba(0,0,0,0.4);
+  position: relative;
+  border-radius: 3px;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.8), 0 1px 1px rgba(255,255,255,0.1);
+}
+
+.tuner-track::before {
+  content: '';
+  position: absolute;
+  top: -15px;
+  left: 0;
+  width: 100%;
+  height: 36px;
+  background-image: 
+    linear-gradient(90deg, rgba(255,255,255,0.4) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px);
+  background-size: 10% 100%, 2% 50%;
+  background-repeat: repeat-x, repeat-x;
+  background-position: bottom, bottom;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.tuner-needle {
+  position: absolute;
+  top: -25px;
+  left: 0%;
+  width: 4px;
+  height: 56px;
+  background-color: var(--tuner-needle);
+  box-shadow: 0 0 10px var(--tuner-needle), 0 0 20px var(--tuner-needle), 0 0 30px var(--tuner-needle);
+  z-index: 2;
+  border-radius: 2px;
+}
+
+.tuner-needle::after {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: -4px;
+  width: 12px;
+  height: 12px;
+  background-color: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 15px var(--tuner-needle), 0 0 25px var(--tuner-needle);
+}
+
+.tuner-bottom {
+  display: flex;
+}
+
+.days-list {
+  list-style: none;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.days-list li {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.days-list li.active-day {
+  color: var(--text-active);
+  text-shadow: 0 0 10px #fff, 0 0 20px #fff;
+  transform: translateY(-2px) scale(1.1);
+}
+
+/* Speaker Grille Detail */
+.speaker-grille {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0 20px;
+}
+
+.grille-line {
+  height: 8px;
+  background: #110022;
+  border-radius: 4px;
+  box-shadow: inset 0 3px 6px rgba(0,0,0,0.9), 0 1px 2px rgba(255,255,255,0.15);
+}
