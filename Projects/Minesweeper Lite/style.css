@@ -150,7 +150,7 @@ body {
 }
 
 .seg-value {
-  font-family: var(--font-display);
+  font-family: var(--font-display), monospace, Courier;
   font-size: 1.6rem;
   color: #ff0050;
   background: rgba(0, 0, 0, 0.25);
