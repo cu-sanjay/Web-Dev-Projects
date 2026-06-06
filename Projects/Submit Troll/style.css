@@ -1,0 +1,80 @@
+:root {
+  --accent: #eb6835;
+  --accent-2: #6c5ce7;
+  --bg-dark: #0f1117;
+  --card-bg: rgba(255,255,255,0.08);
+  --text-primary: #ffffff;
+  --radius-md: 16px;
+  --transition: 0.3s ease;
+}
+
+body {
+  font-family: "DM Sans", sans-serif;
+  background: linear-gradient(135deg, var(--bg-dark), #1a1f29);
+  color: var(--text-primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.troll-container {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  border-radius: 24px;
+  padding: 32px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  text-align: center;
+}
+
+h1 {
+  font-family: "Syne", sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.buttons {
+  margin: 20px 0;
+  position: relative;
+  height: 120px;
+}
+
+button {
+  padding: 12px 20px;
+  margin: 10px;
+  border: none;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+#yesBtn {
+  background: linear-gradient(135deg, #ff4757, #ff6b81);
+  color: #fff;
+  position: absolute;
+}
+#noBtn {
+  background: linear-gradient(135deg, #2ed573, #1dd1a1);
+  color: #fff;
+}
+
+button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+}
+
+.controls, .stats {
+  margin-top: 20px;
+}
+select {
+  padding: 6px 10px;
+  border-radius: var(--radius-md);
+  border: none;
+  background: var(--accent-2);
+  color: #fff;
+  font-weight: 600;
+}
