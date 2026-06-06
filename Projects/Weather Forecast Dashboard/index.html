@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather Forecast Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1>Weather Forecast Dashboard</h1>
+
+    <div class="search-box">
+        <input
+            type="text"
+            id="cityInput"
+            placeholder="Enter city name..."
+        >
+        <button id="searchBtn">Search</button>
+        <button id="locationBtn">📍 My Location</button>
+    </div>
+
+    <div id="weatherInfo" class="weather-card">
+        <h2>Current Weather</h2>
+
+        <div id="weatherContent">
+             <p>Select a city to view weather.</p>
+        </div>
+    </div>
+
+    <div id="forecastContainer" class="forecast-container"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
