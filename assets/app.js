@@ -12,8 +12,7 @@ const empty = document.getElementById("empty");
 const statCount = document.getElementById("stat-count");
 const statUpdated = document.getElementById("stat-updated");
 
-const state = { all: [], filtered: [], activeTag: null, query: "" };
-const state = { all: [], activeTag: null, query: "", sortBy: "default" };
+const state = { all: [], filtered: [], activeTag: null, query: "", sortBy: "default" };
 
 const PALETTES = [
   ["#efe1cf", "#b86a2b"],
@@ -191,6 +190,9 @@ if (shuffleBtn) {
         cardEl.classList.remove("card--highlight");
       }, 2000);
     }
+  });
+}
+
 if (themeToggle) {
   themeToggle.addEventListener("click", () => {
     const currentTheme = document.documentElement.getAttribute("data-theme") || "light";
@@ -199,6 +201,9 @@ if (themeToggle) {
     localStorage.setItem("theme", newTheme);
     const meta = document.querySelector('meta[name="theme-color"]');
     if (meta) meta.setAttribute("content", newTheme === "dark" ? "#0b0c10" : "#f5f1ea");
+  });
+}
+
 if (sortSelect) {
   sortSelect.addEventListener("change", (e) => {
     state.sortBy = e.target.value;
