@@ -1,6 +1,11 @@
->[!WARNING]
-> You should not edit the main `projects.json` file manually. Simply submit your project folder with its own `project.json` file included. The project index is generated automatically.
-Please avoid making any changes outside your project's folder.
+> [!IMPORTANT]
+> 🎯 Engineering students from the **2027 & 2028 batches** should not miss this [Amazon **₹51 LPA** opportunity](https://github.com/cu-sanjay/Amazon-ML-Summer-School-2025).
+
+> [!WARNING]
+> Do not edit **projects.json** manually.
+> Simply submit your project folder with its own **project.json** file included.
+> The project index is generated automatically.
+> Please avoid making changes outside your project's folder.
 
 <div align="center">
 
@@ -8,108 +13,212 @@ Please avoid making any changes outside your project's folder.
 
 # Web Dev Projects
 
-**A curated, beginner-friendly hub for HTML, CSS & JavaScript projects.**
-Learn Git, GitHub and open source by shipping real work — and get recognised in
-NSoC '26, GSSoC, GSoC and Hacktoberfest along the way.
+### Build. Learn. Contribute. Get Recognised.
 
-<br />
+**A curated collection of beginner-friendly HTML, CSS and JavaScript projects.**
+
+Learn Git, GitHub and open source by shipping real projects while building a public portfolio for programs such as **NSoC '26**, **GSSoC**, **GSoC** and **Hacktoberfest**.
+
+<br>
 
 ![Maintained](https://img.shields.io/badge/Maintained-Yes-1f6f3a?style=for-the-badge)
 ![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-1f6f3a?style=for-the-badge)
 ![Beginner Friendly](https://img.shields.io/badge/Beginner-Friendly-c97a2b?style=for-the-badge)
 ![Made with HTML CSS JS](https://img.shields.io/badge/Made_with-HTML_·_CSS_·_JS-1c1c1e?style=for-the-badge)
 
+<br>
+
 ![NSoC 2026](https://img.shields.io/badge/NSoC-2026-1c1c1e?style=flat-square)
 ![GSSoC](https://img.shields.io/badge/GirlScript_Summer_of_Code-Ready-c97a2b?style=flat-square)
 ![GSoC](https://img.shields.io/badge/Google_Summer_of_Code-Ready-1f6f3a?style=flat-square)
 ![Hacktoberfest](https://img.shields.io/badge/Hacktoberfest-Ready-1c1c1e?style=flat-square)
 
-[**Live Showcase**](https://cu-sanjay.github.io/Web-Dev-Projects/) ·
-[**Contribute**](./CONTRIBUTING.md) ·
-[**Code of Conduct**](./CODE_OF_CONDUCT.md) ·
-[**Open an Issue**](../../issues/new/choose)
+<br><br>
+
+<a href="https://cu-sanjay.github.io/Web-Dev-Projects/">🌐 Live Showcase</a>
+&nbsp;•&nbsp;
+<a href="./CONTRIBUTING.md">🤝 Contribute</a>
+&nbsp;•&nbsp;
+<a href="./CODE_OF_CONDUCT.md">📜 Code of Conduct</a>
+&nbsp;•&nbsp;
+<a href="../../issues/new/choose">🐛 Open an Issue</a>
 
 </div>
 
-## What is this?
+## 🚀 What Is This?
 
-`Web-Dev-Projects` is a community repository where developers — especially
-first-time contributors — add their own **static web projects** built with
-HTML, CSS and JavaScript. Every accepted project is automatically picked up
-by a GitHub Action and rendered on the live showcase page.
+**Web Dev Projects** is a community-driven repository where developers, especially first-time contributors, can submit their own **static web projects** built using **HTML, CSS and JavaScript**.
 
-The repo doubles as:
+Every accepted project is automatically discovered by GitHub Actions and showcased on the live website.
 
-- A **practice ground** for learning Git, branches and pull requests.
-- A **portfolio surface** — your folder, your README, your credit.
-- A **launchpad** for open-source programs (NSoC, GSSoC, GSoC, Hacktoberfest).
+This repository serves as:
 
-## How it works
+- **A practice ground** for Git, GitHub, branching and pull requests.
+- **A portfolio platform** where every contributor gets visible credit.
+- **A launchpad** for open-source programs such as NSoC, GSSoC, GSoC and Hacktoberfest.
+
+## ⚙️ How It Works
 
 ```text
 Projects/
-  Notes App/                  <-- your folder, Title Case with spaces
-    README.md                 <-- required, describes the project
-    project.json              <-- required, machine-readable metadata
-    index.html                <-- entry point
+  Notes App/
+    README.md
+    project.json
+    index.html
     style.css
     script.js
 ```
 
-1. Fork the repo and create a branch.
-2. Add a new folder under `Projects/` named like **"To Do Web App"**
-   (Title Case, real spaces — not `to-do`, not `to_do`).
-3. Inside it, ship your code plus a `README.md` and a `project.json`.
-4. Open a pull request. After review, the showcase page rebuilds automatically.
+### Submission Flow
 
-Full rules and the `project.json` schema live in
-[CONTRIBUTING.md](./CONTRIBUTING.md). Read it before opening a PR — it keeps
-the repo clean and your PR fast to merge.
+1. Fork the repository and create a new branch.
+2. Add a folder inside **Projects/** using **Title Case with spaces**.
+3. Include your project files along with:
+   - **README.md**
+   - **project.json**
+4. Open a Pull Request.
+5. After approval, the showcase updates automatically.
 
-## Example projects
+### Folder Naming Example
 
-Four reference projects ship with the repo so you can see the expected shape:
+✅ To Do Web App
 
-| Project | What it shows |
-| --- | --- |
-| [Notes App](./Projects/Notes%20App) | LocalStorage, live URL detection inside notes, tag filters |
-| [Music Player](./Projects/Music%20Player) | iPhone-style player UI, album art cards, audio API |
-| [2048 Game](./Projects/2048%20Game) | Keyboard + swipe input, grid logic, score persistence |
-| [Daily Wheels](./Projects/Daily%20Wheels) | Spinning decision wheel, custom SVG graphics |
+❌ to-do-web-app
 
-Open any of them, read the README, copy the structure.
+❌ to_do_web_app
 
-## The showcase page
->[!IMPORTANT]
-> The file `index.html` at the repo root is a fully responsive, classic UI that
-lists every project under `Projects/`. It reads from `projects.json`, which is
-regenerated on every push by
-[`.github/workflows/index-projects.yml`](./.github/workflows/index-projects.yml).
+❌ todowebapp
 
->[!WARNING]
-> You never edit `projects.json` by hand — just ship your folder and the index
-takes care of itself.
+Full contribution rules and the **project.json schema** are available in **CONTRIBUTING.md**.
 
-The page is published with GitHub Pages from the `main` branch.
+Reading it before opening a PR helps keep reviews fast and the repository clean.
 
-## Open-source programs this repo supports
+## 📄 project.json Template
 
-- **NSoC 2026** — [Nexus Spring of Code](https://www.nsoc.in/)
-- **GSSoC** — [GirlScript Summer of Code](https://gssoc.girlscript.org/)
-- **GSoC** — [Google Summer of Code](https://summerofcode.withgoogle.com/)
-- **Hacktoberfest** — [DigitalOcean & friends](https://hacktoberfest.com/)
+Every project must include a **project.json** file inside its project folder.
 
-Program-specific labels are added to issues during each event window.
-Watch the repo to get notified.
+Use the template below and update the values according to your project:
 
-## Repository documents
+```json
+{
+  "title": "2048 Game",
+  "description": "The classic 2048 puzzle with keyboard and swipe input, smooth tile transitions and best-score persistence.",
+  "author": {
+    "name": "Your Name",
+    "github": "github-username"
+  },
+  "tags": [
+    "game",
+    "canvas-free",
+    "vanilla-js"
+  ],
+  "entry": "index.html",
+  "thumbnail": "thumbnail.svg"
+}
+```
 
-- [CONTRIBUTING.md](./CONTRIBUTING.md) — rules, naming, `project.json` schema
-- [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md) — Contributor Covenant v2.1
-- [SECURITY.md](./SECURITY.md) — how to report a vulnerability
-- [LICENSE](./LICENSE) — MIT
+### Field Reference
 
-## Maintainer
+| Field | Required | Description |
+|---------|----------|-------------|
+| title | ✅ | Name of your project |
+| description | ✅ | Short summary shown on the showcase page |
+| author.name | ✅ | Your display name |
+| author.github | ✅ | Your GitHub username only |
+| tags | ✅ | Relevant keywords describing your project |
+| entry | ✅ | Main HTML file, usually `index.html` |
+| thumbnail | ✅ | Preview image shown on the showcase |
 
-Maintained by [@cu-sanjay](https://github.com/cu-sanjay). Star the repo if it
-helps you learn — it genuinely keeps the project moving.
+### Before Opening a Pull Request
+
+- Ensure all fields are filled correctly.
+- Verify that **entry** points to an existing file.
+- Verify that **thumbnail** exists inside your project folder.
+- Keep descriptions concise and meaningful.
+- Use relevant tags so users can discover your project easily.
+
+> [!TIP]
+> The easiest approach is to copy the **project.json** from any existing project, update the values, and place it inside your own project folder.
+
+## 📦 Example Projects
+
+These projects are included as references so you can understand the expected structure and quality.
+
+| Project | Highlights |
+|----------|------------|
+| [Notes App](./Projects/Notes%20App) | LocalStorage, URL detection, tag filtering |
+| [Music Player](./Projects/Music%20Player) | iPhone-inspired UI, album artwork, Audio API |
+| [2048 Game](./Projects/2048%20Game) | Keyboard controls, swipe gestures, score saving |
+| [Daily Wheels](./Projects/Daily%20Wheels) | Decision wheel, custom SVG graphics |
+
+Explore any of them, read the README and follow the structure.
+
+## 🌐 Showcase Website
+
+> [!IMPORTANT]
+> The root **index.html** powers the live showcase website.
+>
+> Every project inside **Projects/** is automatically indexed through **projects.json**, which is regenerated on every push using:
+>
+> **.github/workflows/index-projects.yml**
+
+> [!WARNING]
+> Never edit **projects.json** manually.
+>
+> Add your project folder and let the automation handle everything else.
+
+The showcase is deployed using **GitHub Pages** directly from the **main** branch.
+
+## 🏆 Open Source Programs Supported
+
+- **NSoC 2026** → https://www.nsoc.in/
+- **GSSoC** → https://gssoc.girlscript.org/
+- **GSoC** → https://summerofcode.withgoogle.com/
+- **Hacktoberfest** → https://hacktoberfest.com/
+
+Special labels are added during active program periods.
+
+⭐ Watch the repository to stay updated.
+
+## 📚 Repository Documents
+
+| Document | Purpose |
+|-----------|----------|
+| [CONTRIBUTING.md](./CONTRIBUTING.md) | Contribution rules and project.json schema |
+| [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md) | Community guidelines |
+| [SECURITY.md](./SECURITY.md) | Vulnerability reporting |
+| [LICENSE](./LICENSE) | MIT License |
+
+## 👨‍💻 Maintainer
+
+Maintained by **[@cu-sanjay](https://github.com/cu-sanjay)**
+
+If this repository helps you learn, contribute or prepare for open source programs, consider giving it a ⭐.
+
+It genuinely helps the project grow.
+
+<div align="center">
+
+# 🏛️ Hall Of Fame
+
+### Every Avatar Below Represents Code That Made This Repository Better
+
+<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&height=130&color=0:0f172a,100:1e293b&section=header&text=Contributors&fontColor=ffffff&fontSize=42"/>
+
+<br>
+
+<a href="https://github.com/cu-sanjay/Web-Dev-Projects/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=cu-sanjay/Web-Dev-Projects&max=500" />
+</a>
+
+<br><br>
+
+### ⭐ Builders • Creators • Fixers • Contributors ⭐
+
+Every merged contribution earns a permanent place in this wall.
+
+Thank you for helping future developers learn, build and grow through open source.
+
+<br>
+
+</div>
