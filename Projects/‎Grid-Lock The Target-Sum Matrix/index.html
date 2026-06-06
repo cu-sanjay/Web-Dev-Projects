@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grid-Lock: The Target-Sum Matrix</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="app-header">
+        <div class="app-logo">G</div>
+        <h1 class="app-title">Grid-Lock</h1>
+        <span class="app-subtitle">Matrix Agility</span>
+      </div>
+      <div class="stats-panel">
+        <div class="stat-card">
+          <span class="stat-label">Score</span>
+          <span class="stat-value" id="score-display">0</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Targets Cleared</span>
+          <span class="stat-value" id="targets-display">0</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Multiplier</span>
+          <span class="stat-value" id="multiplier-display">1x</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Timer</span>
+          <span class="stat-value" id="timer-display"><span id="timer-seconds">60</span>s</span>
+        </div>
+      </div>
+      <button id="restart-btn" class="btn-primary">Restart Matrix Simulation</button>
+      <div id="high-score" class="high-score" style="display:none">
+        <span class="hs-label">High Score</span>
+        <span class="hs-value" id="hs-display"></span>
+      </div>
+    </aside>
+    <main class="main-content">
+      <div class="top-panel">
+        <div class="target-block">
+          <span class="target-label">TARGET</span>
+          <span class="target-value" id="target-value">0</span>
+        </div>
+        <div class="constraint-badge" id="constraint-badge">CONSTRAINT: SUM ONLY</div>
+      </div>
+      <div id="matrix-grid" class="matrix-grid">
+        <div class="matrix-tile" data-row="0" data-col="0"></div>
+        <div class="matrix-tile" data-row="0" data-col="1"></div>
+        <div class="matrix-tile" data-row="0" data-col="2"></div>
+        <div class="matrix-tile" data-row="0" data-col="3"></div>
+        <div class="matrix-tile" data-row="1" data-col="0"></div>
+        <div class="matrix-tile" data-row="1" data-col="1"></div>
+        <div class="matrix-tile" data-row="1" data-col="2"></div>
+        <div class="matrix-tile" data-row="1" data-col="3"></div>
+        <div class="matrix-tile" data-row="2" data-col="0"></div>
+        <div class="matrix-tile" data-row="2" data-col="1"></div>
+        <div class="matrix-tile" data-row="2" data-col="2"></div>
+        <div class="matrix-tile" data-row="2" data-col="3"></div>
+        <div class="matrix-tile" data-row="3" data-col="0"></div>
+        <div class="matrix-tile" data-row="3" data-col="1"></div>
+        <div class="matrix-tile" data-row="3" data-col="2"></div>
+        <div class="matrix-tile" data-row="3" data-col="3"></div>
+      </div>
+    </main>
+  </div>
+  <div id="game-over-overlay" class="game-over-overlay" style="display:none">
+    <div class="game-over-modal">
+      <h2 class="go-title">Matrix Complete</h2>
+      <div class="go-stat">
+        <span class="go-label">Final Score</span>
+        <span class="go-value" id="final-score">0</span>
+      </div>
+      <div class="go-stat">
+        <span class="go-label">Targets Cleared</span>
+        <span class="go-value" id="final-targets">0</span>
+      </div>
+      <div class="go-stat" id="best-stat" style="display:none">
+        <span class="go-label">Personal Best</span>
+        <span class="go-value go-best" id="final-best">0</span>
+      </div>
+      <button id="play-again-btn" class="btn-primary">Play Again</button>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
