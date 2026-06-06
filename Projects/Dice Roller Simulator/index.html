@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="obsidian">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dice Roller Simulator - RPG 3D Desktop</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="simulator-container">
+    <!-- Header -->
+    <header class="sim-header">
+      <div class="logo">
+        <span class="logo-icon">🎲</span>
+        <h1>RollForge</h1>
+      </div>
+      <p class="tagline">Premium Polyhedral RPG Dice Roller Simulator</p>
+    </header>
+
+    <!-- Main Workspace -->
+    <div class="sim-grid">
+      <!-- Left Column: Controls & Settings -->
+      <aside class="controls-panel card">
+        <h2>Configurations</h2>
+        
+        <!-- Dice Type Selector -->
+        <div class="config-section">
+          <h3>Dice Type</h3>
+          <div class="dice-type-grid">
+            <button type="button" class="type-btn active" data-type="D6">D6 <span>(Cube)</span></button>
+            <button type="button" class="type-btn" data-type="D4">D4 <span>(Pyramid)</span></button>
+            <button type="button" class="type-btn" data-type="D8">D8 <span>(Octa)</span></button>
+            <button type="button" class="type-btn" data-type="D10">D10 <span>(Deca)</span></button>
+            <button type="button" class="type-btn" data-type="D12">D12 <span>(Dodeca)</span></button>
+            <button type="button" class="type-btn" data-type="D20">D20 <span>(Icosa)</span></button>
+          </div>
+        </div>
+
+        <!-- Dice Quantity -->
+        <div class="config-section">
+          <h3>Quantity</h3>
+          <div class="qty-control">
+            <button type="button" class="qty-btn" id="qtyMinus">-</button>
+            <span id="qtyVal">2</span>
+            <button type="button" class="qty-btn" id="qtyPlus">+</button>
+          </div>
+        </div>
+
+        <!-- Themes & Sound controls -->
+        <div class="config-section">
+          <h3>Skins & Aesthetics</h3>
+          <div class="select-wrapper">
+            <select id="themeSelector">
+              <option value="obsidian">Obsidian Black</option>
+              <option value="gold">Gold Trim</option>
+              <option value="glass">Glassmorphism</option>
+              <option value="neon">Neon Glow</option>
+              <option value="ruby">Ruby Red</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Physics force slider -->
+        <div class="config-section">
+          <div class="slider-header">
+            <h3>Throw Force</h3>
+            <span id="forceValue">Medium</span>
+          </div>
+          <input type="range" id="forceSlider" min="1" max="3" value="2" step="1" class="custom-slider">
+        </div>
+
+        <!-- Audio toggle switch -->
+        <div class="config-section audio-toggle-row">
+          <span class="toggle-label">Dynamic Audio Effects</span>
+          <label class="switch">
+            <input type="checkbox" id="soundToggle" checked>
+            <span class="slider-toggle"></span>
+          </label>
+        </div>
+
+        <!-- Action buttons -->
+        <div class="action-buttons-group">
+          <button type="button" id="rollBtn" class="btn btn-primary">Roll Dice</button>
+          <button type="button" id="clearBtn" class="btn btn-secondary">Clear Tray</button>
+        </div>
+      </aside>
+
+      <!-- Center: 3D Dice Tray felt box -->
+      <main class="tray-panel card">
+        <div class="tray-felt-lining" id="diceTray">
+          <!-- Text Instruction Overlay -->
+          <div class="tray-instructions" id="trayInstructions">
+            <p>Click anywhere in the tray or press <strong>Spacebar</strong> to roll</p>
+          </div>
+          <!-- Viewport containing dice cubes/cards -->
+          <div class="tray-viewport" id="trayViewport"></div>
+        </div>
+      </main>
+
+      <!-- Right Column: Roll Analytics & History -->
+      <section class="analytics-panel card">
+        <h2>Roll Analytics</h2>
+
+        <!-- Sum Display -->
+        <div class="sum-box">
+          <span class="sum-title">Total Sum</span>
+          <span class="sum-value" id="totalSum">0</span>
+        </div>
+
+        <!-- Average Stat -->
+        <div class="average-row">
+          <span>Session Average:</span>
+          <strong id="sessionAverage">0.0</strong>
+        </div>
+
+        <!-- Values Distributions Bar Chart -->
+        <div class="stats-section">
+          <h3>Frequencies Distribution</h3>
+          <div class="frequency-chart" id="frequencyChart">
+            <!-- Progress bars loaded dynamically -->
+          </div>
+        </div>
+
+        <!-- Roll History List -->
+        <div class="history-section">
+          <div class="history-header">
+            <h3>History Logs</h3>
+            <button type="button" id="clearHistoryBtn" class="btn-clear-history">Reset</button>
+          </div>
+          <div class="history-list" id="historyList">
+            <p class="empty-history-msg">No rolls registered yet.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Audio Synth and rotations logics scripts -->
+  <script src="script.js"></script>
+</body>
+</html>

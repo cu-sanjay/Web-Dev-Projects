@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KeySpeed - Typing Speed & Accuracy Trainer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-cyan">
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="logo-group">
+        <div class="logo-icon">⌨️</div>
+        <h1>KeySpeed</h1>
+      </div>
+      
+      <div class="header-actions">
+        <!-- Stats summary -->
+        <div class="stat-badge" title="High Score">
+          <span class="badge-label">HIGH</span>
+          <span class="badge-val" id="high-score-val">0 WPM</span>
+        </div>
+        <!-- Theme dots -->
+        <div class="theme-picker">
+          <button class="theme-dot cyan active" data-theme="cyan" title="Cyan Neon" aria-label="Cyan theme"></button>
+          <button class="theme-dot purple" data-theme="purple" title="Neon Purple" aria-label="Purple theme"></button>
+          <button class="theme-dot amber" data-theme="amber" title="Cyberpunk Amber" aria-label="Amber theme"></button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Board -->
+    <main class="main-dashboard">
+      <!-- Left Arena Section -->
+      <section class="test-arena-wrapper">
+        
+        <!-- Selection Control panel -->
+        <div class="arena-controls">
+          <div class="control-group">
+            <span class="group-title">TIME</span>
+            <div class="btn-toggle-group" id="time-select">
+              <button class="toggle-btn" data-time="15">15s</button>
+              <button class="toggle-btn active" data-time="30">30s</button>
+              <button class="toggle-btn" data-time="60">60s</button>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <span class="group-title">DIFFICULTY</span>
+            <div class="btn-toggle-group" id="diff-select">
+              <button class="toggle-btn active" data-diff="easy">EASY</button>
+              <button class="toggle-btn" data-diff="medium">MEDIUM</button>
+              <button class="toggle-btn" data-diff="hard">HARD</button>
+            </div>
+          </div>
+
+          <div class="control-group font-controls">
+            <span class="group-title">AUDIO</span>
+            <button class="icon-toggle active" id="audio-toggle" aria-label="Toggle audio click sounds">
+              🔊
+            </button>
+          </div>
+        </div>
+
+        <!-- Metric Display Bar -->
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <span class="metric-num" id="live-wpm">0</span>
+            <span class="metric-label">WPM</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-num" id="live-accuracy">100%</span>
+            <span class="metric-label">ACCURACY</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-num highlight" id="live-timer">30</span>
+            <span class="metric-label">TIME REMAINING</span>
+          </div>
+        </div>
+
+        <!-- Words Arena Display -->
+        <div class="text-display-card" id="typing-box-container">
+          <!-- Text focused input catcher -->
+          <input type="text" class="hidden-input" id="keyboard-catcher" autofocus autocomplete="off" aria-label="Typing input catcher">
+          
+          <div class="focus-alert" id="focus-alert">
+            <div class="alert-icon">⚡</div>
+            <span>Click inside this container to begin typing</span>
+          </div>
+
+          <!-- Dynamic words will insert here -->
+          <div class="words-wrapper" id="words-container">
+            <span class="word"><span class="char active">L</span><span>o</span><span>a</span><span>d</span><span>i</span><span>n</span><span>g</span></span>
+          </div>
+        </div>
+
+        <!-- Virtual Keyboard Panel -->
+        <div class="keyboard-card" id="virtual-keyboard">
+          <!-- Virtual keys constructed dynamically or statically -->
+          <div class="kb-row">
+            <button class="key" data-key="q">Q</button>
+            <button class="key" data-key="w">W</button>
+            <button class="key" data-key="e">E</button>
+            <button class="key" data-key="r">R</button>
+            <button class="key" data-key="t">T</button>
+            <button class="key" data-key="y">Y</button>
+            <button class="key" data-key="u">U</button>
+            <button class="key" data-key="i">I</button>
+            <button class="key" data-key="o">O</button>
+            <button class="key" data-key="p">P</button>
+          </div>
+          <div class="kb-row">
+            <button class="key" data-key="a">A</button>
+            <button class="key" data-key="s">S</button>
+            <button class="key" data-key="d">D</button>
+            <button class="key" data-key="f">F</button>
+            <button class="key" data-key="g">G</button>
+            <button class="key" data-key="h">H</button>
+            <button class="key" data-key="j">J</button>
+            <button class="key" data-key="k">K</button>
+            <button class="key" data-key="l">L</button>
+          </div>
+          <div class="kb-row">
+            <button class="key" data-key="z">Z</button>
+            <button class="key" data-key="x">X</button>
+            <button class="key" data-key="c">C</button>
+            <button class="key" data-key="v">V</button>
+            <button class="key" data-key="b">B</button>
+            <button class="key" data-key="n">N</button>
+            <button class="key" data-key="m">M</button>
+          </div>
+          <div class="kb-row">
+            <button class="key space" data-key=" ">SPACE</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Dashboard Panel -->
+      <aside class="sidebar-layout">
+        <!-- High Score / Average Card -->
+        <div class="stats-card">
+          <h3>Personal Performance</h3>
+          
+          <div class="performance-metric">
+            <div class="perf-row">
+              <span class="perf-title">Average WPM</span>
+              <span class="perf-val" id="avg-wpm-val">0 WPM</span>
+            </div>
+            <div class="perf-row">
+              <span class="perf-title">Average Accuracy</span>
+              <span class="perf-val" id="avg-acc-val">0%</span>
+            </div>
+            <div class="perf-row">
+              <span class="perf-title">Tests Finished</span>
+              <span class="perf-val" id="tests-count-val">0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- History Graph List -->
+        <div class="stats-card history-card">
+          <h3>Test History Logs</h3>
+          <div class="history-list" id="history-logs-container">
+            <div class="no-history">No tests completed yet. Ready? Go!</div>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <!-- Results Modal Screen -->
+    <div class="modal-overlay" id="results-modal">
+      <div class="results-modal-card">
+        <h2>Test Results</h2>
+        
+        <div class="results-grid">
+          <div class="res-card">
+            <span class="res-num" id="res-wpm">0</span>
+            <span class="res-lbl">WPM</span>
+          </div>
+          <div class="res-card">
+            <span class="res-num" id="res-acc">0%</span>
+            <span class="res-lbl">Accuracy</span>
+          </div>
+          <div class="res-card">
+            <span class="res-num" id="res-chars">0/0</span>
+            <span class="res-lbl">Typed Characters</span>
+          </div>
+        </div>
+
+        <!-- Speed timeline graph -->
+        <div class="graph-card">
+          <h3>Speed Timeline</h3>
+          <div class="graph-canvas-container">
+            <svg id="wpm-svg-graph" viewBox="0 0 500 150">
+              <path class="graph-line" d="M 0 150 L 500 150" fill="none" stroke-width="3"></path>
+              <!-- Chart markers added via JavaScript dynamically -->
+            </svg>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button class="modal-btn" id="modal-retry-btn">Retry Practice</button>
+          <button class="modal-btn outline" id="modal-close-btn">Close Result</button>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <footer class="author-label">
+    Designed and Developed by <span>Mistry Vishwa</span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

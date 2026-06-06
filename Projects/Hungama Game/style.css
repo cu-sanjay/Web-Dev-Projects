@@ -1,0 +1,376 @@
+/* --- CSS Custom Properties & Core Design Architecture --- */
+:root {
+    --bg-main: #070a13;
+    --bg-panel: #111827;
+    --bg-panel-light: #1f2937;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    
+    /* Interactive Feedback Status Tokens */
+    --accent-correct: #10b981;
+    --accent-incorrect: #ef4444;
+    --accent-hover: #3b82f6;
+    --accent-glow: rgba(59, 130, 246, 0.15);
+
+    /* Animation Vectors */
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-fast: 0.15s;
+}
+
+/* --- Global Clean Scaffolding Layout Framework --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 20px;
+}
+
+/* Master Balanced Workspace Grid Frame Layout */
+.app-container {
+    width: 100%;
+    max-width: 1200px;
+    height: 780px;
+    background-color: var(--bg-panel);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 20px;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
+    display: grid;
+    grid-template-columns: 320px 1fr 340px;
+    overflow: hidden;
+}
+
+/* --- Left Column Architecture (Metrics & Settings Panel) --- */
+.sidebar-panel {
+    background-color: rgba(10, 15, 30, 0.4);
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.brand-block h2 {
+    font-size: 1.4rem;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+}
+
+.brand-block .accent-text {
+    color: var(--accent-hover);
+    text-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+}
+
+.subtitle {
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-top: 5px;
+}
+
+.metrics-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 30px 0;
+}
+
+.metric-card {
+    background-color: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 16px 20px;
+    position: relative;
+}
+
+.metric-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 6px;
+}
+
+/* Monospaced Typography Layout Stability Assembly */
+.metric-value {
+    font-family: ui-monospace, Consolas, "SF Mono", Monaco, monospace;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.gauge-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.alert-card {
+    border-left: 3px solid var(--accent-incorrect);
+}
+
+.panel-label {
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: var(--text-secondary);
+    letter-spacing: 0.15em;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.category-panel, .status-panel {
+    background-color: rgba(0, 0, 0, 0.15);
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+.category-text {
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.03em;
+}
+
+.status-prompt {
+    font-family: ui-monospace, Consolas, monospace;
+    font-size: 1.05rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Dynamic State Prompts Colors */
+.status-running { color: var(--accent-hover); }
+.status-victory { color: var(--accent-correct); animation: boardSuccessPulse 0.6s ease-in-out infinite alternate; }
+.status-failed { color: var(--accent-incorrect); animation: hardwareShake 0.4s ease; }
+
+.primary-action-btn {
+    background: linear-gradient(135deg, var(--bg-panel-light), #111827);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--text-primary);
+    padding: 16px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all 0.2s var(--ease-out-expo);
+    margin-top: auto;
+}
+
+.primary-action-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.18);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+}
+
+/* --- Center Column Architecture (SVG Vector Stage & Word Space) --- */
+.core-game-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px;
+    background: radial-gradient(circle at center, rgba(17, 24, 39, 0.6) 0%, var(--bg-main) 100%);
+}
+
+.vector-stage-wrapper {
+    width: 100%;
+    max-width: 320px;
+    height: 350px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    padding: 20px;
+}
+
+/* Strict Clean SVG Configuration Layout */
+.base-scaffold {
+    stroke: var(--text-secondary);
+    stroke-width: 5px;
+    stroke-linecap: round;
+    fill: none;
+    opacity: 0.6;
+}
+
+.vector-limb {
+    stroke: var(--text-primary);
+    stroke-width: 4px;
+    stroke-linecap: round;
+    fill: none;
+    transition: opacity 0.25s var(--ease-out-expo), stroke 0.4s ease;
+    opacity: 0; /* Hidden initially by default */
+}
+
+/* Reveal utility states controlled via JavaScript */
+.vector-limb.revealed {
+    opacity: 1;
+}
+
+.vector-limb.failure-color {
+    stroke: var(--accent-incorrect);
+}
+
+/* Dynamic Hidden Word Track Interface Docks */
+.word-display-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 30px 0;
+}
+
+.word-display {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    font-family: ui-monospace, Consolas, monospace;
+}
+
+.char-tile {
+    width: 44px;
+    height: 52px;
+    border-bottom: 3px solid var(--bg-panel-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: transparent;
+    transition: all 0.25s var(--ease-out-expo);
+}
+
+.char-tile.revealed {
+    color: var(--text-primary);
+    border-bottom-color: var(--accent-correct);
+    text-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+}
+
+.char-tile.failed-reveal {
+    color: var(--accent-incorrect);
+    border-bottom-color: rgba(239, 68, 68, 0.3);
+}
+
+/* --- Right Column Architecture (Virtual Touch Matrix Pad) --- */
+.keyboard-panel {
+    background-color: rgba(10, 15, 30, 0.2);
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 35px 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.key-matrix-label {
+    margin-left: 5px;
+    margin-bottom: 20px;
+}
+
+.keyboard-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    width: 100%;
+}
+
+.key-btn {
+    background-color: var(--bg-panel-light);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    border-radius: 8px;
+    height: 50px;
+    font-family: ui-monospace, Consolas, monospace;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s var(--ease-out-expo);
+}
+
+.key-btn:hover {
+    background-color: rgba(59, 130, 246, 0.1);
+    border-color: var(--accent-hover);
+    color: #ffffff;
+    box-shadow: 0 0 12px var(--accent-glow);
+}
+
+/* System Modifiers States for Tapped Keypads */
+.key-btn.correct {
+    background-color: rgba(16, 185, 129, 0.15) !important;
+    border-color: var(--accent-correct) !important;
+    color: var(--accent-correct) !important;
+    pointer-events: none !important;
+    box-shadow: inset 0 0 8px rgba(16, 185, 129, 0.1);
+}
+
+.key-btn.incorrect {
+    background-color: rgba(239, 68, 68, 0.1) !important;
+    border-color: var(--accent-incorrect) !important;
+    color: var(--accent-incorrect) !important;
+    pointer-events: none !important;
+    opacity: 0.4;
+}
+
+.locked-matrix {
+    pointer-events: none !important;
+}
+
+/* --- Interactive Core Animation Frames --- */
+@keyframes hardwareShake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-6px); }
+    40%, 80% { transform: translateX(6px); }
+}
+
+@keyframes boardSuccessPulse {
+    0% { box-shadow: 0 0 0 0px rgba(16, 185, 129, 0.2); }
+    100% { box-shadow: 0 0 20px 4px rgba(16, 185, 129, 0); }
+}
+
+.victory-flash {
+    animation: boardSuccessPulse 0.5s ease-out;
+    border-color: var(--accent-correct) !important;
+}
+
+/* Responsive Adaptive Viewports Frame Matrix */
+@media(max-width: 1024px) {
+    .app-container {
+        grid-template-columns: 1fr;
+        height: auto;
+        max-width: 600px;
+    }
+    .sidebar-panel {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        padding: 30px;
+    }
+    .metrics-grid {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .metric-card {
+        flex: 1 min-width(120px);
+    }
+    .keyboard-panel {
+        border-left: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .keyboard-grid {
+        grid-template-columns: repeat(7, 1fr);
+    }
+}

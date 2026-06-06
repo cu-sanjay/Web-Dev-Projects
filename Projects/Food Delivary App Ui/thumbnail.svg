@@ -1,0 +1,220 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <!-- Ultra-Dark Premium Canvas Canvas Background -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#05070c" />
+      <stop offset="50%" stop-color="#090d16" />
+      <stop offset="100%" stop-color="#0f1424" />
+    </linearGradient>
+
+    <!-- UI Panel Floating Shadow Matrices -->
+    <filter id="panelGlow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="20" stdDeviation="28" flood-color="#000000" flood-opacity="0.80"/>
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#ef4f5f" flood-opacity="0.03"/>
+    </filter>
+
+    <!-- Zomato-Inspired Scarlet Accent Glow Profiles -->
+    <filter id="accentGlowRed" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <filter id="accentGlowGreen" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <!-- Graphic Linear Color Gradients -->
+    <linearGradient id="zaffronBrand" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ef4f5f" />
+      <stop offset="100%" stop-color="#b91c1c" />
+    </linearGradient>
+    <linearGradient id="goldPrice" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#d97706" />
+    </linearGradient>
+
+    <!-- Precision Fine Technical Grid Grid Pattern Overlay -->
+    <pattern id="uiGrid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="rgba(148, 163, 184, 0.02)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <!-- BACKGROUND BLOCK -->
+  <rect width="800" height="500" fill="url(#bgGrad)" />
+  <rect width="800" height="500" fill="url(#uiGrid)" />
+  
+  <!-- Ambient Atmospheric Dynamic Vector Light Gradients -->
+  <circle cx="100" cy="100" r="220" fill="#ef4f5f" opacity="0.04" filter="blur(50px)" />
+  <circle cx="720" cy="400" r="180" fill="#25c57a" opacity="0.03" filter="blur(45px)" />
+
+  <!-- ====================================================================
+       LEFT PANEL HUD: FOOD CATALOG EXPLORER (ZOMATO GRID MAPPING)
+       ==================================================================== -->
+  <g transform="translate(45, 50)" filter="url(#panelGlow)">
+    <!-- Main Window Chassis -->
+    <rect width="440" height="380" rx="16" fill="#121926" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1.5"/>
+    
+    <!-- OS Control Points System Chrome -->
+    <circle cx="24" cy="22" r="5" fill="#f43f5e" opacity="0.7"/>
+    <circle cx="40" cy="22" r="5" fill="#f59e0b" opacity="0.7"/>
+    <circle cx="56" cy="22" r="5" fill="#10b981" opacity="0.7"/>
+
+    <!-- Left Structural Sidebar Section Nav -->
+    <g transform="translate(16, 54)">
+      <!-- Zaffron Identity Brand Node -->
+      <rect x="0" y="0" width="14" height="14" rx="4" fill="url(#zaffronBrand)" filter="url(#accentGlowRed)"/>
+      <text x="6" y="11" font-family="-apple-system, sans-serif" font-size="9" font-weight="900" fill="#ffffff" text-anchor="middle">Z</text>
+      <text x="22" y="11" font-family="-apple-system, sans-serif" font-size="12" font-weight="800" fill="#f8fafc" letter-spacing="-0.02em">Zaffron</text>
+
+      <!-- Active Mode Selector Anchors Rows -->
+      <g transform="translate(0, 32)">
+        <rect width="104" height="26" rx="6" fill="rgba(239, 79, 95, 0.12)" />
+        <text x="10" y="17" font-family="-apple-system, sans-serif" font-size="10" font-weight="700" fill="#brand-zomato-red">🛵 Delivery</text>
+        
+        <text x="10" y="47" font-family="-apple-system, sans-serif" font-size="10" font-weight="600" fill="#94a3b8">🍽️ Dining Out</text>
+        <text x="10" y="77" font-family="-apple-system, sans-serif" font-size="10" font-weight="600" fill="#94a3b8">✨ Nightlife</text>
+      </g>
+    </g>
+
+    <!-- Core Structural Axis Separator Line Splitter -->
+    <line x1="140" y1="46" x2="140" y2="380" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+
+    <!-- Central Restaurant Catalog Space Content -->
+    <g transform="translate(156, 54)">
+      <!-- Location Header Bar Combo Grid -->
+      <rect width="268" height="26" rx="6" fill="#090d16" stroke="rgba(148, 163, 184, 0.06)" stroke-width="1"/>
+      <text x="10" y="17" font-family="-apple-system, sans-serif" font-size="9" font-weight="700" fill="#f8fafc">📍 Connaught Place, New Delhi</text>
+      <line x1="156" y1="6" x2="156" y2="20" stroke="rgba(148, 163, 184, 0.1)" stroke-width="1"/>
+      <text x="166" y="17" font-family="-apple-system, sans-serif" font-size="9" fill="#475569">Search for dish...</text>
+
+      <!-- Scrollable Filter Chips Vector Rows -->
+      <g transform="translate(0, 38)">
+        <rect width="64" height="18" rx="5" fill="#121926" stroke="#ef4f5f" stroke-width="1"/>
+        <text x="8" y="12" font-family="-apple-system, sans-serif" font-size="8" font-weight="700" fill="#ef4f5f">Pure Veg 🟢</text>
+        
+        <rect x="70" y="0" width="58" height="18" rx="5" fill="#121926" stroke="rgba(148, 163, 184, 0.1)" stroke-width="1"/>
+        <text x="76" y="12" font-family="-apple-system, sans-serif" font-size="8" font-weight="600" fill="#94a3b8">Rating 4.0+</text>
+
+        <rect x="134" y="0" width="54" height="18" rx="5" fill="#121926" stroke="rgba(148, 163, 184, 0.1)" stroke-width="1"/>
+        <text x="140" y="12" font-family="-apple-system, sans-serif" font-size="8" font-weight="600" fill="#94a3b8">Max Safety</text>
+      </g>
+
+      <!-- Main Restaurant Block Grid Presentation Card 1 -->
+      <g transform="translate(0, 72)">
+        <rect width="268" height="114" rx="10" fill="#1c2638" stroke="rgba(148, 163, 184, 0.05)" stroke-width="1"/>
+        
+        <!-- Profile Header Context Details -->
+        <text x="12" y="20" font-family="-apple-system, sans-serif" font-size="12" font-weight="700" fill="#ffffff">ITC Bukhara Recreations</text>
+        <text x="12" y="34" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">North Indian, Mughlai, Kebab Specialist</text>
+        <rect x="226" y="10" width="30" height="14" rx="3" fill="#25c57a"/>
+        <text x="241" y="20" font-family="-apple-system, sans-serif" font-size="8" font-weight="800" fill="#ffffff" text-anchor="middle">4.9 ★</text>
+
+        <!-- Nested Inner Food Row Matrix Element Box 1 -->
+        <g transform="translate(12, 48)">
+          <rect width="244" height="52" rx="8" fill="#121926" />
+          <!-- Small Vector Square Image Block placeholder thumbnail -->
+          <rect x="6" y="6" width="40" height="40" rx="4" fill="#090d16"/>
+          <!-- Pure Vegetarian Green Bound Box Marker Dot -->
+          <rect x="10" y="10" width="6" height="6" rx="1" fill="none" stroke="#25c57a" stroke-width="1"/>
+          <circle cx="13" cy="13" r="1.5" fill="#25c57a"/>
+          
+          <text x="52" y="20" font-family="-apple-system, sans-serif" font-size="10" font-weight="700" fill="#f8fafc">Dal Bukhara (24-Hr Slow)</text>
+          <text x="52" y="32" font-family="-apple-system, sans-serif" font-size="8" fill="#475569">Whole organic black lentils churned overnight...</text>
+          <text x="52" y="44" font-family="monospace" font-size="10" font-weight="700" fill="url(#goldPrice)">$26.00</text>
+          
+          <!-- Add action toggle element link button -->
+          <rect x="194" y="26" width="44" height="18" rx="4" fill="rgba(239, 79, 95, 0.15)" stroke="#ef4f5f" stroke-width="0.75"/>
+          <text x="216" y="38" font-family="-apple-system, sans-serif" font-size="9" font-weight="800" fill="#ef4f5f" text-anchor="middle">Add</text>
+        </g>
+      </g>
+
+      <!-- Main Restaurant Block Grid Presentation Card 2 -->
+      <g transform="translate(0, 196)">
+        <rect width="268" height="46" rx="10" fill="#1c2638" opacity="0.4"/>
+        <text x="12" y="20" font-family="-apple-system, sans-serif" font-size="12" font-weight="700" fill="#94a3b8">Dum Pukht Royal Kitchens</text>
+        <text x="12" y="34" font-family="-apple-system, sans-serif" font-size="9" fill="#475569">Awadhi, Biryani, Royal Heritage Curations</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ====================================================================
+       RIGHT PANEL HUD: LIVE REAL-TIME LOGISTICS SUMMARY BASKET
+       ==================================================================== -->
+  <g transform="translate(505, 75)" filter="url(#panelGlow)">
+    <!-- Sidebar Checkout Matrix Wrapper Panel Base -->
+    <rect width="250" height="330" rx="14" fill="#121926" stroke="rgba(148, 163, 184, 0.1)" stroke-width="1.5"/>
+    
+    <!-- Panel Subsection Module Header -->
+    <g transform="translate(16, 22)">
+      <text x="0" y="12" font-family="-apple-system, sans-serif" font-size="13" font-weight="800" fill="#f8fafc" letter-spacing="-0.01em">Summary Basket</text>
+      <rect x="186" y="0" width="32" height="15" rx="7" fill="#1c2638"/>
+      <text x="202" y="11" font-family="-apple-system, sans-serif" font-size="8" font-weight="700" fill="#ef4f5f" text-anchor="middle">1 Item</text>
+      <line x1="0" y1="26" x2="218" y2="26" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+    </g>
+
+    <!-- Dynamically Ingested Active Row Component Card -->
+    <g transform="translate(16, 64)">
+      <rect width="218" height="60" rx="8" fill="#1c2638" />
+      <text x="12" y="18" font-family="-apple-system, sans-serif" font-size="11" font-weight="700" fill="#ffffff">Dal Bukhara (24-Hr Slow)</text>
+      <text x="12" y="30" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">Royal Clotted Malai Cream Float</text>
+      <text x="12" y="46" font-family="monospace" font-size="11" font-weight="700" fill="url(#goldPrice)">$30.00</text>
+      
+      <!-- Stepper Quantity Counter Box Vector -->
+      <rect x="170" y="32" width="36" height="16" rx="4" fill="#121926" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+      <text x="176" y="43" font-family="monospace" font-size="9" fill="#475569">-</text>
+      <text x="188" y="43" font-family="monospace" font-size="9" font-weight="700" fill="#ef4f5f" text-anchor="middle">1</text>
+      <text x="200" y="43" font-family="monospace" font-size="9" fill="#475569">+</text>
+    </g>
+
+    <!-- Financial Invoice Ledger Calculations Area -->
+    <g transform="translate(16, 146)">
+      <line x1="0" y1="0" x2="218" y2="0" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+      
+      <text x="0" y="16" font-family="-apple-system, sans-serif" font-size="10" fill="#94a3b8">Basket Subtotal</text>
+      <text x="218" y="16" font-family="monospace" font-size="10" font-weight="600" fill="#94a3b8" text-anchor="end">$30.00</text>
+      
+      <text x="0" y="32" font-family="-apple-system, sans-serif" font-size="10" fill="#94a3b8">Restaurant Surcharge &amp; GST</text>
+      <text x="218" y="32" font-family="monospace" font-size="10" font-weight="600" fill="#94a3b8" text-anchor="end">$1.50</text>
+      
+      <text x="0" y="48" font-family="-apple-system, sans-serif" font-size="10" fill="#94a3b8">Delivery Partner Fee</text>
+      <text x="218" y="48" font-family="monospace" font-size="10" font-weight="600" fill="#94a3b8" text-anchor="end">$4.50</text>
+
+      <line x1="0" y1="60" x2="218" y2="60" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1" stroke-dasharray="2 2"/>
+      
+      <text x="0" y="78" font-family="-apple-system, sans-serif" font-size="12" font-weight="800" fill="#ffffff">Grand Total</text>
+      <text x="218" y="78" font-family="monospace" font-size="13" font-weight="800" fill="url(#goldPrice)" text-anchor="end">$36.00</text>
+    </g>
+
+    <!-- Main Dynamic Submission Logistics Fire Trigger Button -->
+    <g transform="translate(16, 274)">
+      <rect width="218" height="36" rx="8" fill="url(#zaffronBrand)" filter="url(#accentGlowRed)"/>
+      <text x="109" y="22" font-family="-apple-system, sans-serif" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle" letter-spacing="0.01em">Place Delivery Order</text>
+    </g>
+  </g>
+
+  <!-- ====================================================================
+       INTERACTION CONNECTOR LINKAGE LINES
+       ==================================================================== -->
+  <path d="M 436 174 Q 470 154 504 190" fill="none" stroke="url(#zaffronBrand)" stroke-width="1.75" stroke-dasharray="4 4" opacity="0.6"/>
+  <polygon points="506,192 503,184 498,189" fill="#ef4f5f" opacity="0.75"/>
+
+  <!-- ====================================================================
+       LOWER TECH BLOCK SPECIFICATIONS OVERLAY META-PILL
+       ==================================================================== -->
+  <g transform="translate(180, 442)">
+    <rect width="440" height="42" rx="21" fill="rgba(5, 7, 13, 0.95)" stroke="rgba(148, 163, 184, 0.15)" stroke-width="1.5"/>
+    
+    <!-- Title Category Identifier Track Label -->
+    <text x="28" y="25" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="800" fill="#f8fafc" letter-spacing="0.06em">FOOD DELIVERY UI</text>
+    <circle cx="164" cy="21" r="2" fill="#475569" />
+    
+    <!-- Standard Coding Language Framework Specifications Matrix Pills -->
+    <text x="180" y="25" font-family="monospace" font-size="12" font-weight="700" fill="#38bdf8">HTML5</text>
+    <text x="230" y="25" font-family="monospace" font-size="12" font-weight="700" fill="#25c57a">CSS3</text>
+    <text x="276" y="25" font-family="monospace" font-size="12" font-weight="700" fill="#f59e0b">ES6+</text>
+    
+    <!-- Native Compliance Structural Check Flag -->
+    <rect x="324" y="13" width="90" height="16" rx="4" fill="rgba(37, 197, 122, 0.08)" stroke="rgba(37, 197, 122, 0.15)" stroke-width="1"/>
+    <text x="330" y="24" font-family="-apple-system, sans-serif" font-size="8" font-weight="800" fill="#25c57a" letter-spacing="0.02em">INDIAN_CUISINE_UI</text>
+  </g>
+</svg>

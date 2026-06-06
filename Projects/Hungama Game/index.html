@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hungama // High-Fidelity Word Logic Simulation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <aside class="sidebar-panel">
+            <div class="brand-block">
+                <h2>HUNGAMA <span class="accent-text">//</span></h2>
+                <p class="subtitle">Educational Logic Interface</p>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <span class="metric-label">CURRENT STREAK</span>
+                    <div id="score-display" class="metric-value">00</div>
+                </div>
+                
+                <div class="metric-card">
+                    <span class="metric-label">HIGH SCORE</span>
+                    <div id="highscore-display" class="metric-value">00</div>
+                </div>
+
+                <div class="metric-card alert-card">
+                    <span class="metric-label">ATTEMPTS REMAINING</span>
+                    <div class="gauge-container">
+                        <div id="attempts-display" class="metric-value">06</div>
+                        <div class="heart-pulse"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-panel">
+                <span class="panel-label">ACTIVE SECTOR</span>
+                <div id="category-hint" class="category-text">LOADING...</div>
+            </div>
+
+            <div class="status-panel">
+                <span class="panel-label">SYSTEM STATUS</span>
+                <div id="status-prompt" class="status-prompt">INITIALIZING</div>
+            </div>
+
+            <button id="reset-btn" class="primary-action-btn">NEW SIMULATION</button>
+        </aside>
+
+        <main class="core-game-panel">
+            <div class="vector-stage-wrapper">
+                <svg id="vector-canvas" viewBox="0 0 200 250" width="100%" height="100%">
+                    <path d="M 20 230 L 180 230" class="base-scaffold" />
+                    <path d="M 60 230 L 60 30" class="base-scaffold" />
+                    <path d="M 60 30 L 140 30" class="base-scaffold" />
+                    <path d="M 140 30 L 140 60" class="base-scaffold" />
+                    
+                    <circle cx="140" cy="80" r="20" class="vector-limb limb-head" />
+                    <line x1="140" y1="100" x2="140" y2="160" class="vector-limb limb-body" />
+                    <line x1="140" y1="120" x2="110" y2="140" class="vector-limb limb-left-arm" />
+                    <line x1="140" y1="120" x2="170" y2="140" class="vector-limb limb-right-arm" />
+                    <line x1="140" y1="160" x2="110" y2="200" class="vector-limb limb-left-leg" />
+                    <line x1="140" y1="160" x2="170" y2="200" class="vector-limb limb-right-leg" />
+                </svg>
+            </div>
+
+            <div class="word-display-container">
+                <div id="word-dock" class="word-display"></div>
+            </div>
+        </main>
+
+        <section class="keyboard-panel">
+            <span class="panel-label key-matrix-label">INPUT CHARACTER KEYPAD MATRIX</span>
+            <div id="keyboard-matrix" class="keyboard-grid"></div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

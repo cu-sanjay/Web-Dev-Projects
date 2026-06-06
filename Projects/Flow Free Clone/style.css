@@ -1,0 +1,483 @@
+:root {
+  /* Design Tokens */
+  --font-display: 'Outfit', system-ui, sans-serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+
+  --bg-gradient: radial-gradient(circle at top right, #0a111a, #04070a);
+  --card-bg: rgba(255, 255, 255, 0.02);
+  --card-border: rgba(255, 255, 255, 0.05);
+
+  --text-primary: #f8f9fa;
+  --text-secondary: #8a92a6;
+  --text-muted: #4e5668;
+
+  /* Theme Accents */
+  --accent-color: #00f0ff;
+  --accent-glow: rgba(0, 240, 255, 0.25);
+  --accent-glow-intense: rgba(0, 240, 255, 0.55);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg-gradient);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  padding: 20px;
+  overflow-x: hidden;
+}
+
+/* Glassmorphism Common Styles */
+.grid-arena-card, .control-card, .stat-box, .toggle-btn, .modal-card, .grid-cell {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* Main Container */
+.game-container {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* Header Group styling */
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--card-border);
+  padding-bottom: 15px;
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-icon {
+  font-size: 1.8rem;
+  filter: drop-shadow(0 0 10px var(--accent-glow));
+}
+
+.logo-area h1 {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  background: linear-gradient(120deg, var(--text-primary), var(--text-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.header-stats {
+  display: flex;
+  gap: 15px;
+}
+
+.stat-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6px 18px;
+}
+
+.stat-lbl {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  letter-spacing: 1.5px;
+}
+
+.stat-val {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  text-shadow: 0 0 8px var(--accent-glow);
+}
+
+/* Game Arena Panel Grid */
+.game-layout {
+  display: grid;
+  grid-template-columns: 1.8fr 1fr;
+  gap: 25px;
+  align-items: start;
+}
+
+.grid-arena-card {
+  padding: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  overflow: hidden;
+}
+
+.board-wrapper {
+  position: relative;
+  max-width: 450px;
+  width: 100%;
+}
+
+/* Custom Grid Columns dynamically resizing */
+.grid-container {
+  display: grid;
+  gap: 6px;
+  background: rgba(0,0,0,0.2);
+  border: 1px solid rgba(255,255,255,0.02);
+  padding: 10px;
+  border-radius: 12px;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+  position: relative;
+  user-select: none;
+}
+
+/* Grid Cell */
+.grid-cell {
+  aspect-ratio: 1 / 1;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+/* Colored Circular Dot */
+.dot {
+  width: 55%;
+  height: 55%;
+  border-radius: 50%;
+  z-index: 10;
+  transition: transform 0.2s;
+  pointer-events: none; /* Let drag events fall through to cell */
+}
+
+/* Highlight dot pulse when dragging starts */
+.grid-cell:active .dot {
+  transform: scale(1.15);
+}
+
+/* Transparent SVG overlay rendering path lines */
+.lines-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* SVG Line paths */
+.lines-overlay path {
+  fill: none;
+  stroke-width: 12px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Animation on complete connections */
+.lines-overlay path.completed {
+  animation: line-glow-pulse 3s infinite alternate;
+}
+
+/* Sidebar configuration cards */
+.sidebar-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.control-card {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.control-card h3 {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+  border-bottom: 1px solid var(--card-border);
+  padding-bottom: 6px;
+}
+
+/* Toggle Preset group button selections */
+.toggle-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.toggle-btn {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--card-border);
+  color: var(--text-secondary);
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+}
+
+.toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-primary);
+}
+
+.toggle-btn.active {
+  background: var(--accent-color);
+  color: #000;
+  font-weight: 700;
+  box-shadow: 0 0 15px var(--accent-glow);
+}
+
+/* Dropdown selections */
+.select-wrapper {
+  position: relative;
+}
+
+.select-wrapper select {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--card-border);
+  color: var(--text-primary);
+  padding: 10px 15px;
+  border-radius: 10px;
+  outline: none;
+  font-size: 0.85rem;
+  appearance: none;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+.select-wrapper select:focus {
+  border-color: var(--accent-color);
+}
+
+.select-wrapper::after {
+  content: '▼';
+  font-size: 0.6rem;
+  color: var(--text-secondary);
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* Dashboard Action control group buttons */
+.btn-controls-card {
+  flex-direction: row;
+  gap: 10px;
+}
+
+.action-btn {
+  flex: 1;
+  background: var(--accent-color);
+  border: none;
+  color: #000;
+  padding: 12px;
+  border-radius: 8px;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.action-btn:hover {
+  box-shadow: 0 0 12px var(--accent-glow-intense);
+  transform: translateY(-1px);
+}
+
+.action-btn.outline {
+  background: transparent;
+  border: 1.5px solid var(--card-border);
+  color: var(--text-primary);
+}
+
+.action-btn.outline:hover {
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: none;
+}
+
+/* Instruction Text Lists styles */
+.instruction-card ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.instruction-card li {
+  font-size: 0.75rem;
+  line-height: 1.15rem;
+  color: var(--text-secondary);
+  position: relative;
+  padding-left: 14px;
+}
+
+.instruction-card li::before {
+  content: '✦';
+  position: absolute;
+  left: 0;
+  font-size: 0.7rem;
+  color: var(--accent-color);
+}
+
+/* Victory Dashboard Modal Overlay layout */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(7, 10, 15, 0.85);
+  backdrop-filter: blur(15px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-card {
+  padding: 40px;
+  width: 90%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+}
+
+.win-trophy {
+  font-size: 3rem;
+  animation: pulse-trophy 2s infinite;
+}
+
+.victory-stats {
+  display: flex;
+  gap: 30px;
+  margin: 10px 0;
+}
+
+.v-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.v-num {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--accent-color);
+}
+
+.v-lbl {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 15px;
+}
+
+.modal-btn {
+  background: var(--accent-color);
+  color: #000;
+  border: none;
+  padding: 12px 24px;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.9rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.modal-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px var(--accent-glow);
+}
+
+.modal-btn.outline {
+  background: transparent;
+  border: 1.5px solid var(--card-border);
+  color: var(--text-primary);
+}
+
+.modal-btn.outline:hover {
+  background: rgba(255,255,255,0.05);
+  box-shadow: none;
+}
+
+/* Footer layout */
+.author-credits {
+  margin-top: 30px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.author-credits span {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* Animations */
+@keyframes pulse-trophy {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(255,200,0,0.3)); }
+  50% { transform: scale(1.15); filter: drop-shadow(0 0 20px rgba(255,200,0,0.8)); }
+}
+
+@keyframes line-glow-pulse {
+  0% { filter: drop-shadow(0 0 2px var(--line-glow-color)); opacity: 0.85; }
+  100% { filter: drop-shadow(0 0 12px var(--line-glow-color)); opacity: 1; }
+}
+
+/* Breakdowns sizing responsiveness */
+@media (max-width: 900px) {
+  .game-layout {
+    grid-template-columns: 1fr;
+    max-width: 600px;
+    margin: auto;
+  }
+}
+
+@media (max-width: 550px) {
+  .game-header {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+}

@@ -1,0 +1,331 @@
+/* Core Custom Properties & Premium Dark Theme Configuration */
+:root {
+    --bg-main: #070a13;
+    --panel-bg: #111827;
+    --border-bounds: #1f2937;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --board-mesh: #1e293b;
+    --board-glow: rgba(30, 41, 59, 0.5);
+    
+    /* Token Accents */
+    --p1-crimson: #ef4444;
+    --p1-glow: radial-gradient(circle at 35% 35%, #ff8585 0%, #ef4444 50%, #991b1b 100%);
+    --p2-amber: #f59e0b;
+    --p2-glow: radial-gradient(circle at 35% 35%, #fef08a 0%, #f59e0b 50%, #9a3412 100%);
+    
+    /* System Typography Stack */
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+/* Master Scaffolding Layout Framework */
+.app-container {
+    width: 1200px;
+    height: 780px;
+    background-color: var(--panel-bg);
+    border: 1px solid var(--border-bounds);
+    border-radius: 16px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    display: flex;
+    overflow: hidden;
+}
+
+/* Left Sidebar Column Configuration */
+.sidebar {
+    width: 340px;
+    border-right: 1px solid var(--border-bounds);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: linear-gradient(180deg, #111827 0%, #0d131f 100%);
+}
+
+.brand {
+    display: flex;
+    flex-direction: column;
+}
+
+.brand-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: 0.25em;
+    color: var(--text-primary);
+}
+
+.brand-subtitle {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: var(--text-secondary);
+    margin-top: 4px;
+}
+
+.divider {
+    border: 0;
+    height: 1px;
+    background-color: var(--border-bounds);
+    margin: 24px 0;
+}
+
+/* Metrics Dashboard Display Panels */
+.metrics-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex-grow: 1;
+}
+
+.metric-card {
+    background-color: rgba(31, 41, 55, 0.4);
+    border: 1px solid var(--border-bounds);
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.metric-label {
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+}
+
+.mono-text {
+    font-family: var(--font-mono);
+}
+
+/* Turn Tracking Metrics Styling */
+.turn-indicator-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.turn-indicator {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.player-one-bg {
+    background: var(--p1-crimson);
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+}
+
+.player-two-bg {
+    background: var(--p2-amber);
+    box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+}
+
+/* Scoreboard Framework Layout */
+.scoreboard {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.score-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+}
+
+.score-name {
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+.p1-dot { background-color: var(--p1-crimson); }
+.p2-dot { background-color: var(--p2-amber); }
+
+.score-value {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.status-card {
+    border-left: 3px solid var(--text-secondary);
+    transition: border-color 0.3s ease;
+}
+
+.status-prompt {
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+/* Primary Execution Button */
+.btn-primary {
+    background-color: var(--text-primary);
+    color: var(--bg-main);
+    border: none;
+    border-radius: 8px;
+    padding: 14px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    font-family: var(--font-sans);
+    transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-primary:hover {
+    opacity: 0.9;
+}
+
+.btn-primary:active {
+    opacity: 0.8;
+}
+
+/* Center/Right Main Column Frame Architecture */
+.main-matrix {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-main);
+    position: relative;
+}
+
+.board-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Column Selector Preview Row Strip */
+.selector-strip {
+    display: grid;
+    grid-template-columns: repeat(7, 72px);
+    gap: 12px;
+    margin-bottom: 12px;
+    height: 32px;
+    width: auto;
+}
+
+.column-preview {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin: 0 auto;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease, background 0.2s ease;
+}
+
+.board-wrapper:not(.locked) .selector-strip .column-preview.active-p1 {
+    opacity: 0.35;
+    background: var(--p1-glow);
+    transform: translateY(0);
+}
+
+.board-wrapper:not(.locked) .selector-strip .column-preview.active-p2 {
+    opacity: 0.35;
+    background: var(--p2-glow);
+    transform: translateY(0);
+}
+
+/* Main Token Mesh Grid Matrix Frame */
+.board-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 72px);
+    grid-template-rows: repeat(6, 72px);
+    gap: 12px;
+    background-color: rgba(30, 41, 59, 0.15);
+    border: 12px solid var(--board-mesh);
+    border-radius: 16px;
+    padding: 12px;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.05), 
+                0 20px 40px -5px rgba(0, 0, 0, 0.8),
+                inset 0 0 24px var(--board-glow);
+    position: relative;
+    cursor: pointer;
+}
+
+/* Token Slot Cell Architecture */
+.cell {
+    width: 72px;
+    height: 72px;
+    background-color: var(--panel-bg);
+    border-radius: 50%;
+    box-shadow: inset 0 4px 6px -1px rgba(0, 0, 0, 0.6), 
+                0 1px 2px -1px rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Token Entities & Drop Animation Engines */
+.cell::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    transform: translateY(-150%);
+    transition: transform 0.45s cubic-bezier(0.6, -0.28, 0.735, 0.04);
+}
+
+.cell.player-one::after {
+    background: var(--p1-glow);
+    transform: translateY(0);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+}
+
+.cell.player-two::after {
+    background: var(--p2-glow);
+    transform: translateY(0);
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+}
+
+/* Concentric Winning Highlight & Pulse Keyframe */
+.cell.winning-token::after {
+    animation: winning-pulse 1.2s infinite ease-in-out;
+    box-shadow: 0 0 0 4px var(--bg-main), 0 0 0 8px var(--text-primary);
+    z-index: 10;
+}
+
+@keyframes winning-pulse {
+    0%, 100% {
+        transform: scale(1);
+        filter: brightness(1);
+    }
+    50% {
+        transform: scale(0.92);
+        filter: brightness(1.3);
+    }
+}
+
+/* Absolute Input State Interlocking */
+.locked {
+    pointer-events: none !important;
+}

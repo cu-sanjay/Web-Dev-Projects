@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minesweeper Lite</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DSEG7+Classic:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-cyan">
+  <div class="game-container">
+    
+    <!-- Top Configuration Header -->
+    <header class="game-header">
+      <div class="logo-area">
+        <span class="logo-icon">💣</span>
+        <h1>Minesweeper</h1>
+      </div>
+
+      <div class="header-actions">
+        <!-- Difficulty preset picker -->
+        <div class="select-wrapper">
+          <select id="diff-select" aria-label="Select Difficulty">
+            <option value="easy">Beginner (9x9, 10 Mines)</option>
+            <option value="medium">Intermediate (16x16, 40 Mines)</option>
+            <option value="hard">Expert (20x20, 80 Mines)</option>
+          </select>
+        </div>
+      </div>
+    </header>
+
+    <!-- Score Board Display Panel -->
+    <div class="scoreboard-card">
+      <div class="segment-display">
+        <span class="seg-label">MINES</span>
+        <span class="seg-value" id="mine-count">010</span>
+      </div>
+
+      <!-- Reset Emoji Face -->
+      <button class="face-btn" id="face-reset" aria-label="Reset game status">😊</button>
+
+      <div class="segment-display">
+        <span class="seg-label">TIME</span>
+        <span class="seg-value" id="timer">000</span>
+      </div>
+    </div>
+
+    <!-- Main Game Board Grid -->
+    <main class="grid-arena-card">
+      <div class="board-scroll-container">
+        <div class="board-grid" id="board-grid">
+          <!-- Dynamically generated cell divs populated here -->
+        </div>
+      </div>
+    </main>
+
+    <!-- Mobile Screen Command Helper Bar -->
+    <div class="mobile-helper-bar">
+      <button class="helper-btn active" id="mode-dig" aria-label="Dig Mode">
+        <span class="icon">⛏️</span> DIG
+      </button>
+      <button class="helper-btn" id="mode-flag" aria-label="Flag Mode">
+        <span class="icon">🚩</span> FLAG
+      </button>
+    </div>
+
+    <!-- Personal best footer card -->
+    <div class="best-time-card">
+      <span>Personal Best: </span><span id="best-time-val">-</span>
+    </div>
+    
+  </div>
+
+  <footer class="author-credits">
+    Designed and Developed by <span>Mistry Vishwa</span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

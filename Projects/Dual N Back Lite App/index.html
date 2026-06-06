@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dual N-Back Lite</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="app-header">
+        <div class="app-logo">N</div>
+        <h1 class="app-title">Dual N-Back</h1>
+        <span class="app-subtitle">NeuroCore Lite</span>
+      </div>
+      <div class="metrics-dashboard">
+        <div class="metric-card">
+          <span class="metric-label">Current Score</span>
+          <span class="metric-value" id="score-display">0</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Accuracy</span>
+          <span class="metric-value" id="accuracy-display">0%</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Missed</span>
+          <span class="metric-value" id="missed-display">0</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Trials</span>
+          <span class="metric-value" id="trial-display">0 / 20</span>
+        </div>
+      </div>
+      <div class="controls-section">
+        <div class="control-group">
+          <label class="control-label" for="n-level">N-Level</label>
+          <select id="n-level" class="control-select">
+            <option value="1">1-Back</option>
+            <option value="2" selected>2-Back</option>
+            <option value="3">3-Back</option>
+          </select>
+        </div>
+        <button id="start-btn" class="btn-primary">Start Training Cycle</button>
+      </div>
+      <div id="personal-best" class="personal-best" style="display:none">
+        <span class="pb-label">Personal Best</span>
+        <span class="pb-value" id="pb-display"></span>
+      </div>
+    </aside>
+    <main class="main-content">
+      <div id="audio-letter-prompt" class="letter-prompt">—</div>
+      <div id="spatial-grid" class="spatial-grid">
+        <div class="grid-cell" data-index="0"></div>
+        <div class="grid-cell" data-index="1"></div>
+        <div class="grid-cell" data-index="2"></div>
+        <div class="grid-cell" data-index="3"></div>
+        <div class="grid-cell" data-index="4"></div>
+        <div class="grid-cell" data-index="5"></div>
+        <div class="grid-cell" data-index="6"></div>
+        <div class="grid-cell" data-index="7"></div>
+        <div class="grid-cell" data-index="8"></div>
+      </div>
+      <div class="action-buttons">
+        <button id="pos-match-btn" class="btn-match">Position Match (Key: A)</button>
+        <button id="let-match-btn" class="btn-match">Letter Match (Key: L)</button>
+      </div>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

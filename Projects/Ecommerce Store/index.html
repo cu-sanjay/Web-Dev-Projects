@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-commerce Store</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">SHOP<span>HUB</span></a>
+      <nav class="nav-links">
+        <a href="#" class="active">Home</a>
+        <a href="#">Products</a>
+        <a href="#">Deals</a>
+        <a href="#">Contact</a>
+      </nav>
+      <button class="cart-btn" id="cartToggle" aria-label="Open cart">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+        </svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <h3>Filters</h3>
+        <button id="resetFilters" class="reset-btn">Reset</button>
+      </div>
+      <div class="filter-section">
+        <h4>Category</h4>
+        <div class="category-list" id="categoryList">
+          <label class="category-option active-cat" data-category="All">
+            <input type="radio" name="category" value="All" checked>
+            <span>All</span>
+          </label>
+        </div>
+      </div>
+      <div class="filter-section">
+        <h4>Price Range</h4>
+        <div class="price-range">
+          <input type="range" id="priceSlider" min="0" max="500" value="500">
+          <div class="price-labels">
+            <span>$0</span>
+            <span id="priceDisplay">$500</span>
+          </div>
+        </div>
+      </div>
+      <div class="filter-section">
+        <h4>Sort By</h4>
+        <select id="sortSelect" class="sort-select">
+          <option value="default">Default</option>
+          <option value="low">Price: Low to High</option>
+          <option value="high">Price: High to Low</option>
+          <option value="rating">Top Rated</option>
+        </select>
+      </div>
+      <button class="mobile-filters-toggle" id="mobileFiltersToggle">☰ Filters</button>
+    </aside>
+
+    <main class="main-content">
+      <div class="products-header">
+        <h2 id="productsTitle">All Products</h2>
+        <span id="productsCount" class="products-count"></span>
+      </div>
+      <div class="product-grid" id="productGrid"></div>
+    </main>
+  </div>
+
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer-header">
+      <h2>Your Cart (<span id="cartItemsCount">0</span>)</h2>
+      <button id="cartClose" class="cart-close" aria-label="Close cart">&times;</button>
+    </div>
+    <div class="cart-drawer-body" id="cartBody">
+      <div class="cart-empty" id="cartEmpty">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.3">
+          <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+        </svg>
+        <p>Your cart is empty</p>
+      </div>
+      <div class="cart-items" id="cartItems"></div>
+    </div>
+    <div class="cart-drawer-footer" id="cartFooter">
+      <div class="cart-summary">
+        <div class="summary-row"><span>Subtotal</span><span id="cartSubtotal">$0.00</span></div>
+        <div class="summary-row"><span>Tax (8%)</span><span id="cartTax">$0.00</span></div>
+        <div class="summary-row total"><span>Total</span><span id="cartTotal">$0.00</span></div>
+      </div>
+      <button class="checkout-btn" id="checkoutBtn">Proceed to Checkout</button>
+    </div>
+  </div>
+
+  <div class="checkout-overlay" id="checkoutOverlay">
+    <div class="checkout-modal">
+      <button class="checkout-close" id="checkoutClose" aria-label="Close checkout">&times;</button>
+      <div class="checkout-steps">
+        <div class="step-indicators">
+          <span class="step-indicator active" data-step="1">1</span>
+          <span class="step-line"></span>
+          <span class="step-indicator" data-step="2">2</span>
+        </div>
+        <div class="step-labels">
+          <span class="active">Shipping</span>
+          <span>Payment</span>
+        </div>
+      </div>
+
+      <div class="checkout-body">
+        <div class="checkout-step active" id="step1">
+          <h2>Shipping Details</h2>
+          <form id="shippingForm" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" placeholder="John Doe" required>
+                <span class="error-msg"></span>
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="john@example.com" required>
+                <span class="error-msg"></span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="address">Address</label>
+              <input type="text" id="address" placeholder="123 Main St" required>
+              <span class="error-msg"></span>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="city">City</label>
+                <input type="text" id="city" placeholder="New York" required>
+                <span class="error-msg"></span>
+              </div>
+              <div class="form-group">
+                <label for="zip">ZIP Code</label>
+                <input type="text" id="zip" placeholder="10001" required pattern="[0-9]{5}">
+                <span class="error-msg"></span>
+              </div>
+            </div>
+            <button type="submit" class="step-btn">Continue to Payment</button>
+          </form>
+        </div>
+
+        <div class="checkout-step" id="step2">
+          <h2>Payment</h2>
+          <div class="card-preview" id="cardPreview">
+            <div class="card-front">
+              <div class="card-chip"></div>
+              <div class="card-number" id="cardDisplayNumber">**** **** **** ****</div>
+              <div class="card-details">
+                <span><small>Card Holder</small><span id="cardDisplayName">YOUR NAME</span></span>
+                <span><small>Expires</small><span id="cardDisplayExpiry">MM/YY</span></span>
+              </div>
+            </div>
+          </div>
+          <form id="paymentForm" novalidate>
+            <div class="form-group">
+              <label for="cardNumber">Card Number</label>
+              <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required>
+              <span class="error-msg"></span>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="cardName">Cardholder Name</label>
+                <input type="text" id="cardName" placeholder="John Doe" required>
+                <span class="error-msg"></span>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="expiry">Expiry</label>
+                <input type="text" id="expiry" placeholder="MM/YY" maxlength="5" required>
+                <span class="error-msg"></span>
+              </div>
+              <div class="form-group">
+                <label for="cvv">CVV</label>
+                <input type="text" id="cvv" placeholder="123" maxlength="4" required pattern="[0-9]{3,4}">
+                <span class="error-msg"></span>
+              </div>
+            </div>
+            <div class="step-btns">
+              <button type="button" class="step-btn secondary" id="backToShipping">Back</button>
+              <button type="submit" class="step-btn">Place Order</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="checkout-step" id="stepSuccess">
+          <div class="success-screen">
+            <div class="success-icon">✓</div>
+            <h2>Order Placed! 🚀</h2>
+            <p>Thank you for your purchase. Your order has been confirmed.</p>
+            <button class="step-btn" id="continueShopping">Continue Shopping</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

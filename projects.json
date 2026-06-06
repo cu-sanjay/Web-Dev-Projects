@@ -1,6 +1,8 @@
 {
   "generatedAt": "2026-06-06T10:40:45.292Z",
   "count": 18,
+  "generatedAt": "2026-06-06T10:30:17.869Z",
+  "count": 75,
   "projects": [
     {
       "slug": "2048 Game",
@@ -18,7 +20,25 @@
       "entry": "Projects/2048%20Game/index.html",
       "folder": "Projects/2048%20Game",
       "thumbnail": "Projects/2048%20Game/thumbnail.svg",
-      "addedAt": "2026-06-03T13:56:10.373Z"
+      "addedAt": "2026-06-06T10:30:12.838Z"
+    },
+    {
+      "slug": "Age Calculator",
+      "title": "Age Calculator",
+      "description": "An elegant, comprehensive calculation interface that evaluates granular chronological profiles including exact days lived, total active stats, and live next-birthday countdown tracking.",
+      "author": {
+        "name": "Shruti Narsulwar",
+        "github": "Shrutiii01"
+      },
+      "tags": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "entry": "Projects/Age%20Calculator/index.html",
+      "folder": "Projects/Age%20Calculator",
+      "thumbnail": null,
+      "addedAt": "2026-06-06T10:30:12.838Z"
     },
     {
       "slug": "Archery Game",
@@ -39,7 +59,48 @@
       "entry": "Projects/Archery%20Game/index.html",
       "folder": "Projects/Archery%20Game",
       "thumbnail": "Projects/Archery%20Game/thumbnail.svg",
-      "addedAt": "2026-06-06T05:23:50.014Z"
+      "addedAt": "2026-06-06T10:30:12.839Z"
+    },
+    {
+      "slug": "Blog",
+      "title": "Blog",
+      "description": "A full-featured blog application built with React, Vite, Appwrite, Redux Toolkit, and TinyMCE. Supports authentication, post creation, editing, deletion, image uploads, protected routes, and dark mode.",
+      "author": {
+        "name": "Aashutosh Rana",
+        "github": "Aashutosh24"
+      },
+      "tags": [
+        "react",
+        "appwrite",
+        "blog",
+        "redux",
+        "tailwind",
+        "vite"
+      ],
+      "entry": "Projects/Blog/index.html",
+      "folder": "Projects/Blog",
+      "thumbnail": null,
+      "addedAt": "2026-06-06T10:30:12.839Z"
+    },
+    {
+      "slug": "Book Library",
+      "title": "Book Library",
+      "description": "A premium, glassmorphic reading progress tracker and collections shelf manager using localStorage.",
+      "author": {
+        "name": "Utkarsh",
+        "github": "utkrsh29"
+      },
+      "tags": [
+        "productivity",
+        "book-tracker",
+        "vanilla-js",
+        "localstorage",
+        "glassmorphism"
+      ],
+      "entry": "Projects/Book%20Library/index.html",
+      "folder": "Projects/Book%20Library",
+      "thumbnail": "Projects/Book%20Library/thumbnail.svg",
+      "addedAt": "2026-06-06T10:30:12.844Z"
     },
     {
       "slug": "Brick Breaker Arcade Game",
@@ -103,16 +164,18 @@
     {
       "slug": "Developer Portfolio Builder",
       "title": "Developer Portfolio Builder",
-      "description": "An interactive tool to build, customize, preview, and download professional developer portfolios in real time.",
+      "description": "A modern developer portfolio builder with live preview, customizable sections, responsive templates, and export-ready portfolio pages.",
       "author": {
         "name": "Mistry Vishwa",
         "github": "MistryVishwa"
       },
       "tags": [
-        "productivity",
         "portfolio",
+        "builder",
         "vanilla-js",
-        "localstorage"
+        "responsive",
+        "dashboard",
+        "ui"
       ],
       "entry": "Projects/Developer%20Portfolio%20Builder/index.html",
       "folder": "Projects/Developer%20Portfolio%20Builder",
@@ -120,18 +183,76 @@
       "addedAt": "2026-06-03T13:56:10.374Z"
     },
     {
-      "slug": "Image Gallery",
-      "title": "Image Gallery",
-      "description": "A responsive image gallery with drag-and-drop upload, IndexedDB persistence, categorization, and lightbox navigation.",
+      "slug": "Dice Roller Simulator",
+      "title": "Dice Roller Simulator",
+      "description": "Simulate rolling one or multiple 3D dice with advanced physics, sound synthesis, history analytics, and themes.",
       "author": {
-        "name": "Shubham",
-        "github": "Shubham2775"
+        "name": "Mistry Vishwa",
+        "github": "MistryVishwa"
       },
       "tags": [
-        "productivity",
-        "localstorage",
+        "game",
+        "simulator",
+        "3d-css",
+        "web-audio",
+        "analytics"
+      ],
+      "entry": "Projects/Dice%20Roller%20Simulator/index.html",
+      "folder": "Projects/Dice%20Roller%20Simulator",
+      "thumbnail": null,
+      "addedAt": "2026-06-06T10:30:12.848Z"
+    },
+    {
+      "slug": "Digital Clock",
+      "title": "Digital Clock",
+      "description": "A sleek digital clock featuring live real-time updates through native JavaScript APIs, dynamic calendar views, and interactive 12/24 hour display formatting toggles.",
+      "author": {
+        "name": "Mistry Vishwa",
+        "github": "MistryVishwa"
+      },
+      "tags": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "entry": "Projects/Digital%20Clock/index.html",
+      "folder": "Projects/Digital%20Clock",
+      "thumbnail": null,
+      "addedAt": "2026-06-06T10:30:12.849Z"
+    },
+    {
+      "slug": "Dual N Back Lite App",
+      "title": "Dual N Back Lite App",
+      "description": "An ultra-premium cognitive neuro-training utility based on scientifically proven working memory and fluid intelligence expansion protocols. Running entirely inside native browser layers, the platform pairs an automated synchronized interval timeline flashing blocks on a 3x3 geometric grid with simultaneous alphabetical text character cues. The application implements an array-backed rolling sequence tracking buffer that maps elements exactly N steps backward, custom zero-dependency audio sound wave generation built with native browser Web Audio API Oscillator nodes, and persistent high-score logs stored using LocalStorage parameters.",
+      "author": {
+        "name": "Senior UI/UX Engineer",
+        "github": "architecture-showcase"
+      },
+      "tags": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "entry": "Projects/Dual%20N%20Back%20Lite%20App/index.html",
+      "folder": "Projects/Dual%20N%20Back%20Lite%20App",
+      "thumbnail": null,
+      "addedAt": "2026-06-06T10:30:12.849Z"
+    },
+    {
+      "slug": "Ecommerce Store",
+      "title": "Ecommerce Store",
+      "description": "A premium e-commerce storefront with dynamic product catalog, multi-attribute filtering, sorting, glassmorphic cart drawer, step-based checkout with validation, and real-time card preview.",
+      "author": {
+        "name": "Girish Madarkar",
+        "github": "Girish0902"
+      },
+      "tags": [
+        "e-commerce",
+        "storefront",
         "vanilla-js",
-        "media"
+        "filtering",
+        "cart",
+        "checkout"
       ],
       "entry": "Projects/Image%20Gallery/index.html",
       "folder": "Projects/Image%20Gallery",
@@ -158,19 +279,58 @@
       "addedAt": "2026-06-05T14:47:06.117Z"
     },
     {
-      "slug": "Markdown Editor",
-      "title": "Markdown Editor",
-      "description": "Real-time Markdown editor with glass UI, export to HTML, and localStorage persistence.",
+      "slug": "Expense Tracker",
+      "title": "Expense Tracker",
+      "description": "A premium Black & Gold daily expense tracker with interactive SVG analytics and localStorage persistence.",
       "author": {
-        "name": "Sam",
-        "github": "sam"
+        "name": "Mistry Vishwa",
+        "github": "MistryVishwa"
       },
       "tags": [
-        "markdown",
-        "editor",
+        "finance",
+        "analytics",
+        "svg",
+        "localstorage"
+      ],
+      "entry": "Projects/Expense%20Tracker/index.html",
+      "folder": "Projects/Expense%20Tracker",
+      "thumbnail": "Projects/Expense%20Tracker/thumbnail.svg",
+      "addedAt": "2026-06-06T10:30:12.850Z"
+    },
+    {
+      "slug": "Fitness Progress Dashboard",
+      "title": "Fitness Progress Dashboard",
+      "description": "Visualize workouts, calories, weight trends, and activity summaries with interactive charts.",
+      "author": {
+        "name": "Vishwa Mistry",
+        "github": "MistryVishwa"
+      },
+      "tags": [
+        "dashboard",
+        "fitness",
+        "chart-js",
+        "localstorage",
+        "analytics"
+      ],
+      "entry": "Projects/Fitness%20Progress%20Dashboard/index.html",
+      "folder": "Projects/Fitness%20Progress%20Dashboard",
+      "thumbnail": "Projects/Fitness%20Progress%20Dashboard/thumbnail.svg",
+      "addedAt": "2026-06-06T10:30:12.850Z"
+    },
+    {
+      "slug": "Flashcard Learning App",
+      "title": "Flashcard Learning App",
+      "description": "A responsive and interactive study platform featuring flashcard reviews with 3D flip effects, custom category management, quiz and timed revision modes, gamified achievements, and native study progress analytics charts.",
+      "author": {
+        "name": "Mistry Vishwa",
+        "github": "MistryVishwa"
+      },
+      "tags": [
+        "education",
+        "flashcards",
         "vanilla-js",
-        "glass-ui",
-        "real-time"
+        "localstorage",
+        "quiz"
       ],
       "entry": "Projects/Markdown%20Editor/index.html",
       "folder": "Projects/Markdown%20Editor",
@@ -178,19 +338,55 @@
       "addedAt": "2026-06-03T13:56:10.383Z"
     },
     {
-      "slug": "Music Player",
-      "title": "Music Player",
-      "description": "iPhone-style audio player with iTunes Search API integration, album artwork, and 30-second preview playback.",
+      "slug": "Flow Free Clone",
+      "title": "Flow Free Clone",
+      "description": "An interactive puzzle game where players connect matching colored dots on a grid to create flow lines. All cells must be occupied, and paths cannot cross.",
       "author": {
-        "name": "Web Dev Projects",
-        "github": "cu-sanjay"
+        "name": "Mistry Vishwa",
+        "github": "MistryVishwa"
       },
       "tags": [
-        "audio",
-        "ui",
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Game"
+      ],
+      "entry": "Projects/Flow%20Free%20Clone/index.html",
+      "folder": "Projects/Flow%20Free%20Clone",
+      "thumbnail": null,
+      "addedAt": "2026-06-06T10:30:12.851Z"
+    },
+    {
+      "slug": "Food Delivary App Ui",
+      "title": "Food Delivary App Ui",
+      "description": "An ultra-premium dark themed food exploration and delivery platform built using zero-dependency vanilla workflows, featuring real-time catalog search filters, food modifier drawers, and a live tracking progress simulator.",
+      "author": {
+        "name": "Shruti Narsulwar",
+        "github": "shrutiii01"
+      },
+      "tags": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "entry": "Projects/Food%20Delivary%20App%20Ui/index.html",
+      "folder": "Projects/Food%20Delivary%20App%20Ui",
+      "thumbnail": null,
+      "addedAt": "2026-06-06T10:30:12.852Z"
+    },
+    {
+      "slug": "GitHub User Search",
+      "title": "GitHub User Search",
+      "description": "A premium search dashboard to fetch, display, and cache GitHub developer profiles and recent repositories.",
+      "author": {
+        "name": "Mistry Vishwa",
+        "github": "MistryVishwa"
+      },
+      "tags": [
         "api",
         "search",
-        "vanilla-js"
+        "github",
+        "localstorage"
       ],
       "entry": "Projects/Music%20Player/index.html",
       "folder": "Projects/Music%20Player",
@@ -198,17 +394,17 @@
       "addedAt": "2026-06-03T13:56:10.386Z"
     },
     {
-      "slug": "Notes App",
-      "title": "Notes App",
-      "description": "A clean, keyboard-friendly notes app with live URL detection, tags and localStorage persistence.",
+      "slug": "Grid Lock",
+      "title": "Grid Lock",
+      "description": "An ultra-premium, high-speed mathematical puzzle application designed to test mental agility, constraint satisfaction, and focus control. Engineered using native browser mechanics, the system implements automated combinations tracking across a 4x4 data layout grid populated with randomized integers, structured constraint evaluating parameters, a column gravity cascading algorithm that drops surviving upper integers downward while spawning fresh entries at empty top indexes, and score milestones backed natively via client LocalStorage variables.",
       "author": {
-        "name": "Web Dev Projects",
-        "github": "cu-sanjay"
+        "name": "Shruti Narsulwar",
+        "github": "shrutiii01"
       },
       "tags": [
-        "productivity",
-        "vanilla-js",
-        "localstorage"
+        "HTML",
+        "CSS",
+        "JavaScript"
       ],
       "entry": "Projects/Notes%20App/index.html",
       "folder": "Projects/Notes%20App",
@@ -216,19 +412,57 @@
       "addedAt": "2026-06-03T13:56:10.386Z"
     },
     {
-      "slug": "Pomodoro Timer",
-      "title": "Pomodoro Timer",
-      "description": "A focus timer with task tracking, stats dashboard, customisable durations, sound alerts and light/dark theme.",
+      "slug": "Habit Tracker",
+      "title": "Habit Tracker",
+      "description": "habit-bloom is a beautiful habit-tracking web app that help users build consistency",
       "author": {
-        "name": "Haripriya Gupta",
-        "github": "https://github.com/Haripriyagupta"
+        "name": "amandeep kujur",
+        "github": "aman-bot06"
+      },
+      "tags": [
+        "Responsive UI",
+        "Local Storage",
+        "Dark Mode",
+        "Habit Tracker",
+        "GitHub Contribution Graph",
+        "API Integration"
+      ],
+      "entry": "Projects/Habit%20Tracker/index.html",
+      "folder": "Projects/Habit%20Tracker",
+      "thumbnail": null,
+      "addedAt": "2026-06-06T10:30:12.853Z"
+    },
+    {
+      "slug": "Hungama Game",
+      "title": "Hungama Game",
+      "description": "An ultra-premium browser-native word guessing application designed around the mechanics of traditional Hangman. This educational project implements comprehensive client-side string processing operations to track and map character vectors, dynamic real-time SVG path rendering to render scale attempts step-by-step on a vector canvas, a custom 7-column virtual keyboard grid, and local persistence arrays for game win streaks managed via browser LocalStorage parameters.",
+      "author": {
+        "name": "Shruti Narsulwar",
+        "github": "shrutiii01"
+      },
+      "tags": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "entry": "Projects/Hungama%20Game/index.html",
+      "folder": "Projects/Hungama%20Game",
+      "thumbnail": null,
+      "addedAt": "2026-06-06T10:30:12.854Z"
+    },
+    {
+      "slug": "Image Gallery",
+      "title": "Image Gallery",
+      "description": "A responsive image gallery with drag-and-drop upload, IndexedDB persistence, categorization, and lightbox navigation.",
+      "author": {
+        "name": "Shubham",
+        "github": "Shubham2775"
       },
       "tags": [
         "productivity",
-        "timer",
         "localstorage",
         "vanilla-js",
-        "accessibility"
+        "media"
       ],
       "entry": "Projects/Pomodoro%20Timer/index.html",
       "folder": "Projects/Pomodoro%20Timer",
@@ -314,6 +548,801 @@
       "addedAt": "2026-06-05T10:47:19.693Z"
     },
     {
+      "slug": "Interview Preparation",
+      "title": "Interview Preparation",
+      "description": "A complete interview preparation platform featuring HR and technical questions, notes management, study progress tracking, YouTube resource management, mock interview tools, and preparation analytics built using HTML, CSS, and JavaScript.",
+      "author": {
+        "name": "Aashutosh Rana",
+        "github": "Aashutosh24"
+      },
+      "tags": [
+        "interview",
+        "education",
+        "productivity",
+        "dashboard",
+        "javascript",
+        "learning"
+      ],
+      "entry": "Projects/Interview%20Preparation/index.html",
+      "folder": "Projects/Interview%20Preparation",
+      "thumbnail": null,
+      "addedAt": "2026-06-06T10:30:12.856Z"
+    },
+    {
+      "slug": "Invoice Billing Generator",
+      "title": "Invoice Billing Generator",
+      "description": "A web app to create invoices, add line items, calculate totals, and export as PDF.",
+      "author": {
+        "name": "Muskan Kumari",
+        "github": "Muskankr"
+      },
+      "tags": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "PDF",
+        "Billing",
+        "Invoice"
+      ],
+      "entry": "Projects/Invoice%20Billing%20Generator/index.html",
+      "folder": "Projects/Invoice%20Billing%20Generator",
+      "thumbnail": null,
+      "addedAt": "2026-06-06T10:30:12.856Z"
+    },
+    {
+      "slug": "Island Expansion Game",
+      "title": "Island Expansion Game",
+      "description": "A puzzle game where you assign Land and Ocean tiles to match numbered island sizes. Features flood-fill validation, 3 difficulty levels, and oceanic dark theme.",
+      "author": {
+        "name": "Girish Madarkar",
+        "github": "Girish0902"
+      },
+      "tags": [
+        "game",
+        "puzzle",
+        "flood-fill",
+        "vanilla-js"
+      ],
+      "entry": "Projects/Island%20Expansion%20Game/index.html",
+      "folder": "Projects/Island%20Expansion%20Game",
+      "thumbnail": "Projects/Island%20Expansion%20Game/thumbnail.svg",
+      "addedAt": "2026-06-06T10:30:12.858Z"
+    },
+    {
+      "slug": "Job Application Tracker",
+      "title": "Job Application Tracker",
+      "description": "Manage job applications, application statuses, interview dates, and notes using a Kanban-style interface.",
+      "author": {
+        "name": "MistryVishwa",
+        "github": "MistryVishwa"
+      },
+      "tags": [
+        "kanban",
+        "productivity",
+        "drag-and-drop",
+        "localstorage",
+        "statistics"
+      ],
+      "entry": "Projects/Job%20Application%20Tracker/index.html",
+      "folder": "Projects/Job%20Application%20Tracker",
+      "thumbnail": "Projects/Job%20Application%20Tracker/thumbnail.svg",
+      "addedAt": "2026-06-06T10:30:12.858Z"
+    },
+    {
+      "slug": "Linkedln Clone",
+      "title": "Linkedln Clone",
+      "description": "A polished LinkedIn desktop clone with interactive profile banner, edit modal, dynamic post feed with emoji/likes/comments, networking recommendation deck with connect simulation, print-ready resume view, and localStorage persistence.",
+      "author": {
+        "name": "Girish Madarkar",
+        "github": "Girish0902"
+      },
+      "tags": [
+        "linkedin",
+        "clone",
+        "vanilla-js",
+        "social",
+        "profile"
+      ],
+      "entry": "Projects/Linkedln%20Clone/index.html",
+      "folder": "Projects/Linkedln%20Clone",
+      "thumbnail": "Projects/Linkedln%20Clone/thumbnail.svg",
+      "addedAt": "2026-06-06T10:30:12.858Z"
+    },
+    {
+      "slug": "Markdown Editor",
+      "title": "Markdown Editor",
+      "description": "Real-time Markdown editor with glass UI, export to HTML, and localStorage persistence.",
+      "author": {
+        "name": "Sam",
+        "github": "sam"
+      },
+      "tags": [
+        "markdown",
+        "editor",
+        "vanilla-js",
+        "glass-ui",
+        "real-time"
+      ],
+      "entry": "Projects/Markdown%20Editor/index.html",
+      "folder": "Projects/Markdown%20Editor",
+      "thumbnail": "Projects/Markdown%20Editor/thumbnail.svg",
+      "addedAt": "2026-06-06T10:30:12.858Z"
+    },
+    {
+      "slug": "Memory Card Game",
+      "title": "Memory Card Game",
+      "description": "A gamified memory match card game with 3D flip animations, leveling system, combo streaks, XP progression, multiple realms, and localStorage persistence.",
+      "author": {
+        "name": "Girish Madarkar",
+        "github": "Girish0902"
+      },
+      "tags": [
+        "game",
+        "memory",
+        "vanilla-js",
+        "gamified",
+        "localstorage",
+        "css-3d"
+      ],
+      "entry": "Projects/Memory%20Card%20Game/index.html",
+      "folder": "Projects/Memory%20Card%20Game",
+      "thumbnail": null,
+      "addedAt": "2026-06-06T10:30:12.859Z"
+    },
+    {
+      "slug": "Minesweeper Lite",
+      "title": "Minesweeper Lite",
+      "description": "A responsive, glassmorphic Minesweeper game featuring recursion reveals, first-click safety, custom timer modules, and local score saving presets.",
+      "author": {
+        "name": "Mistry Vishwa",
+        "github": "MistryVishwa"
+      },
+      "tags": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Game"
+      ],
+      "entry": "Projects/Minesweeper%20Lite/index.html",
+      "folder": "Projects/Minesweeper%20Lite",
+      "thumbnail": null,
+      "addedAt": "2026-06-06T10:30:12.859Z"
+    },
+    {
+      "slug": "Mini Chess Clock",
+      "title": "Mini Chess Clock",
+      "description": "A dual timer for two players that switches after each move. Demonstrates countdown timers and state management.",
+      "author": {
+        "name": "Muskan Kumari",
+        "github": "Muskankr"
+      },
+      "tags": [
+        "html",
+        "css",
+        "javascript",
+        "responsive-design",
+        "youtube-clone",
+        "frontend"
+      ],
+      "entry": "Projects/Mini%20Chess%20Clock/index.html",
+      "folder": "Projects/Mini%20Chess%20Clock",
+      "thumbnail": null,
+      "addedAt": "2026-06-06T10:30:12.860Z"
+    },
+    {
+      "slug": "Movie Search App",
+      "title": "Movie Search App",
+      "description": "Search for movies using the OMDb API with a sleek dark glassmorphism UI and detailed modal view.",
+      "author": {
+        "name": "Girish Madarkar",
+        "github": "Girish0902"
+      },
+      "tags": [
+        "api",
+        "javascript",
+        "vanilla-js",
+        "search",
+        "glass-ui"
+      ],
+      "entry": "Projects/Movie%20Search%20App/index.html",
+      "folder": "Projects/Movie%20Search%20App",
+      "thumbnail": null,
+      "addedAt": "2026-06-06T10:30:12.860Z"
+    },
+    {
+      "slug": "Music Player",
+      "title": "Music Player",
+      "description": "iPhone-style audio player with iTunes Search API integration, album artwork, and 30-second preview playback.",
+      "author": {
+        "name": "Web Dev Projects",
+        "github": "cu-sanjay"
+      },
+      "tags": [
+        "audio",
+        "ui",
+        "api",
+        "search",
+        "vanilla-js"
+      ],
+      "entry": "Projects/Music%20Player/index.html",
+      "folder": "Projects/Music%20Player",
+      "thumbnail": "Projects/Music%20Player/thumbnail.svg",
+      "addedAt": "2026-06-06T10:30:12.860Z"
+    },
+    {
+      "slug": "Netflix Clone",
+      "title": "Netflix Clone",
+      "description": "A premium Netflix-inspired streaming UI with cinematic hero banner, dynamic multi-row content rails from static JSON, hover-scale cards with inline metadata, and a detailed movie modal — all vanilla JS.",
+      "author": {
+        "name": "Girish Madarkar",
+        "github": "Girish0902"
+      },
+      "tags": [
+        "netflix",
+        "streaming",
+        "vanilla-js",
+        "carousel",
+        "cinematic",
+        "responsive"
+      ],
+      "entry": "Projects/Netflix%20Clone/index.html",
+      "folder": "Projects/Netflix%20Clone",
+      "thumbnail": null,
+      "addedAt": "2026-06-06T10:30:12.860Z"
+    },
+    {
+      "slug": "News Aggregator Interface",
+      "title": "News Aggregator Interface",
+      "description": "Browse categorized news cards, trending topics, search, and bookmarking.",
+      "author": {
+        "name": "Muskan Kumari",
+        "github": "Muskankr"
+      },
+      "tags": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "News",
+        "Aggregator"
+      ],
+      "entry": "Projects/News%20Aggregator%20Interface/index.html",
+      "folder": "Projects/News%20Aggregator%20Interface",
+      "thumbnail": null,
+      "addedAt": "2026-06-06T10:30:12.861Z"
+    },
+    {
+      "slug": "Notes App",
+      "title": "Notes App",
+      "description": "A clean, keyboard-friendly notes app with live URL detection, tags and localStorage persistence.",
+      "author": {
+        "name": "Web Dev Projects",
+        "github": "cu-sanjay"
+      },
+      "tags": [
+        "productivity",
+        "vanilla-js",
+        "localstorage"
+      ],
+      "entry": "Projects/Notes%20App/index.html",
+      "folder": "Projects/Notes%20App",
+      "thumbnail": "Projects/Notes%20App/thumbnail.svg",
+      "addedAt": "2026-06-06T10:30:12.861Z"
+    },
+    {
+      "slug": "Number Connect Puzzle",
+      "title": "Number Connect Puzzle",
+      "description": "Puzzle game to connect matching numbers with paths.",
+      "author": {
+        "name": "Muskan Kumari",
+        "github": "Muskankr"
+      },
+      "tags": [
+        "html",
+        "css",
+        "javascript",
+        "responsive-design",
+        "youtube-clone",
+        "frontend"
+      ],
+      "entry": "Projects/Number%20Connect%20Puzzle/index.html",
+      "folder": "Projects/Number%20Connect%20Puzzle",
+      "thumbnail": null,
+      "addedAt": "2026-06-06T10:30:12.861Z"
+    },
+    {
+      "slug": "Number Guessing Game",
+      "title": "Number Guessing Game",
+      "description": "A classic number guessing game styled in a nostalgic Windows Aero Glass interface with floating bubbles, glossy skeuomorphic buttons, and soft chime audio synths.",
+      "author": {
+        "name": "Utkarsh Desale",
+        "github": "utkrsh29"
+      },
+      "tags": [
+        "game",
+        "aero-glass",
+        "vanilla-js",
+        "web-audio",
+        "frutiger-aero"
+      ],
+      "entry": "Projects/Number%20Guessing%20Game/index.html",
+      "folder": "Projects/Number%20Guessing%20Game",
+      "thumbnail": "Projects/Number%20Guessing%20Game/thumbnail.svg",
+      "addedAt": "2026-06-06T10:30:12.862Z"
+    },
+    {
+      "slug": "Password Generator",
+      "title": "Password Generator",
+      "description": "A sleek, lightweight web app to create secure, randomized passwords with adjustable length and toggleable character types — uppercase, lowercase, numbers, and symbols.",
+      "author": {
+        "name": "Your Name",
+        "github": "your-github-username"
+      },
+      "tags": [
+        "password",
+        "security",
+        "productivity",
+        "vanilla-js"
+      ],
+      "entry": "Projects/Password%20Generator/index.html",
+      "folder": "Projects/Password%20Generator",
+      "thumbnail": "Projects/Password%20Generator/thumbnail.svg",
+      "addedAt": "2026-06-06T10:30:12.862Z"
+    },
+    {
+      "slug": "Pipe Connection Puzzle",
+      "title": "Pipe Connection Puzzle",
+      "description": "An immersive puzzle game where players rotate various grid pipe segments to link endpoints into a leak-free plumbing network. Built with native responsive designs and SVG animations.",
+      "author": {
+        "name": "Mistry Vishwa",
+        "github": "MistryVishwa"
+      },
+      "tags": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Game"
+      ],
+      "entry": "Projects/Pipe%20Connection%20Puzzle/index.html",
+      "folder": "Projects/Pipe%20Connection%20Puzzle",
+      "thumbnail": null,
+      "addedAt": "2026-06-06T10:30:12.862Z"
+    },
+    {
+      "slug": "Podcast Platform UI",
+      "title": "Podcast Platform UI",
+      "description": "Modern podcast platform dashboard with glassmorphism design, podcast discovery interface and player controls.",
+      "author": {
+        "name": "Ayesha",
+        "github": "ayesha-cs-93"
+      },
+      "tags": [
+        "ui",
+        "dashboard",
+        "podcast",
+        "vanilla-js"
+      ],
+      "entry": "Projects/Podcast%20Platform%20UI/index.html",
+      "folder": "Projects/Podcast%20Platform%20UI",
+      "thumbnail": "Projects/Podcast%20Platform%20UI/thumbnail.svg",
+      "addedAt": "2026-06-06T10:30:12.863Z"
+    },
+    {
+      "slug": "Pomodoro Timer",
+      "title": "Pomodoro Timer",
+      "description": "A focus timer with task tracking, stats dashboard, customisable durations, sound alerts and light/dark theme.",
+      "author": {
+        "name": "Haripriya Gupta",
+        "github": "https://github.com/Haripriyagupta"
+      },
+      "tags": [
+        "productivity",
+        "timer",
+        "localstorage",
+        "vanilla-js",
+        "accessibility"
+      ],
+      "entry": "Projects/Pomodoro%20Timer/index.html",
+      "folder": "Projects/Pomodoro%20Timer",
+      "thumbnail": "Projects/Pomodoro%20Timer/thumbnail.svg",
+      "addedAt": "2026-06-06T10:30:12.863Z"
+    },
+    {
+      "slug": "Productivity Command Center",
+      "title": "Productivity Command Center",
+      "description": "A centralized productivity dashboard featuring tasks board, goal tracker, notes manager, Pomodoro focus timer, consistency habits tracker, achievements, and interactive progress analytics.",
+      "author": {
+        "name": "Mistry Vishwa",
+        "github": "MistryVishwa"
+      },
+      "tags": [
+        "productivity",
+        "dashboard",
+        "vanilla-js",
+        "localstorage",
+        "charts"
+      ],
+      "entry": "Projects/Productivity%20Command%20Center/index.html",
+      "folder": "Projects/Productivity%20Command%20Center",
+      "thumbnail": "Projects/Productivity%20Command%20Center/thumbnail.svg",
+      "addedAt": "2026-06-06T10:30:12.863Z"
+    },
+    {
+      "slug": "QR Code Generator",
+      "title": "QR Code Generator",
+      "description": "Generate custom QR codes dynamically using links, plain text, or small configuration file payloads with custom color layouts.",
+      "author": {
+        "name": "Shruti Narsulwar",
+        "github": "Shrutiii01"
+      },
+      "tags": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "entry": "Projects/QR%20Code%20Generator/index.html",
+      "folder": "Projects/QR%20Code%20Generator",
+      "thumbnail": null,
+      "addedAt": "2026-06-06T10:30:12.863Z"
+    },
+    {
+      "slug": "Quiz Master",
+      "title": "Quiz Master",
+      "description": "A premium Black & Orange MCQ Quiz App with local auth, score tracking, and an AI-mock topic generator.",
+      "author": {
+        "name": "Mistry Vishwa",
+        "github": "MistryVishwa"
+      },
+      "tags": [
+        "education",
+        "quiz",
+        "vanilla-js",
+        "localstorage"
+      ],
+      "entry": "Projects/Quiz%20Master/index.html",
+      "folder": "Projects/Quiz%20Master",
+      "thumbnail": "Projects/Quiz%20Master/thumbnail.svg",
+      "addedAt": "2026-06-06T10:30:12.864Z"
+    },
+    {
+      "slug": "Quntum Chess",
+      "title": "Quntum Chess",
+      "description": "An ultra-premium, minimalistic strategy simulator introducing core laws of quantum mechanics into microscale chess. Running purely within standalone client-side browser layers, the application models particle dynamics across a 4x4 evaluation matrix grid. Players can execute complex Quantum Moves to split pieces into synchronous parallel superposition board states. The framework triggers automated 50% probability wavefunction collapses when phantom positions are engaged or challenged, resolving spatial coordinates instantly via pure vanilla JavaScript tree arrays without third-party engines.",
+      "author": {
+        "name": "Shruti Narsulwar",
+        "github": "shrutiii01"
+      },
+      "tags": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "entry": "Projects/Quntum%20Chess/index.html",
+      "folder": "Projects/Quntum%20Chess",
+      "thumbnail": null,
+      "addedAt": "2026-06-06T10:30:12.864Z"
+    },
+    {
+      "slug": "Random Quote Generator",
+      "title": "Random Quote Generator",
+      "description": "Displays a random motivational or famous quote on button click.",
+      "author": {
+        "name": "Muskan Kumari",
+        "github": "Muskankr"
+      },
+      "tags": [
+        "utility",
+        "vanilla-js",
+        "api"
+      ],
+      "entry": "Projects/Random%20Quote%20Generator/index.html",
+      "folder": "Projects/Random%20Quote%20Generator",
+      "thumbnail": null,
+      "addedAt": "2026-06-06T10:30:12.864Z"
+    },
+    {
+      "slug": "Reaction Speed Benchmark",
+      "title": "Reaction Speed Benchmark",
+      "description": "A millisecond-accurate reaction time measurement tool with 5-state machine logic, anti-cheat false-start shielding, historical attempt logging, and localStorage best-score persistence.",
+      "author": {
+        "name": "Girish Madarkar",
+        "github": "Girish0902"
+      },
+      "tags": [
+        "tool",
+        "reaction",
+        "benchmark",
+        "vanilla-js",
+        "localstorage"
+      ],
+      "entry": "Projects/Reaction%20Speed%20Benchmark/index.html",
+      "folder": "Projects/Reaction%20Speed%20Benchmark",
+      "thumbnail": "Projects/Reaction%20Speed%20Benchmark/thumbnail.svg",
+      "addedAt": "2026-06-06T10:30:12.865Z"
+    },
+    {
+      "slug": "Reaction Time Tester",
+      "title": "Reaction Time Tester",
+      "description": "A millisecond-accurate reaction time measurement tool with state-machine logic, anti-cheat false-start shielding, historical attempt logging, and localStorage best-score persistence.",
+      "author": {
+        "name": "Girish Madarkar",
+        "github": "Girish0902"
+      },
+      "tags": [
+        "tool",
+        "reaction",
+        "performance",
+        "vanilla-js",
+        "localstorage"
+      ],
+      "entry": "Projects/Reaction%20Time%20Tester/index.html",
+      "folder": "Projects/Reaction%20Time%20Tester",
+      "thumbnail": "Projects/Reaction%20Time%20Tester/thumbnail.svg",
+      "addedAt": "2026-06-06T10:30:12.865Z"
+    },
+    {
+      "slug": "Real Estate Listing",
+      "title": "Real Estate Listing",
+      "description": "A modern property browsing app with advanced filtering, gallery layouts, and a favorites list saved to local storage.",
+      "author": {
+        "name": "Jayam Srivastava",
+        "github": "hrx01-dev"
+      },
+      "tags": [
+        "real-estate",
+        "ui-design",
+        "localstorage",
+        "vanilla-js"
+      ],
+      "entry": "Projects/Real%20Estate%20Listing/index.html",
+      "folder": "Projects/Real%20Estate%20Listing",
+      "thumbnail": null,
+      "addedAt": "2026-06-06T10:30:12.865Z"
+    },
+    {
+      "slug": "Restaurant Ordering Interface",
+      "title": "Restaurant Ordering Interface",
+      "description": "An ultra-premium, zero-dependency restaurant menu browser and ordering interface designed around precise item option customizations, synchronized client cart processing metrics, and structural responsive constraints.",
+      "author": {
+        "name": "Shruti Narsulwar",
+        "github": "shrutiii01"
+      },
+      "tags": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "entry": "Projects/Restaurant%20Ordering%20Interface/index.html",
+      "folder": "Projects/Restaurant%20Ordering%20Interface",
+      "thumbnail": null,
+      "addedAt": "2026-06-06T10:30:12.866Z"
+    },
+    {
+      "slug": "Resume Builder Form",
+      "title": "Resume Builder Form",
+      "description": "A dynamic resume builder with real-time preview, dual templates (Classic Minimalist & Modern Professional), customizable accent colors, tag-based skills/languages, photo upload via File Reader API, and print-to-PDF support.",
+      "author": {
+        "name": "Girish Madarkar",
+        "github": "Girish0902"
+      },
+      "tags": [
+        "resume",
+        "builder",
+        "vanilla-js",
+        "real-time",
+        "localstorage",
+        "print"
+      ],
+      "entry": "Projects/Resume%20Builder%20Form/index.html",
+      "folder": "Projects/Resume%20Builder%20Form",
+      "thumbnail": null,
+      "addedAt": "2026-06-06T10:30:12.866Z"
+    },
+    {
+      "slug": "Rock Paper Scissors",
+      "title": "Rock Paper Scissors",
+      "description": "An interactive Rock Paper Scissors game played against the computer featuring real-time score tracking, responsive glassmorphism UI, and smooth custom animations.",
+      "author": {
+        "name": "Janhvi Soni",
+        "github": "janhvisoni804"
+      },
+      "tags": [
+        "vanilla-js",
+        "game-logic",
+        "css-grid",
+        "localstorage"
+      ],
+      "entry": "Projects/Rock%20Paper%20Scissors/index.html",
+      "folder": "Projects/Rock%20Paper%20Scissors",
+      "thumbnail": null,
+      "addedAt": "2026-06-06T10:30:12.866Z"
+    },
+    {
+      "slug": "Shape Builder Puzzle",
+      "title": "Shape Builder Puzzle",
+      "description": "An interactive puzzle game where players draw rectangles/squares originating from numbered cells to cover the board with no overlaps or empty gaps. Features responsive touch handlers and dynamic solver hints.",
+      "author": {
+        "name": "Mistry Vishwa",
+        "github": "MistryVishwa"
+      },
+      "tags": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Game"
+      ],
+      "entry": "Projects/Shape%20Builder%20Puzzle/index.html",
+      "folder": "Projects/Shape%20Builder%20Puzzle",
+      "thumbnail": null,
+      "addedAt": "2026-06-06T10:30:12.867Z"
+    },
+    {
+      "slug": "Simon Says Game",
+      "title": "Simon Says Game",
+      "description": "An arcade-accurate, high-fidelity browser implementation of the classic Simon Says sensory game loop. Engineered entirely through native client-side infrastructure scripts, the layout implements absolute quadrant grid segment shapes, dynamic glow modifier channels, custom pointer interaction guard blocks, persistent LocalStorage high score counters, and a synthesized live audio rendering track driven natively via the Web Audio API Oscillator engine.",
+      "author": {
+        "name": "Shruti Narsulwar",
+        "github": "shrutiii01"
+      },
+      "tags": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "entry": "Projects/Simon%20Says%20Game/index.html",
+      "folder": "Projects/Simon%20Says%20Game",
+      "thumbnail": null,
+      "addedAt": "2026-06-06T10:30:12.867Z"
+    },
+    {
+      "slug": "Subscription Management Dashboard",
+      "title": "Subscription Management Dashboard",
+      "description": "A premium dark finance dashboard for tracking subscriptions with real-time monthly/annual spend, category distribution bars, renewal alerts, and localStorage persistence.",
+      "author": {
+        "name": "Girish Madarkar",
+        "github": "Girish0902"
+      },
+      "tags": [
+        "dashboard",
+        "finance",
+        "subscriptions",
+        "vanilla-js"
+      ],
+      "entry": "Projects/Subscription%20Management%20Dashboard/index.html",
+      "folder": "Projects/Subscription%20Management%20Dashboard",
+      "thumbnail": "Projects/Subscription%20Management%20Dashboard/thumbnail.svg",
+      "addedAt": "2026-06-06T10:30:12.867Z"
+    },
+    {
+      "slug": "Task Management Dashboard",
+      "title": "Task Management Dashboard",
+      "description": "An ultra-premium, dependency-free developer workspace platform designed using native web semantics. The architecture incorporates a strict three-column dashboard layouts configuration tracking dynamic statistical counts filters, state modification streams, low/medium/high task urgency hierarchies, a chronological system transaction logger engine, and a structural client-side data persistence layer driven entirely via optimized browser LocalStorage allocations.",
+      "author": {
+        "name": "Shruti Narsulwar",
+        "github": "Shrutiii01"
+      },
+      "tags": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "entry": "Projects/Task%20Management%20Dashboard/index.html",
+      "folder": "Projects/Task%20Management%20Dashboard",
+      "thumbnail": null,
+      "addedAt": "2026-06-06T10:30:12.868Z"
+    },
+    {
+      "slug": "The Stroop Interference Grid",
+      "title": "The Stroop Interference Grid",
+      "description": "An ultra-premium cognitive control training tool based on the psychological Stroop Effect. The system forces the brain to override automatic processing habits by dynamically altering target evaluation rules each round between text meaning and ink color constraints. Features include high-frequency component position randomization using automated Fisher-Yates array shuffling passes to block muscle memory adaptations, a high-precision 2-second countdown interval timer tracked down to millisecond boundaries, and native client LocalStorage persistence hooks mapping streak records.",
+      "author": {
+        "name": "Shruti Narsulwar",
+        "github": "shrutiii01"
+      },
+      "tags": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "entry": "Projects/The%20Stroop%20Interference%20Grid/index.html",
+      "folder": "Projects/The%20Stroop%20Interference%20Grid",
+      "thumbnail": null,
+      "addedAt": "2026-06-06T10:30:12.868Z"
+    },
+    {
+      "slug": "Tic Tac Toe",
+      "title": "Tic Tac Toe",
+      "description": "A premium neon cyberpunk Tic Tac Toe game with Player vs Player and unbeatable AI (Minimax) modes, persistent scoreboard, and animated win detection.",
+      "author": {
+        "name": "Girish Madarkar",
+        "github": "Girish0902"
+      },
+      "tags": [
+        "game",
+        "ai",
+        "minimax",
+        "vanilla-js"
+      ],
+      "entry": "Projects/Tic%20Tac%20Toe/index.html",
+      "folder": "Projects/Tic%20Tac%20Toe",
+      "thumbnail": "Projects/Tic%20Tac%20Toe/thumbnail.svg",
+      "addedAt": "2026-06-06T10:30:12.868Z"
+    },
+    {
+      "slug": "Travel Booking Dashboard",
+      "title": "Travel Booking Dashboard",
+      "description": "An integrated multi-column travel management layout featuring dynamic flight and accommodation routing selectors, client-side filtering grids, and reactive price calculations.",
+      "author": {
+        "name": "Shruti Narsulwar",
+        "github": "Shrutiii01"
+      },
+      "tags": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "entry": "Projects/Travel%20Booking%20Dashboard/index.html",
+      "folder": "Projects/Travel%20Booking%20Dashboard",
+      "thumbnail": null,
+      "addedAt": "2026-06-06T10:30:12.868Z"
+    },
+    {
+      "slug": "Typing Practice App",
+      "title": "Typing Practice App",
+      "description": "An interactive, glassmorphic typing speedometer helping users scale their typing dexterity via custom timers, dynamic difficulty preset word banks, Web Audio synth haptic feedbacks, and real-time speed progress graphs.",
+      "author": {
+        "name": "Mistry Vishwa",
+        "github": "MistryVishwa"
+      },
+      "tags": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Web-Audio-API"
+      ],
+      "entry": "Projects/Typing%20Practice%20App/index.html",
+      "folder": "Projects/Typing%20Practice%20App",
+      "thumbnail": null,
+      "addedAt": "2026-06-06T10:30:12.869Z"
+    },
+    {
+      "slug": "Typing Speed Tester",
+      "title": "Typing Speed Tester",
+      "description": "Measure typing speed (WPM) and accuracy with a simple web app.",
+      "author": {
+        "name": "Muskan Kumari",
+        "github": "Muskankr"
+      },
+      "tags": [
+        "productivity",
+        "vanilla-js",
+        "learning"
+      ],
+      "entry": "Projects/Typing%20Speed%20Tester/index.html",
+      "folder": "Projects/Typing%20Speed%20Tester",
+      "thumbnail": null,
+      "addedAt": "2026-06-06T10:30:12.869Z"
+    },
+    {
+      "slug": "URL Shortener UI Simulator",
+      "title": "URL Shortener UI Simulator",
+      "description": "A responsive and interactive study tool simulating a URL shortening service with client-side code validation, custom short links generation, copy animations, simulated click redirection logs, and Canvas stats analytics.",
+      "author": {
+        "name": "Mistry Vishwa",
+        "github": "MistryVishwa"
+      },
+      "tags": [
+        "utility",
+        "shortener",
+        "vanilla-js",
+        "localstorage",
+        "charts"
+      ],
+      "entry": "Projects/URL%20Shortener%20UI%20Simulator/index.html",
+      "folder": "Projects/URL%20Shortener%20UI%20Simulator",
+      "thumbnail": "Projects/URL%20Shortener%20UI%20Simulator/thumbnail.svg",
+      "addedAt": "2026-06-06T10:30:12.869Z"
+    },
+    {
       "slug": "Weather Finder",
       "title": "Weather Finder",
       "description": "Fetches live weather data from an API and shows temperature and conditions.",
@@ -329,7 +1358,47 @@
       "entry": "Projects/Weather%20Finder/index.html",
       "folder": "Projects/Weather%20Finder",
       "thumbnail": null,
-      "addedAt": "2026-06-03T13:56:10.392Z"
+      "addedAt": "2026-06-06T10:30:12.870Z"
+    },
+    {
+      "slug": "Weather Forecast Dashboard",
+      "title": "Weather Forecast Dashboard",
+      "description": "A responsive weather dashboard showing current conditions and a 5-day forecast using real-time API data.",
+      "author": {
+        "name": "Gunjan",
+        "github": "Gunjan10-droid"
+      },
+      "tags": [
+        "weather",
+        "api",
+        "javascript",
+        "responsive",
+        "frontend",
+        "dashboard"
+      ],
+      "entry": "Projects/Weather%20Forecast%20Dashboard/index.html",
+      "folder": "Projects/Weather%20Forecast%20Dashboard",
+      "thumbnail": null,
+      "addedAt": "2026-06-06T10:30:12.870Z"
+    },
+    {
+      "slug": "Whack A Mole",
+      "title": "Whack A Mole",
+      "description": "An arcade-style Whack-A-Mole game featuring Web Audio API retro sounds, satisfying particle effects, progressive speed levels, and high score persistence.",
+      "author": {
+        "name": "Utkarsh Desale",
+        "github": "utkrsh29"
+      },
+      "tags": [
+        "game",
+        "arcade",
+        "vanilla-js",
+        "web-audio"
+      ],
+      "entry": "Projects/Whack%20A%20Mole/index.html",
+      "folder": "Projects/Whack%20A%20Mole",
+      "thumbnail": "Projects/Whack%20A%20Mole/thumbnail.svg",
+      "addedAt": "2026-06-06T10:30:12.870Z"
     },
     {
       "slug": "Word Scramble Game",

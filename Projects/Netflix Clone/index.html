@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Netflix Clone</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <!-- ─── NAV ─── -->
+    <nav class="nav" id="navbar">
+      <div class="nav__inner">
+        <div class="nav__left">
+          <svg class="nav__logo" viewBox="0 0 111 30" xmlns="http://www.w3.org/2000/svg" aria-label="Netflix">
+            <path d="M105.062 14.28L111 30c-1.75-.25-3.499-.563-5.28-.845l-3.345-8.686-3.437 7.969c-1.687-.282-3.344-.376-5.031-.595l6.031-13.75L94.468 0h5.063l3.062 7.874L105.875 0h5.124l-7.937 15.685zm-29.22 14.376c-2.595 0-5.219-.563-7.156-1.407l-.717 1.404H64.75l.03-11.942c.03-4.75 2.31-7.874 7.594-7.874 4.94 0 7.156 3.405 7.156 8.119v1.155H68.656c-.094 3.374 1.125 5.53 4.75 5.53 2.093 0 3.968-.844 5.03-2.156l1.44 1.783c-1.25 1.78-3.5 3.124-7.03 3.124zm-2.156-16.685c-2.125 0-3.5 1.72-3.5 4.53v.813h6.78c.032-2.813-1.126-5.343-3.28-5.343zm-25.47 16.654c-3.47 0-6.314-1.594-7.784-4.092l1.595-1.03c1.03 2 3 3.28 6.126 3.28 2.688 0 4.595-1.22 4.595-3.438 0-2-1.5-3.094-5.03-4.063l-1.532-.376c-4.092-1.156-6.376-3.28-6.376-6.625 0-4.063 3.564-6.845 8.47-6.845 3.374 0 5.78 1.25 7.375 3.5l-1.595 1.094c-.937-1.75-2.844-3-5.875-3-2.97 0-4.595 1.407-4.595 3.157 0 1.967 1.5 2.875 5.03 3.844l1.53.375c4.47 1.188 6.598 3.5 6.598 7.094 0 4.125-3.594 7.032-9.03 7.032zm-14.436-6.105c0 4.376-3.53 7.115-8.47 7.115-5.03 0-8.47-2.865-8.47-7.784V14.53h1.75v7.81c0 3.53 2.53 5.874 6.72 5.874 4.06 0 6.72-2.344 6.72-5.875v-7.81h1.75v7.81zM0 29.938V.188h1.75v29.75H0z" fill="#E50914" fill-rule="evenodd"/>
+          </svg>
+          <div class="nav__links" id="nav-links">
+            <a class="nav__link nav__link--active" href="#">Home</a>
+            <a class="nav__link" href="#">TV Shows</a>
+            <a class="nav__link" href="#">Movies</a>
+            <a class="nav__link" href="#">New &amp; Popular</a>
+            <a class="nav__link" href="#">My List</a>
+          </div>
+        </div>
+        <div class="nav__right">
+          <button class="nav__icon-btn" aria-label="Search">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M10.5 2.5a8 8 0 016.32 12.9l4.38 4.39-1.41 1.41-4.39-4.38A8 8 0 1110.5 2.5zm0 2a6 6 0 100 12 6 6 0 000-12z"/></svg>
+          </button>
+          <button class="nav__icon-btn" aria-label="Notifications">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>
+          </button>
+          <div class="nav__profile">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ─── FEATURED BILLBOARD ─── -->
+    <section class="billboard" id="billboard">
+      <div class="billboard__backdrop" id="billboard-backdrop"></div>
+      <div class="billboard__vignette"></div>
+      <div class="billboard__gradient"></div>
+      <div class="billboard__content">
+        <div class="billboard__meta" id="billboard-meta">
+          <span class="billboard__match" id="billboard-match">--% Match</span>
+          <span class="billboard__year" id="billboard-year">--</span>
+          <span class="billboard__rating" id="billboard-rating">--</span>
+          <span class="billboard__seasons" id="billboard-seasons">-- Seasons</span>
+          <span class="billboard__hd">HD</span>
+        </div>
+        <h1 class="billboard__title" id="billboard-title">Loading...</h1>
+        <p class="billboard__desc" id="billboard-desc"></p>
+        <div class="billboard__actions">
+          <button class="bbtn bbtn--play" id="billboard-play">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <span>Play</span>
+          </button>
+          <button class="bbtn bbtn--info" id="billboard-info">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z"/></svg>
+            <span>More Info</span>
+          </button>
+        </div>
+      </div>
+      <div class="billboard__fade"></div>
+    </section>
+
+    <!-- ─── ROWS ─── -->
+    <main class="content" id="content"></main>
+
+    <!-- ─── FOOTER ─── -->
+    <footer class="footer">
+      <div class="footer__social">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="#808080"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg>
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="#808080"><path d="M22.46 6c-.85.38-1.78.64-2.73.75 1-.6 1.76-1.54 2.12-2.67-.93.55-1.96.95-3.06 1.17a4.77 4.77 0 00-8.13 4.35C7.16 9.1 4 7.3 1.82 4.66c-.67 1.16-.86 2.52-.46 3.82.4 1.3 1.27 2.4 2.38 3.08-.78-.02-1.53-.24-2.2-.6v.06c0 2.3 1.64 4.22 3.8 4.66-.4.1-.82.16-1.25.16-.3 0-.6-.03-.9-.08.6 1.88 2.35 3.25 4.42 3.28a9.56 9.56 0 01-5.92 2.04c-.38 0-.76-.02-1.14-.07A13.5 13.5 0 007.55 22c9.06 0 14-7.5 14-14 0-.2 0-.44-.02-.66.96-.7 1.8-1.56 2.46-2.54z"/></svg>
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="#808080"><path d="M12 2.04c-5.5 0-10 4.46-10 9.96 0 5.5 4.5 10 10 10 5.5 0 10-4.5 10-10 0-5.5-4.5-9.96-10-9.96zm5.4 7.42c.1.46.15.94.15 1.46 0 4.5-3.4 9.66-9.66 9.66-1.9 0-3.66-.56-5.14-1.53.26.03.54.04.8.04 1.56 0 3-.54 4.14-1.44-1.47 0-2.7-1-3.14-2.34.2.04.42.06.64.06.3 0 .6-.04.88-.12-1.54-.3-2.7-1.68-2.7-3.32v-.04c.46.26 1 .4 1.56.44-.9-.6-1.5-1.64-1.5-2.8 0-.62.16-1.2.46-1.7 1.66 2.04 4.14 3.38 6.94 3.52-.06-.26-.08-.52-.08-.8 0-1.9 1.54-3.46 3.46-3.46 1 0 1.9.42 2.54 1.1.8-.16 1.54-.44 2.22-.84-.26.8-.8 1.48-1.52 1.9.7-.08 1.36-.26 1.98-.54-.46.7-1.04 1.3-1.72 1.78z"/></svg>
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="#808080"><path d="M12 2.04C6.5 2.04 2 6.53 2 12.06c0 5 3.66 9.15 8.44 9.9v-7H7.9v-2.9h2.54V9.85c0-2.5 1.5-3.9 3.78-3.9 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.44 2.9h-2.34v7a10 10 0 008.44-9.9c0-5.53-4.5-10.02-10-10.02z"/></svg>
+      </div>
+      <div class="footer__grid">
+        <div class="footer__col">
+          <a href="#">Audio Description</a>
+          <a href="#">Investor Relations</a>
+          <a href="#">Legal Notices</a>
+        </div>
+        <div class="footer__col">
+          <a href="#">Help Center</a>
+          <a href="#">Jobs</a>
+          <a href="#">Cookie Preferences</a>
+        </div>
+        <div class="footer__col">
+          <a href="#">Gift Cards</a>
+          <a href="#">Terms of Use</a>
+          <a href="#">Corporate Information</a>
+        </div>
+        <div class="footer__col">
+          <a href="#">Media Center</a>
+          <a href="#">Privacy</a>
+          <a href="#">Contact Us</a>
+        </div>
+      </div>
+      <button class="footer__service-btn">Service Code</button>
+      <p class="footer__copy">&copy; 1997–2024 Netflix Clone, Inc. &nbsp;|&nbsp; For educational purposes only</p>
+    </footer>
+  </div>
+
+  <!-- ─── DETAIL MODAL ─── -->
+  <div class="modal-overlay" id="modal">
+    <div class="modal__backdrop" id="modal-backdrop"></div>
+    <div class="modal__content" id="modal-content" role="dialog" aria-label="Details">
+      <button class="modal__close" id="modal-close" aria-label="Close">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+      </button>
+      <div class="modal__banner" id="modal-banner">
+        <div class="modal__banner-overlay"></div>
+        <div class="modal__banner-content">
+          <h2 class="modal__title" id="modal-title"></h2>
+          <div class="modal__meta" id="modal-meta"></div>
+          <div class="modal__actions">
+            <button class="bbtn bbtn--play modal__play-btn">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              <span>Play</span>
+            </button>
+            <button class="bbtn bbtn--download">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="modal__body">
+        <div class="modal__left">
+          <p class="modal__synopsis" id="modal-synopsis"></p>
+          <div class="modal__info-row"><span class="modal__info-label">Cast: </span><span id="modal-cast"></span></div>
+          <div class="modal__info-row"><span class="modal__info-label">Genres: </span><span id="modal-genres"></span></div>
+          <div class="modal__info-row"><span class="modal__info-label">Creators: </span><span id="modal-creators"></span></div>
+        </div>
+        <div class="modal__right">
+          <div class="modal__fact"><span>Match</span><span class="modal__fact--green" id="modal-match"></span></div>
+          <div class="modal__fact"><span>Rating</span><span id="modal-rating"></span></div>
+          <div class="modal__fact"><span>Duration</span><span id="modal-dur"></span></div>
+          <div class="modal__fact"><span>Year</span><span id="modal-year"></span></div>
+          <div class="modal__fact"><span>Quality</span><span class="modal__fact--hd">4K HDR</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

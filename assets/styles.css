@@ -417,3 +417,62 @@ main {
   * { transition: none !important; animation: none !important; }
   html { scroll-behavior: auto; }
 }
+
+@media (pointer: fine) {
+    /* Wildcard * selector use karke website ke har ek tiny element se cursor hataya */
+    *, *::before, *::after, 
+    html, body, input, input[type="text"], 
+    .search-input, #search, button, a {
+        cursor: none !important;
+    }
+}
+
+/* Inner Solid Orange Dot */
+.nsoc-cursor-dot {
+    width: 6px;
+    height: 6px;
+    background-color: #ff4500; 
+    position: fixed;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    pointer-events: none; /* Crucial: Taaki clicks block na hon */
+    z-index: 999999;
+    transition: width 0.2s, height 0.2s, background-color 0.2s;
+}
+
+/* Outer Smooth Trailing Ring */
+.nsoc-cursor-outline {
+    width: 30px;
+    height: 30px;
+    border: 2px solid rgba(255, 69, 0, 0.4);
+    position: fixed;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    pointer-events: none; 
+    z-index: 999998;
+    transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s;
+}
+
+/* Hover States */
+.nsoc-cursor-dot.nsoc-hoveractive {
+    width: 0px; 
+    height: 0px;
+}
+
+.nsoc-cursor-outline.nsoc-hoveractive {
+    width: 45px;
+    height: 45px;
+    background-color: rgba(255, 69, 0, 0.1); 
+    border-color: rgba(255, 69, 0, 1);
+}
+
+/* SAFEGUARD: Completely disable custom cursor on Mobile/Touch screens */
+@media (pointer: coarse) {
+    .nsoc-cursor-dot,
+    .nsoc-cursor-outline {
+        display: none !important;
+    }
+    *, html, body {
+        cursor: auto !important;
+    }
+}

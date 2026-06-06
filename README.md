@@ -1,3 +1,7 @@
+>[!WARNING]
+> You should not edit the main `projects.json` file manually. Simply submit your project folder with its own `project.json` file included. The project index is generated automatically.
+Please avoid making any changes outside your project's folder.
+
 <div align="center">
 
 <img src="assets/icons/logo.svg" alt="Web Dev Projects" width="110" />
@@ -26,8 +30,6 @@ NSoC '26, GSSoC, GSoC and Hacktoberfest along the way.
 [**Open an Issue**](../../issues/new/choose)
 
 </div>
-
----
 
 ## What is this?
 
@@ -78,12 +80,14 @@ Four reference projects ship with the repo so you can see the expected shape:
 Open any of them, read the README, copy the structure.
 
 ## The showcase page
-
-The file `index.html` at the repo root is a fully responsive, classic UI that
+>[!IMPORTANT]
+> The file `index.html` at the repo root is a fully responsive, classic UI that
 lists every project under `Projects/`. It reads from `projects.json`, which is
 regenerated on every push by
 [`.github/workflows/index-projects.yml`](./.github/workflows/index-projects.yml).
-You never edit `projects.json` by hand — just ship your folder and the index
+
+>[!WARNING]
+> You never edit `projects.json` by hand — just ship your folder and the index
 takes care of itself.
 
 The page is published with GitHub Pages from the `main` branch.

@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 300" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b0f19"/>
+      <stop offset="50%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#030712"/>
+    </linearGradient>
+    
+    <!-- Indigo & Cyan Accents -->
+    <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+    
+    <linearGradient id="secondaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#22d3ee"/>
+    </linearGradient>
+    
+    <!-- Success Green -->
+    <linearGradient id="successGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#34d399"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background Rect -->
+  <rect width="500" height="300" rx="20" fill="url(#bgGrad)"/>
+  
+  <!-- Subtle decorative grids -->
+  <path d="M 0,60 L 500,60 M 0,120 L 500,120 M 0,180 L 500,180 M 0,240 L 500,240" stroke="rgba(255,255,255,0.02)" stroke-width="1"/>
+  <path d="M 100,0 L 100,300 M 200,0 L 200,300 M 300,0 L 300,300 M 400,0 L 400,300" stroke="rgba(255,255,255,0.02)" stroke-width="1"/>
+  
+  <!-- Sidebar Container Simulation -->
+  <rect x="0" y="0" width="75" height="300" rx="20" fill="rgba(17, 24, 39, 0.45)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <circle cx="37" cy="40" r="12" fill="url(#primaryGrad)"/>
+  <path d="M 32,40 L 37,35 L 42,40 L 37,45 Z" fill="#ffffff"/>
+  
+  <rect x="22" y="80" width="30" height="6" rx="3" fill="#6366f1"/>
+  <rect x="22" y="110" width="30" height="6" rx="3" fill="rgba(255,255,255,0.1)"/>
+  <rect x="22" y="140" width="30" height="6" rx="3" fill="rgba(255,255,255,0.1)"/>
+  <rect x="22" y="170" width="30" height="6" rx="3" fill="rgba(255,255,255,0.1)"/>
+  <rect x="22" y="200" width="30" height="6" rx="3" fill="rgba(255,255,255,0.1)"/>
+  
+  <!-- Heading text -->
+  <text x="95" y="42" font-family="'Outfit', sans-serif" font-weight="800" font-size="20" fill="#ffffff">Flashcard Lab</text>
+  <text x="95" y="58" font-family="'Inter', sans-serif" font-weight="500" font-size="10" fill="#9ca3af">Active Recall &amp; Spaced Repetition</text>
+
+  <!-- Mastery Gauge widget (top right) -->
+  <rect x="360" y="20" width="120" height="40" rx="10" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.05)"/>
+  <text x="420" y="36" font-family="'Inter', sans-serif" font-weight="600" font-size="8" fill="#9ca3af" text-anchor="middle">DECK MASTERY</text>
+  <text x="420" y="52" font-family="'Outfit', sans-serif" font-weight="800" font-size="14" fill="#10b981" text-anchor="middle">85%</text>
+
+  <!-- Core Graphic: Dual Flipping Cards Stack simulation -->
+  
+  <!-- Card 1: The Back Card (Answer) -->
+  <g transform="translate(250, 150) rotate(-8)">
+    <rect x="-80" y="-55" width="160" height="110" rx="12" fill="rgba(31, 41, 55, 0.7)" stroke="rgba(255,255,255,0.05)" stroke-width="2"/>
+    <text x="0" y="-30" font-family="'Inter', sans-serif" font-weight="600" font-size="8" fill="#06b6d4" text-anchor="middle">ANSWER</text>
+    <rect x="-60" y="-10" width="120" height="5" rx="2" fill="rgba(255,255,255,0.2)"/>
+    <rect x="-60" y="10" width="100" height="5" rx="2" fill="rgba(255,255,255,0.2)"/>
+    <rect x="-60" y="30" width="80" height="5" rx="2" fill="rgba(255,255,255,0.2)"/>
+  </g>
+
+  <!-- Card 2: The Front Card (Question) - overlaps -->
+  <g transform="translate(200, 165) rotate(6)">
+    <!-- Shadow representation -->
+    <rect x="-82" y="-57" width="164" height="114" rx="12" fill="rgba(0,0,0,0.3)" filter="url(#glassBlur)"/>
+    <!-- Main card -->
+    <rect x="-80" y="-55" width="160" height="110" rx="12" fill="rgba(31, 41, 55, 0.9)" stroke="#6366f1" stroke-width="2"/>
+    <text x="-60" y="-32" font-family="'Inter', sans-serif" font-weight="700" font-size="8" fill="#6366f1">QUESTION</text>
+    <text x="0" y="5" font-family="'Outfit', sans-serif" font-weight="700" font-size="13" fill="#ffffff" text-anchor="middle">What is a Closure?</text>
+    <!-- Flip indicator -->
+    <path d="M -10,38 L 10,38 M 5,33 L 10,38 L 5,43" fill="none" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round"/>
+    <text x="0" y="31" font-family="'Inter', sans-serif" font-size="6" fill="#9ca3af" text-anchor="middle">REVEAL ANSWER</text>
+  </g>
+
+  <!-- Auxiliary widget: Category counts list summary -->
+  <g transform="translate(365, 80)">
+    <!-- Background border -->
+    <rect width="115" height="195" rx="12" fill="rgba(31, 41, 55, 0.45)" stroke="rgba(255,255,255,0.06)" stroke-width="1.5"/>
+    <text x="15" y="25" font-family="'Outfit', sans-serif" font-weight="700" font-size="11" fill="#ffffff">Active Decks</text>
+    
+    <!-- Item 1 -->
+    <rect x="15" y="40" width="85" height="24" rx="6" fill="rgba(255,255,255,0.04)"/>
+    <circle cx="27" cy="52" r="4" fill="#6366f1"/>
+    <text x="38" y="55" font-family="'Inter', sans-serif" font-weight="600" font-size="9" fill="#f3f4f6">JS Core</text>
+    <text x="92" y="55" font-family="'Outfit', sans-serif" font-weight="700" font-size="9" fill="#9ca3af" text-anchor="end">12</text>
+    
+    <!-- Item 2 -->
+    <rect x="15" y="70" width="85" height="24" rx="6" fill="rgba(255,255,255,0.04)"/>
+    <circle cx="27" cy="82" r="4" fill="#06b6d4"/>
+    <text x="38" y="85" font-family="'Inter', sans-serif" font-weight="600" font-size="9" fill="#f3f4f6">CSS Layout</text>
+    <text x="92" y="85" font-family="'Outfit', sans-serif" font-weight="700" font-size="9" fill="#9ca3af" text-anchor="end">8</text>
+    
+    <!-- Item 3 -->
+    <rect x="15" y="100" width="85" height="24" rx="6" fill="rgba(255,255,255,0.04)"/>
+    <circle cx="27" cy="112" r="4" fill="#10b981"/>
+    <text x="38" y="115" font-family="'Inter', sans-serif" font-weight="600" font-size="9" fill="#f3f4f6">General</text>
+    <text x="92" y="115" font-family="'Outfit', sans-serif" font-weight="700" font-size="9" fill="#9ca3af" text-anchor="end">15</text>
+    
+    <!-- Mastered indicator visual -->
+    <rect x="15" y="140" width="85" height="40" rx="8" fill="rgba(16, 185, 129, 0.08)" stroke="rgba(16, 185, 129, 0.2)"/>
+    <text x="25" y="156" font-family="'Inter', sans-serif" font-size="8" fill="#34d399">Total Mastered</text>
+    <text x="25" y="172" font-family="'Outfit', sans-serif" font-weight="800" font-size="14" fill="#34d399">35 / 42</text>
+  </g>
+
+  <!-- Left Stats Summary values -->
+  <g transform="translate(95, 80)">
+    <rect width="70" height="90" rx="10" fill="rgba(31,41,55,0.4)" stroke="rgba(255,255,255,0.05)"/>
+    <text x="12" y="24" font-family="'Inter', sans-serif" font-size="8" fill="#9ca3af">Streak</text>
+    <text x="12" y="54" font-family="'Outfit', sans-serif" font-weight="800" font-size="24" fill="#ef4444">05</text>
+    <text x="12" y="72" font-family="'Inter', sans-serif" font-weight="600" font-size="8" fill="#9ca3af">Days</text>
+  </g>
+</svg>

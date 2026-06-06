@@ -1,0 +1,243 @@
+/* Base Reset and Modern Theme Background */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #1e1e2f 0%, #111119 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    padding: 20px;
+}
+
+/* Glassmorphism Container Layer with Dynamic Status Transition */
+.game-container {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px;
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    transition: box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+/* Dynamic State Glowing FX */
+.game-container.win-glow {
+    box-shadow: 0 15px 35px rgba(76, 209, 55, 0.25);
+    border-color: rgba(76, 209, 55, 0.4);
+}
+.game-container.lose-glow {
+    box-shadow: 0 15px 35px rgba(232, 65, 24, 0.25);
+    border-color: rgba(232, 65, 24, 0.4);
+}
+
+h1 {
+    font-size: 2.2rem;
+    color: #ff4500;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    color: #888899;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+}
+
+/* Streak Badge */
+.streak-badge {
+    display: inline-block;
+    background: rgba(255, 69, 0, 0.1);
+    border: 1px solid rgba(255, 69, 0, 0.3);
+    color: #ff4500;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+.streak-badge.active {
+    background: #ff4500;
+    color: #ffffff;
+    box-shadow: 0 0 10px rgba(255, 69, 0, 0.4);
+}
+
+/* Score Board Layer Grid */
+.score-board {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    padding: 15px 25px;
+    margin-bottom: 35px;
+}
+
+.score-box {
+    flex: 1;
+}
+
+.score-val {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.score-label {
+    font-size: 0.85rem;
+    color: #888899;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.score-divider {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ff4500;
+    margin: 0 20px;
+}
+
+/* Battle Arena Display Layout */
+.arena {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 35px;
+}
+
+.choice-display {
+    text-align: center;
+}
+
+.choice-icon {
+    font-size: 3.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+    width: 90px;
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.choice-icon.pulse {
+    transform: scale(1.1);
+    background: rgba(255, 69, 0, 0.1);
+    border-style: solid;
+    border-color: #ff4500;
+}
+
+/* Status Messages UI */
+.result-message {
+    font-size: 1.15rem;
+    font-weight: 500;
+    min-height: 30px;
+    margin-bottom: 25px;
+    color: #e0e0e0;
+}
+
+/* Weapons Action Grid */
+.weapons-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.weapon-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    padding: 15px 10px;
+    color: white;
+    font-size: 1.8rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.weapon-btn:hover {
+    background: #ff4500;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 69, 0, 0.4);
+    border-color: #ff4500;
+}
+
+.weapon-btn:active {
+    transform: translateY(0);
+}
+
+.btn-txt {
+    font-size: 0.85rem;
+    color: #cccccc;
+    font-weight: 500;
+}
+
+.weapon-btn:hover .btn-txt {
+    color: #ffffff;
+}
+
+/* History Logs Framework */
+.history-title {
+    font-size: 0.8rem;
+    color: #555566;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+.history-timeline {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    min-height: 28px;
+    margin-bottom: 25px;
+}
+.history-badge {
+    font-size: 0.8rem;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: rgba(255,255,255,0.05);
+}
+.history-badge.W { border: 1px solid #4cd137; color: #4cd137; }
+.history-badge.L { border: 1px solid #e84118; color: #e84118; }
+.history-badge.T { border: 1px solid #fbc531; color: #fbc531; }
+
+/* Reset Auxiliary Controller */
+.reset-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #888899;
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.reset-btn:hover {
+    border-color: #ff4500;
+    color: #ff4500;
+}
+
+/* Responsive Mobile Screen Handling */
+@media (max-width: 480px) {
+    .game-container { padding: 25px 15px; }
+    h1 { font-size: 1.8rem; }
+    .choice-icon { width: 75px; height: 75px; font-size: 2.8rem; }
+}
