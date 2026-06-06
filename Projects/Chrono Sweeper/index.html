@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chrono-Sweeper — Proximity Vector Analytics</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="app">
+    <header id="header">
+      <div id="brand">
+        <span class="brand-icon">&#x26A1;</span>
+        <span class="brand-text">CHRONO-SWEEPER</span>
+        <span class="brand-sub">v2.4.2</span>
+      </div>
+      <div id="timer-section">
+        <div id="timer-bar-container">
+          <div id="timer-bar"></div>
+          <span id="timer-text">5.0s</span>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <section id="grid-section">
+        <div id="grid-container"></div>
+      </section>
+
+      <aside id="sidebar">
+        <div id="stats">
+          <div class="stat-block">
+            <span class="stat-label">SAFE REMAINING</span>
+            <span class="stat-value" id="safe-count">88</span>
+          </div>
+          <div class="stat-block">
+            <span class="stat-label">FLAGS PLACED</span>
+            <span class="stat-value" id="flag-count">0 / 15</span>
+          </div>
+          <div class="stat-block" id="status-block">
+            <span class="stat-label">STATUS</span>
+            <span class="stat-value" id="status-text">SYSTEM STABLE</span>
+          </div>
+        </div>
+
+        <div id="log-panel">
+          <div class="log-header">&#x25B6; LIVE LOG</div>
+          <div id="log-entries"></div>
+        </div>
+
+        <button id="restart-btn">&#x21BB; RESTART TERMINAL</button>
+      </aside>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
