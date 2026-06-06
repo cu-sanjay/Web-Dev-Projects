@@ -3,6 +3,7 @@
 const grid = document.getElementById("grid");
 const tpl = document.getElementById("card-template");
 const search = document.getElementById("search");
+const themeToggle = document.getElementById("theme-toggle");
 const sortSelect = document.getElementById("sort-select");
 const tagbar = document.getElementById("tagbar");
 const empty = document.getElementById("empty");
@@ -170,6 +171,14 @@ search.addEventListener("input", (e) => {
   render();
 });
 
+if (themeToggle) {
+  themeToggle.addEventListener("click", () => {
+    const currentTheme = document.documentElement.getAttribute("data-theme") || "light";
+    const newTheme = currentTheme === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", newTheme);
+    localStorage.setItem("theme", newTheme);
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute("content", newTheme === "dark" ? "#0b0c10" : "#f5f1ea");
 if (sortSelect) {
   sortSelect.addEventListener("change", (e) => {
     state.sortBy = e.target.value;

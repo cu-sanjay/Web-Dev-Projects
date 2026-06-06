@@ -12,6 +12,21 @@
     <link rel="icon" type="image/svg+xml" href="assets/icons/logo.svg" />
     <link rel="stylesheet" href="assets/styles.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <script>
+      (function() {
+        const storedTheme = localStorage.getItem("theme");
+        let theme = "light";
+        if (storedTheme) {
+          theme = storedTheme;
+        } else {
+          const userPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          theme = userPrefersDark ? "dark" : "light";
+        }
+        document.documentElement.setAttribute("data-theme", theme);
+        const meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute("content", theme === "dark" ? "#0b0c10" : "#f5f1ea");
+      })();
+    </script>
   </head>
   <body>
     <header class="topbar">
@@ -23,6 +38,17 @@
         <a href="#projects">Projects</a>
         <a href="#programs">Programs</a>
         <a href="#contribute">Contribute</a>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" type="button">
+          <!-- Sun Icon (visible in dark mode) -->
+          <svg class="sun-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+          </svg>
+          <!-- Moon Icon (visible in light mode) -->
+          <svg class="moon-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
         <a class="topnav__github" href="https://github.com/cu-sanjay/Web-Dev-Projects" rel="noopener">GitHub</a>
       </nav>
     </header>
