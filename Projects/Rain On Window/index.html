@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rain On Window</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="window-scene">
+    <div class="skyline" aria-hidden="true">
+      <span style="--x: 4%; --w: 9%; --h: 34%; --delay: .2s;"></span>
+      <span style="--x: 15%; --w: 11%; --h: 48%; --delay: .8s;"></span>
+      <span style="--x: 29%; --w: 8%; --h: 38%; --delay: 1.2s;"></span>
+      <span style="--x: 42%; --w: 12%; --h: 54%; --delay: .5s;"></span>
+      <span style="--x: 59%; --w: 10%; --h: 42%; --delay: 1.5s;"></span>
+      <span style="--x: 73%; --w: 13%; --h: 58%; --delay: .9s;"></span>
+      <span style="--x: 89%; --w: 8%; --h: 36%; --delay: 1.8s;"></span>
+    </div>
+
+    <div class="lightning-flash" id="lightningFlash" aria-hidden="true"></div>
+
+    <section class="glass" aria-label="Interactive rainy glass simulation">
+      <canvas id="rainCanvas" aria-hidden="true"></canvas>
+      <div class="mist" aria-hidden="true"></div>
+      <div class="glass-grain" aria-hidden="true"></div>
+
+      <div class="title-block">
+        <p class="eyebrow">Weather glass simulator</p>
+        <h1>Rain On Window</h1>
+        <p>Dial the storm from a soft drizzle to a thunder-lit downpour.</p>
+      </div>
+    </section>
+
+    <aside class="control-panel" aria-label="Rain controls">
+      <div class="panel-heading">
+        <span class="status-light" id="statusLight"></span>
+        <div>
+          <h2>Storm Controls</h2>
+          <p id="stormLabel">Steady rain</p>
+        </div>
+      </div>
+
+      <label class="range-row" for="intensity">
+        <span>Rain intensity</span>
+        <output id="intensityValue">65%</output>
+      </label>
+      <input id="intensity" type="range" min="10" max="100" value="65">
+
+      <label class="toggle-row">
+        <span>Lightning</span>
+        <input id="lightningToggle" type="checkbox" checked>
+      </label>
+
+      <label class="toggle-row">
+        <span>Ambient rain</span>
+        <input id="rainSoundToggle" type="checkbox">
+      </label>
+
+      <label class="toggle-row">
+        <span>Thunder</span>
+        <input id="thunderToggle" type="checkbox">
+      </label>
+
+      <label class="range-row" for="volume">
+        <span>Sound volume</span>
+        <output id="volumeValue">45%</output>
+      </label>
+      <input id="volume" type="range" min="0" max="100" value="45">
+
+      <button class="primary-action" id="stormBurst" type="button">Trigger storm burst</button>
+    </aside>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
