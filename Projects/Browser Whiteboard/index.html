@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Browser Whiteboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="toolbar">
+      
+      <div class="tool-group">
+        <label for="color-picker">Brush:</label>
+        <input type="color" id="color-picker" value="#ffffff">
+      </div>
+
+      <div class="tool-group">
+        <label for="bg-color">Board:</label>
+        <select id="bg-color">
+          <option value="#1a1a1a">Dark</option>
+          <option value="#ffffff">Light</option>
+        </select>
+      </div>
+      
+      <div class="tool-group">
+        <label for="brush-size">Size: <span id="size-label">5</span>px</label>
+        <input type="range" id="brush-size" min="1" max="50" value="5">
+      </div>
+
+      <div class="tool-group actions">
+        <button id="clear-btn">Clear Board</button>
+        <button id="download-btn">Save Image</button>
+      </div>
+
+    </div>
+    
+    <div class="canvas-container">
+      <canvas id="drawing-board"></canvas>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

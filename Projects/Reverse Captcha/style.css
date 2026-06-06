@@ -1,0 +1,291 @@
+/* --- Design Variables & Reset --- */
+:root {
+    --bg-color: #0a0f0d;
+    --card-bg: #121a16;
+    --border-color: #2a443b;
+    --text-primary: #a3e2c9;
+    --text-muted: #53806f;
+    --neon-green: #39ff14;
+    --neon-red: #ff3333;
+    --neon-glow: 0 0 10px rgba(57, 255, 20, 0.3);
+    --font-mono: 'Courier New', Courier, monospace;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    overflow-x: hidden;
+    background-image: radial-gradient(circle at center, #14221b 0%, #0a0f0d 100%);
+}
+
+/* --- Layout Structure --- */
+.terminal-container {
+    width: 100%;
+    max-width: 650px;
+    background: var(--card-bg);
+    border: 2px solid var(--border-color);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.7), inset 0 0 20px rgba(42, 68, 59, 0.2);
+    padding: 30px;
+    border-radius: 4px;
+    position: relative;
+}
+
+.terminal-header {
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.terminal-header h1 {
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    color: var(--neon-green);
+    text-shadow: var(--neon-glow);
+}
+
+.subtitle {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 5px;
+}
+
+.status-light {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--neon-green);
+    box-shadow: var(--neon-glow);
+}
+
+/* --- Humanity Progress Bar --- */
+.progress-container {
+    margin-bottom: 30px;
+}
+
+.progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+
+.progress-bar-outer {
+    width: 100%;
+    height: 16px;
+    background: #070b09;
+    border: 1px solid var(--border-color);
+    padding: 2px;
+    border-radius: 2px;
+}
+
+.progress-bar-inner {
+    width: 0%;
+    height: 100%;
+    background-color: var(--neon-green);
+    box-shadow: var(--neon-glow);
+    transition: width 0.4s ease;
+}
+
+/* --- Dynamic Card / Interactive Panels --- */
+.terminal-card {
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.step-panel {
+    display: flex;
+    flex-direction: column;
+    animation: fadeIn 0.3s ease-out forwards;
+}
+
+.step-instruction {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin-bottom: 25px;
+    color: #e0f7ed;
+}
+
+/* MCQ Options */
+.options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.option-btn {
+    background: #17241f;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 14px 20px;
+    font-family: var(--font-mono);
+    text-align: left;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.option-btn:hover {
+    background: var(--border-color);
+    color: #fff;
+    box-shadow: var(--neon-glow);
+    transform: translateX(4px);
+}
+
+/* Canvas Board Layout */
+.canvas-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+canvas {
+    background: #070b09;
+    border: 2px dashed #3a5c4f;
+    cursor: crosshair;
+    border-radius: 4px;
+}
+
+/* Form Inputs */
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+textarea {
+    width: 100%;
+    height: 120px;
+    background: #070b09;
+    border: 1px solid var(--border-color);
+    color: #fff;
+    padding: 12px;
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    resize: none;
+    border-radius: 4px;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--neon-green);
+    box-shadow: var(--neon-glow);
+}
+
+/* Global Buttons */
+.action-btn {
+    background: transparent;
+    border: 2px solid var(--neon-green);
+    color: var(--neon-green);
+    padding: 12px 24px;
+    font-family: var(--font-mono);
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    align-self: flex-end;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.action-btn:hover {
+    background: var(--neon-green);
+    color: var(--bg-color);
+    box-shadow: var(--neon-glow);
+}
+
+/* --- End States (Success / Failure Panels) --- */
+.end-panel {
+    text-align: center;
+    padding: 20px;
+}
+
+.end-panel h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+}
+
+.end-panel p {
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.success-state {
+    color: var(--neon-green);
+    animation: pulseGlow 2s infinite alternate;
+}
+
+.failure-state {
+    color: var(--neon-red);
+    animation: shake 0.4s ease-in-out double;
+}
+
+.failure-state h2 {
+    text-shadow: 0 0 10px rgba(255, 51, 51, 0.4);
+}
+
+.retry-btn {
+    border-color: var(--neon-red);
+    color: var(--neon-red);
+}
+
+.retry-btn:hover {
+    background: var(--neon-red);
+    color: #fff;
+    box-shadow: 0 0 15px rgba(255, 51, 51, 0.5);
+}
+
+/* --- Footer --- */
+.terminal-footer {
+    margin-top: 30px;
+    border-top: 1px dashed var(--border-color);
+    padding-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+/* --- Animations --- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+.blink { animation: blink 1s step-start infinite; }
+
+@keyframes pulseGlow {
+    0% { text-shadow: 0 0 5px rgba(57, 255, 20, 0.2); }
+    100% { text-shadow: 0 0 20px rgba(57, 255, 20, 0.6); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-8px); }
+    40%, 80% { transform: translateX(8px); }
+}
+.shake-element {
+    animation: shake 0.4s ease-in-out;
+}

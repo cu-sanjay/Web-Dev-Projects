@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js" defer></script>
+</head>
+<body>
+    <div class="card">
+        <h2>QR Code Generator</h2>
+        
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="text-link">Text / Link</button>
+            <button class="tab-btn" data-tab="file-upload">File Share</button>
+        </div>
+
+        <div id="text-link-panel" class="tab-panel active">
+            <div class="input-group">
+                <label for="qr-input">Enter Text or URL</label>
+                <input type="text" id="qr-input" placeholder="https://example.com" autocomplete="off">
+            </div>
+        </div>
+
+        <div id="file-upload-panel" class="tab-panel">
+            <div class="input-group">
+                <label for="file-input">Choose Small File (Text, MD, Log)</label>
+                <input type="file" id="file-input" accept=".txt,.md,.json,.log">
+                <p class="file-tip">Note: Generates content directly from small text files.</p>
+            </div>
+        </div>
+
+        <div class="qr-display-box">
+            <canvas id="qr-canvas" hidden></canvas>
+            <div id="qr-placeholder">Your QR Code will appear here</div>
+        </div>
+
+        <div class="actions" hidden id="action-panel">
+            <div class="color-pickers">
+                <div class="color-field">
+                    <label for="fg-color">Foreground</label>
+                    <input type="color" id="fg-color" value="#000000">
+                </div>
+                <div class="color-field">
+                    <label for="bg-color">Background</label>
+                    <input type="color" id="bg-color" value="#ffffff">
+                </div>
+            </div>
+            <button id="download-btn">Download QR Code</button>
+        </div>
+    </div>
+
+    <script src="script.js" defer></script>
+</body>
+</html>

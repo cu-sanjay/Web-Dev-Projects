@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Block-Stack Matrix — Drop-Line Cleansing</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="app">
+    <header id="header">
+      <h1><span class="brand-glow">BLOCK</span>-STACK MATRIX</h1>
+      <span class="brand-sub">v1.0 // drop-line protocol</span>
+    </header>
+
+    <main id="main">
+      <section id="board-section">
+        <div id="board-container" class="glass-panel">
+          <div id="board-grid"></div>
+        </div>
+      </section>
+
+      <aside id="sidebar">
+        <div id="score-panel" class="glass-panel">
+          <div class="stat-row">
+            <span class="stat-label">SCORE</span>
+            <span class="stat-value" id="score-value">0</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">LINES</span>
+            <span class="stat-value" id="lines-value">0</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">LEVEL</span>
+            <span class="stat-value" id="level-value">1</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-row">
+            <span class="stat-label">HIGH SCORE</span>
+            <span class="stat-value" id="highscore-value">0</span>
+          </div>
+        </div>
+
+        <div id="next-panel" class="glass-panel">
+          <div class="panel-title">NEXT</div>
+          <div id="next-grid"></div>
+        </div>
+
+        <div id="controls-panel" class="glass-panel">
+          <button id="action-btn" class="glass-btn">START GAME</button>
+          <div class="controls-list">
+            <div class="control-row"><kbd>&larr;</kbd><kbd>&rarr;</kbd> <span>Move</span></div>
+            <div class="control-row"><kbd>&uarr;</kbd> <span>Rotate</span></div>
+            <div class="control-row"><kbd>&darr;</kbd> <span>Soft drop</span></div>
+            <div class="control-row"><kbd>Space</kbd> <span>Hard drop</span></div>
+            <div class="control-row"><kbd>P</kbd> <span>Pause</span></div>
+          </div>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <div id="gameover-overlay" class="overlay hidden">
+    <div class="overlay-dialog glass-panel">
+      <div class="overlay-title">GAME OVER</div>
+      <div class="overlay-score">SCORE: <span id="final-score">0</span></div>
+      <button id="restart-btn" class="glass-btn">PLAY AGAIN</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chromance // RGB Explorer & Color Engine</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <aside class="sidebar-left">
+            <div class="brand">
+                <div class="brand-icon"></div>
+                <h1>Chromance</h1>
+            </div>
+            <div class="brand-subtitle">RGB Explorer Engine</div>
+
+            <div class="section-label">Telemetry Metrics</div>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <span class="metric-value" id="stat-score">00</span>
+                    <span class="metric-label">Current Score</span>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-value" id="stat-streak">00</span>
+                    <span class="metric-label">Best Streak</span>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-value" id="stat-round">01</span>
+                    <span class="metric-label">Round Matrix</span>
+                </div>
+            </div>
+
+            <div class="section-label">Engine Settings</div>
+            <div class="control-group">
+                <div class="mode-toggle-container">
+                    <button class="mode-btn active" id="btn-easy" data-mode="easy">
+                        Easy Mode
+                        <span class="mode-desc">3 Targets</span>
+                    </button>
+                    <button class="mode-btn" id="btn-hard" data-mode="hard">
+                        Hard Mode
+                        <span class="mode-desc">6 Targets</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                <button class="action-btn" id="btn-reset">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                    Re-roll Workspace
+                </button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="display-panel" id="target-display-panel">
+                <div class="display-overlay" id="display-color-overlay"></div>
+                <div class="display-inner">
+                    <span class="panel-meta-tag">Target Frequency Spec</span>
+                    <h2 class="target-rgb-string" id="rgb-target-string">rgb(0, 0, 0)</h2>
+                    <div class="status-prompter" id="game-status-prompt">Select matching data frequency...</div>
+                </div>
+            </header>
+
+            <section class="grid-wrapper">
+                <div class="grid-header">
+                    <h3>Array Configuration Feed</h3>
+                    <span class="grid-counter-badge" id="grid-density-badge">3 options loaded</span>
+                </div>
+                <div class="color-grid mode-easy" id="color-grid">
+                    </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

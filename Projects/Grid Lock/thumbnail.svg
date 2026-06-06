@@ -1,0 +1,148 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#04060b" />
+      <stop offset="50%" stop-color="#070a13" />
+      <stop offset="100%" stop-color="#0e1322" />
+    </linearGradient>
+
+    <filter id="panelGlow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#000000" flood-opacity="0.80"/>
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#3b82f6" flood-opacity="0.02"/>
+    </filter>
+
+    <linearGradient id="gridlockBrand" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#a855f7" />
+    </linearGradient>
+
+    <filter id="tileGlow" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <pattern id="uiGrid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="rgba(148, 163, 184, 0.02)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#bgGrad)" />
+  <rect width="800" height="500" fill="url(#uiGrid)" />
+  
+  <circle cx="680" cy="400" r="220" fill="#a855f7" opacity="0.03" filter="blur(60px)" />
+  <circle cx="150" cy="100" r="180" fill="#3b82f6" opacity="0.02" filter="blur(45px)" />
+
+  <g transform="translate(50, 45)" filter="url(#panelGlow)">
+    <rect width="700" height="380" rx="16" fill="#111827" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1.5"/>
+    
+    <circle cx="24" cy="22" r="5" fill="#ef4444" opacity="0.7"/>
+    <circle cx="40" cy="22" r="5" fill="#f59e0b" opacity="0.7"/>
+    <circle cx="56" cy="22" r="5" fill="#10b981" opacity="0.7"/>
+
+    <g transform="translate(585, 15)">
+      <circle cx="5" cy="6" r="4" fill="url(#gridlockBrand)" />
+      <text x="14" y="10" font-family="-apple-system, sans-serif" font-size="11" font-weight="800" fill="#f8fafc" letter-spacing="0.02em">GRID-LOCK</text>
+    </g>
+
+    <g transform="translate(20, 64)">
+      <text x="0" y="14" font-family="-apple-system, sans-serif" font-size="14" font-weight="800" fill="#ffffff" letter-spacing="-0.02em">Agility Matrix</text>
+      
+      <rect y="24" width="126" height="24" rx="6" fill="rgba(239, 68, 68, 0.08)" stroke="rgba(239, 68, 68, 0.2)" stroke-width="1"/>
+      <text x="12" y="39" font-family="monospace" font-size="10" font-weight="800" fill="#ef4444" letter-spacing="0.02em">TIME REMAINING: 42s</text>
+
+      <g transform="translate(0, 64)">
+        <rect width="126" height="42" rx="8" fill="#1f2937" opacity="0.5"/>
+        <text x="10" y="16" font-family="-apple-system, sans-serif" font-size="8" font-weight="700" fill="#475569" letter-spacing="0.05em">TOTAL CLEARED</text>
+        <text x="10" y="34" font-family="monospace" font-size="14" font-weight="800" fill="#10b981">18 Targets</text>
+      </g>
+
+      <g transform="translate(0, 118)">
+        <rect width="126" height="42" rx="8" fill="#1f2937" opacity="0.5"/>
+        <text x="10" y="16" font-family="-apple-system, sans-serif" font-size="8" font-weight="700" fill="#475569" letter-spacing="0.05em">MULTIPLIER STREAK</text>
+        <text x="10" y="34" font-family="monospace" font-size="14" font-weight="800" fill="#f59e0b">Streak: x3.5</text>
+      </g>
+
+      <rect y="184" width="126" height="32" rx="6" fill="#1f2937" stroke="rgba(148, 163, 184, 0.1)" stroke-width="1"/>
+      <text x="63" y="204" font-family="-apple-system, sans-serif" font-size="10" font-weight="700" fill="#f8fafc" text-anchor="middle">Restart Matrix</text>
+    </g>
+
+    <line x1="162" y1="46" x2="162" y2="380" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+
+    <g transform="translate(178, 64)">
+      <g transform="translate(0, 0)">
+        <rect width="502" height="44" rx="10" fill="#1f2937" stroke="rgba(148, 163, 184, 0.06)" stroke-width="1"/>
+        <text x="16" y="26" font-family="monospace" font-size="14" font-weight="800" fill="#3b82f6" letter-spacing="0.02em">TARGET SUM: 15</text>
+        
+        <rect x="290" y="12" width="196" height="20" rx="4" fill="rgba(168, 85, 247, 0.1)"/>
+        <text x="388" y="25" font-family="monospace" font-size="9" font-weight="800" fill="#a855f7" text-anchor="middle">CONSTRAINT: EXACTLY 3 BLOCKS</text>
+      </g>
+
+      <g transform="translate(90, 64)">
+        <rect width="48" height="48" rx="8" fill="#1f2937" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+        <text x="24" y="29" font-family="monospace" font-size="16" font-weight="800" fill="#94a3b8" text-anchor="middle">4</text>
+
+        <g transform="translate(60, 0)" filter="url(#tileGlow)">
+          <rect width="48" height="48" rx="8" fill="rgba(168, 85, 247, 0.15)" stroke="#a855f7" stroke-width="1.5"/>
+          <text x="24" y="29" font-family="monospace" font-size="16" font-weight="800" fill="#a855f7" text-anchor="middle">5</text>
+        </g>
+
+        <rect x="120" y="0" width="48" height="48" rx="8" fill="#1f2937" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+        <text x="144" y="29" font-family="monospace" font-size="16" font-weight="800" fill="#94a3b8" text-anchor="middle">9</text>
+
+        <rect x="180" y="0" width="48" height="48" rx="8" fill="#1f2937" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+        <text x="204" y="29" font-family="monospace" font-size="16" font-weight="800" fill="#94a3b8" text-anchor="middle">2</text>
+
+        <rect y="56" width="48" height="48" rx="8" fill="#1f2937" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+        <text x="24" y="85" font-family="monospace" font-size="16" font-weight="800" fill="#94a3b8" text-anchor="middle">1</text>
+
+        <rect x="60" y="56" width="48" height="48" rx="8" fill="#1f2937" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+        <text x="84" y="85" font-family="monospace" font-size="16" font-weight="800" fill="#94a3b8" text-anchor="middle">7</text>
+
+        <g transform="translate(120, 56)" filter="url(#tileGlow)">
+          <rect width="48" height="48" rx="8" fill="rgba(168, 85, 247, 0.15)" stroke="#a855f7" stroke-width="1.5"/>
+          <text x="24" y="29" font-family="monospace" font-size="16" font-weight="800" fill="#a855f7" text-anchor="middle">3</text>
+        </g>
+
+        <rect x="180" y="56" width="48" height="48" rx="8" fill="#1f2937" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+        <text x="204" y="85" font-family="monospace" font-size="16" font-weight="800" fill="#94a3b8" text-anchor="middle">6</text>
+
+        <rect y="112" width="48" height="48" rx="8" fill="#1f2937" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+        <text x="24" y="141" font-family="monospace" font-size="16" font-weight="800" fill="#94a3b8" text-anchor="middle">8</text>
+
+        <rect x="60" y="112" width="48" height="48" rx="8" fill="#1f2937" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+        <text x="84" y="141" font-family="monospace" font-size="16" font-weight="800" fill="#94a3b8" text-anchor="middle">4</text>
+
+        <rect x="120" y="112" width="48" height="48" rx="8" fill="#1f2937" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+        <text x="144" y="141" font-family="monospace" font-size="16" font-weight="800" fill="#94a3b8" text-anchor="middle">2</text>
+
+        <g transform="translate(180, 112)" filter="url(#tileGlow)">
+          <rect width="48" height="48" rx="8" fill="rgba(168, 85, 247, 0.15)" stroke="#a855f7" stroke-width="1.5"/>
+          <text x="24" y="29" font-family="monospace" font-size="16" font-weight="800" fill="#a855f7" text-anchor="middle">7</text>
+        </g>
+
+        <rect y="168" width="48" height="48" rx="8" fill="#1f2937" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+        <text x="24" y="197" font-family="monospace" font-size="16" font-weight="800" fill="#94a3b8" text-anchor="middle">3</text>
+        <rect x="60" y="168" width="48" height="48" rx="8" fill="#1f2937" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+        <text x="84" y="197" font-family="monospace" font-size="16" font-weight="800" fill="#94a3b8" text-anchor="middle">9</text>
+        <rect x="120" y="168" width="48" height="48" rx="8" fill="#1f2937" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+        <text x="144" y="197" font-family="monospace" font-size="16" font-weight="800" fill="#94a3b8" text-anchor="middle">5</text>
+        <rect x="180" y="168" width="48" height="48" rx="8" fill="#1f2937" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+        <text x="204" y="197" font-family="monospace" font-size="16" font-weight="800" fill="#94a3b8" text-anchor="middle">1</text>
+      </g>
+    </g>
+  </g>
+
+  <g transform="translate(180, 440)">
+    <rect width="440" height="42" rx="21" fill="rgba(4, 6, 11, 0.95)" stroke="rgba(148, 163, 184, 0.15)" stroke-width="1.5"/>
+    
+    <text x="28" y="26" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="800" fill="#f8fafc" letter-spacing="0.06em">GRID-LOCK TARGET MATRIX</text>
+    <circle cx="184" cy="22" r="2" fill="#475569" />
+    
+    <text x="200" y="26" font-family="monospace" font-size="12" font-weight="700" fill="#38bdf8">HTML5</text>
+    <text x="250" y="26" font-family="monospace" font-size="12" font-weight="700" fill="#10b981">CSS3</text>
+    <text x="296" y="26" font-family="monospace" font-size="12" font-weight="700" fill="#f59e0b">ES6+</text>
+    
+    <rect x="344" y="13" width="72" height="16" rx="4" fill="rgba(56, 189, 248, 0.08)" stroke="rgba(56, 189, 248, 0.15)" stroke-width="1"/>
+    <text x="350" y="24" font-family="-apple-system, sans-serif" font-size="8" font-weight="800" fill="#38bdf8" letter-spacing="0.02em">CASCADE_2D</text>
+  </g>
+</svg>

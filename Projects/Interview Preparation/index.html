@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interview Preparation Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWix+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkR4j8l4D/e4P6A8mxhP2Vb1zYx8R+E7Q2kg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-theme="dark">
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
+  <div class="glow-orb orb-3"></div>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-icon"><img src="https://as2.ftcdn.net/jpg/04/93/24/65/1000_F_493246520_UVtOcb0YuU81aHxBuUZIniqHq8yDypbH.jpg" alt="Interview Hub Logo" width="50" height="50" /></div>
+        <div>
+          <h1>Interview Hub</h1>
+          <p>Prepare with confidence</p>
+        </div>
+      </div>
+      <nav class="nav-links" id="navLinks">
+        <button class="nav-item active" data-section="dashboard"><i class="fa-solid fa-table-columns"></i>Dashboard</button>
+        <button class="nav-item" data-section="hrQuestions"><i class="fa-solid fa-user-tie"></i>HR Questions</button>
+        <button class="nav-item" data-section="technicalQuestions"><i class="fa-solid fa-code"></i>Technical Questions</button>
+        <button class="nav-item" data-section="notes"><i class="fa-solid fa-note-sticky"></i>Notes</button>
+        <button class="nav-item" data-section="resources"><i class="fa-solid fa-book-open"></i>Resources</button>
+        <button class="nav-item" data-section="progressTracker"><i class="fa-solid fa-chart-line"></i>Progress Tracker</button>
+        <button class="nav-item" data-section="mockInterview"><i class="fa-solid fa-microphone-lines"></i>Mock Interview</button>
+        <button class="nav-item" data-section="settings"><i class="fa-solid fa-gear"></i>Settings</button>
+      </nav>
+    </aside>
+
+    <div class="content-shell">
+      <header class="topbar">
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu"><i class="fa-solid fa-bars"></i></button>
+        <div>
+          <h2 id="sectionTitle">Dashboard</h2>
+          <p id="sectionSubtitle">Track your interview preparation journey.</p>
+        </div>
+        <div class="search-wrap">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="globalSearch" placeholder="Search questions, notes, resources..." />
+          <div class="search-results" id="searchResults"></div>
+        </div>
+      </header>
+
+      <main class="main-content">
+        <section class="section active" id="dashboard">
+          <div class="grid widgets-grid" id="dashboardWidgets">
+            <article class="widget-card">
+              <div class="widget-icon primary-glow"><img src="https://www.citypng.com/public/uploads/preview/bookmark-black-icon-symbol-701751695035662jfatweih4d.png" alt="Questions Studied" width="40" height="40" /></div>
+              <div class="widget-info">
+                <h3>Questions Studied</h3>
+                <p id="statQuestionsStudied">0</p>
+              </div>
+            </article>
+            <article class="widget-card">
+              <div class="widget-icon accent-glow"><img src="https://www.citypng.com/public/uploads/preview/bookmark-black-icon-symbol-701751695035662jfatweih4d.png" alt="Questions Bookmarked" width="50" height="50" style="border-radius: 25%;"/>
+            </div>
+              <div class="widget-info">
+                <h3>Bookmarked Questions</h3>
+                <p id="statBookmarked">0</p>
+              </div>
+            </article>
+            <article class="widget-card">
+              <div class="widget-icon purple-glow"><img src="/assets/images/notes.jpg" alt="Notes Created" width="50" height="50" style="border-radius: 25%;"/></div>
+              <div class="widget-info">
+                <h3>Notes Created</h3>
+                <p id="statNotes">0</p>
+              </div>
+            </article>
+            <article class="widget-card">
+              <div class="widget-icon warning-glow"><img src="https://www.citypng.com/public/uploads/preview/bookmark-black-icon-symbol-701751695035662jfatweih4d.png" alt="Resources Saved" width="50" height="50" style="border-radius: 25%;"/></div>
+              <div class="widget-info">
+                <h3>Resources Saved</h3>
+                <p id="statResources">0</p>
+              </div>
+            </article>
+            <article class="widget-card">
+              <div class="widget-icon success-glow"><img src="./assets/images/progress.png" alt="Preparation Progress" width="50" height="50" style="border-radius: 25%;" style="background-color: white;"/></div>
+              <div class="widget-info">
+                <h3>Preparation Progress</h3>
+                <p id="statProgress">0%</p>
+              </div>
+            </article>
+            <article class="widget-card">
+              <div class="widget-icon danger-glow"><img src="https://png.pngtree.com/png-vector/20220603/ourmid/pngtree-fire-icon-symbol-simple-design-symbol-blaze-abstract-vector-png-image_46963190.jpg" alt="Current Streak" width="50" height="50" style="border-radius: 25%;"/></div>
+              <div class="widget-info">
+                <h3>Current Streak</h3>
+                <p id="statStreak">0 days</p>
+              </div>
+            </article>
+          </div>
+          <article class="daily-question-card">
+            <div class="daily-question-icon"><i class="fa-solid fa-lightbulb"></i></div>
+            <div class="daily-question-content">
+              <h3>Daily Interview Question</h3>
+              <p id="dailyQuestionText">Loading daily question...</p>
+            </div>
+            <button id="refreshDailyQuestion" class="btn ghost">Refresh Tomorrow</button>
+          </article>
+        </section>
+
+        <section class="section" id="hrQuestions">
+          <div class="controls-row">
+            <input type="text" id="hrSearch" placeholder="Search HR questions" />
+            <select id="hrFilterStatus">
+              <option value="all">All Status</option>
+              <option value="completed">Completed</option>
+              <option value="bookmarked">Bookmarked</option>
+              <option value="pending">Pending</option>
+            </select>
+          </div>
+          <div class="cards-grid" id="hrQuestionList"></div>
+        </section>
+
+        <section class="section" id="technicalQuestions">
+          <div class="controls-row">
+            <input type="text" id="techSearch" placeholder="Search technical questions" />
+            <select id="techFilterCategory">
+              <option value="all">All Categories</option>
+              <option value="Java">Java</option>
+              <option value="JavaScript">JavaScript</option>
+              <option value="React">React</option>
+              <option value="Node.js">Node.js</option>
+              <option value="DBMS">DBMS</option>
+              <option value="Operating Systems">Operating Systems</option>
+              <option value="Computer Networks">Computer Networks</option>
+            </select>
+            <select id="techFilterStatus">
+              <option value="all">All Status</option>
+              <option value="completed">Completed</option>
+              <option value="bookmarked">Bookmarked</option>
+              <option value="pending">Pending</option>
+            </select>
+          </div>
+          <div class="cards-grid" id="techQuestionList"></div>
+        </section>
+
+        <section class="section" id="notes">
+          <form class="panel" id="noteForm">
+            <h3>Create / Edit Note</h3>
+            <input type="hidden" id="noteId" />
+            <input type="text" id="noteTitle" placeholder="Note title" required />
+            <textarea id="noteContent" rows="4" placeholder="Write your note..." required></textarea>
+            <div class="actions-row">
+              <button type="submit" class="btn primary" id="saveNoteBtn">Save Note</button>
+              <button type="button" class="btn ghost" id="cancelEditNote">Cancel</button>
+            </div>
+          </form>
+          <div class="panel">
+            <div class="controls-row">
+              <input type="text" id="noteSearch" placeholder="Search notes" />
+            </div>
+            <div class="notes-list" id="notesList"></div>
+          </div>
+        </section>
+
+        <section class="section" id="resources">
+          <form class="panel" id="resourceForm">
+            <h3>Add Resource</h3>
+            <select id="resourceType" required>
+              <option value="youtube">YouTube Video</option>
+              <option value="playlist">YouTube Playlist</option>
+              <option value="article">Article</option>
+              <option value="docs">Documentation</option>
+            </select>
+            <input type="text" id="resourceTitle" placeholder="Resource title" required />
+            <input type="url" id="resourceUrl" placeholder="https://..." required />
+            <input type="url" id="resourceThumbnail" placeholder="Custom thumbnail URL (for playlist/optional)" />
+            <button type="submit" class="btn primary">Save Resource</button>
+          </form>
+          <div class="cards-grid" id="resourceList"></div>
+        </section>
+
+        <section class="section" id="progressTracker">
+          <div class="panel">
+            <h3>Category Progress</h3>
+            <div id="progressControls"></div>
+          </div>
+          <div class="panel overall-panel">
+            <h3>Overall Completion</h3>
+            <div class="overall-circle" id="overallCircle">0%</div>
+          </div>
+        </section>
+
+        <section class="section" id="mockInterview">
+          <div class="panel">
+            <h3>Mock Interview Practice</h3>
+            <div class="controls-row">
+              <select id="mockTimerSelect">
+                <option value="120">2 Minutes</option>
+                <option value="300">5 Minutes</option>
+                <option value="600">10 Minutes</option>
+              </select>
+              <button class="btn primary" id="generateMockQuestion">Generate Question</button>
+              <button class="btn ghost" id="startMockTimer">Start Timer</button>
+            </div>
+            <p class="mock-question" id="mockQuestionText">Click "Generate Question" to start.</p>
+            <p class="mock-timer" id="mockTimerDisplay">00:00</p>
+            <textarea id="mockAnswer" rows="5" placeholder="Write your answer here..."></textarea>
+            <button class="btn primary" id="saveMockAnswer">Save Practice Entry</button>
+          </div>
+          <div class="panel">
+            <h3>Practice History</h3>
+            <div class="history-list" id="mockHistoryList"></div>
+          </div>
+        </section>
+
+        <section class="section" id="settings">
+          <div class="panel">
+            <h3>Theme Preference</h3>
+            <div class="actions-row">
+              <button class="btn primary" id="themeLight">Light Mode</button>
+              <button class="btn ghost" id="themeDark">Dark Mode</button>
+            </div>
+          </div>
+          <div class="panel">
+            <h3>Data Management</h3>
+            <button class="btn danger" id="resetDataBtn">Reset All Data</button>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <div class="modal-backdrop hidden" id="confirmModal">
+    <div class="modal">
+      <h3>Reset all data?</h3>
+      <p>This will remove notes, resources, progress, bookmarks, history, and settings.</p>
+      <div class="actions-row">
+        <button class="btn danger" id="confirmReset">Yes, Reset</button>
+        <button class="btn ghost" id="cancelReset">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

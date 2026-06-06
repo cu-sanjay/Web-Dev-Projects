@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quantum - Modern Digital Clock & Time Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-cyan">
+  <div class="dashboard-container">
+    
+    <!-- Main Clock Card -->
+    <main class="clock-card" id="clock-card">
+      <div class="card-glow"></div>
+      
+      <!-- Top Meta Info -->
+      <div class="clock-meta">
+        <div class="status-indicator">
+          <span class="pulse-dot"></span>
+          <span id="status-text">LIVE SYNCED</span>
+        </div>
+        <div class="timezone-badge" id="timezone-label">UTC+05:30</div>
+      </div>
+
+      <!-- Time Display Area -->
+      <div class="display-container">
+        <div class="time-wrapper" id="time-display-wrapper">
+          <span id="hours">12</span>
+          <span class="colon" id="colon">:</span>
+          <span id="minutes">00</span>
+          <span class="seconds-display" id="seconds-wrapper">
+            <span class="colon-sec">:</span><span id="seconds">00</span>
+          </span>
+        </div>
+        <div class="format-badge" id="ampm-indicator">AM</div>
+      </div>
+
+      <!-- Live Progress Bar -->
+      <div class="progress-bar-container">
+        <div class="progress-fill" id="seconds-progress"></div>
+      </div>
+
+      <!-- Calendar Display -->
+      <div class="calendar-section">
+        <div class="date-text" id="date-display">JUNE 05, 2026</div>
+        <div class="days-grid" id="days-grid">
+          <span data-day="1">MON</span>
+          <span data-day="2">TUE</span>
+          <span data-day="3">WED</span>
+          <span data-day="4">THU</span>
+          <span data-day="5">FRI</span>
+          <span data-day="6">SAT</span>
+          <span data-day="0">SUN</span>
+        </div>
+      </div>
+    </main>
+
+    <!-- Side Control Panel -->
+    <aside class="control-panel">
+      
+      <!-- Power Switch Card -->
+      <div class="control-card pwr-card">
+        <div class="control-header">
+          <span class="control-title">System Power</span>
+          <span class="control-desc">Deactivate display glows</span>
+        </div>
+        <button class="power-btn active" id="power-toggle" aria-label="Toggle clock power">
+          <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
+            <line x1="12" y1="2" x2="12" y2="12"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- General Settings Card -->
+      <div class="control-card">
+        <h3>Time Configuration</h3>
+        
+        <div class="setting-item">
+          <div>
+            <span class="setting-label">24-Hour Format</span>
+            <span class="setting-desc">Switch from standard 12H display</span>
+          </div>
+          <button class="switch-toggle" id="format-toggle" aria-label="Toggle 24 hour format">
+            <span class="switch-slider"></span>
+          </button>
+        </div>
+
+        <div class="setting-item">
+          <div>
+            <span class="setting-label">Show Seconds</span>
+            <span class="setting-desc">Toggle precise seconds indicator</span>
+          </div>
+          <button class="switch-toggle active" id="seconds-toggle" aria-label="Toggle seconds display">
+            <span class="switch-slider"></span>
+          </button>
+        </div>
+
+        <div class="setting-item">
+          <div>
+            <span class="setting-label">Smooth Separator</span>
+            <span class="setting-desc">Pulsing colon animation</span>
+          </div>
+          <button class="switch-toggle active" id="colon-toggle" aria-label="Toggle separator animation">
+            <span class="switch-slider"></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Timezone Card -->
+      <div class="control-card">
+        <h3>Active Timezone</h3>
+        <div class="select-wrapper">
+          <select id="timezone-select" aria-label="Select timezone">
+            <option value="local">Local System Time</option>
+            <option value="UTC">UTC / GMT</option>
+            <option value="America/New_York">New York (EST/EDT)</option>
+            <option value="Europe/London">London (BST/GMT)</option>
+            <option value="Asia/Tokyo">Tokyo (JST)</option>
+            <option value="Australia/Sydney">Sydney (AEST)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Theme Preset Selector -->
+      <div class="control-card">
+        <h3>Accent Theme</h3>
+        <div class="theme-grid">
+          <button class="theme-dot cyan active" data-theme="cyan" title="Cyan Neon" aria-label="Cyan Neon Theme"></button>
+          <button class="theme-dot purple" data-theme="purple" title="Purple Haze" aria-label="Purple Haze Theme"></button>
+          <button class="theme-dot amber" data-theme="amber" title="Amber Glow" aria-label="Amber Glow Theme"></button>
+          <button class="theme-dot emerald" data-theme="emerald" title="Emerald Pulse" aria-label="Emerald Pulse Theme"></button>
+        </div>
+      </div>
+      
+    </aside>
+  </div>
+  
+  <footer class="author-credits">
+    Designed by <span>Mistry Vishwa</span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

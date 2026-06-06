@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Table Fan Simulator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="control-deck">
+            <div class="deck-header">
+                <h2>FAN INTERACTION CORE</h2>
+                <p class="deck-subtitle">TELEMETRY & HARDWARE OVERRIDE</p>
+            </div>
+
+            <div class="telemetry-card">
+                <div class="card-label">ROTOR VELOCITY</div>
+                <div class="gauge-display">
+                    <span id="rpm-value" class="mono">0</span>
+                    <span class="gauge-unit">RPM</span>
+                </div>
+                <div class="gauge-bar-container">
+                    <div id="rpm-progress" class="gauge-bar-fill"></div>
+                </div>
+            </div>
+
+            <div class="telemetry-card">
+                <div class="card-label">SYSTEM DIAGNOSTIC PROMPT</div>
+                <div id="diagnostic-status" class="status-indicator state-off">IDLE</div>
+                <div class="status-grid">
+                    <div class="status-item">
+                        <span class="status-lbl">OSC ANGLE:</span>
+                        <span id="telemetry-angle" class="mono value">0.0°</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-lbl">ENERGY LOAD:</span>
+                        <span id="telemetry-load" class="mono value">0%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">ROTATION VELOCITY SELECTOR</label>
+                <div class="speed-selector-matrix">
+                    <button type="button" class="speed-btn active" data-speed="0">
+                        <span class="btn-num">0</span>
+                        <span class="btn-lbl">OFF</span>
+                    </button>
+                    <button type="button" class="speed-btn" data-speed="1">
+                        <span class="btn-num">1</span>
+                        <span class="btn-lbl">LOW</span>
+                    </button>
+                    <button type="button" class="speed-btn" data-speed="2">
+                        <span class="btn-num">2</span>
+                        <span class="btn-lbl">MED</span>
+                    </button>
+                    <button type="button" class="speed-btn" data-speed="3">
+                        <span class="btn-num">3</span>
+                        <span class="btn-lbl">HIGH</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">MECHANICAL SWEEP ACTUATOR</label>
+                <button type="button" id="oscillation-toggle" class="toggle-action-btn">
+                    <span class="indicator-dot"></span>
+                    <span class="toggle-text">OSCILLATION MODE: DISABLED</span>
+                </button>
+            </div>
+
+            <div class="audio-notice">
+                <p>💡 Interactive high-fidelity synthesized audio maps directly onto current rotor speed. Interact with any control to initialize sound synthesis loops.</p>
+            </div>
+        </aside>
+
+        <main class="simulation-canvas">
+            <div id="fan-hardware-assembly" class="fan-assembly">
+                
+                <div class="fan-neck"></div>
+                <div class="fan-motor-housing"></div>
+
+                <div class="fan-grill-back">
+                    <div class="spoke" style="transform: rotate(0deg);"></div>
+                    <div class="spoke" style="transform: rotate(15deg);"></div>
+                    <div class="spoke" style="transform: rotate(30deg);"></div>
+                    <div class="spoke" style="transform: rotate(45deg);"></div>
+                    <div class="spoke" style="transform: rotate(60deg);"></div>
+                    <div class="spoke" style="transform: rotate(75deg);"></div>
+                    <div class="spoke" style="transform: rotate(90deg);"></div>
+                    <div class="spoke" style="transform: rotate(105deg);"></div>
+                    <div class="spoke" style="transform: rotate(120deg);"></div>
+                    <div class="spoke" style="transform: rotate(135deg);"></div>
+                    <div class="spoke" style="transform: rotate(150deg);"></div>
+                    <div class="spoke" style="transform: rotate(165deg);"></div>
+                    <div class="concentric-ring ring-1"></div>
+                    <div class="concentric-ring ring-2"></div>
+                    <div class="concentric-ring ring-3"></div>
+                </div>
+
+                <div id="fan-blade-container" class="fan-blades">
+                    <div class="blade blade-1"></div>
+                    <div class="blade blade-2"></div>
+                    <div class="blade blade-3"></div>
+                </div>
+
+                <div class="fan-grill-front">
+                    <div class="center-cap">
+                        <div class="center-logo">CORE-V1</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="fan-base-anchor">
+                <div class="base-plate"></div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subscription Manager</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <h1>Subscriptions</h1>
+      <p class="header-sub">Manage your recurring payments</p>
+    </header>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <span class="stat-label">Monthly Spend</span>
+        <span class="stat-value" id="monthlyTotal">$0.00</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Annual Spend</span>
+        <span class="stat-value" id="annualTotal">$0.00</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Active Subs</span>
+        <span class="stat-value" id="activeCount">0</span>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="add-btn" id="addBtn">+ Add Subscription</button>
+      <div class="filter-group">
+        <select id="filterCategory">
+          <option value="">All Categories</option>
+          <option value="Entertainment">Entertainment</option>
+          <option value="Utilities">Utilities</option>
+          <option value="Software">Software</option>
+          <option value="Cloud">Cloud</option>
+        </select>
+        <select id="sortBy">
+          <option value="name">Sort: Name</option>
+          <option value="cost">Sort: Cost</option>
+          <option value="renewal">Sort: Renewal Date</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="category-bars" id="categoryBars"></div>
+
+    <div class="subs-list" id="subsList">
+      <div class="empty-state">No subscriptions yet. Click "+ Add Subscription" to get started.</div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Add Subscription</h2>
+        <button class="modal-close" id="modalClose">&times;</button>
+      </div>
+      <form class="modal-body" id="form">
+        <div class="form-group">
+          <label for="formName">Name</label>
+          <input type="text" id="formName" placeholder="e.g. Netflix" required>
+        </div>
+        <div class="form-group">
+          <label for="formCost">Cost ($)</label>
+          <input type="number" id="formCost" min="0" step="0.01" placeholder="0.00" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="formCycle">Billing Cycle</label>
+            <select id="formCycle">
+              <option value="Monthly">Monthly</option>
+              <option value="Yearly">Yearly</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="formCategory">Category</label>
+            <select id="formCategory">
+              <option value="Entertainment">Entertainment</option>
+              <option value="Utilities">Utilities</option>
+              <option value="Software">Software</option>
+              <option value="Cloud">Cloud</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="formDate">Next Renewal</label>
+          <input type="date" id="formDate" required>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn-cancel" id="formCancel">Cancel</button>
+          <button type="submit" class="btn-submit">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

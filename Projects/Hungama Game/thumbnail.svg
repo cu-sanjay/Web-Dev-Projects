@@ -1,0 +1,203 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#04060b" />
+      <stop offset="50%" stop-color="#070a13" />
+      <stop offset="100%" stop-color="#0e1322" />
+    </linearGradient>
+
+    <filter id="panelGlow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#000000" flood-opacity="0.80"/>
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#3b82f6" flood-opacity="0.02"/>
+    </filter>
+
+    <filter id="glowGreen" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <filter id="glowRed" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <linearGradient id="hungamaBrand" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#3b82f6" />
+    </linearGradient>
+
+    <pattern id="uiGrid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="rgba(148, 163, 184, 0.02)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#bgGrad)" />
+  <rect width="800" height="500" fill="url(#uiGrid)" />
+  
+  <circle cx="680" cy="120" r="220" fill="#3b82f6" opacity="0.03" filter="blur(55px)" />
+  <circle cx="120" cy="380" r="180" fill="#ef4444" opacity="0.02" filter="blur(45px)" />
+
+  <g transform="translate(50, 45)" filter="url(#panelGlow)">
+    <rect width="700" height="380" rx="16" fill="#111827" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1.5"/>
+    
+    <circle cx="24" cy="22" r="5" fill="#ef4444" opacity="0.7"/>
+    <circle cx="40" cy="22" r="5" fill="#f59e0b" opacity="0.7"/>
+    <circle cx="56" cy="22" r="5" fill="#10b981" opacity="0.7"/>
+
+    <g transform="translate(605, 15)">
+      <circle cx="5" cy="6" r="4" fill="url(#hungamaBrand)" />
+      <text x="14" y="10" font-family="-apple-system, sans-serif" font-size="11" font-weight="800" fill="#f8fafc" letter-spacing="0.02em">HUNGAMA</text>
+    </g>
+
+    <g transform="translate(20, 64)">
+      <text x="0" y="14" font-family="-apple-system, sans-serif" font-size="15" font-weight="800" fill="#ffffff" letter-spacing="-0.02em">Game Status</text>
+      
+      <rect y="24" width="124" height="22" rx="5" fill="#1f2937" stroke="rgba(148, 163, 184, 0.06)" stroke-width="1"/>
+      <text x="8" y="38" font-family="-apple-system, sans-serif" font-size="9" font-weight="700" fill="#94a3b8">TECH TERMINOLOGY</text>
+
+      <g transform="translate(0, 64)">
+        <rect width="124" height="42" rx="8" fill="#1f2937" opacity="0.5"/>
+        <text x="10" y="16" font-family="-apple-system, sans-serif" font-size="8" font-weight="700" fill="#475569" letter-spacing="0.05em">ATTEMPTS REMAINING</text>
+        <text x="10" y="34" font-family="monospace" font-size="15" font-weight="800" fill="#ef4444">04 / 06</text>
+      </g>
+
+      <g transform="translate(0, 118)">
+        <rect width="124" height="42" rx="8" fill="#1f2937" opacity="0.5"/>
+        <text x="10" y="16" font-family="-apple-system, sans-serif" font-size="8" font-weight="700" fill="#475569" letter-spacing="0.05em">CURRENT STREAK</text>
+        <text x="10" y="34" font-family="monospace" font-size="15" font-weight="800" fill="#10b981">07 Wins</text>
+      </g>
+    </g>
+
+    <line x1="160" y1="46" x2="160" y2="380" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+
+    <g transform="translate(176, 64)">
+      <g transform="translate(60, 10)">
+        <path d="M 10 140 L 70 140 M 30 140 L 30 10 L 100 10 L 100 30" fill="none" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
+        
+        <circle cx="100" cy="42" r="12" fill="none" stroke="#f8fafc" stroke-width="3"/>
+        <line x1="100" y1="54" x2="100" y2="94" stroke="#f8fafc" stroke-width="3" stroke-linecap="round"/>
+        
+        <line x1="100" y1="64" x2="80" y2="78" stroke="#475569" stroke-width="2.5" opacity="0.3"/>
+        <line x1="100" y1="64" x2="120" y2="78" stroke="#475569" stroke-width="2.5" opacity="0.3"/>
+        <line x1="100" y1="94" x2="82" y2="120" stroke="#475569" stroke-width="2.5" opacity="0.3"/>
+        <line x1="100" y1="94" x2="118" y2="120" stroke="#475569" stroke-width="2.5" opacity="0.3"/>
+      </g>
+
+      <g transform="translate(20, 195)">
+        <rect x="0" y="0" width="22" height="28" rx="4" fill="#1f2937"/>
+        <text x="11" y="19" font-family="monospace" font-size="14" font-weight="800" fill="#f8fafc" text-anchor="middle">J</text>
+        
+        <rect x="28" y="0" width="22" height="28" rx="4" fill="#111827" stroke="#475569" stroke-width="1"/>
+        <line x1="34" y1="20" x2="44" y2="20" stroke="#94a3b8" stroke-width="2"/>
+        
+        <rect x="56" y="0" width="22" height="28" rx="4" fill="#1f2937"/>
+        <text x="67" y="19" font-family="monospace" font-size="14" font-weight="800" fill="#f8fafc" text-anchor="middle">V</text>
+        
+        <rect x="84" y="0" width="22" height="28" rx="4" fill="#111827" stroke="#475569" stroke-width="1"/>
+        <line x1="90" y1="20" x2="100" y2="20" stroke="#94a3b8" stroke-width="2"/>
+        
+        <rect x="112" y="0" width="22" height="28" rx="4" fill="#1f2937"/>
+        <text x="123" y="19" font-family="monospace" font-size="14" font-weight="800" fill="#f8fafc" text-anchor="middle">S</text>
+        
+        <rect x="140" y="0" width="22" height="28" rx="4" fill="#111827" stroke="#475569" stroke-width="1"/>
+        <line x1="146" y1="20" x2="156" y2="20" stroke="#94a3b8" stroke-width="2"/>
+        
+        <rect x="168" y="0" width="22" height="28" rx="4" fill="#111827" stroke="#475569" stroke-width="1"/>
+        <line x1="174" y1="20" x2="184" y2="20" stroke="#94a3b8" stroke-width="2"/>
+        
+        <rect x="196" y="0" width="22" height="28" rx="4" fill="#1f2937"/>
+        <text x="207" y="19" font-family="monospace" font-size="14" font-weight="800" fill="#f8fafc" text-anchor="middle">P</text>
+        
+        <rect x="224" y="0" width="22" height="28" rx="4" fill="#111827" stroke="#475569" stroke-width="1"/>
+        <line x1="230" y1="20" x2="240" y2="20" stroke="#94a3b8" stroke-width="2"/>
+        
+        <rect x="252" y="0" width="22" height="28" rx="4" fill="#1f2937"/>
+        <text x="263" y="19" font-family="monospace" font-size="14" font-weight="800" fill="#f8fafc" text-anchor="middle">T</text>
+      </g>
+    </g>
+
+    <line x1="510" y1="46" x2="510" y2="380" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+
+    <g transform="translate(526, 64)">
+      <text x="0" y="12" font-family="-apple-system, sans-serif" font-size="10" font-weight="700" fill="#475569" letter-spacing="0.05em">VIRTUAL INPUT HOVER KEYPAD</text>
+      
+      <g transform="translate(0, 24)">
+        <rect width="22" height="22" rx="5" fill="#1f2937"/>
+        <text x="11" y="14" font-family="monospace" font-size="10" font-weight="700" fill="#94a3b8" text-anchor="middle">A</text>
+        
+        <rect x="26" y="0" width="22" height="22" rx="5" fill="#1f2937"/>
+        <text x="37" y="14" font-family="monospace" font-size="10" font-weight="700" fill="#94a3b8" text-anchor="middle">B</text>
+        
+        <rect x="52" y="0" width="22" height="22" rx="5" fill="rgba(239, 68, 68, 0.15)" stroke="#ef4444" stroke-width="1" filter="url(#glowRed)"/>
+        <text x="63" y="14" font-family="monospace" font-size="10" font-weight="700" fill="#ef4444" text-anchor="middle">C</text>
+        
+        <rect x="78" y="0" width="22" height="22" rx="5" fill="#1f2937"/>
+        <text x="89" y="14" font-family="monospace" font-size="10" font-weight="700" fill="#94a3b8" text-anchor="middle">D</text>
+        
+        <rect x="104" y="0" width="22" height="22" rx="5" fill="#1f2937"/>
+        <text x="115" y="14" font-family="monospace" font-size="10" font-weight="700" fill="#94a3b8" text-anchor="middle">E</text>
+        
+        <rect y="26" width="22" height="22" rx="5" fill="#1f2937"/>
+        <text x="11" y="40" font-family="monospace" font-size="10" font-weight="700" fill="#94a3b8" text-anchor="middle">F</text>
+        
+        <rect x="26" y="26" width="22" height="22" rx="5" fill="#1f2937"/>
+        <text x="37" y="40" font-family="monospace" font-size="10" font-weight="700" fill="#94a3b8" text-anchor="middle">G</text>
+        
+        <rect x="52" y="26" width="22" height="22" rx="5" fill="#1f2937"/>
+        <text x="63" y="40" font-family="monospace" font-size="10" font-weight="700" fill="#94a3b8" text-anchor="middle">H</text>
+        
+        <rect x="78" y="26" width="22" height="22" rx="5" fill="rgba(16, 185, 129, 0.15)" stroke="#10b981" stroke-width="1" filter="url(#glowGreen)"/>
+        <text x="89" y="40" font-family="monospace" font-size="10" font-weight="700" fill="#10b981" text-anchor="middle">I</text>
+        
+        <rect x="104" y="26" width="22" height="22" rx="5" fill="rgba(16, 185, 129, 0.15)" stroke="#10b981" stroke-width="1" filter="url(#glowGreen)"/>
+        <text x="115" y="40" font-family="monospace" font-size="10" font-weight="700" fill="#10b981" text-anchor="middle">J</text>
+
+        <rect y="52" width="22" height="22" rx="5" fill="#1f2937"/>
+        <text x="11" y="66" font-family="monospace" font-size="10" font-weight="700" fill="#94a3b8" text-anchor="middle">K</text>
+        <rect x="26" y="52" width="22" height="22" rx="5" fill="#1f2937"/>
+        <text x="37" y="66" font-family="monospace" font-size="10" font-weight="700" fill="#94a3b8" text-anchor="middle">L</text>
+        <rect x="52" y="52" width="22" height="22" rx="5" fill="#1f2937"/>
+        <text x="63" y="66" font-family="monospace" font-size="10" font-weight="700" fill="#94a3b8" text-anchor="middle">M</text>
+        <rect x="78" y="52" width="22" height="22" rx="5" fill="#1f2937"/>
+        <text x="89" y="66" font-family="monospace" font-size="10" font-weight="700" fill="#94a3b8" text-anchor="middle">N</text>
+        <rect x="104" y="52" width="22" height="22" rx="5" fill="#1f2937"/>
+        <text x="115" y="66" font-family="monospace" font-size="10" font-weight="700" fill="#94a3b8" text-anchor="middle">O</text>
+
+        <rect y="78" width="22" height="22" rx="5" fill="#1f2937"/>
+        <text x="11" y="92" font-family="monospace" font-size="10" font-weight="700" fill="#94a3b8" text-anchor="middle">P</text>
+        <rect x="26" y="78" width="22" height="22" rx="5" fill="#1f2937"/>
+        <text x="37" y="92" font-family="monospace" font-size="10" font-weight="700" fill="#94a3b8" text-anchor="middle">Q</text>
+        <rect x="52" y="78" width="22" height="22" rx="5" fill="#1f2937"/>
+        <text x="63" y="92" font-family="monospace" font-size="10" font-weight="700" fill="#94a3b8" text-anchor="middle">R</text>
+        <rect x="78" y="78" width="22" height="22" rx="5" fill="#1f2937"/>
+        <text x="89" y="92" font-family="monospace" font-size="10" font-weight="700" fill="#94a3b8" text-anchor="middle">S</text>
+        <rect x="104" y="78" width="22" height="22" rx="5" fill="#1f2937"/>
+        <text x="115" y="92" font-family="monospace" font-size="10" font-weight="700" fill="#94a3b8" text-anchor="middle">T</text>
+
+        <rect y="104" width="22" height="22" rx="5" fill="#1f2937"/>
+        <text x="11" y="118" font-family="monospace" font-size="10" font-weight="700" fill="#94a3b8" text-anchor="middle">U</text>
+        <rect x="26" y="104" width="22" height="22" rx="5" fill="#1f2937"/>
+        <text x="37" y="118" font-family="monospace" font-size="10" font-weight="700" fill="#94a3b8" text-anchor="middle">V</text>
+        <rect x="52" y="104" width="22" height="22" rx="5" fill="#1f2937"/>
+        <text x="63" y="118" font-family="monospace" font-size="10" font-weight="700" fill="#94a3b8" text-anchor="middle">W</text>
+        <rect x="78" y="104" width="22" height="22" rx="5" fill="#1f2937"/>
+        <text x="89" y="118" font-family="monospace" font-size="10" font-weight="700" fill="#94a3b8" text-anchor="middle">X</text>
+        <rect x="104" y="104" width="22" height="22" rx="5" fill="#1f2937"/>
+        <text x="115" y="118" font-family="monospace" font-size="10" font-weight="700" fill="#94a3b8" text-anchor="middle">Y</text>
+      </g>
+    </g>
+  </g>
+
+  <g transform="translate(180, 440)">
+    <rect width="440" height="42" rx="21" fill="rgba(4, 6, 11, 0.95)" stroke="rgba(148, 163, 184, 0.15)" stroke-width="1.5"/>
+    
+    <text x="28" y="26" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="800" fill="#f8fafc" letter-spacing="0.06em">HUNGAMA WORD GAME</text>
+    <circle cx="164" cy="22" r="2" fill="#475569" />
+    
+    <text x="180" y="26" font-family="monospace" font-size="12" font-weight="700" fill="#38bdf8">HTML5</text>
+    <text x="230" y="26" font-family="monospace" font-size="12" font-weight="700" fill="#10b981">CSS3</text>
+    <text x="276" y="26" font-family="monospace" font-size="12" font-weight="700" fill="#f59e0b">ES6+</text>
+    
+    <rect x="324" y="13" width="88" height="16" rx="4" fill="rgba(56, 189, 248, 0.08)" stroke="rgba(56, 189, 248, 0.15)" stroke-width="1"/>
+    <text x="330" y="24" font-family="-apple-system, sans-serif" font-size="8" font-weight="800" fill="#38bdf8" letter-spacing="0.02em">STRING_REDUCE</text>
+  </g>
+</svg>

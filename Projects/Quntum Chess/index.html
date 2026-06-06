@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quantum Chess — Micro-State Board</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <header id="header">
+      <h1><span class="quantum-symbol">⚛</span> QUANTUM CHESS</h1>
+      <div id="header-controls">
+        <div id="turn-indicator">White to move</div>
+        <div id="game-status">Select a piece</div>
+      </div>
+    </header>
+    <main id="main">
+      <section id="board-section">
+        <div id="chess-board"></div>
+      </section>
+      <aside id="sidebar">
+        <div id="controls">
+          <button id="quantum-toggle" class="btn" title="Toggle quantum-split mode">🌀 Quantum Split</button>
+          <button id="reset-btn" class="btn">⟳ Reset</button>
+        </div>
+        <div id="quantum-log">
+          <div class="log-header">QUANTUM LOG</div>
+        </div>
+      </aside>
+    </main>
+  </div>
+  <div id="promotion-overlay" class="hidden">
+    <div id="promotion-dialog">
+      <div class="promo-title">PROMOTE PAWN</div>
+      <div class="promo-options">
+        <button class="promo-btn" data-piece="knight">♞ Knight</button>
+        <button class="promo-btn" data-piece="rook">♜ Rook</button>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

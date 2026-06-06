@@ -1,0 +1,222 @@
+/* Reset & Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #1e1e24;
+  color: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.piano-container {
+  text-align: center;
+  background: #2a2a35;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  width: max-content; 
+  max-width: 100%;
+}
+
+.piano-header {
+  margin-bottom: 20px;
+}
+
+.piano-header h1 {
+  font-size: 2rem;
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+.piano-header p {
+  color: #a0a0b0;
+  font-size: 0.95rem;
+}
+
+/* Controls Panel Styles */
+.controls-panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px; /* Forces a healthy minimum buffer gap between the groups */
+  background: #1a1a22;
+  padding: 14px 20px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid #3a3a45;
+}
+
+.control-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.9rem;
+  color: #e0e0e0;
+}
+
+.control-group select {
+  background: #2a2a35;
+  color: #fff;
+  border: 1px solid #4a4a55;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  outline: none;
+  font-family: inherit;
+}
+
+/* Custom Checkbox/Sustain Toggle (Premium Switch UI) */
+.toggle-container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  gap: 12px;
+  user-select: none;
+}
+
+/* Hide default checkbox native style */
+.toggle-container input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+/* Custom modern switch track slider background */
+.checkmark {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 22px;
+  background-color: #4a4a55;
+  border-radius: 22px;
+  transition: background-color 0.2s ease;
+}
+
+/* Inside white indicator knob circle */
+.checkmark::after {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  width: 16px;
+  height: 16px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+}
+
+/* Active state color shift & transform shifts */
+.toggle-container input:checked + .checkmark {
+  background-color: #4f46e5; /* Match our indigo visualizer theme */
+}
+
+.toggle-container input:checked + .checkmark::after {
+  transform: translateX(22px);
+}
+
+/* Visualizer Canvas */
+#visualizer {
+  display: block;
+  background: #111;
+  width: 100%;
+  height: 80px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  border: 1px solid #222;
+}
+
+/* Keyboard Layout Container */
+.piano-keyboard {
+  display: inline-flex;
+  position: relative;
+  background: #111;
+  padding: 20px 10px 10px 10px;
+  border-radius: 8px;
+  border-top: 15px solid #222;
+  box-shadow: inset 0 8px 10px rgba(0,0,0,0.6);
+  user-select: none;
+}
+
+/* White Key Styles */
+.key.white {
+  height: 240px;
+  width: 60px;
+  background: linear-gradient(to bottom, #eeeeee 0%, #ffffff 100%);
+  border: 1px solid #ccc;
+  border-radius: 0 0 6px 6px;
+  position: relative;
+  cursor: pointer;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 15px;
+  box-shadow: 0 4px 5px rgba(0,0,0,0.2);
+}
+
+.key.white:active, .key.white.active {
+  background: linear-gradient(to bottom, #e0e0e0 0%, #d5d5d5 100%);
+  padding-bottom: 12px;
+  border-top: none;
+  box-shadow: inset 0 4px 5px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.2);
+}
+
+/* Black Key Styles */
+.key.black {
+  height: 150px;
+  width: 36px;
+  background: linear-gradient(to bottom, #444 0%, #111 100%);
+  border: 1px solid #000;
+  border-radius: 0 0 4px 4px;
+  position: absolute;
+  cursor: pointer;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 10px;
+  box-shadow: 0 3px 5px rgba(0,0,0,0.4);
+}
+
+.key.black:active, .key.black.active {
+  background: linear-gradient(to bottom, #222 0%, #050505 100%);
+  box-shadow: inset 0 2px 3px rgba(0,0,0,0.4), 0 1px 1px rgba(0,0,0,0.2);
+}
+
+/* Relative Black Key positioning math offsets */
+.key[data-note="C#4"] { left: calc(10px + (60px * 1) - 18px); }
+.key[data-note="D#4"] { left: calc(10px + (60px * 2) - 18px); }
+.key[data-note="F#4"] { left: calc(10px + (60px * 4) - 18px); }
+.key[data-note="G#4"] { left: calc(10px + (60px * 5) - 18px); }
+.key[data-note="A#4"] { left: calc(10px + (60px * 6) - 18px); }
+
+/* Labels styling */
+.label {
+  font-weight: 600;
+  font-size: 0.85rem;
+  pointer-events: none;
+}
+
+.key.white .label {
+  color: #666;
+}
+
+.key.black .label {
+  color: #aaa;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .key, .checkmark, .checkmark::after {
+    transition: none !important;
+  }
+}

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zaffron Food Delivery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <span class="material-symbols-outlined icon">restaurant</span>
+        <h1>Zaffron</h1>
+    </div>
+
+    <div class="search-box">
+        <span class="material-symbols-outlined search-icon">search</span>
+        <input type="text" id="searchInput" placeholder="Search for your favorite food..." onkeyup="filterRestaurants()">
+    </div>
+
+    <div class="header-actions">
+        <button id="cartToggleBtn" class="icon-btn" onclick="toggleCart()">
+            <span class="material-symbols-outlined">shopping_cart</span>
+            <span id="cartBadge" class="badge">0</span>
+        </button>
+        <button id="loginBtn" class="text-btn">Login</button>
+        <button id="profileBtn" class="icon-btn" style="display:none;">
+            <span class="material-symbols-outlined">person</span>
+        </button>
+    </div>
+</header>
+
+<main>
+    <section class="hero-section">
+        <h2>Craving something delicious?</h2>
+        <p>Get the best food from top restaurants delivered to your door.</p>
+    </section>
+
+    <section class="restaurant-container" id="restaurantContainer"></section>
+</main>
+
+<!-- Cart Sidebar -->
+<aside class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+        <h2>Your Cart</h2>
+        <button class="close-btn" onclick="toggleCart()">
+            <span class="material-symbols-outlined">close</span>
+        </button>
+    </div>
+    
+    <div id="cartItems" class="cart-items-container">
+        <!-- Empty cart message will be shown here by default -->
+        <div class="empty-cart">
+            <span class="material-symbols-outlined">shopping_bag</span>
+            <p>Your cart is empty.</p>
+        </div>
+    </div>
+
+    <div class="cart-footer">
+        <div class="coupon-box">
+            <input type="text" id="couponInput" placeholder="Coupon code (e.g. WELCOME50)">
+            <button onclick="applyCoupon()">Apply</button>
+        </div>
+        <div class="totals">
+            <div class="total-row discount-row" id="discountRow" style="display: none;">
+                <span>Discount</span>
+                <span class="discount-amount">-₹<span id="discountAmount">0</span></span>
+            </div>
+            <div class="total-row grand-total">
+                <span>Total</span>
+                <span>₹<span id="cartTotal">0</span></span>
+            </div>
+        </div>
+        <button class="checkout-btn" onclick="openCheckout()">Checkout Now</button>
+    </div>
+</aside>
+
+<!-- Overlays -->
+<div class="overlay" id="sidebarOverlay" onclick="toggleCart()"></div>
+
+<!-- Modals -->
+<div id="profileModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>User Profile</h2>
+            <button class="close-btn" onclick="closeProfile()">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="user-info">
+                <span class="material-symbols-outlined user-avatar">account_circle</span>
+                <p id="userName" class="user-name">Guest</p>
+            </div>
+            
+            <div class="order-history-section">
+                <h3>Order History</h3>
+                <div id="orderHistoryList" class="order-list">
+                    <p class="no-orders">No past orders.</p>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="danger-btn" onclick="logout()">Logout</button>
+        </div>
+    </div>
+</div>
+
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Login to Zaffron</h2>
+            <button class="close-btn" onclick="closeLogin()">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="input-group">
+                <span class="material-symbols-outlined">person</span>
+                <input type="text" id="username" placeholder="Username">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="primary-btn" onclick="login()">Login</button>
+        </div>
+    </div>
+</div>
+
+<div id="checkoutModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Complete Checkout</h2>
+            <button class="close-btn" onclick="closeCheckout()">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <textarea id="address" placeholder="Enter Delivery Address..."></textarea>
+            
+            <h3 class="payment-title">Payment Method</h3>
+            <div class="payment-options">
+                <label class="payment-card">
+                    <input type="radio" name="payment" value="COD" checked>
+                    <span class="material-symbols-outlined">payments</span>
+                    <span>Cash on Delivery</span>
+                </label>
+                <label class="payment-card">
+                    <input type="radio" name="payment" value="UPI">
+                    <span class="material-symbols-outlined">qr_code_scanner</span>
+                    <span>UPI</span>
+                </label>
+                <label class="payment-card">
+                    <input type="radio" name="payment" value="CARD">
+                    <span class="material-symbols-outlined">credit_card</span>
+                    <span>Card</span>
+                </label>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="primary-btn" onclick="placeOrder()">Confirm Order</button>
+        </div>
+    </div>
+</div>
+
+<div id="toast" class="toast">
+    <span class="material-symbols-outlined toast-icon">info</span>
+    <span id="toastMsg"></span>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

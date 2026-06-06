@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Stroop Interference Grid</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="app-header">
+        <div class="app-logo">S</div>
+        <h1 class="app-title">Stroop</h1>
+        <span class="app-subtitle">Cognitive Control</span>
+      </div>
+      <div class="metrics-dashboard">
+        <div class="metric-card">
+          <span class="metric-label">Current Streak</span>
+          <span class="metric-value" id="streak-display">0</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Best Streak</span>
+          <span class="metric-value" id="best-display">0</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Total Rounds</span>
+          <span class="metric-value" id="rounds-display">0</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Accuracy</span>
+          <span class="metric-value" id="accuracy-display">0%</span>
+        </div>
+      </div>
+      <button id="reset-btn" class="btn-primary">Reset Simulation Suite</button>
+    </aside>
+    <main class="main-content" id="main-content">
+      <div class="playground">
+        <div class="rule-banner" id="rule-banner">RULE: TAP THE TEXT COLOR</div>
+        <div class="stimulus-area">
+          <div class="timer-track">
+            <div class="timer-fill" id="timer-fill"></div>
+          </div>
+          <div class="stroop-stimulus" id="stroop-stimulus">RED</div>
+        </div>
+        <div class="target-grid" id="target-grid"></div>
+      </div>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

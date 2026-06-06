@@ -1,0 +1,327 @@
+/* --- CSS Custom Properties & Design Tokens --- */
+:root {
+    --bg-main: #070a13;
+    --bg-panel: #111827;
+    --bg-panel-light: #1f2937;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --border-color: #2e3440;
+    
+    /* Pad Color Profiles (Idle States) */
+    --pad-green: #047857;
+    --pad-red: #b91c1c;
+    --pad-yellow: #b45309;
+    --pad-blue: #1d4ed8;
+
+    /* Pad Active Glow Profiles */
+    --glow-green: #10b981;
+    --glow-red: #ef4444;
+    --glow-yellow: #f59e0b;
+    --glow-blue: #3b82f6;
+
+    /* Timing / Easings */
+    --transition-speed: 0.15s;
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- Base Resets & Layout Core --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 20px;
+}
+
+/* Master Application Dashboard Scaffold */
+.app-container {
+    width: 100%;
+    max-width: 1200px;
+    height: 780px;
+    background-color: var(--bg-panel);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    overflow: hidden;
+}
+
+/* --- Left Sidebar Column CSS --- */
+.sidebar {
+    background-color: rgba(10, 15, 30, 0.4);
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.brand h2 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+}
+
+.accent-text {
+    color: var(--glow-blue);
+    text-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+}
+
+.subtitle {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-top: 4px;
+}
+
+.metrics-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 40px 0;
+}
+
+.metric-card {
+    background-color: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.metric-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* Monospaced Layout Stability Assembly */
+.metric-value {
+    font-family: ui-monospace, Consolas, "SF Mono", Menlo, Monaco, monospace;
+    font-size: 2.25rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.status-panel {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-left: 3px solid var(--text-secondary);
+    padding: 16px;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: auto;
+}
+
+.status-label {
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: var(--text-secondary);
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.status-prompt {
+    font-family: ui-monospace, Consolas, monospace;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+/* Dynamic State Status Text Colors */
+.status-watch { color: var(--glow-yellow); }
+.status-user { color: var(--glow-green); }
+.status-error { color: var(--glow-red); animation: shake 0.4s ease; }
+
+.primary-btn {
+    background: linear-gradient(135deg, #1f2937, #111827);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    padding: 18px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all 0.2s var(--ease-out-expo);
+}
+
+.primary-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+}
+
+.primary-btn:active {
+    transform: scale(0.98);
+}
+
+/* --- Right Main Column CSS (Simon Board Layout Matrix) --- */
+.board-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: radial-gradient(circle at center, rgba(17, 24, 39, 0.8) 0%, var(--bg-main) 100%);
+}
+
+.simon-board {
+    position: relative;
+    width: 480px;
+    height: 480px;
+    border-radius: 50%;
+    background-color: #030712;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 12px;
+    padding: 12px;
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.02), 
+                0 30px 60px rgba(0, 0, 0, 0.6);
+}
+
+/* Interactive Pad Execution Layout */
+.pad {
+    position: relative;
+    cursor: pointer;
+    transition: background-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+.pad-green {
+    border-top-left-radius: 100% 0 0 0;
+    background-color: var(--pad-green);
+    border-top-left-radius: 100%;
+}
+.pad-green.active {
+    background-color: var(--glow-green) !important;
+    box-shadow: 0 0 40px var(--glow-green);
+    z-index: 10;
+}
+
+.pad-red {
+    background-color: var(--pad-red);
+    border-top-right-radius: 100%;
+}
+.pad-red.active {
+    background-color: var(--glow-red) !important;
+    box-shadow: 0 0 40px var(--glow-red);
+    z-index: 10;
+}
+
+.pad-yellow {
+    background-color: var(--pad-yellow);
+    border-bottom-left-radius: 100%;
+}
+.pad-yellow.active {
+    background-color: var(--glow-yellow) !important;
+    box-shadow: 0 0 40px var(--glow-yellow);
+    z-index: 10;
+}
+
+.pad-blue {
+    background-color: var(--pad-blue);
+    border-bottom-right-radius: 100%;
+}
+.pad-blue.active {
+    background-color: var(--glow-blue) !important;
+    box-shadow: 0 0 40px var(--glow-blue);
+    z-index: 10;
+}
+
+/* Center Cap Stabilization Ring */
+.board-center-cap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 110px;
+    height: 110px;
+    background-color: var(--bg-panel);
+    border-radius: 50%;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.8), 0 0 0 10px #030712;
+}
+
+.inner-ring {
+    width: 86px;
+    height: 86px;
+    border: 2px dashed rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+}
+
+/* --- Structural Modifier Constraints --- */
+.locked {
+    pointer-events: none !important;
+}
+
+/* --- Frame System Animations --- */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-6px); }
+    40%, 80% { transform: translateX(6px); }
+}
+
+.board-failure-flash {
+    animation: criticalFlash 0.4s ease-out;
+}
+
+@keyframes criticalFlash {
+    0% { box-shadow: 0 0 0 999px rgba(239, 68, 68, 0.4); }
+    100% { box-shadow: 0 0 0 999px rgba(239, 68, 68, 0); }
+}
+
+/* Responsive Scaling Support Matrix */
+@media(max-width: 900px) {
+    .app-container {
+        grid-template-columns: 1fr;
+        height: auto;
+        max-width: 500px;
+    }
+    .sidebar {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        padding: 24px;
+    }
+    .metrics-panel {
+        flex-direction: row;
+        margin: 20px 0;
+    }
+    .metric-card {
+        flex: 1;
+        padding: 12px;
+    }
+    .board-container {
+        padding: 40px 20px;
+    }
+    .simon-board {
+        width: 340px;
+        height: 340px;
+        gap: 8px;
+        padding: 8px;
+    }
+    .board-center-cap {
+        width: 80px;
+        height: 80px;
+    }
+    .inner-ring {
+        width: 60px;
+        height: 60px;
+    }
+}

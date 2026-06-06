@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aero Decrypter | Frutiger Aero Number Guessing Game</title>
+  <meta name="description" content="Penetrate the firewall in this nostalgic Windows Aero-styled number guessing game. Features bubble animations, 3D skeuomorphic glossy controls, and retro chime sound effects.">
+  <!-- Google Fonts for Humanist Sans-Serif Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Local stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Floating Bubble Background Decorations -->
+  <div id="bubble-container" class="bubble-container" aria-hidden="true">
+    <!-- Bubbles will be injected dynamically here by app.js -->
+  </div>
+
+  <!-- Vista/7 Style Aero Glass Window Cabinet -->
+  <div class="aero-window" id="app-window">
+    <!-- Aero Window Glass Titlebar -->
+    <header class="window-titlebar">
+      <div class="titlebar-info">
+        <img class="titlebar-icon" src="thumbnail.svg" alt="" width="16" height="16" />
+        <span class="titlebar-text">Aero Decrypter</span>
+      </div>
+      
+      <!-- Window Controls (Vista/7 Skeuomorphic Style) -->
+      <div class="window-controls">
+        <button id="sound-toggle" class="control-btn sound-btn" aria-label="Toggle Audio" title="Toggle audio feedback">
+          <!-- Audio On Icon -->
+          <svg id="sound-icon-on" viewBox="0 0 24 24" width="14" height="14" class="hidden">
+            <path fill="currentColor" d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.85 14,18.71V20.77C18,19.86 21,16.28 21,12C21,7.72 18,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.77 16.5,12M3,9V15H7L12,20V4L7,9H3Z" />
+          </svg>
+          <!-- Audio Off Icon -->
+          <svg id="sound-icon-off" viewBox="0 0 24 24" width="14" height="14">
+            <path fill="currentColor" d="M12,4L7,9H3V15H7L12,20V4M16.5,12A4.5,4.5 0 0,0 14,7.97V10.18L16.45,12.63C16.48,12.42 16.5,12.21 16.5,12M19,12C19,12.94 18.8,13.82 18.46,14.64L19.97,16.15C20.62,14.91 21,13.5 21,12A9,9 0 0,0 14,3.23V5.29C16.89,6.15 19,8.83 19,12M4.27,3L3,4.27L7.73,9H3V15H7L12,20V13.27L16.25,17.53C15.58,18.04 14.83,18.44 14,18.63V20.7C15.38,20.47 16.63,19.83 17.68,18.96L20.73,22L22,20.73L4.27,3Z" />
+          </svg>
+        </button>
+        <button class="control-btn min-btn" aria-label="Minimize" tabindex="-1"></button>
+        <button class="control-btn max-btn" aria-label="Maximize" tabindex="-1"></button>
+        <button id="close-btn" class="control-btn close-btn" aria-label="Close Game" title="Close application"></button>
+      </div>
+    </header>
+
+    <!-- Main Window Canvas/Work Area -->
+    <main class="window-canvas">
+      <!-- Aero Main Title -->
+      <section class="banner-section">
+        <h1 class="main-title">AERO DECRYPTER</h1>
+        <p class="main-desc">Guess the secret security code to bypass firewall penetration checks.</p>
+      </section>
+
+      <!-- Difficulties Selector Section -->
+      <section class="difficulty-panel" aria-label="Difficulty Selection">
+        <span class="panel-label">PENETRATION LEVEL</span>
+        <div class="segmented-control">
+          <input type="radio" id="diff-easy" name="difficulty" value="easy">
+          <label for="diff-easy">EASY (1-50)</label>
+          
+          <input type="radio" id="diff-medium" name="difficulty" value="medium" checked>
+          <label for="diff-medium">MEDIUM (1-100)</label>
+          
+          <input type="radio" id="diff-hard" name="difficulty" value="hard">
+          <label for="diff-hard">HARD (1-200)</label>
+        </div>
+      </section>
+
+      <!-- Game Status Dashboard -->
+      <section class="dashboard-panel" aria-label="Statistics Dashboard">
+        <!-- Target Range Card -->
+        <div class="stat-card range-card">
+          <span class="stat-label">TARGET BOUNDS</span>
+          <span id="range-display" class="stat-value text-blue">1 - 100</span>
+        </div>
+
+        <!-- Remaining Attempts Card -->
+        <div class="stat-card attempts-card">
+          <span class="stat-label">ATTEMPTS LEFT</span>
+          <div class="attempts-gauge-wrapper">
+            <span id="attempts-display" class="stat-value text-green">6</span>
+            <svg class="attempts-ring" viewBox="0 0 36 36">
+              <path class="ring-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+              <path id="ring-fill" class="ring-fill" stroke-dasharray="100, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+            </svg>
+          </div>
+        </div>
+
+        <!-- High Score Card -->
+        <div class="stat-card highscore-card">
+          <span class="stat-label">BEST RECORD</span>
+          <span id="highscore-display" class="stat-value text-gold">—</span>
+          <span class="highscore-subtext">(Fewest attempts)</span>
+        </div>
+      </section>
+
+      <!-- Grid layout split: Left: Inputs, Right: Clue History Log -->
+      <div class="arena-layout">
+        <!-- Left Side: Guess Form & Keypad -->
+        <section class="control-arena" aria-label="Guess Input Form">
+          <div class="input-container">
+            <input type="number" id="guess-input" placeholder="Enter number..." min="1" max="100" autocomplete="off" />
+            <button id="guess-btn" class="action-btn glow-green">SUBMIT GUESS</button>
+          </div>
+
+          <!-- Skeuomorphic Digit Dial Touch Keypad -->
+          <div class="keypad-panel">
+            <button class="key-btn" data-val="1">1</button>
+            <button class="key-btn" data-val="2">2</button>
+            <button class="key-btn" data-val="3">3</button>
+            <button class="key-btn" data-val="4">4</button>
+            <button class="key-btn" data-val="5">5</button>
+            <button class="key-btn" data-val="6">6</button>
+            <button class="key-btn" data-val="7">7</button>
+            <button class="key-btn" data-val="8">8</button>
+            <button class="key-btn" data-val="9">9</button>
+            <button id="key-clear" class="key-btn key-action" aria-label="Clear Input">CLR</button>
+            <button class="key-btn" data-val="0">0</button>
+            <button id="key-back" class="key-btn key-action" aria-label="Backspace">⌫</button>
+          </div>
+
+          <button id="restart-btn" class="action-btn glow-blue full-width">START NEW GAME</button>
+        </section>
+
+        <!-- Right Side: Clue Decryption Log -->
+        <section class="history-arena" aria-label="Decryption History">
+          <header class="history-header">
+            <span class="panel-label">DECRYPTION HISTORY</span>
+            <span id="history-counter" class="history-count">(0 guesses)</span>
+          </header>
+          
+          <div id="history-list" class="history-list">
+            <!-- Empty state illustration -->
+            <div id="history-empty" class="history-empty-state">
+              <div class="empty-icon-bubble">
+                <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                </svg>
+              </div>
+              <p>No decryption attempts logged yet. Select level and type a guess above.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- Decryption Result Popup Modals -->
+  <!-- Success Modal -->
+  <div id="success-modal" class="modal-backdrop hidden">
+    <div class="modal-content glass-card success-card">
+      <div class="modal-header">
+        <div class="modal-glow-logo success-logo">✨</div>
+        <h2 class="modal-title text-green">DECRYPTION SUCCESS</h2>
+        <p class="modal-subtitle">Security code successfully bypassed!</p>
+      </div>
+
+      <!-- High Score beat banner (hidden by default) -->
+      <div id="highscore-banner" class="highscore-banner hidden">
+        <span class="banner-sparkle">🏆</span>
+        <span class="banner-text">NEW BEST RECORD!</span>
+        <span class="banner-sparkle">🏆</span>
+      </div>
+
+      <div class="modal-stats">
+        <div class="stat-row">
+          <span>SECRET CODE</span>
+          <span id="success-code" class="modal-val text-blue">88</span>
+        </div>
+        <div class="stat-row">
+          <span>ATTEMPTS USED</span>
+          <span id="success-attempts" class="modal-val text-green">3</span>
+        </div>
+      </div>
+
+      <button id="modal-success-btn" class="action-btn glow-green">PLAY AGAIN</button>
+    </div>
+  </div>
+
+  <!-- Failure Modal -->
+  <div id="failure-modal" class="modal-backdrop hidden">
+    <div class="modal-content glass-card failure-card">
+      <div class="modal-header">
+        <div class="modal-glow-logo failure-logo">❌</div>
+        <h2 class="modal-title text-red">ACCESS DENIED</h2>
+        <p class="modal-subtitle">Firewall locked down due to system alerts.</p>
+      </div>
+
+      <div class="modal-stats">
+        <div class="stat-row">
+          <span>SECRET CODE WAS</span>
+          <span id="failure-code" class="modal-val text-red">54</span>
+        </div>
+        <div class="stat-row">
+          <span>DIFFICULTY</span>
+          <span id="failure-level" class="modal-val text-blue">MEDIUM</span>
+        </div>
+      </div>
+
+      <button id="modal-failure-btn" class="action-btn glow-blue">TRY AGAIN</button>
+    </div>
+  </div>
+
+  <!-- Local Script Module -->
+  <script src="app.js" type="module"></script>
+</body>
+</html>

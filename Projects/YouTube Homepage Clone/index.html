@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube Homepage Clone</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Font Awesome CDN for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+</head>
+<body>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <ul>
+      <li class="active"><i class="fas fa-home"></i> Home</li>
+      <li><i class="fas fa-fire"></i> Trending</li>
+      <li><i class="fas fa-play-circle"></i> Subscriptions</li>
+      <li><i class="fas fa-book"></i> Library</li>
+    </ul>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Search Bar -->
+    <header class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search videos...">
+      <button id="searchBtn"><i class="fas fa-search"></i></button>
+      <button id="clearBtn"><i class="fas fa-times"></i></button>
+    </header>
+
+    <!-- Filters -->
+    <div class="filters">
+      <button data-filter="All" class="active"><i class="fas fa-globe"></i> All</button>
+      <button data-filter="Music"><i class="fas fa-music"></i> Music</button>
+      <button data-filter="Gaming"><i class="fas fa-gamepad"></i> Gaming</button>
+      <button data-filter="News"><i class="fas fa-newspaper"></i> News</button>
+    </div>
+
+    <!-- Video Grid -->
+    <main id="videoGrid"></main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

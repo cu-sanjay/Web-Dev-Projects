@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arcade-Accurate Premium Simon Says</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="brand">
+                <h2>SIMON <span class="accent-text">SAYS</span></h2>
+                <p class="subtitle">Arcade-Fidelity Edition</p>
+            </div>
+
+            <div class="metrics-panel">
+                <div class="metric-card">
+                    <span class="metric-label">CURRENT ROUND</span>
+                    <div id="round-display" class="metric-value">00</div>
+                </div>
+                
+                <div class="metric-card">
+                    <span class="metric-label">HIGH SCORE</span>
+                    <div id="highscore-display" class="metric-value">00</div>
+                </div>
+            </div>
+
+            <div class="status-panel">
+                <span class="status-label">SYSTEM STATUS</span>
+                <div id="status-prompt" class="status-prompt">IDLE</div>
+            </div>
+
+            <button id="start-btn" class="primary-btn">START SIMULATION</button>
+        </aside>
+
+        <main class="board-container">
+            <div id="game-board" class="simon-board locked">
+                <div class="pad pad-green" data-pad="green" aria-label="Green Pad"></div>
+                <div class="pad pad-red" data-pad="red" aria-label="Red Pad"></div>
+                <div class="pad pad-yellow" data-pad="yellow" aria-label="Yellow Pad"></div>
+                <div class="pad pad-blue" data-pad="blue" aria-label="Blue Pad"></div>
+                <div class="board-center-cap">
+                    <div class="inner-ring"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

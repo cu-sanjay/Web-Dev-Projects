@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Word Scramble Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="score-top">
+        <span class="score-label">Personal Best</span>
+        <span class="score-value" id="highScore">0</span>
+      </div>
+      <h1>Word Scramble</h1>
+      <div class="score-top">
+        <span class="score-label">Score</span>
+        <span class="score-value current" id="currentScore">0</span>
+      </div>
+    </header>
+
+    <div class="timer-track">
+      <div class="timer-bar" id="timerBar"></div>
+      <span class="timer-text" id="timerText">30</span>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span>Scrambled Word</span>
+        <span class="card-round" id="roundNum">1/20</span>
+      </div>
+      <div class="scrambled" id="scrambled">
+        <span class="letter-badge">S</span>
+        <span class="letter-badge">C</span>
+        <span class="letter-badge">R</span>
+        <span class="letter-badge">M</span>
+        <span class="letter-badge">B</span>
+        <span class="letter-badge">L</span>
+        <span class="letter-badge">E</span>
+      </div>
+      <div class="hint-box" id="hintBox">
+        <span class="hint-icon">💡</span>
+        <span class="hint-text" id="hintText">Click "Get Hint" for a clue</span>
+      </div>
+      <div class="input-row">
+        <input type="text" id="wordInput" placeholder="Type your answer..." autocomplete="off" spellcheck="false"
+          autofocus>
+        <button class="btn btn-check" id="checkBtn">Check</button>
+      </div>
+      <div class="actions">
+        <button class="btn btn-hint" id="hintBtn">💡 Get Hint</button>
+        <button class="btn btn-skip" id="skipBtn">Skip →</button>
+      </div>
+      <div class="message" id="message"></div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-item">
+        <span class="stat-num" id="streakCount">0</span>
+        <span class="stat-lbl">Streak</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num" id="solvedCount">0</span>
+        <span class="stat-lbl">Solved</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num" id="hintsUsed">0</span>
+        <span class="stat-lbl">Hints</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

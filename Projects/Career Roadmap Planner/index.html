@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevPath - Career Roadmap Planner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-cyan">
+  <div class="app-container">
+    
+    <!-- Main Header -->
+    <header class="app-header">
+      <div class="logo-area">
+        <span class="logo-icon">🗺️</span>
+        <div>
+          <h1>DevPath</h1>
+          <p class="subtitle">Interactive Career Roadmap Planner</p>
+        </div>
+      </div>
+
+      <div class="header-overall-stats">
+        <div class="progress-circle-wrapper">
+          <svg class="progress-ring" width="60" height="60">
+            <circle class="progress-ring-bg" stroke="rgba(255,255,255,0.05)" stroke-width="4" fill="transparent" r="24" cx="30" cy="30"/>
+            <circle class="progress-ring-fill" id="overall-progress-circle" stroke="var(--accent-color)" stroke-width="4" fill="transparent" r="24" cx="30" cy="30"/>
+          </svg>
+          <div class="progress-percent" id="overall-progress-val">0%</div>
+        </div>
+        <div class="overall-meta">
+          <span class="meta-label">OVERALL PROGRESS</span>
+          <span class="meta-desc" id="completed-fraction">0 / 0 Skills</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="dashboard-layout">
+      
+      <!-- Central Roadmap Board Area -->
+      <section class="roadmap-board">
+        
+        <!-- Dropdown selectors -->
+        <div class="controls-card">
+          <div class="selector-group">
+            <label for="roadmap-select">Target Career</label>
+            <div class="select-wrapper">
+              <select id="roadmap-select">
+                <option value="frontend">Frontend Developer</option>
+                <option value="backend">Backend Developer</option>
+                <option value="data-science">Data Scientist</option>
+                <option value="ai-ml">AI / ML Engineer</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="filters-group">
+            <button class="action-btn outline" id="reset-progress-btn">Reset Path</button>
+          </div>
+        </div>
+
+        <!-- Render Timeline wrapper -->
+        <div class="roadmap-canvas" id="roadmap-canvas">
+          <!-- Dynamically generated timeline nodes render here -->
+        </div>
+
+      </section>
+
+      <!-- Sidebar Node Resource Details -->
+      <aside class="sidebar-details">
+        
+        <!-- Dynamic Detail Panel -->
+        <div class="detail-card active" id="detail-panel">
+          <div class="detail-header">
+            <div class="detail-icon" id="node-icon">💡</div>
+            <div>
+              <h2 id="node-title">Select a Skill</h2>
+              <span class="badge" id="node-status">PENDING</span>
+            </div>
+          </div>
+
+          <div class="detail-body">
+            <p id="node-description" class="desc-text">Click any skill node on the roadmap to view its study checkpoints, tutorials, and documentation resources.</p>
+            
+            <div class="checkpoints-section" id="checkpoints-container" style="display: none;">
+              <h4>Core Objectives</h4>
+              <ul class="checkpoints-list" id="checkpoints-list">
+                <!-- Checkpoints populated -->
+              </ul>
+            </div>
+
+            <div class="resources-section" id="resources-container" style="display: none;">
+              <h4>Recommended Resources</h4>
+              <div class="resources-list" id="resources-list">
+                <!-- Resource anchors populated -->
+              </div>
+            </div>
+          </div>
+
+          <div class="detail-footer" id="node-action-container" style="display: none;">
+            <button class="action-btn" id="mark-complete-btn">Mark Completed</button>
+          </div>
+        </div>
+
+        <!-- Path Progression History Logs -->
+        <div class="detail-card history-card">
+          <h3>Progression Summary</h3>
+          <div class="summary-list" id="summary-list">
+            <!-- Phase percentages summary list -->
+          </div>
+        </div>
+
+      </aside>
+
+    </main>
+
+  </div>
+
+  <footer class="author-credits">
+    Designed and Developed by <span>Mistry Vishwa</span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

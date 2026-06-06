@@ -1,0 +1,120 @@
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #0a0a12;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: 'Courier New', monospace;
+  overflow: hidden;
+}
+
+#game-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#game-canvas {
+  display: block;
+  border: 2px solid #0ff;
+  border-radius: 6px;
+  box-shadow:
+    0 0 10px #0ff,
+    0 0 30px rgba(0, 255, 255, 0.3),
+    inset 0 0 10px rgba(0, 255, 255, 0.05);
+  background: #0d0d1a;
+}
+
+#ui-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+}
+
+.score-panel {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  background: rgba(10, 10, 18, 0.7);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  border-radius: 4px;
+  padding: 8px 24px;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.15);
+}
+
+.score-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.score-label {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 700;
+}
+
+.score-value {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.player-score .score-value {
+  color: #0af;
+  text-shadow: 0 0 8px #0af, 0 0 20px rgba(0, 170, 255, 0.4);
+}
+
+.ai-score .score-value {
+  color: #f06;
+  text-shadow: 0 0 8px #f06, 0 0 20px rgba(255, 0, 102, 0.4);
+}
+
+.score-box.vs {
+  font-size: 14px;
+  font-weight: 700;
+  color: rgba(0, 255, 255, 0.4);
+  letter-spacing: 2px;
+}
+
+#game-status {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: #0ff;
+  text-shadow: 0 0 10px #0ff, 0 0 30px rgba(0, 255, 255, 0.3);
+  background: rgba(10, 10, 18, 0.6);
+  border: 1px solid rgba(0, 255, 255, 0.15);
+  border-radius: 4px;
+  padding: 8px 24px;
+  backdrop-filter: blur(4px);
+  margin-bottom: 40px;
+}
+
+#controls {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.25);
+  background: rgba(10, 10, 18, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 4px;
+  padding: 6px 16px;
+  backdrop-filter: blur(4px);
+}

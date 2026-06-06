@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gravitas // Connect Four Matrix</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="brand">
+                <h1 class="brand-title">GRAVITAS</h1>
+                <span class="brand-subtitle">Connect Four Matrix</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="metrics-panel">
+                <div class="metric-card">
+                    <span class="metric-label">CURRENT TURN</span>
+                    <div class="turn-indicator-wrapper">
+                        <div id="current-turn-indicator" class="turn-indicator player-one-bg"></div>
+                        <span id="current-turn-text" class="mono-text">PLAYER 1</span>
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <span class="metric-label">MATCH SCOREBOARD</span>
+                    <div class="scoreboard">
+                        <div class="score-row">
+                            <span class="score-name"><span class="dot p1-dot"></span> Player 1 (Red)</span>
+                            <span id="score-p1" class="score-value mono-text">0</span>
+                        </div>
+                        <div class="score-row">
+                            <span class="score-name"><span class="dot p2-dot"></span> Player 2 (Amber)</span>
+                            <span id="score-p2" class="score-value mono-text">0</span>
+                        </div>
+                        <div class="score-row">
+                            <span class="score-name">Draw Matches</span>
+                            <span id="score-draws" class="score-value mono-text">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="metric-card status-card">
+                    <span class="metric-label">SYSTEM STATUS</span>
+                    <div id="game-status-prompt" class="status-prompt">Initializing matrix...</div>
+                </div>
+            </div>
+
+            <button id="reset-btn" class="btn-primary">RESET BOARD</button>
+        </aside>
+
+        <main class="main-matrix">
+            <div class="board-wrapper">
+                <div id="selector-strip" class="selector-strip">
+                    <div class="column-preview" data-col="0"></div>
+                    <div class="column-preview" data-col="1"></div>
+                    <div class="column-preview" data-col="2"></div>
+                    <div class="column-preview" data-col="3"></div>
+                    <div class="column-preview" data-col="4"></div>
+                    <div class="column-preview" data-col="5"></div>
+                    <div class="column-preview" data-col="6"></div>
+                </div>
+
+                <div id="board-grid" class="board-grid">
+                    </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

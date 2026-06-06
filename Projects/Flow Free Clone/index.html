@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flow Free Clone</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-cyan">
+  <div class="game-container">
+    
+    <!-- Header Controls -->
+    <header class="game-header">
+      <div class="logo-area">
+        <span class="logo-icon">💧</span>
+        <h1>FlowFree</h1>
+      </div>
+
+      <div class="header-stats">
+        <div class="stat-box" title="Connected Flows">
+          <span class="stat-lbl">FLOWS</span>
+          <span class="stat-val" id="flows-count">0 / 0</span>
+        </div>
+        <div class="stat-box" title="Percentage of board covered">
+          <span class="stat-lbl">PIPE</span>
+          <span class="stat-val" id="coverage-percentage">0%</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-lbl">TIME</span>
+          <span class="stat-val" id="timer-counter">00:00</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Game Board Grid -->
+    <main class="game-layout">
+      
+      <!-- Grid Arena -->
+      <section class="grid-arena-card">
+        <div class="board-wrapper">
+          <div class="grid-container" id="grid-container">
+            <!-- Dynamically generated puzzle cells will render here -->
+          </div>
+          <!-- Transparent SVG overlay rendering the path lines -->
+          <svg class="lines-overlay" id="lines-overlay" xmlns="http://www.w3.org/2000/svg">
+            <g id="paths-group"></g>
+            <path id="temp-drag-path" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"></path>
+          </svg>
+        </div>
+      </section>
+
+      <!-- Sidebar Options -->
+      <aside class="sidebar-controls">
+        
+        <!-- Grid Dimension Setup -->
+        <div class="control-card">
+          <h3>Board Size</h3>
+          <div class="toggle-group" id="size-toggle">
+            <button class="toggle-btn active" data-size="5">5x5 Grid</button>
+            <button class="toggle-btn" data-size="6">6x6 Grid</button>
+            <button class="toggle-btn" data-size="7">7x7 Grid</button>
+          </div>
+        </div>
+
+        <div class="control-card">
+          <h3>Select Puzzle Level</h3>
+          <div class="select-wrapper">
+            <select id="level-select">
+              <!-- Dynamically populated options -->
+            </select>
+          </div>
+        </div>
+
+        <!-- Quick Game Controls -->
+        <div class="control-card btn-controls-card">
+          <button class="action-btn" id="reset-level-btn">Reset Grid</button>
+          <button class="action-btn outline" id="clear-paths-btn">Clear All</button>
+        </div>
+
+        <!-- How To Play Instructions -->
+        <div class="control-card instruction-card">
+          <h3>How To Play</h3>
+          <ul>
+            <li>Drag from a colored dot to draw a flow line.</li>
+            <li>Connect matching colored dots together.</li>
+            <li>Lines cannot cross or overlap other colors.</li>
+            <li>Fill <strong>every cell</strong> on the grid to complete the puzzle!</li>
+          </ul>
+        </div>
+        
+      </aside>
+    </main>
+
+    <!-- Victory Modal Overlay -->
+    <div class="modal-overlay" id="victory-modal">
+      <div class="modal-card">
+        <div class="win-trophy">✨</div>
+        <h2>Flow Completed!</h2>
+        <p>All colors are connected and the board is 100% covered.</p>
+        
+        <div class="victory-stats">
+          <div class="v-stat">
+            <span class="v-num" id="victory-flows">0/0</span>
+            <span class="v-lbl">Colors Connected</span>
+          </div>
+          <div class="v-stat">
+            <span class="v-num" id="victory-time">00:00</span>
+            <span class="v-lbl">Elapsed Time</span>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button class="modal-btn" id="next-level-btn">Next Level</button>
+          <button class="modal-btn outline" id="modal-close-btn">View Grid</button>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <footer class="author-credits">
+    Designed and Developed by <span>Mistry Vishwa</span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

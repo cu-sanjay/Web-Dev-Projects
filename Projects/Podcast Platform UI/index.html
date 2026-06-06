@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Podcast Platform UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo"><i class="fa-solid fa-microphone-lines"></i> <span>PodStream</span></div>
+        <nav class="menu">
+            <a href="#" class="active"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="#"><i class="fa-solid fa-compass"></i> Discover</a>
+            <a href="#"><i class="fa-solid fa-heart"></i> Favorites</a>
+            <a href="#"><i class="fa-solid fa-clock"></i> History</a>
+        </nav>
+    </div>
+    <div class="main-content">
+        <header>
+            <div class="search-bar"><i class="fa-solid fa-magnifying-glass"></i><input type="text" placeholder="Search podcasts..."></div>
+            <div class="user-profile"><i class="fa-solid fa-bell notification"></i><div class="avatar">AF</div></div>
+        </header>
+        <section class="featured">
+            <div class="featured-text">
+                <span class="tag">Trending No. 1</span>
+                <h1>The Data Science Journey</h1>
+                <p>Explore AI, Machine Learning, and tech career growth with expert interviews.</p>
+                <button class="btn-play" onclick="playPodcast('The Data Science Journey', 'Ayesha Farooq', 'linear-gradient(135deg, #4f46e5, #06b6d4)')"><i class="fa-solid fa-play"></i> Listen Now</button>
+            </div>
+        </section>
+        <section class="episodes-section">
+            <h2>Popular Episodes</h2>
+            <div class="episode-grid">
+                <div class="episode-card" onclick="playPodcast('Ep. 45 - Advanced CSS Layouts', 'Web Dev Masterclass', 'linear-gradient(45deg, #f43f5e, #ed64a6)')">
+                    <div class="card-img card-img-1"><i class="fa-solid fa-play play-overlay"></i></div>
+                    <h3>Ep. 45 - Advanced CSS Layouts</h3><p>Web Development</p>
+                </div>
+                <div class="episode-card" onclick="playPodcast('Ep. 46 - Python Essentials', 'Data Science Studio', 'linear-gradient(45deg, #3b82f6, #2dd4bf)')">
+                    <div class="card-img card-img-2"><i class="fa-solid fa-play play-overlay"></i></div>
+                    <h3>Ep. 46 - Python Essentials</h3><p>Data Science</p>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="audio-player">
+        <div class="now-playing">
+          <div class="player-thumb" id="player-track-thumb" style="display: flex; align-items: center; justify-content: center; background: #232335;"><i class="fa-solid fa-music" style="color: var(--text-muted); font-size: 18px;"></i></div>
+            <div><h4 id="player-track-title">Select a podcast</h4><p id="player-track-artist">Click any card to play</p></div>
+        </div>
+        <div class="player-controls">
+            <button class="control-btn"><i class="fa-solid fa-backward-step"></i></button>
+            <button class="control-btn play-main" id="main-play-btn"><i class="fa-solid fa-circle-play"></i></button>
+            <button class="control-btn"><i class="fa-solid fa-forward-step"></i></button>
+        </div>
+        <div class="volume-control"><i class="fa-solid fa-volume-high"></i><div class="slider"></div></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
