@@ -325,6 +325,7 @@
             <a class="card__author" rel="noopener"></a>
             <div class="card__actions">
               <a class="btn btn--ghost btn--sm card__source" rel="noopener">Source</a>
+              <button class="btn btn--ghost btn--sm card__preview" type="button">Preview</button>
               <a class="btn btn--primary btn--sm card__open" target="_blank" rel="noopener">Open</a>
             </div>
           </div>
@@ -423,6 +424,43 @@
             }
         });
     </script>
+
+    <div id="preview-drawer" class="preview-drawer" aria-hidden="true">
+      <div class="preview-drawer__backdrop" aria-label="Close preview"></div>
+      <div class="preview-drawer__content">
+        <header class="preview-drawer__header">
+          <div class="preview-drawer__info">
+            <h2 id="preview-title" class="preview-drawer__title">Project Title</h2>
+            <p id="preview-author" class="preview-drawer__author">by Author</p>
+          </div>
+          <div class="preview-drawer__switcher">
+            <button class="btn btn--ghost btn--sm preview-switcher-btn is-active" data-device="desktop" aria-label="Desktop view">
+              <i class="fa-solid fa-desktop"></i>
+            </button>
+            <button class="btn btn--ghost btn--sm preview-switcher-btn" data-device="tablet" aria-label="Tablet view">
+              <i class="fa-solid fa-tablet-screen-button"></i>
+            </button>
+            <button class="btn btn--ghost btn--sm preview-switcher-btn" data-device="mobile" aria-label="Mobile view">
+              <i class="fa-solid fa-mobile-screen-button"></i>
+            </button>
+          </div>
+          <div class="preview-drawer__actions">
+            <a id="preview-external" class="btn btn--primary btn--sm" target="_blank" rel="noopener">Open App <i class="fa-solid fa-arrow-up-right-from-square" style="margin-left: 4px;"></i></a>
+            <button id="preview-close" class="btn btn--ghost btn--sm preview-drawer__close" aria-label="Close preview">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+        </header>
+        <div class="preview-drawer__body">
+          <div id="preview-spinner" class="preview-drawer__spinner">
+            <i class="fa-solid fa-circle-notch fa-spin fa-2xl"></i>
+          </div>
+          <div id="preview-iframe-wrapper" class="preview-drawer__iframe-wrapper device--desktop">
+            <iframe id="preview-iframe" class="preview-drawer__iframe" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals" aria-label="Interactive project preview"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
 
   </body>
 </html>

@@ -320,6 +320,7 @@ function render() {
     const author = node.querySelector(".card__author");
     const open = node.querySelector(".card__open");
     const source = node.querySelector(".card__source");
+    const previewBtn = node.querySelector(".card__preview");
 
     if (bookmarks.includes(p.slug)) {
       bookmarkBtn.classList.add("is-bookmarked");
@@ -362,6 +363,11 @@ function render() {
     }
     open.href = p.entry;
     source.href = `https://github.com/cu-sanjay/Web-Dev-Projects/tree/main/${p.folder}`;
+    if (previewBtn) {
+      previewBtn.addEventListener("click", () => {
+        openPreviewDrawer(p);
+      });
+    }
     grid.appendChild(node);
   }
 }
@@ -643,5 +649,83 @@ function filterComplexity(level) {
   document.querySelectorAll(".project-card").forEach(card => {
     const badge = card.querySelector(".complexity-badge");
     card.style.display = (level === "all" || badge.classList.contains(level)) ? "block" : "none";
+  });
+}
+
+// --- Preview Drawer Logic ---
+const previewDrawer = document.getElementById("preview-drawer");
+const previewBackdrop = document.querySelector(".preview-drawer__backdrop");
+const previewCloseBtn = document.getElementById("preview-close");
+const previewTitle = document.getElementById("preview-title");
+const previewAuthor = document.getElementById("preview-author");
+const previewExternal = document.getElementById("preview-external");
+const previewIframeWrapper = document.getElementById("preview-iframe-wrapper");
+const previewIframe = document.getElementById("preview-iframe");
+const previewSpinner = document.getElementById("preview-spinner");
+const switcherBtns = document.querySelectorAll(".preview-switcher-btn");
+
+function openPreviewDrawer(project) {
+  if (!previewDrawer) return;
+
+  // Set project details
+  previewTitle.textContent = project.title;
+  if (project.author) {
+    previewAuthor.textContent = "by " + project.author.name;
+    previewAuthor.hidden = false;
+  } else {
+    previewAuthor.hidden = true;
+  }
+  previewExternal.href = project.entry;
+
+  // Show spinner and load iframe
+  previewSpinner.classList.remove("is-hidden");
+  previewIframe.src = project.entry;
+
+  // Open the drawer
+  previewDrawer.classList.add("is-open");
+  previewDrawer.setAttribute("aria-hidden", "false");
+}
+
+function closePreviewDrawer() {
+  if (!previewDrawer) return;
+
+  previewDrawer.classList.remove("is-open");
+  previewDrawer.setAttribute("aria-hidden", "true");
+  
+  // Unload iframe to save CPU and stop audio
+  setTimeout(() => {
+    previewIframe.src = "about:blank";
+  }, 300); // wait for slide-out animation to finish
+}
+
+if (previewDrawer) {
+  // Load handler for spinner
+  previewIframe.addEventListener("load", () => {
+    // Avoid hiding spinner when iframe is blank
+    if (previewIframe.src !== "about:blank" && previewIframe.src !== window.location.href) {
+      previewSpinner.classList.add("is-hidden");
+    }
+  });
+
+  // Close handlers
+  previewCloseBtn.addEventListener("click", closePreviewDrawer);
+  previewBackdrop.addEventListener("click", closePreviewDrawer);
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && previewDrawer.classList.contains("is-open")) {
+      closePreviewDrawer();
+    }
+  });
+
+  // Device Switcher logic
+  switcherBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      // Update active button state
+      switcherBtns.forEach(b => b.classList.remove("is-active"));
+      btn.classList.add("is-active");
+
+      // Update iframe wrapper class
+      const device = btn.dataset.device; // desktop, tablet, mobile
+      previewIframeWrapper.className = `preview-drawer__iframe-wrapper device--${device}`;
+    });
   });
 }
