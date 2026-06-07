@@ -114,6 +114,7 @@ body {
   background: var(--bg);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  cursor: none;
 }
 
 h1, h2, h3 {
@@ -752,6 +753,17 @@ main {
   html { scroll-behavior: auto; }
 }
 
+.glow-cursor {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(0, 255, 200, 0.9);
+  box-shadow: 0 0 12px rgba(0, 255, 200, 0.9);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease;
+  z-index: 9999;
 @media (pointer: fine) {
     /* Wildcard * selector use karke website ke har ek tiny element se cursor hataya */
     *, *::before, *::after, 
