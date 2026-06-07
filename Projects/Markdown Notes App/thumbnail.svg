@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 300" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d0e15"/>
+      <stop offset="50%" stop-color="#141724"/>
+      <stop offset="100%" stop-color="#05060a"/>
+    </linearGradient>
+    
+    <!-- Accent Gradients -->
+    <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#60a5fa"/>
+    </linearGradient>
+    
+    <linearGradient id="secondaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ec4899"/>
+      <stop offset="100%" stop-color="#f472b6"/>
+    </linearGradient>
+
+    <linearGradient id="yellowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#fbbf24"/>
+    </linearGradient>
+    
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="500" height="300" rx="20" fill="url(#bgGrad)"/>
+  
+  <!-- Grid Lines -->
+  <path d="M 0,50 L 500,50 M 0,100 L 500,100 M 0,150 L 500,150 M 0,200 L 500,200 M 0,250 L 500,250" stroke="rgba(255,255,255,0.02)" stroke-width="1"/>
+  <path d="M 50,0 L 50,300 M 100,0 L 100,300 M 150,0 L 150,300 M 200,0 L 200,300 M 250,0 L 250,300 M 300,0 L 300,300 M 350,0 L 350,300 M 400,0 L 400,300 M 450,0 L 450,300" stroke="rgba(255,255,255,0.02)" stroke-width="1"/>
+  
+  <!-- Sidebar simulation -->
+  <rect x="0" y="0" width="75" height="300" rx="20" fill="rgba(20, 23, 36, 0.45)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  
+  <!-- Brand Logo markdown symbol -->
+  <g transform="translate(37, 40)">
+    <circle cx="0" cy="0" r="12" fill="url(#primaryGrad)"/>
+    <text x="0" y="4" font-family="'Outfit', sans-serif" font-weight="900" font-size="12" fill="#ffffff" text-anchor="middle">M↓</text>
+  </g>
+  
+  <!-- Sidebar items mock -->
+  <circle cx="37" cy="90" r="4" fill="#3b82f6"/>
+  <circle cx="37" cy="125" r="4" fill="rgba(255,255,255,0.2)"/>
+  <circle cx="37" cy="160" r="4" fill="rgba(255,255,255,0.2)"/>
+  <circle cx="37" cy="195" r="4" fill="rgba(255,255,255,0.2)"/>
+  
+  <!-- Header Title -->
+  <text x="95" y="42" font-family="'Outfit', sans-serif" font-weight="800" font-size="20" fill="#ffffff">Markdown Studio</text>
+  <text x="95" y="58" font-family="'Inter', sans-serif" font-weight="500" font-size="10" fill="#94a3b8">Real-time split pane note organizer</text>
+  
+  <!-- Stat Widget 1 (Total Notes count) -->
+  <rect x="360" y="20" width="120" height="40" rx="10" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.05)"/>
+  <text x="420" y="36" font-family="'Inter', sans-serif" font-weight="600" font-size="8" fill="#94a3b8" text-anchor="middle">TOTAL NOTES</text>
+  <text x="420" y="52" font-family="'Outfit', sans-serif" font-weight="800" font-size="14" fill="#ec4899" text-anchor="middle">24 Active</text>
+  
+  <!-- Core Design: Split Pane View Card -->
+  <g transform="translate(95, 80)">
+    <!-- Main Card Body -->
+    <rect width="250" height="195" rx="14" fill="rgba(30, 41, 59, 0.45)" stroke="rgba(255,255,255,0.06)" stroke-width="1.5" filter="url(#shadow)"/>
+    
+    <!-- Editor Pane (Left) -->
+    <rect x="12" y="30" width="105" height="150" rx="8" fill="rgba(255, 255, 255, 0.02)" stroke="rgba(255,255,255,0.05)"/>
+    <text x="20" y="22" font-family="'Outfit', sans-serif" font-weight="700" font-size="9" fill="#94a3b8">Markdown Editor</text>
+    
+    <!-- Editor text code lines mock -->
+    <text x="20" y="46" font-family="monospace" font-size="7" fill="#60a5fa"># Hello World</text>
+    <text x="20" y="60" font-family="monospace" font-size="7" fill="#94a3b8">This is **bold** text</text>
+    <text x="20" y="74" font-family="monospace" font-size="7" fill="#94a3b8">and some *italics*.</text>
+    <text x="20" y="88" font-family="monospace" font-size="7" fill="#f472b6">- Point one</text>
+    <text x="20" y="102" font-family="monospace" font-size="7" fill="#f472b6">- Point two</text>
+    <text x="20" y="116" font-family="monospace" font-size="7" fill="#fbbf24">`inline code` block</text>
+    
+    <!-- Live Render Pane (Right) -->
+    <rect x="133" y="30" width="105" height="150" rx="8" fill="rgba(255, 255, 255, 0.04)" stroke="rgba(255,255,255,0.08)"/>
+    <text x="141" y="22" font-family="'Outfit', sans-serif" font-weight="700" font-size="9" fill="#ffffff">Live Preview</text>
+    
+    <!-- Preview rendered result mock -->
+    <text x="141" y="48" font-family="'Outfit', sans-serif" font-weight="800" font-size="10" fill="#ffffff">Hello World</text>
+    <text x="141" y="62" font-family="'Inter', sans-serif" font-weight="400" font-size="7" fill="#e2e8f0">This is <tspan font-weight="bold">bold</tspan> text</text>
+    <text x="141" y="74" font-family="'Inter', sans-serif" font-weight="400" font-size="7" fill="#e2e8f0">and some <tspan font-style="italic">italics</tspan>.</text>
+    
+    <!-- Bullet list symbols -->
+    <circle cx="145" cy="88" r="1.5" fill="#ec4899"/>
+    <text x="151" y="90" font-family="'Inter', sans-serif" font-size="7" fill="#e2e8f0">Point one</text>
+    
+    <circle cx="145" cy="102" r="1.5" fill="#ec4899"/>
+    <text x="151" y="104" font-family="'Inter', sans-serif" font-size="7" fill="#e2e8f0">Point two</text>
+    
+    <!-- Code block tag -->
+    <rect x="141" y="112" width="70" height="12" rx="3" fill="rgba(245, 158, 11, 0.1)"/>
+    <text x="145" y="120" font-family="monospace" font-size="6" fill="#fbbf24">inline code</text>
+    <text x="218" y="120" font-family="'Inter', sans-serif" font-size="7" fill="#e2e8f0">block</text>
+  </g>
+  
+  <!-- Right Dashboard Graph (Canvas Stats / Tags list) -->
+  <g transform="translate(365, 80)">
+    <rect width="115" height="195" rx="14" fill="rgba(30, 41, 59, 0.45)" stroke="rgba(255,255,255,0.06)" stroke-width="1.5"/>
+    <text x="15" y="25" font-family="'Outfit', sans-serif" font-weight="700" font-size="11" fill="#ffffff">Categories</text>
+    
+    <!-- Progress bar 1 -->
+    <text x="15" y="45" font-family="'Inter', sans-serif" font-size="8" fill="#94a3b8">Work</text>
+    <rect x="15" y="49" width="85" height="5" rx="2.5" fill="rgba(255,255,255,0.03)"/>
+    <rect x="15" y="49" width="65" height="5" rx="2.5" fill="url(#primaryGrad)"/>
+    
+    <!-- Progress bar 2 -->
+    <text x="15" y="69" font-family="'Inter', sans-serif" font-size="8" fill="#94a3b8">Study</text>
+    <rect x="15" y="73" width="85" height="5" rx="2.5" fill="rgba(255,255,255,0.03)"/>
+    <rect x="15" y="73" width="40" height="5" rx="2.5" fill="url(#secondaryGrad)"/>
+    
+    <!-- Progress bar 3 -->
+    <text x="15" y="93" font-family="'Inter', sans-serif" font-size="8" fill="#94a3b8">Ideas</text>
+    <rect x="15" y="97" width="85" height="5" rx="2.5" fill="rgba(255,255,255,0.03)"/>
+    <rect x="15" y="97" width="25" height="5" rx="2.5" fill="url(#yellowGrad)"/>
+    
+    <!-- Active note status badge -->
+    <rect x="15" y="135" width="85" height="42" rx="8" fill="rgba(59, 130, 246, 0.08)" stroke="rgba(59,130,246,0.2)"/>
+    <circle cx="28" cy="156" r="6" fill="#3b82f6"/>
+    <path d="M 26,156 L 28,158 L 31,154" stroke="#ffffff" stroke-width="1.2" fill="none"/>
+    <text x="38" y="159" font-family="'Inter', sans-serif" font-weight="700" font-size="8" fill="#3b82f6">Saved</text>
+  </g>
+</svg>
