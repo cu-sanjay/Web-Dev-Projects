@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Number Guessing Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="hud">
+      <div class="hud-item">
+        <span class="hud-lbl">Attempts</span>
+        <span class="hud-val" id="attemptsVal">0</span>
+      </div>
+      <div class="hud-item">
+        <span class="hud-lbl">Range</span>
+        <span class="hud-val accent" id="rangeVal">1 – 100</span>
+      </div>
+      <div class="hud-item">
+        <span class="hud-lbl">Best</span>
+        <span class="hud-val" id="bestVal">—</span>
+      </div>
+    </header>
+
+    <div class="card">
+      <div class="feedback" id="feedback">Guess a number between 1 and 100</div>
+
+      <div class="input-row">
+        <input type="number" id="guessInput" class="guess-input" placeholder="0" min="1" max="100" autofocus>
+        <button class="btn primary" id="guessBtn">Guess</button>
+        <button class="btn secondary" id="resetBtn">Reset</button>
+      </div>
+    </div>
+
+    <div class="log-wrap">
+      <div class="log-header">History</div>
+      <div class="log" id="log"></div>
+    </div>
+
+    <div class="overlay" id="overlay">
+      <div class="modal">
+        <h2 class="modal-title">You Got It!</h2>
+        <div class="mo-stats">
+          <div class="mo-row"><span>Attempts</span><span id="moAttempts">0</span></div>
+          <div class="mo-row"><span>Best Record</span><span id="moBest">—</span></div>
+        </div>
+        <button class="modal-btn" id="playAgainBtn">Play Again</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
