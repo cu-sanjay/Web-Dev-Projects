@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Application Tracker - CareerForge</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Top Header -->
+    <header class="app-header">
+      <div class="header-left">
+        <div class="logo">
+          <span class="logo-symbol">💼</span>
+          <h1>CareerForge</h1>
+        </div>
+        <p class="tagline">Manage and optimize your career application pipeline</p>
+      </div>
+      <div class="header-right">
+        <button type="button" id="addJobBtn" class="btn btn-primary">+ Add Application</button>
+      </div>
+    </header>
+
+    <!-- Analytics Dashboard Summaries -->
+    <section class="stats-row">
+      <div class="stat-card card">
+        <span class="stat-label">Total Applications</span>
+        <span class="stat-value" id="statTotal">0</span>
+      </div>
+      <div class="stat-card card">
+        <span class="stat-label">Interviewing</span>
+        <span class="stat-value" id="statInterviewing" style="color: #f59e0b;">0</span>
+      </div>
+      <div class="stat-card card">
+        <span class="stat-label">Offers Received</span>
+        <span class="stat-value" id="statOffers" style="color: #10b981;">0</span>
+      </div>
+      <div class="stat-card card">
+        <span class="stat-label">Success Rate</span>
+        <span class="stat-value" id="statSuccessRate">0%</span>
+      </div>
+    </section>
+
+    <!-- Search / Filter controls -->
+    <section class="filter-row card">
+      <div class="search-input-wrapper">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="Search by company, title, or tags..." autofocus>
+      </div>
+      <div class="filter-controls">
+        <button type="button" id="resetHistory" class="btn btn-secondary">Reset Data</button>
+      </div>
+    </section>
+
+    <!-- Kanban Grid Columns -->
+    <div class="kanban-grid">
+      <!-- Column 1: Wishlist -->
+      <div class="kanban-column" data-status="wishlist">
+        <div class="column-header">
+          <span class="column-dot" style="background-color: #64748b;"></span>
+          <h2>Wishlist</h2>
+          <span class="column-count" id="count-wishlist">0</span>
+        </div>
+        <div class="column-cards-container" id="column-wishlist"></div>
+      </div>
+
+      <!-- Column 2: Applied -->
+      <div class="kanban-column" data-status="applied">
+        <div class="column-header">
+          <span class="column-dot" style="background-color: #3b82f6;"></span>
+          <h2>Applied</h2>
+          <span class="column-count" id="count-applied">0</span>
+        </div>
+        <div class="column-cards-container" id="column-applied"></div>
+      </div>
+
+      <!-- Column 3: Interviewing -->
+      <div class="kanban-column" data-status="interviewing">
+        <div class="column-header">
+          <span class="column-dot" style="background-color: #f59e0b;"></span>
+          <h2>Interviewing</h2>
+          <span class="column-count" id="count-interviewing">0</span>
+        </div>
+        <div class="column-cards-container" id="column-interviewing"></div>
+      </div>
+
+      <!-- Column 4: Offer -->
+      <div class="kanban-column" data-status="offer">
+        <div class="column-header">
+          <span class="column-dot" style="background-color: #10b981;"></span>
+          <h2>Offer</h2>
+          <span class="column-count" id="count-offer">0</span>
+        </div>
+        <div class="column-cards-container" id="column-offer"></div>
+      </div>
+
+      <!-- Column 5: Rejected -->
+      <div class="kanban-column" data-status="rejected">
+        <div class="column-header">
+          <span class="column-dot" style="background-color: #ef4444;"></span>
+          <h2>Rejected</h2>
+          <span class="column-count" id="count-rejected">0</span>
+        </div>
+        <div class="column-cards-container" id="column-rejected"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Job Application Modal Form -->
+  <div id="jobModal" class="modal-overlay hidden">
+    <div class="modal-box card">
+      <div class="modal-header">
+        <h2 id="modalTitle">New Job Application</h2>
+        <button type="button" class="btn-close-modal" id="closeModalBtn">×</button>
+      </div>
+      <form id="jobForm" class="modal-form">
+        <!-- Hidden input to store editing ID -->
+        <input type="hidden" id="jobId">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="companyName">Company Name *</label>
+            <input type="text" id="companyName" placeholder="Google" required>
+          </div>
+          <div class="form-group">
+            <label for="jobTitle">Position Title *</label>
+            <input type="text" id="jobTitle" placeholder="Frontend Developer" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="salaryRange">Salary Range</label>
+            <input type="text" id="salaryRange" placeholder="e.g. $80k - $100k">
+          </div>
+          <div class="form-group">
+            <label for="jobStatus">Application Status</label>
+            <select id="jobStatus" required>
+              <option value="wishlist">Wishlist</option>
+              <option value="applied">Applied</option>
+              <option value="interviewing">Interviewing</option>
+              <option value="offer">Offer</option>
+              <option value="rejected">Rejected</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="dateApplied">Date Applied</label>
+            <input type="date" id="dateApplied">
+          </div>
+          <div class="form-group">
+            <label for="interviewDate">Interview Date</label>
+            <input type="datetime-local" id="interviewDate">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="jobUrl">Job URL / Link</label>
+          <input type="url" id="jobUrl" placeholder="https://careers.google.com/jobs/...">
+        </div>
+
+        <div class="form-group">
+          <label for="jobNotes">Notes & Log Details</label>
+          <textarea id="jobNotes" rows="4" placeholder="Mention key requirements, recruiter contact, notes..."></textarea>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="cancelFormBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="saveJobBtn">Save Details</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- JavaScript controller -->
+  <script src="script.js"></script>
+</body>
+</html>

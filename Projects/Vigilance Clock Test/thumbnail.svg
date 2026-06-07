@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#020408" />
+      <stop offset="50%" stop-color="#050a14" />
+      <stop offset="100%" stop-color="#0a1224" />
+    </linearGradient>
+
+    <filter id="panelGlow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#000000" flood-opacity="0.85"/>
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#10b981" flood-opacity="0.03"/>
+    </filter>
+
+    <filter id="skipGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <linearGradient id="radarBrand" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#06b6d4" />
+    </linearGradient>
+
+    <pattern id="radarGrid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="rgba(16, 185, 129, 0.015)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#bgGrad)" />
+  <rect width="800" height="500" fill="url(#radarGrid)" />
+  
+  <circle cx="580" cy="250" r="180" fill="#10b981" opacity="0.02" filter="blur(55px)" />
+  <circle cx="200" cy="380" r="150" fill="#06b6d4" opacity="0.015" filter="blur(45px)" />
+
+  <g transform="translate(50, 45)" filter="url(#panelGlow)">
+    <rect width="700" height="380" rx="16" fill="#0b1329" fill-opacity="0.8" stroke="rgba(16, 185, 129, 0.08)" stroke-width="1.5"/>
+    
+    <circle cx="24" cy="22" r="5" fill="#ef4444" opacity="0.7"/>
+    <circle cx="40" cy="22" r="5" fill="#f59e0b" opacity="0.7"/>
+    <circle cx="56" cy="22" r="5" fill="#10b981" opacity="0.7"/>
+
+    <g transform="translate(545, 15)">
+      <circle cx="5" cy="6" r="4" fill="url(#radarBrand)" />
+      <text x="14" y="10" font-family="monospace" font-size="11" font-weight="900" fill="#f8fafc" letter-spacing="0.05em">MACKWORTH_VIGIL</text>
+    </g>
+
+    <g transform="translate(20, 64)">
+      <text x="0" y="14" font-family="-apple-system, sans-serif" font-size="14" font-weight="800" fill="#ffffff" letter-spacing="-0.01em">Operator Status</text>
+      
+      <rect y="24" width="126" height="24" rx="6" fill="rgba(6, 182, 212, 0.06)" stroke="rgba(6, 182, 212, 0.2)" stroke-width="1"/>
+      <text x="12" y="39" font-family="monospace" font-size="9" font-weight="800" fill="#06b6d4" letter-spacing="0.02em">● SCANNING_RUN</text>
+
+      <g transform="translate(0, 64)">
+        <rect width="126" height="42" rx="8" fill="#1e293b" opacity="0.5" stroke="rgba(148, 163, 184, 0.04)" stroke-width="1"/>
+        <text x="10" y="16" font-family="-apple-system, sans-serif" font-size="8" font-weight="700" fill="#64748b" letter-spacing="0.05em">ANOMALY CAPTURE</text>
+        <text x="10" y="34" font-family="monospace" font-size="13" font-weight="800" fill="#10b981">92.4% Accuracy</text>
+      </g>
+
+      <g transform="translate(0, 118)">
+        <rect width="126" height="42" rx="8" fill="#1e293b" opacity="0.5" stroke="rgba(148, 163, 184, 0.04)" stroke-width="1"/>
+        <text x="10" y="16" font-family="-apple-system, sans-serif" font-size="8" font-weight="700" fill="#64748b" letter-spacing="0.05em">MISSED DOUBLE JUMPS</text>
+        <text x="10" y="34" font-family="monospace" font-size="13" font-weight="800" fill="#ef4444">01 Omission</text>
+      </g>
+
+      <rect y="184" width="126" height="34" rx="8" fill="rgba(16, 185, 129, 0.12)" stroke="#10b981" stroke-width="1.5"/>
+      <text x="63" y="21" font-family="monospace" font-size="10" font-weight="900" fill="#10b981" text-anchor="middle">REPORT ANOMALY [SPACE]</text>
+    </g>
+
+    <line x1="162" y1="46" x2="162" y2="380" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+
+    <g transform="translate(420, 200)">
+      <circle cx="0" cy="0" r="110" fill="none" stroke="rgba(16, 185, 129, 0.05)" stroke-width="4"/>
+      <circle cx="0" cy="0" r="110" fill="none" stroke="rgba(16, 185, 129, 0.15)" stroke-width="1" stroke-dasharray="2 6"/>
+      
+      <circle cx="0" cy="-110" r="3" fill="#334155"/>
+      <circle cx="55" cy="-95" r="3" fill="#334155"/>
+      <circle cx="95" cy="-55" r="3" fill="#334155"/>
+      <circle cx="110" cy="0" r="3" fill="#334155"/>
+      <circle cx="95" cy="55" r="3" fill="#334155"/>
+      <circle cx="55" cy="95" r="3" fill="#334155"/>
+      <circle cx="0" cy="110" r="3" fill="#334155"/>
+      <circle cx="-55" cy="95" r="3" fill="#334155"/>
+      <circle cx="-95" cy="55" r="3" fill="#334155"/>
+      <circle cx="-110" cy="0" r="3" fill="#334155"/>
+      <circle cx="-95" cy="-55" r="3" fill="#334155"/>
+      <circle cx="-55" cy="-95" r="3" fill="#334155"/>
+
+      <path d="M 0 -110 A 110 110 0 0 1 55 -95" fill="none" stroke="rgba(239, 68, 68, 0.25)" stroke-width="2" stroke-dasharray="3 3"/>
+      
+      <g transform="translate(95, -55)" filter="url(#skipGlow)">
+        <circle r="7" fill="#10b981" stroke="#f8fafc" stroke-width="1.5"/>
+        <circle r="2" fill="#ffffff"/>
+      </g>
+
+      <line x1="-15" y1="0" x2="15" y2="0" stroke="rgba(16, 185, 129, 0.15)" stroke-width="0.75"/>
+      <line x1="0" y1="-15" x2="0" y2="15" stroke="rgba(16, 185, 129, 0.15)" stroke-width="0.75"/>
+      <circle cx="0" cy="0" r="6" fill="none" stroke="rgba(16, 185, 129, 0.2)" stroke-width="0.75"/>
+    </g>
+  </g>
+
+  <g transform="translate(180, 440)">
+    <rect width="440" height="42" rx="21" fill="rgba(2, 4, 8, 0.95)" stroke="rgba(16, 185, 129, 0.15)" stroke-width="1.5"/>
+    
+    <text x="28" y="26" font-family="monospace" font-size="11" font-weight="900" fill="#f8fafc" letter-spacing="0.06em">MACKWORTH COGNITIVE CORE</text>
+    <circle cx="204" cy="22" r="2" fill="#475569" />
+    
+    <text x="220" y="26" font-family="monospace" font-size="12" font-weight="700" fill="#38bdf8">HTML5</text>
+    <text x="270" y="26" font-family="monospace" font-size="12" font-weight="700" fill="#10b981">CSS3</text>
+    <text x="316" y="26" font-family="monospace" font-size="12" font-weight="700" fill="#f59e0b">ES6+</text>
+    
+    <rect x="360" y="13" width="56" height="16" rx="4" fill="rgba(6, 182, 212, 0.08)" stroke="rgba(6, 182, 212, 0.15)" stroke-width="1"/>
+    <text x="366" y="24" font-family="-apple-system, sans-serif" font-size="8" font-weight="800" fill="#06b6d4" letter-spacing="0.02em">RADIAL_BUF</text>
+  </g>
+</svg>

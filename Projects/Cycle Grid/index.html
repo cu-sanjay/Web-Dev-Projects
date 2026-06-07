@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyber-Grid Lightcycles</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game-container">
+    <div id="ui-overlay">
+      <div class="score-panel">
+        <div class="score-box player-score">
+          <span class="score-label">PLAYER</span>
+          <span id="player-score" class="score-value">0</span>
+        </div>
+        <div class="score-box vs">VS</div>
+        <div class="score-box ai-score">
+          <span class="score-label">AI</span>
+          <span id="ai-score" class="score-value">0</span>
+        </div>
+      </div>
+      <div id="game-status">PRESS SPACE TO START</div>
+      <div id="controls">
+        <span>WASD / Arrow Keys</span>
+      </div>
+    </div>
+    <canvas id="game-canvas" width="800" height="600"></canvas>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Invoice & Billing Generator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="invoice-container">
+    <h1>Invoice Generator</h1>
+
+    <div class="invoice-details">
+      <label>Client Name: <input type="text" id="clientName"></label>
+      <label>Invoice Number: <input type="text" id="invoiceNumber"></label>
+      <label>Date: <input type="date" id="invoiceDate"></label>
+    </div>
+
+    <table id="itemsTable">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Quantity</th>
+          <th>Unit Price</th>
+          <th>Total</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <button id="addItemBtn">+ Add Item</button>
+
+    <div class="totals">
+      <p>Subtotal: <span id="subtotal">0</span></p>
+      <p>Tax (10%): <span id="tax">0</span></p>
+      <p><strong>Grand Total: <span id="grandTotal">0</span></strong></p>
+    </div>
+
+    <button id="exportPDFBtn">Export as PDF</button>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

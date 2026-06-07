@@ -1,0 +1,42 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #0f172a;
+  color: #fff;
+  text-align: center;
+  padding: 50px;
+}
+
+.clock-container {
+  max-width: 600px;
+  margin: auto;
+}
+
+.player {
+  background: rgba(255,255,255,.08);
+  padding: 20px;
+  border-radius: 12px;
+  margin: 20px 0;
+}
+
+.player h2 {
+  margin-bottom: 10px;
+}
+
+.player p {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #7b61ff, #38bdf8);
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.9;
+}

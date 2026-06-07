@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premium Expense Tracker - Black & Gold Edition</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="dashboard-wrapper">
+    <!-- Top Header bar -->
+    <header class="app-header">
+      <div class="header-left">
+        <div class="logo">
+          <span class="logo-symbol">⚜</span>
+          <h1>AURA <span class="sub-logo">Finance</span></h1>
+        </div>
+        <p class="header-tagline">Track daily expenses in premium elegance.</p>
+      </div>
+      <div class="header-right">
+        <!-- Light/Dark Mode Switcher -->
+        <button type="button" id="themeToggleBtn" class="theme-toggle-btn" title="Toggle Light/Dark Theme">
+          <svg id="moonIcon" viewBox="0 0 24 24" class="icon-theme"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg id="sunIcon" viewBox="0 0 24 24" class="icon-theme hidden"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Grid Dashboard -->
+    <div class="dashboard-grid">
+      <!-- Left Column: Balances and Form Inputs -->
+      <aside class="dashboard-sidebar">
+        <!-- Balances Summary Widget -->
+        <div class="card balance-card">
+          <div class="balance-title">CURRENT BALANCE</div>
+          <div class="balance-value" id="netBalance">$0.00</div>
+          <div class="balance-flow">
+            <div class="flow-item flow-in">
+              <span class="flow-arrow">↑</span>
+              <div class="flow-details">
+                <span class="flow-label">INCOME</span>
+                <span class="flow-amount" id="totalIncome">$0.00</span>
+              </div>
+            </div>
+            <div class="flow-item flow-out">
+              <span class="flow-arrow">↓</span>
+              <div class="flow-details">
+                <span class="flow-label">SPENT</span>
+                <span class="flow-amount" id="totalExpenses">$0.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Add / Edit Transaction Form -->
+        <div class="card form-card">
+          <h2 id="formTitle">Add Transaction</h2>
+          <form id="transactionForm">
+            <!-- Transaction ID hidden if editing -->
+            <input type="hidden" id="transactionId">
+            
+            <div class="form-group">
+              <label>Transaction Type</label>
+              <div class="type-selector">
+                <label class="type-option">
+                  <input type="radio" name="transType" value="expense" checked>
+                  <span class="type-label-text">Expense</span>
+                </label>
+                <label class="type-option">
+                  <input type="radio" name="transType" value="income">
+                  <span class="type-label-text">Income</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="transTitle">Description</label>
+              <input type="text" id="transTitle" placeholder="Grocery shopping, Coffee, Salary..." required>
+            </div>
+
+            <div class="form-group">
+              <label for="transAmount">Amount ($)</label>
+              <input type="number" id="transAmount" step="0.01" min="0.01" placeholder="0.00" required>
+            </div>
+
+            <div class="form-group">
+              <label for="transCategory">Category</label>
+              <select id="transCategory" required>
+                <option value="Food">Food</option>
+                <option value="Travel">Travel</option>
+                <option value="Shopping">Shopping</option>
+                <option value="Bills">Bills</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="transDate">Date</label>
+              <input type="date" id="transDate" required>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" id="cancelEditBtn" class="btn btn-outline hidden">Cancel</button>
+              <button type="submit" id="submitBtn" class="btn btn-primary">Add Entry</button>
+            </div>
+          </form>
+        </div>
+      </aside>
+
+      <!-- Center/Right Column: Charts and Transactions List -->
+      <main class="dashboard-content">
+        <!-- Top row: SVG Analytics Charts -->
+        <section class="charts-row">
+          <div class="card chart-card">
+            <h3>Monthly Spending Comparison</h3>
+            <div class="chart-wrapper">
+              <!-- SVG Bar Chart -->
+              <svg id="barChart" class="svg-chart" viewBox="0 0 320 180" width="100%" height="100%">
+                <!-- Dynamic Content Rendered inside script.js -->
+              </svg>
+            </div>
+          </div>
+          <div class="card chart-card">
+            <h3>Category Breakdown</h3>
+            <div class="chart-wrapper flex-center">
+              <!-- SVG Donut Chart -->
+              <svg id="donutChart" class="svg-chart" viewBox="0 0 180 180" width="100%" height="100%">
+                <!-- Dynamic Content Rendered inside script.js -->
+              </svg>
+              <!-- Legend list -->
+              <div id="chartLegend" class="chart-legend"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Bottom row: Transactions Listing -->
+        <section class="transactions-panel card">
+          <div class="panel-header">
+            <h3>Transaction History</h3>
+            <div class="filters-row">
+              <select id="filterCategory">
+                <option value="all">All Categories</option>
+                <option value="Food">Food</option>
+                <option value="Travel">Travel</option>
+                <option value="Shopping">Shopping</option>
+                <option value="Bills">Bills</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Other">Other</option>
+              </select>
+              <select id="sortBy">
+                <option value="date-desc">Newest First</option>
+                <option value="date-asc">Oldest First</option>
+                <option value="amount-desc">Highest Amount</option>
+                <option value="amount-asc">Lowest Amount</option>
+              </select>
+            </div>
+          </div>
+          <div class="transactions-container">
+            <div id="noTransactions" class="no-data-msg hidden">No transactions recorded yet. Add your first entry!</div>
+            <ul id="transactionsList" class="transactions-list"></ul>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script src="script.js"></script>
+</body>
+</html>

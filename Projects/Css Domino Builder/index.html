@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Domino Builder #184</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-wrapper">
+    <header class="app-header">
+      <h1>CSS Domino Builder <span class="hash">#184</span></h1>
+      <p class="subtitle">Place domino tiles on the grid and trigger a cascading chain reaction</p>
+    </header>
+
+    <div class="workspace">
+      <aside class="control-hud">
+        <div class="control-group">
+          <label class="control-label">Tool</label>
+          <button id="addModeBtn" class="ctrl-btn active" data-active="true">
+            <span class="icon">🧱</span> Add Domino
+          </button>
+          <p class="hint">Click empty cells to place — click placed domino to remove</p>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label">Topple Direction</label>
+          <div class="direction-picker">
+            <button class="dir-btn" data-dir="up" title="Up">↑</button>
+            <button class="dir-btn active" data-dir="right" title="Right">→</button>
+            <button class="dir-btn" data-dir="down" title="Down">↓</button>
+            <button class="dir-btn" data-dir="left" title="Left">←</button>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label">Actions</label>
+          <button id="triggerBtn" class="ctrl-btn trigger">
+            <span class="icon">💥</span> TRIGGER CHAIN
+          </button>
+          <button id="resetBtn" class="ctrl-btn reset">
+            <span class="icon">🔄</span> Reset Workspace
+          </button>
+        </div>
+
+        <div class="stats">
+          <div class="stat-item">
+            <span class="stat-value" id="dominoCounter">0</span>
+            <span class="stat-label">Placed</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value" id="chainStatus">⏸</span>
+            <span class="stat-label">Status</span>
+          </div>
+        </div>
+      </aside>
+
+      <div class="grid-container">
+        <div id="grid" class="grid"></div>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

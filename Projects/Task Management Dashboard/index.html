@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zenith // Workspace Analytics & Task Engine</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <aside class="sidebar-left">
+            <div class="brand">
+                <div class="brand-icon"></div>
+                <h1>Zenith</h1>
+            </div>
+
+            <div class="section-label">Metrics & Engine State</div>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <span class="metric-value" id="metric-total">00</span>
+                    <span class="metric-label">Total Tasks</span>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-value" id="metric-pending">00</span>
+                    <span class="metric-label">Pending</span>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-value" id="metric-completed">00</span>
+                    <span class="metric-label">Completed</span>
+                </div>
+            </div>
+
+            <div class="section-label">Navigation Filters</div>
+            <nav class="filter-menu">
+                <button class="filter-btn active" data-filter="all">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
+                    All Tasks
+                </button>
+                <button class="filter-btn" data-filter="pending">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    Pending Queue
+                </button>
+                <button class="filter-btn" data-filter="completed">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                    Completed
+                </button>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <section class="input-panel">
+                <form id="task-form" autocomplete="off">
+                    <div class="form-row">
+                        <input type="text" id="task-title" placeholder="Task heading or objective..." required maxLength="80">
+                    </div>
+                    <div class="form-row">
+                        <textarea id="task-desc" placeholder="Add additional technical parameters or contextual descriptions..." maxLength="200"></textarea>
+                    </div>
+                    <div class="form-meta-row">
+                        <div class="meta-input-group">
+                            <label for="task-priority">Priority Level</label>
+                            <select id="task-priority">
+                                <option value="low">Low Priority</option>
+                                <option value="medium" selected>Medium Priority</option>
+                                <option value="high">High Priority</option>
+                            </select>
+                        </div>
+                        <div class="meta-input-group">
+                            <label for="task-date">Target Date</label>
+                            <input type="date" id="task-date" required>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                            Commit Task
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="task-feed-wrapper">
+                <div class="feed-header">
+                    <h2 id="current-view-title">All Tasks Matrix</h2>
+                    <span class="feed-count" id="feed-count-badge">0 items</span>
+                </div>
+                <div class="task-list" id="task-list-container">
+                    </div>
+            </section>
+        </main>
+
+        <aside class="sidebar-right">
+            <div class="section-label">System Inspector</div>
+            <div class="inspector-panel" id="inspector-panel">
+                <div class="empty-inspector-state">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                    <p>Select or hover over a task workspace card to inspect telemetry metadata metrics.</p>
+                </div>
+            </div>
+
+            <div class="section-label">Real-time Activity Log</div>
+            <div class="log-container" id="log-stream">
+                </div>
+        </aside>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

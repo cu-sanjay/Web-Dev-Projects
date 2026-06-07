@@ -1,0 +1,51 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: #f4f4f4;
+}
+
+h1 {
+    margin-top: 20px;
+}
+
+.info {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 15px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#gameArea {
+    width: 400px;
+    height: 500px;
+    border: 3px solid #333;
+    margin: auto;
+    position: relative;
+    overflow: hidden;
+    background: white;
+}
+
+#catcher {
+    width: 80px;
+    height: 20px;
+    background: red;
+    position: absolute;
+    bottom: 10px;
+    left: 160px;
+}
+
+.falling {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    position: absolute;
+}
+
+#startBtn {
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}

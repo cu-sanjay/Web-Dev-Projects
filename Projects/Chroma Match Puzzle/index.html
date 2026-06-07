@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chroma Match Puzzle</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <header id="hud">
+      <div class="hud-item">
+        <span class="hud-label">Score</span>
+        <span id="scoreDisplay" class="hud-value">0</span>
+      </div>
+      <div class="hud-item">
+        <span class="hud-label">Best</span>
+        <span id="bestDisplay" class="hud-value">0</span>
+      </div>
+    </header>
+
+    <div id="timerTrack">
+      <div id="timerBar"></div>
+    </div>
+
+    <main id="gameArea">
+      <div id="targetSection">
+        <span id="targetLabel">TARGET</span>
+        <div id="targetBox"></div>
+      </div>
+
+      <div id="optionsWrapper">
+        <button class="choice-tile" data-index="0">1</button>
+        <button class="choice-tile" data-index="1">2</button>
+        <button class="choice-tile" data-index="2">3</button>
+        <button class="choice-tile" data-index="3">4</button>
+      </div>
+    </main>
+
+    <div id="gameOverOverlay" class="hidden">
+      <div id="gameOverModal">
+        <h2>GAME OVER</h2>
+        <p id="finalScoreMsg">Streak: <span id="finalScore">0</span></p>
+        <p id="colorReveal">
+          You picked <span id="wrongColorSwatch" class="swatch"></span>
+          instead of <span id="correctColorSwatch" class="swatch"></span>
+        </p>
+        <button id="tryAgainBtn">Try Again</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

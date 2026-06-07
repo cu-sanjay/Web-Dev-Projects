@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#04060b" />
+      <stop offset="50%" stop-color="#070a13" />
+      <stop offset="100%" stop-color="#0e1322" />
+    </linearGradient>
+
+    <filter id="panelGlow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#000000" flood-opacity="0.80"/>
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#3b82f6" flood-opacity="0.02"/>
+    </filter>
+
+    <filter id="flashGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <linearGradient id="dualBrand" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#a855f7" />
+    </linearGradient>
+
+    <pattern id="uiGrid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="rgba(148, 163, 184, 0.02)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#bgGrad)" />
+  <rect width="800" height="500" fill="url(#uiGrid)" />
+  
+  <circle cx="600" cy="350" r="180" fill="#a855f7" opacity="0.02" filter="blur(50px)" />
+  <circle cx="400" cy="150" r="150" fill="#3b82f6" opacity="0.03" filter="blur(40px)" />
+
+  <g transform="translate(50, 45)" filter="url(#panelGlow)">
+    <rect width="700" height="380" rx="16" fill="#111827" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1.5"/>
+    
+    <circle cx="24" cy="22" r="5" fill="#ef4444" opacity="0.7"/>
+    <circle cx="40" cy="22" r="5" fill="#f59e0b" opacity="0.7"/>
+    <circle cx="56" cy="22" r="5" fill="#10b981" opacity="0.7"/>
+
+    <g transform="translate(565, 15)">
+      <circle cx="5" cy="6" r="4" fill="url(#dualBrand)" />
+      <text x="14" y="10" font-family="-apple-system, sans-serif" font-size="11" font-weight="800" fill="#f8fafc" letter-spacing="0.04em">DUAL N-BACK</text>
+    </g>
+
+    <g transform="translate(20, 64)">
+      <text x="0" y="14" font-family="-apple-system, sans-serif" font-size="14" font-weight="800" fill="#ffffff" letter-spacing="-0.02em">Cognitive State</text>
+      
+      <rect y="24" width="126" height="24" rx="6" fill="rgba(168, 85, 247, 0.08)" stroke="rgba(168, 85, 247, 0.2)" stroke-width="1"/>
+      <text x="12" y="39" font-family="monospace" font-size="10" font-weight="800" fill="#a855f7" letter-spacing="0.02em">MODE: 2-BACK</text>
+
+      <g transform="translate(0, 64)">
+        <rect width="126" height="42" rx="8" fill="#1f2937" opacity="0.5"/>
+        <text x="10" y="16" font-family="-apple-system, sans-serif" font-size="8" font-weight="700" fill="#475569" letter-spacing="0.05em">MATCH ACCURACY</text>
+        <text x="10" y="34" font-family="monospace" font-size="14" font-weight="800" fill="#10b981">92.5% Sync</text>
+      </g>
+
+      <g transform="translate(0, 118)">
+        <rect width="126" height="42" rx="8" fill="#1f2937" opacity="0.5"/>
+        <text x="10" y="16" font-family="-apple-system, sans-serif" font-size="8" font-weight="700" fill="#475569" letter-spacing="0.05em">RUNNING TRIALS</text>
+        <text x="10" y="34" font-family="monospace" font-size="14" font-weight="800" fill="#3b82f6">Trial 14/20</text>
+      </g>
+
+      <rect y="184" width="126" height="32" rx="6" fill="#1f2937" stroke="rgba(148, 163, 184, 0.1)" stroke-width="1"/>
+      <text x="63" y="204" font-family="-apple-system, sans-serif" font-size="10" font-weight="700" fill="#f8fafc" text-anchor="middle">Start Training</text>
+    </g>
+
+    <line x1="162" y1="46" x2="162" y2="380" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+
+    <g transform="translate(194, 52)">
+      <rect width="474" height="64" rx="10" fill="#1e293b" opacity="0.4" stroke="rgba(148, 163, 184, 0.06)" stroke-width="1"/>
+      <text x="24" y="36" font-family="-apple-system, sans-serif" font-size="11" font-weight="800" fill="#94a3b8" letter-spacing="0.05em">AUDITORY SIGNAL CUE</text>
+      
+      <rect x="414" y="18" width="36" height="28" rx="6" fill="rgba(168, 85, 247, 0.12)" stroke="rgba(168, 85, 247, 0.25)" stroke-width="1" />
+      <text x="432" y="36" font-family="monospace" font-size="16" font-weight="900" fill="#a855f7" text-anchor="middle">Q</text>
+    </g>
+
+    <g transform="translate(326, 134)">
+      <rect width="64" height="64" rx="8" fill="#1f2937" opacity="0.6" stroke="rgba(148, 163, 184, 0.06)" stroke-width="1"/>
+      <rect x="76" y="0" width="64" height="64" rx="8" fill="#1f2937" opacity="0.6" stroke="rgba(148, 163, 184, 0.06)" stroke-width="1"/>
+      <rect x="152" y="0" width="64" height="64" rx="8" fill="#1f2937" opacity="0.6" stroke="rgba(148, 163, 184, 0.06)" stroke-width="1"/>
+
+      <g transform="translate(0, 72)" filter="url(#flashGlow)">
+        <rect width="64" height="64" rx="8" fill="rgba(59, 130, 246, 0.2)" stroke="#3b82f6" stroke-width="2"/>
+        <rect x="12" y="12" width="40" height="40" rx="4" fill="#3b82f6"/>
+      </g>
+      <rect x="76" y="72" width="64" height="64" rx="8" fill="#1f2937" opacity="0.6" stroke="rgba(148, 163, 184, 0.06)" stroke-width="1"/>
+      <rect x="152" y="72" width="64" height="64" rx="8" fill="#1f2937" opacity="0.6" stroke="rgba(148, 163, 184, 0.06)" stroke-width="1"/>
+
+      <rect y="144" width="64" height="64" rx="8" fill="#1f2937" opacity="0.6" stroke="rgba(148, 163, 184, 0.06)" stroke-width="1"/>
+      <rect x="76" y="144" width="64" height="64" rx="8" fill="#1f2937" opacity="0.6" stroke="rgba(148, 163, 184, 0.06)" stroke-width="1"/>
+      <rect x="152" y="144" width="64" height="64" rx="8" fill="#1f2937" opacity="0.6" stroke="rgba(148, 163, 184, 0.06)" stroke-width="1"/>
+    </g>
+
+    <g transform="translate(194, 324)">
+      <rect width="224" height="34" rx="6" fill="#1f2937" stroke="rgba(148, 163, 184, 0.1)" stroke-width="1"/>
+      <text x="112" y="21" font-family="-apple-system, sans-serif" font-size="10" font-weight="700" fill="#94a3b8" text-anchor="middle">Position Match <tspan font-family="monospace" fill="#3b82f6">[A]</tspan></text>
+
+      <rect x="250" y="0" width="224" height="34" rx="6" fill="#1f2937" stroke="rgba(148, 163, 184, 0.1)" stroke-width="1"/>
+      <text x="362" y="21" font-family="-apple-system, sans-serif" font-size="10" font-weight="700" fill="#94a3b8" text-anchor="middle">Letter Match <tspan font-family="monospace" fill="#a855f7">[L]</tspan></text>
+    </g>
+  </g>
+
+  <g transform="translate(180, 440)">
+    <rect width="440" height="42" rx="21" fill="rgba(4, 6, 11, 0.95)" stroke="rgba(148, 163, 184, 0.15)" stroke-width="1.5"/>
+    
+    <text x="28" y="26" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="800" fill="#f8fafc" letter-spacing="0.06em">COGNITIVE TESTING SUITE</text>
+    <circle cx="178" cy="22" r="2" fill="#475569" />
+    
+    <text x="194" y="26" font-family="monospace" font-size="12" font-weight="700" fill="#38bdf8">HTML5</text>
+    <text x="244" y="26" font-family="monospace" font-size="12" font-weight="700" fill="#10b981">CSS3</text>
+    <text x="290" y="26" font-family="monospace" font-size="12" font-weight="700" fill="#f59e0b">ES6+</text>
+    
+    <rect x="338" y="13" width="76" height="16" rx="4" fill="rgba(245, 158, 11, 0.08)" stroke="rgba(245, 158, 11, 0.15)" stroke-width="1"/>
+    <text x="344" y="24" font-family="-apple-system, sans-serif" font-size="8" font-weight="800" fill="#f59e0b" letter-spacing="0.02em">ROLLING_BUF</text>
+  </g>
+</svg>

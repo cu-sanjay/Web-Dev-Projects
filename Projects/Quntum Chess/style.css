@@ -1,0 +1,531 @@
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap');
+
+@font-face {
+  font-family: 'Chess Merida';
+  src: local('Segoe UI Symbol'), local('Apple Symbols'), local('Arial Unicode MS');
+}
+
+:root {
+  --bg-deep: #08081a;
+  --bg-panel: #0c0c24;
+  --bg-cell-dark: #111133;
+  --bg-cell-light: #18183d;
+  --bg-cell-hover: #20204a;
+  --neon-cyan: #00eeff;
+  --neon-magenta: #ff00aa;
+  --neon-purple: #8833ff;
+  --neon-green: #00ff88;
+  --neon-orange: #ff8800;
+  --text-primary: #d0d0f0;
+  --text-dim: #6060a0;
+  --glow-cyan: 0 0 8px rgba(0, 238, 255, 0.4), 0 0 20px rgba(0, 238, 255, 0.1);
+  --glow-magenta: 0 0 8px rgba(255, 0, 170, 0.4), 0 0 20px rgba(255, 0, 170, 0.1);
+  --glow-purple: 0 0 8px rgba(136, 51, 255, 0.4), 0 0 20px rgba(136, 51, 255, 0.1);
+  --border-glow: 1px solid rgba(0, 238, 255, 0.15);
+}
+
+body {
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: 'Exo 2', 'Segoe UI', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+#app {
+  width: 900px;
+  max-width: 96vw;
+  background: var(--bg-panel);
+  border: var(--border-glow);
+  border-radius: 12px;
+  box-shadow: var(--glow-cyan), 0 0 60px rgba(0, 238, 255, 0.03);
+  padding: 20px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ── Header ── */
+#header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(0, 238, 255, 0.08);
+}
+
+#header h1 {
+  font-family: 'Orbitron', monospace;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.quantum-symbol {
+  -webkit-text-fill-color: initial;
+  color: var(--neon-cyan);
+  filter: drop-shadow(0 0 6px rgba(0, 238, 255, 0.6));
+}
+
+#header-controls {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+#turn-indicator {
+  font-family: 'Orbitron', monospace;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 6px rgba(0, 238, 255, 0.3);
+}
+
+#game-status {
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+}
+
+/* ── Main Layout ── */
+#main {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+/* ── Board ── */
+#board-section {
+  flex-shrink: 0;
+}
+
+#chess-board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  width: 400px;
+  height: 400px;
+  border: 2px solid rgba(0, 238, 255, 0.2);
+  border-radius: 4px;
+  box-shadow: var(--glow-cyan), inset 0 0 30px rgba(0, 238, 255, 0.02);
+  overflow: hidden;
+}
+
+.cell {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 42px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.12s, box-shadow 0.2s, transform 0.08s;
+}
+
+.cell.dark {
+  background: var(--bg-cell-dark);
+}
+
+.cell.light {
+  background: var(--bg-cell-light);
+}
+
+.cell:hover {
+  background: var(--bg-cell-hover);
+  z-index: 2;
+}
+
+.cell:active {
+  transform: scale(0.95);
+}
+
+/* ── Coordinate labels ── */
+.cell .coord {
+  position: absolute;
+  font-size: 9px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.12);
+  pointer-events: none;
+  font-family: 'Orbitron', monospace;
+}
+
+.cell .coord.file {
+  bottom: 2px;
+  right: 4px;
+}
+
+.cell .coord.rank {
+  top: 2px;
+  left: 4px;
+}
+
+/* ── Selection highlight ── */
+.cell.selected {
+  box-shadow: inset 0 0 18px rgba(0, 238, 255, 0.35);
+  border: 1px solid rgba(0, 238, 255, 0.4);
+}
+
+/* ── Valid move indicators ── */
+.cell .move-dot {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.cell .move-dot.empty {
+  background: rgba(0, 255, 136, 0.25);
+  border: 1px solid rgba(0, 255, 136, 0.3);
+  box-shadow: 0 0 8px rgba(0, 255, 136, 0.15);
+}
+
+.cell .move-dot.capture {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 0, 0, 0.4);
+  background: rgba(255, 0, 0, 0.06);
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.1);
+  inset: auto;
+}
+
+/* ── Quantum split target markers ── */
+.cell .quantum-target {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(0, 238, 255, 0.15);
+  border: 2px dashed rgba(0, 238, 255, 0.4);
+  animation: quantum-mark-pulse 1s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.cell .quantum-target.first {
+  border-color: var(--neon-magenta);
+  background: rgba(255, 0, 170, 0.1);
+  box-shadow: 0 0 12px rgba(255, 0, 170, 0.2);
+}
+
+@keyframes quantum-mark-pulse {
+  0%, 100% { opacity: 0.5; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+/* ── Check indicator ── */
+.cell.in-check {
+  box-shadow: inset 0 0 20px rgba(255, 0, 0, 0.35);
+  border: 1px solid rgba(255, 0, 0, 0.4);
+  animation: check-pulse 0.8s ease-in-out infinite;
+}
+
+@keyframes check-pulse {
+  0%, 100% { box-shadow: inset 0 0 10px rgba(255, 0, 0, 0.2); }
+  50% { box-shadow: inset 0 0 24px rgba(255, 0, 0, 0.5); }
+}
+
+/* ── Quantum superposition glow ── */
+.cell.quantum-super {
+  animation: quantum-glow 1.5s ease-in-out infinite;
+  z-index: 1;
+}
+
+@keyframes quantum-glow {
+  0%, 100% {
+    box-shadow: inset 0 0 6px rgba(0, 238, 255, 0.15), 0 0 4px rgba(0, 238, 255, 0.1);
+  }
+  50% {
+    box-shadow: inset 0 0 16px rgba(0, 238, 255, 0.35), 0 0 14px rgba(0, 238, 255, 0.2);
+  }
+}
+
+.cell.quantum-super .piece-char {
+  opacity: 0.75;
+  filter: drop-shadow(0 0 6px rgba(0, 238, 255, 0.5));
+}
+
+/* ── Piece character ── */
+.piece-char {
+  position: relative;
+  z-index: 2;
+  line-height: 1;
+  font-family: 'Segoe UI Symbol', 'Apple Symbols', 'Arial Unicode MS', sans-serif;
+  pointer-events: none;
+  text-shadow: 0 0 4px rgba(255, 255, 255, 0.1);
+  transition: transform 0.1s;
+}
+
+.cell:not(.quantum-super) .piece-char.white-piece {
+  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.2));
+}
+
+.cell:not(.quantum-super) .piece-char.black-piece {
+  filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.3));
+}
+
+/* ── Collapse animation ── */
+.cell.collapsing {
+  animation: collapse-flash 0.4s ease-out;
+}
+
+@keyframes collapse-flash {
+  0% { background: rgba(0, 238, 255, 0.5); transform: scale(1.15); }
+  100% { background: transparent; transform: scale(1); }
+}
+
+.cell.collapsing-away {
+  animation: collapse-away 0.35s ease-in forwards;
+}
+
+@keyframes collapse-away {
+  0% { opacity: 1; transform: scale(1); filter: brightness(1); }
+  100% { opacity: 0; transform: scale(0.3); filter: brightness(0); }
+}
+
+/* ── Sidebar ── */
+#sidebar {
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+#controls {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  font-family: 'Orbitron', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  padding: 8px 14px;
+  border: 1px solid rgba(0, 238, 255, 0.2);
+  border-radius: 4px;
+  background: rgba(0, 238, 255, 0.04);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn:hover {
+  background: rgba(0, 238, 255, 0.1);
+  border-color: rgba(0, 238, 255, 0.4);
+  box-shadow: 0 0 12px rgba(0, 238, 255, 0.15);
+}
+
+.btn:active {
+  transform: scale(0.96);
+}
+
+.btn.active {
+  background: rgba(255, 0, 170, 0.15);
+  border-color: var(--neon-magenta);
+  box-shadow: 0 0 14px rgba(255, 0, 170, 0.2);
+  color: var(--neon-magenta);
+}
+
+#reset-btn {
+  border-color: rgba(255, 0, 0, 0.15);
+  color: var(--text-dim);
+}
+
+#reset-btn:hover {
+  border-color: rgba(255, 0, 0, 0.4);
+  background: rgba(255, 0, 0, 0.06);
+  color: #ff4444;
+}
+
+/* ── Quantum log ── */
+#quantum-log {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 238, 255, 0.06);
+  border-radius: 4px;
+  padding: 10px 12px;
+  height: 180px;
+  overflow-y: auto;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.log-header {
+  font-family: 'Orbitron', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--text-dim);
+  margin-bottom: 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  padding-bottom: 4px;
+}
+
+.log-entry {
+  padding: 1px 0;
+  color: var(--text-primary);
+  opacity: 0.85;
+}
+
+.log-entry:first-of-type {
+  color: var(--neon-cyan);
+  opacity: 1;
+}
+
+.log-entry.quantum-event {
+  color: var(--neon-magenta);
+}
+
+.log-entry.check-event {
+  color: var(--neon-orange);
+}
+
+.log-entry.win-event {
+  color: var(--neon-green);
+  font-weight: 600;
+}
+
+/* ── Promotion overlay ── */
+#promotion-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(3px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  transition: opacity 0.2s;
+}
+
+#promotion-overlay.hidden {
+  display: none;
+  opacity: 0;
+}
+
+#promotion-dialog {
+  background: var(--bg-panel);
+  border: 1px solid var(--neon-cyan);
+  border-radius: 8px;
+  box-shadow: var(--glow-cyan), 0 0 40px rgba(0, 0, 0, 0.5);
+  padding: 24px 32px;
+  text-align: center;
+}
+
+.promo-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--neon-cyan);
+  margin-bottom: 16px;
+}
+
+.promo-options {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.promo-btn {
+  font-size: 28px;
+  padding: 12px 24px;
+  border: 1px solid rgba(0, 238, 255, 0.2);
+  border-radius: 6px;
+  background: rgba(0, 238, 255, 0.03);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: 'Segoe UI Symbol', 'Apple Symbols', 'Arial Unicode MS', sans-serif;
+  min-width: 100px;
+}
+
+.promo-btn:hover {
+  background: rgba(0, 238, 255, 0.1);
+  border-color: var(--neon-cyan);
+  box-shadow: var(--glow-cyan);
+  transform: scale(1.05);
+}
+
+.promo-btn:active {
+  transform: scale(0.95);
+}
+
+/* ── Scrollbar ── */
+#quantum-log::-webkit-scrollbar {
+  width: 4px;
+}
+
+#quantum-log::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#quantum-log::-webkit-scrollbar-thumb {
+  background: rgba(0, 238, 255, 0.2);
+  border-radius: 2px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 700px) {
+  #main {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #chess-board {
+    width: 320px;
+    height: 320px;
+  }
+
+  .cell {
+    font-size: 32px;
+  }
+
+  #sidebar {
+    width: 100%;
+    min-width: unset;
+  }
+
+  #header {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+
+  #header h1 {
+    font-size: 15px;
+  }
+
+  #app {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 380px) {
+  #chess-board {
+    width: 260px;
+    height: 260px;
+  }
+
+  .cell {
+    font-size: 26px;
+  }
+}

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume Builder</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <!-- ─── TOOLBAR ─── -->
+    <header class="toolbar">
+      <div class="toolbar__left">
+        <span class="toolbar__brand">Resume Builder</span>
+      </div>
+      <div class="toolbar__center">
+        <div class="toolbar__group">
+          <label class="toolbar__label" for="template-select">Template</label>
+          <div class="toolbar__select-wrap">
+            <select id="template-select">
+              <option value="classic">Classic Minimalist</option>
+              <option value="modern">Modern Professional</option>
+            </select>
+            <span class="toolbar__arrow">▾</span>
+          </div>
+        </div>
+        <div class="toolbar__group">
+          <label class="toolbar__label" for="accent-select">Accent</label>
+          <div class="toolbar__swatches" id="swatches">
+            <button class="swatch" data-color="#2563eb" style="background:#2563eb" aria-label="Blue"></button>
+            <button class="swatch" data-color="#059669" style="background:#059669" aria-label="Emerald"></button>
+            <button class="swatch" data-color="#dc2626" style="background:#dc2626" aria-label="Red"></button>
+            <button class="swatch" data-color="#7c3aed" style="background:#7c3aed" aria-label="Purple"></button>
+            <button class="swatch" data-color="#ea580c" style="background:#ea580c" aria-label="Orange"></button>
+            <button class="swatch swatch--active" data-color="#1e293b" style="background:#1e293b" aria-label="Slate"></button>
+          </div>
+        </div>
+      </div>
+      <div class="toolbar__right">
+        <button class="btn btn--print" id="print-btn">
+          <span class="btn__icon">⬇</span> Download PDF
+        </button>
+      </div>
+    </header>
+
+    <!-- ─── WORKSPACE ─── -->
+    <div class="workspace">
+      <!-- ─── FORM PANEL ─── -->
+      <aside class="panel panel--form" id="form-panel">
+        <form class="form" id="resume-form" novalidate>
+
+          <!-- Personal Info -->
+          <section class="section">
+            <h2 class="section__title">Personal Info</h2>
+            <div class="section__body">
+              <div class="field-row">
+                <div class="field field--half">
+                  <label class="field__label" for="full-name">Full Name</label>
+                  <input class="field__input" type="text" id="full-name" placeholder="Alex Johnson" data-field="name">
+                </div>
+                <div class="field field--half">
+                  <label class="field__label" for="title">Professional Title</label>
+                  <input class="field__input" type="text" id="title" placeholder="Senior Software Engineer" data-field="title">
+                </div>
+              </div>
+              <div class="field-row">
+                <div class="field field--third">
+                  <label class="field__label" for="email">Email</label>
+                  <input class="field__input" type="email" id="email" placeholder="alex@example.com" data-field="email">
+                </div>
+                <div class="field field--third">
+                  <label class="field__label" for="phone">Phone</label>
+                  <input class="field__input" type="tel" id="phone" placeholder="+1 (555) 000-0000" data-field="phone">
+                </div>
+                <div class="field field--third">
+                  <label class="field__label" for="website">Website</label>
+                  <input class="field__input" type="url" id="website" placeholder="alexjohnson.dev" data-field="website">
+                </div>
+              </div>
+              <div class="field">
+                <label class="field__label" for="photo-upload">Profile Photo</label>
+                <div class="photo-upload" id="photo-upload-area">
+                  <input type="file" id="photo-upload" accept="image/*">
+                  <div class="photo-upload__placeholder">
+                    <span class="photo-upload__icon">📷</span>
+                    <span class="photo-upload__text">Click to upload photo</span>
+                  </div>
+                  <img class="photo-upload__preview" id="photo-preview" alt="Profile preview">
+                  <button class="photo-upload__clear" id="photo-clear" type="button" aria-label="Remove photo">&times;</button>
+                </div>
+              </div>
+              <div class="field">
+                <label class="field__label" for="summary">Professional Summary</label>
+                <textarea class="field__input field__textarea" id="summary" rows="3" placeholder="Brief overview of your professional background and goals..." data-field="summary"></textarea>
+              </div>
+            </div>
+          </section>
+
+          <!-- Experience -->
+          <section class="section">
+            <div class="section__header">
+              <h2 class="section__title">Experience</h2>
+              <button class="btn btn--add" id="add-exp" type="button">+ Add</button>
+            </div>
+            <div class="section__body section__body--list" id="exp-list">
+              <div class="entry" data-index="0">
+                <div class="entry__fields">
+                  <div class="field-row">
+                    <div class="field field--half">
+                      <label class="field__label">Company</label>
+                      <input class="field__input" type="text" placeholder="Acme Corp" data-exp="company">
+                    </div>
+                    <div class="field field--half">
+                      <label class="field__label">Location</label>
+                      <input class="field__input" type="text" placeholder="San Francisco, CA" data-exp="location">
+                    </div>
+                  </div>
+                  <div class="field-row">
+                    <div class="field field--half">
+                      <label class="field__label">Role</label>
+                      <input class="field__input" type="text" placeholder="Senior Engineer" data-exp="role">
+                    </div>
+                    <div class="field field--fourth">
+                      <label class="field__label">Start</label>
+                      <input class="field__input" type="text" placeholder="Jan 2020" data-exp="start">
+                    </div>
+                    <div class="field field--fourth">
+                      <label class="field__label">End</label>
+                      <input class="field__input" type="text" placeholder="Present" data-exp="end">
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="field__label">Description</label>
+                    <textarea class="field__input field__textarea" rows="2" placeholder="Describe your responsibilities and achievements..." data-exp="desc"></textarea>
+                  </div>
+                </div>
+                <button class="entry__remove" type="button" aria-label="Remove entry">&times;</button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Education -->
+          <section class="section">
+            <div class="section__header">
+              <h2 class="section__title">Education</h2>
+              <button class="btn btn--add" id="add-edu" type="button">+ Add</button>
+            </div>
+            <div class="section__body section__body--list" id="edu-list">
+              <div class="entry" data-index="0">
+                <div class="entry__fields">
+                  <div class="field-row">
+                    <div class="field field--half">
+                      <label class="field__label">School</label>
+                      <input class="field__input" type="text" placeholder="Stanford University" data-edu="school">
+                    </div>
+                    <div class="field field--half">
+                      <label class="field__label">Degree</label>
+                      <input class="field__input" type="text" placeholder="B.S. Computer Science" data-edu="degree">
+                    </div>
+                  </div>
+                  <div class="field-row">
+                    <div class="field field--half">
+                      <label class="field__label">Start</label>
+                      <input class="field__input" type="text" placeholder="Sep 2016" data-edu="start">
+                    </div>
+                    <div class="field field--half">
+                      <label class="field__label">End</label>
+                      <input class="field__input" type="text" placeholder="Jun 2020" data-edu="end">
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="field__label">Description</label>
+                    <textarea class="field__input field__textarea" rows="2" placeholder="Honors, activities, or relevant coursework..." data-edu="desc"></textarea>
+                  </div>
+                </div>
+                <button class="entry__remove" type="button" aria-label="Remove entry">&times;</button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Skills -->
+          <section class="section">
+            <h2 class="section__title">Skills</h2>
+            <div class="section__body">
+              <div class="field">
+                <label class="field__label" for="skills-input">Add a skill and press Enter</label>
+                <div class="tags" id="skills-container">
+                  <input class="field__input tags__input" type="text" id="skills-input" placeholder="e.g. JavaScript, React, Python...">
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Languages -->
+          <section class="section">
+            <h2 class="section__title">Languages</h2>
+            <div class="section__body">
+              <div class="field">
+                <label class="field__label" for="langs-input">Add a language and press Enter</label>
+                <div class="tags" id="langs-container">
+                  <input class="field__input tags__input" type="text" id="langs-input" placeholder="e.g. English, Spanish, French...">
+                </div>
+              </div>
+            </div>
+          </section>
+
+        </form>
+      </aside>
+
+      <!-- ─── PREVIEW PANEL ─── -->
+      <main class="panel panel--preview" id="preview-panel">
+        <div class="preview-frame" id="preview-frame">
+          <div class="resume" id="resume-preview"></div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

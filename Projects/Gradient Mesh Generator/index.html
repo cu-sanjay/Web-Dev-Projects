@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gradient Mesh Generator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="mesh-container" class="mesh-container"></div>
+
+  <main class="dashboard">
+    <div class="card">
+      <h1 class="card-title">Gradient Mesh Generator</h1>
+      <p class="card-subtitle">Pick four colors to build a smooth radial-gradient mesh.</p>
+
+      <div class="color-grid">
+        <div class="color-group">
+          <label for="color-1">Color 1 <span class="position-label">(top left)</span></label>
+          <div class="input-row">
+            <input type="color" id="color-1" value="#ff6b6b">
+            <input type="text" id="hex-1" value="#ff6b6b" maxlength="7">
+          </div>
+        </div>
+
+        <div class="color-group">
+          <label for="color-2">Color 2 <span class="position-label">(top right)</span></label>
+          <div class="input-row">
+            <input type="color" id="color-2" value="#48dbfb">
+            <input type="text" id="hex-2" value="#48dbfb" maxlength="7">
+          </div>
+        </div>
+
+        <div class="color-group">
+          <label for="color-3">Color 3 <span class="position-label">(bottom left)</span></label>
+          <div class="input-row">
+            <input type="color" id="color-3" value="#feca57">
+            <input type="text" id="hex-3" value="#feca57" maxlength="7">
+          </div>
+        </div>
+
+        <div class="color-group">
+          <label for="color-4">Color 4 <span class="position-label">(bottom right)</span></label>
+          <div class="input-row">
+            <input type="color" id="color-4" value="#5f27cd">
+            <input type="text" id="hex-4" value="#5f27cd" maxlength="7">
+          </div>
+        </div>
+      </div>
+
+      <button type="button" id="randomize-btn" class="randomize-btn">🎲 Randomize Palette</button>
+
+      <div class="export-section">
+        <label for="css-output">Generated CSS</label>
+        <textarea id="css-output" class="css-output" readonly spellcheck="false"></textarea>
+        <button type="button" id="copy-btn" class="copy-btn">Copy Code</button>
+      </div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,479 @@
+/* --- GLOBAL ROOT RESETS & COMPONENT STYLES --- */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg-main: #070a13;
+    --panel-bg: #111827;
+    --border-subtle: #1f2937;
+    --border-focus: #374151;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    
+    /* Dynamic Feedback Accent Markers */
+    --accent-blue: #3b82f6;
+    --accent-emerald: #10b981;
+    --accent-red: #ef4444;
+    
+    /* Active Physics Control State Variables passed through JS Engine hooks */
+    --fan-rotation-deg: 0deg;
+    --fan-oscillation-deg: 0deg;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    overflow: hidden;
+}
+
+/* --- MONOSPACE CONTAINER PRESERVATION OVERRIDES --- */
+.mono {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
+}
+
+/* --- MASTER ARCHITECTURE SCAFFOLDING MATRIX --- */
+.app-container {
+    width: 1200px;
+    height: 780px;
+    background-color: #0b0f19;
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    overflow: hidden;
+}
+
+/* --- LEFT COLUMN: TELEMETRY & HARDWARE CONTROL STATION --- */
+.control-deck {
+    background-color: var(--panel-bg);
+    border-right: 1px solid var(--border-subtle);
+    padding: 40px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    overflow-y: auto;
+}
+
+.deck-header h2 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--text-primary);
+}
+
+.deck-subtitle {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    letter-spacing: 0.05em;
+    margin-top: 4px;
+}
+
+/* Telemetry Display Infrastructure Cards */
+.telemetry-card {
+    background-color: #0d131f;
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.card-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+}
+
+.gauge-display {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.gauge-display #rpm-value {
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--text-primary);
+    line-height: 1;
+}
+
+.gauge-unit {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.gauge-bar-container {
+    width: 100%;
+    height: 6px;
+    background-color: var(--border-subtle);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.gauge-bar-fill {
+    width: 0%;
+    height: 100%;
+    background-color: var(--accent-blue);
+    border-radius: 3px;
+    box-shadow: 0 0 12px var(--accent-blue);
+    transition: width 0.1s linear;
+}
+
+/* Diagnostics Output Parameters */
+.status-indicator {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin-bottom: 16px;
+    text-align: center;
+    width: 100%;
+}
+
+.state-off {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: var(--accent-red);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.state-active {
+    background-color: rgba(59, 130, 246, 0.1);
+    color: var(--accent-blue);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.status-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    border-top: 1px solid var(--border-subtle);
+    padding-top: 14px;
+}
+
+.status-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.status-lbl {
+    font-size: 0.65rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.status-item .value {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* User Interface Matrix Buttons Configuration */
+.control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.control-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--text-secondary);
+}
+
+.speed-selector-matrix {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    background-color: #0d131f;
+    padding: 6px;
+    border-radius: 8px;
+    border: 1px solid var(--border-subtle);
+}
+
+.speed-btn {
+    background-color: transparent;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 0;
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.speed-btn:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+    color: var(--text-primary);
+}
+
+.speed-btn.active {
+    background-color: var(--border-focus);
+    color: var(--text-primary);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.speed-btn.active[data-speed="0"] {
+    color: var(--accent-red);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    background-color: rgba(239, 68, 68, 0.05);
+}
+
+.speed-btn.active[data-speed="1"],
+.speed-btn.active[data-speed="2"],
+.speed-btn.active[data-speed="3"] {
+    color: var(--accent-blue);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    background-color: rgba(59, 130, 246, 0.05);
+}
+
+.btn-num {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.btn-lbl {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+/* Toggle Switch Control Actuator Layout */
+.toggle-action-btn {
+    background-color: #0d131f;
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    padding: 16px;
+    width: 100%;
+    color: var(--text-primary);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.2s ease;
+}
+
+.toggle-action-btn:hover {
+    border-color: var(--border-focus);
+    background-color: #121a2b;
+}
+
+.toggle-action-btn .indicator-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--text-secondary);
+    transition: all 0.2s ease;
+}
+
+.toggle-action-btn.active-mode {
+    border-color: rgba(16, 185, 129, 0.4);
+    background-color: rgba(16, 185, 129, 0.02);
+}
+
+.toggle-action-btn.active-mode .indicator-dot {
+    background-color: var(--accent-emerald);
+    box-shadow: 0 0 10px var(--accent-emerald);
+}
+
+.audio-notice {
+    margin-top: auto;
+    background-color: #0b111e;
+    border-left: 3px solid var(--border-focus);
+    padding: 14px;
+    border-radius: 0 6px 6px 0;
+}
+
+.audio-notice p {
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+/* --- RIGHT COLUMN: MECHANICAL HARDWARE PHYSICS CANVAS --- */
+.simulation-canvas {
+    background-color: var(--bg-main);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    perspective: 1000px;
+}
+
+/* Complete Mechanical Chassis Wrapper with dynamic oscillation hook alignment */
+.fan-assembly {
+    width: 440px;
+    height: 440px;
+    position: relative;
+    transform-origin: center bottom;
+    transform: rotateY(var(--fan-oscillation-deg));
+    will-change: transform;
+    z-index: 5;
+}
+
+/* Motor Box overlay resting immediately in back layout space */
+.fan-motor-housing {
+    width: 90px;
+    height: 90px;
+    background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) translateZ(-30px);
+    border-radius: 12px;
+    border: 2px solid #374151;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+}
+
+/* Neck linkage attaching Chassis Head to Ground Base */
+.fan-neck {
+    width: 24px;
+    height: 160px;
+    background: linear-gradient(90deg, #1f2937 0%, #374151 50%, #111827 100%);
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-bottom: 2px solid #4b5563;
+}
+
+/* Protective Rear Grille Mesh Frame Cage Layer */
+.fan-grill-back {
+    width: 100%;
+    height: 100%;
+    border: 4px solid #1f2937;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(17, 24, 39, 0.15);
+    box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8), 0 15px 35px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+.fan-grill-back .spoke {
+    width: 2px;
+    height: 100%;
+    background-color: rgba(55, 65, 81, 0.4);
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform-origin: center center;
+}
+
+.fan-grill-back .concentric-ring {
+    border: 2px solid rgba(55, 65, 81, 0.3);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.ring-1 { width: 30%; height: 30%; }
+.ring-2 { width: 60%; height: 60%; }
+.ring-3 { width: 85%; height: 85%; }
+
+/* Dynamic Interceptor Spinning Blade Hub Node Assembly Layer */
+.fan-blades {
+    width: 90%;
+    height: 90%;
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    transform: rotate(var(--fan-rotation-deg));
+    will-change: transform;
+    z-index: 10;
+}
+
+.blade {
+    position: absolute;
+    left: 50%;
+    bottom: 50%;
+    width: 64px;
+    height: 170px;
+    background: linear-gradient(180deg, rgba(59, 130, 246, 0.75) 0%, rgba(29, 78, 216, 0.1) 100%);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 50% 50% 20% 20% / 70% 70% 30% 30%;
+    transform-origin: center bottom;
+    box-shadow: inset 0 0 15px rgba(59, 130, 246, 0.2);
+}
+
+.blade-1 { transform: translateX(-50%) rotate(0deg); }
+.blade-2 { transform: translateX(-50%) rotate(120deg); }
+.blade-3 { transform: translateX(-50%) rotate(240deg); }
+
+/* Front Outer Grill Structure Box Core Cover Node Layout */
+.fan-grill-front {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 15;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.center-cap {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+    border: 3px solid #4b5563;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.center-logo {
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: var(--text-secondary);
+    letter-spacing: 0.05em;
+}
+
+/* Fixed Platform Ground Plate Anchorage Layout Frame */
+.fan-base-anchor {
+    position: absolute;
+    top: 82%;
+    width: 220px;
+    height: 32px;
+    z-index: 2;
+}
+
+.base-plate {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #1f2937 0%, #111827 100%);
+    border: 2px solid #374151;
+    border-radius: 16px / 8px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7);
+}

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vigilance Clock Test — Mackworth Simulator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <header id="console-header">
+      <h1>VIGILANCE CLOCK TEST</h1>
+      <span class="subtitle">MACKWORTH CLOCK SIMULATOR v1.0</span>
+    </header>
+
+    <main id="console-body">
+      <div id="clock-column">
+        <div id="clock-frame">
+          <canvas id="clockCanvas" width="320" height="320"></canvas>
+          <div id="statusDot"></div>
+        </div>
+        <div id="session-timer">
+          <span class="timer-label">ELAPSED</span>
+          <span id="elapsedDisplay">00:00</span>
+        </div>
+      </div>
+
+      <div id="dashboard">
+        <div id="controls-panel">
+          <button id="startBtn" class="btn primary">START TEST</button>
+          <button id="reportBtn" class="btn accent" disabled>REPORT ANOMALY</button>
+          <button id="endBtn" class="btn danger" disabled>END SESSION</button>
+          <div class="hint">or press <kbd>SPACEBAR</kbd></div>
+        </div>
+
+        <div id="metrics-panel">
+          <div class="metric">
+            <span class="metric-label">EVENTS</span>
+            <span class="metric-value" id="eventsValue">0</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">HITS <span class="paren">(TP)</span></span>
+            <span class="metric-value" id="hitsValue">0</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">MISSES <span class="paren">(FN)</span></span>
+            <span class="metric-value" id="missesValue">0</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">FALSE ALARMS <span class="paren">(FP)</span></span>
+            <span class="metric-value" id="faValue">0</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">AVG RT</span>
+            <span class="metric-value" id="rtValue">—</span>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div id="summaryOverlay" class="hidden">
+      <div class="summary-modal">
+        <h2>SESSION REPORT</h2>
+        <div class="summary-stats">
+          <div class="summary-row">
+            <span>Session Duration</span>
+            <span id="summaryDuration">00:00</span>
+          </div>
+          <div class="summary-row">
+            <span>Total Double-Jumps</span>
+            <span id="summaryEvents">0</span>
+          </div>
+          <div class="summary-row">
+            <span>Hits (True Positives)</span>
+            <span id="summaryHits">0</span>
+          </div>
+          <div class="summary-row">
+            <span>Misses (False Negatives)</span>
+            <span id="summaryMisses">0</span>
+          </div>
+          <div class="summary-row">
+            <span>False Alarms (False Positives)</span>
+            <span id="summaryFA">0</span>
+          </div>
+          <div class="summary-row">
+            <span>Hit Rate</span>
+            <span id="summaryHitRate">0%</span>
+          </div>
+          <div class="summary-row">
+            <span>Average Reaction Time</span>
+            <span id="summaryRT">—</span>
+          </div>
+        </div>
+        <button id="closeSummaryBtn" class="btn primary">CLOSE</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

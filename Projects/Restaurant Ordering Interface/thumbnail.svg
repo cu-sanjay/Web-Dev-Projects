@@ -1,0 +1,210 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <!-- Premium Deep Canvas Dark Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#060913" />
+      <stop offset="50%" stop-color="#0b0f19" />
+      <stop offset="100%" stop-color="#0f1626" />
+    </linearGradient>
+
+    <!-- UI Panel Drop Shadow Filter Rigging -->
+    <filter id="panelGlow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#000000" flood-opacity="0.75"/>
+      <feDropShadow dx="0" dy="2" stdDeviation="6" flood-color="#f59e0b" flood-opacity="0.03"/>
+    </filter>
+    
+    <!-- Micro Glow Filter Modules -->
+    <filter id="accentGlowGold" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <filter id="accentGlowBlue" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <!-- Branding Vector Gradients -->
+    <linearGradient id="umamiBrand" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#ef4444" />
+    </linearGradient>
+    <linearGradient id="blueInteractive" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#2563eb" />
+    </linearGradient>
+
+    <!-- Technical Geometric Grid Layer Layout -->
+    <pattern id="techGrid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="rgba(148, 163, 184, 0.025)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <!-- BACKGROUND BASELAYER -->
+  <rect width="800" height="500" fill="url(#bgGrad)" />
+  <rect width="800" height="500" fill="url(#techGrid)" />
+  
+  <!-- Ambient Atmospheric Backlight Vector Orbs -->
+  <circle cx="700" cy="120" r="250" fill="#f59e0b" opacity="0.03" filter="blur(60px)" />
+  <circle cx="100" cy="400" r="200" fill="#3b82f6" opacity="0.03" filter="blur(50px)" />
+
+  <!-- ====================================================================
+       LEFT MASTER WIREFRAME PANEL: CATEGORIES & SELECTIONS GRID
+       ==================================================================== -->
+  <g transform="translate(50, 45)" filter="url(#panelGlow)">
+    <!-- Main Workspace Container Mask -->
+    <rect width="420" height="390" rx="16" fill="#161f30" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1.5"/>
+    
+    <!-- Window OS Top Bar Chrome Controls -->
+    <circle cx="22" cy="22" r="5" fill="#f43f5e" opacity="0.7"/>
+    <circle cx="38" cy="22" r="5" fill="#f59e0b" opacity="0.7"/>
+    <circle cx="54" cy="22" r="5" fill="#10b981" opacity="0.7"/>
+    
+    <!-- Left Sidebar Sub-Navigation Section -->
+    <g transform="translate(16, 60)">
+      <!-- Brand Frame Header -->
+      <rect x="4" y="0" width="12" height="12" rx="3" fill="url(#umamiBrand)" filter="url(#accentGlowGold)"/>
+      <text x="24" y="11" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="800" fill="#f8fafc" letter-spacing="-0.01em">Umami</text>
+      
+      <!-- Category Nav Link Active/Inactive Arrays -->
+      <g transform="translate(0, 36)">
+        <rect width="96" height="26" rx="6" fill="#3b82f6" />
+        <text x="10" y="17" font-family="-apple-system, sans-serif" font-size="10" font-weight="700" fill="#ffffff">All Curations</text>
+        
+        <rect y="32" width="96" height="26" rx="6" fill="transparent" />
+        <text x="10" y="49" font-family="-apple-system, sans-serif" font-size="10" font-weight="500" fill="#94a3b8">Small Plates</text>
+        
+        <rect y="64" width="96" height="26" rx="6" fill="transparent" />
+        <text x="10" y="81" font-family="-apple-system, sans-serif" font-size="10" font-weight="500" fill="#94a3b8">Signature Mains</text>
+      </g>
+      
+      <!-- Vegetarian Toggle Filter Module -->
+      <g transform="translate(0, 270)">
+        <line x1="4" y1="0" x2="92" y2="0" stroke="rgba(148, 163, 184, 0.1)" stroke-width="1"/>
+        <text x="4" y="20" font-family="-apple-system, sans-serif" font-size="9" font-weight="700" fill="#475569" letter-spacing="0.05em">PREFERENCE</text>
+        <rect x="4" y="30" width="30" height="16" rx="8" fill="#10b981" />
+        <circle cx="22" cy="38" r="6" fill="#ffffff" />
+        <text x="40" y="42" font-family="-apple-system, sans-serif" font-size="10" font-weight="600" fill="#10b981">Veg Only</text>
+      </g>
+    </g>
+    
+    <!-- Vertical Column Border Splitting Line -->
+    <line x1="134" y1="50" x2="134" y2="390" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+
+    <!-- Central Core Browsing Display Area Header -->
+    <g transform="translate(154, 60)">
+      <text x="0" y="14" font-family="-apple-system, sans-serif" font-size="18" font-weight="800" fill="#f8fafc" letter-spacing="-0.02em">All Curations</text>
+      
+      <!-- Interactive Mini Native Search Box Vector -->
+      <rect x="116" y="0" width="134" height="24" rx="6" fill="#1e293b" stroke="rgba(148, 163, 184, 0.1)" stroke-width="1" />
+      <text x="126" y="15" font-family="-apple-system, sans-serif" font-size="9" fill="#475569">Search culinary...</text>
+
+      <!-- Grid Layout Deck: Item Menu Card Cardboard 1 -->
+      <g transform="translate(0, 36)">
+        <rect width="250" height="125" rx="10" fill="#1e293b" stroke="rgba(148, 163, 184, 0.05)" stroke-width="1" />
+        <text x="14" y="24" font-family="-apple-system, sans-serif" font-size="13" font-weight="700" fill="#f8fafc">Truffle Porcini Arancini</text>
+        <text x="14" y="42" font-family="-apple-system, sans-serif" font-size="10" fill="#94a3b8" width="220">Crisp wild mushroom risotto spheres infused</text>
+        <text x="14" y="56" font-family="-apple-system, sans-serif" font-size="10" fill="#94a3b8" width="220">with high-grade black truffle oil...</text>
+        
+        <!-- Tags line -->
+        <rect x="14" y="70" width="28" height="14" rx="3" fill="rgba(16, 185, 129, 0.12)"/>
+        <text x="20" y="80" font-family="-apple-system, sans-serif" font-size="8" font-weight="700" fill="#10b981">VEG</text>
+
+        <!-- Card Footer Divider & Actions -->
+        <line x1="14" y1="94" x2="236" y2="94" stroke="rgba(148, 163, 184, 0.05)" stroke-width="1"/>
+        <text x="14" y="112" font-family="monospace" font-size="12" font-weight="700" fill="#f59e0b">$16.00</text>
+        <rect x="166" y="100" width="70" height="18" rx="4" fill="#161f30" stroke="rgba(148, 163, 184, 0.15)" stroke-width="1"/>
+        <text x="176" y="112" font-family="-apple-system, sans-serif" font-size="9" font-weight="700" fill="#f8fafc">Configure</text>
+      </g>
+
+      <!-- Grid Layout Deck: Item Menu Card Cardboard 2 -->
+      <g transform="translate(0, 175)">
+        <rect width="250" height="110" rx="10" fill="#1e293b" opacity="0.4" stroke="rgba(148, 163, 184, 0.02)" stroke-width="1" />
+        <text x="14" y="24" font-family="-apple-system, sans-serif" font-size="13" font-weight="700" fill="#94a3b8">Glazed Wagyu Skewers</text>
+        <text x="14" y="42" font-family="-apple-system, sans-serif" font-size="10" fill="#475569">A5 Wagyu beef slices seared on Japanese...</text>
+        <line x1="14" y1="78" x2="236" y2="78" stroke="rgba(148, 163, 184, 0.03)" stroke-width="1"/>
+        <text x="14" y="96" font-family="monospace" font-size="12" font-weight="700" fill="#a16207">$24.00</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ====================================================================
+       RIGHT MASTER WIREFRAME PANEL: SYNCHRONIZED CART & LIVE RECEIPT
+       ==================================================================== -->
+  <g transform="translate(490, 75)" filter="url(#panelGlow)">
+    <!-- Sidebar Checkout Window Wrapper -->
+    <rect width="260" height="330" rx="14" fill="#161f30" stroke="rgba(148, 163, 184, 0.1)" stroke-width="1.5"/>
+    
+    <!-- Panel Segment Header -->
+    <g transform="translate(16, 24)">
+      <text x="0" y="12" font-family="-apple-system, sans-serif" font-size="14" font-weight="700" fill="#f8fafc">Your Order</text>
+      <rect x="194" y="0" width="34" height="15" rx="8" fill="#1e293b"/>
+      <text x="200" y="11" font-family="-apple-system, sans-serif" font-size="9" font-weight="600" fill="#94a3b8">1 item</text>
+      <line x1="0" y1="28" x2="228" y2="28" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+    </g>
+
+    <!-- Cart Processing Array Items Rows -->
+    <g transform="translate(16, 70)">
+      <rect width="228" height="64" rx="8" fill="#1e293b" />
+      <text x="12" y="20" font-family="-apple-system, sans-serif" font-size="11" font-weight="700" fill="#f8fafc">Dry-Aged Tomahawk Segment</text>
+      <text x="12" y="34" font-family="-apple-system, sans-serif" font-size="9" fill="#94a3b8">Medium Rare, Shaved Alba Truffles</text>
+      <text x="12" y="50" font-family="monospace" font-size="11" font-weight="700" fill="#f59e0b">$80.00</text>
+      
+      <!-- Quantity Increment / Decrement Micro-Buttons Wrapper -->
+      <rect x="174" y="36" width="42" height="16" rx="4" fill="#161f30" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+      <text x="180" y="47" font-family="monospace" font-size="10" fill="#475569">-</text>
+      <text x="193" y="47" font-family="monospace" font-size="9" font-weight="700" fill="#f8fafc">1</text>
+      <text x="206" y="47" font-family="monospace" font-size="10" fill="#475569">+</text>
+    </g>
+
+    <!-- Calculation Ledger Metrics Block -->
+    <g transform="translate(16, 165)">
+      <line x1="0" y1="0" x2="228" y2="0" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+      
+      <text x="0" y="18" font-family="-apple-system, sans-serif" font-size="11" fill="#94a3b8">Subtotal</text>
+      <text x="228" y="18" font-family="monospace" font-size="11" font-weight="500" fill="#94a3b8" text-anchor="end">$80.00</text>
+      
+      <text x="0" y="36" font-family="-apple-system, sans-serif" font-size="11" fill="#94a3b8">Artisanal Tax &amp; Service</text>
+      <text x="228" y="36" font-family="monospace" font-size="11" font-weight="500" fill="#94a3b8" text-anchor="end">$9.60</text>
+      
+      <text x="0" y="54" font-family="-apple-system, sans-serif" font-size="11" fill="#94a3b8">Delivery Fee</text>
+      <text x="228" y="54" font-family="monospace" font-size="11" font-weight="500" fill="#94a3b8" text-anchor="end">$8.50</text>
+
+      <line x1="0" y1="66" x2="228" y2="66" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1" stroke-dasharray="2 2"/>
+      
+      <text x="0" y="84" font-family="-apple-system, sans-serif" font-size="12" font-weight="800" fill="#f8fafc">Total Estimate</text>
+      <text x="228" y="84" font-family="monospace" font-size="13" font-weight="800" fill="#f59e0b" text-anchor="end">$98.10</text>
+    </g>
+
+    <!-- Final Order Placement Interactive Checkout Button -->
+    <g transform="translate(16, 274)">
+      <rect width="228" height="36" rx="8" fill="url(#blueInteractive)" filter="url(#accentGlowBlue)"/>
+      <text x="114" y="22" font-family="-apple-system, sans-serif" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle" letter-spacing="0.02em">Proceed to Checkout</text>
+    </g>
+  </g>
+
+  <!-- ====================================================================
+       INTERSECTING ARROW HUD CONNECTOR
+       ==================================================================== -->
+  <path d="M 416 190 Q 450 170 484 210" fill="none" stroke="url(#umamiBrand)" stroke-width="2" stroke-dasharray="4 4" opacity="0.6" />
+  <polygon points="486,212 484,204 478,209" fill="#ef4444" opacity="0.8" />
+
+  <!-- ====================================================================
+       FOOTER TECH SPECIFICATIONS METADATA OVERLAY
+       ==================================================================== -->
+  <g transform="translate(180, 442)">
+    <rect width="440" height="42" rx="21" fill="rgba(6, 9, 19, 0.95)" stroke="rgba(148, 163, 184, 0.15)" stroke-width="1.5"/>
+    
+    <!-- Title Category Specification Label -->
+    <text x="28" y="25" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="800" fill="#f8fafc" letter-spacing="0.06em">RESTAURANT MENU APP</text>
+    <circle cx="188" cy="21" r="2" fill="#475569" />
+    
+    <!-- Engine Core Stack Framework Pills -->
+    <text x="206" y="25" font-family="monospace" font-size="12" font-weight="700" fill="#38bdf8">HTML5</text>
+    <text x="256" y="25" font-family="monospace" font-size="12" font-weight="700" fill="#10b981">CSS3</text>
+    <text x="302" y="25" font-family="monospace" font-size="12" font-weight="700" fill="#f59e0b">ES6+</text>
+    
+    <!-- Build/Compiler Optimization Constraint Flag -->
+    <rect x="350" y="13" width="64" height="16" rx="4" fill="rgba(244, 63, 94, 0.08)" stroke="rgba(244, 63, 94, 0.15)" stroke-width="1"/>
+    <text x="356" y="24" font-family="-apple-system, sans-serif" font-size="8" font-weight="800" fill="#f43f5e">PURE_VANILLA</text>
+  </g>
+</svg>

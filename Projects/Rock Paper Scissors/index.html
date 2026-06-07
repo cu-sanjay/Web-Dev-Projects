@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors - NSoC '26</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>Rock Paper Scissors</h1>
+        <p class="subtitle">Play against the Computer</p>
+
+        <div class="streak-badge" id="streak-counter">🔥 Current Streak: 0</div>
+
+        <div class="score-board">
+            <div class="score-box">
+                <span class="score-val" id="player-score">0</span>
+                <span class="score-label">You</span>
+            </div>
+            <div class="score-divider">:</div>
+            <div class="score-box">
+                <span class="score-val" id="computer-score">0</span>
+                <span class="score-label">CPU</span>
+            </div>
+        </div>
+
+        <div class="arena">
+            <div class="choice-display">
+                <div class="choice-icon" id="player-choice-view">❓</div>
+                <p>Your Pick</p>
+            </div>
+            <div class="choice-display">
+                <div class="choice-icon" id="computer-choice-view">❓</div>
+                <p>CPU Pick</p>
+            </div>
+        </div>
+
+        <div class="result-message" id="game-status">Choose your weapon to start!</div>
+
+        <div class="weapons-grid">
+            <button class="weapon-btn" data-choice="rock">✊ <span class="btn-txt">Rock</span></button>
+            <button class="weapon-btn" data-choice="paper">✋ <span class="btn-txt">Paper</span></button>
+            <button class="weapon-btn" data-choice="scissors">✌️ <span class="btn-txt">Scissors</span></button>
+        </div>
+
+        <p class="history-title">Recent Rounds</p>
+        <div class="history-timeline" id="history-log"></div>
+
+        <button id="reset-btn" class="reset-btn">Reset Game State</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
