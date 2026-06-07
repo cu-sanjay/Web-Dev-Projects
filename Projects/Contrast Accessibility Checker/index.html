@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contrast Accessibility Checker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="dashboard">
+    <h1 class="title">Contrast Accessibility Checker</h1>
+    <p class="subtitle">Check your foreground and background color combination against WCAG standards.</p>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="panel inputs-panel">
+          <h2 class="panel-title">Colors</h2>
+
+          <div class="input-group">
+            <label for="bg-color">Background</label>
+            <div class="color-input-row">
+              <input type="color" id="bg-color" value="#ffffff">
+              <input type="text" id="bg-hex" value="#ffffff" maxlength="7">
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="text-color">Text</label>
+            <div class="color-input-row">
+              <input type="color" id="text-color" value="#000000">
+              <input type="text" id="text-hex" value="#000000" maxlength="7">
+            </div>
+          </div>
+
+          <button type="button" id="swap-btn" aria-label="Swap background and text colors">⇄ Swap</button>
+        </div>
+
+        <div class="panel preview-panel">
+          <h2 class="panel-title">Preview</h2>
+          <div id="preview-box" class="preview-box">
+            <h3 id="preview-heading">The quick brown fox</h3>
+            <p id="preview-body">Jumps over the lazy dog. Accessibility ensures everyone can read your content with ease.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="results-section">
+        <div class="badge-container">
+          <span id="badge" class="badge">—</span>
+          <span id="ratio-display" class="ratio-value">—</span>
+        </div>
+
+        <table class="details-table" aria-label="WCAG compliance details">
+          <thead>
+            <tr>
+              <th>Standard</th>
+              <th>Threshold</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>AA Normal Text</td>
+              <td>≥ 4.5:1</td>
+              <td><span id="aa-normal" class="detail-status">—</span></td>
+            </tr>
+            <tr>
+              <td>AA Large Text</td>
+              <td>≥ 3:1</td>
+              <td><span id="aa-large" class="detail-status">—</span></td>
+            </tr>
+            <tr>
+              <td>AAA Normal Text</td>
+              <td>≥ 7:1</td>
+              <td><span id="aaa-normal" class="detail-status">—</span></td>
+            </tr>
+            <tr>
+              <td>AAA Large Text</td>
+              <td>≥ 3:1</td>
+              <td><span id="aaa-large" class="detail-status">—</span></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p class="footnote">
+          <strong>Large Text</strong> is defined as at least 18pt or 14pt bold.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

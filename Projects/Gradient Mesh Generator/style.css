@@ -1,0 +1,212 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: #0f0f1a;
+}
+
+.mesh-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  transition: background-image 0.5s ease;
+}
+
+.dashboard {
+  width: 100%;
+  max-width: 580px;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 2rem 2rem 1.75rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 0.2rem;
+}
+
+.card-subtitle {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.color-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.color-group label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.position-label {
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: normal;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.input-row input[type="color"] {
+  width: 44px;
+  height: 38px;
+  padding: 2px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  cursor: pointer;
+  background: none;
+  flex-shrink: 0;
+}
+
+.input-row input[type="color"]:focus {
+  border-color: #fff;
+  outline: 2px solid rgba(255, 255, 255, 0.3);
+  outline-offset: 2px;
+}
+
+.input-row input[type="text"] {
+  flex: 1;
+  height: 38px;
+  padding: 0 0.65rem;
+  font-size: 0.85rem;
+  font-family: "SF Mono", "Fira Code", "Cascadia Code", monospace;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.25);
+  color: #fff;
+  transition: border-color 0.15s;
+}
+
+.input-row input[type="text"]:focus {
+  border-color: rgba(255, 255, 255, 0.5);
+  outline: none;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.randomize-btn {
+  display: block;
+  width: 100%;
+  padding: 0.7rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  cursor: pointer;
+  margin-bottom: 1.25rem;
+  transition: background 0.2s;
+}
+
+.randomize-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.randomize-btn:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.4);
+  outline-offset: 2px;
+}
+
+.export-section label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.4rem;
+}
+
+.css-output {
+  width: 100%;
+  height: 80px;
+  padding: 0.75rem;
+  font-size: 0.78rem;
+  font-family: "SF Mono", "Fira Code", "Cascadia Code", monospace;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.35);
+  color: rgba(255, 255, 255, 0.85);
+  resize: none;
+  line-height: 1.5;
+  white-space: pre;
+  word-wrap: normal;
+  overflow-x: auto;
+  margin-bottom: 0.5rem;
+}
+
+.copy-btn {
+  display: block;
+  width: 100%;
+  padding: 0.55rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.copy-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.copy-btn:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.4);
+  outline-offset: 2px;
+}
+
+.copy-btn.copied {
+  background: rgba(34, 197, 94, 0.25);
+  border-color: rgba(34, 197, 94, 0.4);
+}
+
+@media (max-width: 500px) {
+  .card {
+    padding: 1.25rem;
+  }
+
+  .color-grid {
+    grid-template-columns: 1fr;
+  }
+}

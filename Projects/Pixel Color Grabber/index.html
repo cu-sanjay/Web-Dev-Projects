@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Pixel Color Grabber</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <h1>Pixel Color Grabber</h1>
+    </header>
+
+    <div class="drop-zone" id="dropZone">
+      <input type="file" id="fileInput" accept="image/*" hidden>
+      <span class="drop-icon">⬆</span>
+      <span class="drop-text">Drop an image or click to browse</span>
+      <span class="drop-hint">PNG, JPG, WebP</span>
+    </div>
+
+    <div class="workspace">
+      <div class="canvas-panel">
+        <div class="canvas-wrap" id="canvasWrap">
+          <canvas id="previewCanvas"></canvas>
+          <div class="crosshair" id="crosshair">
+            <div class="ch-line ch-h"></div>
+            <div class="ch-line ch-v"></div>
+          </div>
+        </div>
+        <div class="coords" id="coords">Click an image to sample</div>
+      </div>
+
+      <div class="sidebar">
+        <div class="preview-ring" id="previewRing">
+          <span class="pr-lbl">Preview</span>
+          <div class="pr-swatch" id="prSwatch"></div>
+        </div>
+
+        <div class="color-row">
+          <span class="cr-lbl">HEX</span>
+          <input class="cr-input" id="hexInput" readonly value="—">
+          <button class="cr-copy" data-target="hexInput">Copy</button>
+        </div>
+        <div class="color-row">
+          <span class="cr-lbl">RGB</span>
+          <input class="cr-input" id="rgbInput" readonly value="—">
+          <button class="cr-copy" data-target="rgbInput">Copy</button>
+        </div>
+        <div class="color-row">
+          <span class="cr-lbl">HSL</span>
+          <input class="cr-input" id="hslInput" readonly value="—">
+          <button class="cr-copy" data-target="hslInput">Copy</button>
+        </div>
+
+        <div class="palette-section">
+          <span class="palette-lbl">Palette</span>
+          <div class="palette" id="palette"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

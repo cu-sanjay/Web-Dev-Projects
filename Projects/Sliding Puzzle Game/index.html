@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Sliding Puzzle</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="hud">
+      <div class="hud-item">
+        <span class="hud-lbl">Moves</span>
+        <span class="hud-val" id="movesVal">0</span>
+      </div>
+      <div class="hud-item">
+        <span class="hud-lbl">Time</span>
+        <span class="hud-val" id="timeVal">0s</span>
+      </div>
+      <div class="hud-item">
+        <span class="hud-lbl">Best</span>
+        <span class="hud-val accent" id="bestVal">—</span>
+      </div>
+    </header>
+
+    <div class="grid-wrap">
+      <div class="grid" id="grid"></div>
+    </div>
+
+    <div class="ctrl-row">
+      <button class="ctrl-btn" id="shuffleBtn">New Game</button>
+      <button class="ctrl-btn" id="resetBtn">Reset</button>
+    </div>
+
+    <div class="overlay" id="overlay">
+      <div class="modal">
+        <h2 class="modal-title">Puzzle Complete!</h2>
+        <div class="mo-stats">
+          <div class="mo-row"><span>Moves</span><span id="moMoves">0</span></div>
+          <div class="mo-row"><span>Time</span><span id="moTime">0s</span></div>
+          <div class="mo-row"><span>Best</span><span id="moBest">—</span></div>
+        </div>
+        <button class="modal-btn" id="playAgainBtn">Play Again</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
