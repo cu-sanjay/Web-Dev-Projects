@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Coding Challenge Tracker - Log resolved coding problems, maintain consistency streaks, monitor daily goals, and analyze study statistics.">
+  <title>DevTracker - Coding Challenge Tracker</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Toast Notification System -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- App Wrapper -->
+  <div class="app-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <span class="logo-icon">&lt;/&gt;</span>
+          <h2>DevTracker</h2>
+        </div>
+        <button id="theme-toggle-btn" class="icon-btn" title="Toggle Theme (Alt+T)" aria-label="Toggle Theme">
+          <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button class="nav-btn active" data-target="dashboard-section">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
+          <span>Dashboard</span>
+        </button>
+        <button class="nav-btn" data-target="log-section">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+          <span>Log Challenge</span>
+        </button>
+        <button class="nav-btn" data-target="registry-section">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+          <span>History Logs</span>
+        </button>
+        <button class="nav-btn" data-target="analytics-section">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+          <span>Analytics</span>
+        </button>
+        <button class="nav-btn" data-target="backup-section">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+          <span>Data Backup</span>
+        </button>
+      </nav>
+
+      <!-- Sidebar goal control -->
+      <div class="sidebar-goal-card">
+        <h3>Daily Target Goals</h3>
+        <div class="goal-input-row">
+          <input type="number" id="daily-goal-input" min="1" max="10" value="2" aria-label="Daily goal limit">
+          <span>problems</span>
+        </div>
+        <button id="update-goal-btn" class="secondary-btn btn-sm">Set Goal</button>
+      </div>
+
+      <div class="sidebar-footer">
+        <p>Offline Workspace Mode</p>
+        <span>Author: Mistry Vishwa</span>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- DASHBOARD VIEW -->
+      <section id="dashboard-section" class="content-section active-section">
+        <div class="section-header">
+          <h1>Dashboard Overview</h1>
+          <p class="subtitle">Monitor streaks, goal thresholds, and milestone achievements in real-time.</p>
+        </div>
+
+        <!-- Metric widgets grid -->
+        <div class="metrics-grid">
+          <!-- Streak widget -->
+          <div class="metric-card streak-card">
+            <div class="card-glow"></div>
+            <div class="metric-info">
+              <span class="metric-label">CONSECUTIVE STREAK</span>
+              <h2 id="current-streak-val">0 Days</h2>
+              <p>Longest streak: <strong id="longest-streak-val">0</strong> days</p>
+            </div>
+            <div class="streak-icon-fire">🔥</div>
+          </div>
+
+          <!-- Goals widget -->
+          <div class="metric-card goal-card">
+            <div class="metric-info">
+              <span class="metric-label">TODAY'S TARGET GOAL</span>
+              <h2 id="today-solved-val">0 / 2</h2>
+              <div class="goal-bar-outer">
+                <div id="today-goal-progress-bar" class="goal-bar-inner" style="width: 0%;"></div>
+              </div>
+              <p id="goal-status-desc">Log a challenge to progress today!</p>
+            </div>
+            <div class="goal-wheel">
+              <svg viewBox="0 0 36 36" class="circular-chart">
+                <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="3.5" />
+                <path id="goal-circle-path" class="circle" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="var(--success)" stroke-width="3.5" stroke-linecap="round" />
+              </svg>
+            </div>
+          </div>
+
+          <!-- Difficulty widget -->
+          <div class="metric-card difficulty-summary-card">
+            <span class="metric-label">SOLVED DIFFICULTY DISTRIBUTION</span>
+            <div class="difficulty-bars">
+              <div class="diff-bar-item">
+                <div class="diff-lbl">Easy <span id="easy-count-badge" class="badge-tag bg-success">0</span></div>
+                <div class="progress-bar-outer"><div id="easy-progress-fill" class="progress-bar-inner bg-success" style="width: 0%;"></div></div>
+              </div>
+              <div class="diff-bar-item">
+                <div class="diff-lbl">Medium <span id="med-count-badge" class="badge-tag bg-warning">0</span></div>
+                <div class="progress-bar-outer"><div id="med-progress-fill" class="progress-bar-inner bg-warning" style="width: 0%;"></div></div>
+              </div>
+              <div class="diff-bar-item">
+                <div class="diff-lbl">Hard <span id="hard-count-badge" class="badge-tag bg-danger">0</span></div>
+                <div class="progress-bar-outer"><div id="hard-progress-fill" class="progress-bar-inner bg-danger" style="width: 0%;"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-details">
+          <!-- Recent Activity -->
+          <div class="panel recent-activity-panel">
+            <div class="panel-header">
+              <h3>Recent Solved Problems</h3>
+              <button class="link-btn navigate-to-logs-btn">View All Logs</button>
+            </div>
+            <div class="table-container">
+              <table id="recent-challenges-table">
+                <thead>
+                  <tr>
+                    <th>Problem</th>
+                    <th>Platform</th>
+                    <th>Difficulty</th>
+                    <th>Date Solved</th>
+                  </tr>
+                </thead>
+                <tbody id="recent-challenges-tbody">
+                  <!-- Dynically filled -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Milestone achievements -->
+          <div class="panel achievements-panel">
+            <h3>Consistency Milestones</h3>
+            <div id="achievements-badges-grid" class="badges-grid">
+              <!-- Dynically filled -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- LOG CHALLENGE FORM VIEW -->
+      <section id="log-section" class="content-section">
+        <div class="section-header">
+          <h1 id="form-heading-title">Log Solved Challenge</h1>
+          <p class="subtitle">Record and submit problem details to update your active streak statistics.</p>
+        </div>
+
+        <div class="panel form-panel">
+          <form id="challenge-log-form">
+            <input type="hidden" id="edit-mode-id">
+            
+            <div class="form-group">
+              <label for="form-problem-title">Challenge Title <span class="required">*</span></label>
+              <input type="text" id="form-problem-title" placeholder="e.g. Reverse Linked List II" required>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="form-platform">Platform <span class="required">*</span></label>
+                <select id="form-platform" required>
+                  <option value="">Select Platform</option>
+                  <option value="LeetCode">LeetCode</option>
+                  <option value="Codeforces">Codeforces</option>
+                  <option value="HackerRank">HackerRank</option>
+                  <option value="CodeChef">CodeChef</option>
+                  <option value="GeeksforGeeks">GeeksforGeeks</option>
+                  <option value="Custom">Custom Platform</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>Difficulty Level <span class="required">*</span></label>
+                <div class="difficulty-toggle-group">
+                  <input type="radio" name="difficulty" id="diff-easy" value="Easy" checked>
+                  <label for="diff-easy" class="diff-btn-lbl btn-easy">Easy</label>
+
+                  <input type="radio" name="difficulty" id="diff-medium" value="Medium">
+                  <label for="diff-medium" class="diff-btn-lbl btn-medium">Medium</label>
+
+                  <input type="radio" name="difficulty" id="diff-hard" value="Hard">
+                  <label for="diff-hard" class="diff-btn-lbl btn-hard">Hard</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="form-topic">Topic / Category <span class="required">*</span></label>
+                <input type="text" id="form-topic" placeholder="e.g. Dynamic Programming, HashMap" list="topics-datalist" required>
+                <datalist id="topics-datalist"></datalist>
+              </div>
+
+              <div class="form-group">
+                <label for="form-date">Date Solved <span class="required">*</span></label>
+                <input type="date" id="form-date" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="form-time">Study Duration (Minutes)</label>
+                <input type="number" id="form-time" min="1" max="600" placeholder="e.g. 45">
+              </div>
+
+              <div class="form-group">
+                <label for="form-link">Problem Link (Optional)</label>
+                <input type="url" id="form-link" placeholder="https://leetcode.com/problems/...">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="form-notes">Analysis & Notes (Optional)</label>
+              <textarea id="form-notes" placeholder="Write algorithm complexity details, edge cases faced, or key optimization takeaways..."></textarea>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" id="submit-form-btn" class="primary-btn">Save Problem Log</button>
+              <button type="button" id="cancel-form-btn" class="secondary-btn">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- REGISTRY LOGS GRID VIEW -->
+      <section id="registry-section" class="content-section">
+        <div class="section-header">
+          <h1>Historical Logs Registry</h1>
+          <p class="subtitle">Search, filter, and sort solved challenges logs archive.</p>
+        </div>
+
+        <!-- Filters Workspace -->
+        <div class="filter-panel">
+          <div class="filter-search-box">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" id="registry-search-input" placeholder="Search problems title..." aria-label="Search problems">
+          </div>
+
+          <div class="filter-controls-row">
+            <select id="filter-platform" aria-label="Filter Platform">
+              <option value="all">All Platforms</option>
+              <option value="LeetCode">LeetCode</option>
+              <option value="Codeforces">Codeforces</option>
+              <option value="HackerRank">HackerRank</option>
+              <option value="CodeChef">CodeChef</option>
+              <option value="GeeksforGeeks">GeeksforGeeks</option>
+              <option value="Custom">Custom Platform</option>
+            </select>
+
+            <select id="filter-difficulty" aria-label="Filter Difficulty">
+              <option value="all">All Difficulties</option>
+              <option value="Easy">Easy</option>
+              <option value="Medium">Medium</option>
+              <option value="Hard">Hard</option>
+            </select>
+
+            <select id="filter-topic" aria-label="Filter Topic">
+              <!-- Dynamically populated -->
+              <option value="all">All Topics</option>
+            </select>
+
+            <select id="sort-order" aria-label="Sort Order">
+              <option value="date-desc">Newest Solved</option>
+              <option value="date-asc">Oldest Solved</option>
+              <option value="title-asc">Title A-Z</option>
+              <option value="time-desc">Longest Session</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Registry List Table -->
+        <div class="panel registry-panel">
+          <div class="table-container">
+            <table id="registry-table">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Platform</th>
+                  <th>Difficulty</th>
+                  <th>Topic</th>
+                  <th>Time Spent</th>
+                  <th>Date Solved</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="registry-tbody">
+                <!-- Dynamically filled -->
+              </tbody>
+            </table>
+          </div>
+          <div id="empty-state-logs" class="empty-state">
+            <p>No logged challenges match your search filters.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ANALYTICS PANEL VIEW -->
+      <section id="analytics-section" class="content-section">
+        <div class="section-header">
+          <h1>Analytics Dashboard</h1>
+          <p class="subtitle">Visualize topic breakdowns, platform trends, and study volume indices.</p>
+        </div>
+
+        <div class="analytics-metrics-row">
+          <div class="analytics-metric-tile">
+            <h4>Total Solved</h4>
+            <p id="analytic-total-solved">0</p>
+          </div>
+          <div class="analytics-metric-tile">
+            <h4>Study Duration</h4>
+            <p id="analytic-total-time">0 min</p>
+          </div>
+          <div class="analytics-metric-tile">
+            <h4>Avg. Session Time</h4>
+            <p id="analytic-avg-time">0 min</p>
+          </div>
+          <div class="analytics-metric-tile">
+            <h4>Streaks Record</h4>
+            <p id="analytic-best-streak">0 Days</p>
+          </div>
+        </div>
+
+        <div class="analytics-charts-grid">
+          <div class="chart-tile">
+            <h3>Platform Representation</h3>
+            <canvas id="platform-chart" width="400" height="240"></canvas>
+          </div>
+
+          <div class="chart-tile">
+            <h3>Weekly Solved Volume</h3>
+            <canvas id="weekly-chart" width="400" height="240"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <!-- DATA PORTABILITY BACKUPS VIEW -->
+      <section id="backup-section" class="content-section">
+        <div class="section-header">
+          <h1>Data Portability & Settings</h1>
+          <p class="subtitle">Safely backup your solved challenges database index locally or import previous archives.</p>
+        </div>
+
+        <div class="backup-grid">
+          <div class="panel backup-card-panel">
+            <h3>Download Backup Document</h3>
+            <p>Export all logged problems, difficulty metrics, streaks history, and user settings in a single portable JSON file.</p>
+            <button id="backup-export-btn" class="primary-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              <span>Export Database (JSON)</span>
+            </button>
+          </div>
+
+          <div class="panel backup-card-panel">
+            <h3>Restore Backup Archive</h3>
+            <p>Upload a previously exported database JSON file to restore your Coding Challenge Tracker state. Warning: This will overwrite local browser records.</p>
+            <label for="backup-import-file" class="upload-badge-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+              <span>Upload Backup File</span>
+            </label>
+            <input type="file" id="backup-import-file" accept=".json" class="file-input-hide">
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
