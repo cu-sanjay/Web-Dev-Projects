@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trail Making Lab — Executive Function Trail Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <header id="app-header">
+      <h1>TRAIL MAKING LAB</h1>
+      <span class="subtitle">Executive Function Trail Tracker</span>
+    </header>
+
+    <div id="toolbar">
+      <div class="toolbar-group">
+        <span class="toolbar-label">Test Variant:</span>
+        <div class="btn-group">
+          <button id="partABtn" class="btn variant-btn active">Part A <span class="sub">Numeric</span></button>
+          <button id="partBBtn" class="btn variant-btn">Part B <span class="sub">Alphanumeric</span></button>
+        </div>
+      </div>
+      <div class="toolbar-group">
+        <button id="startBtn" class="btn primary-btn">Start Assessment</button>
+        <button id="resetBtn" class="btn secondary-btn">Reset Board</button>
+      </div>
+      <div class="toolbar-group timer-group">
+        <span class="toolbar-label">Timer:</span>
+        <span id="timerDisplay">00:00.000</span>
+      </div>
+    </div>
+
+    <main id="main-content">
+      <div id="workspace">
+        <canvas id="lineCanvas"></canvas>
+        <div id="nodes-container"></div>
+      </div>
+      <aside id="dashboard">
+        <div class="dash-section">
+          <div class="dash-row">
+            <span class="dash-label">Time Elapsed</span>
+            <span id="dashTime" class="dash-value">00:00.000</span>
+          </div>
+          <div class="dash-row">
+            <span class="dash-label">Connected</span>
+            <span id="dashConnected" class="dash-value">0 / 20</span>
+          </div>
+          <div class="dash-row">
+            <span class="dash-label">Errors</span>
+            <span id="dashErrors" class="dash-value">0</span>
+          </div>
+        </div>
+        <div class="dash-divider"></div>
+        <div class="dash-section log-section">
+          <span class="dash-label">System Log</span>
+          <div id="logPanel">
+            <div class="log-entry info">Select test variant and press Start Assessment.</div>
+          </div>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
