@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200">
+  <rect width="320" height="200" fill="#05070c"/>
+  <rect x="10" y="10" width="300" height="180" rx="10" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+  <!-- quiz active view -->
+  <rect x="14" y="14" width="292" height="172" rx="10" fill="#05070c"/>
+  <!-- topbar -->
+  <text x="22" y="30" font-family="system-ui, sans-serif" font-size="6" font-weight="700" fill="#64748b" letter-spacing="1">SCIENCE</text>
+  <text x="260" y="30" font-family="system-ui, sans-serif" font-size="6" fill="#64748b">2 / 5</text>
+  <!-- timer -->
+  <rect x="18" y="40" width="130" height="4" rx="2" fill="rgba(255,255,255,0.04)"/>
+  <rect x="18" y="40" width="78" height="4" rx="2" fill="#00f0ff"/>
+  <text x="155" y="44" font-family="monospace" font-size="7" font-weight="700" fill="#00f0ff">9s</text>
+  <!-- question -->
+  <text x="22" y="68" font-family="system-ui, sans-serif" font-size="8" font-weight="600" fill="#e2e8f0">What planet is known as</text>
+  <text x="22" y="80" font-family="system-ui, sans-serif" font-size="8" font-weight="600" fill="#e2e8f0">the Red Planet?</text>
+  <!-- options -->
+  <rect x="22" y="94" width="130" height="26" rx="8" fill="rgba(255,255,255,0.015)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <text x="34" y="111" font-family="system-ui, sans-serif" font-size="6" fill="#e2e8f0">Venus</text>
+  <rect x="168" y="94" width="130" height="26" rx="8" fill="rgba(16,185,129,0.08)" stroke="#10b981" stroke-width="1"/>
+  <text x="180" y="111" font-family="system-ui, sans-serif" font-size="6" font-weight="600" fill="#10b981">Mars ✓</text>
+  <rect x="22" y="126" width="130" height="26" rx="8" fill="rgba(239,68,68,0.08)" stroke="#ef4444" stroke-width="1"/>
+  <text x="34" y="143" font-family="system-ui, sans-serif" font-size="6" font-weight="600" fill="#ef4444">Jupiter ✗</text>
+  <rect x="168" y="126" width="130" height="26" rx="8" fill="rgba(255,255,255,0.015)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <text x="180" y="143" font-family="system-ui, sans-serif" font-size="6" fill="#e2e8f0">Saturn</text>
+  <!-- feedback -->
+  <rect x="22" y="160" width="276" height="20" rx="6" fill="rgba(16,185,129,0.06)" stroke="rgba(16,185,129,0.12)" stroke-width="1"/>
+  <text x="30" y="174" font-family="system-ui, sans-serif" font-size="6" fill="#10b981">✅ Correct!</text>
+  <!-- next -->
+  <rect x="246" y="160" width="52" height="20" rx="6" fill="#00f0ff"/>
+  <text x="272" y="175" font-family="system-ui, sans-serif" font-size="6" font-weight="700" fill="#05070c" text-anchor="middle">Next</text>
+</svg>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Master</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Category Screen -->
+    <div id="categoryScreen">
+      <div class="screen-header">
+        <span class="brand">Quiz Master</span>
+        <span class="brand-sub">Choose a topic</span>
+      </div>
+      <div id="categoryGrid"></div>
+    </div>
+
+    <!-- Quiz Arena -->
+    <div id="quizScreen" class="hidden">
+      <div id="quizTopbar">
+        <span id="quizCategory" class="quiz-cat"></span>
+        <span id="quizIndex" class="quiz-idx">0 / 0</span>
+      </div>
+      <div id="timerRow">
+        <span id="timerText" class="timer-text">15s</span>
+        <div id="timerTrack"><div id="timerFill"></div></div>
+      </div>
+      <div id="questionArea">
+        <div id="questionText" class="question-text"></div>
+        <div id="optionsList"></div>
+        <div id="feedbackBanner" class="hidden"></div>
+      </div>
+      <div id="quizControls">
+        <button id="nextBtn" class="btn btn-primary hidden">Next</button>
+      </div>
+    </div>
+
+    <!-- Summary Modal -->
+    <div id="summaryScreen" class="hidden">
+      <div class="summary-panel">
+        <div class="summary-header">Quiz Complete</div>
+        <div class="summary-score">
+          <span id="summaryPoints" class="summary-points">0</span>
+          <span class="summary-of">/</span>
+          <span id="summaryTotal" class="summary-total">0</span>
+        </div>
+        <div class="summary-metrics">
+          <div class="metric-row"><span>Correct</span><span id="summaryCorrect">0</span></div>
+          <div class="metric-row"><span>Incorrect</span><span id="summaryIncorrect">0</span></div>
+          <div class="metric-row"><span>Accuracy</span><span id="summaryAccuracy">0%</span></div>
+          <div class="metric-row high"><span>High Score</span><span id="summaryHigh">0</span></div>
+          <div class="metric-row new hidden" id="newBadge"><span>&#x2B50; New Record!</span><span></span></div>
+        </div>
+        <button id="summaryBtn" class="btn btn-primary">Back to Topics</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
