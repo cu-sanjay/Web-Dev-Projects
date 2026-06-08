@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pomo Timer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="hud">
+      <div class="hud-item">
+        <span class="hud-lbl">Focus</span>
+        <span class="hud-val" id="focusCount">0</span>
+      </div>
+      <div class="hud-item">
+        <span class="hud-lbl">Total Min</span>
+        <span class="hud-val accent" id="totalMin">0</span>
+      </div>
+      <div class="hud-item">
+        <span class="hud-lbl">Today</span>
+        <span class="hud-val" id="todayCount">0</span>
+      </div>
+    </header>
+
+    <div class="card">
+      <div class="tabs" id="tabs">
+        <button class="tab active" data-phase="focus">Focus</button>
+        <button class="tab" data-phase="short">Short Break</button>
+        <button class="tab" data-phase="long">Long Break</button>
+      </div>
+
+      <div class="progress-ring" id="progressRing">
+        <svg viewBox="0 0 200 200">
+          <circle cx="100" cy="100" r="88" class="track"/>
+          <circle cx="100" cy="100" r="88" class="fill" id="progressFill"/>
+        </svg>
+      </div>
+
+      <div class="clock" id="clock">25:00</div>
+
+      <div class="phase-label" id="phaseLabel">Focus</div>
+
+      <div class="controls">
+        <button class="ctrl-btn primary" id="startBtn">Start</button>
+        <button class="ctrl-btn" id="pauseBtn">Pause</button>
+        <button class="ctrl-btn" id="resetBtn">Reset</button>
+      </div>
+
+      <div class="settings-toggle" id="settingsToggle">Settings</div>
+
+      <div class="settings" id="settingsPanel">
+        <div class="setting-row">
+          <label>Focus (min)</label>
+          <input type="number" id="focusDuration" class="setting-input" value="25" min="1" max="120">
+        </div>
+        <div class="setting-row">
+          <label>Short Break (min)</label>
+          <input type="number" id="shortDuration" class="setting-input" value="5" min="1" max="30">
+        </div>
+        <div class="setting-row">
+          <label>Long Break (min)</label>
+          <input type="number" id="longDuration" class="setting-input" value="15" min="1" max="60">
+        </div>
+        <button class="ctrl-btn primary" id="applySettings">Apply</button>
+      </div>
+    </div>
+
+    <div class="overlay" id="overlay">
+      <div class="modal">
+        <h2 class="modal-title" id="phaseCompleteTitle">Focus Complete</h2>
+        <div class="mo-stats">
+          <div class="mo-row"><span>Sessions Today</span><span id="moToday">0</span></div>
+          <div class="mo-row"><span>Total Minutes</span><span id="moTotal">0</span></div>
+        </div>
+        <button class="modal-btn" id="dismissBtn">Continue</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
