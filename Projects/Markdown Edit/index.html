@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Markdown Edit</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <div id="toolbar">
+      <button class="tb-btn" data-action="bold" title="Bold (Ctrl+B)"><strong>B</strong></button>
+      <button class="tb-btn" data-action="italic" title="Italic (Ctrl+I)"><em>I</em></button>
+      <button class="tb-btn" data-action="link" title="Link">Link</button>
+      <button class="tb-btn" data-action="code" title="Code Block">&lt;/&gt;</button>
+      <span class="tb-divider"></span>
+      <button class="tb-btn" data-action="clear" title="Clear">Clear</button>
+      <button class="tb-btn" data-action="export" title="Export .md">Export</button>
+    </div>
+
+    <div id="editor">
+      <div class="pane pane-input">
+        <div class="pane-label">Markdown</div>
+        <textarea id="input" placeholder="Type Markdown here..."></textarea>
+      </div>
+      <div class="pane pane-preview">
+        <div class="pane-label">Preview</div>
+        <div id="preview"></div>
+      </div>
+    </div>
+
+    <div id="statusbar">
+      <span id="wordCount">0 words</span>
+      <span id="lineCount">0 lines</span>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

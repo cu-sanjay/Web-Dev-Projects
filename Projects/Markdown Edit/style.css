@@ -1,0 +1,164 @@
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body { height: 100%; background: #05070c; color: #e2e8f0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; -webkit-font-smoothing: antialiased; overflow: hidden; }
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
+
+#app { display: flex; flex-direction: column; height: 100vh; }
+
+#toolbar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 14px;
+  background: rgba(5,7,12,0.85);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  flex-shrink: 0;
+  z-index: 10;
+  flex-wrap: wrap;
+}
+
+.tb-btn {
+  padding: 5px 12px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 5px;
+  color: #64748b;
+  font-size: 12px;
+  font-family: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+
+.tb-btn:hover { border-color: rgba(255,255,255,0.1); color: #e2e8f0; }
+.tb-btn:active { transform: scale(0.96); }
+
+.tb-divider { width: 1px; height: 20px; background: rgba(255,255,255,0.06); margin: 0 4px; }
+
+#editor {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  flex: 1;
+  min-height: 0;
+}
+
+.pane {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.pane-input { border-right: 1px solid rgba(255,255,255,0.04); }
+
+.pane-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #475569;
+  padding: 7px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  flex-shrink: 0;
+}
+
+#input {
+  flex: 1;
+  background: #05070c;
+  border: none;
+  outline: none;
+  resize: none;
+  color: #e2e8f0;
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  font-size: 13px;
+  line-height: 1.7;
+  padding: 14px;
+  tab-size: 2;
+}
+
+#input::placeholder { color: #475569; }
+
+#preview {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px;
+  line-height: 1.7;
+  word-wrap: break-word;
+}
+
+#preview h1 { font-size: 24px; font-weight: 700; margin: 16px 0 8px; padding-bottom: 6px; border-bottom: 1px solid rgba(255,255,255,0.04); }
+#preview h2 { font-size: 20px; font-weight: 700; margin: 14px 0 6px; }
+#preview h3 { font-size: 17px; font-weight: 700; margin: 12px 0 4px; }
+#preview h4 { font-size: 15px; font-weight: 700; }
+
+#preview p { margin: 6px 0; }
+#preview strong { font-weight: 700; color: #e2e8f0; }
+#preview em { font-style: italic; }
+
+#preview ul, #preview ol { padding-left: 22px; margin: 6px 0; }
+#preview li { margin: 2px 0; }
+#preview li > ul, #preview li > ol { margin: 0; }
+
+#preview a { color: #00f0ff; text-decoration: none; transition: color 0.15s; }
+#preview a:hover { color: #60ffff; text-decoration: underline; }
+
+#preview code {
+  background: rgba(255,255,255,0.04);
+  color: #f59e0b;
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-family: 'SF Mono', 'Consolas', monospace;
+  font-size: 0.9em;
+}
+
+#preview pre {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.04);
+  border-radius: 6px;
+  padding: 12px;
+  overflow-x: auto;
+  margin: 10px 0;
+}
+
+#preview pre code {
+  background: none;
+  color: #00f0ff;
+  padding: 0;
+  border-radius: 0;
+  font-size: 0.85em;
+  line-height: 1.6;
+}
+
+#preview blockquote {
+  border-left: 3px solid #00f0ff;
+  padding: 6px 14px;
+  margin: 10px 0;
+  color: #94a3b8;
+  background: rgba(255,255,255,0.01);
+  border-radius: 0 4px 4px 0;
+}
+
+#preview hr { border: none; border-top: 1px solid rgba(255,255,255,0.04); margin: 16px 0; }
+
+#statusbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 14px;
+  background: rgba(5,7,12,0.85);
+  border-top: 1px solid rgba(255,255,255,0.04);
+  font-size: 11px;
+  color: #475569;
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+  #editor { grid-template-columns: 1fr; }
+  .pane-input { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.04); }
+  #input { min-height: 30vh; }
+}
