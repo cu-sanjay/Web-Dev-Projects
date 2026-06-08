@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <header id="topbar">
+      <div class="topbar-left">
+        <span class="brand">Weather</span>
+        <span class="brand-sub">Dashboard</span>
+      </div>
+    </header>
+
+    <div id="workspace">
+      <aside id="sidebar">
+        <div class="panel-title">Recent</div>
+        <div id="historyList"></div>
+        <div class="panel-title" style="margin-top:16px">Quick</div>
+        <button id="geoBtn" class="geo-btn">Use My Location</button>
+      </aside>
+
+      <main id="main-col">
+        <div id="search-bar">
+          <input type="text" id="cityInput" placeholder="Search city..." autocomplete="off">
+          <button id="searchBtn" class="btn btn-primary">Search</button>
+          <div id="searchFeedback" class="search-feedback"></div>
+        </div>
+
+        <div id="current-card">
+          <div id="curLeft">
+            <div id="curCity" class="cur-city">--</div>
+            <div id="curDate" class="cur-date">--</div>
+            <div id="curDesc" class="cur-desc">--</div>
+            <div id="curTemp" class="cur-temp">--</div>
+          </div>
+          <div id="curRight">
+            <div id="curIcon" class="cur-icon"></div>
+            <div class="cur-metrics">
+              <div class="metric"><span class="metric-label">Humidity</span><span id="curHumidity" class="metric-value">--</span></div>
+              <div class="metric"><span class="metric-label">Wind</span><span id="curWind" class="metric-value">--</span></div>
+              <div class="metric"><span class="metric-label">Pressure</span><span id="curPressure" class="metric-value">--</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel-title" style="margin-top:8px">5-Day Forecast</div>
+        <div id="forecast-grid"></div>
+      </main>
+    </div>
+  </div>
+
+  <div id="spinner" class="spinner hidden">
+    <div class="spinner-ring"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
