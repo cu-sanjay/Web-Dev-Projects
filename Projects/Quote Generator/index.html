@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quote Generator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <header id="topbar">
+      <div class="topbar-left">
+        <span class="brand">Quote Generator</span>
+      </div>
+      <div class="topbar-right">
+        <button id="bookmarksToggle" class="icon-btn" title="Bookmarks">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+          <span id="bookmarkCount" class="badge">0</span>
+        </button>
+      </div>
+    </header>
+
+    <main id="card">
+      <div id="quote-mark">&ldquo;</div>
+      <div id="quoteText" class="quote-text">Click the button to generate a quote</div>
+      <div id="quoteAuthor" class="quote-author">&mdash; Unknown</div>
+      <div id="quoteCategory" class="quote-cat">inspiration</div>
+    </main>
+
+    <div id="toolbar">
+      <button id="newBtn" class="btn btn-primary">New Quote</button>
+      <button id="copyBtn" class="btn btn-ghost" title="Copy">Copy</button>
+      <button id="bookmarkBtn" class="btn btn-ghost" title="Bookmark">
+        <span id="bookmarkIcon">&hearts;</span>
+      </button>
+      <button id="shareBtn" class="btn btn-ghost" title="Share to X">Share</button>
+    </div>
+
+    <div id="toast" class="hidden"></div>
+  </div>
+
+  <div id="sidebar" class="hidden">
+    <div id="sidebarHeader">
+      <span>Bookmarks</span>
+      <button id="sidebarClose">&times;</button>
+    </div>
+    <div id="sidebarList"></div>
+    <div id="sidebarEmpty" class="sidebar-empty">No bookmarks yet</div>
+  </div>
+  <div id="sidebarOverlay" class="hidden"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

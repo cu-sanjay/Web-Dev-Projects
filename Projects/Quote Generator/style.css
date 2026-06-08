@@ -1,0 +1,226 @@
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body { height: 100%; background: #05060c; color: #e2e8f0; font-family: 'Georgia', 'Times New Roman', serif; -webkit-font-smoothing: antialiased; }
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
+
+body { display: flex; align-items: center; justify-content: center; padding: 20px; min-height: 100vh; }
+
+#app { width: 100%; max-width: 560px; position: relative; }
+
+#topbar { display: flex; align-items: center; justify-content: space-between; padding: 8px 0 16px; }
+
+.brand { font-size: 13px; font-weight: 700; letter-spacing: 0.3px; color: #64748b; }
+
+.topbar-right { display: flex; align-items: center; }
+
+.icon-btn {
+  position: relative;
+  background: none;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.15s;
+}
+
+.icon-btn:hover { color: #e2e8f0; background: rgba(255,255,255,0.03); }
+
+.badge {
+  font-size: 10px;
+  font-weight: 700;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: rgba(0,240,255,0.12);
+  color: #00f0ff;
+  padding: 0 5px;
+  border-radius: 8px;
+  min-width: 16px;
+  text-align: center;
+  line-height: 1.4;
+}
+
+#card {
+  background: rgba(255,255,255,0.015);
+  border: 1px solid rgba(255,255,255,0.04);
+  border-radius: 16px;
+  padding: 40px 36px;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: opacity 0.3s ease;
+}
+
+#quote-mark {
+  position: absolute;
+  top: 10px;
+  left: 16px;
+  font-size: 80px;
+  color: rgba(0,240,255,0.06);
+  font-family: 'Georgia', serif;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.quote-text {
+  font-size: 22px;
+  line-height: 1.6;
+  color: #e2e8f0;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+  transition: opacity 0.25s;
+}
+
+.quote-author {
+  font-size: 14px;
+  color: #64748b;
+  font-style: italic;
+  margin-bottom: 8px;
+}
+
+.quote-cat {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 3px 10px;
+  border-radius: 4px;
+  background: rgba(0,240,255,0.06);
+  color: #00f0ff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  align-self: flex-start;
+}
+
+#toolbar { display: flex; gap: 8px; padding: 16px 0; flex-wrap: wrap; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 9px 18px;
+  border: none;
+  border-radius: 8px;
+  font-size: 12px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  outline: none;
+}
+
+.btn:focus-visible { box-shadow: 0 0 0 2px #00f0ff; }
+
+.btn-primary { background: #00f0ff; color: #05060c; }
+.btn-primary:hover { box-shadow: 0 4px 20px rgba(0,240,255,0.2); transform: translateY(-1px); }
+
+.btn-ghost {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.05);
+  color: #64748b;
+}
+
+.btn-ghost:hover { border-color: rgba(255,255,255,0.1); color: #e2e8f0; }
+
+.btn-ghost.active { color: #ef4444; border-color: rgba(239,68,68,0.2); }
+.btn-ghost.active #bookmarkIcon { color: #ef4444; }
+
+#bookmarkIcon { font-size: 14px; line-height: 1; }
+
+#toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(5,6,12,0.9);
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #e2e8f0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 30;
+  animation: toastIn 0.3s ease;
+  pointer-events: none;
+}
+
+#toast.hidden { display: none; }
+
+@keyframes toastIn { from { opacity: 0; transform: translateX(-50%) translateY(10px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
+
+/* Sidebar */
+#sidebar {
+  position: fixed;
+  top: 0; right: 0;
+  width: 300px;
+  height: 100vh;
+  background: rgba(5,6,12,0.98);
+  border-left: 1px solid rgba(255,255,255,0.04);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  animation: slideIn 0.25s ease;
+}
+
+#sidebar.hidden { display: none; }
+
+@keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+
+#sidebarHeader { display: flex; justify-content: space-between; align-items: center; padding: 16px 18px; border-bottom: 1px solid rgba(255,255,255,0.04); }
+#sidebarHeader span { font-size: 13px; font-weight: 700; }
+#sidebarClose { background: none; border: none; color: #64748b; font-size: 18px; cursor: pointer; }
+#sidebarClose:hover { color: #e2e8f0; }
+
+#sidebarList { flex: 1; overflow-y: auto; padding: 8px 0; }
+
+.sidebar-item {
+  padding: 12px 18px;
+  border-bottom: 1px solid rgba(255,255,255,0.02);
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.sidebar-item-text { flex: 1; }
+.sidebar-item-q { font-size: 13px; color: #e2e8f0; line-height: 1.4; }
+.sidebar-item-a { font-size: 11px; color: #64748b; font-style: italic; margin-top: 2px; }
+
+.sidebar-item-del {
+  background: none;
+  border: none;
+  color: #475569;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0 2px;
+  flex-shrink: 0;
+}
+
+.sidebar-item-del:hover { color: #ef4444; }
+
+.sidebar-empty { display: flex; align-items: center; justify-content: center; flex: 1; color: #475569; font-size: 13px; }
+
+#sidebarOverlay { position: fixed; inset: 0; z-index: 40; background: rgba(0,0,0,0.3); }
+#sidebarOverlay.hidden { display: none; }
+
+@media (max-width: 480px) {
+  #card { padding: 28px 20px; min-height: 200px; }
+  .quote-text { font-size: 18px; }
+  #quote-mark { font-size: 56px; top: 6px; left: 10px; }
+  #sidebar { width: 100%; }
+}
