@@ -1,0 +1,49 @@
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle, #0b1020, #05060a);
+  font-family: Arial;
+  color: white;
+}
+
+.app {
+  text-align: center;
+}
+
+.wheel-container {
+  position: relative;
+  width: 400px;
+  height: 400px;
+}
+
+canvas {
+  border-radius: 50%;
+  box-shadow: 0 0 30px rgba(0,255,200,0.25);
+}
+
+.pointer {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 30px;
+  color: #00ffd5;
+}
+
+button {
+  margin-top: 20px;
+  padding: 12px 40px;
+  border: none;
+  border-radius: 30px;
+  background: linear-gradient(90deg,#00ffd5,#00aaff);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#result {
+  margin-top: 20px;
+  font-size: 18px;
+}
