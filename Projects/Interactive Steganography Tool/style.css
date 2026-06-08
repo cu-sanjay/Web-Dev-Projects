@@ -1,0 +1,124 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg,#0f172a,#1e293b);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    color:white;
+}
+
+.container{
+    width:100%;
+    max-width:900px;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    text-align:center;
+    margin-bottom:25px;
+    color:#cbd5e1;
+}
+
+.card{
+    background:#1e293b;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.3);
+}
+
+input[type="file"]{
+    width:100%;
+    padding:10px;
+    margin-bottom:15px;
+    background:#334155;
+    border-radius:10px;
+}
+
+textarea{
+    width:100%;
+    min-height:120px;
+    padding:15px;
+    border:none;
+    border-radius:12px;
+    resize:vertical;
+    outline:none;
+    font-size:16px;
+    margin-bottom:20px;
+}
+
+.button-group{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+button{
+    padding:12px 24px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:15px;
+    transition:0.3s;
+}
+
+#encodeBtn{
+    background:#22c55e;
+    color:white;
+}
+
+#decodeBtn{
+    background:#3b82f6;
+    color:white;
+}
+
+button:hover{
+    transform:translateY(-2px);
+}
+
+canvas{
+    width:100%;
+    margin-top:25px;
+    border-radius:12px;
+    background:#0f172a;
+    max-height:500px;
+}
+
+#downloadLink{
+    display:none;
+    margin-top:20px;
+    text-align:center;
+    text-decoration:none;
+    color:#38bdf8;
+    font-weight:bold;
+}
+
+#output{
+    margin-top:20px;
+    padding:15px;
+    border-radius:10px;
+    background:#334155;
+    word-break:break-word;
+}
+
+@media(max-width:600px){
+    .button-group{
+        flex-direction:column;
+    }
+
+    button{
+        width:100%;
+    }
+}

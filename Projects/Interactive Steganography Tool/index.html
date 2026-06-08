@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Steganography Tool</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>🔐 Interactive Steganography Tool</h1>
+
+    <p class="subtitle">
+        Hide secret messages inside images and reveal them later.
+    </p>
+
+    <div class="card">
+
+        <input type="file" id="imageInput" accept="image/*">
+
+        <textarea
+            id="secretMessage"
+            placeholder="Enter your secret message here..."></textarea>
+
+        <div class="button-group">
+            <button id="encodeBtn">Encode Message</button>
+            <button id="decodeBtn">Decode Message</button>
+        </div>
+
+        <canvas id="canvas"></canvas>
+
+        <a id="downloadLink" download="encoded-image.png">
+            Download Encoded Image
+        </a>
+
+        <div id="output"></div>
+
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
