@@ -1,0 +1,360 @@
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background: #09090b;
+  color: #e4e4e7;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+#app {
+  width: 100%;
+  max-width: 480px;
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+/* ── HUD ── */
+
+#hud {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  gap: 6px;
+}
+
+.hud-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.hud-label {
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: #52525b;
+}
+
+.hud-value {
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: #fafafa;
+  line-height: 1.2;
+}
+
+/* ── Status Bar ── */
+
+#statusBar {
+  width: 100%;
+  text-align: center;
+  padding: 8px 12px;
+  border: 1px solid #18181b;
+  border-radius: 4px;
+  background: #0a0a0d;
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#statusMessage {
+  font-size: 0.75rem;
+  letter-spacing: 1.5px;
+  color: #71717a;
+  transition: color 0.2s ease;
+}
+
+#statusMessage.listening {
+  color: #e4e4e7;
+}
+
+#statusMessage.input {
+  color: #a1a1aa;
+}
+
+#statusMessage.correct {
+  color: #a3e635;
+}
+
+#statusMessage.error {
+  color: #f97316;
+}
+
+#statusMessage.done {
+  color: #818cf8;
+}
+
+/* ── Grid ── */
+
+#grid {
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+/* ── Blocks ── */
+
+.block {
+  position: relative;
+  background: #18181b;
+  border: 1px solid #27272a;
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.08s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.block:hover:not(.disabled) {
+  border-color: #3f3f46;
+}
+
+.block:active:not(.disabled) {
+  transform: scale(0.96);
+}
+
+.block.disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.block-label {
+  font-size: 0.65rem;
+  letter-spacing: 1.5px;
+  color: #52525b;
+  text-transform: uppercase;
+  pointer-events: none;
+  transition: color 0.15s ease;
+}
+
+/* ── Block States ── */
+
+.block.active {
+  background: #fafafa;
+  border-color: #fafafa;
+  box-shadow: 0 0 28px rgba(255, 255, 255, 0.5), 0 0 60px rgba(255, 255, 255, 0.15);
+}
+
+.block.active .block-label {
+  color: #18181b;
+}
+
+.block.correct-tap {
+  background: #3f3f46;
+  border-color: #52525b;
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.2);
+}
+
+.block.correct-tap .block-label {
+  color: #d4d4d8;
+}
+
+.block.error-tap {
+  background: #18181b;
+  border-color: #f97316;
+  box-shadow: 0 0 16px rgba(249, 115, 22, 0.3);
+  animation: error-throb 0.4s ease;
+}
+
+@keyframes error-throb {
+  0%, 100% { transform: scale(1); }
+  30% { transform: scale(1.06); }
+  60% { transform: scale(0.97); }
+}
+
+/* ── Screen Shake + Amber Fade ── */
+
+#app.shake {
+  animation: screen-shake 0.4s ease;
+}
+
+@keyframes screen-shake {
+  0%, 100% { transform: translate(0, 0); }
+  12%  { transform: translate(-5px, 2px); }
+  30%  { transform: translate(5px, -2px); }
+  50%  { transform: translate(-4px, 3px); }
+  70%  { transform: translate(4px, -3px); }
+  88%  { transform: translate(-2px, 1px); }
+}
+
+#grid.amber-fade {
+  animation: amber-overlay 0.6s ease;
+}
+
+@keyframes amber-overlay {
+  0%   { background: transparent; }
+  15%  { background: rgba(245, 158, 11, 0.08); }
+  40%  { background: rgba(245, 158, 11, 0.03); }
+  100% { background: transparent; }
+}
+
+/* ── Controls ── */
+
+#controls {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.btn {
+  padding: 10px 28px;
+  border: 1px solid #27272a;
+  border-radius: 4px;
+  background: transparent;
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  cursor: pointer;
+  text-transform: uppercase;
+  color: #a1a1aa;
+  transition: background 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+}
+
+.btn:hover:not(:disabled) {
+  border-color: #3f3f46;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.btn:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* ── Results Overlay ── */
+
+.hidden {
+  display: none !important;
+}
+
+#resultsOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  backdrop-filter: blur(6px);
+}
+
+.results-modal {
+  background: #0a0a0d;
+  border: 1px solid #18181b;
+  border-radius: 12px;
+  padding: 32px 28px;
+  max-width: 360px;
+  width: 90%;
+  text-align: center;
+}
+
+.results-modal h2 {
+  font-size: 1rem;
+  letter-spacing: 3px;
+  color: #818cf8;
+  font-weight: 500;
+}
+
+.results-divider {
+  height: 1px;
+  background: #18181b;
+  margin: 16px 0;
+}
+
+.results-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+  border-bottom: 1px solid #121214;
+}
+
+.result-row:last-child {
+  border-bottom: none;
+}
+
+.result-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.5px;
+  color: #71717a;
+}
+
+.result-value {
+  font-size: 1.1rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: #fafafa;
+}
+
+.result-summary {
+  font-size: 0.72rem;
+  color: #52525b;
+  letter-spacing: 0.5px;
+  margin-bottom: 20px;
+  padding: 8px;
+  border: 1px solid #18181b;
+  border-radius: 4px;
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 420px) {
+  .hud-value {
+    font-size: 1.2rem;
+  }
+
+  #app {
+    padding: 14px 10px;
+    gap: 14px;
+  }
+
+  #grid {
+    gap: 10px;
+  }
+
+  .block-label {
+    font-size: 0.55rem;
+  }
+
+  .results-modal {
+    padding: 24px 18px;
+  }
+}

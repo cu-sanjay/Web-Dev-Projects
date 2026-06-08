@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blind Color Mixer — Design Lab</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <div id="panels">
+      <div class="panel">
+        <span class="panel-label">TARGET</span>
+        <div id="targetBox" class="color-box"></div>
+      </div>
+      <div class="panel">
+        <span class="panel-label">YOUR MIX</span>
+        <div id="mixBox" class="color-box"></div>
+      </div>
+    </div>
+
+    <div id="sliders">
+      <input type="range" min="0" max="255" id="redSlider" class="blind-slider" data-channel="R">
+      <input type="range" min="0" max="255" id="greenSlider" class="blind-slider" data-channel="G">
+      <input type="range" min="0" max="255" id="blueSlider" class="blind-slider" data-channel="B">
+    </div>
+
+    <div id="actions">
+      <button id="submitBtn" class="btn primary">SUBMIT MIX</button>
+      <button id="newBtn" class="btn secondary">NEW TARGET</button>
+    </div>
+
+    <div id="hud">
+      <div class="hud-cell">
+        <span class="hud-label">Accuracy</span>
+        <span id="accuracyDisplay" class="hud-value">—</span>
+      </div>
+      <div class="hud-cell">
+        <span class="hud-label">Round</span>
+        <span id="roundDisplay" class="hud-value">0</span>
+      </div>
+      <div class="hud-cell">
+        <span class="hud-label">Best</span>
+        <span id="bestDisplay" class="hud-value">—</span>
+      </div>
+    </div>
+
+    <div id="overlay" class="hidden">
+      <div class="modal">
+        <h2 id="resultTitle">RESULT</h2>
+        <div class="modal-divider"></div>
+        <div class="modal-body">
+          <div id="accuracyBlock">
+            <span id="accuracyPct" class="accuracy-big">0.0%</span>
+            <span class="accuracy-label">ACCURACY</span>
+          </div>
+          <div id="rgbCompare">
+            <div class="rgb-row">
+              <span class="rgb-label">Target</span>
+              <span id="targetRgb" class="rgb-value">rgb(0, 0, 0)</span>
+              <span id="targetSwatch" class="swatch"></span>
+            </div>
+            <div class="rgb-row">
+              <span class="rgb-label">Your Mix</span>
+              <span id="mixRgb" class="rgb-value">rgb(0, 0, 0)</span>
+              <span id="mixSwatch" class="swatch"></span>
+            </div>
+          </div>
+        </div>
+        <button id="continueBtn" class="btn primary">CONTINUE</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

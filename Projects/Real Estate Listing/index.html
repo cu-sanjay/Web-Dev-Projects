@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Real Estate Listing</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <header>
+      <h1 class="header-title">
+        DreamHome Listings
+        <img src="../../assets/icons/logo.svg" alt="" class="header-logo">
+      </h1>
+      <div class="search-bar">
+        <input type="text" id="city-search" placeholder="Search by city or state...">
+        <select id="type-filter">
+          <option value="all">All Types</option>
+          <option value="House">House</option>
+          <option value="Apartment">Apartment</option>
+          <option value="Condo">Condo</option>
+        </select>
+        <button id="toggle-favorites" class="btn-secondary">Show Favorites</button>
+      </div>
+    </header>
+
+    <main>
+      <div id="status-bar">
+        <p id="result-count">Showing all properties</p>
+      </div>
+      
+      <section id="property-gallery" class="gallery" aria-live="polite">
+        <!-- Cards will be injected here by script.js -->
+      </section>
+    </main>
+
+    <footer class="project-footer">
+      <p>Made with love for your love</p>
+    </footer>
+  </div>
+
+  <!-- Property Detail Modal -->
+  <div id="property-detail-modal" class="modal-overlay" aria-hidden="true">
+    <div class="modal-content">
+      <button class="modal-close-btn" aria-label="Close property details">&times;</button>
+      <img id="modal-img" src="" alt="" class="modal-image">
+      <div class="modal-body">
+        <h2 id="modal-title"></h2>
+        <p class="modal-price" id="modal-price"></p>
+        <p class="modal-meta" id="modal-meta"></p>
+        <p id="modal-description"></p>
+        <div class="modal-contact">
+          <h3>Contact Agent</h3>
+          <p><strong>Name:</strong> <span id="modal-owner-name"></span></p>
+          <p><strong>Phone:</strong> <span id="modal-owner-contact"></span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

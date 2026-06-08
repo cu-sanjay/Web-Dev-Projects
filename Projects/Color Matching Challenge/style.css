@@ -1,0 +1,53 @@
+button {
+  padding: 12px 20px;
+  margin: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+/* CHECK BUTTON */
+.check-btn {
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  color: white;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.check-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 242, 254, 0.4);
+}
+
+/* RESET BUTTON */
+.reset-btn {
+  background: linear-gradient(135deg, #ff416c, #ff4b2b);
+  color: white;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.reset-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(255, 75, 43, 0.4);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+#targetColor, #userColor {
+  width: 150px;
+  height: 150px;
+  border: 3px solid #333;
+  margin: 10px auto;
+  border-radius: 12px;
+  display: block;
+}
+.container {
+  text-align: center;
+}
+
+.target-box, .user-box {
+  margin: 20px auto;
+}

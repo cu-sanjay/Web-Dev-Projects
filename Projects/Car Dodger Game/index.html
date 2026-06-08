@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Car Dodger</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="hud">
+      <div class="hud-item">
+        <span class="hud-lbl">Time</span>
+        <span class="hud-val" id="timeVal">0s</span>
+      </div>
+      <div class="hud-item">
+        <span class="hud-lbl">Score</span>
+        <span class="hud-val" id="scoreVal">0</span>
+      </div>
+      <div class="hud-item">
+        <span class="hud-lbl">Speed</span>
+        <span class="hud-val" id="speedVal">1×</span>
+      </div>
+      <div class="hud-item">
+        <span class="hud-lbl">Best</span>
+        <span class="hud-val accent" id="bestVal">0</span>
+      </div>
+    </header>
+
+    <div class="canvas-wrap">
+      <canvas id="gameCanvas" width="360" height="600"></canvas>
+    </div>
+
+    <div class="overlay" id="overlay">
+      <div class="modal" id="modal">
+        <h2 class="modal-title">Game Over</h2>
+        <div class="mo-stats">
+          <div class="mo-row"><span>Survived</span><span id="moTime">0s</span></div>
+          <div class="mo-row"><span>Score</span><span id="moScore">0</span></div>
+          <div class="mo-row"><span>Best</span><span id="moBest">0</span></div>
+        </div>
+        <button class="modal-btn" id="resetBtn">Play Again</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

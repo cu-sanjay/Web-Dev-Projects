@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Color Matching Challenge</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="container">
+    
+    <h1>🎨 Color Matching Challenge</h1>
+
+    <div class="target-box">
+      <h3>Target Color</h3>
+      <div id="targetColor"></div>
+    </div>
+
+    <div class="controls">
+      <label>R: <input type="range" id="r" min="0" max="255"></label>
+      <label>G: <input type="range" id="g" min="0" max="255"></label>
+      <label>B: <input type="range" id="b" min="0" max="255"></label>
+    </div>
+
+    <div class="user-box">
+      <h3>Your Color</h3>
+      <div id="userColor"></div>
+    </div>
+
+    <button class="check-btn" onclick="checkColor()">Check Match</button>
+    <button class="reset-btn" onclick="resetGame()">Reset</button>
+
+    <h2 id="score"></h2>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

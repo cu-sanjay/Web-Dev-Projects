@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Book Library — Track your reading progress, manage shelves, and discover your next read." />
+  <title>Book Library</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <span class="logo-icon">📚</span>
+        <span class="logo-text">Bibliotheca</span>
+      </div>
+      <button class="sidebar-close-btn" id="sidebarCloseBtn" aria-label="Close sidebar">✕</button>
+    </div>
+
+    <div class="sidebar-section">
+      <p class="sidebar-label">Library</p>
+      <nav class="shelf-nav" id="staticShelfNav">
+        <button class="shelf-btn active" data-shelf="all" id="nav-all">
+          <span class="shelf-icon">🏠</span> All Books
+          <span class="shelf-count" id="count-all">0</span>
+        </button>
+        <button class="shelf-btn" data-shelf="currently-reading" id="nav-currently-reading">
+          <span class="shelf-icon">📖</span> Currently Reading
+          <span class="shelf-count" id="count-currently-reading">0</span>
+        </button>
+        <button class="shelf-btn" data-shelf="want-to-read" id="nav-want-to-read">
+          <span class="shelf-icon">🔖</span> Want to Read
+          <span class="shelf-count" id="count-want-to-read">0</span>
+        </button>
+        <button class="shelf-btn" data-shelf="completed" id="nav-completed">
+          <span class="shelf-icon">✅</span> Completed
+          <span class="shelf-count" id="count-completed">0</span>
+        </button>
+        <button class="shelf-btn" data-shelf="on-hold" id="nav-on-hold">
+          <span class="shelf-icon">⏸️</span> On Hold
+          <span class="shelf-count" id="count-on-hold">0</span>
+        </button>
+        <button class="shelf-btn" data-shelf="dropped" id="nav-dropped">
+          <span class="shelf-icon">🗑️</span> Dropped
+          <span class="shelf-count" id="count-dropped">0</span>
+        </button>
+      </nav>
+    </div>
+
+    <div class="sidebar-section">
+      <p class="sidebar-label">Collections
+        <button class="add-collection-btn" id="addCollectionBtn" title="New collection">+</button>
+      </p>
+      <nav class="shelf-nav" id="collectionsNav">
+        <!-- Dynamic collections injected here -->
+      </nav>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="stats-mini">
+        <div class="stat-mini-item">
+          <span class="stat-mini-value" id="totalBooks">0</span>
+          <span class="stat-mini-label">Books</span>
+        </div>
+        <div class="stat-mini-item">
+          <span class="stat-mini-value" id="totalPages">0</span>
+          <span class="stat-mini-label">Pages Read</span>
+        </div>
+        <div class="stat-mini-item">
+          <span class="stat-mini-value" id="totalCompleted">0</span>
+          <span class="stat-mini-label">Finished</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <div class="main-wrapper">
+    <!-- Top Bar -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open sidebar">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="search-wrapper">
+          <span class="search-icon">🔍</span>
+          <input
+            type="text"
+            id="searchInput"
+            class="search-input"
+            placeholder="Search by title, author, genre…"
+            autocomplete="off"
+          />
+          <button class="search-clear-btn" id="searchClearBtn" aria-label="Clear search">✕</button>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="view-toggle">
+          <button class="view-btn active" id="gridViewBtn" title="Grid view">⊞</button>
+          <button class="view-btn" id="listViewBtn" title="List view">☰</button>
+        </div>
+        <button class="btn-primary" id="addBookBtn">+ Add Book</button>
+      </div>
+    </header>
+
+    <!-- Page Title -->
+    <div class="page-header">
+      <div>
+        <h1 class="page-title" id="pageTitle">All Books</h1>
+        <p class="page-subtitle" id="pageSubtitle">Your complete library</p>
+      </div>
+      <div class="sort-wrapper">
+        <label for="sortSelect" class="sort-label">Sort:</label>
+        <select id="sortSelect" class="sort-select">
+          <option value="dateAdded-desc">Recently Added</option>
+          <option value="dateAdded-asc">Oldest First</option>
+          <option value="title-asc">Title A–Z</option>
+          <option value="title-desc">Title Z–A</option>
+          <option value="author-asc">Author A–Z</option>
+          <option value="progress-desc">Progress (High)</option>
+          <option value="rating-desc">Rating (High)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Books Grid / List -->
+    <main class="books-container" id="booksContainer">
+      <div class="books-grid" id="booksGrid">
+        <!-- Book cards injected here -->
+      </div>
+      <div class="empty-state" id="emptyState" style="display:none;">
+        <div class="empty-icon">📭</div>
+        <h2 class="empty-title">No books here yet</h2>
+        <p class="empty-desc">Add a book to start building your library.</p>
+        <button class="btn-primary" id="emptyAddBtn">+ Add Your First Book</button>
+      </div>
+      <div class="no-results" id="noResults" style="display:none;">
+        <div class="empty-icon">🔎</div>
+        <h2 class="empty-title">No results found</h2>
+        <p class="empty-desc">Try a different search term or browse your shelves.</p>
+      </div>
+    </main>
+  </div>
+
+  <!-- ===== SIDEBAR OVERLAY ===== -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- ===== ADD / EDIT BOOK MODAL ===== -->
+  <div class="modal-overlay" id="bookModalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal" id="bookModal">
+      <div class="modal-header">
+        <h2 class="modal-title" id="modalTitle">Add New Book</h2>
+        <button class="modal-close" id="modalCloseBtn" aria-label="Close modal">✕</button>
+      </div>
+      <div class="modal-body">
+        <form id="bookForm" novalidate>
+          <input type="hidden" id="bookId" />
+
+          <div class="form-row">
+            <div class="form-group form-group-2">
+              <label for="bookTitle">Title <span class="required">*</span></label>
+              <input type="text" id="bookTitle" placeholder="e.g. The Great Gatsby" required />
+              <span class="form-error" id="titleError"></span>
+            </div>
+            <div class="form-group form-group-1">
+              <label for="bookAuthor">Author <span class="required">*</span></label>
+              <input type="text" id="bookAuthor" placeholder="e.g. F. Scott Fitzgerald" required />
+              <span class="form-error" id="authorError"></span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group form-group-1">
+              <label for="bookGenre">Genre</label>
+              <input type="text" id="bookGenre" placeholder="e.g. Fiction, Mystery…" />
+            </div>
+            <div class="form-group form-group-1">
+              <label for="bookShelf">Shelf <span class="required">*</span></label>
+              <select id="bookShelf">
+                <option value="want-to-read">Want to Read</option>
+                <option value="currently-reading">Currently Reading</option>
+                <option value="completed">Completed</option>
+                <option value="on-hold">On Hold</option>
+                <option value="dropped">Dropped</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group form-group-1">
+              <label for="bookTotalPages">Total Pages</label>
+              <input type="number" id="bookTotalPages" placeholder="e.g. 320" min="1" />
+            </div>
+            <div class="form-group form-group-1">
+              <label for="bookCurrentPage">Current Page</label>
+              <input type="number" id="bookCurrentPage" placeholder="e.g. 145" min="0" />
+            </div>
+            <div class="form-group form-group-1">
+              <label for="bookRating">Rating</label>
+              <div class="star-rating-input" id="starRatingInput">
+                <button type="button" class="star-btn" data-value="1">★</button>
+                <button type="button" class="star-btn" data-value="2">★</button>
+                <button type="button" class="star-btn" data-value="3">★</button>
+                <button type="button" class="star-btn" data-value="4">★</button>
+                <button type="button" class="star-btn" data-value="5">★</button>
+              </div>
+              <input type="hidden" id="bookRating" value="0" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group form-group-1">
+              <label for="bookISBN">ISBN</label>
+              <input type="text" id="bookISBN" placeholder="e.g. 978-3-16-148410-0" />
+            </div>
+            <div class="form-group form-group-1">
+              <label for="bookPublishedYear">Published Year</label>
+              <input type="number" id="bookPublishedYear" placeholder="e.g. 1925" min="1000" max="2100" />
+            </div>
+            <div class="form-group form-group-1">
+              <label for="bookColor">Cover Color</label>
+              <input type="color" id="bookColor" value="#6366f1" class="color-picker" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="bookCollection">Add to Collection</label>
+            <select id="bookCollection">
+              <option value="">— None —</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="bookNotes">Notes</label>
+            <textarea id="bookNotes" rows="3" placeholder="Your thoughts, quotes, or reminders…"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-ghost" id="cancelBookBtn">Cancel</button>
+        <button class="btn-primary" id="saveBookBtn">Save Book</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== BOOK DETAIL MODAL ===== -->
+  <div class="modal-overlay" id="detailModalOverlay" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+    <div class="modal modal-detail" id="detailModal">
+      <button class="modal-close" id="detailCloseBtn" aria-label="Close">✕</button>
+      <div class="detail-header" id="detailHeader">
+        <div class="detail-cover" id="detailCover">
+          <span class="detail-cover-emoji" id="detailCoverEmoji"></span>
+        </div>
+        <div class="detail-meta">
+          <h2 class="detail-title" id="detailTitle">Book Title</h2>
+          <p class="detail-author" id="detailAuthor">Author</p>
+          <div class="detail-badges" id="detailBadges"></div>
+          <div class="detail-stars" id="detailStars"></div>
+        </div>
+      </div>
+
+      <div class="detail-body">
+        <!-- Progress Section -->
+        <div class="detail-section">
+          <h3 class="detail-section-title">Reading Progress</h3>
+          <div class="progress-controls">
+            <div class="progress-inputs">
+              <div class="progress-input-group">
+                <label for="detailCurrentPage">Current Page</label>
+                <input type="number" id="detailCurrentPage" min="0" />
+              </div>
+              <span class="progress-sep">/</span>
+              <div class="progress-input-group">
+                <label for="detailTotalPages">Total Pages</label>
+                <input type="number" id="detailTotalPages" min="1" />
+              </div>
+            </div>
+            <div class="progress-pct-display" id="progressPctDisplay">0%</div>
+          </div>
+          <div class="progress-bar-wrapper">
+            <div class="progress-bar-track">
+              <div class="progress-bar-fill" id="detailProgressBar"></div>
+            </div>
+          </div>
+          <button class="btn-primary btn-sm" id="updateProgressBtn">Update Progress</button>
+        </div>
+
+        <!-- Shelf -->
+        <div class="detail-section detail-two-col">
+          <div>
+            <h3 class="detail-section-title">Shelf</h3>
+            <select id="detailShelf" class="detail-select">
+              <option value="want-to-read">Want to Read</option>
+              <option value="currently-reading">Currently Reading</option>
+              <option value="completed">Completed</option>
+              <option value="on-hold">On Hold</option>
+              <option value="dropped">Dropped</option>
+            </select>
+          </div>
+          <div>
+            <h3 class="detail-section-title">Collection</h3>
+            <select id="detailCollection" class="detail-select">
+              <option value="">— None —</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Notes -->
+        <div class="detail-section">
+          <h3 class="detail-section-title">Notes</h3>
+          <textarea id="detailNotes" rows="4" class="detail-notes" placeholder="Your thoughts, quotes…"></textarea>
+        </div>
+
+        <!-- Info Row -->
+        <div class="detail-info-row" id="detailInfoRow"></div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-danger" id="deleteBookBtn">🗑 Delete</button>
+        <div style="display:flex;gap:0.75rem;">
+          <button class="btn-ghost" id="editBookBtn">✏️ Edit</button>
+          <button class="btn-primary" id="saveDetailBtn">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== NEW COLLECTION MODAL ===== -->
+  <div class="modal-overlay" id="collectionModalOverlay" role="dialog" aria-modal="true">
+    <div class="modal modal-sm" id="collectionModal">
+      <div class="modal-header">
+        <h2 class="modal-title">New Collection</h2>
+        <button class="modal-close" id="collectionCloseBtn" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="collectionName">Collection Name <span class="required">*</span></label>
+          <input type="text" id="collectionName" placeholder="e.g. Summer Reads, Favorites…" />
+          <span class="form-error" id="collectionError"></span>
+        </div>
+        <div class="form-group">
+          <label for="collectionEmoji">Icon (emoji)</label>
+          <input type="text" id="collectionEmoji" placeholder="e.g. 🌟" maxlength="2" class="emoji-input" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-ghost" id="cancelCollectionBtn">Cancel</button>
+        <button class="btn-primary" id="saveCollectionBtn">Create</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== DELETE CONFIRM MODAL ===== -->
+  <div class="modal-overlay" id="deleteModalOverlay" role="dialog" aria-modal="true">
+    <div class="modal modal-sm" id="deleteModal">
+      <div class="modal-header">
+        <h2 class="modal-title">Delete Book?</h2>
+        <button class="modal-close" id="deleteCloseBtn" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body">
+        <p class="delete-confirm-text">Are you sure you want to remove <strong id="deleteBookTitle"></strong> from your library? This cannot be undone.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-ghost" id="cancelDeleteBtn">Cancel</button>
+        <button class="btn-danger" id="confirmDeleteBtn">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TOAST ===== -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

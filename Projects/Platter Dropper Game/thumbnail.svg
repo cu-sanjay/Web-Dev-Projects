@@ -1,0 +1,177 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <!-- Deep Arcade Dark Workspace Canvas Background -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#020306" />
+      <stop offset="50%" stop-color="#060914" />
+      <stop offset="100%" stop-color="#0d1222" />
+    </linearGradient>
+
+    <!-- UI Panel Floating Chroma Drop Shadows -->
+    <filter id="panelGlow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#000000" flood-opacity="0.85"/>
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#f43f5e" flood-opacity="0.02"/>
+    </filter>
+
+    <!-- Cleansing Laser Flash Bloom Filter -->
+    <filter id="cleanseGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <!-- Core Brand Spectrum Track Gradient -->
+    <linearGradient id="paletteBrand" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f43f5e" />
+      <stop offset="33%" stop-color="#fb923c" />
+      <stop offset="66%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#06b6d4" />
+    </linearGradient>
+
+    <!-- Block Fill Gradients — Warm Tones vs Cool Tones -->
+    <linearGradient id="blockWarmRed" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f43f5e" />
+      <stop offset="100%" stop-color="#9f1239" />
+    </linearGradient>
+    <linearGradient id="blockWarmOrange" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fb923c" />
+      <stop offset="100%" stop-color="#9a3412" />
+    </linearGradient>
+    <linearGradient id="blockCoolBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#1e3a8a" />
+    </linearGradient>
+    <linearGradient id="blockCoolCyan" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4" />
+      <stop offset="100%" stop-color="#155e75" />
+    </linearGradient>
+
+    <!-- Technical UI Alignment Matrix Pattern Overlay -->
+    <pattern id="matrixGrid" width="28" height="28" patternUnits="userSpaceOnUse">
+      <path d="M 28 0 L 0 0 0 28" fill="none" stroke="rgba(148, 163, 184, 0.015)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <!-- BACKGROUND BASELAYERS -->
+  <rect width="800" height="500" fill="url(#bgGrad)" />
+  <rect width="800" height="500" fill="url(#matrixGrid)" />
+  
+  <!-- Subtle Ambient Vignette Backlighting Flares -->
+  <circle cx="680" cy="120" r="180" fill="#f43f5e" opacity="0.02" filter="blur(55px)" />
+  <circle cx="150" cy="380" r="160" fill="#3b82f6" opacity="0.025" filter="blur(45px)" />
+
+  <!-- ====================================================================
+       PALETTE DROPPER INTERACTIVE MAIN Viewport WINDOW DECK
+       ==================================================================== -->
+  <g transform="translate(50, 45)" filter="url(#panelGlow)">
+    <!-- Main Outer Window Frame Chassis -->
+    <rect width="700" height="380" rx="16" fill="#0f172a" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1.5"/>
+    
+    <!-- OS Control Points Window Chrome -->
+    <circle cx="24" cy="22" r="5" fill="#f43f5e" opacity="0.7"/>
+    <circle cx="40" cy="22" r="5" fill="#fb923c" opacity="0.7"/>
+    <circle cx="56" cy="22" r="5" fill="#10b981" opacity="0.7"/>
+
+    <!-- App Identity Top Right Flag -->
+    <g transform="translate(545, 15)">
+      <circle cx="5" cy="6" r="4" fill="url(#paletteBrand)" />
+      <text x="14" y="10" font-family="monospace" font-size="11" font-weight="900" fill="#f8fafc" letter-spacing="0.05em">PALETTE_MATRIX</text>
+    </g>
+
+    <!-- ==================================================================
+         COLUMN 1: LEFT SIDEBAR ARCADE METRICS HUD LOGS
+         ================================================================== -->
+    <g transform="translate(20, 64)">
+      <text x="0" y="14" font-family="-apple-system, sans-serif" font-size="14" font-weight="800" fill="#ffffff" letter-spacing="-0.01em">Chroma HUD</text>
+      
+      <!-- Current Session Phase Status Readout -->
+      <rect y="24" width="126" height="24" rx="6" fill="rgba(244, 63, 94, 0.06)" stroke="rgba(244, 63, 94, 0.2)" stroke-width="1"/>
+      <text x="12" y="39" font-family="monospace" font-size="9" font-weight="800" fill="#f43f5e" letter-spacing="0.02em">● FILTER_ACTIVE</text>
+
+      <!-- Numerical Arcade Scoreboard Subscale Panels -->
+      <g transform="translate(0, 64)">
+        <rect width="126" height="42" rx="8" fill="#1e293b" opacity="0.5" stroke="rgba(148, 163, 184, 0.04)" stroke-width="1"/>
+        <text x="10" y="16" font-family="-apple-system, sans-serif" font-size="8" font-weight="700" fill="#64748b" letter-spacing="0.05em">TOTAL CLEARED</text>
+        <text x="10" y="34" font-family="monospace" font-size="14" font-weight="800" fill="#10b981">1,840 Points</text>
+      </g>
+
+      <g transform="translate(0, 118)">
+        <rect width="126" height="42" rx="8" fill="#1e293b" opacity="0.5" stroke="rgba(148, 163, 184, 0.04)" stroke-width="1"/>
+        <text x="10" y="16" font-family="-apple-system, sans-serif" font-size="8" font-weight="700" fill="#64748b" letter-spacing="0.05em">STREAK MULTIPLIER</text>
+        <text x="10" y="34" font-family="monospace" font-size="14" font-weight="800" fill="#3b82f6">x4.5 Velocity</text>
+      </g>
+
+      <!-- Primary Core Matrix Re-Initialization Button -->
+      <rect y="184" width="126" height="32" rx="6" fill="#1e293b" stroke="rgba(148, 163, 184, 0.1)" stroke-width="1"/>
+      <text x="63" y="204" font-family="-apple-system, sans-serif" font-size="10" font-weight="700" fill="#f8fafc" text-anchor="middle">Reset Pipeline</text>
+    </g>
+
+    <!-- Vertical Splitter Layout Column Line 1 -->
+    <line x1="162" y1="46" x2="162" y2="380" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+
+    <!-- ==================================================================
+         COLUMN 2: CENTRAL INTERACTIVE COMMAND DECK & VERTICAL TUBE GRID
+         ================================================================== -->
+    <g transform="translate(192, 52)">
+      
+      <!-- TOP COMPONENT: Dynamic Core Action Category Command Banner -->
+      <rect width="478" height="42" rx="8" fill="rgba(251, 146, 60, 0.08)" stroke="rgba(251, 146, 60, 0.25)" stroke-width="1.5"/>
+      <text x="16" y="25" font-family="monospace" font-size="12" font-weight="900" fill="#fb923c" letter-spacing="0.04em">ACTIVE SELECTION TARGET: CLEAR ALL WARM COLORS</text>
+      <circle cx="454" cy="21" r="4" fill="#fb923c" />
+
+      <!-- VERTICAL MATRIX TUBE: Cascade grid playground showing falling colored blocks -->
+      <g transform="translate(160, 60)">
+        <!-- Vertical Chamber Shell Frame -->
+        <rect width="168" height="236" rx="8" fill="#02040a" stroke="rgba(148, 163, 184, 0.04)" stroke-width="1"/>
+        
+        <!-- Internal Columns Guidelines -->
+        <line x1="42" y1="0" x2="42" y2="236" stroke="rgba(148, 163, 184, 0.015)" stroke-width="0.75"/>
+        <line x1="84" y1="0" x2="84" y2="236" stroke="rgba(148, 163, 184, 0.015)" stroke-width="0.75"/>
+        <line x1="126" y1="0" x2="126" y2="236" stroke="rgba(148, 163, 184, 0.015)" stroke-width="0.75"/>
+
+        <!-- FALLING MATRIX ELEMENT STACK -->
+        
+        <!-- Block A: Cool Blue Cube (Resting Safe Node) -->
+        <rect x="2" y="196" width="38" height="38" rx="4" fill="url(#blockCoolBlue)" stroke="rgba(255,255,255,0.1)" stroke-width="0.75"/>
+        
+        <!-- Block B: Cool Cyan Cube (Resting Safe Node) -->
+        <rect x="44" y="196" width="38" height="38" rx="4" fill="url(#blockCoolCyan)" stroke="rgba(255,255,255,0.1)" stroke-width="0.75"/>
+
+        <!-- Block C: VALID TARGET BEING CLEANSED (Warm Red undergoing instant tap vaporization) -->
+        <g transform="translate(86, 196)" filter="url(#cleanseGlow)">
+          <rect width="38" height="38" rx="4" fill="#ffffff" stroke="#f43f5e" stroke-width="2"/>
+          <line x1="8" y1="8" x2="30" y2="30" stroke="#f43f5e" stroke-width="1.5"/>
+          <line x1="30" y1="8" x2="8" y2="30" stroke="#f43f5e" stroke-width="1.5"/>
+        </g>
+        
+        <!-- Block D: Cool Blue Cube (Resting Upper Tier Node) -->
+        <rect x="44" y="154" width="38" height="38" rx="4" fill="url(#blockCoolBlue)" stroke="rgba(255,255,255,0.1)" stroke-width="0.75"/>
+
+        <!-- Block E: ACTIVE FALLING TARGET ELEMENT (Warm Orange shifting downwards) -->
+        <g transform="translate(128, 60)">
+          <rect width="38" height="38" rx="4" fill="url(#blockWarmOrange)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+          <!-- Direction indicator vector lines -->
+          <path d="M 19 12 L 19 26 M 14 21 L 19 26 L 24 21" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <!-- ====================================================================
+       FOOTER PIPELINE FRAMEWORK TECHNICAL MANIFEST MODULE CAPSULE
+       ==================================================================== -->
+  <g transform="translate(180, 440)">
+    <rect width="440" height="42" rx="21" fill="rgba(2, 3, 6, 0.95)" stroke="rgba(148, 163, 184, 0.15)" stroke-width="1.5"/>
+    
+    <text x="28" y="26" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="800" fill="#f8fafc" letter-spacing="0.06em">HYBRID CHROMATIC ENGINE</text>
+    <circle cx="196" cy="22" r="2" fill="#475569" />
+    
+    <!-- Code Language Tech Badges -->
+    <text x="212" y="26" font-family="monospace" font-size="12" font-weight="700" fill="#38bdf8">HTML5</text>
+    <text x="262" y="26" font-family="monospace" font-size="12" font-weight="700" fill="#10b981">CSS3</text>
+    <text x="308" y="26" font-family="monospace" font-size="12" font-weight="700" fill="#f59e0b">ES6+</text>
+    
+    <!-- Algorithmic Paradigm Specification Tag -->
+    <rect x="352" y="13" width="64" height="16" rx="4" fill="rgba(244, 63, 94, 0.08)" stroke="rgba(244, 63, 94, 0.15)" stroke-width="1"/>
+    <text x="358" y="24" font-family="-apple-system, sans-serif" font-size="8" font-weight="800" fill="#f43f5e" letter-spacing="0.02em">CHROMA_SORT</text>
+  </g>
+</svg>

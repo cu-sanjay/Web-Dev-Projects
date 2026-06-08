@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Markdown Notes App - A clean writing environment with real-time split pane preview, categories, tags, Canvas analytics, and JSON backups.">
+  <title>Markdown Studio - Real-time Note Workspace</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Toast Notification System -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- App Container -->
+  <div class="app-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="app-sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo">
+          <span class="logo-icon">M↓</span>
+          <h2>Markdown Studio</h2>
+        </div>
+        <button id="theme-toggle-btn" class="icon-btn" title="Toggle Theme (Alt+T)" aria-label="Toggle Theme">
+          <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+      </div>
+
+      <div class="sidebar-actions">
+        <button id="create-note-btn" class="primary-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          <span>New Note</span>
+        </button>
+      </div>
+
+      <div class="search-box">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" id="note-search-input" placeholder="Search title, content, tags..." aria-label="Search Notes">
+      </div>
+
+      <!-- Quick filters -->
+      <div class="sidebar-section">
+        <h3>Categories</h3>
+        <ul id="categories-filter-list" class="filter-list">
+          <li class="active-filter" data-category="all">All Categories</li>
+          <!-- Dynically filled -->
+        </ul>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>Popular Tags</h3>
+        <div id="tags-cloud-container" class="tags-cloud">
+          <!-- Dynically filled -->
+        </div>
+      </div>
+
+      <!-- Notes List -->
+      <div class="sidebar-section notes-section">
+        <div class="section-title-bar">
+          <h3>Notes</h3>
+          <span id="notes-counter-badge" class="badge">0</span>
+        </div>
+        <ul id="notes-list-ul" class="notes-list">
+          <!-- Dynamically filled -->
+        </ul>
+      </div>
+
+      <!-- Footer Menu -->
+      <div class="sidebar-footer">
+        <button id="analytics-modal-btn" class="footer-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+          <span>Analytics</span>
+        </button>
+        <button id="backup-modal-btn" class="footer-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+          <span>Backup</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Note Workspace -->
+    <main class="main-workspace">
+      <!-- Top Note Properties & View Selector Header -->
+      <header class="workspace-header">
+        <div class="note-meta-inputs">
+          <input type="text" id="note-title-input" placeholder="Untitled Note" class="title-field" aria-label="Note Title">
+          <div class="meta-row">
+            <div class="meta-input-group">
+              <label for="note-category-input">Category:</label>
+              <input type="text" id="note-category-input" placeholder="General" list="categories-datalist">
+              <datalist id="categories-datalist"></datalist>
+            </div>
+            <div class="meta-input-group">
+              <label for="note-tags-input">Tags:</label>
+              <input type="text" id="note-tags-input" placeholder="e.g. work, idea, draft">
+            </div>
+          </div>
+        </div>
+
+        <div class="workspace-controls">
+          <!-- View Modes Toggle -->
+          <div class="view-mode-selector">
+            <button id="view-editor-btn" class="view-btn" title="Editor Only (Alt+E)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+            </button>
+            <button id="view-split-btn" class="view-btn active-view" title="Split View (Alt+V)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="12" y1="3" x2="12" y2="21"></line></svg>
+            </button>
+            <button id="view-preview-btn" class="view-btn" title="Preview Only (Alt+P)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            </button>
+          </div>
+          <button id="save-note-btn" class="primary-btn save-btn" title="Save changes (Alt+S)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+            <span>Save</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Markdown Formatting Toolbar -->
+      <div class="formatting-toolbar">
+        <button class="toolbar-btn" data-syntax="h1" title="Heading 1">H1</button>
+        <button class="toolbar-btn" data-syntax="h2" title="Heading 2">H2</button>
+        <button class="toolbar-btn" data-syntax="h3" title="Heading 3">H3</button>
+        <span class="toolbar-separator"></span>
+        <button class="toolbar-btn" data-syntax="bold" title="Bold (**)">
+          <strong>B</strong>
+        </button>
+        <button class="toolbar-btn" data-syntax="italic" title="Italic (*)">
+          <em>I</em>
+        </button>
+        <button class="toolbar-btn" data-syntax="code" title="Inline Code (`)">
+          <code>&lt;/&gt;</code>
+        </button>
+        <span class="toolbar-separator"></span>
+        <button class="toolbar-btn" data-syntax="blockquote" title="Blockquote (&gt;)">Quote</button>
+        <button class="toolbar-btn" data-syntax="link" title="Link ([text](url))">Link</button>
+        <button class="toolbar-btn" data-syntax="ul" title="Unordered List (-)">List</button>
+        <button class="toolbar-btn" data-syntax="table" title="Insert Table template">Table</button>
+      </div>
+
+      <!-- Main Editor Preview Split Pane Workspace -->
+      <div class="workspace-panes split-mode" id="workspace-panes-div">
+        <div class="pane editor-pane" id="editor-pane-div">
+          <textarea id="markdown-editor-textarea" placeholder="Start writing markdown content here..." aria-label="Markdown Input"></textarea>
+        </div>
+        <div class="pane preview-pane" id="preview-pane-div">
+          <div id="html-preview-render-area" class="markdown-body">
+            <!-- Rendered HTML goes here -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Note Stats Info Bar -->
+      <footer class="workspace-footer">
+        <div class="info-group">
+          <span>Words: <strong id="word-count-val">0</strong></span>
+          <span class="dot-separator">•</span>
+          <span>Characters: <strong id="char-count-val">0</strong></span>
+          <span class="dot-separator">•</span>
+          <span>Reading Time: <strong id="read-time-val">~0 min</strong></span>
+        </div>
+        <div class="info-group save-status">
+          <span id="save-status-text">Draft autosaved</span>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Analytics Modal -->
+  <div id="analytics-modal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2>Study & Productivity Analytics</h2>
+        <button class="modal-close-btn" id="close-analytics-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="analytics-grid">
+          <!-- Overview Cards -->
+          <div class="analytics-stat-card">
+            <h4>Total Notes</h4>
+            <p id="stat-total-notes">0</p>
+          </div>
+          <div class="analytics-stat-card">
+            <h4>Total Word Count</h4>
+            <p id="stat-total-words">0</p>
+          </div>
+          <div class="analytics-stat-card">
+            <h4>Avg. Words / Note</h4>
+            <p id="stat-avg-words">0</p>
+          </div>
+        </div>
+
+        <div class="charts-row">
+          <div class="chart-container">
+            <h3>Notes by Category</h3>
+            <canvas id="category-canvas" width="300" height="200"></canvas>
+          </div>
+          <div class="chart-container">
+            <h3>Notes Activity (Word Distribution)</h3>
+            <canvas id="distribution-canvas" width="300" height="200"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Backup & Export Modal -->
+  <div id="backup-modal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2>Notes Backup Registry</h2>
+        <button class="modal-close-btn" id="close-backup-modal">&times;</button>
+      </div>
+      <div class="modal-body backup-body">
+        <p class="section-description">Export your complete Markdown Notes workspace database into a portable backup file, or restore dynamic contents from a previous backup.</p>
+        
+        <div class="backup-actions">
+          <div class="backup-card">
+            <h3>Export Database</h3>
+            <p>Download all notes, categories, settings, and tag collections in a single JSON backup document.</p>
+            <button id="export-db-btn" class="primary-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              <span>Download Backup (.json)</span>
+            </button>
+          </div>
+
+          <div class="backup-card">
+            <h3>Import Database</h3>
+            <p>Restore notes database using a valid JSON backup file. WARNING: This will overwrite your current active browser storage notes.</p>
+            <label for="import-db-file" class="file-upload-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+              <span>Select Backup File</span>
+            </label>
+            <input type="file" id="import-db-file" accept=".json" class="file-upload-input">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script Reference -->
+  <script src="script.js"></script>
+</body>
+</html>

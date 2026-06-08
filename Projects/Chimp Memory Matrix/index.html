@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chimp Memory Matrix — Aymu Primate Test</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <header id="hud">
+      <div class="hud-cell">
+        <span class="hud-label">Matrix Level</span>
+        <span id="levelDisplay" class="hud-value">9</span>
+      </div>
+      <div class="hud-cell">
+        <span class="hud-label">Highest Level</span>
+        <span id="highestDisplay" class="hud-value">0</span>
+      </div>
+      <div class="hud-cell">
+        <span class="hud-label">Status</span>
+        <span id="trialDisplay" class="hud-value sm">MEMORIZE</span>
+      </div>
+    </header>
+
+    <div id="statusBar">
+      <span id="statusMessage">Study the layout. Tap "1" to begin.</span>
+    </div>
+
+    <div id="board">
+      <div id="grid"></div>
+    </div>
+
+    <div id="overlay" class="hidden">
+      <div class="modal">
+        <h2 id="modalTitle">MATRIX CLEAR</h2>
+        <div class="modal-divider"></div>
+        <div class="modal-body">
+          <div class="modal-row">
+            <span class="modal-label">Level</span>
+            <span id="modalLevel" class="modal-value">9</span>
+          </div>
+          <div class="modal-row">
+            <span class="modal-label">Recalled</span>
+            <span id="modalRecalled" class="modal-value">0 / 0</span>
+          </div>
+          <div class="modal-row">
+            <span class="modal-label">Highest Level</span>
+            <span id="modalHighest" class="modal-value">0</span>
+          </div>
+        </div>
+        <button id="modalBtn" class="btn">BEGIN NEXT TRIAL</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flashcard Learning Platform - Active Recall Workspace</title>
+  
+  <!-- Modern Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Icon Libraries -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+  <!-- Main Grid Layout -->
+  <div class="app-layout">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="main-sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-logo"><i class="fa-solid fa-layer-group"></i></div>
+        <span class="brand-text">FlashcardLab</span>
+      </div>
+      <nav class="sidebar-nav">
+        <ul>
+          <li><button class="nav-btn active" data-panel="dashboard" id="btn-nav-dashboard"><i class="fa-solid fa-gauge"></i><span>Dashboard</span></button></li>
+          <li><button class="nav-btn" data-panel="review" id="btn-nav-review"><i class="fa-solid fa-graduation-cap"></i><span>Review Cards</span></button></li>
+          <li><button class="nav-btn" data-panel="categories" id="btn-nav-categories"><i class="fa-solid fa-tags"></i><span>Categories</span></button></li>
+          <li><button class="nav-btn" data-panel="manage" id="btn-nav-manage"><i class="fa-solid fa-pen-clip"></i><span>Manage Cards</span></button></li>
+          <li><button class="nav-btn" data-panel="achievements" id="btn-nav-achievements"><i class="fa-solid fa-award"></i><span>Achievements</span></button></li>
+          <li><button class="nav-btn" data-panel="analytics" id="btn-nav-analytics"><i class="fa-solid fa-chart-column"></i><span>Analytics</span></button></li>
+        </ul>
+      </nav>
+      <div class="sidebar-footer">
+        <button id="btn-theme-toggle" class="footer-btn" title="Toggle Light/Dark Theme (Alt + L)"><i class="fa-solid fa-moon"></i></button>
+        <button id="btn-export-deck" class="footer-btn" title="Export Deck Data (JSON)"><i class="fa-solid fa-file-export"></i></button>
+        <button id="btn-import-deck" class="footer-btn" title="Import Deck Data (JSON)"><i class="fa-solid fa-file-import"></i></button>
+        <input type="file" id="deck-file-input" style="display: none;" accept=".json">
+      </div>
+    </aside>
+    
+    <!-- Top Stats and Settings Bar -->
+    <header class="top-bar">
+      <div class="top-bar-left">
+        <h1 class="panel-main-title" id="panel-title-text">Dashboard</h1>
+        <p class="panel-subtitle" id="panel-subtitle-text">Study overview, streaks, and progress stats.</p>
+      </div>
+      <div class="top-bar-right">
+        <!-- Streak Widget -->
+        <div class="streak-widget" id="streak-indicator" title="Daily study streak counter">
+          <i class="fa-solid fa-fire fire-icon"></i>
+          <span class="streak-count" id="study-streak-val">0 Days</span>
+        </div>
+        <!-- Progress gauge info -->
+        <div class="mastery-mini-gauge" title="Total mastered flashcards ratio">
+          <span class="gauge-title">Mastery Rate:</span>
+          <span class="gauge-value" id="global-mastery-percent">0%</span>
+        </div>
+      </div>
+    </header>
+    
+    <!-- Main Display panel swapper -->
+    <main class="main-content">
+      
+      <!-- PANEL 1: DASHBOARD -->
+      <section class="content-panel active" id="panel-dashboard">
+        <!-- Stats Widgets -->
+        <div class="stats-row">
+          <div class="stats-card glass-card">
+            <div class="stats-card-icon sc-blue"><i class="fa-solid fa-layer-group"></i></div>
+            <div class="stats-card-info">
+              <span class="stats-number" id="stats-total-cards">0</span>
+              <span class="stats-label">Total Flashcards</span>
+            </div>
+          </div>
+          
+          <div class="stats-card glass-card">
+            <div class="stats-card-icon sc-green"><i class="fa-solid fa-circle-check"></i></div>
+            <div class="stats-card-info">
+              <span class="stats-number" id="stats-mastered-cards">0</span>
+              <span class="stats-label">Cards Mastered</span>
+            </div>
+          </div>
+
+          <div class="stats-card glass-card">
+            <div class="stats-card-icon sc-purple"><i class="fa-solid fa-book-open-reader"></i></div>
+            <div class="stats-card-info">
+              <span class="stats-number" id="stats-cards-studied">0</span>
+              <span class="stats-label">Reviewed Today</span>
+            </div>
+          </div>
+
+          <div class="stats-card glass-card">
+            <div class="stats-card-icon sc-orange"><i class="fa-solid fa-stopwatch"></i></div>
+            <div class="stats-card-info">
+              <span class="stats-number" id="stats-study-minutes">0m</span>
+              <span class="stats-label">Study Time Today</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Dashboard Split grid -->
+        <div class="dashboard-split-grid">
+          <!-- Left: Quick Practice Widget -->
+          <div class="split-card glass-card">
+            <div class="split-card-header">
+              <h3>Quick Study Hub</h3>
+              <button class="btn-text-link" id="dash-btn-go-study">Open Deck <i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+            <div class="quick-study-options">
+              <div class="qs-mode-box">
+                <h4>Quiz Mode Challenge</h4>
+                <p>Self-grade your recall to log accuracy stats and verify study readiness.</p>
+                <button class="btn-primary-accent" id="btn-start-quiz-qs"><i class="fa-solid fa-play"></i> Start Quiz</button>
+              </div>
+              <div class="qs-mode-box">
+                <h4>Timed revision</h4>
+                <p>Test speed memory with adjustable timer constraints per card.</p>
+                <button class="btn-secondary-outline" id="btn-start-timed-qs"><i class="fa-solid fa-clock"></i> Timed Practice</button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Right: Category distribution quick summaries -->
+          <div class="split-card glass-card">
+            <div class="split-card-header">
+              <h3>Active Categories</h3>
+              <button class="btn-text-link" id="dash-btn-go-categories">Manage <i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+            <div class="dash-categories-list" id="dash-categories-container">
+              <!-- Categories list elements -->
+              <p class="empty-message-text">No active categories. Create one in Categories tab!</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- PANEL 2: REVIEW DECK -->
+      <section class="content-panel" id="panel-review">
+        <!-- Review Action controls header -->
+        <div class="study-session-controls glass-card">
+          <div class="session-modes-row">
+            <button class="study-mode-tab active" data-mode="classic" id="btn-mode-classic"><i class="fa-solid fa-repeat"></i> Classic Recall</button>
+            <button class="study-mode-tab" data-mode="quiz" id="btn-mode-quiz"><i class="fa-solid fa-circle-question"></i> Quiz Challenge</button>
+            <button class="study-mode-tab" data-mode="timed" id="btn-mode-timed"><i class="fa-solid fa-stopwatch"></i> Timed Revise</button>
+          </div>
+          <div class="session-filter-deck">
+            <label for="review-category-filter">Category Filter</label>
+            <select id="review-category-filter" class="select-field-styled">
+              <option value="all">All Categories</option>
+            </select>
+          </div>
+        </div>
+        
+        <!-- Flashcard Flip Box Container -->
+        <div class="flashcard-container-wrapper">
+          <!-- Timed revise ticker display -->
+          <div class="timer-ticker-indicator" id="timed-ticker-box" style="display: none;">
+            <i class="fa-regular fa-clock"></i> Time Left: <span id="timed-seconds-value">10</span>s
+          </div>
+          
+          <!-- 3D flipping card structure -->
+          <div class="flashcard-3d-card" id="interactive-flashcard">
+            <!-- Front of the Card -->
+            <div class="card-side card-front">
+              <span class="card-category-label" id="card-front-category">Category</span>
+              <div class="card-question-text" id="card-front-question">Create flashcards to begin studying!</div>
+              <span class="card-flip-prompt">Click Card or Press Space to Reveal Answer</span>
+            </div>
+            <!-- Back of the Card -->
+            <div class="card-side card-back">
+              <span class="card-category-label" id="card-back-category">Answer</span>
+              <div class="card-answer-text" id="card-back-answer">Flashcard answer goes here.</div>
+              <span class="card-flip-prompt">Click Card to return to Question</span>
+            </div>
+          </div>
+          
+          <!-- Classic controls -->
+          <div class="flashcard-action-bar" id="review-actions-classic">
+            <button class="btn-round-control" id="btn-card-prev" title="Previous Card (ArrowLeft)"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="btn-action-primary" id="btn-card-flip" title="Flip Card (Space)"><i class="fa-solid fa-arrows-rotate"></i> Flip Card</button>
+            <button class="btn-round-control" id="btn-card-mastered" title="Toggle Mastered Status (Alt + M)"><i class="fa-regular fa-star"></i></button>
+            <button class="btn-round-control" id="btn-card-next" title="Next Card (ArrowRight)"><i class="fa-solid fa-chevron-right"></i></button>
+          </div>
+          
+          <!-- Self-grading quiz buttons -->
+          <div class="flashcard-action-bar" id="review-actions-quiz" style="display: none;">
+            <button class="btn-danger-accent width-half" id="btn-quiz-incorrect"><i class="fa-regular fa-circle-xmark"></i> Need Practice</button>
+            <button class="btn-success-accent width-half" id="btn-quiz-correct"><i class="fa-regular fa-circle-check"></i> Got It Right!</button>
+          </div>
+          
+          <!-- Deck shuffles & progress labels -->
+          <div class="deck-stats-footer">
+            <span class="deck-index-label" id="deck-progress-numbers">0 of 0 Cards</span>
+            <button class="btn-icon-styled" id="btn-shuffle-deck" title="Shuffle flashcards order"><i class="fa-solid fa-shuffle"></i> Shuffle</button>
+          </div>
+        </div>
+      </section>
+      
+      <!-- PANEL 3: CATEGORIES -->
+      <section class="content-panel" id="panel-categories">
+        <div class="categories-layout">
+          <!-- Categories Form (left) -->
+          <div class="category-creator-card glass-card">
+            <h3 id="category-modal-title">Create Category</h3>
+            <form id="category-form">
+              <input type="hidden" id="category-edit-id">
+              <div class="form-group">
+                <label for="category-name-input">Category Name</label>
+                <input type="text" id="category-name-input" placeholder="e.g. JavaScript, History, Math" required>
+              </div>
+              <div class="form-group">
+                <label for="category-color-input">Accent Label Color</label>
+                <input type="color" id="category-color-input" value="#6366f1" class="color-picker-styled">
+              </div>
+              <button type="submit" class="btn-primary-accent width-full"><i class="fa-solid fa-plus"></i> Save Category</button>
+            </form>
+          </div>
+          
+          <!-- Categories Display list (right) -->
+          <div class="categories-grid" id="categories-list-container">
+            <!-- Dynamically populated cards -->
+          </div>
+        </div>
+      </section>
+      
+      <!-- PANEL 4: MANAGE CARDS -->
+      <section class="content-panel" id="panel-manage">
+        <div class="manage-layout">
+          <!-- Flashcard Builder section -->
+          <div class="flashcard-builder-section glass-card">
+            <h3 id="builder-title-text">Create Flashcard</h3>
+            <form id="flashcard-form">
+              <input type="hidden" id="flashcard-edit-id">
+              <div class="form-group">
+                <label for="card-question-input">Question / Front Text</label>
+                <textarea id="card-question-input" rows="3" placeholder="Enter the prompt or question..." required></textarea>
+              </div>
+              <div class="form-group">
+                <label for="card-answer-input">Answer / Back Text</label>
+                <textarea id="card-answer-input" rows="3" placeholder="Enter the explanation or definition..." required></textarea>
+              </div>
+              <div class="form-group-row">
+                <div class="form-group">
+                  <label for="card-category-select">Category</label>
+                  <select id="card-category-select" class="select-field-styled" required>
+                    <!-- Filled dynamically -->
+                  </select>
+                </div>
+                <div class="form-group" style="justify-content: flex-end; flex-direction: row; align-items: center; gap: 8px;">
+                  <input type="checkbox" id="card-mastered-input" class="checkbox-styled">
+                  <label for="card-mastered-input">Mark as Mastered</label>
+                </div>
+              </div>
+              <div class="builder-actions-row">
+                <button type="submit" class="btn-primary-accent width-full"><i class="fa-solid fa-circle-check"></i> Save Flashcard</button>
+                <button type="button" class="btn-secondary-outline" id="btn-cancel-builder-edit" style="display: none;">Cancel</button>
+              </div>
+            </form>
+          </div>
+          
+          <!-- Flashcard Registry list -->
+          <div class="flashcards-registry-section glass-card">
+            <div class="registry-filter-bar">
+              <div class="search-input-wrapper">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="registry-search-input" placeholder="Search cards by text...">
+              </div>
+              <select id="registry-category-filter" class="select-field-styled">
+                <option value="all">All Categories</option>
+              </select>
+            </div>
+            
+            <div class="registry-cards-table-wrapper">
+              <table class="registry-table">
+                <thead>
+                  <tr>
+                    <th>Question</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="registry-cards-list">
+                  <!-- Filled dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- PANEL 5: ACHIEVEMENTS -->
+      <section class="content-panel" id="panel-achievements">
+        <div class="achievements-progress-container glass-card">
+          <div class="ach-progress-stats">
+            <span class="ach-fraction" id="achievements-count-label">0 / 8 Unlocked</span>
+            <span class="ach-motivational">Keep reviewing flashcards to claim learning trophies!</span>
+          </div>
+          <div class="ach-bar-wrapper">
+            <div class="ach-bar-fill" id="achievements-progress-bar" style="width: 0%;"></div>
+          </div>
+        </div>
+        
+        <div class="achievements-grid" id="achievements-list-grid">
+          <!-- Achievement cards rendered by JS -->
+        </div>
+      </section>
+      
+      <!-- PANEL 6: STUDY ANALYTICS -->
+      <section class="content-panel" id="panel-analytics">
+        <div class="analytics-charts-grid">
+          <!-- Chart 1: Mastery Rate -->
+          <div class="chart-box glass-card">
+            <h3>Deck Mastery rate</h3>
+            <div class="chart-canvas-wrapper">
+              <canvas id="chart-mastery-percentage" width="450" height="250"></canvas>
+            </div>
+            <p class="chart-caption">Overall percent of flashcards marked as Mastered vs Studied.</p>
+          </div>
+          
+          <!-- Chart 2: Category distribution -->
+          <div class="chart-box glass-card">
+            <h3>Category Counts Distribution</h3>
+            <div class="chart-canvas-wrapper">
+              <canvas id="chart-category-counts" width="450" height="250"></canvas>
+            </div>
+            <p class="chart-caption">Total number of flashcards created per subject/topic.</p>
+          </div>
+          
+          <!-- Chart 3: Study revision timeline -->
+          <div class="chart-box glass-card">
+            <h3>Daily Revision Time (Last 7 Days)</h3>
+            <div class="chart-canvas-wrapper">
+              <canvas id="chart-study-time-trends" width="450" height="250"></canvas>
+            </div>
+            <p class="chart-caption">Minutes spent reviewing cards.</p>
+          </div>
+          
+          <!-- Chart 4: Self-graded quiz diagnostic -->
+          <div class="chart-box glass-card">
+            <h3>Quiz Accuracy Diagnostic</h3>
+            <div class="chart-canvas-wrapper">
+              <canvas id="chart-quiz-accuracy" width="450" height="250"></canvas>
+            </div>
+            <p class="chart-caption">Correct vs Incorrect responses logged in Quiz Mode.</p>
+          </div>
+        </div>
+      </section>
+      
+    </main>
+    
+  </div>
+  
+  <script src="script.js"></script>
+</body>
+</html>

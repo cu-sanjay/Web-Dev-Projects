@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Personal Knowledge Hub - A centralized dashboard to organize notes, bookmarks, and learning resources.">
+  <title>Personal Knowledge Hub</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Include Google Fonts for modern typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Include Phosphor Icons for modern icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <div class="logo-icon"><i class="ph-fill ph-brain"></i></div>
+          <h1>Knowledge Hub</h1>
+        </div>
+        <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+
+      <div class="sidebar-content">
+        <nav class="nav-menu">
+          <h3 class="nav-heading">Views</h3>
+          <button class="nav-item active" data-view="all">
+            <i class="ph ph-squares-four"></i>
+            <span>Dashboard</span>
+          </button>
+          <button class="nav-item" data-view="notes">
+            <i class="ph ph-notebook"></i>
+            <span>Notes</span>
+          </button>
+          <button class="nav-item" data-view="bookmarks">
+            <i class="ph ph-bookmarks"></i>
+            <span>Bookmarks</span>
+          </button>
+        </nav>
+
+        <nav class="nav-menu">
+          <div class="nav-heading-row">
+            <h3 class="nav-heading">Categories</h3>
+          </div>
+          <div id="categoryList">
+            <!-- Categories will be rendered here dynamically -->
+          </div>
+        </nav>
+      </div>
+
+      <div class="sidebar-footer">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <i class="ph ph-moon"></i>
+          <span>Dark Mode</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Top Header -->
+      <header class="top-header">
+        <div class="header-left">
+          <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">
+            <i class="ph ph-list"></i>
+          </button>
+          <h2 id="currentViewTitle">Dashboard</h2>
+        </div>
+        
+        <div class="header-right">
+          <div class="search-container">
+            <i class="ph ph-magnifying-glass search-icon"></i>
+            <input type="text" id="searchInput" placeholder="Search resources..." autocomplete="off">
+            <button class="clear-search" id="clearSearch" aria-label="Clear search" style="display: none;">
+              <i class="ph ph-x-circle"></i>
+            </button>
+          </div>
+          <button class="btn-primary" id="addBtn">
+            <i class="ph ph-plus"></i>
+            <span class="btn-text">Add New</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Dashboard Statistics (Visible only on 'all' view) -->
+      <section class="dashboard-stats" id="dashboardStats">
+        <div class="stat-card">
+          <div class="stat-icon notes-icon"><i class="ph ph-file-text"></i></div>
+          <div class="stat-info">
+            <span class="stat-value" id="totalNotesStat">0</span>
+            <span class="stat-label">Total Notes</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon bookmarks-icon"><i class="ph ph-bookmark-simple"></i></div>
+          <div class="stat-info">
+            <span class="stat-value" id="totalBookmarksStat">0</span>
+            <span class="stat-label">Bookmarks</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon categories-icon"><i class="ph ph-folder"></i></div>
+          <div class="stat-info">
+            <span class="stat-value" id="totalCategoriesStat">0</span>
+            <span class="stat-label">Categories</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Resource Grid -->
+      <div class="content-scrollable">
+        <!-- Empty State -->
+        <div class="empty-state" id="emptyState" style="display: none;">
+          <div class="empty-icon"><i class="ph ph-empty"></i></div>
+          <h3>No resources found</h3>
+          <p>Get started by adding a new note or bookmark.</p>
+          <button class="btn-primary btn-sm" id="emptyAddBtn">Add Resource</button>
+        </div>
+
+        <div class="resource-grid" id="resourceGrid">
+          <!-- Resource cards will be rendered here dynamically -->
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Add/Edit Modal -->
+  <div class="modal-overlay" id="resourceModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modalTitle">Add New Resource</h3>
+        <button class="close-modal" id="closeModalBtn" aria-label="Close modal">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="resourceForm">
+          <input type="hidden" id="resourceId">
+          
+          <div class="form-group type-selector">
+            <label>Resource Type</label>
+            <div class="radio-group">
+              <label class="radio-label">
+                <input type="radio" name="resourceType" value="note" checked>
+                <span class="radio-custom"><i class="ph ph-notebook"></i> Note</span>
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="resourceType" value="bookmark">
+                <span class="radio-custom"><i class="ph ph-bookmarks"></i> Bookmark</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="resourceTitle">Title</label>
+            <input type="text" id="resourceTitle" placeholder="e.g. JavaScript Array Methods" required>
+          </div>
+
+          <!-- Bookmark specific field -->
+          <div class="form-group bookmark-field" id="urlGroup" style="display: none;">
+            <label for="resourceUrl">URL</label>
+            <input type="url" id="resourceUrl" placeholder="https://example.com">
+          </div>
+
+          <!-- Note specific field -->
+          <div class="form-group note-field" id="contentGroup">
+            <label for="resourceContent">Content / Description</label>
+            <textarea id="resourceContent" rows="5" placeholder="Write your notes here..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="resourceCategory">Category</label>
+            <div class="category-input-group">
+              <select id="resourceCategory" required>
+                <!-- Predefined categories will be populated here -->
+              </select>
+              <button type="button" class="btn-icon" id="addCategoryBtn" aria-label="Add new category">
+                <i class="ph ph-plus"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn-secondary" id="cancelBtn">Cancel</button>
+            <button type="submit" class="btn-primary" id="saveBtn">Save Resource</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- New Category Modal -->
+  <div class="modal-overlay" id="categoryModal" style="z-index: 1000;">
+    <div class="modal modal-sm">
+      <div class="modal-header">
+        <h3>Add New Category</h3>
+        <button class="close-modal" id="closeCatModalBtn" aria-label="Close modal">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="categoryForm">
+          <div class="form-group">
+            <label for="newCategoryName">Category Name</label>
+            <input type="text" id="newCategoryName" placeholder="e.g. Design Systems" required>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn-secondary" id="cancelCatBtn">Cancel</button>
+            <button type="submit" class="btn-primary">Add</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

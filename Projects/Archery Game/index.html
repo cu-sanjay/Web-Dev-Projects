@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Archery Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="hud">
+      <div class="hud-group">
+        <div class="hud-item">
+          <span class="hud-lbl">Score</span>
+          <span class="hud-val" id="scoreVal">0</span>
+        </div>
+        <div class="hud-item">
+          <span class="hud-lbl">Best</span>
+          <span class="hud-val accent" id="bestVal">0</span>
+        </div>
+      </div>
+      <div class="hud-group">
+        <div class="hud-item">
+          <span class="hud-lbl">Arrows</span>
+          <span class="hud-val" id="arrowVal">10</span>
+        </div>
+        <div class="hud-item">
+          <span class="hud-lbl">Accuracy</span>
+          <span class="hud-val" id="accVal">0%</span>
+        </div>
+      </div>
+      <select class="diff-select" id="diffSelect">
+        <option value="easy">Easy</option>
+        <option value="medium" selected>Medium</option>
+        <option value="hard">Hard</option>
+      </select>
+    </header>
+
+    <div class="canvas-wrap">
+      <canvas id="gameCanvas" width="600" height="400"></canvas>
+      <div class="wind-indicator" id="windIndicator">
+        <span class="wind-lbl">WIND</span>
+        <span class="wind-arrow" id="windArrow">→</span>
+        <span class="wind-val" id="windVal">0.0</span>
+      </div>
+    </div>
+
+    <div class="overlay" id="overlay">
+      <div class="modal" id="modal">
+        <h2 class="modal-title" id="modalTitle">Game Over</h2>
+        <div class="modal-stats">
+          <div class="ms-row"><span>Final Score</span><span id="finalScore">0</span></div>
+          <div class="ms-row"><span>Arrows Shot</span><span id="finalShots">0</span></div>
+          <div class="ms-row"><span>Hits</span><span id="finalHits">0</span></div>
+          <div class="ms-row"><span>Accuracy</span><span id="finalAcc">0%</span></div>
+          <div class="ms-row"><span>Best Score</span><span id="finalBest">0</span></div>
+        </div>
+        <button class="modal-btn" id="resetBtn">Play Again</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+name: PR Automation
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  pull-requests: write
+  contents: write
+  issues: write
+
+jobs:
+  manage-prs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Process PR Logic
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const prNum = context.payload.pull_request.number;
+
+            const { data: files } = await github.rest.pulls.listFiles({ owner, repo, pull_number: prNum });
+            const totalFiles = files.length;
+            const rootProjectJsonModified = files.some(f => f.filename === 'project.json');
+            const changedOutsideProjects = files.some(f => !f.filename.startsWith('Projects/'));
+            const tooManyFiles = totalFiles > 6;
+
+            const projectDirs = new Set();
+            const normalizedFiles = files.map(f => ({
+              ...f,
+              filenameLower: f.filename.toLowerCase(),
+              statusLower: f.status ? f.status.toLowerCase() : 'added'
+            }));
+
+            for (const f of normalizedFiles) {
+              if (f.filename.startsWith('Projects/')) {
+                const parts = f.filename.split('/');
+                if (parts.length >= 2) {
+                  projectDirs.add(parts.slice(0, 2).join('/'));
+                }
+              }
+            }
+
+            if (rootProjectJsonModified || changedOutsideProjects) {
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: prNum,
+                body: 'PR failed checks: Changes must be limited to a single new project folder under `Projects/`. Do not modify the root `project.json` or files outside the new folder.'
+              });
+              return;
+            }
+
+            if (tooManyFiles) {
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: prNum,
+                body: 'PR failed checks: Please keep the total number of changed files at 6 or fewer for a single new project submission.'
+              });
+              return;
+            }
+
+            if (projectDirs.size !== 1) {
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: prNum,
+                body: 'PR failed checks: Ensure all changes are within one new project folder under `Projects/`.'
+              });
+              return;
+            }
+
+            const [projectDir] = [...projectDirs];
+            const hasReadme = normalizedFiles.some(f => f.filenameLower === `${projectDir.toLowerCase()}/readme.md`);
+            const hasProjectJson = normalizedFiles.some(f => f.filenameLower === `${projectDir.toLowerCase()}/project.json`);
+            const hasInvalidStatus = normalizedFiles.some(f => f.filenameLower.startsWith(`${projectDir.toLowerCase()}/`) && f.statusLower !== 'added');
+
+            if (!hasReadme || !hasProjectJson) {
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: prNum,
+                body: 'PR failed checks: The new project folder must include both `README.md` and `project.json`.'
+              });
+              return;
+            }
+
+            if (hasInvalidStatus) {
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: prNum,
+                body: 'PR failed checks: Existing files may not be modified. All changes should be new files inside the new project folder only.'
+              });
+              return;
+            }
+
+            await github.rest.issues.addLabels({
+              owner,
+              repo,
+              issue_number: prNum,
+              labels: ["NSoC'26", "NSoC'26 Accepted", 'level3']
+            });
+
+            await github.rest.issues.createComment({
+              owner,
+              repo,
+              issue_number: prNum,
+              body: 'Great work and contribution, will be merged soon as NSoc 2026 contribution.'
+            });

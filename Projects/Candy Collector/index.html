@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Candy Collector</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="hud">
+      <div class="hud-item">
+        <span class="hud-lbl">Score</span>
+        <span class="hud-val" id="scoreVal">0</span>
+      </div>
+      <div class="hud-item">
+        <span class="hud-lbl">Combo</span>
+        <span class="hud-val accent" id="comboVal">1×</span>
+      </div>
+      <div class="hud-item">
+        <span class="hud-lbl">Lives</span>
+        <span class="hud-val" id="livesVal">3</span>
+      </div>
+      <div class="hud-item">
+        <span class="hud-lbl">Best</span>
+        <span class="hud-val" id="bestVal">0</span>
+      </div>
+    </header>
+
+    <div class="canvas-wrap">
+      <canvas id="gameCanvas" width="400" height="500"></canvas>
+    </div>
+
+    <div class="legend">
+      <span class="key-hint">← → or mouse to move</span>
+    </div>
+
+    <div class="overlay" id="overlay">
+      <div class="modal">
+        <h2 class="modal-title">Game Over</h2>
+        <div class="mo-stats">
+          <div class="mo-row"><span>Final Score</span><span id="moScore">0</span></div>
+          <div class="mo-row"><span>Best Combo</span><span id="moCombo">1×</span></div>
+          <div class="mo-row"><span>Best Score</span><span id="moBest">0</span></div>
+        </div>
+        <button class="modal-btn" id="resetBtn">Play Again</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

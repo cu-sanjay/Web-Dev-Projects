@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solar System Simulation</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <aside id="control-panel">
+      <header id="brand-header">
+        <h1>ORBITAL MECHANICS</h1>
+        <span>Solar System Engine</span>
+      </header>
+      <section id="control-dashboard">
+        <button id="pause-btn">PAUSE / RESUME</button>
+        <div id="speed-control">
+          <label>SPEED MULTIPLIER</label>
+          <div id="speed-slider-container">
+            <input type="range" id="speed-slider" min="0" max="5" step="0.1" value="1">
+            <span id="speed-display">1.0x</span>
+          </div>
+        </div>
+        <div id="status-panel">
+          <div id="status-indicator"></div>
+          <span id="status-text">SIMULATION ACTIVE</span>
+        </div>
+      </section>
+      <section id="telemetry-panel">
+        <h2>LIVE TELEMETRY</h2>
+        <div class="metric">
+          <span class="metric-label">SPEED MULTIPLIER</span>
+          <span class="metric-value" id="telemetry-speed">1.0x</span>
+        </div>
+        <div class="metric">
+          <span class="metric-label">SIMULATION TIME</span>
+          <span class="metric-value" id="telemetry-time">00:00:00</span>
+        </div>
+      </section>
+      <section id="planet-info" class="hidden">
+        <h2>SELECTED BODY DOSSIER</h2>
+        <div id="planet-details">
+          <div class="detail-row">
+            <span class="detail-label">NAME</span>
+            <span class="detail-value" id="planet-name">—</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">ORBITAL PERIOD</span>
+            <span class="detail-value" id="planet-period">—</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">DISTANCE FROM STAR</span>
+            <span class="detail-value" id="planet-distance">—</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">FUN FACT</span>
+            <span class="detail-value" id="planet-fact">—</span>
+          </div>
+        </div>
+      </section>
+    </aside>
+    <main id="viewport">
+      <canvas id="simulation-canvas"></canvas>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chronos // Premium Calendar & Scheduling</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <aside class="sidebar-left">
+      <div class="brand">
+        <div class="brand-icon"></div>
+        <h2>Calender and Scheduling App</h2>
+      </div>
+
+      <section class="event-form-section">
+        <h3>Create Event</h3>
+        <form id="event-form">
+          <div class="form-group">
+            <label for="event-title">Event Title</label>
+            <input type="text" id="event-title" placeholder="e.g., Architecture Review" required maxLength="40">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="event-date">Date</label>
+              <input type="date" id="event-date" required>
+            </div>
+            <div class="form-group">
+              <label for="event-time">Time</label>
+              <input type="time" id="event-time" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Category Tag</label>
+            <div class="category-selector">
+              <label class="category-radio work">
+                <input type="radio" name="event-category" value="work" checked>
+                <span>Work</span>
+              </label>
+              <label class="category-radio personal">
+                <input type="radio" name="event-category" value="personal">
+                <span>Personal</span>
+              </label>
+              <label class="category-radio urgent">
+                <input type="radio" name="event-category" value="urgent">
+                <span>Urgent</span>
+              </label>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-submit">Schedule Event</button>
+        </form>
+      </section>
+
+      <section class="alerts-section">
+        <h3>High-Priority Alerts</h3>
+        <div id="alerts-ticker" class="alerts-ticker">
+          <div class="no-alerts">No urgent priority alerts</div>
+        </div>
+      </section>
+    </aside>
+
+    <main class="calendar-core">
+      <header class="calendar-header">
+        <div class="calendar-title-wrap">
+          <h1 id="current-month-year">October 2026</h1>
+        </div>
+        <div class="calendar-controls">
+          <button id="btn-prev" class="btn-nav" aria-label="Previous Month">◀</button>
+          <button id="btn-today" class="btn-today">Today</button>
+          <button id="btn-next" class="btn-nav" aria-label="Next Month">▶</button>
+        </div>
+      </header>
+
+      <div class="days-of-week">
+        <div>SUN</div>
+        <div>MON</div>
+        <div>TUE</div>
+        <div>WED</div>
+        <div>THU</div>
+        <div>FRI</div>
+        <div>SAT</div>
+      </div>
+
+      <div id="calendar-grid" class="calendar-grid">
+        </div>
+    </main>
+
+    <aside class="sidebar-right">
+      <div class="agenda-header">
+        <h3>Selected Agenda</h3>
+        <p id="agenda-date-display">Select a date</p>
+      </div>
+
+      <div id="agenda-timeline" class="agenda-timeline">
+        <div class="empty-agenda">No scheduled items for this date.</div>
+      </div>
+    </aside>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

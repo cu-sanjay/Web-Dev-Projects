@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pendulum Simulation</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <aside id="left-panel">
+      <header id="brand-header">
+        <h1>HARMONIC OSCILLATOR</h1>
+        <span>Pendulum Engine</span>
+      </header>
+      <section id="input-section">
+        <div class="param-group">
+          <div class="param-header">
+            <label for="length-slider">CABLE LENGTH (L)</label>
+            <span class="param-readout" id="length-readout">1.5 m</span>
+          </div>
+          <input type="range" id="length-slider" min="0.5" max="3.0" step="0.05" value="1.5">
+        </div>
+        <div class="param-group">
+          <label>GRAVITATIONAL FIELD (g)</label>
+          <div id="gravity-buttons">
+            <button class="gravity-btn active" data-g="9.81">EARTH<br><span>9.81 m/s&sup2;</span></button>
+            <button class="gravity-btn" data-g="3.71">MARS<br><span>3.71 m/s&sup2;</span></button>
+            <button class="gravity-btn" data-g="1.62">MOON<br><span>1.62 m/s&sup2;</span></button>
+          </div>
+        </div>
+        <div class="param-group">
+          <div class="param-header">
+            <label for="damping-slider">DAMPING COEFFICIENT (b)</label>
+            <span class="param-readout" id="damping-readout">0.00</span>
+          </div>
+          <input type="range" id="damping-slider" min="0" max="0.1" step="0.001" value="0">
+        </div>
+      </section>
+      <section id="action-section">
+        <button id="pause-btn">PAUSE SIMULATION</button>
+        <button id="reset-btn">RESET INITIAL EQUILIBRIUM</button>
+      </section>
+      <section id="diagnostics-panel">
+        <h2>DIAGNOSTICS</h2>
+        <div class="diag-row">
+          <span class="diag-label">THEORETICAL PERIOD (T)</span>
+          <span class="diag-value" id="period-value">2.46 s</span>
+        </div>
+        <div class="diag-row">
+          <span class="diag-label">ANGULAR VELOCITY (&omega;)</span>
+          <span class="diag-value" id="omega-value">0.00 rad/s</span>
+        </div>
+        <div class="diag-row">
+          <span class="diag-label">INSTANT ANGLE (&theta;)</span>
+          <span class="diag-value" id="theta-value">0.0&deg;</span>
+        </div>
+      </section>
+    </aside>
+    <main id="viewport">
+      <canvas id="simulation-canvas"></canvas>
+    </main>
+    <aside id="right-panel">
+      <h2>ENERGY BALANCE</h2>
+      <div class="energy-card" id="energy-pe">
+        <div class="energy-header">
+          <span class="energy-label">POTENTIAL ENERGY (PE)</span>
+          <span class="energy-value" id="pe-value">0.00 J</span>
+        </div>
+        <div class="energy-track">
+          <div class="energy-fill" id="pe-fill"></div>
+        </div>
+      </div>
+      <div class="energy-card" id="energy-ke">
+        <div class="energy-header">
+          <span class="energy-label">KINETIC ENERGY (KE)</span>
+          <span class="energy-value" id="ke-value">0.00 J</span>
+        </div>
+        <div class="energy-track">
+          <div class="energy-fill" id="ke-fill"></div>
+        </div>
+      </div>
+      <div class="energy-card" id="energy-total">
+        <div class="energy-header">
+          <span class="energy-label">TOTAL MECHANICAL ENERGY</span>
+          <span class="energy-value" id="total-value">0.00 J</span>
+        </div>
+        <div class="energy-track">
+          <div class="energy-fill" id="total-fill"></div>
+        </div>
+      </div>
+      <div id="conservation-note">
+        <div id="conservation-indicator"></div>
+        <span>LAW OF CONSERVATION VALIDATED</span>
+      </div>
+    </aside>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

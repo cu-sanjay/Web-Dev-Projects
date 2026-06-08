@@ -1,0 +1,175 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #04050a;
+  color: #e2e8f0;
+  font-family: 'Courier New', 'Fira Code', monospace;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app {
+  max-width: 380px;
+  width: 100%;
+  padding: 14px 10px 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.hud {
+  width: 100%;
+  display: flex;
+  gap: 5px;
+}
+
+.hud-item {
+  flex: 1;
+  text-align: center;
+  padding: 5px 3px;
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 6px;
+}
+
+.hud-lbl {
+  display: block;
+  font-size: 0.38rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #475569;
+}
+
+.hud-val {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #e2e8f0;
+  margin-top: 1px;
+}
+
+.hud-val.accent {
+  color: #10b981;
+}
+
+.canvas-wrap {
+  width: 100%;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.03), inset 0 0 20px rgba(255, 42, 95, 0.01);
+  overflow: hidden;
+}
+
+#gameCanvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 360 / 480;
+  background: #04050a;
+  touch-action: none;
+}
+
+.hint {
+  font-size: 0.48rem;
+  color: #373e4b;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 5, 10, 0.88);
+  backdrop-filter: blur(6px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.overlay.active {
+  display: flex;
+}
+
+.modal {
+  background: rgba(13, 13, 26, 0.96);
+  border: 1px solid rgba(59, 130, 246, 0.1);
+  border-radius: 16px;
+  padding: 32px 36px;
+  text-align: center;
+  max-width: 280px;
+  width: 90%;
+  box-shadow: 0 0 40px rgba(59, 130, 246, 0.04);
+  animation: modalIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes modalIn {
+  0% { transform: scale(0.85); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.modal-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #f97316;
+  letter-spacing: 1px;
+  margin-bottom: 18px;
+}
+
+.mo-stats {
+  margin-bottom: 24px;
+}
+
+.mo-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.73rem;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  color: #64748b;
+}
+
+.mo-row:last-child { border-bottom: none; }
+
+.mo-row span:last-child {
+  color: #e2e8f0;
+  font-weight: 700;
+}
+
+.modal-btn {
+  padding: 12px 36px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 16px rgba(59, 130, 246, 0.2);
+}
+
+.modal-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(59, 130, 246, 0.35);
+}
+
+@media (max-width: 380px) {
+  .app { padding: 8px 4px 14px; gap: 6px; }
+  .hud-item { padding: 3px 2px; }
+  .hud-val { font-size: 0.8rem; }
+  .modal { padding: 22px 18px; }
+}

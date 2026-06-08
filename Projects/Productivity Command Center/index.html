@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Productivity Command Center - All-in-One Dashboard</title>
+  
+  <!-- Modern Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons for Beautiful Visuals -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+  <!-- Main Grid Wrapper -->
+  <div class="app-container">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="app-sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon"><i class="fa-solid fa-terminal"></i></div>
+        <span class="brand-name">CommandCenter</span>
+      </div>
+      <nav class="sidebar-nav">
+        <ul>
+          <li><button class="nav-btn active" data-panel="dashboard" id="btn-nav-dashboard"><i class="fa-solid fa-chart-line"></i><span>Dashboard</span></button></li>
+          <li><button class="nav-btn" data-panel="tasks" id="btn-nav-tasks"><i class="fa-solid fa-list-check"></i><span>Tasks</span></button></li>
+          <li><button class="nav-btn" data-panel="goals" id="btn-nav-goals"><i class="fa-solid fa-bullseye"></i><span>Goals</span></button></li>
+          <li><button class="nav-btn" data-panel="notes" id="btn-nav-notes"><i class="fa-solid fa-note-sticky"></i><span>Notes Vault</span></button></li>
+          <li><button class="nav-btn" data-panel="focus" id="btn-nav-focus"><i class="fa-solid fa-hourglass-start"></i><span>Focus Center</span></button></li>
+          <li><button class="nav-btn" data-panel="habits" id="btn-nav-habits"><i class="fa-solid fa-calendar-check"></i><span>Habits & Journal</span></button></li>
+          <li><button class="nav-btn" data-panel="achievements" id="btn-nav-achievements"><i class="fa-solid fa-trophy"></i><span>Achievements</span></button></li>
+          <li><button class="nav-btn" data-panel="analytics" id="btn-nav-analytics"><i class="fa-solid fa-chart-pie"></i><span>Analytics</span></button></li>
+        </ul>
+      </nav>
+      <div class="sidebar-footer">
+        <button id="btn-theme-toggle" class="footer-action-btn" title="Toggle Light/Dark Theme (Alt + L)"><i class="fa-solid fa-moon"></i></button>
+        <button id="btn-export-data" class="footer-action-btn" title="Export Workspace Data"><i class="fa-solid fa-download"></i></button>
+        <button id="btn-import-trigger" class="footer-action-btn" title="Import Workspace Data"><i class="fa-solid fa-upload"></i></button>
+        <input type="file" id="import-file-input" style="display: none;" accept=".json">
+      </div>
+    </aside>
+    
+    <!-- Top Information Bar -->
+    <header class="top-bar">
+      <div class="top-bar-left">
+        <h1 class="page-title" id="current-panel-title">Dashboard Overview</h1>
+        <p class="panel-subtitle" id="current-panel-subtitle">Welcome back! Here is a summary of your workspace.</p>
+      </div>
+      <div class="top-bar-right">
+        <!-- Motivational Quote Widget -->
+        <div class="quote-widget" id="quote-container">
+          <span class="quote-text">"Make today count."</span>
+        </div>
+        <!-- Clock & Date Widget -->
+        <div class="clock-widget">
+          <div class="clock-time" id="clock-display">00:00 AM</div>
+          <div class="clock-date" id="date-display">Saturday, June 6</div>
+        </div>
+      </div>
+    </header>
+    
+    <!-- Main Content Panels -->
+    <main class="main-content">
+      
+      <!-- PANEL 1: DASHBOARD OVERVIEW -->
+      <section class="content-panel active" id="panel-dashboard">
+        <!-- Stats Widgets Grid -->
+        <div class="widgets-grid">
+          <div class="stat-card glass-card">
+            <div class="stat-icon val-tasks"><i class="fa-solid fa-check-double"></i></div>
+            <div class="stat-info">
+              <span class="stat-value" id="dash-tasks-count">0 / 0</span>
+              <span class="stat-label">Tasks Completed</span>
+            </div>
+            <div class="stat-progress"><div class="stat-progress-bar" id="dash-tasks-progress" style="width: 0%;"></div></div>
+          </div>
+          
+          <div class="stat-card glass-card">
+            <div class="stat-icon val-goals"><i class="fa-solid fa-bullseye"></i></div>
+            <div class="stat-info">
+              <span class="stat-value" id="dash-goals-count">0%</span>
+              <span class="stat-label">Goals Success</span>
+            </div>
+            <div class="stat-progress"><div class="stat-progress-bar" id="dash-goals-progress" style="width: 0%;"></div></div>
+          </div>
+          
+          <div class="stat-card glass-card">
+            <div class="stat-icon val-timer"><i class="fa-solid fa-clock"></i></div>
+            <div class="stat-info">
+              <span class="stat-value" id="dash-focus-count">0m</span>
+              <span class="stat-label">Time Focused Today</span>
+            </div>
+            <div class="stat-progress"><div class="stat-progress-bar" id="dash-focus-progress" style="width: 30%;"></div></div>
+          </div>
+
+          <div class="stat-card glass-card">
+            <div class="stat-icon val-habits"><i class="fa-solid fa-fire"></i></div>
+            <div class="stat-info">
+              <span class="stat-value" id="dash-habits-count">0 Days</span>
+              <span class="stat-label">Max Habit Streak</span>
+            </div>
+            <div class="stat-progress"><div class="stat-progress-bar" id="dash-habits-progress" style="width: 0%;"></div></div>
+          </div>
+        </div>
+        
+        <!-- Main Dashboard Split View -->
+        <div class="dashboard-split">
+          <!-- Left side: Live widgets -->
+          <div class="split-left">
+            <!-- Pomodoro Quick Widget -->
+            <div class="dashboard-widget-card glass-card">
+              <div class="widget-header">
+                <h3>Focus Session</h3>
+                <button class="btn-link" id="dash-timer-go-btn">Go to Timer <i class="fa-solid fa-arrow-right"></i></button>
+              </div>
+              <div class="dash-timer-box">
+                <div class="circular-timer-mini">
+                  <svg class="progress-ring-mini" width="80" height="80">
+                    <circle class="progress-ring-circle-bg" stroke="var(--bg-card-muted)" stroke-width="4" fill="transparent" r="34" cx="40" cy="40"/>
+                    <circle class="progress-ring-circle" id="dash-timer-ring" stroke="var(--color-primary)" stroke-width="4" fill="transparent" r="34" cx="40" cy="40"/>
+                  </svg>
+                  <div class="dash-timer-time" id="dash-timer-display">25:00</div>
+                </div>
+                <div class="dash-timer-info">
+                  <p class="dash-timer-status" id="dash-timer-status-text">Ready for Work</p>
+                  <div class="dash-timer-actions">
+                    <button id="btn-dash-timer-toggle" class="btn-action-primary"><i class="fa-solid fa-play"></i> Start</button>
+                    <button id="btn-dash-timer-reset" class="btn-action-secondary"><i class="fa-solid fa-rotate-left"></i> Reset</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Quick Habit Grid -->
+            <div class="dashboard-widget-card glass-card">
+              <div class="widget-header">
+                <h3>Today's Habits</h3>
+                <button class="btn-link" id="dash-habits-go-btn">Manage <i class="fa-solid fa-arrow-right"></i></button>
+              </div>
+              <div class="quick-habits-list" id="dash-quick-habits-container">
+                <!-- Habits list loaded by JS -->
+                <p class="empty-message-inline">No habits configured. Create one in the Habits tab!</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Right side: Lists & Schedule -->
+          <div class="split-right">
+            <!-- Upcoming high priority tasks -->
+            <div class="dashboard-widget-card glass-card">
+              <div class="widget-header">
+                <h3>Priority Tasks</h3>
+                <button class="btn-link" id="dash-tasks-go-btn">Open Tasks <i class="fa-solid fa-arrow-right"></i></button>
+              </div>
+              <div class="priority-tasks-list" id="dash-priority-tasks-container">
+                <!-- Loaded dynamically -->
+                <p class="empty-message-inline">No high priority tasks pending.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- PANEL 2: TASKS BOARD -->
+      <section class="content-panel" id="panel-tasks">
+        <div class="panel-actions-bar">
+          <div class="search-filter-box">
+            <div class="search-input-wrapper">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input type="text" id="task-search-input" placeholder="Search tasks by name or tag...">
+            </div>
+            <select id="task-filter-priority" class="select-dropdown">
+              <option value="all">All Priorities</option>
+              <option value="high">High Priority</option>
+              <option value="medium">Medium Priority</option>
+              <option value="low">Low Priority</option>
+            </select>
+          </div>
+          <button id="btn-add-task-modal" class="btn-primary-glow"><i class="fa-solid fa-plus"></i> Add New Task</button>
+        </div>
+        
+        <!-- Board Layout (Columns) -->
+        <div class="tasks-board-layout">
+          <!-- Column 1: To Do -->
+          <div class="board-column glass-card" id="col-todo">
+            <div class="column-header">
+              <span class="column-title"><i class="fa-regular fa-circle-play"></i> To Do</span>
+              <span class="column-badge" id="badge-todo-count">0</span>
+            </div>
+            <div class="column-cards-container" id="container-todo">
+              <!-- Cards dynamic insertion -->
+            </div>
+          </div>
+          
+          <!-- Column 2: In Progress -->
+          <div class="board-column glass-card" id="col-in-progress">
+            <div class="column-header">
+              <span class="column-title"><i class="fa-solid fa-spinner"></i> In Progress</span>
+              <span class="column-badge" id="badge-inprogress-count">0</span>
+            </div>
+            <div class="column-cards-container" id="container-in-progress">
+              <!-- Cards dynamic insertion -->
+            </div>
+          </div>
+          
+          <!-- Column 3: Completed -->
+          <div class="board-column glass-card" id="col-completed">
+            <div class="column-header">
+              <span class="column-title"><i class="fa-regular fa-circle-check"></i> Completed</span>
+              <span class="column-badge" id="badge-completed-count">0</span>
+            </div>
+            <div class="column-cards-container" id="container-completed">
+              <!-- Cards dynamic insertion -->
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- PANEL 3: GOALS TRACKER -->
+      <section class="content-panel" id="panel-goals">
+        <div class="goals-layout">
+          <div class="goals-form-section glass-card">
+            <h3>Set a New Goal</h3>
+            <form id="goal-creator-form">
+              <div class="form-group">
+                <label for="goal-title-input">Goal Title</label>
+                <input type="text" id="goal-title-input" required placeholder="e.g. Learn Canvas APIs">
+              </div>
+              <div class="form-group-row">
+                <div class="form-group">
+                  <label for="goal-timeframe">Timeframe</label>
+                  <select id="goal-timeframe" class="select-dropdown">
+                    <option value="daily">Daily Goal</option>
+                    <option value="weekly">Weekly Goal</option>
+                    <option value="monthly">Monthly Goal</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="goal-target-val">Target Target Steps</label>
+                  <input type="number" id="goal-target-val" value="1" min="1" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="goal-category">Goal Category</label>
+                <input type="text" id="goal-category" placeholder="e.g. Career, Health, Studies">
+              </div>
+              <button type="submit" class="btn-action-primary width-full"><i class="fa-solid fa-plus"></i> Save Goal</button>
+            </form>
+          </div>
+          
+          <div class="goals-display-section">
+            <div class="goals-filters">
+              <button class="goal-filter-btn active" data-timeframe="all">All Goals</button>
+              <button class="goal-filter-btn" data-timeframe="daily">Daily</button>
+              <button class="goal-filter-btn" data-timeframe="weekly">Weekly</button>
+              <button class="goal-filter-btn" data-timeframe="monthly">Monthly</button>
+            </div>
+            <div class="goals-list-container" id="goals-container">
+              <!-- Goals insertion by script -->
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- PANEL 4: NOTES VAULT -->
+      <section class="content-panel" id="panel-notes">
+        <div class="notes-workspace">
+          <!-- Sidebar selector -->
+          <div class="notes-sidebar glass-card">
+            <div class="notes-sidebar-header">
+              <div class="search-input-wrapper">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="notes-search" placeholder="Search notes...">
+              </div>
+              <button id="btn-new-note" class="btn-action-primary" title="Create New Note"><i class="fa-solid fa-plus"></i></button>
+            </div>
+            <div class="notes-list-items" id="notes-list-container">
+              <!-- Notes listing elements -->
+            </div>
+          </div>
+          
+          <!-- Editor display -->
+          <div class="notes-editor glass-card" id="notes-editor-panel">
+            <div class="notes-editor-empty" id="notes-editor-empty-state">
+              <i class="fa-regular fa-file-lines"></i>
+              <p>Select a note to edit or click the plus button to create a new one.</p>
+            </div>
+            
+            <div class="notes-editor-active" id="notes-editor-active-state" style="display: none;">
+              <div class="notes-editor-header">
+                <input type="text" id="note-title-input" class="note-title-field" placeholder="Note Title...">
+                <div class="note-meta-actions">
+                  <select id="note-category-input" class="note-select-cat">
+                    <option value="General">General</option>
+                    <option value="Work">Work</option>
+                    <option value="Personal">Personal</option>
+                    <option value="Idea">Idea</option>
+                  </select>
+                  <button id="btn-delete-note" class="btn-icon-danger" title="Delete Note"><i class="fa-solid fa-trash"></i></button>
+                </div>
+              </div>
+              <textarea id="note-content-input" class="note-textarea" placeholder="Start typing your note contents here..."></textarea>
+              <div class="notes-editor-footer">
+                <span class="note-saved-indicator" id="note-save-status">Saved</span>
+                <span class="note-char-count" id="note-char-counter">0 characters</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- PANEL 5: FOCUS CENTER (POMODORO) -->
+      <section class="content-panel" id="panel-focus">
+        <div class="focus-layout">
+          <!-- Left side: The Big Timer -->
+          <div class="focus-timer-section glass-card">
+            <div class="timer-mode-selector">
+              <button class="timer-mode-btn active" data-duration="25" data-mode="work" id="mode-work">Pomodoro</button>
+              <button class="timer-mode-btn" data-duration="5" data-mode="short-break" id="mode-short">Short Break</button>
+              <button class="timer-mode-btn" data-duration="15" data-mode="long-break" id="mode-long">Long Break</button>
+            </div>
+            
+            <div class="timer-display-container">
+              <!-- Big circular SVG progress ring -->
+              <svg class="timer-progress-ring" width="280" height="280">
+                <circle class="timer-ring-bg" stroke="var(--bg-card-muted)" stroke-width="8" fill="transparent" r="120" cx="140" cy="140"/>
+                <circle class="timer-ring-bar" id="main-timer-bar" stroke="var(--color-primary)" stroke-width="8" fill="transparent" r="120" cx="140" cy="140"/>
+              </svg>
+              <div class="timer-numbers" id="main-timer-numbers">25:00</div>
+              <div class="timer-sub-status" id="main-timer-sub">Time to Focus!</div>
+            </div>
+            
+            <div class="timer-controls">
+              <button id="btn-timer-toggle" class="btn-timer-main-play" title="Toggle Timer (Alt + P)"><i class="fa-solid fa-play"></i></button>
+              <button id="btn-timer-reset" class="btn-timer-sub-reset" title="Reset Timer"><i class="fa-solid fa-rotate-left"></i></button>
+              <button id="btn-timer-sound" class="btn-timer-sub-sound" title="Toggle Tick Sound"><i class="fa-solid fa-volume-high"></i></button>
+            </div>
+            
+            <div class="timer-customizer">
+              <div class="custom-setting-item">
+                <label for="custom-work-time">Work</label>
+                <input type="number" id="custom-work-time" value="25" min="1" max="120">
+              </div>
+              <div class="custom-setting-item">
+                <label for="custom-short-time">Short</label>
+                <input type="number" id="custom-short-time" value="5" min="1" max="60">
+              </div>
+              <div class="custom-setting-item">
+                <label for="custom-long-time">Long</label>
+                <input type="number" id="custom-long-time" value="15" min="1" max="60">
+              </div>
+              <button id="btn-apply-settings" class="btn-action-apply">Apply</button>
+            </div>
+          </div>
+          
+          <!-- Right side: Focus History Log -->
+          <div class="focus-log-section glass-card">
+            <h3>Focus History & Logs</h3>
+            <div class="focus-stats-mini">
+              <div class="mini-stat-item">
+                <span class="mini-value" id="stats-total-sessions">0</span>
+                <span class="mini-label">Sessions Completed</span>
+              </div>
+              <div class="mini-stat-item">
+                <span class="mini-value" id="stats-total-minutes">0h 0m</span>
+                <span class="mini-label">Total Time Focused</span>
+              </div>
+            </div>
+            <div class="focus-logs-list" id="focus-history-container">
+              <!-- Logs dynamic list -->
+              <p class="empty-message-inline">No focus sessions completed today yet.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- PANEL 6: HABITS & JOURNAL -->
+      <section class="content-panel" id="panel-habits">
+        <div class="habits-journal-split">
+          <!-- Habits Tracker Card -->
+          <div class="habits-container glass-card">
+            <div class="section-header-row">
+              <h3>Habits Tracker</h3>
+              <button id="btn-add-habit" class="btn-action-primary"><i class="fa-solid fa-plus"></i> Add Habit</button>
+            </div>
+            
+            <!-- Habits List container -->
+            <div class="habits-list-scrollable" id="habits-list-container">
+              <!-- Habits rendered dynamically -->
+            </div>
+          </div>
+          
+          <!-- Daily Reflection Journal Card -->
+          <div class="journal-container glass-card">
+            <h3>Daily Reflection Journal</h3>
+            <div class="journal-editor">
+              <div class="form-group">
+                <label for="journal-mood-select">Today's Mood</label>
+                <select id="journal-mood-select" class="select-dropdown">
+                  <option value="😀 Productive">😀 Productive</option>
+                  <option value="😎 Happy">😎 Happy</option>
+                  <option value="😐 Neutral">😐 Neutral</option>
+                  <option value="😴 Tired">😴 Tired</option>
+                  <option value="😤 Stressed">😤 Stressed</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="journal-entry-text">Reflection Log</label>
+                <textarea id="journal-entry-text" class="journal-textarea" placeholder="Write down your thoughts, wins, and reflections for today..."></textarea>
+              </div>
+              <button id="btn-save-journal" class="btn-action-primary width-full"><i class="fa-solid fa-floppy-disk"></i> Save Journal Entry</button>
+            </div>
+            <div class="journal-logs-divider">Previous Entries</div>
+            <div class="journal-history-list" id="journal-history-container">
+              <!-- Logged entries -->
+              <p class="empty-message-inline">No journal entries written yet.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- PANEL 7: ACHIEVEMENTS -->
+      <section class="content-panel" id="panel-achievements">
+        <div class="achievements-summary glass-card">
+          <div class="ach-summary-info">
+            <span class="ach-summary-count" id="achievements-unlocked-ratio">0 / 8 Unlocked</span>
+            <span class="ach-summary-label">Boost your productivity to claim premium awards!</span>
+          </div>
+          <div class="ach-summary-gauge">
+            <div class="ach-gauge-fill" id="achievements-gauge-bar" style="width: 0%;"></div>
+          </div>
+        </div>
+        
+        <div class="achievements-grid" id="achievements-grid-container">
+          <!-- Dynamically populated achievement cards -->
+        </div>
+      </section>
+      
+      <!-- PANEL 8: ANALYTICS & CHARTS -->
+      <section class="content-panel" id="panel-analytics">
+        <div class="analytics-grid">
+          <!-- Chart Card 1: Productivity Trends -->
+          <div class="chart-card glass-card">
+            <h3>Daily Productivity Trends</h3>
+            <div class="canvas-chart-wrapper">
+              <canvas id="chart-productivity-trends" width="450" height="250"></canvas>
+            </div>
+            <p class="chart-caption">Visualizes focus sessions score over the last 7 days.</p>
+          </div>
+          
+          <!-- Chart Card 2: Task Distribution -->
+          <div class="chart-card glass-card">
+            <h3>Task Priority Distribution</h3>
+            <div class="canvas-chart-wrapper">
+              <canvas id="chart-task-priority" width="450" height="250"></canvas>
+            </div>
+            <p class="chart-caption">Ratio of tasks by their urgency level.</p>
+          </div>
+          
+          <!-- Chart Card 3: Goals Progression -->
+          <div class="chart-card glass-card">
+            <h3>Goals Completion Metrics</h3>
+            <div class="canvas-chart-wrapper">
+              <canvas id="chart-goals-progression" width="450" height="250"></canvas>
+            </div>
+            <p class="chart-caption">Performance of Daily vs Weekly vs Monthly targets.</p>
+          </div>
+
+          <!-- Chart Card 4: Categories Breakdown -->
+          <div class="chart-card glass-card">
+            <h3>Notes Vault Distribution</h3>
+            <div class="canvas-chart-wrapper">
+              <canvas id="chart-notes-categories" width="450" height="250"></canvas>
+            </div>
+            <p class="chart-caption">Categories division of saved vault records.</p>
+          </div>
+        </div>
+      </section>
+      
+    </main>
+    
+  </div>
+  
+  <!-- MODAL DIALOGS -->
+  
+  <!-- Modal 1: Add/Edit Task Dialog -->
+  <div class="modal-overlay" id="task-modal">
+    <div class="modal-card glass-card">
+      <div class="modal-header">
+        <h3 id="task-modal-title">Create New Task</h3>
+        <button class="btn-close-modal" id="btn-close-task-modal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form id="task-modal-form">
+        <input type="hidden" id="task-modal-edit-id">
+        <div class="form-group">
+          <label for="task-title-field">Task Description</label>
+          <input type="text" id="task-title-field" required placeholder="What needs to be done?">
+        </div>
+        <div class="form-group">
+          <label for="task-desc-field">Extra Details (Optional)</label>
+          <textarea id="task-desc-field" rows="2" placeholder="Provide extra description here..."></textarea>
+        </div>
+        <div class="form-group-row">
+          <div class="form-group">
+            <label for="task-priority-field">Priority</label>
+            <select id="task-priority-field" class="select-dropdown">
+              <option value="low">🟢 Low</option>
+              <option value="medium">🟡 Medium</option>
+              <option value="high">🔴 High</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="task-due-field">Due Date</label>
+            <input type="date" id="task-due-field">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="task-tags-field">Tags (Comma-separated)</label>
+          <input type="text" id="task-tags-field" placeholder="e.g. coding, test, urgent">
+        </div>
+        <button type="submit" class="btn-action-primary width-full"><i class="fa-solid fa-circle-check"></i> Save Task</button>
+      </form>
+    </div>
+  </div>
+  
+  <!-- Audio assets synthesized with Web Audio API (in script.js) to avoid resource request errors -->
+  <script src="script.js"></script>
+</body>
+</html>

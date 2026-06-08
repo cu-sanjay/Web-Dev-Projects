@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Corsi Block Tapper — Spatial Span Test</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <header id="hud">
+      <div class="hud-cell">
+        <span class="hud-label">Span</span>
+        <span id="spanDisplay" class="hud-value">2</span>
+      </div>
+      <div class="hud-cell">
+        <span class="hud-label">Max Span</span>
+        <span id="maxSpanDisplay" class="hud-value">0</span>
+      </div>
+      <div class="hud-cell">
+        <span class="hud-label">Trial</span>
+        <span id="trialDisplay" class="hud-value">1 / 2</span>
+      </div>
+    </header>
+
+    <div id="statusBanner">
+      <span id="statusMessage">PRESS START TO BEGIN</span>
+    </div>
+
+    <div id="arena">
+      <div id="blocksContainer"></div>
+    </div>
+
+    <div id="controls">
+      <button id="startBtn" class="btn primary">START TEST</button>
+    </div>
+
+    <div id="resultsOverlay" class="hidden">
+      <div class="results-modal">
+        <h2>ASSESSMENT COMPLETE</h2>
+        <div class="results-divider"></div>
+        <div class="results-body">
+          <div class="result-row">
+            <span class="result-label">Corsi Span Score</span>
+            <span id="resultSpan" class="result-value">0</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Longest Sequence</span>
+            <span id="resultLongest" class="result-value">0</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Correct Trials</span>
+            <span id="resultCorrect" class="result-value">0</span>
+          </div>
+        </div>
+        <button id="restartBtn" class="btn primary">RESTART ASSESSMENT</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

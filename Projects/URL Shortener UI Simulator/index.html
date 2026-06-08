@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URL Shortener UI Simulator - Client Link Hash Generator</title>
+  
+  <!-- Modern Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Vector Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+  <!-- Core Layout Grid -->
+  <div class="app-layout">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="app-sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-logo"><i class="fa-solid fa-link"></i></div>
+        <span class="brand-text">ShortLink</span>
+      </div>
+      <nav class="sidebar-nav">
+        <ul>
+          <li><button class="nav-btn active" data-panel="dashboard" id="btn-nav-dashboard"><i class="fa-solid fa-chart-line"></i><span>Dashboard</span></button></li>
+          <li><button class="nav-btn" data-panel="shorten" id="btn-nav-shorten"><i class="fa-solid fa-scissors"></i><span>Shorten Link</span></button></li>
+          <li><button class="nav-btn" data-panel="history" id="btn-nav-history"><i class="fa-solid fa-list-ul"></i><span>Links History</span></button></li>
+          <li><button class="nav-btn" data-panel="analytics" id="btn-nav-analytics"><i class="fa-solid fa-chart-pie"></i><span>Analytics</span></button></li>
+        </ul>
+      </nav>
+      <div class="sidebar-footer">
+        <button id="btn-theme-toggle" class="footer-btn" title="Toggle Light/Dark Theme (Alt + L)"><i class="fa-solid fa-moon"></i></button>
+        <button id="btn-export-json" class="footer-btn" title="Export Backup JSON"><i class="fa-solid fa-download"></i></button>
+        <button id="btn-import-json" class="footer-btn" title="Import Backup JSON"><i class="fa-solid fa-upload"></i></button>
+        <input type="file" id="backup-file-input" style="display: none;" accept=".json">
+      </div>
+    </aside>
+    
+    <!-- Top Stats and Settings Bar -->
+    <header class="top-bar">
+      <div class="top-bar-left">
+        <h1 class="panel-main-title" id="panel-title-text">Dashboard</h1>
+        <p class="panel-subtitle" id="panel-subtitle-text">Study links stats, click rates, and mock redirects.</p>
+      </div>
+      <div class="top-bar-right">
+        <!-- Live Time Display -->
+        <div class="time-widget">
+          <div class="clock-display" id="clock-display">00:00 AM</div>
+        </div>
+      </div>
+    </header>
+    
+    <!-- Main Display panel swapper -->
+    <main class="main-content">
+      
+      <!-- PANEL 1: DASHBOARD -->
+      <section class="content-panel active" id="panel-dashboard">
+        <!-- Stats Widgets -->
+        <div class="stats-row">
+          <div class="stats-card glass-card">
+            <div class="stats-card-icon sc-blue"><i class="fa-solid fa-link"></i></div>
+            <div class="stats-card-info">
+              <span class="stats-number" id="stats-total-links">0</span>
+              <span class="stats-label">Total Short Links</span>
+            </div>
+          </div>
+          
+          <div class="stats-card glass-card">
+            <div class="stats-card-icon sc-cyan"><i class="fa-solid fa-arrow-pointer"></i></div>
+            <div class="stats-card-info">
+              <span class="stats-number" id="stats-total-clicks">0</span>
+              <span class="stats-label">Simulated Clicks</span>
+            </div>
+          </div>
+
+          <div class="stats-card glass-card">
+            <div class="stats-card-icon sc-green"><i class="fa-solid fa-percent"></i></div>
+            <div class="stats-card-info">
+              <span class="stats-number" id="stats-avg-clicks">0.0</span>
+              <span class="stats-label">Avg. Clicks / Link</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Dashboard Split grid -->
+        <div class="dashboard-split-grid">
+          <!-- Left: Quick Shortener Widget -->
+          <div class="split-card glass-card">
+            <div class="split-card-header">
+              <h3>Create Short Link</h3>
+              <button class="btn-text-link" id="dash-btn-go-shorten">Open Form <i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+            <form id="dash-shorten-form" class="dashboard-form">
+              <div class="form-group">
+                <label for="dash-url-input">Enter Target Long URL</label>
+                <div class="input-inline-btn-group">
+                  <input type="text" id="dash-url-input" placeholder="https://example.com/very/long/path/..." required>
+                  <button type="submit" class="btn-primary-accent">Shorten</button>
+                </div>
+                <span class="validation-warning" id="dash-url-warning"></span>
+              </div>
+            </form>
+            
+            <!-- Output box -->
+            <div class="shorten-output-box" id="dash-output-box" style="display: none;">
+              <span class="output-title">Your Shortened URL:</span>
+              <div class="output-url-row">
+                <span class="output-link-text" id="dash-output-link">shrt.lnk/xyz123</span>
+                <div class="output-actions">
+                  <button class="btn-round-control" id="btn-dash-copy" title="Copy to clipboard"><i class="fa-regular fa-copy"></i></button>
+                  <button class="btn-round-control" id="btn-dash-test-redirect" title="Test Simulated Redirect"><i class="fa-solid fa-play"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Right: Top Short Links -->
+          <div class="split-card glass-card">
+            <div class="split-card-header">
+              <h3>Popular Links</h3>
+              <button class="btn-text-link" id="dash-btn-go-history">View History <i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+            <div class="popular-links-list" id="dash-popular-links-container">
+              <!-- Filled dynamically -->
+              <p class="empty-message-text">No short links created yet.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- PANEL 2: SHORTEN URL FORM -->
+      <section class="content-panel" id="panel-shorten">
+        <div class="shorten-layout-wrapper">
+          <div class="shorten-main-card glass-card">
+            <h3>Custom URL Shortener</h3>
+            <p class="form-caption">Enter a valid HTTP/HTTPS URL and customize your short suffix code below.</p>
+            <form id="shorten-form-main">
+              <div class="form-group">
+                <label for="main-url-input">Destination Long URL</label>
+                <div class="input-with-icon-wrapper">
+                  <i class="fa-solid fa-globe"></i>
+                  <input type="text" id="main-url-input" placeholder="e.g. https://github.com/MistryVishwa/Web-Dev-Projects" required>
+                </div>
+                <span class="validation-warning" id="main-url-warning"></span>
+              </div>
+              
+              <div class="form-group-row">
+                <div class="form-group">
+                  <label for="main-custom-input">Custom Short Suffix (Optional)</label>
+                  <div class="input-with-icon-wrapper">
+                    <i class="fa-solid fa-tag"></i>
+                    <input type="text" id="main-custom-input" placeholder="e.g. my-project">
+                  </div>
+                  <span class="validation-warning" id="main-custom-warning"></span>
+                </div>
+                
+                <div class="form-group">
+                  <label>Hash Generator Suffix Length</label>
+                  <select id="main-suffix-length" class="select-field-styled">
+                    <option value="4">4 Characters (e.g. a7B8)</option>
+                    <option value="6" selected>6 Characters (e.g. a7B8cD)</option>
+                    <option value="8">8 Characters (e.g. a7B8cDeF)</option>
+                  </select>
+                </div>
+              </div>
+              
+              <button type="submit" class="btn-primary-accent width-full"><i class="fa-solid fa-scissors"></i> Shrink Link</button>
+            </form>
+            
+            <!-- Long output card -->
+            <div class="shorten-output-box" id="main-output-box" style="display: none; margin-top: 24px;">
+              <span class="output-title">Short Link Generated:</span>
+              <div class="output-url-row">
+                <span class="output-link-text" id="main-output-link">shrt.lnk/my-project</span>
+                <div class="output-actions">
+                  <button class="btn-round-control" id="btn-main-copy" title="Copy to clipboard"><i class="fa-regular fa-copy"></i></button>
+                  <button class="btn-round-control" id="btn-main-test-redirect" title="Test Simulated Redirect"><i class="fa-solid fa-play"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- PANEL 3: HISTORY REGISTRY -->
+      <section class="content-panel" id="panel-history">
+        <div class="history-registry-container glass-card">
+          <div class="registry-filter-bar">
+            <div class="search-input-wrapper">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input type="text" id="history-search-input" placeholder="Search by original URL, custom code, or short link...">
+            </div>
+            <button class="btn-danger-outline" id="btn-clear-all-history"><i class="fa-solid fa-trash-can"></i> Clear All</button>
+          </div>
+          
+          <div class="registry-table-wrapper">
+            <table class="registry-table">
+              <thead>
+                <tr>
+                  <th>Original Target URL</th>
+                  <th>Simulated Short Link</th>
+                  <th>Created Date</th>
+                  <th>Clicks Count</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="history-table-body">
+                <!-- Filled dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+      
+      <!-- PANEL 4: STUDY ANALYTICS -->
+      <section class="content-panel" id="panel-analytics">
+        <div class="analytics-grid">
+          <!-- Chart 1: Shortened Links Timeline -->
+          <div class="chart-box glass-card">
+            <h3>Shortening Activity Timeline</h3>
+            <div class="chart-canvas-wrapper">
+              <canvas id="chart-activity-timeline" width="450" height="250"></canvas>
+            </div>
+            <p class="chart-caption">Number of links shortened over the last 7 days.</p>
+          </div>
+          
+          <!-- Chart 2: Clicks distribution bar chart -->
+          <div class="chart-box glass-card">
+            <h3>Link Engagement click rates</h3>
+            <div class="chart-canvas-wrapper">
+              <canvas id="chart-link-clicks" width="450" height="250"></canvas>
+            </div>
+            <p class="chart-caption">Simulated redirect clicks logged per shortened URL hash.</p>
+          </div>
+          
+          <!-- Chart 3: Domains Distribution Pie chart -->
+          <div class="chart-box glass-card">
+            <h3>Destination Domain breakdown</h3>
+            <div class="chart-canvas-wrapper">
+              <canvas id="chart-domain-shares" width="450" height="250"></canvas>
+            </div>
+            <p class="chart-caption">Distribution ratio of destination domains (e.g. github.com, google.com).</p>
+          </div>
+        </div>
+      </section>
+      
+    </main>
+    
+  </div>
+  
+  <!-- MODAL: SIMULATED REDIRECT DIALOG -->
+  <div class="modal-overlay" id="redirect-modal">
+    <div class="modal-card glass-card">
+      <div class="modal-header">
+        <h3>Simulating URL Redirect</h3>
+        <button class="btn-close-modal" id="btn-close-redirect-modal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="redirect-modal-content">
+        <div class="redirect-spinner">
+          <i class="fa-solid fa-spinner fa-spin"></i>
+        </div>
+        <p class="redirect-main-message">Redirecting you to target destination shortly...</p>
+        
+        <div class="redirect-urls-box">
+          <div class="redirect-row">
+            <span class="r-label">From:</span>
+            <span class="r-value" id="redirect-from-link">shrt.lnk/xyz</span>
+          </div>
+          <div class="redirect-row">
+            <span class="r-label">To:</span>
+            <span class="r-value" id="redirect-to-link">https://target.com</span>
+          </div>
+        </div>
+        
+        <p class="redirect-countdown-alert">Redirecting in <span id="redirect-countdown-sec">3</span>s...</p>
+        <div class="redirect-progress-bar-wrapper">
+          <div class="redirect-progress-bar-fill" id="redirect-progress-bar" style="width: 100%;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION FOR COPY FEEDBACK -->
+  <div class="toast-container" id="copy-toast">
+    <i class="fa-solid fa-circle-check"></i>
+    <span class="toast-message">Copied to clipboard!</span>
+  </div>
+  
+  <script src="script.js"></script>
+</body>
+</html>

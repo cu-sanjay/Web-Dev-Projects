@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simon Auditory Recall — Symphonic Sequence</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <header id="hud">
+      <div class="hud-cell">
+        <span class="hud-label">Sequence Length</span>
+        <span id="lengthDisplay" class="hud-value">3</span>
+      </div>
+      <div class="hud-cell">
+        <span class="hud-label">Peak Span</span>
+        <span id="peakDisplay" class="hud-value">0</span>
+      </div>
+      <div class="hud-cell">
+        <span class="hud-label">Attempt</span>
+        <span id="attemptDisplay" class="hud-value">1 / 2</span>
+      </div>
+    </header>
+
+    <div id="statusBar">
+      <span id="statusMessage">PRESS START TO BEGIN</span>
+    </div>
+
+    <div id="grid">
+      <div class="block" data-index="0">
+        <span class="block-label">Node I</span>
+      </div>
+      <div class="block" data-index="1">
+        <span class="block-label">Node II</span>
+      </div>
+      <div class="block" data-index="2">
+        <span class="block-label">Node III</span>
+      </div>
+      <div class="block" data-index="3">
+        <span class="block-label">Node IV</span>
+      </div>
+    </div>
+
+    <div id="controls">
+      <button id="startBtn" class="btn">START SESSION</button>
+    </div>
+
+    <div id="resultsOverlay" class="hidden">
+      <div class="results-modal">
+        <h2>SESSION COMPLETE</h2>
+        <div class="results-divider"></div>
+        <div class="results-body">
+          <div class="result-row">
+            <span class="result-label">Audio-Spatial Memory Span</span>
+            <span id="resultSpan" class="result-value">0</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Peak Sequence Length</span>
+            <span id="resultPeak" class="result-value">0</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Total Correct</span>
+            <span id="resultCorrect" class="result-value">0</span>
+          </div>
+        </div>
+        <div id="resultSummary" class="result-summary">—</div>
+        <button id="restartBtn" class="btn">RESTART SESSION</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

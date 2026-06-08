@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Typography Playground</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="playground-container">
+    <header class="playground-header">
+      <h1>Typography Playground</h1>
+      <p>Design stunning web text effects in real-time and export raw CSS code instantly.</p>
+    </header>
+
+    <div class="main-layout">
+      <aside class="control-panel">
+        <div class="control-section">
+          <h3>Content & Presets</h3>
+          <div class="input-group">
+            <label for="customText">Playground Text</label>
+            <input type="text" id="customText" value="DESIGN" maxlength="24">
+          </div>
+          <div class="input-group">
+            <label for="stylePreset">Effect Presets</label>
+            <select id="stylePreset">
+              <option value="none">Clean Modern</option>
+              <option value="neon" selected>Cyber Neon Glow</option>
+              <option value="retro-3d">Retro 3D Pop</option>
+              <option value="glitch">Digital Glitch Distortion</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="control-section">
+          <h3>Typography Options</h3>
+          <div class="slider-group">
+            <div class="slider-label">
+              <span>Size (<span id="valSize">90</span>px)</span>
+            </div>
+            <input type="range" id="fontSize" min="30" max="150" value="90">
+          </div>
+          <div class="slider-group">
+            <div class="slider-label">
+              <span>Letter Spacing (<span id="valSpacing">6</span>px)</span>
+            </div>
+            <input type="range" id="letterSpacing" min="-5" max="30" value="6">
+          </div>
+          <div class="slider-group">
+            <div class="slider-label">
+              <span>Font Weight (<span id="valWeight">900</span>)</span>
+            </div>
+            <input type="range" id="fontWeight" min="100" max="900" step="100" value="900">
+          </div>
+        </div>
+
+        <div class="control-section">
+          <h3>Effect Customization</h3>
+          <div class="slider-group">
+            <div class="slider-label">
+              <span>Horizontal Offset (<span id="valX">4</span>px)</span>
+            </div>
+            <input type="range" id="shadowX" min="-30" max="30" value="4">
+          </div>
+          <div class="slider-group">
+            <div class="slider-label">
+              <span>Vertical Offset (<span id="valY">4</span>px)</span>
+            </div>
+            <input type="range" id="shadowY" min="-30" max="30" value="4">
+          </div>
+          <div class="slider-group">
+            <div class="slider-label">
+              <span>Blur Radius (<span id="valBlur">15</span>px)</span>
+            </div>
+            <input type="range" id="shadowBlur" min="0" max="50" value="15">
+          </div>
+        </div>
+      </aside>
+
+      <main class="display-canvas">
+        <div class="preview-box">
+          <div id="textPreview">DESIGN</div>
+        </div>
+        
+        <div class="code-container">
+          <div class="code-header">
+            <span>Generated CSS Snippet</span>
+            <button id="copyBtn">Copy Code</button>
+          </div>
+          <pre><code id="cssOutput">text-shadow: 0 0 10px #ff0055;</code></pre>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

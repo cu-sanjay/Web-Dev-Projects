@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Reaction Time Tester</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <h1>Reaction Time</h1>
+      <div class="header-stats">
+        <div class="stat-block">
+          <span class="stat-lbl">Last</span>
+          <span class="stat-val" id="lastVal">—</span>
+        </div>
+        <div class="stat-block">
+          <span class="stat-lbl">Best</span>
+          <span class="stat-val accent" id="bestVal">—</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="pad-wrap">
+      <div class="pad" id="pad">
+        <div class="pad-content" id="padContent">
+          <span class="pad-icon" id="padIcon">◉</span>
+          <span class="pad-label" id="padLabel">Click to Start</span>
+          <span class="pad-time" id="padTime"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="history-panel">
+      <div class="history-header">
+        <span>Attempts</span>
+        <span class="history-count" id="attemptCount">0</span>
+      </div>
+      <div class="history-list" id="historyList">
+        <div class="history-empty">No attempts yet</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

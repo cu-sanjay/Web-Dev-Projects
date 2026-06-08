@@ -1,0 +1,219 @@
+:root {
+    --bg-workspace: #0f172a;      
+    --card-bg: #1e293b;           
+    --input-bg: #0f172a;           
+    --text-primary: #f8fafc;       
+    --text-muted: #94a3b8;         
+    --accent-indigo: #6366f1;      
+    --accent-hover: #4f46e5;       
+    --neon-cyan: #2dfde2;         
+    --border-color: #334155;      
+    --error-red: #ef4444;         
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+    background-color: var(--bg-workspace);
+    color: var(--text-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 1.5rem;
+}
+
+.calculator-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    width: 100%;
+    max-width: 500px;
+    border-radius: 16px;
+    padding: 2.25rem 2rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+}
+
+.card-header h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 0.35rem;
+}
+
+.card-header p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* Input Row Formatting */
+.input-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.input-block label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.input-row {
+    display: flex;
+    gap: 0.75rem;
+}
+
+input[type="date"] {
+    flex: 1;
+    background-color: var(--input-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+input[type="date"]:focus {
+    border-color: var(--accent-indigo);
+}
+
+button {
+    background-color: var(--accent-indigo);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    white-space: nowrap;
+}
+
+button:hover {
+    background-color: var(--accent-hover);
+}
+
+.error-msg {
+    color: var(--error-red);
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* Primary Matrix Displays */
+.results-dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.primary-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.metric-box {
+    background-color: rgba(15, 23, 42, 0.4);
+    border: 1px solid var(--border-color);
+    padding: 1.25rem 0.5rem;
+    border-radius: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.metric-value {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--neon-cyan);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+}
+
+.metric-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+/* Next Birthday Banner section */
+.birthday-countdown-banner {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(45, 253, 226, 0.05));
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    padding: 1rem 1.25rem;
+    border-radius: 10px;
+}
+
+.birthday-countdown-banner h3 {
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    margin-bottom: 0.35rem;
+}
+
+.countdown-digits {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.countdown-digits span {
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+/* Secondary Detailed Grid System */
+.lifetime-stats h3 {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    background-color: rgba(15, 23, 42, 0.2);
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border: 1px solid rgba(51, 65, 85, 0.5);
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.stat-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}

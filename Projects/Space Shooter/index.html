@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Space Shooter</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="hud">
+      <div class="hud-item">
+        <span class="hud-lbl">Score</span>
+        <span class="hud-val" id="scoreVal">0</span>
+      </div>
+      <div class="hud-item">
+        <span class="hud-lbl">Shield</span>
+        <span class="hud-val accent" id="shieldVal">100</span>
+      </div>
+      <div class="hud-item">
+        <span class="hud-lbl">Wave</span>
+        <span class="hud-val" id="waveVal">1</span>
+      </div>
+      <div class="hud-item">
+        <span class="hud-lbl">Best</span>
+        <span class="hud-val" id="bestVal">0</span>
+      </div>
+    </header>
+
+    <div class="canvas-wrap">
+      <canvas id="gameCanvas" width="360" height="480"></canvas>
+    </div>
+
+    <p class="hint">Arrow/WASD move &middot; Space/Click fire</p>
+
+    <div class="overlay" id="overlay">
+      <div class="modal">
+        <h2 class="modal-title">Mission Failed</h2>
+        <div class="mo-stats">
+          <div class="mo-row"><span>Final Score</span><span id="moScore">0</span></div>
+          <div class="mo-row"><span>Wave Reached</span><span id="moWave">1</span></div>
+          <div class="mo-row"><span>Enemies Destroyed</span><span id="moKills">0</span></div>
+          <div class="mo-row"><span>Best Score</span><span id="moBest">0</span></div>
+        </div>
+        <button class="modal-btn" id="resetBtn">Launch Again</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

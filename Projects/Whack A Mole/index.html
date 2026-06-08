@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyber Whack-A-Mole | Neon Arcade Game</title>
+  <meta name="description" content="Whack the cyber-moles in this fast-paced neon retro arcade game. Play with progressive speed levels, satisfying synthesizer sound effects, and high score persistence.">
+  <!-- Google Fonts for Retro and Modern UI -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <!-- Local Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="arcade-container">
+    <!-- Cyberpunk Cabinet Header -->
+    <header class="arcade-header">
+      <div class="header-main">
+        <span class="arcade-subtitle">NEON RETRO</span>
+        <h1 class="arcade-title">CYBER MOLE</h1>
+      </div>
+      <!-- Sound Toggle -->
+      <button id="sound-toggle" class="sound-btn" aria-label="Toggle Audio" title="Muted by default due to browser policy. Click to unmute.">
+        <svg id="sound-icon-on" viewBox="0 0 24 24" width="24" height="24" class="hidden">
+          <path fill="currentColor" d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.85 14,18.71V20.77C18,19.86 21,16.28 21,12C21,7.72 18,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.77 16.5,12M3,9V15H7L12,20V4L7,9H3Z" />
+        </svg>
+        <svg id="sound-icon-off" viewBox="0 0 24 24" width="24" height="24">
+          <path fill="currentColor" d="M12,4L7,9H3V15H7L12,20V4M16.5,12A4.5,4.5 0 0,0 14,7.97V10.18L16.45,12.63C16.48,12.42 16.5,12.21 16.5,12M19,12C19,12.94 18.8,13.82 18.46,14.64L19.97,16.15C20.62,14.91 21,13.5 21,12A9,9 0 0,0 14,3.23V5.29C16.89,6.15 19,8.83 19,12M4.27,3L3,4.27L7.73,9H3V15H7L12,20V13.27L16.25,17.53C15.58,18.04 14.83,18.44 14,18.63V20.7C15.38,20.47 16.63,19.83 17.68,18.96L20.73,22L22,20.73L4.27,3Z" />
+        </svg>
+      </button>
+    </header>
+
+    <!-- Score and Stats Bar -->
+    <section class="dashboard-panel" aria-label="Game Dashboard">
+      <div class="stat-card score-card">
+        <span class="stat-label">SCORE</span>
+        <span id="score-display" class="stat-value text-cyber-blue">0</span>
+      </div>
+      
+      <div class="stat-card timer-card">
+        <span class="stat-label">TIME REMAINING</span>
+        <span id="timer-display" class="stat-value text-cyber-pink">30s</span>
+        <div class="progress-bar-container">
+          <div id="timer-progress" class="progress-bar" style="width: 100%"></div>
+        </div>
+      </div>
+
+      <div class="stat-card high-score-card">
+        <span class="stat-label">HIGH SCORE</span>
+        <span id="high-score-display" class="stat-value text-cyber-yellow">0</span>
+      </div>
+    </section>
+
+    <!-- Difficulty & Starter Controls -->
+    <section class="controls-panel" aria-label="Game Controls">
+      <div class="difficulty-group">
+        <span class="control-label">LEVEL</span>
+        <div class="segmented-control">
+          <input type="radio" id="diff-easy" name="difficulty" value="easy">
+          <label for="diff-easy">EASY</label>
+          
+          <input type="radio" id="diff-medium" name="difficulty" value="medium" checked>
+          <label for="diff-medium">MEDIUM</label>
+          
+          <input type="radio" id="diff-hard" name="difficulty" value="hard">
+          <label for="diff-hard">HARD</label>
+        </div>
+      </div>
+      
+      <button id="start-btn" class="action-btn glow-pink">START GAME</button>
+    </section>
+
+    <!-- The Play Field (Grid of Holes) -->
+    <main id="game-grid" class="game-grid">
+      <!-- 9 Holes in a 3x3 Grid -->
+      <div class="hole" data-id="1">
+        <div class="mole-container">
+          <div class="mole">
+            <svg class="mole-face" viewBox="0 0 100 100">
+              <!-- Mole Silhouette Base -->
+              <ellipse cx="50" cy="55" rx="36" ry="40" fill="var(--mole-body-color)" />
+              <ellipse cx="50" cy="55" rx="20" ry="14" fill="var(--mole-snout-color)" />
+              
+              <!-- Standard Eyes (Replaced dynamically via CSS / classes when whacked) -->
+              <g class="mole-eyes">
+                <circle cx="38" cy="38" r="4.5" fill="#0c041f" />
+                <circle cx="37" cy="36.5" r="1.5" fill="#ffffff" />
+                <circle cx="62" cy="38" r="4.5" fill="#0c041f" />
+                <circle cx="61" cy="36.5" r="1.5" fill="#ffffff" />
+              </g>
+              
+              <!-- Whacked / Hit Eyes (Hidden by default, shown when whacked class added) -->
+              <g class="mole-eyes-hit">
+                <path d="M 34,34 L 42,42 M 42,34 L 34,42" stroke="#0c041f" stroke-width="3.5" stroke-linecap="round" />
+                <path d="M 58,34 L 66,42 M 66,34 L 58,42" stroke="#0c041f" stroke-width="3.5" stroke-linecap="round" />
+              </g>
+
+              <!-- Snout details -->
+              <polygon points="46,52 54,52 50,57" fill="#ff8ba7" />
+              <rect x="47.5" y="57" width="5" height="4" fill="#ffffff" rx="1" />
+              
+              <!-- Rosy Cheeks -->
+              <circle cx="30" cy="46" r="3" fill="#ff7096" opacity="0.6" />
+              <circle cx="70" cy="46" r="3" fill="#ff7096" opacity="0.6" />
+            </svg>
+          </div>
+        </div>
+        <div class="hole-rim"></div>
+      </div>
+
+      <div class="hole" data-id="2">
+        <div class="mole-container">
+          <div class="mole">
+            <svg class="mole-face" viewBox="0 0 100 100">
+              <ellipse cx="50" cy="55" rx="36" ry="40" fill="var(--mole-body-color)" />
+              <ellipse cx="50" cy="55" rx="20" ry="14" fill="var(--mole-snout-color)" />
+              <g class="mole-eyes">
+                <circle cx="38" cy="38" r="4.5" fill="#0c041f" />
+                <circle cx="37" cy="36.5" r="1.5" fill="#ffffff" />
+                <circle cx="62" cy="38" r="4.5" fill="#0c041f" />
+                <circle cx="61" cy="36.5" r="1.5" fill="#ffffff" />
+              </g>
+              <g class="mole-eyes-hit">
+                <path d="M 34,34 L 42,42 M 42,34 L 34,42" stroke="#0c041f" stroke-width="3.5" stroke-linecap="round" />
+                <path d="M 58,34 L 66,42 M 66,34 L 58,42" stroke="#0c041f" stroke-width="3.5" stroke-linecap="round" />
+              </g>
+              <polygon points="46,52 54,52 50,57" fill="#ff8ba7" />
+              <rect x="47.5" y="57" width="5" height="4" fill="#ffffff" rx="1" />
+              <circle cx="30" cy="46" r="3" fill="#ff7096" opacity="0.6" />
+              <circle cx="70" cy="46" r="3" fill="#ff7096" opacity="0.6" />
+            </svg>
+          </div>
+        </div>
+        <div class="hole-rim"></div>
+      </div>
+
+      <div class="hole" data-id="3">
+        <div class="mole-container">
+          <div class="mole">
+            <svg class="mole-face" viewBox="0 0 100 100">
+              <ellipse cx="50" cy="55" rx="36" ry="40" fill="var(--mole-body-color)" />
+              <ellipse cx="50" cy="55" rx="20" ry="14" fill="var(--mole-snout-color)" />
+              <g class="mole-eyes">
+                <circle cx="38" cy="38" r="4.5" fill="#0c041f" />
+                <circle cx="37" cy="36.5" r="1.5" fill="#ffffff" />
+                <circle cx="62" cy="38" r="4.5" fill="#0c041f" />
+                <circle cx="61" cy="36.5" r="1.5" fill="#ffffff" />
+              </g>
+              <g class="mole-eyes-hit">
+                <path d="M 34,34 L 42,42 M 42,34 L 34,42" stroke="#0c041f" stroke-width="3.5" stroke-linecap="round" />
+                <path d="M 58,34 L 66,42 M 66,34 L 58,42" stroke="#0c041f" stroke-width="3.5" stroke-linecap="round" />
+              </g>
+              <polygon points="46,52 54,52 50,57" fill="#ff8ba7" />
+              <rect x="47.5" y="57" width="5" height="4" fill="#ffffff" rx="1" />
+              <circle cx="30" cy="46" r="3" fill="#ff7096" opacity="0.6" />
+              <circle cx="70" cy="46" r="3" fill="#ff7096" opacity="0.6" />
+            </svg>
+          </div>
+        </div>
+        <div class="hole-rim"></div>
+      </div>
+
+      <div class="hole" data-id="4">
+        <div class="mole-container">
+          <div class="mole">
+            <svg class="mole-face" viewBox="0 0 100 100">
+              <ellipse cx="50" cy="55" rx="36" ry="40" fill="var(--mole-body-color)" />
+              <ellipse cx="50" cy="55" rx="20" ry="14" fill="var(--mole-snout-color)" />
+              <g class="mole-eyes">
+                <circle cx="38" cy="38" r="4.5" fill="#0c041f" />
+                <circle cx="37" cy="36.5" r="1.5" fill="#ffffff" />
+                <circle cx="62" cy="38" r="4.5" fill="#0c041f" />
+                <circle cx="61" cy="36.5" r="1.5" fill="#ffffff" />
+              </g>
+              <g class="mole-eyes-hit">
+                <path d="M 34,34 L 42,42 M 42,34 L 34,42" stroke="#0c041f" stroke-width="3.5" stroke-linecap="round" />
+                <path d="M 58,34 L 66,42 M 66,34 L 58,42" stroke="#0c041f" stroke-width="3.5" stroke-linecap="round" />
+              </g>
+              <polygon points="46,52 54,52 50,57" fill="#ff8ba7" />
+              <rect x="47.5" y="57" width="5" height="4" fill="#ffffff" rx="1" />
+              <circle cx="30" cy="46" r="3" fill="#ff7096" opacity="0.6" />
+              <circle cx="70" cy="46" r="3" fill="#ff7096" opacity="0.6" />
+            </svg>
+          </div>
+        </div>
+        <div class="hole-rim"></div>
+      </div>
+
+      <div class="hole" data-id="5">
+        <div class="mole-container">
+          <div class="mole">
+            <svg class="mole-face" viewBox="0 0 100 100">
+              <ellipse cx="50" cy="55" rx="36" ry="40" fill="var(--mole-body-color)" />
+              <ellipse cx="50" cy="55" rx="20" ry="14" fill="var(--mole-snout-color)" />
+              <g class="mole-eyes">
+                <circle cx="38" cy="38" r="4.5" fill="#0c041f" />
+                <circle cx="37" cy="36.5" r="1.5" fill="#ffffff" />
+                <circle cx="62" cy="38" r="4.5" fill="#0c041f" />
+                <circle cx="61" cy="36.5" r="1.5" fill="#ffffff" />
+              </g>
+              <g class="mole-eyes-hit">
+                <path d="M 34,34 L 42,42 M 42,34 L 34,42" stroke="#0c041f" stroke-width="3.5" stroke-linecap="round" />
+                <path d="M 58,34 L 66,42 M 66,34 L 58,42" stroke="#0c041f" stroke-width="3.5" stroke-linecap="round" />
+              </g>
+              <polygon points="46,52 54,52 50,57" fill="#ff8ba7" />
+              <rect x="47.5" y="57" width="5" height="4" fill="#ffffff" rx="1" />
+              <circle cx="30" cy="46" r="3" fill="#ff7096" opacity="0.6" />
+              <circle cx="70" cy="46" r="3" fill="#ff7096" opacity="0.6" />
+            </svg>
+          </div>
+        </div>
+        <div class="hole-rim"></div>
+      </div>
+
+      <div class="hole" data-id="6">
+        <div class="mole-container">
+          <div class="mole">
+            <svg class="mole-face" viewBox="0 0 100 100">
+              <ellipse cx="50" cy="55" rx="36" ry="40" fill="var(--mole-body-color)" />
+              <ellipse cx="50" cy="55" rx="20" ry="14" fill="var(--mole-snout-color)" />
+              <g class="mole-eyes">
+                <circle cx="38" cy="38" r="4.5" fill="#0c041f" />
+                <circle cx="37" cy="36.5" r="1.5" fill="#ffffff" />
+                <circle cx="62" cy="38" r="4.5" fill="#0c041f" />
+                <circle cx="61" cy="36.5" r="1.5" fill="#ffffff" />
+              </g>
+              <g class="mole-eyes-hit">
+                <path d="M 34,34 L 42,42 M 42,34 L 34,42" stroke="#0c041f" stroke-width="3.5" stroke-linecap="round" />
+                <path d="M 58,34 L 66,42 M 66,34 L 58,42" stroke="#0c041f" stroke-width="3.5" stroke-linecap="round" />
+              </g>
+              <polygon points="46,52 54,52 50,57" fill="#ff8ba7" />
+              <rect x="47.5" y="57" width="5" height="4" fill="#ffffff" rx="1" />
+              <circle cx="30" cy="46" r="3" fill="#ff7096" opacity="0.6" />
+              <circle cx="70" cy="46" r="3" fill="#ff7096" opacity="0.6" />
+            </svg>
+          </div>
+        </div>
+        <div class="hole-rim"></div>
+      </div>
+
+      <div class="hole" data-id="7">
+        <div class="mole-container">
+          <div class="mole">
+            <svg class="mole-face" viewBox="0 0 100 100">
+              <ellipse cx="50" cy="55" rx="36" ry="40" fill="var(--mole-body-color)" />
+              <ellipse cx="50" cy="55" rx="20" ry="14" fill="var(--mole-snout-color)" />
+              <g class="mole-eyes">
+                <circle cx="38" cy="38" r="4.5" fill="#0c041f" />
+                <circle cx="37" cy="36.5" r="1.5" fill="#ffffff" />
+                <circle cx="62" cy="38" r="4.5" fill="#0c041f" />
+                <circle cx="61" cy="36.5" r="1.5" fill="#ffffff" />
+              </g>
+              <g class="mole-eyes-hit">
+                <path d="M 34,34 L 42,42 M 42,34 L 34,42" stroke="#0c041f" stroke-width="3.5" stroke-linecap="round" />
+                <path d="M 58,34 L 66,42 M 66,34 L 58,42" stroke="#0c041f" stroke-width="3.5" stroke-linecap="round" />
+              </g>
+              <polygon points="46,52 54,52 50,57" fill="#ff8ba7" />
+              <rect x="47.5" y="57" width="5" height="4" fill="#ffffff" rx="1" />
+              <circle cx="30" cy="46" r="3" fill="#ff7096" opacity="0.6" />
+              <circle cx="70" cy="46" r="3" fill="#ff7096" opacity="0.6" />
+            </svg>
+          </div>
+        </div>
+        <div class="hole-rim"></div>
+      </div>
+
+      <div class="hole" data-id="8">
+        <div class="mole-container">
+          <div class="mole">
+            <svg class="mole-face" viewBox="0 0 100 100">
+              <ellipse cx="50" cy="55" rx="36" ry="40" fill="var(--mole-body-color)" />
+              <ellipse cx="50" cy="55" rx="20" ry="14" fill="var(--mole-snout-color)" />
+              <g class="mole-eyes">
+                <circle cx="38" cy="38" r="4.5" fill="#0c041f" />
+                <circle cx="37" cy="36.5" r="1.5" fill="#ffffff" />
+                <circle cx="62" cy="38" r="4.5" fill="#0c041f" />
+                <circle cx="61" cy="36.5" r="1.5" fill="#ffffff" />
+              </g>
+              <g class="mole-eyes-hit">
+                <path d="M 34,34 L 42,42 M 42,34 L 34,42" stroke="#0c041f" stroke-width="3.5" stroke-linecap="round" />
+                <path d="M 58,34 L 66,42 M 66,34 L 58,42" stroke="#0c041f" stroke-width="3.5" stroke-linecap="round" />
+              </g>
+              <polygon points="46,52 54,52 50,57" fill="#ff8ba7" />
+              <rect x="47.5" y="57" width="5" height="4" fill="#ffffff" rx="1" />
+              <circle cx="30" cy="46" r="3" fill="#ff7096" opacity="0.6" />
+              <circle cx="70" cy="46" r="3" fill="#ff7096" opacity="0.6" />
+            </svg>
+          </div>
+        </div>
+        <div class="hole-rim"></div>
+      </div>
+
+      <div class="hole" data-id="9">
+        <div class="mole-container">
+          <div class="mole">
+            <svg class="mole-face" viewBox="0 0 100 100">
+              <ellipse cx="50" cy="55" rx="36" ry="40" fill="var(--mole-body-color)" />
+              <ellipse cx="50" cy="55" rx="20" ry="14" fill="var(--mole-snout-color)" />
+              <g class="mole-eyes">
+                <circle cx="38" cy="38" r="4.5" fill="#0c041f" />
+                <circle cx="37" cy="36.5" r="1.5" fill="#ffffff" />
+                <circle cx="62" cy="38" r="4.5" fill="#0c041f" />
+                <circle cx="61" cy="36.5" r="1.5" fill="#ffffff" />
+              </g>
+              <g class="mole-eyes-hit">
+                <path d="M 34,34 L 42,42 M 42,34 L 34,42" stroke="#0c041f" stroke-width="3.5" stroke-linecap="round" />
+                <path d="M 58,34 L 66,42 M 66,34 L 58,42" stroke="#0c041f" stroke-width="3.5" stroke-linecap="round" />
+              </g>
+              <polygon points="46,52 54,52 50,57" fill="#ff8ba7" />
+              <rect x="47.5" y="57" width="5" height="4" fill="#ffffff" rx="1" />
+              <circle cx="30" cy="46" r="3" fill="#ff7096" opacity="0.6" />
+              <circle cx="70" cy="46" r="3" fill="#ff7096" opacity="0.6" />
+            </svg>
+          </div>
+        </div>
+        <div class="hole-rim"></div>
+      </div>
+    </main>
+
+    <!-- Footer Credit -->
+    <footer class="arcade-footer">
+      <p>USE YOUR MOUSE OR TOUCH TO WHACK. BEWARE OF REFLEX SPEED!</p>
+    </footer>
+  </div>
+
+  <!-- Game Over Screen Modal Backdrop -->
+  <div id="game-over-modal" class="modal-backdrop hidden">
+    <div class="modal-content glass-card">
+      <h2 class="modal-title text-cyber-pink animate-pulse">GAME OVER</h2>
+      
+      <!-- High Score celebration banner (hidden by default) -->
+      <div id="high-score-banner" class="high-score-banner hidden">
+        <span class="banner-sparkle">✨</span>
+        <span class="banner-text">NEW HIGH SCORE!</span>
+        <span class="banner-sparkle">✨</span>
+      </div>
+
+      <div class="modal-stats">
+        <div class="modal-stat-row">
+          <span>FINAL SCORE</span>
+          <span id="final-score" class="modal-stat-val text-cyber-blue">0</span>
+        </div>
+        <div class="modal-stat-row">
+          <span>LEVEL PLAYED</span>
+          <span id="final-level" class="modal-stat-val text-cyber-yellow">MEDIUM</span>
+        </div>
+      </div>
+
+      <button id="restart-btn" class="action-btn glow-cyan">PLAY AGAIN</button>
+    </div>
+  </div>
+
+  <!-- JavaScript module -->
+  <script src="app.js" type="module"></script>
+</body>
+</html>

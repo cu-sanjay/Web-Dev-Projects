@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Virtual Piano Synthesizer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="piano-container">
+    <header class="piano-header">
+      <h1>Virtual Piano Synthesizer</h1>
+      <p>Click the keys or use your computer keyboard (Row 1: A-K, Row 2: W-U)</p>
+    </header>
+
+    <div class="controls-panel">
+      <div class="control-group">
+        <label for="waveType">Synth Timbre:</label>
+        <select id="waveType">
+          <option value="triangle" selected>Triangle (Warm Piano)</option>
+          <option value="sine">Sine (Pure/Soft)</option>
+          <option value="square">Square (8-Bit Retro)</option>
+          <option value="sawtooth">Sawtooth (Buzzing Lead)</option>
+        </select>
+      </div>
+      
+      <div class="control-group">
+        <label class="toggle-container">
+          <input type="checkbox" id="sustainToggle">
+          <span class="checkmark"></span>
+          Sustain Pedal (Spacebar)
+        </label>
+      </div>
+    </div>
+
+    <canvas id="visualizer" width="540" height="100"></canvas>
+
+    <div class="piano-keyboard" id="keyboard">
+      <button class="key white" data-note="C4" data-key="A"><span class="label">A</span></button>
+      <button class="key black" data-note="C#4" data-key="W"><span class="label">W</span></button>
+      
+      <button class="key white" data-note="D4" data-key="S"><span class="label">S</span></button>
+      <button class="key black" data-note="D#4" data-key="E"><span class="label">E</span></button>
+      
+      <button class="key white" data-note="E4" data-key="D"><span class="label">D</span></button>
+      
+      <button class="key white" data-note="F4" data-key="F"><span class="label">F</span></button>
+      <button class="key black" data-note="F#4" data-key="T"><span class="label">T</span></button>
+      
+      <button class="key white" data-note="G4" data-key="G"><span class="label">G</span></button>
+      <button class="key black" data-note="G#4" data-key="Y"><span class="label">Y</span></button>
+      
+      <button class="key white" data-note="A4" data-key="H"><span class="label">H</span></button>
+      <button class="key black" data-note="A#4" data-key="U"><span class="label">U</span></button>
+      
+      <button class="key white" data-note="B4" data-key="J"><span class="label">J</span></button>
+      <button class="key white" data-note="C5" data-key="K"><span class="label">K</span></button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

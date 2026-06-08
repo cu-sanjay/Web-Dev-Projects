@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#04060b" />
+      <stop offset="50%" stop-color="#070a13" />
+      <stop offset="100%" stop-color="#0e1322" />
+    </linearGradient>
+
+    <filter id="panelGlow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#000000" flood-opacity="0.80"/>
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#3b82f6" flood-opacity="0.02"/>
+    </filter>
+
+    <linearGradient id="targetColorGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ec4899" />
+      <stop offset="100%" stop-color="#8b5cf6" />
+    </linearGradient>
+
+    <filter id="tileGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <pattern id="uiGrid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="rgba(148, 163, 184, 0.02)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#bgGrad)" />
+  <rect width="800" height="500" fill="url(#uiGrid)" />
+  
+  <circle cx="700" cy="100" r="220" fill="#8b5cf6" opacity="0.03" filter="blur(55px)" />
+  <circle cx="100" cy="400" r="180" fill="#3b82f6" opacity="0.02" filter="blur(45px)" />
+
+  <g transform="translate(50, 45)" filter="url(#panelGlow)">
+    <rect width="700" height="380" rx="16" fill="#111827" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1.5"/>
+    
+    <circle cx="24" cy="22" r="5" fill="#ef4444" opacity="0.7"/>
+    <circle cx="40" cy="22" r="5" fill="#f59e0b" opacity="0.7"/>
+    <circle cx="56" cy="22" r="5" fill="#10b981" opacity="0.7"/>
+
+    <g transform="translate(585, 15)">
+      <circle cx="5" cy="6" r="4" fill="url(#targetColorGrad)" />
+      <text x="14" y="10" font-family="-apple-system, sans-serif" font-size="11" font-weight="800" fill="#f8fafc" letter-spacing="0.02em">CHROMANCE</text>
+    </g>
+
+    <g transform="translate(20, 64)">
+      <text x="0" y="14" font-family="-apple-system, sans-serif" font-size="14" font-weight="800" fill="#ffffff" letter-spacing="-0.02em">Control Center</text>
+      
+      <g transform="translate(0, 24)">
+        <rect width="60" height="22" rx="5" fill="#1f2937" opacity="0.3" stroke="rgba(148, 163, 184, 0.1)" stroke-width="1"/>
+        <text x="30" y="14" font-family="-apple-system, sans-serif" font-size="9" font-weight="600" fill="#94a3b8" text-anchor="middle">EASY</text>
+        
+        <rect x="66" y="0" width="60" height="22" rx="5" fill="#3b82f6"/>
+        <text x="96" y="14" font-family="-apple-system, sans-serif" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">HARD</text>
+      </g>
+
+      <g transform="translate(0, 64)">
+        <rect width="126" height="42" rx="8" fill="#1f2937" opacity="0.5"/>
+        <text x="10" y="16" font-family="-apple-system, sans-serif" font-size="8" font-weight="700" fill="#475569" letter-spacing="0.05em">CURRENT STREAK</text>
+        <text x="10" y="34" font-family="monospace" font-size="14" font-weight="800" fill="#10b981">14 Correct</text>
+      </g>
+
+      <g transform="translate(0, 118)">
+        <rect width="126" height="42" rx="8" fill="#1f2937" opacity="0.5"/>
+        <text x="10" y="16" font-family="-apple-system, sans-serif" font-size="8" font-weight="700" fill="#475569" letter-spacing="0.05em">BEST RECORD</text>
+        <text x="10" y="34" font-family="monospace" font-size="14" font-weight="800" fill="#f59e0b">Streak: 32</text>
+      </g>
+
+      <rect y="184" width="126" height="32" rx="6" fill="#1f2937" stroke="rgba(148, 163, 184, 0.1)" stroke-width="1"/>
+      <text x="63" y="204" font-family="-apple-system, sans-serif" font-size="10" font-weight="700" fill="#f8fafc" text-anchor="middle">Regenerate Grid</text>
+    </g>
+
+    <line x1="162" y1="46" x2="162" y2="380" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+
+    <g transform="translate(178, 64)">
+      <rect width="502" height="46" rx="10" fill="#1f2937" stroke="rgba(148, 163, 184, 0.06)" stroke-width="1"/>
+      <text x="20" y="27" font-family="monospace" font-size="15" font-weight="800" fill="#f8fafc" letter-spacing="0.04em">TARGET VALUE: rgb(236, 72, 153)</text>
+      <text x="482" y="27" font-family="-apple-system, sans-serif" font-size="10" font-weight="700" fill="#f59e0b" text-anchor="end">MATCH TARGET</text>
+
+      <g transform="translate(0, 66)">
+        <rect width="156" height="96" rx="8" fill="#3b82f6" opacity="0.15" stroke="rgba(148, 163, 184, 0.05)" stroke-width="1"/>
+        
+        <rect x="172" y="0" width="156" height="96" rx="8" fill="#10b981" opacity="0.15" stroke="rgba(148, 163, 184, 0.05)" stroke-width="1"/>
+        
+        <g transform="translate(344, 0)" filter="url(#tileGlow)">
+          <rect width="158" height="96" rx="8" fill="url(#targetColorGrad)" stroke="#f8fafc" stroke-width="2"/>
+          <circle cx="142" cy="16" r="6" fill="#10b981"/>
+          <path d="M 139 16 L 141 18 L 145 14" fill="none" stroke="#ffffff" stroke-width="1.2" stroke-linecap="round"/>
+        </g>
+
+        <rect y="112" width="156" height="96" rx="8" fill="#f59e0b" stroke="rgba(148, 163, 184, 0.05)" stroke-width="1"/>
+        
+        <rect x="172" y="112" width="156" height="96" rx="8" fill="#6366f1" stroke="rgba(148, 163, 184, 0.05)" stroke-width="1"/>
+        
+        <rect x="344" y="112" width="158" height="96" rx="8" fill="#14b8a6" stroke="rgba(148, 163, 184, 0.05)" stroke-width="1"/>
+      </g>
+    </g>
+  </g>
+
+  <g transform="translate(180, 440)">
+    <rect width="440" height="42" rx="21" fill="rgba(4, 6, 11, 0.95)" stroke="rgba(148, 163, 184, 0.15)" stroke-width="1.5"/>
+    
+    <text x="28" y="26" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="800" fill="#f8fafc" letter-spacing="0.06em">RGB GUESSING GAME</text>
+    <circle cx="164" cy="22" r="2" fill="#475569" />
+    
+    <text x="180" y="26" font-family="monospace" font-size="12" font-weight="700" fill="#38bdf8">HTML5</text>
+    <text x="230" y="26" font-family="monospace" font-size="12" font-weight="700" fill="#10b981">CSS3</text>
+    <text x="276" y="26" font-family="monospace" font-size="12" font-weight="700" fill="#f59e0b">ES6+</text>
+    
+    <rect x="324" y="13" width="88" height="16" rx="4" fill="rgba(56, 189, 248, 0.08)" stroke="rgba(56, 189, 248, 0.15)" stroke-width="1"/>
+    <text x="330" y="24" font-family="-apple-system, sans-serif" font-size="8" font-weight="800" fill="#38bdf8" letter-spacing="0.02em">ISSUE_107_FIX</text>
+  </g>
+</svg>

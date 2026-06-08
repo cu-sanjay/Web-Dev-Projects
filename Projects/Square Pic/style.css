@@ -1,0 +1,101 @@
+:root {
+  --accent: #eb6835;
+  --accent-2: #6c5ce7;
+  --bg-dark: #0f1117;
+  --card-bg: rgba(255,255,255,0.05);
+  --text-primary: #ffffff;
+  --radius-md: 16px;
+  --transition: 0.3s ease;
+}
+
+body {
+  font-family: "DM Sans", sans-serif;
+  background: linear-gradient(135deg, var(--bg-dark), #1a1f29);
+  color: var(--text-primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 40px;
+}
+
+.square-pic-container {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  border-radius: 24px;
+  padding: 32px;
+  max-width: 640px;
+  width: 100%;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  text-align: center;
+}
+
+h1 {
+  font-family: "Syne", sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.upload-zone {
+  border: 2px dashed rgba(255,255,255,0.2);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+.upload-zone:hover {
+  background: rgba(255,255,255,0.08);
+}
+.upload-zone i {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.preview-area {
+  margin: 20px 0;
+}
+canvas {
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+  max-width: 100%;
+}
+
+.options {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+.options button {
+  padding: 12px 18px;
+  border: none;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.options button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+}
+
+.download-btn {
+  margin-top: 20px;
+  padding: 14px 22px;
+  border: none;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--accent-2), var(--accent));
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.download-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+}

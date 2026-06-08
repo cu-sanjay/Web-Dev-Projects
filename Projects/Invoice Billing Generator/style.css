@@ -1,0 +1,58 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  margin: 0;
+  padding: 20px;
+}
+
+.invoice-container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 800px;
+  margin: auto;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.invoice-details label {
+  display: block;
+  margin: 10px 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table, th, td {
+  border: 1px solid #ddd;
+}
+
+th, td {
+  padding: 10px;
+  text-align: center;
+}
+
+button {
+  margin-top: 15px;
+  padding: 10px 15px;
+  background: #16f3aa;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #0dbf82;
+}
+
+.totals {
+  margin-top: 20px;
+  font-size: 16px;
+}

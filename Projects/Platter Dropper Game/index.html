@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Palette Dropper — Tetris Color Hybrid</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <div id="commandBanner">
+      <span id="commandLabel">TACTICAL MISSION</span>
+      <span id="commandText">—</span>
+    </div>
+
+    <div id="timerTrack">
+      <div id="timerFill"></div>
+    </div>
+
+    <div id="hud">
+      <div class="hud-cell">
+        <span class="hud-label">Score</span>
+        <span id="scoreDisplay" class="hud-value">0</span>
+      </div>
+      <div class="hud-cell">
+        <span class="hud-label">Cleared</span>
+        <span id="clearedDisplay" class="hud-value">0</span>
+      </div>
+      <div class="hud-cell">
+        <span class="hud-label">Best</span>
+        <span id="bestDisplay" class="hud-value">0</span>
+      </div>
+    </div>
+
+    <div id="grid"></div>
+
+    <div id="controls">
+      <button id="restartBtn" class="btn">RESTART</button>
+    </div>
+
+    <div id="overlay" class="hidden">
+      <div class="modal">
+        <h2>ROUND OVER</h2>
+        <div class="modal-divider"></div>
+        <div class="modal-body">
+          <div class="modal-row">
+            <span class="modal-label">Final Score</span>
+            <span id="finalScore" class="modal-value">0</span>
+          </div>
+          <div class="modal-row">
+            <span class="modal-label">Blocks Cleared</span>
+            <span id="finalCleared" class="modal-value">0</span>
+          </div>
+          <div class="modal-row">
+            <span class="modal-label">High Score</span>
+            <span id="finalBest" class="modal-value">0</span>
+          </div>
+        </div>
+        <button id="playBtn" class="btn">PLAY AGAIN</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+:root {
+  --bg-light: #f5f5f5;
+  --bg-dark: #1e1e1e;
+  --card-light: #fff;
+  --card-dark: #2c2c2c;
+  --text-light: #000;
+  --text-dark: #fff;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: calc(100vh - 120px); /* subtract header/footer height */
+}
+
+
+body {
+  font-family: "Segoe UI", sans-serif;
+  margin: 0;
+  background: var(--bg-light);
+  color: var(--text-light);
+  transition: background 0.3s, color 0.3s;
+}
+
+body.dark {
+  background: var(--bg-dark);
+  color: var(--text-dark);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #6200ea;
+  color: #fff;
+  padding: 1rem;
+}
+
+/* Center the whole board */
+.board {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;    
+  align-items: flex-start;   
+  gap: 1.5rem;
+  padding: 2rem;
+  max-width: 1200px;          
+  margin: 0 auto;             
+}
+
+/* Card styling */
+.card {
+  background: var(--card-light);
+  border-radius: 12px;
+  padding: 1.2rem;
+  width: 300px;             
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.2);
+}
+
+/* Dark mode card */
+body.dark .card {
+  background: var(--card-dark);
+}
+
+/* Header controls */
+header .controls {
+  display: flex;
+  gap: 1rem;
+}
+
+header button {
+  background: #fff;
+  color: #6200ea;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s, transform 0.2s;
+}
+
+header button:hover {
+  background: #eee;
+  transform: scale(1.05);
+}
