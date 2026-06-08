@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200">
+  <rect width="320" height="200" fill="#05070e"/>
+  <rect x="10" y="10" width="300" height="180" rx="8" fill="#05070e" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+  <!-- topbar -->
+  <text x="18" y="28" font-family="system-ui, sans-serif" font-size="7" font-weight="700" fill="#e2e8f0">Ledger</text>
+  <text x="46" y="28" font-family="system-ui, sans-serif" font-size="5" fill="#64748b">Expense Tracker</text>
+  <!-- scorecards -->
+  <rect x="14" y="40" width="90" height="40" rx="6" fill="rgba(15,20,45,0.65)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <text x="22" y="52" font-family="system-ui, sans-serif" font-size="4" fill="#64748b" text-transform="uppercase">Net Balance</text>
+  <text x="22" y="72" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#e2e8f0">₹12,450</text>
+  <rect x="112" y="40" width="90" height="40" rx="6" fill="rgba(15,20,45,0.65)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <text x="120" y="52" font-family="system-ui, sans-serif" font-size="4" fill="#64748b" text-transform="uppercase">Total Income</text>
+  <text x="120" y="72" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#10b981">₹18,000</text>
+  <rect x="210" y="40" width="90" height="40" rx="6" fill="rgba(15,20,45,0.65)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <text x="218" y="52" font-family="system-ui, sans-serif" font-size="4" fill="#64748b" text-transform="uppercase">Total Expenses</text>
+  <text x="218" y="72" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#ef4444">₹5,550</text>
+  <!-- ledger preview -->
+  <rect x="14" y="92" width="186" height="94" rx="6" fill="rgba(15,20,45,0.65)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <rect x="14" y="92" width="186" height="14" rx="6" fill="rgba(255,255,255,0.01)"/>
+  <text x="22" y="103" font-family="system-ui, sans-serif" font-size="4" font-weight="700" fill="#64748b">DESCRIPTION</text>
+  <text x="110" y="103" font-family="system-ui, sans-serif" font-size="4" font-weight="700" fill="#64748b">AMOUNT</text>
+  <text x="22" y="120" font-family="system-ui, sans-serif" font-size="5" fill="#e2e8f0">Salary</text>
+  <text x="120" y="120" font-family="monospace" font-size="5" font-weight="700" fill="#10b981">+₹15,000</text>
+  <text x="22" y="136" font-family="system-ui, sans-serif" font-size="5" fill="#e2e8f0">Grocery</text>
+  <text x="120" y="136" font-family="monospace" font-size="5" font-weight="700" fill="#ef4444">-₹2,300</text>
+  <text x="22" y="152" font-family="system-ui, sans-serif" font-size="5" fill="#e2e8f0">Electricity</text>
+  <text x="120" y="152" font-family="monospace" font-size="5" font-weight="700" fill="#ef4444">-₹1,250</text>
+  <text x="22" y="168" font-family="system-ui, sans-serif" font-size="5" fill="#e2e8f0">Freelance</text>
+  <text x="120" y="168" font-family="monospace" font-size="5" font-weight="700" fill="#10b981">+₹3,000</text>
+  <!-- category sidebar -->
+  <rect x="214" y="92" width="86" height="94" rx="6" fill="rgba(15,20,45,0.65)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <text x="222" y="103" font-family="system-ui, sans-serif" font-size="4" font-weight="700" fill="#64748b">SPENDING</text>
+  <text x="222" y="120" font-family="system-ui, sans-serif" font-size="4" fill="#64748b">Food</text>
+  <text x="280" y="120" font-family="monospace" font-size="4" font-weight="700" fill="#e2e8f0">₹2.3k</text>
+  <rect x="222" y="122" width="70" height="4" rx="2" fill="#05070e"/>
+  <rect x="222" y="122" width="41" height="4" rx="2" fill="#ef4444"/>
+  <text x="222" y="136" font-family="system-ui, sans-serif" font-size="4" fill="#64748b">Utilities</text>
+  <text x="280" y="136" font-family="monospace" font-size="4" font-weight="700" fill="#e2e8f0">₹1.2k</text>
+  <rect x="222" y="138" width="70" height="4" rx="2" fill="#05070e"/>
+  <rect x="222" y="138" width="22" height="4" rx="2" fill="#ef4444"/>
+  <text x="222" y="152" font-family="system-ui, sans-serif" font-size="4" fill="#64748b">Shopping</text>
+  <text x="280" y="152" font-family="monospace" font-size="4" font-weight="700" fill="#e2e8f0">₹0.5k</text>
+  <rect x="222" y="154" width="70" height="4" rx="2" fill="#05070e"/>
+  <rect x="222" y="154" width="9" height="4" rx="2" fill="#ef4444"/>
+</svg>

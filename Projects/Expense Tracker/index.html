@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expense Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <header id="topbar">
+      <div class="topbar-left">
+        <span class="brand">Ledger</span>
+        <span class="brand-sub">Expense Tracker</span>
+      </div>
+    </header>
+
+    <div id="scorecard">
+      <div class="scorecard-item net">
+        <span class="scorecard-label">Net Balance</span>
+        <span class="scorecard-value" id="netBalance">₹0.00</span>
+      </div>
+      <div class="scorecard-item income">
+        <span class="scorecard-label">Total Income</span>
+        <span class="scorecard-value" id="totalIncome">₹0.00</span>
+      </div>
+      <div class="scorecard-item expense">
+        <span class="scorecard-label">Total Expenses</span>
+        <span class="scorecard-value" id="totalExpense">₹0.00</span>
+      </div>
+    </div>
+
+    <div id="workspace">
+      <div id="left-panel">
+        <div id="entry-form">
+          <div class="panel-title">New Transaction</div>
+          <div class="field-row">
+            <div class="field flex-1">
+              <label for="descInput">Description</label>
+              <input type="text" id="descInput" placeholder="e.g. Grocery shopping" maxlength="60" autocomplete="off">
+            </div>
+            <div class="field flex-1">
+              <label for="amountInput">Amount (₹)</label>
+              <input type="text" id="amountInput" placeholder="0.00" inputmode="decimal">
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field flex-1">
+              <label for="typeSelect">Type</label>
+              <select id="typeSelect">
+                <option value="income">Income</option>
+                <option value="expense" selected>Expense</option>
+              </select>
+            </div>
+            <div class="field flex-1">
+              <label for="categorySelect">Category</label>
+              <select id="categorySelect"></select>
+            </div>
+          </div>
+          <button id="addBtn" class="btn btn-primary">+ Add Entry</button>
+          <div id="formError" class="form-error" role="alert"></div>
+        </div>
+
+        <div id="filter-bar">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="income">Income</button>
+          <button class="filter-btn" data-filter="expense">Expense</button>
+        </div>
+
+        <div id="ledger-wrapper">
+          <table id="ledger">
+            <thead>
+              <tr>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Amount</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="ledgerBody"></tbody>
+          </table>
+          <div id="emptyState" class="empty-state">No transactions yet</div>
+        </div>
+      </div>
+
+      <aside id="right-panel">
+        <div class="panel-title">Spending by Category</div>
+        <div id="categoryBreakdown"></div>
+        <div id="categoryEmpty" class="empty-state">No expense data</div>
+      </aside>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
