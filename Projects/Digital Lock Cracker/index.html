@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Lock Cracker</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="background"></div>
+
+    <div class="container">
+        <div class="card">
+            <div class="header">
+                <h1>🔐 Digital Lock Cracker</h1>
+                <p>Decode the secret 4-digit lock within 10 attempts.</p>
+            </div>
+
+            <div class="stats">
+                <div class="stat-box">
+                    <span>Attempts Left</span>
+                    <strong id="attempts">10</strong>
+                </div>
+
+                <div class="stat-box">
+                    <span>Code Length</span>
+                    <strong>4</strong>
+                </div>
+            </div>
+
+            <div class="input-section">
+                <input
+                    type="text"
+                    id="guessInput"
+                    maxlength="4"
+                    placeholder="Enter 4 digits"
+                />
+                <button id="guessBtn">Crack Lock</button>
+            </div>
+
+            <div id="message" class="message"></div>
+
+            <div class="history-container">
+                <h3>Attempt History</h3>
+                <div id="history"></div>
+            </div>
+
+            <button id="restartBtn" class="restart-btn">
+                New Game
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
