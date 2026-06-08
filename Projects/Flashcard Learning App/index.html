@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flashcard Learning App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <header id="topbar">
+      <div class="topbar-left">
+        <span class="brand">Flashcard</span>
+        <span class="brand-sub">Study Deck</span>
+      </div>
+      <div class="topbar-right">
+        <button id="addBtn" class="btn btn-primary">+ Add Card</button>
+        <button id="resetBtn" class="btn btn-ghost">Reset</button>
+      </div>
+    </header>
+
+    <div id="progress-bar">
+      <div id="progress-fill"></div>
+    </div>
+
+    <div id="stats-row">
+      <span id="statIndex">0 / 0</span>
+      <span id="statPct">0%</span>
+      <span id="statTotal">0 cards</span>
+    </div>
+
+    <main id="card-stage">
+      <div id="empty-state" class="hidden">
+        <span>No cards yet &mdash; add your first flashcard!</span>
+      </div>
+      <div id="card-3d" class="hidden">
+        <div id="card-inner">
+          <div id="card-front" class="card-face">
+            <div class="card-label">Question</div>
+            <div id="cardQuestion" class="card-text"></div>
+          </div>
+          <div id="card-back" class="card-face">
+            <div class="card-label">Answer</div>
+            <div id="cardAnswer" class="card-text"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div id="controls">
+      <button id="prevBtn" class="ctrl-btn">Previous</button>
+      <button id="flipBtn" class="ctrl-btn ctrl-primary">Flip</button>
+      <button id="nextBtn" class="ctrl-btn">Next</button>
+    </div>
+
+    <button id="drawerToggle" class="drawer-toggle">&#x25B2; Deck List</button>
+
+    <div id="drawer" class="hidden">
+      <div id="drawer-header">
+        <span>All Cards</span>
+        <button id="drawerClose" class="drawer-close">&times;</button>
+      </div>
+      <div id="drawer-list"></div>
+    </div>
+  </div>
+
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-backdrop"></div>
+    <div class="modal-panel">
+      <div class="modal-header">
+        <h2>Add Flashcard</h2>
+        <button id="modalClose" class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="field">
+          <label for="qInput">Question</label>
+          <textarea id="qInput" rows="3" maxlength="300" placeholder="Enter the question..."></textarea>
+        </div>
+        <div class="field">
+          <label for="aInput">Answer</label>
+          <textarea id="aInput" rows="3" maxlength="300" placeholder="Enter the answer..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="modalCancel" class="btn btn-ghost">Cancel</button>
+        <button id="modalSave" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
