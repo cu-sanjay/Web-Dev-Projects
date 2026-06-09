@@ -1,0 +1,112 @@
+body {
+  font-family: "Segoe UI", sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at top, #1b1f3a, #0b0f1a);
+  color: white;
+}
+
+/* MAIN CARD */
+.container {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 25px;
+  border-radius: 20px;
+  backdrop-filter: blur(18px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  text-align: center;
+  animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* TITLE */
+h1 {
+  margin-bottom: 15px;
+  font-size: 28px;
+  letter-spacing: 1px;
+  background: linear-gradient(90deg, #00c6ff, #7f00ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* GRID */
+#sudoku-grid {
+  display: grid;
+  grid-template-columns: repeat(9, 44px);
+  gap: 3px;
+  margin: 20px auto;
+  padding: 10px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 12px;
+}
+
+/* CELLS */
+input {
+  width: 42px;
+  height: 42px;
+  text-align: center;
+  font-size: 18px;
+  border: none;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.08);
+  color: white;
+  outline: none;
+  transition: 0.2s;
+}
+
+/* hover effect */
+input:hover {
+  transform: scale(1.05);
+  background: rgba(255,255,255,0.15);
+}
+
+/* focus glow */
+input:focus {
+  background: #00c6ff;
+  color: black;
+  box-shadow: 0 0 10px #00c6ff;
+}
+
+/* fixed numbers */
+input:disabled {
+  background: rgba(255, 255, 255, 0.25);
+  font-weight: bold;
+  color: #000;
+}
+
+/* BUTTONS */
+.buttons {
+  margin-top: 15px;
+}
+
+button {
+  margin: 5px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  transition: 0.3s;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+button:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+}
+
+/* MESSAGE */
+#message {
+  margin-top: 10px;
+  font-size: 18px;
+  color: #00ffcc;
+}
