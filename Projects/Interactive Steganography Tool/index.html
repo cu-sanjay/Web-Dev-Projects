@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Steganography Tool</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <header class="app-header">
+      <h1>Interactive Steganography Tool</h1>
+      <p>Hide secret text messages inside image pixels seamlessly using secure LSB manipulation.</p>
+    </header>
+
+    <div class="tabs-navigation">
+      <button class="tab-btn active" id="tabEncodeBtn">Encode Secret Message</button>
+      <button class="tab-btn" id="tabDecodeBtn">Decode Hidden Message</button>
+    </div>
+
+    <div class="workspace-card">
+      
+      <section id="encodePanel" class="panel-view active">
+        <div class="grid-layout">
+          <div class="control-column">
+            <div class="input-group">
+              <label for="encodeUpload">1. Upload Source Image</label>
+              <input type="file" id="encodeUpload" accept="image/*">
+            </div>
+            
+            <div class="input-group">
+              <label for="secretMessage">2. Enter Secret Message</label>
+              <textarea id="secretMessage" placeholder="Type the confidential text payload here..."></textarea>
+            </div>
+
+            <button id="processEncodeBtn" class="action-btn purple-btn">Process & Encode Image</button>
+          </div>
+
+          <div class="preview-column">
+            <h3>Image Result Preview</h3>
+            <div class="preview-box">
+              <img id="encodePreviewImg" alt="Source Preview Holder" class="hidden">
+              <div id="encodePlaceholderText" class="placeholder-msg">No image uploaded yet</div>
+            </div>
+            <a id="downloadBtn" class="action-btn green-btn hidden">Download Encoded Image (.png)</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="decodePanel" class="panel-view">
+        <div class="grid-layout">
+          <div class="control-column">
+            <div class="input-group">
+              <label for="decodeUpload">1. Upload Encoded Image</label>
+              <input type="file" id="decodeUpload" accept="image/*">
+            </div>
+
+            <button id="processDecodeBtn" class="action-btn purple-btn">Scan & Extract Message</button>
+          </div>
+
+          <div class="preview-column">
+            <h3>Extracted Text Content</h3>
+            <div class="preview-box output-box">
+              <textarea id="decodedMessageOutput" readonly placeholder="Extracted secret message strings will manifest inside this box..."></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <canvas id="processingCanvas" class="hidden"></canvas>
+
+  <script src="script.js"></script>
+</body>
+</html>
