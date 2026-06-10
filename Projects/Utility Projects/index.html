@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Utility Projects — Geolocation Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Top Status Bar -->
+    <div id="topBar">
+      <div id="brand">Geo Telemetry</div>
+      <div class="stat-item"><span class="stat-label">API Status</span><span id="apiStatus" class="stat-value status-idle">Idle</span></div>
+      <div class="stat-item"><span class="stat-label">Permission</span><span id="permStatus" class="stat-value status-idle">Unknown</span></div>
+      <div class="stat-item"><span class="stat-label">Watcher</span><span id="watcherStatus" class="stat-value status-idle">Inactive</span></div>
+      <span id="liveDot" class="dot-idle"></span>
+    </div>
+
+    <!-- Telemetry Grid -->
+    <div id="teleGrid">
+      <div class="tele-card"><span class="tel-label">Latitude</span><span id="tLat" class="tel-value">—</span></div>
+      <div class="tele-card"><span class="tel-label">Longitude</span><span id="tLng" class="tel-value">—</span></div>
+      <div class="tele-card"><span class="tel-label">Heading</span><span id="tHeading" class="tel-value">—</span></div>
+      <div class="tele-card"><span class="tel-label">Speed</span><span id="tSpeed" class="tel-value">—</span></div>
+      <div class="tele-card"><span class="tel-label">Accuracy</span><span id="tAccuracy" class="tel-value">—</span></div>
+      <div class="tele-card"><span class="tel-label">Timestamp</span><span id="tTime" class="tel-value">—</span></div>
+    </div>
+
+    <!-- Log Panel -->
+    <div id="logPanel">
+      <div id="logList"></div>
+    </div>
+
+    <!-- Controls -->
+    <div id="footer">
+      <button id="pingBtn">Request One-Time Ping</button>
+      <button id="watchBtn">Initialize Live Vector Tracking Stream</button>
+      <button id="stopBtn" disabled>Terminate Watcher Stream</button>
+      <button id="clearBtn">Clear Log Cache</button>
+    </div>
+
+    <!-- Error Overlay -->
+    <div id="errorOverlay" class="hidden">
+      <div id="errorPanel"><span id="errorText"></span></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
