@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Internet Speed Test UI</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <div id="topBar">
+      <div id="brand">Speed Test</div>
+      <div class="tel-item"><span class="tel-label">Ping</span><span id="telPing" class="tel-value">—</span></div>
+      <div class="tel-item"><span class="tel-label">Jitter</span><span id="telJitter" class="tel-value">—</span></div>
+      <div class="tel-item"><span class="tel-label">ISP</span><span id="telIsp" class="tel-value">—</span></div>
+      <div class="tel-item"><span class="tel-label">Status</span><span id="telStatus" class="tel-value status-idle">Idle</span></div>
+    </div>
+    <div id="main">
+      <div id="gaugePanel" class="panel">
+        <div id="gaugeWrap"><canvas id="gaugeCanvas"></canvas></div>
+        <div id="gaugeLabels">
+          <span id="gaugeSpeed" class="gauge-num">0</span>
+          <span id="gaugeUnit" class="gauge-unit">Mbps</span>
+        </div>
+      </div>
+      <div id="rightCol">
+        <div id="resultsPanel" class="panel">
+          <div class="panel-title">Results</div>
+          <div class="result-row"><span>Download</span><span id="resDown" class="res-val">—</span></div>
+          <div class="result-row"><span>Upload</span><span id="resUp" class="res-val">—</span></div>
+          <div class="result-row"><span>Ping</span><span id="resPing" class="res-val">—</span></div>
+          <div class="result-row"><span>Jitter</span><span id="resJitter" class="res-val">—</span></div>
+        </div>
+        <div id="historyPanel" class="panel">
+          <div class="panel-title">History</div>
+          <div id="historyList"></div>
+          <div id="historyEmpty" class="empty-state">No tests recorded</div>
+        </div>
+      </div>
+    </div>
+    <div id="footer">
+      <button id="startBtn">Initiate Network Diagnostic Scan</button>
+      <button id="clearBtn">Clear History</button>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
