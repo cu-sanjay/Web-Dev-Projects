@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Population Growth Simulator — Eco-Sphere</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<div class="dashboard">
+<aside class="left-panel">
+<div class="brand-header">
+<div class="brand-icon">
+<svg viewBox="0 0 32 32" fill="none">
+<circle cx="16" cy="16" r="14" stroke="#2e7d32" stroke-width="1.5" fill="none"/>
+<path d="M16 8 C16 8 8 14 8 18 C8 22 11 25 16 25 C21 25 24 22 24 18 C24 14 16 8 16 8Z" fill="#2e7d32" opacity="0.15"/>
+<path d="M16 12 C16 12 12 16 12 18.5 C12 20.5 14 22 16 22 C18 22 20 20.5 20 18.5 C20 16 16 12 16 12Z" fill="#2e7d32" opacity="0.3"/>
+<circle cx="16" cy="18" r="2" fill="#2e7d32"/>
+</svg>
+</div>
+<div class="brand-text">
+<h1>ECO-SPHERE</h1>
+<h2>Population Growth Simulator</h2>
+</div>
+</div>
+
+<div class="parameter-rack">
+<div class="param-group" data-param="N0">
+<div class="param-header">
+<label>Initial Population <span class="param-symbol">(N₀)</span></label>
+<span class="param-value" id="valN0">100</span>
+</div>
+<input type="range" id="sliderN0" min="10" max="5000" step="10" value="100">
+<div class="param-range-labels"><span>10</span><span>5000</span></div>
+</div>
+
+<div class="param-group" data-param="b">
+<div class="param-header">
+<label>Birth Rate <span class="param-symbol">(b)</span></label>
+<span class="param-value" id="valB">0.8</span>
+</div>
+<input type="range" id="sliderB" min="0.0" max="2.0" step="0.05" value="0.8">
+<div class="param-range-labels"><span>0.0</span><span>2.0</span></div>
+</div>
+
+<div class="param-group" data-param="d">
+<div class="param-header">
+<label>Death Rate <span class="param-symbol">(d)</span></label>
+<span class="param-value" id="valD">0.2</span>
+</div>
+<input type="range" id="sliderD" min="0.0" max="2.0" step="0.05" value="0.2">
+<div class="param-range-labels"><span>0.0</span><span>2.0</span></div>
+</div>
+
+<div class="param-group net-rate-display">
+<div class="param-header">
+<label>Net Growth Rate <span class="param-symbol">(r = b − d)</span></label>
+<span class="param-value" id="valR">0.60</span>
+</div>
+<div class="net-rate-bar"><div class="net-rate-fill" id="rateFill" style="width: 60%;"></div></div>
+</div>
+
+<div class="param-group" data-param="K">
+<div class="param-header">
+<label>Carrying Capacity <span class="param-symbol">(K)</span></label>
+<span class="param-value" id="valK">1000</span>
+</div>
+<input type="range" id="sliderK" min="100" max="10000" step="50" value="1000">
+<div class="param-range-labels"><span>100</span><span>10000</span></div>
+</div>
+
+<div class="param-group" data-param="tMax">
+<div class="param-header">
+<label>Time Horizon <span class="param-symbol">(t_max)</span></label>
+<span class="param-value" id="valTMax">50</span>
+</div>
+<input type="range" id="sliderTMax" min="10" max="200" step="1" value="50">
+<div class="param-range-labels"><span>10</span><span>200</span></div>
+</div>
+
+<div class="model-toggle">
+<span class="model-toggle-label">Growth Model</span>
+<div class="toggle-group">
+<button class="toggle-btn" data-model="exponential">Unlimited Exponential</button>
+<button class="toggle-btn active" data-model="logistic">Verhulst Logistic</button>
+</div>
+</div>
+</div>
+
+<div class="telemetry-dashboard">
+<div class="telemetry-card">
+<div class="t-label">N(t)</div>
+<div class="t-value" id="teleNt">100</div>
+<div class="t-sub">Current Population</div>
+</div>
+<div class="telemetry-card">
+<div class="t-label">dN/dt</div>
+<div class="t-value" id="teleDndt">0.00</div>
+<div class="t-sub">Growth Velocity</div>
+</div>
+<div class="telemetry-card">
+<div class="t-label">N/K</div>
+<div class="t-value" id="teleStress">0.0%</div>
+<div class="t-sub">Resource Saturation</div>
+</div>
+</div>
+
+<div class="action-nodes">
+<button class="action-btn run-btn" id="btnRun">
+<svg width="14" height="14" viewBox="0 0 14 14"><polygon points="3,1 13,7 3,13" fill="currentColor"/></svg> RUN
+</button>
+<button class="action-btn pause-btn" id="btnPause">
+<svg width="14" height="14" viewBox="0 0 14 14"><rect x="2" y="1" width="3.5" height="12" rx="0.8" fill="currentColor"/><rect x="8.5" y="1" width="3.5" height="12" rx="0.8" fill="currentColor"/></svg> PAUSE
+</button>
+<button class="action-btn step-btn" id="btnStep">
+<svg width="14" height="14" viewBox="0 0 14 14"><polygon points="2,1 9,7 2,13" fill="currentColor"/><rect x="10" y="1" width="2.5" height="12" rx="0.6" fill="currentColor"/></svg> STEP
+</button>
+<button class="action-btn reset-btn" id="btnReset">
+<svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1C3.686 1 1 3.686 1 7C1 10.314 3.686 13 7 13C10.314 13 12.5 10.5 12.5 7" stroke="currentColor" stroke-width="1.5" fill="none"/><polygon points="12.5,2 12.5,7 9,4.5" fill="currentColor"/></svg> RESET
+</button>
+<button class="action-btn export-btn" id="btnExport">
+<svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 1L7 9M7 9L4 6M7 9L10 6" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M1 8V12H13V8" stroke="currentColor" stroke-width="1.5" fill="none"/></svg> EXPORT CSV
+</button>
+</div>
+
+<div class="status-banner" id="statusBanner">
+<div class="status-indicator" id="statusIndicator"></div>
+<span id="statusText">AWAITING INITIALIZATION</span>
+</div>
+</aside>
+
+<main class="right-panel">
+<div class="analytics-header">
+<div class="model-state" id="modelState">Model: Verhulst Logistic</div>
+<div class="sim-state" id="simState">Generations: 0 / 50</div>
+</div>
+
+<div class="chart-wrapper">
+<canvas id="populationChart"></canvas>
+</div>
+
+<div class="telemetry-log">
+<table>
+<thead>
+<tr>
+<th>Generation (t)</th>
+<th>Population (N)</th>
+<th>Growth Velocity (dN/dt)</th>
+<th>Environmental Stress (%)</th>
+</tr>
+</thead>
+<tbody id="telemetryBody"></tbody>
+</table>
+</div>
+</main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
