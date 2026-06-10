@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wave Interference Simulator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <aside id="sidebar">
+      <div id="brand">
+        <svg class="brand-icon" width="28" height="28" viewBox="0 0 28 28">
+          <rect x="2" y="2" width="24" height="24" rx="4" fill="none" stroke="#3b82f6" stroke-width="1.5"/>
+          <path d="M4 18 Q7 10 10 18 Q13 26 16 18 Q19 10 22 18" fill="none" stroke="#10b981" stroke-width="1.5"/>
+          <circle cx="14" cy="14" r="2" fill="#3b82f6"/>
+        </svg>
+        <div class="brand-text">
+          <div class="brand-title">SIGNAL DYNAMICS</div>
+          <div class="brand-sub">Wave Interference Lab</div>
+        </div>
+      </div>
+
+      <div id="controls">
+        <div class="source-group" data-source="0">
+          <div class="source-header">
+            <span class="source-dot" style="background:#3b82f6"></span>
+            <span class="source-label">SOURCE A</span>
+          </div>
+          <div class="param-row">
+            <div class="param-label">
+              <span>Frequency</span>
+              <span class="param-unit" data-display="freq-0">1.5 Hz</span>
+            </div>
+            <input type="range" class="param-slider" min="0.5" max="5.0" step="0.1" value="1.5" data-source="0" data-param="freq">
+          </div>
+          <div class="param-row">
+            <div class="param-label">
+              <span>Amplitude</span>
+              <span class="param-unit" data-display="amp-0">30 px</span>
+            </div>
+            <input type="range" class="param-slider" min="0" max="50" step="1" value="30" data-source="0" data-param="amp">
+          </div>
+        </div>
+
+        <div class="source-group" data-source="1">
+          <div class="source-header">
+            <span class="source-dot" style="background:#ef4444"></span>
+            <span class="source-label">SOURCE B</span>
+          </div>
+          <div class="param-row">
+            <div class="param-label">
+              <span>Frequency</span>
+              <span class="param-unit" data-display="freq-1">2.0 Hz</span>
+            </div>
+            <input type="range" class="param-slider" min="0.5" max="5.0" step="0.1" value="2.0" data-source="1" data-param="freq">
+          </div>
+          <div class="param-row">
+            <div class="param-label">
+              <span>Amplitude</span>
+              <span class="param-unit" data-display="amp-1">30 px</span>
+            </div>
+            <input type="range" class="param-slider" min="0" max="50" step="1" value="30" data-source="1" data-param="amp">
+          </div>
+        </div>
+
+        <div id="actions">
+          <button id="btn-pause" class="btn-primary">PAUSE WAVE FLOW</button>
+          <button id="btn-reset" class="btn-secondary">RESET SIGNAL WAVEFRONTS</button>
+        </div>
+      </div>
+
+      <div id="telemetry">
+        <div class="telem-header">DIAGNOSTIC TELEMETRY</div>
+        <div class="telem-grid">
+          <div class="telem-row">
+            <span class="telem-label">Phase Delta</span>
+            <span class="telem-value mono" id="telem-phase">0.00 rad</span>
+          </div>
+          <div class="telem-row">
+            <span class="telem-label">Time Elapsed</span>
+            <span class="telem-value mono" id="telem-time">0.00 s</span>
+          </div>
+          <div class="telem-row">
+            <span class="telem-label">Wave Mode</span>
+            <span class="telem-value" id="telem-mode">COMPLEX SUPERPOSITION</span>
+          </div>
+          <div class="telem-row">
+            <span class="telem-label">Frames</span>
+            <span class="telem-value mono" id="telem-fps">60 fps</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main id="viewport">
+      <div id="canvas-header">
+        <span class="tracker-item">
+          <svg width="12" height="12" viewBox="0 0 12 12"><circle cx="6" cy="6" r="2" fill="#3b82f6"/></svg>
+          Pointer: <span class="mono" id="pointer-coords">X: — Y: —</span>
+        </span>
+        <span class="tracker-item">
+          <svg width="12" height="12" viewBox="0 0 12 12"><path d="M1 6 h10 M6 1 v10" stroke="#10b981" stroke-width="1" fill="none"/></svg>
+          Amplitude Z: <span class="mono" id="pointer-z">—</span>
+        </span>
+      </div>
+      <div id="canvas-wrapper">
+        <canvas id="simulation-canvas"></canvas>
+      </div>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

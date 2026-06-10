@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#070a13"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+
+  <g opacity="0.8">
+    <circle cx="300" cy="300" r="40" fill="none" stroke="#3b82f6" stroke-width="2" opacity="0.9"/>
+    <circle cx="300" cy="300" r="80" fill="none" stroke="#3b82f6" stroke-width="1.5" opacity="0.6"/>
+    <circle cx="300" cy="300" r="120" fill="none" stroke="#3b82f6" stroke-width="1" opacity="0.4"/>
+    <circle cx="300" cy="300" r="160" fill="none" stroke="#3b82f6" stroke-width="0.8" opacity="0.25"/>
+    <circle cx="300" cy="300" r="200" fill="none" stroke="#3b82f6" stroke-width="0.5" opacity="0.15"/>
+    <circle cx="300" cy="300" r="240" fill="none" stroke="#3b82f6" stroke-width="0.5" opacity="0.1"/>
+    <circle cx="300" cy="300" r="280" fill="none" stroke="#3b82f6" stroke-width="0.5" opacity="0.06"/>
+  </g>
+
+  <g opacity="0.8">
+    <circle cx="500" cy="300" r="40" fill="none" stroke="#ef4444" stroke-width="2" opacity="0.9"/>
+    <circle cx="500" cy="300" r="80" fill="none" stroke="#ef4444" stroke-width="1.5" opacity="0.6"/>
+    <circle cx="500" cy="300" r="120" fill="none" stroke="#ef4444" stroke-width="1" opacity="0.4"/>
+    <circle cx="500" cy="300" r="160" fill="none" stroke="#ef4444" stroke-width="0.8" opacity="0.25"/>
+    <circle cx="500" cy="300" r="200" fill="none" stroke="#ef4444" stroke-width="0.5" opacity="0.15"/>
+    <circle cx="500" cy="300" r="240" fill="none" stroke="#ef4444" stroke-width="0.5" opacity="0.1"/>
+    <circle cx="500" cy="300" r="280" fill="none" stroke="#ef4444" stroke-width="0.5" opacity="0.06"/>
+  </g>
+
+  <g opacity="0.3">
+    <line x1="0" y1="300" x2="800" y2="300" stroke="#10b981" stroke-width="0.5"/>
+    <line x1="400" y1="0" x2="400" y2="600" stroke="#10b981" stroke-width="0.5"/>
+  </g>
+
+  <rect x="0" y="0" width="800" height="56" fill="#070a13" opacity="0.85"/>
+  <text x="400" y="34" text-anchor="middle" font-family="ui-monospace,Consolas,monospace" font-size="14" font-weight="700" letter-spacing="2" fill="#f8fafc">SIGNAL DYNAMICS</text>
+  <text x="400" y="48" text-anchor="middle" font-family="ui-monospace,Consolas,monospace" font-size="8" letter-spacing="1.5" fill="#64748b">WAVE INTERFERENCE LAB</text>
+
+  <rect x="0" y="544" width="800" height="56" fill="#070a13" opacity="0.85"/>
+  <text x="400" y="566" text-anchor="middle" font-family="ui-monospace,Consolas,monospace" font-size="9" fill="#3b82f6" letter-spacing="1">CONSTRUCTIVE REINFORCEMENT</text>
+  <text x="400" y="582" text-anchor="middle" font-family="ui-monospace,Consolas,monospace" font-size="8" fill="#64748b" letter-spacing="0.5">REAL-TIME WAVE SUPERPOSITION ENGINE</text>
+
+  <circle cx="300" cy="300" r="6" fill="#10b981"/>
+  <circle cx="500" cy="300" r="6" fill="#10b981"/>
+  <text x="300" y="318" text-anchor="middle" font-family="ui-monospace,Consolas,monospace" font-size="7" fill="#f8fafc">A</text>
+  <text x="500" y="318" text-anchor="middle" font-family="ui-monospace,Consolas,monospace" font-size="7" fill="#f8fafc">B</text>
+
+  <path d="M 260 240 Q 270 260 280 240 Q 290 220 300 240" fill="none" stroke="#3b82f6" stroke-width="0.8" opacity="0.4"/>
+  <path d="M 460 280 Q 470 300 480 280 Q 490 260 500 280" fill="none" stroke="#ef4444" stroke-width="0.8" opacity="0.4"/>
+</svg>
