@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regex Tester & Visualizer</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fa-solid fa-code"></i>
+                <h1>Regex <span>Tester</span></h1>
+            </div>
+            <a href="../../index.html" class="back-link">
+                <i class="fa-solid fa-arrow-left"></i> Back to Projects
+            </a>
+        </header>
+
+        <!-- Main Content Layout -->
+        <main class="main-layout">
+            <!-- Left Side: Interactive Editor -->
+            <div class="editor-section">
+                <!-- Top Panel: Regex Input -->
+                <div class="regex-panel">
+                    <div class="regex-input-container">
+                        <span class="regex-slash">/</span>
+                        <input type="text" id="regex-input" placeholder="Type regular expression here..." value="[A-Z][a-z]+ \d{4}">
+                        <span class="regex-slash">/</span>
+                        <div class="flags-container" id="flags-container">
+                            gmi
+                        </div>
+                    </div>
+                    
+                    <div class="flags-dropdown" id="flags-dropdown">
+                        <label class="flag-option">
+                            <input type="checkbox" id="flag-g" checked>
+                            <span class="flag-char">g</span>
+                            <span class="flag-desc">global</span>
+                        </label>
+                        <label class="flag-option">
+                            <input type="checkbox" id="flag-m" checked>
+                            <span class="flag-char">m</span>
+                            <span class="flag-desc">multi line</span>
+                        </label>
+                        <label class="flag-option">
+                            <input type="checkbox" id="flag-i" checked>
+                            <span class="flag-char">i</span>
+                            <span class="flag-desc">insensitive</span>
+                        </label>
+                    </div>
+
+                    <div id="error-message" class="error-message"></div>
+                </div>
+
+                <!-- Bottom Panel: Test String -->
+                <div class="test-panel">
+                    <div class="test-header">
+                        <h2>Test String</h2>
+                        <span class="match-count" id="match-count">0 matches</span>
+                    </div>
+                    
+                    <!-- The Magic Highlight Overlay System -->
+                    <div class="editor-wrapper">
+                        <div id="highlight-layer" class="highlight-layer"></div>
+                        <textarea id="test-input" class="test-input" spellcheck="false" placeholder="Type test string here...">Regex is incredibly powerful!
+It can find dates like January 2024 or IDs like USER-9923.
+You can even match phone numbers: 555-1234.
+Try editing the regex pattern above to see matches highlight in real-time.</textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: Cheat Sheet -->
+            <aside class="cheatsheet-section">
+                <h2><i class="fa-solid fa-book-open"></i> Regex Cheat Sheet</h2>
+                
+                <div class="cheat-group">
+                    <h3>Character Classes</h3>
+                    <ul>
+                        <li><code>.</code> <span>Any character except newline</span></li>
+                        <li><code>\w</code> <span>Word character <em>[a-zA-Z0-9_]</em></span></li>
+                        <li><code>\d</code> <span>Digit <em>[0-9]</em></span></li>
+                        <li><code>\s</code> <span>Whitespace character</span></li>
+                        <li><code>[abc]</code> <span>Any of a, b, or c</span></li>
+                        <li><code>[^abc]</code> <span>Not a, b, or c</span></li>
+                        <li><code>[a-z]</code> <span>Character between a & z</span></li>
+                    </ul>
+                </div>
+
+                <div class="cheat-group">
+                    <h3>Quantifiers</h3>
+                    <ul>
+                        <li><code>*</code> <span>0 or more</span></li>
+                        <li><code>+</code> <span>1 or more</span></li>
+                        <li><code>?</code> <span>0 or 1</span></li>
+                        <li><code>{3}</code> <span>Exactly 3</span></li>
+                        <li><code>{3,}</code> <span>3 or more</span></li>
+                        <li><code>{3,5}</code> <span>Between 3 and 5</span></li>
+                    </ul>
+                </div>
+
+                <div class="cheat-group">
+                    <h3>Anchors</h3>
+                    <ul>
+                        <li><code>^</code> <span>Start of string/line</span></li>
+                        <li><code>$</code> <span>End of string/line</span></li>
+                        <li><code>\b</code> <span>Word boundary</span></li>
+                    </ul>
+                </div>
+            </aside>
+        </main>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
