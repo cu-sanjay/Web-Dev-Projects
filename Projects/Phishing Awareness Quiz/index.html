@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phishing Awareness Quiz</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Top Telemetry -->
+    <div id="topBar">
+      <div id="brand">Phishing Awareness</div>
+      <div class="tel-item"><span class="tel-label">Safety Score</span><span id="telScore" class="tel-value">0</span></div>
+      <div class="tel-item"><span class="tel-label">Rating</span><span id="telRating" class="tel-value">Unrated</span></div>
+      <div class="tel-item"><span class="tel-label">Streak</span><span id="telStreak" class="tel-value">0</span></div>
+      <div class="tel-item"><span class="tel-label">Best</span><span id="telBest" class="tel-value">0</span></div>
+      <span id="progressBadge"><span id="qIdx">0</span>/<span id="qTotal">0</span></span>
+    </div>
+
+    <!-- Email Mockup Container -->
+    <div id="emailWrap">
+      <div id="emailCard">
+        <div id="emailHeaders">
+          <div class="eh-row" id="ehFrom"><span class="eh-label">From:</span><span id="efrom" class="eh-value"></span></div>
+          <div class="eh-row" id="ehReply"><span class="eh-label">Reply-To:</span><span id="ereply" class="eh-value"></span></div>
+          <div class="eh-row" id="ehSubject"><span class="eh-label">Subject:</span><span id="esubject" class="eh-value"></span></div>
+        </div>
+        <div id="emailBody">
+          <div id="ebody"></div>
+          <div id="ehoverWrap">
+            <span id="ehoverLabel">Hover the link below:</span>
+            <div id="ehoverDisplay"><span id="ehoverText">Hover over the link in the email body</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div id="actionRow">
+      <button id="btnLegit" class="action-btn action-legit">Legitimate Email</button>
+      <button id="btnPhish" class="action-btn action-phish">Phishing Threat</button>
+    </div>
+
+    <!-- Feedback / Red-Flag Breakdown -->
+    <div id="feedbackArea" class="hidden">
+      <div id="feedbackBanner"></div>
+      <div id="redflagDrawer" class="hidden">
+        <div id="redflagTitle">Security Defect Breakdown</div>
+        <div id="redflagFields"></div>
+        <div id="redflagList"></div>
+      </div>
+      <button id="nextBtn" class="hidden">Next Scenario</button>
+    </div>
+
+    <!-- Summary Modal -->
+    <div id="summaryModal" class="hidden">
+      <div id="summaryOverlay"></div>
+      <div id="summaryPanel">
+        <div id="summaryTitle">Assessment Complete</div>
+        <div id="summaryBody">
+          <div class="sum-row"><span>Score</span><span id="sumScore">0</span></div>
+          <div class="sum-row"><span>Rating</span><span id="sumRating">Unrated</span></div>
+          <div class="sum-row"><span>Correct</span><span id="sumCorrect">0</span></div>
+          <div class="sum-row"><span>Incorrect</span><span id="sumIncorrect">0</span></div>
+          <div class="sum-row"><span>Accuracy</span><span id="sumAccuracy">0%</span></div>
+          <div class="sum-row"><span>Best Streak</span><span id="sumBest">0</span></div>
+        </div>
+        <button id="restartBtn">Restart Quiz</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
