@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Word Scramble Game</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+<div class="top-bar">
+<h1>🧩 Word Scramble</h1>
+<button id="themeBtn">🌙</button>
+</div>
+
+<div class="card">
+
+<div class="score-board">
+<p>Score: <span id="score">0</span></p>
+<p>High Score: <span id="highScore">0</span></p>
+<p>Time: <span id="time">30</span>s</p>
+</div>
+
+<div class="difficulty">
+<select id="difficulty">
+<option value="easy">Easy</option>
+<option value="medium">Medium</option>
+<option value="hard">Hard</option>
+</select>
+</div>
+
+<div class="scramble-box">
+<h2 id="scrambledWord">LOADING...</h2>
+</div>
+
+<input type="text" id="userInput" placeholder="Enter word">
+
+<div class="buttons">
+<button onclick="checkAnswer()">Check</button>
+<button onclick="showHint()">Hint</button>
+<button onclick="nextWord()">Skip</button>
+</div>
+
+<p id="hint"></p>
+<p id="message"></p>
+
+<div class="progress">
+<div id="progressBar"></div>
+</div>
+
+</div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
