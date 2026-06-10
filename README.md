@@ -1,23 +1,16 @@
-> [!IMPORTANT]
-> 🎯 Engineering students from the **2027 & 2028 batches** should not miss this [Amazon **₹51 LPA** opportunity](https://github.com/cu-sanjay/Amazon-ML-Summer-School-2025).
-
-> [!WARNING]
-> Do not edit **projects.json** manually.
-> Simply submit your project folder with its own **project.json** file included.
-> The project index is generated automatically.
-> Please avoid making changes outside your project's folder.
-
 <div align="center">
 
-<img src="assets/icons/logo.svg" alt="Web Dev Projects" width="110" />
+<img src="assets/GH_Header.png" alt="OpenStudio — Build in public. Grow through open source." width="100%" />
 
-# Web Dev Projects
+<br/><br/>
 
-### Build. Learn. Contribute. Get Recognised.
+# OpenStudio
 
-**A curated collection of beginner-friendly HTML, CSS and JavaScript projects.**
+### Build in public. Grow through open source.
 
-Learn Git, GitHub and open source by shipping real projects while building a public portfolio for programs such as **NSoC '26**, **GSSoC**, **GSoC** and **Hacktoberfest**.
+**A curated collection of beginner-friendly HTML, CSS and JavaScript projects — built by the community, for the community.**
+
+Ship real projects, sharpen your craft, and earn recognition through **Hacktoberfest 2026**, **GSSoC**, **GSoC**, and beyond.
 
 <br>
 

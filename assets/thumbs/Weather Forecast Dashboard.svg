@@ -1,0 +1,100 @@
+<svg width="800" height="500" viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#041e1e"/>
+      <stop offset="100%" stop-color="#021212"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#0d9488" stop-opacity="0.7"/>
+    </linearGradient>
+    <clipPath id="clip"><rect width="800" height="500" rx="0"/></clipPath>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#g)" clip-path="url(#clip)"/>
+
+  <!-- Subtle glow behind center -->
+  <ellipse cx="400" cy="220" rx="280" ry="160" fill="#2dd4bf" opacity="0.04"/>
+
+  <!-- Editor window -->
+  <rect x="32" y="32" width="736" height="348" rx="12" fill="rgba(0,0,0,0.45)"/>
+
+  <!-- Title bar -->
+  <rect x="32" y="32" width="736" height="38" rx="12" fill="#031414"/>
+  <rect x="32" y="56" width="736" height="14" fill="#031414"/>
+
+  <!-- Traffic lights -->
+  <circle cx="62"  cy="51" r="7" fill="#ff5f57" opacity="0.95"/>
+  <circle cx="88"  cy="51" r="7" fill="#febc2e" opacity="0.95"/>
+  <circle cx="114" cy="51" r="7" fill="#28c840" opacity="0.95"/>
+
+  <!-- Tab/filename -->
+  <rect x="140" y="38" width="160" height="26" rx="5" fill="rgba(255,255,255,0.07)"/>
+  <text x="160" y="55" fill="rgba(255,255,255,0.55)" font-size="11" font-family="monospace">weather-forecast-dashboard.html</text>
+
+  <!-- Gutter -->
+  <rect x="32" y="70" width="52" height="310" fill="rgba(0,0,0,0.2)"/>
+
+  <!-- Code lines -->
+  <text x="52" y="92" text-anchor="end" fill="rgba(255,255,255,0.15)" font-size="10" font-family="monospace">1</text>
+  <rect x="60" y="82" width="644" height="13" rx="2" fill="rgba(255,255,255,0.07979344606860388)" opacity="1"/>
+  <rect x="716" y="82" width="36" height="13" rx="2" fill="rgba(255,255,255,0.05596208635390785)" opacity="0.6"/>
+  <text x="52" y="110" text-anchor="end" fill="rgba(255,255,255,0.15)" font-size="10" font-family="monospace">2</text>
+  <rect x="60" y="100" width="508" height="13" rx="2" fill="rgba(255,255,255,0.11661146653271548)" opacity="1"/>
+  <text x="52" y="128" text-anchor="end" fill="rgba(255,255,255,0.15)" font-size="10" font-family="monospace">3</text>
+  <rect x="60" y="118" width="205" height="13" rx="2" fill="rgba(255,255,255,0.09209982682766854)" opacity="1"/>
+  <text x="52" y="146" text-anchor="end" fill="rgba(255,255,255,0.15)" font-size="10" font-family="monospace">4</text>
+  <rect x="60" y="136" width="127" height="13" rx="2" fill="rgba(255,255,255,0.1221573160174669)" opacity="1"/>
+  <text x="52" y="164" text-anchor="end" fill="rgba(255,255,255,0.15)" font-size="10" font-family="monospace">5</text>
+  <rect x="60" y="154" width="111" height="13" rx="2" fill="rgba(255,255,255,0.11559206950841287)" opacity="1"/>
+  <text x="52" y="182" text-anchor="end" fill="rgba(255,255,255,0.15)" font-size="10" font-family="monospace">6</text>
+  <rect x="100" y="172" width="209" height="13" rx="2" fill="rgba(255,255,255,0.1130546772044745)" opacity="1"/>
+  <rect x="321" y="172" width="34" height="13" rx="2" fill="rgba(255,255,255,0.07331656580169606)" opacity="0.6"/>
+  <text x="52" y="200" text-anchor="end" fill="rgba(255,255,255,0.15)" font-size="10" font-family="monospace">7</text>
+  <rect x="80" y="190" width="342" height="13" rx="2" fill="rgba(255,255,255,0.11420627883966228)" opacity="1"/>
+  <rect x="434" y="190" width="104" height="13" rx="2" fill="rgba(255,255,255,0.06702924945089717)" opacity="0.6"/>
+  <text x="52" y="218" text-anchor="end" fill="rgba(255,255,255,0.15)" font-size="10" font-family="monospace">8</text>
+  <rect x="80" y="208" width="637" height="13" rx="2" fill="#2dd4bf" opacity="0.55"/>
+  <text x="52" y="236" text-anchor="end" fill="rgba(255,255,255,0.15)" font-size="10" font-family="monospace">9</text>
+  <rect x="60" y="226" width="462" height="13" rx="2" fill="rgba(255,255,255,0.07476697827101847)" opacity="1"/>
+  <text x="52" y="254" text-anchor="end" fill="rgba(255,255,255,0.15)" font-size="10" font-family="monospace">10</text>
+  <rect x="80" y="244" width="638" height="13" rx="2" fill="rgba(255,255,255,0.10244757327308124)" opacity="1"/>
+  <text x="52" y="272" text-anchor="end" fill="rgba(255,255,255,0.15)" font-size="10" font-family="monospace">11</text>
+  <rect x="100" y="262" width="293" height="13" rx="2" fill="rgba(255,255,255,0.1393590788169203)" opacity="1"/>
+  <rect x="405" y="262" width="88" height="13" rx="2" fill="rgba(255,255,255,0.057924064797797256)" opacity="0.6"/>
+  <text x="52" y="290" text-anchor="end" fill="rgba(255,255,255,0.15)" font-size="10" font-family="monospace">12</text>
+  <rect x="60" y="280" width="674" height="13" rx="2" fill="#2dd4bf" opacity="0.55"/>
+  <text x="52" y="308" text-anchor="end" fill="rgba(255,255,255,0.15)" font-size="10" font-family="monospace">13</text>
+  <rect x="100" y="298" width="243" height="13" rx="2" fill="rgba(255,255,255,0.07318344874614464)" opacity="1"/>
+  <text x="52" y="326" text-anchor="end" fill="rgba(255,255,255,0.15)" font-size="10" font-family="monospace">14</text>
+  <rect x="60" y="316" width="572" height="13" rx="2" fill="rgba(255,255,255,0.11625775686843734)" opacity="1"/>
+  <rect x="644" y="316" width="34" height="13" rx="2" fill="rgba(255,255,255,0.06761083767460911)" opacity="0.6"/>
+
+  <!-- Big dimmed project name in center -->
+  <text x="400" y="295" text-anchor="middle" fill="rgba(255,255,255,0.05)" font-size="52" font-weight="900" font-family="system-ui,sans-serif" letter-spacing="-2">Weather Forecast Das…</text>
+
+  <!-- Bottom info bar -->
+  <rect x="0" y="400" width="800" height="100" fill="rgba(0,0,0,0.55)"/>
+
+  <!-- Accent line -->
+  <rect x="0" y="400" width="800" height="3" fill="url(#bar)"/>
+
+  <!-- Author initials circle -->
+  <circle cx="72" cy="450" r="28" fill="#2dd4bf" opacity="0.18"/>
+  <circle cx="72" cy="450" r="22" fill="#2dd4bf" opacity="0.22"/>
+  <text x="72" y="456" text-anchor="middle" fill="#2dd4bf" font-size="15" font-weight="800" font-family="system-ui,sans-serif">G</text>
+
+  <!-- Project name -->
+  <text x="112" y="440" fill="rgba(255,255,255,0.92)" font-size="17" font-weight="800" font-family="system-ui,sans-serif" letter-spacing="-0.5">Weather Forecast Dashboard</text>
+
+  <!-- Tag pills -->
+  <rect x="112" y="455" width="65" height="20" rx="10" fill="#2dd4bf" opacity="0.22"/>
+  <text x="144.5" y="469" text-anchor="middle" fill="#2dd4bf" font-size="10" font-weight="700" font-family="system-ui,sans-serif">WEATHER</text>
+
+  <rect x="183" y="455" width="37" height="20" rx="10" fill="rgba(255,255,255,0.08)"/>
+  <text x="201.5" y="469" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="10" font-weight="600" font-family="system-ui,sans-serif">API</text>
+
+  <rect x="226" y="455" width="86" height="20" rx="10" fill="rgba(255,255,255,0.06)"/>
+  <text x="269" y="469" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="10" font-weight="600" font-family="system-ui,sans-serif">JAVASCRIPT</text>
+</svg>

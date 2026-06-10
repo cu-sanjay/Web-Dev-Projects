@@ -3,14 +3,14 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>Web Dev Projects — a hub for HTML, CSS & JS contributors</title>
-    <meta name="description" content="A curated, beginner-friendly hub of HTML, CSS and JavaScript projects. Learn Git, GitHub and open source through NSoC '26, GSSoC, GSoC and Hacktoberfest." />
+    <title>OpenStudio — Build. Learn. Contribute. Grow.</title>
+    <meta name="description" content="OpenStudio is a community-driven hub of open source web projects built with HTML, CSS, and JavaScript. Contribute, learn, and earn recognition through Hacktoberfest 2026 and more." />
     <meta name="theme-color" content="#f5f1ea" />
-    <meta property="og:title" content="Web Dev Projects" />
-    <meta property="og:description" content="A curated hub of static web projects from open-source contributors." />
+    <meta property="og:title" content="OpenStudio" />
+    <meta property="og:description" content="Build in public. Learn by doing. Grow through open source." />
     <meta property="og:type" content="website" />
-    <link rel="icon" type="image/svg+xml" href="assets/icons/logo.svg" />
-    <link rel="stylesheet" href="assets/styles.css?v=1.0.3" />
+    <link rel="icon" type="image/png" href="assets/icons/OpenStudio.png" />
+    <link rel="stylesheet" href="assets/styles.css?v=2.0.0" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <script>
       (function() {
@@ -25,54 +25,94 @@
         document.documentElement.setAttribute("data-theme", theme);
         const meta = document.querySelector('meta[name="theme-color"]');
         if (meta) meta.setAttribute("content", theme === "dark" ? "#0b0c10" : "#f5f1ea");
+        // Init cursor preference early to avoid flash
+        const cursorPref = localStorage.getItem("cursor") || "cat";
+        if (cursorPref === "default") document.documentElement.setAttribute("data-cursor", "default");
       })();
     </script>
   </head>
   <body>
     <header class="topbar">
       <a class="brand" href="./">
-        <img src="assets/icons/logo.svg" alt="" width="32" height="32" />
-        <span>Web Dev Projects</span>
+        <img src="assets/icons/OpenStudio.png" alt="OpenStudio" width="32" height="32" />
+        <span>OpenStudio</span>
       </a>
       <nav class="topnav" aria-label="Primary">
         <a href="#projects">Projects</a>
+        <a href="#hall-of-fame">Hall of Fame</a>
         <a href="#programs">Programs</a>
         <a href="#contribute">Contribute</a>
         <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" type="button">
-          <!-- Sun Icon (visible in dark mode) -->
           <svg class="sun-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="12" cy="12" r="4"></circle>
             <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
           </svg>
-          <!-- Moon Icon (visible in light mode) -->
           <svg class="moon-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
           </svg>
         </button>
-        <a class="topnav__github" href="https://github.com/cu-sanjay/Web-Dev-Projects" rel="noopener">GitHub</a>
+        <button id="cursor-toggle" class="cursor-toggle" aria-label="Toggle cursor style" type="button" title="Toggle cursor">
+          <span class="cursor-icon cursor-icon--cat">🐱</span>
+          <span class="cursor-icon cursor-icon--arrow">↖</span>
+        </button>
+        <a class="topnav__github" href="https://github.com/cu-sanjay/OpenStudio" rel="noopener" target="_blank">GitHub</a>
       </nav>
     </header>
 
     <main>
+      <!-- Hero -->
       <section class="hero">
-        <p class="eyebrow">A community repository</p>
-        <h1>Ship a project. Learn open source. Get credit.</h1>
-        <p class="lede">
-          A curated, beginner-friendly hub for HTML, CSS and JavaScript projects.
-          Add yours, learn Git and GitHub in the process, and earn recognition
-          through NSoC&nbsp;'26, GSSoC, GSoC and Hacktoberfest.
-        </p>
-        <div class="hero__cta">
-          <a class="btn btn--primary" href="#contribute">How to contribute</a>
-          <a class="btn btn--ghost" href="https://github.com/cu-sanjay/Web-Dev-Projects" rel="noopener">View on GitHub</a>
+        <!-- Decorative background -->
+        <div class="hero__deco" aria-hidden="true">
+          <div class="hero__ellipse hero__ellipse--1"></div>
+          <div class="hero__ellipse hero__ellipse--2"></div>
+          <div class="hero__ellipse hero__ellipse--3"></div>
+          <div class="hero__dot" style="top:11%;left:7%"></div>
+          <div class="hero__dot" style="top:16%;right:11%"></div>
+          <div class="hero__dot" style="bottom:32%;left:14%"></div>
+          <div class="hero__dot" style="top:27%;left:46%"></div>
+          <div class="hero__dot" style="top:62%;right:7%"></div>
+          <div class="hero__square" style="top:13%;left:12%"></div>
+          <div class="hero__square" style="bottom:24%;right:9%;width:20px;height:20px"></div>
+          <div class="hero__square" style="top:66%;left:5%;width:18px;height:18px"></div>
+          <div class="hero__tech-card hero__tech-card--html">
+            <span class="htc__lang">HTML</span><span class="htc__sym">&lt;/&gt;</span>
+          </div>
+          <div class="hero__tech-card hero__tech-card--css">
+            <span class="htc__lang">CSS</span><span class="htc__sym">{ }</span>
+          </div>
+          <div class="hero__tech-card hero__tech-card--js">
+            <span class="htc__lang">JS</span><span class="htc__sym">( )</span>
+          </div>
         </div>
-        <dl class="hero__stats" aria-label="Repository stats">
-          <div><dt>Projects</dt><dd id="stat-count">—</dd></div>
-          <div><dt>Last indexed</dt><dd id="stat-updated">—</dd></div>
-          <div><dt>License</dt><dd>MIT</dd></div>
-        </dl>
+        <!-- Content -->
+        <div class="hero__content">
+          <div class="hero__logo-mark" aria-hidden="true">✦</div>
+          <p class="eyebrow">Open Source Community</p>
+          <h1>Build in public.<br>Grow through open source.</h1>
+          <p class="lede">
+            OpenStudio is where developers ship real projects, sharpen their craft,
+            and earn recognition — through Hacktoberfest&nbsp;2026, GSSoC, GSoC, and beyond.
+          </p>
+          <div class="hero__badges">
+            <span class="hero__badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>Community Driven</span>
+            <span class="hero__badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>100% Open Source</span>
+            <span class="hero__badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>Real Projects</span>
+            <span class="hero__badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>Made for Devs</span>
+          </div>
+          <div class="hero__cta">
+            <a class="btn btn--primary" href="#contribute">Start Contributing</a>
+            <a class="btn btn--ghost" href="https://github.com/cu-sanjay/OpenStudio" rel="noopener" target="_blank">View on GitHub</a>
+          </div>
+          <dl class="hero__stats" aria-label="Repository stats">
+            <div><dt>Projects</dt><dd id="stat-count">—</dd></div>
+            <div><dt>Last indexed</dt><dd id="stat-updated">—</dd></div>
+            <div><dt>License</dt><dd>MIT</dd></div>
+          </dl>
+        </div>
       </section>
 
+      <!-- Projects -->
       <section id="projects" class="section">
         <header class="section__head">
           <h2>Projects in this repo</h2>
@@ -85,7 +125,7 @@
               <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
                 <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Zm10 3-5-5" />
               </svg>
-              <input id="search" type="search" placeholder="Search projects, tags, authors" autocomplete="off" />
+              <input id="search" type="search" placeholder="Search projects, tags, authors…" autocomplete="off" />
             </label>
             <button id="shuffle-btn" class="btn btn--ghost shuffle-btn" type="button" aria-label="Random project">
               <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -102,7 +142,7 @@
                 <option value="default">Default</option>
                 <option value="newest">Newest First</option>
                 <option value="oldest">Oldest First</option>
-                <option value="alpha">Alphabetical A-Z</option>
+                <option value="alpha">A–Z</option>
               </select>
             </div>
           </div>
@@ -112,63 +152,98 @@
         <ul id="grid" class="grid" aria-live="polite"></ul>
 
         <p id="empty" class="empty" hidden>
-          No projects match. Try a different search, or
+          No projects match. Try a different search or
           <a href="#contribute">add the first one</a>.
         </p>
-        <div class="complexity-filter">
-  <button onclick="filterComplexity('all')">All</button>
-  <button onclick="filterComplexity('beginner')">Beginner</button>
-  <button onclick="filterComplexity('intermediate')">Intermediate</button>
-  <button onclick="filterComplexity('advanced')">Advanced</button>
-</div>
-
       </section>
 
-      <section id="programs" class="section">
-      <header class="section__head">
-        <h2>Open-source programs we participate in</h2>
-        <p>Pick a program, find an issue with its label, ship the work.</p>
-      </header>
-    
-      <div class="programs">
-        <article class="program program--nsoc">
-          <img class="program__logo"
-            src="https://www.nsoc.in/_next/image?url=%2Flogo_white.png&w=64&q=75"
-            alt="NSoC" width="48" height="48" />
-          <h3>Nexus Spring of Code</h3>
-          <p>NIT Surat's annual 2-month program for first-time open-source contributors.</p>
-          <a class="link" href="https://www.nsoc.in/" rel="noopener">Learn more</a>
-        </article>
-    
-        <article class="program program--gssoc">
-          <img class="program__logo"
-            src="https://cdn-icons-png.flaticon.com/512/4140/4140048.png"
-            alt="Women Coding" width="48" height="48" />
-          <h3>GirlScript Summer of Code</h3>
-          <p>India's largest open-source program for first-time contributors, run by GirlScript.</p>
-          <a class="link" href="https://gssoc.girlscript.org/" rel="noopener">Learn more</a>
-        </article>
-    
-        <article class="program program--gsoc">
-          <img class="program__logo"
-            src="https://summerofcode.withgoogle.com/assets/media/logo.svg"
-            alt="GSoC" width="48" height="48" />
-          <h3>Google Summer of Code</h3>
-          <p>Global paid program for students and new contributors. Run by Google annually.</p>
-          <a class="link" href="https://summerofcode.withgoogle.com/" rel="noopener">Learn more</a>
-        </article>
-    
-        <article class="program program--hacktoberfest">
-          <img class="program__logo"
-            src="https://hacktoberfest.com/_next/static/media/logo-hacktoberfest-12--nav.0ac01b46.svg"
-            alt="Hacktoberfest" width="48" height="48" />
-          <h3>Hacktoberfest</h3>
-          <p>October's month-long celebration of open source. Look for the <code>hacktoberfest</code> label.</p>
-          <a class="link" href="https://hacktoberfest.com/" rel="noopener">Learn more</a>
-        </article>
-      </div>
-    </section>
+      <!-- Hall of Fame -->
+      <section id="hall-of-fame" class="hof-section">
+        <div class="hof-header">
+          <div class="hof-eyebrow"><span class="hof-star">✦</span><span>Hall of Fame</span></div>
+          <h2 class="hof-title">The builders behind OpenStudio</h2>
+          <p class="hof-subtitle">Click any contributor to explore their projects</p>
+        </div>
+        <div class="hof-track-wrap">
+          <div class="hof-fade hof-fade--left"></div>
+          <div class="hof-track" id="hof-track">
+            <div class="hof-loading" id="hof-loading">
+              <span class="hof-spinner"></span>
+              <span>Fetching contributors…</span>
+            </div>
+          </div>
+          <div class="hof-fade hof-fade--right"></div>
+        </div>
+        <p class="hof-hint" id="hof-hint" hidden>
+          <span id="hof-contributor-count">0</span> contributors · ranked by projects shipped
+        </p>
+      </section>
 
+      <!-- Programs -->
+      <section id="programs" class="section">
+        <header class="section__head">
+          <h2>Programs we participate in</h2>
+          <p>Pick a program, find an issue with its label, ship the work.</p>
+        </header>
+
+        <div class="programs">
+          <article class="program program--hacktoberfest">
+            <div class="program__logo-wrap">
+              <img class="program__logo"
+                src="https://hacktoberfest.com/_next/static/media/logo-hacktoberfest-12--nav.0ac01b46.svg"
+                alt="Hacktoberfest" width="56" height="56"
+                onerror="this.src='https://raw.githubusercontent.com/nicedoc/hacktoberfest/main/logos/hacktoberfest-2023.svg'" />
+            </div>
+            <div class="program__body">
+              <h3>Hacktoberfest 2026</h3>
+              <p class="program__badge">Featured</p>
+              <p>October's month-long global celebration of open source. Look for the <code>hacktoberfest</code> label and get your contributions counted.</p>
+              <a class="link" href="https://hacktoberfest.com/" rel="noopener" target="_blank">Learn more →</a>
+            </div>
+          </article>
+
+          <article class="program program--nsoc">
+            <div class="program__logo-wrap">
+              <img class="program__logo"
+                src="https://www.nsoc.in/_next/image?url=%2Flogo_white.png&w=96&q=80"
+                alt="NSoC" width="56" height="56" />
+            </div>
+            <div class="program__body">
+              <h3>Nexus Spring of Code</h3>
+              <p>NIT Surat's annual 2-month program for first-time open-source contributors.</p>
+              <a class="link" href="https://www.nsoc.in/" rel="noopener" target="_blank">Learn more →</a>
+            </div>
+          </article>
+
+          <article class="program program--gssoc">
+            <div class="program__logo-wrap">
+              <img class="program__logo"
+                src="https://avatars.githubusercontent.com/u/56705888?v=4"
+                alt="GirlScript" width="56" height="56" />
+            </div>
+            <div class="program__body">
+              <h3>GirlScript Summer of Code</h3>
+              <p>India's largest open-source program for first-time contributors, run by GirlScript Foundation.</p>
+              <a class="link" href="https://gssoc.girlscript.org/" rel="noopener" target="_blank">Learn more →</a>
+            </div>
+          </article>
+
+          <article class="program program--gsoc">
+            <div class="program__logo-wrap">
+              <img class="program__logo"
+                src="https://summerofcode.withgoogle.com/assets/media/logo.svg"
+                alt="GSoC" width="56" height="56" />
+            </div>
+            <div class="program__body">
+              <h3>Google Summer of Code</h3>
+              <p>Global paid program for students and new contributors. Run by Google each year.</p>
+              <a class="link" href="https://summerofcode.withgoogle.com/" rel="noopener" target="_blank">Learn more →</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Resources -->
       <section id="resources" class="section">
         <header class="section__head">
           <h2>Learning resources</h2>
@@ -178,46 +253,47 @@
           <div class="resource-group">
             <h3>Web Development</h3>
             <ul class="resource-list">
-              <li><a href="https://developer.mozilla.org/" rel="noopener" class="resource-link">MDN Web Docs</a></li>
-              <li><a href="https://www.freecodecamp.org/" rel="noopener" class="resource-link">freeCodeCamp</a></li>
-              <li><a href="https://www.w3schools.com/" rel="noopener" class="resource-link">W3Schools</a></li>
-              <li><a href="https://javascript.info/" rel="noopener" class="resource-link">JavaScript.info</a></li>
+              <li><a href="https://developer.mozilla.org/" rel="noopener" target="_blank" class="resource-link">MDN Web Docs</a></li>
+              <li><a href="https://www.freecodecamp.org/" rel="noopener" target="_blank" class="resource-link">freeCodeCamp</a></li>
+              <li><a href="https://www.w3schools.com/" rel="noopener" target="_blank" class="resource-link">W3Schools</a></li>
+              <li><a href="https://javascript.info/" rel="noopener" target="_blank" class="resource-link">JavaScript.info</a></li>
             </ul>
           </div>
           <div class="resource-group">
-            <h3>Git & GitHub</h3>
+            <h3>Git &amp; GitHub</h3>
             <ul class="resource-list">
-              <li><a href="https://git-scm.com/" rel="noopener" class="resource-link">Git Documentation</a></li>
-              <li><a href="https://guides.github.com/" rel="noopener" class="resource-link">GitHub Guides</a></li>
-              <li><a href="https://www.atlassian.com/git" rel="noopener" class="resource-link">Atlassian Git</a></li>
-              <li><a href="https://education.github.com/" rel="noopener" class="resource-link">GitHub Education</a></li>
+              <li><a href="https://git-scm.com/" rel="noopener" target="_blank" class="resource-link">Git Documentation</a></li>
+              <li><a href="https://guides.github.com/" rel="noopener" target="_blank" class="resource-link">GitHub Guides</a></li>
+              <li><a href="https://www.atlassian.com/git" rel="noopener" target="_blank" class="resource-link">Atlassian Git</a></li>
+              <li><a href="https://education.github.com/" rel="noopener" target="_blank" class="resource-link">GitHub Education</a></li>
             </ul>
           </div>
           <div class="resource-group">
             <h3>Communities</h3>
             <ul class="resource-list">
-              <li><a href="https://stackoverflow.com/" rel="noopener" class="resource-link">Stack Overflow</a></li>
-              <li><a href="https://dev.to/" rel="noopener" class="resource-link">Dev.to</a></li>
-              <li><a href="https://hashnode.com/" rel="noopener" class="resource-link">Hashnode</a></li>
-              <li><a href="https://www.reddit.com/r/webdev/" rel="noopener" class="resource-link">r/webdev</a></li>
+              <li><a href="https://stackoverflow.com/" rel="noopener" target="_blank" class="resource-link">Stack Overflow</a></li>
+              <li><a href="https://dev.to/" rel="noopener" target="_blank" class="resource-link">Dev.to</a></li>
+              <li><a href="https://hashnode.com/" rel="noopener" target="_blank" class="resource-link">Hashnode</a></li>
+              <li><a href="https://www.reddit.com/r/webdev/" rel="noopener" target="_blank" class="resource-link">r/webdev</a></li>
             </ul>
           </div>
           <div class="resource-group">
             <h3>Open Source</h3>
             <ul class="resource-list">
-              <li><a href="https://opensource.guide/" rel="noopener" class="resource-link">Open Source Guides</a></li>
-              <li><a href="https://www.firsttimersonly.com/" rel="noopener" class="resource-link">First Timers Only</a></li>
-              <li><a href="https://goodfirstissue.dev/" rel="noopener" class="resource-link">Good First Issue</a></li>
-              <li><a href="https://www.codementor.io/learn" rel="noopener" class="resource-link">Code Mentor</a></li>
+              <li><a href="https://opensource.guide/" rel="noopener" target="_blank" class="resource-link">Open Source Guides</a></li>
+              <li><a href="https://www.firsttimersonly.com/" rel="noopener" target="_blank" class="resource-link">First Timers Only</a></li>
+              <li><a href="https://goodfirstissue.dev/" rel="noopener" target="_blank" class="resource-link">Good First Issue</a></li>
+              <li><a href="https://www.codementor.io/learn" rel="noopener" target="_blank" class="resource-link">Code Mentor</a></li>
             </ul>
           </div>
         </div>
       </section>
 
+      <!-- Contribute -->
       <section id="contribute" class="section">
         <header class="section__head">
           <h2>Contribute in four steps</h2>
-          <p>Read the full guide in <a href="CONTRIBUTING.md">CONTRIBUTING.md</a>.</p>
+          <p>Read the full guide in <a href="https://github.com/cu-sanjay/OpenStudio/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">CONTRIBUTING.md</a>.</p>
         </header>
         <ol class="steps">
           <li>
@@ -238,84 +314,81 @@
           <li>
             <span class="steps__n">04</span>
             <h3>Open a pull request</h3>
-            <p>Use the New Project template. Once merged, the showcase rebuilds itself.</p>
+            <p>Use the New Project template. Once merged, the showcase rebuilds automatically.</p>
           </li>
         </ol>
       </section>
     </main>
 
+    <!-- Footer -->
     <footer class="site-footer">
-  <div class="footer-grid">
+      <div class="footer-inner">
+        <div class="footer-brand-col">
+          <div class="footer-brand">
+            <img src="assets/icons/OpenStudio.png" alt="OpenStudio" width="36" height="36" />
+            <span class="footer-brand-name">OpenStudio</span>
+          </div>
+          <p class="footer-tagline">Build in public. Learn by doing.<br>Grow through open source.</p>
+          <div class="footer-social" aria-label="Social links">
+            <a href="https://github.com/cu-sanjay/OpenStudio" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+              <i class="fa-brands fa-github" aria-hidden="true"></i>
+            </a>
+            <a href="https://linkedin.com/in/sanjay2705" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+              <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
+            </a>
+            <a href="https://twitter.com/cSxnJ" aria-label="X / Twitter" target="_blank" rel="noopener noreferrer">
+              <i class="fa-brands fa-x-twitter" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
 
-    <!-- Column 1: Brand -->
-    <div class="footer-brand">
-      <div class="footer-logo">
-        <span class="footer-logo-icon">&lt;/&gt;</span>
-        <span class="footer-logo-text">Web Dev Projects</span>
+        <div class="footer-links-col">
+          <h4 class="footer-heading">Explore</h4>
+          <ul class="footer-links">
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#hall-of-fame">Hall of Fame</a></li>
+            <li><a href="#programs">Programs</a></li>
+            <li><a href="#contribute">Contribute</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <h4 class="footer-heading">Repository</h4>
+          <ul class="footer-links">
+            <li><a href="https://github.com/cu-sanjay/OpenStudio" target="_blank" rel="noopener">GitHub Repo</a></li>
+            <li><a href="https://github.com/cu-sanjay/OpenStudio/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contributing Guide</a></li>
+            <li><a href="https://github.com/cu-sanjay/OpenStudio/issues" target="_blank" rel="noopener">Open Issues</a></li>
+            <li><a href="https://github.com/cu-sanjay/OpenStudio/pulls" target="_blank" rel="noopener">Pull Requests</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <h4 class="footer-heading">Programs</h4>
+          <ul class="footer-links">
+            <li><a href="https://hacktoberfest.com/" target="_blank" rel="noopener">Hacktoberfest 2026</a></li>
+            <li><a href="https://gssoc.girlscript.org/" target="_blank" rel="noopener">GSSoC</a></li>
+            <li><a href="https://www.nsoc.in/" target="_blank" rel="noopener">NSoC</a></li>
+            <li><a href="https://summerofcode.withgoogle.com/" target="_blank" rel="noopener">GSoC</a></li>
+          </ul>
+        </div>
       </div>
-      <p>Open source web development projects built with HTML, CSS, and JavaScript. No tracking. No ads.</p>
-      <div class="footer-social" aria-label="Social media links">
-        <div class="footer-social" aria-label="Social media links">
-        <a href="https://github.com/cu-sanjay" 
-          aria-label="Visit cu-sanjay on GitHub" 
-          target="_blank" 
-          rel="noopener noreferrer">
-          <i class="fa-brands fa-github" aria-hidden="true"></i>
-        </a>
-        <a href="https://linkedin.com/in/sanjay2705" 
-          aria-label="Visit cu-sanjay on LinkedIn" 
-          target="_blank" 
-          rel="noopener noreferrer">
-          <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
-        </a>
-        <a href="https://twitter.com/cSxnJ" 
-          aria-label="Visit cu-sanjay on Twitter" 
-          target="_blank" 
-          rel="noopener noreferrer">
-          <i class="fa-brands fa-x-twitter" aria-hidden="true"></i>
-        </a>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 <a href="https://github.com/cu-sanjay" target="_blank" rel="noopener">cu-sanjay</a> &amp; OpenStudio contributors &middot; MIT License</p>
+        <p>Built with HTML, CSS &amp; JavaScript &middot; No tracking, no ads.</p>
       </div>
-            </div>
-    </div>
+    </footer>
 
-    <!-- Column 2: Navigate -->
-    <div class="footer-col">
-      <h4 class="footer-col-title">Navigate</h4>
-      <ul class="footer-links">
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#programs">Programs</a></li>
-        <li><a href="#contribute">Contribute</a></li>
-        <li><a href="https://github.com/cu-sanjay/Web-Dev-Projects" target="_blank" rel="noopener noreferrer">GitHub Repository</a></li>
-      </ul>
-    </div>
-
-    <!-- Column 3: Community -->
-    <div class="footer-col">
-      <h4 class="footer-col-title">Community</h4>
-      <ul class="footer-links">
-        <li><a href="https://github.com/cu-sanjay/Web-Dev-Projects/blob/main/CONTRIBUTING.md">Contribution Guide</a></li>
-        <li><a href="https://github.com/cu-sanjay/Web-Dev-Projects/issues">Open Issues</a></li>
-        <li><a href="https://github.com/cu-sanjay/Web-Dev-Projects/pulls">PR Guidelines</a></li>
-      </ul>
-    </div>
-
-  </div>
-
-  <div class="footer-bottom">
-    <p>&copy; 2025 cu-sanjay &middot; MIT License</p>
-    <p>Built with HTML, CSS &amp; JavaScript</p>
-  </div>
-</footer>
-
+    <!-- Card Template -->
     <template id="card-template">
       <li class="card">
-        <button class="card__bookmark-btn" aria-label="Bookmark project" type="button">
-          <svg class="heart-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-          </svg>
-        </button>
         <a class="card__media" target="_blank" rel="noopener">
           <div class="card__thumb" aria-hidden="true"></div>
+          <button class="card__bookmark-btn" aria-label="Bookmark project" type="button">
+            <svg class="heart-icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+          </button>
         </a>
         <div class="card__body">
           <h3 class="card__title"></h3>
@@ -324,7 +397,7 @@
           <div class="card__meta">
             <a class="card__author" rel="noopener"></a>
             <div class="card__actions">
-              <a class="btn btn--ghost btn--sm card__source" rel="noopener">Source</a>
+              <a class="btn btn--ghost btn--sm card__source" rel="noopener" target="_blank">Source</a>
               <button class="btn btn--ghost btn--sm card__preview" type="button">Preview</button>
               <a class="btn btn--primary btn--sm card__open" target="_blank" rel="noopener">Open</a>
             </div>
@@ -333,14 +406,14 @@
       </li>
     </template>
 
-    <script src="assets/app.js?v=1.0.3" type="module"></script>
+    <script src="assets/app.js?v=2.0.0" type="module"></script>
 
     <!-- Tag Explorer Modal -->
-    <div id="tag-modal-overlay" class="tag-modal-overlay" hidden>
-      <div class="tag-modal-content" role="dialog" aria-modal="true" aria-labelledby="tag-modal-title">
+    <div id="tag-modal-overlay" class="tag-modal-overlay" aria-modal="true" role="dialog" aria-labelledby="tag-modal-title">
+      <div class="tag-modal-content">
         <div class="tag-modal-header">
           <h2 id="tag-modal-title">Explore All Tags</h2>
-          <button id="tag-modal-close" class="btn btn--ghost tag-modal-close-btn" aria-label="Close tag explorer">
+          <button id="tag-modal-close" class="tag-modal-close-btn" aria-label="Close tag explorer" type="button">
             <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
               <line x1="18" y1="6" x2="6" y2="18"></line>
               <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -349,18 +422,17 @@
         </div>
         <div class="tag-modal-body">
           <div class="tag-modal-search-wrapper">
-            <svg class="tag-modal-search-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+            <svg class="tag-modal-search-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
               <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Zm10 3-5-5"></path>
             </svg>
-            <input id="tag-modal-search" class="tag-modal-search-input" type="search" placeholder="Search tags..." autocomplete="off" />
+            <input id="tag-modal-search" class="tag-modal-search-input" type="search" placeholder="Search tags…" autocomplete="off" />
           </div>
           <div id="tag-modal-cloud" class="tag-modal-cloud"></div>
         </div>
       </div>
     </div>
 
-
-
+    <!-- Preview Drawer -->
     <div id="preview-drawer" class="preview-drawer" aria-hidden="true">
       <div class="preview-drawer__backdrop" aria-label="Close preview"></div>
       <div class="preview-drawer__content">
@@ -370,19 +442,19 @@
             <p id="preview-author" class="preview-drawer__author">by Author</p>
           </div>
           <div class="preview-drawer__switcher">
-            <button class="btn btn--ghost btn--sm preview-switcher-btn is-active" data-device="desktop" aria-label="Desktop view">
+            <button class="btn btn--ghost btn--sm preview-switcher-btn is-active" data-device="desktop" aria-label="Desktop view" type="button">
               <i class="fa-solid fa-desktop"></i>
             </button>
-            <button class="btn btn--ghost btn--sm preview-switcher-btn" data-device="tablet" aria-label="Tablet view">
+            <button class="btn btn--ghost btn--sm preview-switcher-btn" data-device="tablet" aria-label="Tablet view" type="button">
               <i class="fa-solid fa-tablet-screen-button"></i>
             </button>
-            <button class="btn btn--ghost btn--sm preview-switcher-btn" data-device="mobile" aria-label="Mobile view">
+            <button class="btn btn--ghost btn--sm preview-switcher-btn" data-device="mobile" aria-label="Mobile view" type="button">
               <i class="fa-solid fa-mobile-screen-button"></i>
             </button>
           </div>
           <div class="preview-drawer__actions">
-            <a id="preview-external" class="btn btn--primary btn--sm" target="_blank" rel="noopener">Open App <i class="fa-solid fa-arrow-up-right-from-square" style="margin-left: 4px;"></i></a>
-            <button id="preview-close" class="btn btn--ghost btn--sm preview-drawer__close" aria-label="Close preview">
+            <a id="preview-external" class="btn btn--primary btn--sm" target="_blank" rel="noopener">Open App <i class="fa-solid fa-arrow-up-right-from-square" style="margin-left:4px"></i></a>
+            <button id="preview-close" class="btn btn--ghost btn--sm preview-drawer__close" aria-label="Close preview" type="button">
               <i class="fa-solid fa-xmark"></i>
             </button>
           </div>
@@ -397,6 +469,5 @@
         </div>
       </div>
     </div>
-
   </body>
 </html>

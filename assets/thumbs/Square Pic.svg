@@ -1,0 +1,98 @@
+<svg width="800" height="500" viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e0c00"/>
+      <stop offset="100%" stop-color="#120700"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#fb923c" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#ea580c" stop-opacity="0.7"/>
+    </linearGradient>
+    <clipPath id="clip"><rect width="800" height="500" rx="0"/></clipPath>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#g)" clip-path="url(#clip)"/>
+
+  <!-- Subtle glow behind center -->
+  <ellipse cx="400" cy="220" rx="280" ry="160" fill="#fb923c" opacity="0.04"/>
+
+  <!-- Editor window -->
+  <rect x="32" y="32" width="736" height="348" rx="12" fill="rgba(0,0,0,0.45)"/>
+
+  <!-- Title bar -->
+  <rect x="32" y="32" width="736" height="38" rx="12" fill="#150800"/>
+  <rect x="32" y="56" width="736" height="14" fill="#150800"/>
+
+  <!-- Traffic lights -->
+  <circle cx="62"  cy="51" r="7" fill="#ff5f57" opacity="0.95"/>
+  <circle cx="88"  cy="51" r="7" fill="#febc2e" opacity="0.95"/>
+  <circle cx="114" cy="51" r="7" fill="#28c840" opacity="0.95"/>
+
+  <!-- Tab/filename -->
+  <rect x="140" y="38" width="160" height="26" rx="5" fill="rgba(255,255,255,0.07)"/>
+  <text x="160" y="55" fill="rgba(255,255,255,0.55)" font-size="11" font-family="monospace">square-pic.html</text>
+
+  <!-- Gutter -->
+  <rect x="32" y="70" width="52" height="310" fill="rgba(0,0,0,0.2)"/>
+
+  <!-- Code lines -->
+  <text x="52" y="92" text-anchor="end" fill="rgba(255,255,255,0.15)" font-size="10" font-family="monospace">1</text>
+  <rect x="80" y="82" width="451" height="13" rx="2" fill="rgba(255,255,255,0.13455898685254133)" opacity="1"/>
+  <text x="52" y="110" text-anchor="end" fill="rgba(255,255,255,0.15)" font-size="10" font-family="monospace">2</text>
+  <rect x="80" y="100" width="421" height="13" rx="2" fill="rgba(255,255,255,0.11571181496039773)" opacity="1"/>
+  <rect x="513" y="100" width="86" height="13" rx="2" fill="rgba(255,255,255,0.06472824635327054)" opacity="0.6"/>
+  <text x="52" y="128" text-anchor="end" fill="rgba(255,255,255,0.15)" font-size="10" font-family="monospace">3</text>
+  <rect x="100" y="118" width="644" height="13" rx="2" fill="rgba(255,255,255,0.09742342532552392)" opacity="1"/>
+  <text x="52" y="146" text-anchor="end" fill="rgba(255,255,255,0.15)" font-size="10" font-family="monospace">4</text>
+  <rect x="100" y="136" width="460" height="13" rx="2" fill="#fb923c" opacity="0.55"/>
+  <text x="52" y="164" text-anchor="end" fill="rgba(255,255,255,0.15)" font-size="10" font-family="monospace">5</text>
+  <rect x="60" y="154" width="336" height="13" rx="2" fill="rgba(255,255,255,0.08558994666337733)" opacity="1"/>
+  <text x="52" y="182" text-anchor="end" fill="rgba(255,255,255,0.15)" font-size="10" font-family="monospace">6</text>
+  <rect x="100" y="172" width="562" height="13" rx="2" fill="rgba(255,255,255,0.10559816592503296)" opacity="1"/>
+  <text x="52" y="200" text-anchor="end" fill="rgba(255,255,255,0.15)" font-size="10" font-family="monospace">7</text>
+  <rect x="100" y="190" width="620" height="13" rx="2" fill="rgba(255,255,255,0.136618354040342)" opacity="1"/>
+  <text x="52" y="218" text-anchor="end" fill="rgba(255,255,255,0.15)" font-size="10" font-family="monospace">8</text>
+  <rect x="60" y="208" width="199" height="13" rx="2" fill="#fb923c" opacity="0.55"/>
+  <text x="52" y="236" text-anchor="end" fill="rgba(255,255,255,0.15)" font-size="10" font-family="monospace">9</text>
+  <rect x="100" y="226" width="160" height="13" rx="2" fill="rgba(255,255,255,0.10974796100746559)" opacity="1"/>
+  <text x="52" y="254" text-anchor="end" fill="rgba(255,255,255,0.15)" font-size="10" font-family="monospace">10</text>
+  <rect x="80" y="244" width="258" height="13" rx="2" fill="rgba(255,255,255,0.13398361556091895)" opacity="1"/>
+  <rect x="350" y="244" width="54" height="13" rx="2" fill="rgba(255,255,255,0.06525220439425954)" opacity="0.6"/>
+  <text x="52" y="272" text-anchor="end" fill="rgba(255,255,255,0.15)" font-size="10" font-family="monospace">11</text>
+  <rect x="100" y="262" width="406" height="13" rx="2" fill="rgba(255,255,255,0.12363927680618113)" opacity="1"/>
+  <rect x="518" y="262" width="98" height="13" rx="2" fill="rgba(255,255,255,0.08534271441990107)" opacity="0.6"/>
+  <text x="52" y="290" text-anchor="end" fill="rgba(255,255,255,0.15)" font-size="10" font-family="monospace">12</text>
+  <rect x="100" y="280" width="547" height="13" rx="2" fill="#fb923c" opacity="0.55"/>
+  <text x="52" y="308" text-anchor="end" fill="rgba(255,255,255,0.15)" font-size="10" font-family="monospace">13</text>
+  <rect x="100" y="298" width="408" height="13" rx="2" fill="rgba(255,255,255,0.1021181478263154)" opacity="1"/>
+  <text x="52" y="326" text-anchor="end" fill="rgba(255,255,255,0.15)" font-size="10" font-family="monospace">14</text>
+  <rect x="80" y="316" width="345" height="13" rx="2" fill="rgba(255,255,255,0.09745919316016585)" opacity="1"/>
+
+  <!-- Big dimmed project name in center -->
+  <text x="400" y="295" text-anchor="middle" fill="rgba(255,255,255,0.05)" font-size="52" font-weight="900" font-family="system-ui,sans-serif" letter-spacing="-2">Square Pic</text>
+
+  <!-- Bottom info bar -->
+  <rect x="0" y="400" width="800" height="100" fill="rgba(0,0,0,0.55)"/>
+
+  <!-- Accent line -->
+  <rect x="0" y="400" width="800" height="3" fill="url(#bar)"/>
+
+  <!-- Author initials circle -->
+  <circle cx="72" cy="450" r="28" fill="#fb923c" opacity="0.18"/>
+  <circle cx="72" cy="450" r="22" fill="#fb923c" opacity="0.22"/>
+  <text x="72" y="456" text-anchor="middle" fill="#fb923c" font-size="15" font-weight="800" font-family="system-ui,sans-serif">MK</text>
+
+  <!-- Project name -->
+  <text x="112" y="440" fill="rgba(255,255,255,0.92)" font-size="17" font-weight="800" font-family="system-ui,sans-serif" letter-spacing="-0.5">Square Pic</text>
+
+  <!-- Tag pills -->
+  <rect x="112" y="455" width="44" height="20" rx="10" fill="#fb923c" opacity="0.22"/>
+  <text x="134" y="469" text-anchor="middle" fill="#fb923c" font-size="10" font-weight="700" font-family="system-ui,sans-serif">HTML</text>
+
+  <rect x="162" y="455" width="37" height="20" rx="10" fill="rgba(255,255,255,0.08)"/>
+  <text x="180.5" y="469" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="10" font-weight="600" font-family="system-ui,sans-serif">CSS</text>
+
+  <rect x="205" y="455" width="86" height="20" rx="10" fill="rgba(255,255,255,0.06)"/>
+  <text x="248" y="469" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="10" font-weight="600" font-family="system-ui,sans-serif">JAVASCRIPT</text>
+</svg>
