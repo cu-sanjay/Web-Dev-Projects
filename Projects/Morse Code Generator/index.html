@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morse Code Challenge</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Morse Code Challenge</h1>
+
+    <!-- Text to Morse -->
+
+    <section class="card">
+
+        <h2>Text → Morse</h2>
+
+        <textarea
+            id="textInput"
+            placeholder="Enter text..."
+        ></textarea>
+
+        <button id="convertBtn">
+            Convert to Morse
+        </button>
+
+        <div id="morseOutput" class="output"></div>
+
+        <div class="button-row">
+            <button id="copyBtn">
+                Copy Morse
+            </button>
+
+            <button id="playBtn">
+                Play Morse
+            </button>
+        </div>
+
+    </section>
+
+    <!-- Morse to Text -->
+
+    <section class="card">
+
+        <h2>Morse → Text</h2>
+
+        <textarea
+            id="morseInput"
+            placeholder="Enter Morse code..."
+        ></textarea>
+
+        <button id="decodeBtn">
+            Decode
+        </button>
+
+        <div id="textOutput" class="output"></div>
+
+    </section>
+
+    <!-- Challenge -->
+
+    <section class="card">
+
+        <h2>Decode Challenge</h2>
+
+        <div id="challengeCode" class="challenge"></div>
+
+        <input
+            type="text"
+            id="challengeAnswer"
+            placeholder="Your answer"
+        >
+
+        <div class="button-row">
+
+            <button id="submitChallenge">
+                Submit
+            </button>
+
+            <button id="newChallenge">
+                New Challenge
+            </button>
+
+        </div>
+
+        <div id="challengeResult"></div>
+
+    </section>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
