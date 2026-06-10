@@ -1,0 +1,57 @@
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;background:#05070c;color:#e2e8f0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;font-size:13px;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:#475569;border-radius:4px}
+#app{min-height:100vh;display:flex;flex-direction:column;gap:10px;padding:12px;max-width:1100px;margin:0 auto}
+
+#topBar{display:flex;align-items:center;gap:8px 18px;padding:10px 16px;background:rgba(255,255,255,0.01);border:1px solid rgba(255,255,255,0.03);border-radius:10px;backdrop-filter:blur(12px);flex-wrap:wrap}
+#brand{font-size:13px;font-weight:700;color:#00f0ff;white-space:nowrap;margin-right:auto}
+.tel-item{display:flex;align-items:center;gap:5px;font-size:10px}
+.tel-label{color:#475569;text-transform:uppercase;letter-spacing:0.3px}
+.tel-value{font-weight:700;font-family:'SF Mono','Consolas',monospace;color:#00f0ff}
+
+#main{flex:1;display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;min-height:0}
+
+.panel{background:rgba(255,255,255,0.01);border:1px solid rgba(255,255,255,0.03);border-radius:10px;padding:14px;backdrop-filter:blur(12px);display:flex;flex-direction:column;gap:8px;overflow-y:auto}
+.panel-title{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#475569}
+
+.flabel{display:block;font-size:10px;font-weight:600;color:#64748b;margin-top:6px;margin-bottom:2px}
+.fsub{font-weight:400;color:#475569}
+#goalForm input{width:100%;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);border-radius:5px;padding:7px 9px;font-size:12px;font-family:inherit;color:#e2e8f0;outline:none;transition:border-color 0.12s}
+#goalForm input:focus{border-color:#00f0ff}
+#addBtn{width:100%;margin-top:10px;padding:8px;border:none;border-radius:5px;background:#00f0ff;color:#05070c;font-weight:600;font-size:11px;cursor:pointer;font-family:inherit;transition:all 0.12s}
+#addBtn:hover{box-shadow:0 4px 16px rgba(0,240,255,0.15)}
+
+#canvasWrap{flex:1;display:flex;align-items:center;justify-content:center;min-height:0}
+#ringCanvas{width:100%;height:100%;max-width:260px;max-height:260px;display:block}
+
+#goalList{display:flex;flex-direction:column;gap:6px}
+.goal-card{padding:10px;background:rgba(255,255,255,0.01);border:1px solid rgba(255,255,255,0.03);border-radius:6px;display:flex;flex-direction:column;gap:4px;transition:all 0.2s}
+.goal-card.topped{border-color:#10b981}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-4px)}40%{transform:translateX(4px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
+.goal-card.shake{animation:shake 0.3s ease}
+.goal-name{font-size:12px;font-weight:700;color:#e2e8f0}
+.goal-stats{font-size:10px;color:#64748b;font-family:monospace;display:flex;gap:8px;flex-wrap:wrap}
+.goal-bar{height:4px;background:rgba(255,255,255,0.04);border-radius:4px;overflow:hidden}
+.goal-fill{height:100%;width:0%;border-radius:4px;transition:width 0.3s}
+.goal-topup{display:flex;gap:4px;margin-top:2px}
+.goal-topup input{flex:1;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);border-radius:3px;padding:4px 6px;font-size:10px;font-family:inherit;color:#e2e8f0;outline:none;width:60px}
+.goal-topup input:focus{border-color:#00f0ff}
+.goal-topup button{background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.15);color:#10b981;padding:3px 8px;border-radius:3px;font-size:10px;cursor:pointer;font-family:inherit;transition:all 0.12s}
+.goal-topup button:hover{background:rgba(16,185,129,0.15)}
+.goal-del{background:none;border:none;color:#475569;cursor:pointer;font-size:11px;padding:0 4px;margin-left:auto;transition:color 0.12s}
+.goal-del:hover{color:#ef4444}
+
+.empty-state{display:flex;align-items:center;justify-content:center;flex:1;color:#475569;font-size:11px}
+
+#footer{display:flex;gap:8px;flex-wrap:wrap}
+#footer button{flex:1;min-width:100px;padding:8px 14px;border-radius:5px;font-size:10px;font-weight:600;cursor:pointer;font-family:inherit;border:1px solid rgba(255,255,255,0.03);background:rgba(255,255,255,0.02);color:#e2e8f0;transition:all 0.12s}
+#footer button:hover{border-color:#00f0ff;color:#00f0ff}
+
+@media (max-width:720px){
+  #app{padding:8px;gap:6px}
+  #main{grid-template-columns:1fr}
+  #ringCanvas{max-width:200px;max-height:200px}
+  .panel{max-height:300px}
+}

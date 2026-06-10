@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finance Tools — Savings Goal Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <div id="topBar">
+      <div id="brand">Savings Tracker</div>
+      <div class="tel-item"><span class="tel-label">Saved</span><span id="telSaved" class="tel-value">$0</span></div>
+      <div class="tel-item"><span class="tel-label">Target</span><span id="telTarget" class="tel-value">$0</span></div>
+      <div class="tel-item"><span class="tel-label">Progress</span><span id="telPct" class="tel-value">0%</span></div>
+      <div class="tel-item"><span class="tel-label">Horizon</span><span id="telHorizon" class="tel-value">—</span></div>
+    </div>
+
+    <div id="main">
+      <div id="leftPanel" class="panel">
+        <div class="panel-title">New Goal</div>
+        <form id="goalForm" autocomplete="off">
+          <label class="flabel">Goal Name</label>
+          <input id="fName" type="text" placeholder="e.g. Emergency Fund" maxlength="60">
+          <label class="flabel">Target Amount <span class="fsub">($)</span></label>
+          <input id="fTarget" type="number" placeholder="e.g. 50000" min="1">
+          <label class="flabel">Current Savings <span class="fsub">($)</span></label>
+          <input id="fCurrent" type="number" placeholder="e.g. 5000" min="0">
+          <label class="flabel">Monthly Contribution <span class="fsub">($)</span></label>
+          <input id="fMonthly" type="number" placeholder="e.g. 1000" min="1">
+          <label class="flabel">Deadline <span class="fsub">(months)</span></label>
+          <input id="fDeadline" type="number" placeholder="e.g. 48" min="1" max="600">
+          <button type="submit" id="addBtn">Instantiate Financial Target</button>
+        </form>
+      </div>
+
+      <div id="centerPanel" class="panel">
+        <div class="panel-title">Progress Overview</div>
+        <div id="canvasWrap"><canvas id="ringCanvas"></canvas></div>
+      </div>
+
+      <div id="rightPanel" class="panel">
+        <div class="panel-title">Active Goals</div>
+        <div id="goalList"></div>
+        <div id="goalEmpty" class="empty-state">No goals yet</div>
+      </div>
+    </div>
+
+    <div id="footer">
+      <button id="flushBtn">Flush Ledger Arrays</button>
+      <button id="sampleBtn">Load Sample Simulation Portfolios</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
