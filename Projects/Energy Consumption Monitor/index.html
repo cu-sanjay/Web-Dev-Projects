@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Energy Consumption Monitor</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Top Telemetry -->
+    <div id="topBar">
+      <div id="brand">Energy Monitor</div>
+      <div class="tel-item"><span class="tel-label">Daily kWh</span><span id="telDaily" class="tel-value">0.00</span></div>
+      <div class="tel-item"><span class="tel-label">Monthly Bill</span><span id="telBill" class="tel-value">$0.00</span></div>
+      <div class="tel-item"><span class="tel-label">Carbon</span><span id="telCarbon" class="tel-value">0.00 kg</span></div>
+      <div class="tel-item"><span class="tel-label">Status</span><span id="telStatus" class="tel-value status-ok">Optimal</span></div>
+    </div>
+
+    <!-- Main Grid -->
+    <div id="mainGrid">
+      <!-- Left: Add Appliance Form -->
+      <div id="leftPanel" class="panel">
+        <div class="panel-title">Add Appliance Load</div>
+        <form id="applianceForm" autocomplete="off">
+          <label class="flabel">Appliance Name</label>
+          <input id="fName" type="text" placeholder="e.g. Smart HVAC" maxlength="60">
+          <label class="flabel">Power Draw <span class="fsub">(watts)</span></label>
+          <input id="fWatts" type="number" placeholder="e.g. 1500" min="1" max="99999">
+          <label class="flabel">Run Time <span class="fsub">(hours/day)</span></label>
+          <input id="fHours" type="number" placeholder="e.g. 8" min="0.5" max="24" step="0.5">
+          <button type="submit" id="addBtn">Add Appliance</button>
+        </form>
+        <div id="applianceList"></div>
+      </div>
+
+      <!-- Center: Canvas -->
+      <div id="centerPanel" class="panel">
+        <div class="panel-title">Distribution</div>
+        <div id="canvasWrap"><canvas id="chartCanvas"></canvas></div>
+      </div>
+
+      <!-- Right: Advice -->
+      <div id="rightPanel" class="panel">
+        <div class="panel-title">Optimization Advice</div>
+        <div id="adviceList"></div>
+        <div id="adviceEmpty" class="empty-state">All loads are within optimal thresholds</div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer">
+      <button id="flushBtn">Flush Data Cache</button>
+      <button id="sampleBtn">Load Sample Simulation Eco-Data</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

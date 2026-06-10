@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200">
+  <rect width="320" height="200" fill="#05070c"/>
+  <!-- top bar -->
+  <rect x="4" y="4" width="312" height="18" rx="6" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="10" y="16" font-family="system-ui,sans-serif" font-size="8" font-weight="700" fill="#00f0ff">Energy Monitor</text>
+  <text x="98" y="16" font-family="system-ui,sans-serif" font-size="5" fill="#64748b">Daily kWh</text>
+  <text x="130" y="16" font-family="monospace" font-size="6" font-weight="700" fill="#00f0ff">42.75</text>
+  <text x="172" y="16" font-family="system-ui,sans-serif" font-size="5" fill="#64748b">Bill</text>
+  <text x="192" y="16" font-family="monospace" font-size="6" font-weight="700" fill="#00f0ff">$153.90</text>
+  <text x="236" y="16" font-family="system-ui,sans-serif" font-size="5" fill="#64748b">Carbon</text>
+  <text x="266" y="16" font-family="monospace" font-size="6" font-weight="700" fill="#00f0ff">36.3kg</text>
+  <!-- left panel -->
+  <rect x="4" y="26" width="100" height="146" rx="6" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="10" y="36" font-family="system-ui,sans-serif" font-size="5" font-weight="700" fill="#475569" letter-spacing="0.5">ADD APPLIANCE</text>
+  <rect x="8" y="42" width="92" height="14" rx="3" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="12" y="53" font-family="system-ui,sans-serif" font-size="5" fill="#64748b">Appliance Name</text>
+  <rect x="8" y="60" width="92" height="14" rx="3" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="12" y="71" font-family="system-ui,sans-serif" font-size="5" fill="#64748b">Power (watts)</text>
+  <rect x="8" y="78" width="92" height="14" rx="3" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="12" y="89" font-family="system-ui,sans-serif" font-size="5" fill="#64748b">Hours/day</text>
+  <rect x="8" y="98" width="92" height="14" rx="4" fill="#00f0ff"/>
+  <text x="54" y="109" font-family="system-ui,sans-serif" font-size="6" font-weight="600" fill="#05070c" text-anchor="middle">Add Appliance</text>
+  <!-- appliance list -->
+  <rect x="4" y="120" width="100" height="52" fill="none"/>
+  <rect x="6" y="120" width="96" height="12" rx="3" fill="rgba(255,255,255,0.01)"/>
+  <rect x="6" y="134" width="96" height="12" rx="3" fill="rgba(255,255,255,0.01)"/>
+  <rect x="6" y="148" width="96" height="12" rx="3" fill="rgba(255,255,255,0.01)"/>
+  <text x="10" y="129" font-family="system-ui,sans-serif" font-size="5" fill="#e2e8f0">Smart HVAC</text>
+  <text x="80" y="129" font-family="monospace" font-size="5" fill="#64748b">21.0</text>
+  <text x="10" y="143" font-family="system-ui,sans-serif" font-size="5" fill="#e2e8f0">Dev Rig</text>
+  <text x="80" y="143" font-family="monospace" font-size="5" fill="#64748b">6.0</text>
+  <text x="10" y="157" font-family="system-ui,sans-serif" font-size="5" fill="#e2e8f0">LED Matrix</text>
+  <text x="80" y="157" font-family="monospace" font-size="5" fill="#64748b">1.4</text>
+  <!-- center donut -->
+  <rect x="108" y="26" width="100" height="146" rx="6" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="114" y="36" font-family="system-ui,sans-serif" font-size="5" font-weight="700" fill="#475569" letter-spacing="0.5">DISTRIBUTION</text>
+  <!-- donut arcs -->
+  <circle cx="158" cy="92" r="42" fill="none" stroke="rgba(255,255,255,0.02)" stroke-width="1"/>
+  <path d="M 158 50 A 42 42 0 0 1 190 70" fill="none" stroke="#00f0ff" stroke-width="14"/>
+  <path d="M 190 70 A 42 42 0 0 1 195 118" fill="none" stroke="#10b981" stroke-width="14"/>
+  <path d="M 195 118 A 42 42 0 0 1 140 130" fill="none" stroke="#f59e0b" stroke-width="14"/>
+  <path d="M 140 130 A 42 42 0 0 1 130 90" fill="none" stroke="#ef4444" stroke-width="14"/>
+  <path d="M 130 90 A 42 42 0 0 1 158 50" fill="none" stroke="#8b5cf6" stroke-width="14"/>
+  <!-- center text -->
+  <text x="158" y="92" font-family="monospace" font-size="9" font-weight="700" fill="#00f0ff" text-anchor="middle">42.8</text>
+  <text x="158" y="102" font-family="system-ui,sans-serif" font-size="4" fill="#64748b" text-anchor="middle">kWh</text>
+  <!-- right advice -->
+  <rect x="212" y="26" width="104" height="146" rx="6" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="218" y="36" font-family="system-ui,sans-serif" font-size="5" font-weight="700" fill="#475569" letter-spacing="0.5">OPTIMIZATION</text>
+  <rect x="216" y="42" width="96" height="30" rx="3" fill="rgba(255,255,255,0.01)" stroke="#f59e0b" stroke-width="0.5"/>
+  <text x="222" y="52" font-family="system-ui,sans-serif" font-size="5" font-weight="700" fill="#f59e0b">Smart HVAC</text>
+  <text x="222" y="62" font-family="system-ui,sans-serif" font-size="4" fill="#94a3b8">49% of budget — reduce run time</text>
+  <rect x="216" y="76" width="96" height="26" rx="3" fill="rgba(255,255,255,0.01)" stroke="#f59e0b" stroke-width="0.5"/>
+  <text x="222" y="86" font-family="system-ui,sans-serif" font-size="5" font-weight="700" fill="#f59e0b">Water Heater</text>
+  <text x="222" y="96" font-family="system-ui,sans-serif" font-size="4" fill="#94a3b8">3000W load — schedule off-peak</text>
+  <rect x="216" y="106" width="96" height="26" rx="3" fill="rgba(255,255,255,0.01)" stroke="#f59e0b" stroke-width="0.5"/>
+  <text x="222" y="116" font-family="system-ui,sans-serif" font-size="5" font-weight="700" fill="#f59e0b">Server Vault</text>
+  <text x="222" y="126" font-family="system-ui,sans-serif" font-size="4" fill="#94a3b8">24/7 draw — auto power cycling</text>
+  <!-- footer -->
+  <rect x="4" y="176" width="312" height="20" rx="5" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.02)" stroke-width="0.5"/>
+  <rect x="6" y="177" width="56" height="18" rx="3" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="10" y="190" font-family="system-ui,sans-serif" font-size="6" fill="#e2e8f0">Flush Cache</text>
+  <rect x="66" y="177" width="80" height="18" rx="3" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="70" y="190" font-family="system-ui,sans-serif" font-size="6" fill="#e2e8f0">Load Sample Data</text>
+</svg>
