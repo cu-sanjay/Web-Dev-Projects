@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Color Blindness Simulator</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+  <defs>
+    <filter id="vision-normal" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+      <feColorMatrix type="matrix" values="
+        1 0 0 0 0
+        0 1 0 0 0
+        0 0 1 0 0
+        0 0 0 1 0" />
+    </filter>
+    <filter id="vision-protanopia" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+      <feColorMatrix type="matrix" values="
+        0.567 0.433 0.000 0 0
+        0.558 0.442 0.000 0 0
+        0.000 0.242 0.758 0 0
+        0.000 0.000 0.000 1 0" />
+    </filter>
+    <filter id="vision-deuteranopia" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+      <feColorMatrix type="matrix" values="
+        0.625 0.375 0.000 0 0
+        0.700 0.300 0.000 0 0
+        0.000 0.300 0.700 0 0
+        0.000 0.000 0.000 1 0" />
+    </filter>
+    <filter id="vision-tritanopia" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+      <feColorMatrix type="matrix" values="
+        0.950 0.050 0.000 0 0
+        0.000 0.433 0.567 0 0
+        0.000 0.475 0.525 0 0
+        0.000 0.000 0.000 1 0" />
+    </filter>
+    <filter id="vision-achromatopsia" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+      <feColorMatrix type="matrix" values="
+        0.299 0.587 0.114 0 0
+        0.299 0.587 0.114 0 0
+        0.299 0.587 0.114 0 0
+        0.000 0.000 0.000 1 0" />
+    </filter>
+  </defs>
+</svg>
+
+<div id="app">
+  <aside class="panel left-panel">
+    <div class="panel-header">
+      <div class="brand">ACCESSIBILITY ENG</div>
+      <div class="brand-sub">// Vision Deficiency Lab</div>
+    </div>
+
+    <div class="vision-matrix" id="vision-matrix">
+      <button class="vision-btn active" data-vision="normal">
+        <span class="vision-icon">◉</span>
+        <span class="vision-name">Normal Trichromacy</span>
+        <span class="vision-desc">Standard clear state</span>
+      </button>
+      <button class="vision-btn" data-vision="protanopia">
+        <span class="vision-icon">◐</span>
+        <span class="vision-name">Protanopia</span>
+        <span class="vision-desc">Red-blind / L-cone deficit</span>
+      </button>
+      <button class="vision-btn" data-vision="deuteranopia">
+        <span class="vision-icon">◑</span>
+        <span class="vision-name">Deuteranopia</span>
+        <span class="vision-desc">Green-blind / M-cone deficit</span>
+      </button>
+      <button class="vision-btn" data-vision="tritanopia">
+        <span class="vision-icon">◒</span>
+        <span class="vision-name">Tritanopia</span>
+        <span class="vision-desc">Blue-blind / S-cone deficit</span>
+      </button>
+      <button class="vision-btn" data-vision="achromatopsia">
+        <span class="vision-icon">◓</span>
+        <span class="vision-name">Achromatopsia</span>
+        <span class="vision-desc">Total color-blindness</span>
+      </button>
+    </div>
+
+    <div class="telemetry-panel" id="telemetry">
+      <div class="telem-title">DIAGNOSTIC TELEMETRY</div>
+      <div class="telem-card">
+        <span class="telem-label">Deficit Type</span>
+        <span id="telem-deficit" class="telem-value">None (Trichromacy)</span>
+      </div>
+      <div class="telem-card">
+        <span class="telem-label">Estimated Prevalence</span>
+        <span id="telem-prevalence" class="telem-value">~100% of population</span>
+      </div>
+      <div class="telem-card">
+        <span class="telem-label">Affected Photoreceptor</span>
+        <span id="telem-receptor" class="telem-value">None — all cones active</span>
+      </div>
+      <div class="telem-card">
+        <span class="telem-label">Confusion Axis</span>
+        <span id="telem-axis" class="telem-value">—</span>
+      </div>
+      <div class="telem-card">
+        <span class="telem-label">Accessibility Check</span>
+        <span id="telem-access" class="telem-value telem-access-ok">PASS — Full color differentiation</span>
+      </div>
+    </div>
+
+    <div class="action-buttons">
+      <button id="btn-axis-guide" class="action-btn secondary">TOGGLE CONFUSION AXIS GUIDE</button>
+      <button id="btn-reset" class="action-btn secondary">RESET TO STANDARDIZED VISION</button>
+    </div>
+  </aside>
+
+  <main class="viewport">
+    <header class="viewport-header">
+      <span id="sim-source" class="sim-source">SIMULATION SOURCE: ABSTRACT VECTOR ART GRID</span>
+      <span id="sim-filter" class="sim-filter">FILTER: NONE (IDENTITY)</span>
+    </header>
+    <div class="simulation-stage" id="simulation-stage">
+      <div class="sim-content" id="sim-content">
+        <!-- Color gradient bars -->
+        <div class="color-row">
+          <div class="gradient-bar" style="background:linear-gradient(90deg,#ff0000,#ff8800,#ffff00,#00ff00,#0088ff,#0000ff,#8800ff)"></div>
+        </div>
+
+        <!-- Ishihara-inspired color circles -->
+        <div class="circle-grid">
+          <div class="isihara-circle" style="--c1:#ff4444;--c2:#44ff44;--c3:#4488ff">
+            <svg viewBox="0 0 100 100" width="100" height="100">
+              <circle cx="50" cy="50" r="48" fill="var(--c1)" opacity="0.3"/>
+              <circle cx="50" cy="50" r="32" fill="var(--c2)" opacity="0.35"/>
+              <circle cx="50" cy="50" r="18" fill="var(--c3)" opacity="0.4"/>
+              <circle cx="30" cy="40" r="8" fill="var(--c1)" opacity="0.5"/>
+              <circle cx="70" cy="40" r="8" fill="var(--c2)" opacity="0.5"/>
+              <circle cx="50" cy="65" r="8" fill="var(--c3)" opacity="0.5"/>
+            </svg>
+          </div>
+          <div class="isihara-circle" style="--c1:#ffaa00;--c2:#ff4488;--c3:#44ffaa">
+            <svg viewBox="0 0 100 100" width="100" height="100">
+              <circle cx="50" cy="50" r="48" fill="var(--c1)" opacity="0.3"/>
+              <circle cx="40" cy="45" r="28" fill="var(--c2)" opacity="0.35"/>
+              <circle cx="60" cy="55" r="20" fill="var(--c3)" opacity="0.4"/>
+              <circle cx="50" cy="50" r="8" fill="var(--c1)" opacity="0.5"/>
+            </svg>
+          </div>
+          <div class="isihara-circle" style="--c1:#8844ff;--c2:#44ffcc;--c3:#ff6644">
+            <svg viewBox="0 0 100 100" width="100" height="100">
+              <circle cx="50" cy="50" r="48" fill="var(--c1)" opacity="0.25"/>
+              <circle cx="50" cy="35" r="22" fill="var(--c2)" opacity="0.35"/>
+              <circle cx="50" cy="65" r="22" fill="var(--c3)" opacity="0.35"/>
+              <circle cx="35" cy="50" r="10" fill="var(--c1)" opacity="0.3"/>
+              <circle cx="65" cy="50" r="10" fill="var(--c2)" opacity="0.3"/>
+            </svg>
+          </div>
+          <div class="isihara-circle" style="--c1:#ff2244;--c2:#22ff88;--c3:#8822ff">
+            <svg viewBox="0 0 100 100" width="100" height="100">
+              <circle cx="50" cy="50" r="48" fill="var(--c1)" opacity="0.3"/>
+              <circle cx="50" cy="50" r="30" fill="var(--c2)" opacity="0.3"/>
+              <circle cx="50" cy="50" r="15" fill="var(--c3)" opacity="0.35"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Geometric color blocks -->
+        <div class="color-grid-art">
+          <div class="art-cell" style="background:#ff3333"></div>
+          <div class="art-cell" style="background:#ff8833"></div>
+          <div class="art-cell" style="background:#ffdd33"></div>
+          <div class="art-cell" style="background:#33ff33"></div>
+          <div class="art-cell" style="background:#33ddff"></div>
+          <div class="art-cell" style="background:#3366ff"></div>
+          <div class="art-cell" style="background:#8833ff"></div>
+          <div class="art-cell" style="background:#ff33aa"></div>
+          <div class="art-cell" style="background:#33ffaa"></div>
+          <div class="art-cell" style="background:#ff6633"></div>
+          <div class="art-cell" style="background:#33ff66"></div>
+          <div class="art-cell" style="background:#6633ff"></div>
+          <div class="art-cell" style="background:#ff33ff"></div>
+          <div class="art-cell" style="background:#33ffff"></div>
+          <div class="art-cell" style="background:#ffff33"></div>
+          <div class="art-cell" style="background:#ff8833"></div>
+        </div>
+
+        <!-- Color test text samples -->
+        <div class="color-text-samples">
+          <div class="text-sample" style="color:#ff3333;background:#1a0a0a">Red Text on Dark</div>
+          <div class="text-sample" style="color:#33ff33;background:#0a1a0a">Green Text on Dark</div>
+          <div class="text-sample" style="color:#3388ff;background:#0a0a1a">Blue Text on Dark</div>
+          <div class="text-sample" style="color:#ffdd00;background:#1a1a0a">Yellow Text on Dark</div>
+          <div class="text-sample" style="color:#ffffff;background:#ff4444">White on Red</div>
+          <div class="text-sample" style="color:#ffffff;background:#44ff44">White on Green</div>
+          <div class="text-sample" style="color:#ffffff;background:#4444ff">White on Blue</div>
+          <div class="text-sample" style="color:#111111;background:#ffdd44">Dark on Yellow</div>
+          <div class="text-sample" style="color:#111111;background:#44ffaa">Dark on Teal</div>
+          <div class="text-sample" style="color:#ffffff;background:#ff44ff">White on Magenta</div>
+        </div>
+
+        <!-- Color confusion zone markers -->
+        <div class="confusion-zone" id="confusion-zone">
+          <span class="confusion-label">RED-GREEN CONFUSION ZONE</span>
+          <div class="confusion-bar">
+            <span class="confusion-seg" style="background:#ff0000"></span>
+            <span class="confusion-seg" style="background:#ff4400"></span>
+            <span class="confusion-seg" style="background:#ff8800"></span>
+            <span class="confusion-seg" style="background:#ffaa00"></span>
+            <span class="confusion-seg" style="background:#ffcc00"></span>
+            <span class="confusion-seg" style="background:#44ff00"></span>
+            <span class="confusion-seg" style="background:#00ff44"></span>
+            <span class="confusion-seg" style="background:#00ff88"></span>
+            <span class="confusion-seg" style="background:#00ffcc"></span>
+            <span class="confusion-seg" style="background:#00ffff"></span>
+          </div>
+        </div>
+
+        <!-- Overlapping transparency test -->
+        <div class="blend-test">
+          <div class="blend-circle" style="background:rgba(255,0,0,0.6);left:10%"></div>
+          <div class="blend-circle" style="background:rgba(0,255,0,0.6);left:45%"></div>
+          <div class="blend-circle" style="background:rgba(0,0,255,0.6);left:80%"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
