@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bug Hunt Game</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <div class="app">
+
+    <!-- HEADER -->
+    <header class="header">
+      <h1>🐞 Bug Hunt Game</h1>
+      <p>Find bugs. Fix code. Level up your logic.</p>
+    </header>
+
+    <!-- GAME CONTAINER -->
+    <main class="card">
+
+      <div class="meta">
+        <span id="language">Language: JavaScript</span>
+        <span id="level">Level: Easy</span>
+      </div>
+
+      <div id="question" class="question"></div>
+
+      <pre id="code-block" class="code"></pre>
+
+      <div id="options" class="options"></div>
+
+      <div id="result" class="result"></div>
+
+      <button class="next-btn" onclick="nextQuestion()">
+        Next Challenge →
+      </button>
+
+    </main>
+
+    <footer class="footer">
+      Built for coding practice ✨
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

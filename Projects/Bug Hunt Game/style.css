@@ -1,0 +1,124 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  background: radial-gradient(circle at top, #1e293b, #0f172a);
+  color: #e2e8f0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* APP WRAPPER */
+.app {
+  width: 90%;
+  max-width: 750px;
+  text-align: center;
+}
+
+/* HEADER */
+.header h1 {
+  font-size: 32px;
+  color: #38bdf8;
+}
+
+.header p {
+  color: #94a3b8;
+  margin-top: 5px;
+}
+
+/* CARD */
+.card {
+  margin-top: 25px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+}
+
+/* META INFO */
+.meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  font-size: 14px;
+  color: #60a5fa;
+}
+
+/* QUESTION */
+.question {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: #f1f5f9;
+}
+
+/* CODE BLOCK */
+.code {
+  background: #0b1220;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: left;
+  color: #fbbf24;
+  overflow-x: auto;
+  margin-bottom: 15px;
+  border-left: 4px solid #38bdf8;
+}
+
+/* OPTIONS */
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.options button {
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(148, 163, 184, 0.1);
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.options button:hover {
+  background: rgba(56, 189, 248, 0.2);
+  transform: scale(1.02);
+}
+
+/* RESULT */
+.result {
+  margin-top: 12px;
+  font-weight: bold;
+}
+
+/* NEXT BUTTON */
+.next-btn {
+  margin-top: 15px;
+  padding: 10px 15px;
+  background: linear-gradient(90deg, #38bdf8, #0ea5e9);
+  border: none;
+  border-radius: 10px;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.next-btn:hover {
+  transform: scale(1.05);
+}
+
+/* FOOTER */
+.footer {
+  margin-top: 15px;
+  font-size: 12px;
+  color: #64748b;
+}
