@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEM-SPROUT // Memory Management Simulator</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="dashboard">
+        <aside class="left-panel">
+            <div class="brand">
+                <div class="brand-title">MEM-SPROUT</div>
+                <div class="brand-sub">Memory Management Simulator</div>
+            </div>
+
+            <div class="section">
+                <h3>Allocation Algorithm</h3>
+                <div class="algo-tabs">
+                    <button data-algo="first-fit" class="active">First Fit</button>
+                    <button data-algo="best-fit">Best Fit</button>
+                    <button data-algo="worst-fit">Worst Fit</button>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>RAM Configuration</h3>
+                <label class="input-label">Block Sizes (KB, comma-separated)</label>
+                <input type="text" class="mono" id="ram-input" value="100, 500, 200, 300, 600">
+                <button class="btn-primary" id="init-ram">INITIALIZE RAM</button>
+            </div>
+
+            <div class="section">
+                <h3>Process Request Stream</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="input-label">Process ID</label>
+                        <input type="text" class="mono" id="pid-input" value="P1">
+                    </div>
+                    <div class="form-group">
+                        <label class="input-label">Size (KB)</label>
+                        <input type="number" class="mono" id="size-input" value="80" min="1">
+                    </div>
+                    <div class="form-group">
+                        <label class="input-label">Lifetime (steps)</label>
+                        <input type="number" class="mono" id="lifetime-input" value="5" min="1">
+                    </div>
+                </div>
+            </div>
+
+            <div class="section actions">
+                <button class="btn-accent" id="allocate-btn">ALLOCATE MEMORY</button>
+                <button class="btn-secondary" id="compact-btn">COMPACT RAM</button>
+                <button class="btn-secondary" id="step-btn">STEP CLOCK</button>
+                <button class="btn-danger" id="deallocate-btn">FLUSH ALL</button>
+                <button class="btn-secondary" id="export-btn">EXPORT CSV</button>
+            </div>
+
+            <div class="diagnostics" id="diagnostics">
+                <span class="diag-icon">&#9670;</span>
+                <span class="diag-text">AWAITING INITIALIZATION</span>
+            </div>
+        </aside>
+
+        <main class="right-panel">
+            <div class="stats-header">
+                <div class="stat">
+                    <span class="stat-label">Total Capacity</span>
+                    <span class="stat-value mono" id="total-capacity">0 KB</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Active Allocations</span>
+                    <span class="stat-value mono" id="active-allocations">0</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Clock Step</span>
+                    <span class="stat-value mono" id="clock-step">0</span>
+                </div>
+            </div>
+
+            <div class="ram-map-container">
+                <h3>Interactive RAM Map</h3>
+                <div class="ram-map" id="ram-map">
+                    <div class="empty-state">Initialize RAM to view memory map</div>
+                </div>
+            </div>
+
+            <div class="metrics-row">
+                <div class="metric-card">
+                    <div class="metric-label">Utilization (U)</div>
+                    <div class="metric-value mono" id="utilization">0%</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Internal Frag (F<sub>int</sub>)</div>
+                    <div class="metric-value mono" id="internal-frag">0 KB</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Free Space (F<sub>ext</sub>)</div>
+                    <div class="metric-value mono" id="free-space">0 KB</div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <h3>Utilization History</h3>
+                <div class="chart-wrap">
+                    <canvas id="util-chart"></canvas>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <h3>Heap Telemetry Log</h3>
+                <div class="table-wrap">
+                    <table id="telemetry-table">
+                        <thead>
+                            <tr>
+                                <th>Block</th>
+                                <th>Base</th>
+                                <th>Limit</th>
+                                <th>Size</th>
+                                <th>Status</th>
+                                <th>PID</th>
+                                <th>Waste</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body"></tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
