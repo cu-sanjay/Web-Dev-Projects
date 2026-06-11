@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PAGI-SPROUT // Page Replacement Simulator</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div id="app">
+    <aside id="left-panel">
+      <div class="brand">
+        <svg class="brand-icon" viewBox="0 0 32 32" width="32" height="32">
+          <path d="M16 4 C16 4 8 10 8 18 C8 22 12 26 16 26 C20 26 24 22 24 18 C24 10 16 4 16 4Z" fill="#1b3a24" opacity="0.85"/>
+          <path d="M16 8 C16 8 12 13 12 18 C12 21 14 23 16 23 C18 23 20 21 20 18 C20 13 16 8 16 8Z" fill="#2e7d32"/>
+          <line x1="16" y1="22" x2="16" y2="28" stroke="#1b3a24" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M12 26 Q16 30 20 26" stroke="#1b3a24" stroke-width="1" fill="none" stroke-linecap="round"/>
+        </svg>
+        <div class="brand-text">
+          <span class="brand-name">PAGI-SPROUT</span>
+          <span class="brand-sub">// Page Replacement Simulator</span>
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <div class="section-title">Algorithm Selection</div>
+        <div class="algo-tabs" id="algo-tabs">
+          <button class="algo-tab active" data-algo="fifo">
+            <span class="algo-indicator" style="background:#4caf50"></span>
+            <span class="algo-label">FIFO</span>
+            <span class="algo-desc">First-In-First-Out</span>
+          </button>
+          <button class="algo-tab" data-algo="lru">
+            <span class="algo-indicator" style="background:#009688"></span>
+            <span class="algo-label">LRU</span>
+            <span class="algo-desc">Least Recently Used</span>
+          </button>
+          <button class="algo-tab" data-algo="opt">
+            <span class="algo-indicator" style="background:#8d6e63"></span>
+            <span class="algo-label">OPT</span>
+            <span class="algo-desc">Optimal Page Replacement</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <div class="section-title">Cache Memory Configuration</div>
+        <div class="control-row">
+          <label for="frame-slider">Physical Frame Slots</label>
+          <div class="slider-group">
+            <input type="range" id="frame-slider" min="3" max="7" value="4">
+            <span id="frame-count-display">4</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <div class="section-title">Workload Injector</div>
+        <div class="control-row">
+          <label for="ref-string-input">Reference String</label>
+          <input type="text" id="ref-string-input" value="7, 0, 1, 2, 0, 3, 0, 4, 2, 3, 0, 3, 2" placeholder="e.g. 7, 0, 1, 2, 0, 3, ...">
+        </div>
+        <div class="presets">
+          <button class="preset-btn" data-preset="belady">Belady's Anomaly</button>
+          <button class="preset-btn" data-preset="locality">High Locality</button>
+          <button class="preset-btn" data-preset="cyclic">Cyclic Saturation</button>
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <div class="section-title">System Action Nodes</div>
+        <div class="action-buttons">
+          <button class="btn btn-primary" id="btn-run">RUN ENTIRE SEQUENCE</button>
+          <div class="btn-row">
+            <button class="btn btn-secondary" id="btn-step">STEP NEXT TICK</button>
+            <button class="btn btn-secondary" id="btn-prev">PREVIOUS STEP</button>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-danger" id="btn-flush">FLUSH CACHE MEMORY</button>
+            <button class="btn btn-accent" id="btn-export">EXPORT DIAGNOSTIC MATRICES (CSV)</button>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main id="right-panel">
+      <div class="diag-header">
+        <div class="diag-item">
+          <span class="diag-label">t</span>
+          <span class="diag-value diag-time" id="diag-time">0</span>
+        </div>
+        <div class="diag-item">
+          <span class="diag-label">Page</span>
+          <span class="diag-value diag-page" id="diag-page">-</span>
+        </div>
+        <div class="diag-item">
+          <span class="diag-label">Status</span>
+          <span class="diag-value diag-status" id="diag-status">
+            <span class="status-dot awaiting"></span>
+            AWAITING
+          </span>
+        </div>
+        <div class="diag-item">
+          <span class="diag-label">CHR</span>
+          <span class="diag-value" id="diag-chr">0%</span>
+        </div>
+        <div class="diag-item">
+          <span class="diag-label">PFR</span>
+          <span class="diag-value" id="diag-pfr">0%</span>
+        </div>
+      </div>
+
+      <div class="main-content">
+        <div class="trace-section">
+          <div class="section-header">
+            <span class="section-title">Step-by-Step Frame Trace Matrix</span>
+            <span class="section-badge" id="trace-info">No data</span>
+          </div>
+          <div class="trace-container" id="trace-container">
+            <div class="trace-empty">
+              <svg width="48" height="48" viewBox="0 0 48 48">
+                <rect x="4" y="4" width="40" height="40" rx="4" fill="none" stroke="#e2ebd9" stroke-width="2"/>
+                <rect x="10" y="10" width="28" height="28" rx="2" fill="#e8f5e9" stroke="#e2ebd9" stroke-width="1"/>
+                <text x="24" y="30" text-anchor="middle" fill="#a5c4a0" font-size="14" font-family="monospace">LOAD</text>
+              </svg>
+              <p>Load a reference string and run the simulation</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="telemetry-section">
+          <div class="metric-cards">
+            <div class="metric-card">
+              <span class="metric-label">Total Page Faults</span>
+              <span class="metric-value" id="metric-faults">0</span>
+            </div>
+            <div class="metric-card">
+              <span class="metric-label">Cache Hit Ratio</span>
+              <span class="metric-value" id="metric-chr">0%</span>
+            </div>
+            <div class="metric-card">
+              <span class="metric-label">Variance vs FIFO</span>
+              <span class="metric-value" id="metric-variance">
+                <span class="variance-neutral">0</span>
+              </span>
+            </div>
+          </div>
+          <div class="chart-wrapper">
+            <canvas id="fault-chart"></canvas>
+          </div>
+        </div>
+
+        <div class="log-section">
+          <div class="section-header">
+            <span class="section-title">Execution Telemetry Log</span>
+            <span class="section-badge" id="log-info">0 entries</span>
+          </div>
+          <div class="log-container">
+            <table id="log-table">
+              <thead>
+                <tr>
+                  <th>Step t</th>
+                  <th>Request</th>
+                  <th>Cache State</th>
+                  <th>Evicted</th>
+                  <th>Event</th>
+                  <th>Fault Ratio</th>
+                </tr>
+              </thead>
+              <tbody id="log-body">
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="status-banner" id="status-banner">
+        <span class="status-dot awaiting"></span>
+        <span class="status-text">AWAITING TRANSITION TIMELINE</span>
+      </div>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
