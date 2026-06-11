@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPU Scheduling Simulator</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<div class="app-container">
+
+<aside class="sidebar">
+<div class="brand">
+<svg class="brand-icon" viewBox="0 0 32 32" width="28" height="28">
+<path d="M16 2L4 8v6c0 6.6 4.7 12.8 12 16 7.3-3.2 12-9.4 12-16V8L16 2z" fill="#2e7d32" opacity="0.9"/>
+<path d="M16 6L8 10v5c0 4.6 3.2 9 8 11.5 4.8-2.5 8-6.9 8-11.5v-5l-8-4z" fill="#4caf50" opacity="0.7"/>
+<rect x="15" y="5" width="2" height="7" rx="1" fill="#a5d6a7"/>
+</svg>
+<h1>KERN-SPROUT // CPU Scheduling Simulator</h1>
+</div>
+
+<div class="control-section">
+<label class="section-label">SCHEDULING ALGORITHM</label>
+<div class="algo-tabs" id="algo-tabs">
+<button class="algo-tab active" data-algo="fcfs" style="--algo-color:#4caf50">FCFS</button>
+<button class="algo-tab" data-algo="sjf" style="--algo-color:#2e7d32">SJF</button>
+<button class="algo-tab" data-algo="rr" style="--algo-color:#009688">RR</button>
+<button class="algo-tab" data-algo="priority" style="--algo-color:#795548">Priority</button>
+</div>
+</div>
+
+<div class="control-section" id="algo-options-panel">
+<div id="opt-sjf" class="algo-options hidden">
+<label class="checkbox-label"><input type="checkbox" id="sjf-preemptive"> Preemptive (SRTF)</label>
+</div>
+<div id="opt-rr" class="algo-options hidden">
+<label class="option-label">Time Quantum (q):</label>
+<div class="quantum-control">
+<input type="range" id="rr-quantum-slider" min="1" max="10" value="4" step="1">
+<span id="rr-quantum-display">4</span>
+</div>
+</div>
+<div id="opt-priority" class="algo-options hidden">
+<label class="checkbox-label"><input type="checkbox" id="priority-preemptive"> Preemptive</label>
+<label class="option-label">Priority Order:</label>
+<select id="priority-order" class="form-select">
+<option value="high-numeric">High Numeric = High Priority</option>
+<option value="low-numeric">Low Numeric = High Priority</option>
+</select>
+</div>
+</div>
+
+<div class="control-section">
+<label class="section-label">PROCESS INJECTOR</label>
+<div class="form-grid">
+<div class="form-field">
+<label>PID</label>
+<input type="text" id="inject-pid" class="form-input" value="P1" spellcheck="false">
+</div>
+<div class="form-field">
+<label>AT</label>
+<input type="number" id="inject-at" class="form-input" value="0" min="0">
+</div>
+<div class="form-field">
+<label>BT</label>
+<input type="number" id="inject-bt" class="form-input" value="5" min="1">
+</div>
+<div class="form-field">
+<label>Priority</label>
+<input type="number" id="inject-priority" class="form-input" value="1" min="1" max="10">
+</div>
+</div>
+<button id="btn-add-process" class="btn btn-secondary"><span>+</span> ADD PROCESS</button>
+</div>
+
+<div class="control-section process-queue-section">
+<label class="section-label">PROCESS QUEUE <span id="process-count" class="badge">0</span></label>
+<div class="process-table" id="process-table"></div>
+</div>
+
+<div class="control-section">
+<label class="section-label">PRESETS</label>
+<div class="preset-buttons">
+<button class="btn btn-preset" data-preset="convoy">Convoy Effect</button>
+<button class="btn btn-preset" data-preset="preempt">High Preemption</button>
+<button class="btn btn-preset" data-preset="balanced">Balanced Pool</button>
+</div>
+</div>
+
+<div class="control-section">
+<div class="action-buttons">
+<button id="btn-execute" class="btn btn-primary">EXECUTE SCHEDULE</button>
+<button id="btn-step" class="btn btn-outline">STEP TICK</button>
+<button id="btn-flush" class="btn btn-outline">FLUSH QUEUE</button>
+<button id="btn-export" class="btn btn-outline">EXPORT CSV</button>
+</div>
+</div>
+</aside>
+
+<main class="viewport">
+<div class="engine-status">
+<div class="status-chip"><span class="chip-label">CPU Time</span><span class="chip-value" id="cpu-time">0</span></div>
+<div class="status-chip"><span class="chip-label">CPU Util</span><span class="chip-value" id="cpu-util">0%</span></div>
+<div class="status-chip"><span class="chip-label">Active Block</span><span class="chip-value" id="active-block">—</span></div>
+<div class="status-chip"><span class="chip-label">Algorithm</span><span class="chip-value" id="current-algo">FCFS</span></div>
+</div>
+
+<div class="gantt-section">
+<div class="section-header">
+<label class="section-label">EXECUTION TIMELINE (GANTT)</label>
+<span class="gantt-legend" id="gantt-legend"></span>
+</div>
+<div class="gantt-container" id="gantt-container">
+<div class="gantt-empty" id="gantt-empty">Configure processes and press EXECUTE to render the timeline</div>
+<div class="gantt-content" id="gantt-content">
+<div class="gantt-time-axis" id="gantt-time-axis"></div>
+<div class="gantt-lanes" id="gantt-lanes"></div>
+</div>
+</div>
+</div>
+
+<div class="metrics-dashboard">
+<div class="metric-card">
+<svg class="metric-icon" viewBox="0 0 20 20" width="16" height="16"><circle cx="10" cy="10" r="8" fill="none" stroke="#2e7d32" stroke-width="1.5"/><path d="M10 4v6l4 2" fill="none" stroke="#2e7d32" stroke-width="1.5"/></svg>
+<div class="metric-body"><span class="metric-label">Avg Waiting Time</span><span class="metric-value" id="avg-wt">—</span></div>
+</div>
+<div class="metric-card">
+<svg class="metric-icon" viewBox="0 0 20 20" width="16" height="16"><circle cx="10" cy="10" r="8" fill="none" stroke="#2e7d32" stroke-width="1.5"/><path d="M10 4v6l4 2" fill="none" stroke="#2e7d32" stroke-width="1.5"/></svg>
+<div class="metric-body"><span class="metric-label">Avg Turnaround Time</span><span class="metric-value" id="avg-tat">—</span></div>
+</div>
+<div class="metric-card">
+<svg class="metric-icon" viewBox="0 0 20 20" width="16" height="16"><rect x="3" y="5" width="14" height="10" rx="2" fill="none" stroke="#c62828" stroke-width="1.5"/><path d="M10 8v4M8 10h4" fill="none" stroke="#c62828" stroke-width="1.5"/></svg>
+<div class="metric-body"><span class="metric-label">Max Latency / Starvation</span><span class="metric-value" id="max-latency">—</span></div>
+</div>
+<div class="metric-card">
+<svg class="metric-icon" viewBox="0 0 20 20" width="16" height="16"><path d="M2 10h16M10 2v16" fill="none" stroke="#2e7d32" stroke-width="1.5"/><circle cx="10" cy="10" r="3" fill="none" stroke="#2e7d32" stroke-width="1.5"/></svg>
+<div class="metric-body"><span class="metric-label">Throughput</span><span class="metric-value" id="throughput">—</span></div>
+</div>
+</div>
+
+<div class="chart-section" id="chart-section" style="display:none">
+<div class="section-header">
+<label class="section-label">PERFORMANCE COMPARISON</label>
+</div>
+<canvas id="metrics-chart"></canvas>
+</div>
+
+<div class="telemetry-section">
+<div class="section-header">
+<label class="section-label">PROCESS TELEMETRY</label>
+</div>
+<div class="table-wrapper">
+<table id="telemetry-table">
+<thead><tr>
+<th>PID</th><th>AT</th><th>BT</th><th>Priority</th><th>CT</th><th>TAT</th><th>WT</th><th>NRR</th>
+</tr></thead>
+<tbody id="telemetry-body"></tbody>
+</table>
+</div>
+</div>
+</main>
+
+</div>
+<script src="script.js"></script>
+</body>
+</html>

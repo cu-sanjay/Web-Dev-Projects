@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f4f7f5"/>
+      <stop offset="100%" stop-color="#e8efe7"/>
+    </linearGradient>
+    <linearGradient id="leafGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4caf50"/>
+      <stop offset="100%" stop-color="#2e7d32"/>
+    </linearGradient>
+    <linearGradient id="leafGrad2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#81c784"/>
+      <stop offset="100%" stop-color="#388e3c"/>
+    </linearGradient>
+    <linearGradient id="leafGrad3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#a5d6a7"/>
+      <stop offset="100%" stop-color="#66bb6a"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="400" fill="url(#bg)" rx="8"/>
+
+  <!-- Decorative leaf in top-right -->
+  <path d="M340 30 C360 20 370 40 360 60 C350 80 330 85 320 70 C310 55 320 40 340 30Z" fill="url(#leafGrad)" opacity="0.3"/>
+
+  <!-- Decorative leaf in bottom-left -->
+  <path d="M30 340 C20 320 40 310 60 320 C80 330 85 350 70 360 C55 370 40 360 30 340Z" fill="url(#leafGrad2)" opacity="0.3"/>
+
+  <!-- Title text -->
+  <text x="200" y="36" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="700" fill="#1b3a24" letter-spacing="1.5">CPU SCHEDULING SIMULATOR</text>
+
+  <!-- Grid lines -->
+  <g stroke="#e2ebd9" stroke-width="0.8">
+    <line x1="40" y1="60" x2="360" y2="60"/>
+    <line x1="40" y1="100" x2="360" y2="100"/>
+    <line x1="40" y1="140" x2="360" y2="140"/>
+    <line x1="40" y1="180" x2="360" y2="180"/>
+    <line x1="40" y1="220" x2="360" y2="220"/>
+    <line x1="40" y1="260" x2="360" y2="260"/>
+    <line x1="40" y1="300" x2="360" y2="300"/>
+  </g>
+
+  <!-- Time axis labels -->
+  <g font-family="ui-monospace,Consolas,monospace" font-size="7" fill="#557a61" text-anchor="middle">
+    <text x="60" y="55">0</text>
+    <text x="100" y="55">2</text>
+    <text x="140" y="55">4</text>
+    <text x="180" y="55">6</text>
+    <text x="220" y="55">8</text>
+    <text x="260" y="55">10</text>
+    <text x="300" y="55">12</text>
+    <text x="340" y="55">14</text>
+  </g>
+
+  <!-- Process label column -->
+  <g font-family="ui-monospace,Consolas,monospace" font-size="8" font-weight="700" fill="#1b3a24" text-anchor="end">
+    <text x="36" y="84">P1</text>
+    <text x="36" y="124">P2</text>
+    <text x="36" y="164">P3</text>
+    <text x="36" y="204">P4</text>
+    <text x="36" y="244">P5</text>
+  </g>
+
+  <!-- Gantt blocks as leaf shapes / bars -->
+  <!-- P1: runs 0-6 -->
+  <rect x="40" y="66" width="220" height="22" rx="4" fill="url(#leafGrad)" opacity="0.9"/>
+  <text x="150" y="81" text-anchor="middle" font-family="ui-monospace,Consolas,monospace" font-size="8" font-weight="700" fill="#fff">P1</text>
+
+  <!-- P2: runs 0-2, preempted, then resumes -->
+  <rect x="40" y="106" width="72" height="22" rx="4" fill="url(#leafGrad2)" opacity="0.85"/>
+  <text x="76" y="121" text-anchor="middle" font-family="ui-monospace,Consolas,monospace" font-size="7" font-weight="700" fill="#fff">P2</text>
+  <rect x="260" y="106" width="40" height="22" rx="4" fill="url(#leafGrad2)" opacity="0.85"/>
+  <text x="280" y="121" text-anchor="middle" font-family="ui-monospace,Consolas,monospace" font-size="7" font-weight="700" fill="#fff">P2</text>
+
+  <!-- P3: runs 2-5 -->
+  <rect x="112" y="146" width="108" height="22" rx="4" fill="url(#leafGrad3)" opacity="0.85"/>
+  <text x="166" y="161" text-anchor="middle" font-family="ui-monospace,Consolas,monospace" font-size="8" font-weight="700" fill="#1b3a24">P3</text>
+
+  <!-- P4: runs 6-9 -->
+  <rect x="260" y="186" width="80" height="22" rx="4" fill="#81c784" opacity="0.8"/>
+  <text x="300" y="201" text-anchor="middle" font-family="ui-monospace,Consolas,monospace" font-size="8" font-weight="700" fill="#fff">P4</text>
+
+  <!-- P5: runs 9-15 -->
+  <rect x="340" y="226" width="20" height="22" rx="4" fill="#66bb6a" opacity="0.75"/>
+  <text x="350" y="241" text-anchor="middle" font-family="ui-monospace,Consolas,monospace" font-size="6" font-weight="700" fill="#fff">P5</text>
+
+  <!-- Idle block -->
+  <rect x="300" y="266" width="40" height="22" rx="4" fill="#b0bec5" opacity="0.6"/>
+  <text x="320" y="281" text-anchor="middle" font-family="ui-monospace,Consolas,monospace" font-size="6" font-weight="600" fill="#1b3a24">Idle</text>
+
+  <!-- Metrics summary cards at bottom -->
+  <rect x="40" y="290" width="72" height="36" rx="6" fill="#ffffff" stroke="#e2ebd9" stroke-width="1"/>
+  <text x="76" y="306" text-anchor="middle" font-family="system-ui,sans-serif" font-size="6" font-weight="600" fill="#557a61">AVG WT</text>
+  <text x="76" y="319" text-anchor="middle" font-family="ui-monospace,Consolas,monospace" font-size="7" font-weight="700" fill="#1b3a24">3.8</text>
+
+  <rect x="122" y="290" width="72" height="36" rx="6" fill="#ffffff" stroke="#e2ebd9" stroke-width="1"/>
+  <text x="158" y="306" text-anchor="middle" font-family="system-ui,sans-serif" font-size="6" font-weight="600" fill="#557a61">AVG TAT</text>
+  <text x="158" y="319" text-anchor="middle" font-family="ui-monospace,Consolas,monospace" font-size="7" font-weight="700" fill="#1b3a24">6.2</text>
+
+  <rect x="204" y="290" width="72" height="36" rx="6" fill="#ffffff" stroke="#e2ebd9" stroke-width="1"/>
+  <text x="240" y="306" text-anchor="middle" font-family="system-ui,sans-serif" font-size="6" font-weight="600" fill="#557a61">THPT</text>
+  <text x="240" y="319" text-anchor="middle" font-family="ui-monospace,Consolas,monospace" font-size="7" font-weight="700" fill="#1b3a24">0.33</text>
+
+  <rect x="286" y="290" width="72" height="36" rx="6" fill="#ffffff" stroke="#e2ebd9" stroke-width="1"/>
+  <text x="322" y="306" text-anchor="middle" font-family="system-ui,sans-serif" font-size="6" font-weight="600" fill="#557a61">CPU UTIL</text>
+  <text x="322" y="319" text-anchor="middle" font-family="ui-monospace,Consolas,monospace" font-size="7" font-weight="700" fill="#1b3a24">86.7%</text>
+
+  <!-- Decorative sprout/leaf elements -->
+  <path d="M60 360 Q70 340 85 345 Q75 355 70 370 Q60 375 60 360Z" fill="#a5d6a7" opacity="0.4"/>
+  <path d="M330 370 Q340 350 355 355 Q345 365 340 380 Q330 385 330 370Z" fill="#81c784" opacity="0.3"/>
+
+  <!-- Small dot grid decoration -->
+  <g fill="#e2ebd9">
+    <circle cx="370" cy="60" r="2"/>
+    <circle cx="375" cy="100" r="1.5"/>
+    <circle cx="365" cy="140" r="1.8"/>
+    <circle cx="372" cy="180" r="1.5"/>
+    <circle cx="30" cy="60" r="1.5"/>
+    <circle cx="25" cy="100" r="2"/>
+    <circle cx="35" cy="140" r="1.5"/>
+  </g>
+
+  <!-- Brand mark -->
+  <g transform="translate(200, 358)">
+    <rect x="-14" y="-4" width="28" height="14" rx="7" fill="#2e7d32" opacity="0.15"/>
+    <text x="0" y="4" text-anchor="middle" font-family="system-ui,sans-serif" font-size="6" font-weight="700" fill="#2e7d32" letter-spacing="1.5">KERN-SPROUT</text>
+  </g>
+
+  <!-- Corner leaf accents -->
+  <path d="M36 36 Q44 28 52 34 Q46 42 40 44 Q34 44 36 36Z" fill="#4caf50" opacity="0.5"/>
+  <path d="M364 364 Q356 372 348 366 Q354 358 360 356 Q366 356 364 364Z" fill="#2e7d32" opacity="0.5"/>
+</svg>
