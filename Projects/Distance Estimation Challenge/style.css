@@ -1,0 +1,94 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.game-container {
+  background: #fff;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+  text-align: center;
+  width: 800px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+h1 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+canvas {
+  border: 3px solid #333;
+  margin: 20px 0;
+  background: #f9f9f9;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+canvas:hover {
+  transform: scale(1.02);
+}
+
+.controls {
+  margin: 15px 0;
+}
+
+.controls input {
+  padding: 10px;
+  font-size: 16px;
+  margin-right: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.controls button {
+  padding: 10px 15px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  margin: 5px;
+  transition: background 0.3s ease;
+}
+
+.controls button:hover {
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+}
+
+.stats {
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+#leaderboard {
+  margin-top: 30px;
+  background: #f1f1f1;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+#scoresList {
+  list-style: none;
+  padding: 0;
+}
+
+#scoresList li {
+  background: #fff;
+  margin: 5px 0;
+  padding: 8px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

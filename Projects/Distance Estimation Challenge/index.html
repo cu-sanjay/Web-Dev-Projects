@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Distance Estimation Challenge</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="game-container">
+    <h1>📏 Distance Estimation Challenge</h1>
+    <canvas id="gameCanvas" width="700" height="450"></canvas>
+
+    <div class="controls">
+      <input id="guessInput" type="number" placeholder="Enter distance (px)">
+      <button id="submitBtn">Submit Guess</button>
+      <button id="newBtn">New Scenario</button>
+      <button id="resetBtn">Reset Score</button>
+    </div>
+
+    <div class="stats">
+      <p>🎯 Actual Distance: <span id="actualDistance">-</span></p>
+      <p>✅ Your Guess: <span id="userGuess">-</span></p>
+      <p>📊 Accuracy: <span id="accuracy">-</span>%</p>
+      <p>🏆 Score: <span id="score">0</span></p>
+    </div>
+
+    <div id="leaderboard">
+      <h2>🏅 Leaderboard</h2>
+      <ul id="scoresList"></ul>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
