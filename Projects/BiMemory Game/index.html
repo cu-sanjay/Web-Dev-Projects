@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>BiMemory Game</title>
+  <meta name="description" content="A recall game that shows a number for 2 seconds and then asks the player to enter it from memory." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="game-shell">
+    <section class="game-card" aria-live="polite">
+      <header class="game-header">
+        <div>
+          <p class="eyebrow">BiMemory Game</p>
+          <h1>Recall the number</h1>
+          <p class="subtitle">Remember the digits, then type them back after they disappear.</p>
+        </div>
+      </header>
+
+      <div class="status-row">
+        <div class="status-block"><span>Level</span><strong id="level">1</strong></div>
+        <div class="status-block"><span>Lives</span><strong id="lives">3</strong></div>
+        <div class="status-block"><span>Best</span><strong id="best">0</strong></div>
+      </div>
+
+      <div class="display-panel">
+        <div class="display-label" id="displayLabel">Ready?</div>
+        <div id="numberDisplay" class="number-display" aria-live="assertive">—</div>
+        <div class="timer-row"><span>Time</span><strong id="timer">2s</strong></div>
+      </div>
+
+      <form class="input-panel" id="answerForm">
+        <label for="answerInput" class="visually-hidden">Enter the number</label>
+        <input id="answerInput" class="answer-input" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]*" maxlength="8" placeholder="Type the number" disabled />
+        <div class="button-row">
+          <button id="submitButton" class="btn btn-primary" type="submit" disabled>Submit</button>
+          <button id="restartButton" class="btn btn-secondary" type="button">Restart</button>
+        </div>
+      </form>
+
+      <div id="message" class="message">Press start to begin your memory run.</div>
+      <button id="startButton" class="btn btn-start" type="button">Start Game</button>
+      <div id="confetti" class="confetti" aria-hidden="true"></div>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
