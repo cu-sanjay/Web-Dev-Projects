@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Audio DSP Synthesizer & Beat Sequencer</title>
+  <meta name="description" content="Synthesize sound waves, shape envelopes, and program grid beat sequencers using Web Audio API and HTML5 Canvas.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient background glow spheres -->
+  <div class="ambient-glow bg-purple"></div>
+  <div class="ambient-glow bg-cyan"></div>
+
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="logo">
+        <svg class="logo-icon" viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2v20M17 5v14M22 9v6M7 8v8M2 10v4" stroke-linecap="round"/>
+        </svg>
+        <h1>DSP<span>Studio</span></h1>
+      </div>
+
+      <div class="header-actions">
+        <div class="audio-status-banner" id="audio-status">
+          ⚠️ Click anywhere to activate Web Audio
+        </div>
+
+        <button class="btn btn-secondary btn-sm" id="btn-export-pattern">
+          📥 Save Pattern
+        </button>
+
+        <label for="import-pattern" class="btn btn-secondary btn-sm pointer-label">
+          📤 Load Pattern
+        </label>
+        <input type="file" id="import-pattern" class="hidden" accept=".json">
+
+        <!-- Theme Toggle -->
+        <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle theme" title="Switch Theme">
+          <svg class="sun-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+          </svg>
+          <svg class="moon-icon hidden" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Grid Workspace -->
+  <main class="main-container">
+    <div class="workspace-layout">
+      
+      <!-- Left Controls: Synth and Drum Volumes -->
+      <section class="card config-panel">
+        <div class="card-inner">
+          
+          <!-- Waveform & ADSR Config -->
+          <h2 class="panel-section-title">Synth Engine</h2>
+          
+          <div class="input-group">
+            <label for="synth-waveform">Oscillator Waveform</label>
+            <select id="synth-waveform" class="select-input">
+              <option value="sine">Sine Wave</option>
+              <option value="sawtooth" selected>Sawtooth Wave</option>
+              <option value="square">Square Wave</option>
+              <option value="triangle">Triangle Wave</option>
+            </select>
+          </div>
+
+          <div class="envelope-group">
+            <div class="slider-wrapper">
+              <label for="adsr-attack">Attack: <span id="val-attack">0.05</span>s</label>
+              <input type="range" id="adsr-attack" min="0.01" max="1" step="0.01" value="0.05">
+            </div>
+            <div class="slider-wrapper">
+              <label for="adsr-decay">Decay: <span id="val-decay">0.1</span>s</label>
+              <input type="range" id="adsr-decay" min="0.01" max="1" step="0.01" value="0.1">
+            </div>
+            <div class="slider-wrapper">
+              <label for="adsr-sustain">Sustain: <span id="val-sustain">0.5</span></label>
+              <input type="range" id="adsr-sustain" min="0" max="1" step="0.05" value="0.5">
+            </div>
+            <div class="slider-wrapper">
+              <label for="adsr-release">Release: <span id="val-release">0.3</span>s</label>
+              <input type="range" id="adsr-release" min="0.01" max="2" step="0.01" value="0.3">
+            </div>
+          </div>
+
+          <hr class="divider">
+
+          <h2 class="panel-section-title">Filter (DSP)</h2>
+          <div class="slider-wrapper">
+            <label for="filter-cutoff">Cutoff: <span id="val-cutoff">1200</span> Hz</label>
+            <input type="range" id="filter-cutoff" min="100" max="8000" step="50" value="1200">
+          </div>
+          <div class="slider-wrapper">
+            <label for="filter-q">Resonance (Q): <span id="val-q">2</span></label>
+            <input type="range" id="filter-q" min="0.5" max="15" step="0.1" value="2">
+          </div>
+
+          <hr class="divider">
+
+          <!-- Drum volume mixer -->
+          <h2 class="panel-section-title">Drum Mixer</h2>
+          <div class="mixer-channels">
+            <div class="slider-wrapper">
+              <label for="vol-kick">Kick Vol: <span id="val-kick">80</span>%</label>
+              <input type="range" id="vol-kick" min="0" max="100" value="80">
+            </div>
+            <div class="slider-wrapper">
+              <label for="vol-snare">Snare Vol: <span id="val-snare">70</span>%</label>
+              <input type="range" id="vol-snare" min="0" max="100" value="70">
+            </div>
+            <div class="slider-wrapper">
+              <label for="vol-hihat">Hi-Hat Vol: <span id="val-hihat">60</span>%</label>
+              <input type="range" id="vol-hihat" min="0" max="100" value="60">
+            </div>
+            <div class="slider-wrapper">
+              <label for="vol-clap">Clap Vol: <span id="val-clap">50</span>%</label>
+              <input type="range" id="vol-clap" min="0" max="100" value="50">
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Center & Right Panel: Visualizer & Sequencer Grid -->
+      <section class="studio-viewport">
+        
+        <!-- Audio Visualizer Dashboard -->
+        <div class="card visualizer-card">
+          <div class="card-inner flex-row justify-between align-center">
+            <div class="visualizer-wrapper">
+              <canvas id="audio-visualizer" width="480" height="130"></canvas>
+            </div>
+            
+            <div class="visualizer-controls">
+              <div class="input-group">
+                <label>Visual Mode</label>
+                <select id="visualizer-mode" class="select-input-sm">
+                  <option value="wave">Oscilloscope (Wave)</option>
+                  <option value="bars">Spectrum (Bars)</option>
+                </select>
+              </div>
+
+              <div class="tempo-wrapper">
+                <label for="tempo-slider">BPM: <span id="val-tempo">120</span></label>
+                <input type="range" id="tempo-slider" min="60" max="200" step="1" value="120" class="width-full">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step Sequencer Grid -->
+        <div class="card sequencer-card">
+          <div class="card-inner">
+            <div class="sequencer-actions">
+              <button class="btn btn-primary" id="btn-play-sequencer">▶ Play</button>
+              <button class="btn btn-secondary" id="btn-stop-sequencer">⏸ Stop</button>
+              <button class="btn btn-danger-sm" id="btn-clear-grid">🗑️ Clear Grid</button>
+
+              <div class="preset-selector-wrapper">
+                <span class="preset-label">Presets:</span>
+                <button class="btn-preset" data-preset="techno">Techno</button>
+                <button class="btn-preset" data-preset="retro">80s Pop</button>
+                <button class="btn-preset" data-preset="chill">Chillout</button>
+              </div>
+            </div>
+
+            <!-- Scrollable Step Grid -->
+            <div class="sequencer-grid-wrapper">
+              <div class="grid-headers">
+                <div class="grid-header-label">Instrument</div>
+                <!-- 16 steps counters -->
+                <div class="steps-headers-container" id="steps-headers"></div>
+              </div>
+              <div class="grid-rows-container" id="sequencer-rows">
+                <!-- Populated via script -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Manual Keyboard Instrument -->
+        <div class="card keyboard-card">
+          <div class="card-inner">
+            <h3 class="keyboard-title">🎹 Manual Synthesizer Playboard (Press keys A-S-D-F-G-H-J-K to play)</h3>
+            <div class="piano-keyboard" id="piano-keyboard-container">
+              <!-- Keys generated dynamically -->
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="app-footer">
+    <p>Interactive DSP Synthesizer & Beat Sequencer &copy; 2026. Powered by HTML5 Web Audio API.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
