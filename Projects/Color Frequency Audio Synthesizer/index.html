@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Color Frequency Audio Synthesizer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <aside class="panel left-panel">
+    <div class="panel-header">
+      <div class="brand">SYNTHESIZER CHROMO</div>
+      <div class="brand-sub">// Audio Wave Engine</div>
+    </div>
+
+    <div class="waveform-section">
+      <div class="section-title">WAVEFORM SELECTOR</div>
+      <div class="waveform-strip" id="waveform-strip">
+        <button class="wave-btn active" data-wave="sine">Sine</button>
+        <button class="wave-btn" data-wave="triangle">Triangle</button>
+        <button class="wave-btn" data-wave="sawtooth">Sawtooth</button>
+        <button class="wave-btn" data-wave="square">Square</button>
+      </div>
+    </div>
+
+    <div class="slider-group">
+      <div class="slider-row">
+        <span class="slider-label">Master Volume</span>
+        <span id="volume-display" class="slider-value">75%</span>
+      </div>
+      <input type="range" id="volume-slider" min="0" max="100" value="75" class="ctrl-range">
+    </div>
+
+    <div class="slider-group">
+      <div class="slider-row">
+        <span class="slider-label">Harmonics Multiplier</span>
+        <span id="harmonics-display" class="slider-value">1.0x</span>
+      </div>
+      <input type="range" id="harmonics-slider" min="100" max="400" value="100" class="ctrl-range">
+    </div>
+
+    <div class="telemetry-deck">
+      <div class="telem-card">
+        <span class="telem-label">Wavelength</span>
+        <span id="telem-wavelength" class="telem-value">— nm</span>
+      </div>
+      <div class="telem-card">
+        <span class="telem-label">Pitch</span>
+        <span id="telem-pitch" class="telem-value">— Hz</span>
+      </div>
+      <div class="telem-card">
+        <span class="telem-label">Color Hex</span>
+        <span id="telem-hex" class="telem-value mono-sm">—</span>
+      </div>
+    </div>
+
+    <div class="diagnostics-bar">
+      <span id="diag-status" class="diag-status">AWAITING AUDIO CONTEXT INITIALIZATION</span>
+    </div>
+  </aside>
+
+  <main class="viewport">
+    <header class="viewport-header">
+      <span class="sim-source">CHROMATIC RIBBON ARRAY</span>
+      <span id="note-display" class="note-display">—</span>
+    </header>
+    <div class="ribbon-stage" id="ribbon-stage">
+      <div class="ribbon-container" id="ribbon-container"></div>
+    </div>
+  </main>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
