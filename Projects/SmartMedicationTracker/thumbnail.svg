@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e1b4b" />
+    </linearGradient>
+
+    <!-- Pill Gradient Red/Blue -->
+    <linearGradient id="pill-red" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ef4444" />
+      <stop offset="100%" stop-color="#b91c1c" />
+    </linearGradient>
+    <linearGradient id="pill-blue" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#1d4ed8" />
+    </linearGradient>
+
+    <!-- Accent Glows -->
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.15" />
+      <stop offset="100%" stop-color="#3b82f6" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bg-grad)" />
+
+  <!-- Ambient Glow -->
+  <circle cx="400" cy="250" r="350" fill="url(#glow)" />
+
+  <!-- Grid Pattern Overlay -->
+  <g opacity="0.05">
+    <path d="M0,50 H800 M0,100 H800 M0,150 H800 M0,200 H800 M0,250 H800 M0,300 H800 M0,350 H800 M0,400 H800 M0,450 H800" stroke="#ffffff" stroke-width="1" />
+    <path d="M50,0 V500 M100,0 V500 M150,0 V500 M200,0 V500 M250,0 V500 M300,0 V500 M350,0 V500 M400,0 V500 M450,0 V500 M500,0 V500 M550,0 V500 M600,0 V500 M650,0 V500 M700,0 V500 M750,0 V500" stroke="#ffffff" stroke-width="1" />
+  </g>
+
+  <!-- Illustration Group -->
+  <g transform="translate(180, 80)">
+    <!-- Shield / Heart Graphic background -->
+    <path d="M 220,50 A 50,50 0 0,1 320,50 A 50,50 0 0,1 420,50 Q 420,150 220,280 Q 20,150 20,50 A 50,50 0 0,1 120,50 A 50,50 0 0,1 220,50 z" fill="#ffffff" fill-opacity="0.02" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.1" />
+
+    <!-- Isometric Smart Pill -->
+    <g transform="translate(220, 150) rotate(-35)">
+      <!-- Left Capsule Half (Blue) -->
+      <rect x="-100" y="-40" width="100" height="80" rx="40" ry="40" fill="url(#pill-blue)" />
+      <!-- Right Capsule Half (Red) -->
+      <rect x="0" y="-40" width="100" height="80" rx="40" ry="40" fill="url(#pill-red)" />
+      <!-- Middle Band -->
+      <rect x="-5" y="-40" width="10" height="80" fill="#ffffff" opacity="0.9" />
+      <!-- Pill Shadow -->
+      <ellipse cx="0" cy="70" rx="110" ry="15" fill="#000000" opacity="0.4" filter="blur(5px)" />
+    </g>
+
+    <!-- Ring Chart around Pill -->
+    <circle cx="220" cy="150" r="140" fill="none" stroke="#38bdf8" stroke-width="8" stroke-dasharray="879" stroke-dashoffset="250" stroke-linecap="round" opacity="0.85" transform="rotate(-90 220 150)" />
+    <circle cx="220" cy="150" r="140" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.15" />
+
+    <!-- Pulse Line / ECG Graphic -->
+    <path d="M 50,220 L 150,220 L 170,180 L 185,260 L 205,150 L 220,240 L 235,210 L 250,230 L 370,230" fill="none" stroke="#10b981" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.8" />
+  </g>
+
+  <!-- Typography -->
+  <text x="400" y="420" font-family="'Outfit', 'Inter', sans-serif" font-size="36" font-weight="700" fill="#f8fafc" text-anchor="middle" letter-spacing="1">Smart Medication Tracker</text>
+  <text x="400" y="455" font-family="'Inter', sans-serif" font-size="18" font-weight="500" fill="#94a3b8" text-anchor="middle" letter-spacing="2">PILL ADHERENCE SCHEDULER</text>
+</svg>
