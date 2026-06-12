@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HSL Color Wheel Explorer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <aside class="panel left-panel">
+    <div class="panel-header">
+      <div class="brand">RADIAL OPTICS</div>
+      <div class="brand-sub">// HSL Wheel Explorer</div>
+    </div>
+
+    <div class="lightness-control">
+      <div class="ctrl-header">
+        <span class="ctrl-label">Lightness (L)</span>
+        <span id="lightness-display" class="ctrl-value">50%</span>
+      </div>
+      <div class="lightness-track">
+        <input type="range" id="lightness-slider" min="0" max="100" value="50" class="lightness-range">
+        <div class="lightness-ramp" id="lightness-ramp"></div>
+      </div>
+    </div>
+
+    <div class="telemetry-deck" id="telemetry">
+      <div class="telem-title">PRECISION TELEMETRY</div>
+      <div class="telem-card">
+        <span class="telem-label">Hue (Angle)</span>
+        <span id="telem-hue" class="telem-value">200°</span>
+      </div>
+      <div class="telem-card">
+        <span class="telem-label">Saturation (Radius)</span>
+        <span id="telem-saturation" class="telem-value">85%</span>
+      </div>
+      <div class="telem-card">
+        <span class="telem-label">HSL String</span>
+        <span id="telem-hsl" class="telem-value mono-sm">hsl(200, 85%, 50%)</span>
+      </div>
+      <div class="telem-card">
+        <span class="telem-label">Hex Code</span>
+        <span id="telem-hex" class="telem-value mono-sm">#1a6bff</span>
+      </div>
+      <div class="telem-card">
+        <span class="telem-label">RGB Channels</span>
+        <span id="telem-rgb" class="telem-value mono-sm">26, 107, 255</span>
+      </div>
+      <div class="telem-card">
+        <span class="telem-label">Coordinates</span>
+        <span id="telem-coords" class="telem-value mono-sm">(+32, -64)px</span>
+      </div>
+    </div>
+
+    <div class="diagnostics-bar">
+      <span id="diag-status" class="diag-status">IDLE — TRACKING ANCHOR</span>
+    </div>
+
+    <div class="action-buttons">
+      <button id="btn-lock" class="action-btn primary">LOCK SELECTED SWATCH TO PALETTE</button>
+    </div>
+
+    <div class="palette-section" id="palette-section">
+      <div class="palette-title">LOCKED PALETTE</div>
+      <div class="palette-strip" id="palette-strip"></div>
+    </div>
+  </aside>
+
+  <main class="viewport">
+    <header class="viewport-header">
+      <span class="sim-source">POLAR COORDINATE CHROMATIC STAGE</span>
+      <span id="color-preview-dot" class="color-preview-dot"></span>
+    </header>
+    <div class="wheel-stage" id="wheel-stage">
+      <div class="wheel-container" id="wheel-container">
+        <div class="wheel-field" id="wheel-field">
+          <div class="wheel-saturation-overlay" id="wheel-overlay"></div>
+        </div>
+        <div class="reticle" id="reticle">
+          <div class="reticle-ring"></div>
+          <div class="reticle-crosshair-h"></div>
+          <div class="reticle-crosshair-v"></div>
+        </div>
+        <div class="center-dot" id="center-dot"></div>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

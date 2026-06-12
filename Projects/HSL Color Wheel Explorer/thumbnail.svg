@@ -1,0 +1,42 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <rect width="128" height="128" rx="16" fill="#070a13"/>
+  <rect x="8" y="8" width="112" height="112" rx="10" fill="none" stroke="#1f2937" stroke-width="1.5"/>
+
+  <defs>
+    <linearGradient id="hue-wheel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ff0000"/>
+      <stop offset="16%" stop-color="#ffff00"/>
+      <stop offset="33%" stop-color="#00ff00"/>
+      <stop offset="50%" stop-color="#00ffff"/>
+      <stop offset="66%" stop-color="#0000ff"/>
+      <stop offset="83%" stop-color="#ff00ff"/>
+      <stop offset="100%" stop-color="#ff0000"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Color wheel -->
+  <g transform="translate(64, 58)">
+    <!-- Outer ring -->
+    <circle cx="0" cy="0" r="42" fill="none" stroke="url(#hue-wheel)" stroke-width="28" opacity="0.8"/>
+    <!-- Inner white desaturation -->
+    <circle cx="0" cy="0" r="28" fill="rgba(255,255,255,0.15)"/>
+    <circle cx="0" cy="0" r="14" fill="rgba(255,255,255,0.3)"/>
+    <!-- Center dot -->
+    <circle cx="0" cy="0" r="3" fill="#94a3b8" opacity="0.5"/>
+
+    <!-- Reticle cursor -->
+    <circle cx="18" cy="-18" r="8" fill="none" stroke="#f8fafc" stroke-width="1.5"/>
+    <line x1="10" y1="-18" x2="26" y2="-18" stroke="#f8fafc" stroke-width="0.8" opacity="0.5"/>
+    <line x1="18" y1="-26" x2="18" y2="-10" stroke="#f8fafc" stroke-width="0.8" opacity="0.5"/>
+  </g>
+
+  <!-- Angle arc indicator -->
+  <path d="M 64 58 L 82 40" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M 64 58 A 28 28 0 0 1 82 40" fill="none" stroke="#3b82f6" stroke-width="1" stroke-dasharray="3,2" opacity="0.5"/>
+
+  <!-- Degree label -->
+  <text x="86" y="32" fill="#3b82f6" font-size="5" font-family="monospace">θ</text>
+
+  <!-- Bottom text -->
+  <text x="64" y="118" fill="#94a3b8" font-size="7" font-family="monospace" text-anchor="middle" letter-spacing="0.5">RADIAL OPTICS</text>
+</svg>
