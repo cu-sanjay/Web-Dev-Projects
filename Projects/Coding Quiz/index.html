@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Quiz — NSOC'26</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container" id="gameContainer">
+        <!-- Screen 1: Categories -->
+        <div id="categoryScreen">
+            <h1>Select Topic</h1>
+            <div class="category-grid">
+                <div class="cat-card" onclick="startQuiz('JavaScript')">JS</div>
+                <div class="cat-card" onclick="startQuiz('Python')">Python</div>
+                <div class="cat-card" onclick="startQuiz('Java')">Java</div>
+                <div class="cat-card" onclick="startQuiz('DSA')">DSA</div>
+                <div class="cat-card" onclick="startQuiz('DBMS')">DBMS</div>
+            </div>
+        </div>
+
+        <!-- Screen 2: Quiz -->
+        <div id="quizScreen" class="hidden">
+            <div class="quiz-header">
+                <span id="topicDisplay">Topic</span>
+                <span>Question <span id="qNum">1</span>/5</span>
+            </div>
+            <div class="question" id="qText">Question Text?</div>
+            <div class="options" id="optionsList"></div>
+            <button class="btn-primary" id="nextBtn" onclick="handleNext()">Next</button>
+        </div>
+
+        <!-- Screen 3: Results -->
+        <div id="resultScreen" class="hidden">
+            <h1>Quiz Complete!</h1>
+            <div style="text-align: center; font-size: 48px; margin-bottom: 10px;" id="finalScore">0</div>
+            <div style="text-align: center; margin-bottom: 30px; opacity: 0.8;">Total Points Earned</div>
+            
+            <h3 style="margin-top: 40px;">Review Answers</h3>
+            <div id="reviewContainer"></div>
+
+            <button class="btn-primary" onclick="location.reload()">Play Again</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
