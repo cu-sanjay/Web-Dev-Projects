@@ -1,4 +1,4 @@
-  let notes = JSON.parse(localStorage.getItem('taskquest_v1.notes') || '[]');
+ let notes = JSON.parse(localStorage.getItem('taskquest_v1.notes') || '[]');
         let currentFilter = 'All';
 
         function addNote() {
