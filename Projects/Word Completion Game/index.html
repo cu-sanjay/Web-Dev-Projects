@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WordFlow — Word Completion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="game-card">
+    <div id="start-screen" class="screen-overlay">
+      <h1 style="font-size: 42px; margin: 0;">WordFlow</h1>
+      <p style="color: var(--muted); margin-bottom: 30px;">Complete the word by choosing the right letter.</p>
+      <button class="primary-btn" onclick="initGame()">Start Game</button>
+    </div>
+
+    <div id="end-screen" class="screen-overlay hidden">
+      <h2 style="font-size: 32px;">Results</h2>
+      <p id="final-stats" style="font-size: 24px; margin: 20px 0;"></p>
+      <button class="primary-btn" onclick="initGame()">Try Again</button>
+    </div>
+
+    <div class="header">
+      <div class="badge" id="round-indicator">ROUND 1/10</div>
+      <div style="font-weight: 600;">Score: <span id="score-val" style="color: var(--accent)">0</span></div>
+    </div>
+
+    <div class="word-area" id="display-word"></div>
+
+    <div class="options-grid" id="options-container"></div>
+  </div>
+    <script src="script.js"></script>
+</body>
+</html>
