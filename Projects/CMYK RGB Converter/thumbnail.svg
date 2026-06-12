@@ -1,0 +1,31 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <rect width="128" height="128" rx="16" fill="#070a13"/>
+  <rect x="8" y="8" width="112" height="112" rx="10" fill="none" stroke="#1f2937" stroke-width="1.5"/>
+
+  <!-- CMYK color blocks (subtractive) -->
+  <g transform="translate(16, 20)">
+    <rect x="0" y="0" width="44" height="36" rx="6" fill="#06b6d4"/>
+    <text x="22" y="23" fill="#fff" font-size="12" font-family="monospace" text-anchor="middle" font-weight="700">C</text>
+
+    <rect x="48" y="0" width="44" height="36" rx="6" fill="#ec4899"/>
+    <text x="70" y="23" fill="#fff" font-size="12" font-family="monospace" text-anchor="middle" font-weight="700">M</text>
+
+    <rect x="0" y="40" width="44" height="36" rx="6" fill="#eab308"/>
+    <text x="22" y="63" fill="#fff" font-size="12" font-family="monospace" text-anchor="middle" font-weight="700">Y</text>
+
+    <rect x="48" y="40" width="44" height="36" rx="6" fill="#64748b"/>
+    <text x="70" y="63" fill="#fff" font-size="12" font-family="monospace" text-anchor="middle" font-weight="700">K</text>
+  </g>
+
+  <!-- Arrow -->
+  <polyline points="48,72 64,72 64,64" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="64" y1="72" x2="80" y2="72" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"/>
+  <polyline points="76,68 80,72 76,76" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- RGB result swatch -->
+  <rect x="44" y="80" width="40" height="24" rx="6" fill="#ffffff" stroke="#1f2937" stroke-width="1"/>
+  <text x="64" y="96" fill="#0f172a" font-size="8" font-family="monospace" text-anchor="middle" font-weight="600">sRGB</text>
+
+  <!-- Bottom label -->
+  <text x="64" y="120" fill="#94a3b8" font-size="6" font-family="monospace" text-anchor="middle" letter-spacing="0.5">CMYK → RGB CONVERTER</text>
+</svg>
