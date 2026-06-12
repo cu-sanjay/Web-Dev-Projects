@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Procedural Terrain Generator & Landscape Sandbox</title>
+  <meta name="description" content="Generate procedurally modeled maps with Perlin noise, hydraulic erosion, dynamic biomes, and rotating isometric pseudo-3D grid mesh canvas.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient background glow elements -->
+  <div class="ambient-glow bg-blue"></div>
+  <div class="ambient-glow bg-emerald"></div>
+
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="logo">
+        <svg class="logo-icon" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M12 2L2 12h3v8h14v-8h3L12 2z" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 2v18M2 12h20M7 8l5-5 5 5" opacity="0.3"/>
+        </svg>
+        <h1>Procedural<span>Terrain</span></h1>
+      </div>
+
+      <div class="header-actions">
+        <!-- Re-Generate map -->
+        <button class="btn btn-primary btn-sm" id="btn-generate">🎲 Generate New Seed</button>
+        <button class="btn btn-secondary btn-sm" id="btn-erosion-step">🌧️ Run Erosion</button>
+
+        <!-- Flat/Isometric view selection -->
+        <div class="toggle-group">
+          <button class="btn-toggle active" id="view-2d">2D Flat</button>
+          <button class="btn-toggle" id="view-iso">3D Isometric</button>
+        </div>
+
+        <!-- Light/Dark Mode -->
+        <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle theme">
+          <svg class="sun-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+          </svg>
+          <svg class="moon-icon hidden" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Workspace main layout -->
+  <main class="main-container">
+    <div class="workspace-layout">
+
+      <!-- Left Column: Controls panel -->
+      <section class="card control-panel">
+        <div class="card-inner">
+          <h2>Landscape Properties</h2>
+          
+          <!-- Section 1: Noise Settings -->
+          <div class="settings-group">
+            <h3 class="group-title">Noise Math (fBm)</h3>
+            
+            <div class="slider-wrapper">
+              <label for="slider-scale">Noise Frequency: <span id="val-scale">40</span></label>
+              <input type="range" id="slider-scale" min="15" max="100" value="40">
+            </div>
+
+            <div class="slider-wrapper">
+              <label for="slider-octaves">Octaves (Details): <span id="val-octaves">4</span></label>
+              <input type="range" id="slider-octaves" min="1" max="6" value="4">
+            </div>
+
+            <div class="slider-wrapper">
+              <label for="slider-persistence">Persistence (Roughness): <span id="val-persistence">0.5</span></label>
+              <input type="range" id="slider-persistence" min="0.1" max="0.8" step="0.05" value="0.5">
+            </div>
+
+            <div class="slider-wrapper">
+              <label for="slider-lacunarity">Lacunarity: <span id="val-lacunarity">2.0</span></label>
+              <input type="range" id="slider-lacunarity" min="1.5" max="3.5" step="0.1" value="2.0">
+            </div>
+            
+            <div class="select-wrapper">
+              <label for="select-resolution">Grid Resolution</label>
+              <select id="select-resolution" class="select-input">
+                <option value="48">Low Resolution (48 x 48)</option>
+                <option value="64" selected>Normal Resolution (64 x 64)</option>
+                <option value="96">High Resolution (96 x 96)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Section 2: Hydraulic Erosion physics -->
+          <div class="settings-group">
+            <h3 class="group-title">Hydraulic Erosion</h3>
+            <p class="group-desc">Simulate water drops falling down slopes to dissolve soil and form rivers.</p>
+            
+            <div class="slider-wrapper">
+              <label for="slider-erosion-drops">Droplets: <span id="val-erosion-drops">1000</span></label>
+              <input type="range" id="slider-erosion-drops" min="200" max="5000" step="100" value="1000">
+            </div>
+
+            <div class="slider-wrapper">
+              <label for="slider-erosion-strength">Erosion Rate: <span id="val-erosion-strength">0.1</span></label>
+              <input type="range" id="slider-erosion-strength" min="0.02" max="0.3" step="0.01" value="0.1">
+            </div>
+          </div>
+
+          <!-- Section 3: Isometric Views parameters -->
+          <div class="settings-group" id="iso-settings-container">
+            <h3 class="group-title">3D Isometric View</h3>
+            
+            <div class="slider-wrapper">
+              <label for="slider-height-scale">Height Extrusion: <span id="val-height-scale">60</span></label>
+              <input type="range" id="slider-height-scale" min="10" max="150" value="60">
+            </div>
+
+            <div class="slider-wrapper">
+              <label for="slider-rotation">Rotation Angle: <span id="val-rotation">45</span>°</label>
+              <input type="range" id="slider-rotation" min="-180" max="180" value="45">
+            </div>
+
+            <div class="slider-wrapper">
+              <label for="slider-sun-angle">Sun Azimuth (Lighting): <span id="val-sun-angle">135</span>°</label>
+              <input type="range" id="slider-sun-angle" min="0" max="360" value="135">
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Center Column: Visual Heightmap Canvas -->
+      <section class="viewport-section">
+        <div class="card viewport-card">
+          <div class="card-inner relative-pos">
+            <canvas id="terrain-canvas" width="700" height="520"></canvas>
+            
+            <!-- Floating coordinate coordinates tooltip inspector -->
+            <div class="coord-tooltip" id="coord-tooltip">
+              <div>Cell: <b id="lbl-cell">-</b></div>
+              <div>Elevation: <b id="lbl-elevation">-</b> m</div>
+              <div>Biome: <b id="lbl-biome">-</b></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Column: Analytics & Biome lists -->
+      <section class="analytics-section">
+        
+        <!-- Statistics distribution -->
+        <div class="card stat-card">
+          <div class="card-inner">
+            <h2>Landscape Analytics</h2>
+            
+            <div class="progress-block">
+              <div class="stat-row">
+                <span>Water Cover</span>
+                <span id="stat-water">0%</span>
+              </div>
+              <div class="progress-bar-container">
+                <div class="progress-fill fill-water" id="bar-water"></div>
+              </div>
+            </div>
+
+            <div class="progress-block">
+              <div class="stat-row">
+                <span>Plains & Biomes</span>
+                <span id="stat-plains">0%</span>
+              </div>
+              <div class="progress-bar-container">
+                <div class="progress-fill fill-plains" id="bar-plains"></div>
+              </div>
+            </div>
+
+            <div class="progress-block">
+              <div class="stat-row">
+                <span>Mountain Rocks</span>
+                <span id="stat-mountains">0%</span>
+              </div>
+              <div class="progress-bar-container">
+                <div class="progress-fill fill-mountains" id="bar-mountains"></div>
+              </div>
+            </div>
+            
+            <hr class="divider">
+
+            <div class="meta-stats">
+              <div class="meta-box">
+                <span class="meta-lbl">Avg Height</span>
+                <span class="meta-val" id="meta-avg-height">-</span>
+              </div>
+              <div class="meta-box">
+                <span class="meta-lbl">Max Peak</span>
+                <span class="meta-val" id="meta-max-height">-</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Biome Color Legend -->
+        <div class="card legend-card">
+          <div class="card-inner">
+            <h2>Biome Reference</h2>
+            <div class="biome-list">
+              <div class="biome-item">
+                <span class="biome-color-indicator" style="background-color: #0d5cba;"></span>
+                <div class="biome-info">
+                  <span class="biome-name">Deep Ocean</span>
+                  <span class="biome-range">&lt; 15m</span>
+                </div>
+              </div>
+              <div class="biome-item">
+                <span class="biome-color-indicator" style="background-color: #1ea3d8;"></span>
+                <div class="biome-info">
+                  <span class="biome-name">Shallow Water</span>
+                  <span class="biome-range">15m - 25m</span>
+                </div>
+              </div>
+              <div class="biome-item">
+                <span class="biome-color-indicator" style="background-color: #f3e5ab;"></span>
+                <div class="biome-info">
+                  <span class="biome-name">Sand Beach</span>
+                  <span class="biome-range">25m - 30m</span>
+                </div>
+              </div>
+              <div class="biome-item">
+                <span class="biome-color-indicator" style="background-color: #4ade80;"></span>
+                <div class="biome-info">
+                  <span class="biome-name">Green Plain</span>
+                  <span class="biome-range">30m - 55m</span>
+                </div>
+              </div>
+              <div class="biome-item">
+                <span class="biome-color-indicator" style="background-color: #15803d;"></span>
+                <div class="biome-info">
+                  <span class="biome-name">Deep Forest</span>
+                  <span class="biome-range">55m - 70m</span>
+                </div>
+              </div>
+              <div class="biome-item">
+                <span class="biome-color-indicator" style="background-color: #64748b;"></span>
+                <div class="biome-info">
+                  <span class="biome-name">Rocky Mountain</span>
+                  <span class="biome-range">70m - 85m</span>
+                </div>
+              </div>
+              <div class="biome-item">
+                <span class="biome-color-indicator" style="background-color: #f8fafc; border: 1px solid rgba(0,0,0,0.15);"></span>
+                <div class="biome-info">
+                  <span class="biome-name">Snow Peak</span>
+                  <span class="biome-range">85m - 100m</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="app-footer">
+    <p>Procedural Terrain Landscape Sandbox &copy; 2026. Rendered with multi-octave Perlin noise and hydraulic erosion calculus.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

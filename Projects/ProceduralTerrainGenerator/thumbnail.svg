@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <!-- Background -->
+  <rect width="400" height="300" fill="#05070f"/>
+  
+  <defs>
+    <!-- Glow effects -->
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#05070f" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="400" height="300" fill="url(#glow)"/>
+
+  <!-- Isometric Block Terrain Outline Grid visual -->
+  <g transform="translate(200, 190)">
+    <!-- Base blocks layers -->
+    <!-- Top block -->
+    <path d="M 0,-80 L 100,-40 L 0,0 L -100,-40 Z" fill="#15803d" stroke="#38bdf8" stroke-width="2"/>
+    <path d="M -100,-40 L 0,0 L 0,40 L -100,0 Z" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5"/>
+    <path d="M 100,-40 L 0,0 L 0,40 L 100,0 Z" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+
+    <!-- High Mountain Peak block -->
+    <path d="M 0,-130 L 40,-110 L 0,-90 L -40,-110 Z" fill="#f8fafc" stroke="#f8fafc" stroke-width="1"/>
+    <path d="M -40,-110 L 0,-90 L 0,-60 L -40,-80 Z" fill="#475569" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+    <path d="M 40,-110 L 0,-90 L 0,-60 L 40,-80 Z" fill="#64748b" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+
+    <!-- River stream flow overlay -->
+    <path d="M -30,-52 Q 0,-30 20,-32" fill="none" stroke="#0ea5e9" stroke-width="4" filter="drop-shadow(0 0 4px rgba(14, 165, 233, 0.6))"/>
+    
+    <!-- Water layers around base block -->
+    <path d="M 0,-40 L 130,-70 L 130,-50 L 0,-20 Z" fill="rgba(30, 163, 216, 0.4)" stroke="#38bdf8" stroke-width="1"/>
+    <path d="M 0,-40 L -130,-70 L -130,-50 L 0,-20 Z" fill="rgba(13, 92, 186, 0.4)" stroke="#38bdf8" stroke-width="1"/>
+  </g>
+
+  <!-- Typography Labels -->
+  <text x="200" y="55" fill="#f8fafc" font-family="'Outfit', sans-serif" font-size="16" font-weight="800" text-anchor="middle" letter-spacing="1">TERRAIN GENERATOR</text>
+  <text x="200" y="75" fill="#94a3b8" font-family="'Space Grotesk', sans-serif" font-size="10" text-anchor="middle" letter-spacing="3">PERLIN NOISE &amp; EROSION</text>
+</svg>

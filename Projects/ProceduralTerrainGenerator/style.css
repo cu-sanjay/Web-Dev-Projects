@@ -1,0 +1,467 @@
+/* style.css - Glassmorphic Cyberpunk Procedural Terrain Simulator Styles */
+
+:root {
+  --font-display: 'Outfit', sans-serif;
+  --font-body: 'Space Grotesk', sans-serif;
+
+  /* Colors */
+  --bg-app: #05070f;
+  --bg-panel: rgba(13, 17, 30, 0.7);
+  --bg-inner: rgba(22, 28, 45, 0.55);
+  
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(56, 189, 248, 0.45);
+  
+  --color-sky: #38bdf8;
+  --color-sky-glow: rgba(56, 189, 248, 0.3);
+  --color-emerald: #10b981;
+  --color-emerald-glow: rgba(16, 185, 129, 0.3);
+
+  --text-main: #f8fafc;
+  --text-sub: #94a3b8;
+  --text-mute: #475569;
+
+  --transition-smooth: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --border-radius-lg: 16px;
+  --border-radius-md: 10px;
+}
+
+[data-theme="light"] {
+  --bg-app: #f1f5f9;
+  --bg-panel: rgba(255, 255, 255, 0.85);
+  --bg-inner: #ffffff;
+  
+  --border-color: rgba(15, 23, 42, 0.08);
+  --border-hover: rgba(14, 116, 144, 0.6);
+
+  --color-sky: #0284c7;
+  --color-sky-glow: rgba(2, 132, 199, 0.15);
+  --color-emerald: #047857;
+  --color-emerald-glow: rgba(4, 120, 87, 0.15);
+
+  --text-main: #0f172a;
+  --text-sub: #4b5563;
+  --text-mute: #94a3b8;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.hidden {
+  display: none !important;
+}
+
+body {
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  font-family: var(--font-body);
+  line-height: 1.5;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Background ambient blur spheres */
+.ambient-glow {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.12;
+  width: 45vw;
+  height: 45vw;
+}
+.bg-blue {
+  background: radial-gradient(circle, var(--color-sky) 0%, transparent 70%);
+  top: -15vw;
+  left: -10vw;
+}
+.bg-emerald {
+  background: radial-gradient(circle, var(--color-emerald) 0%, transparent 70%);
+  bottom: -15vw;
+  right: -10vw;
+}
+
+/* Header */
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-panel);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-color);
+  padding: 12px 24px;
+}
+.header-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--color-sky);
+}
+.logo-icon {
+  filter: drop-shadow(0 0 4px var(--color-sky-glow));
+}
+.logo h1 {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--text-main);
+}
+.logo h1 span {
+  color: var(--color-sky);
+  margin-left: 4px;
+  font-weight: 400;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Toggle Group for View Selection */
+.toggle-group {
+  display: flex;
+  background: var(--bg-inner);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  padding: 3px;
+  gap: 2px;
+}
+.btn-toggle {
+  background: transparent;
+  border: none;
+  color: var(--text-sub);
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+.btn-toggle:hover {
+  color: var(--text-main);
+}
+.btn-toggle.active {
+  background: var(--color-sky);
+  color: #000000;
+}
+
+/* Button layout styling */
+.btn {
+  font-family: var(--font-body);
+  font-weight: 600;
+  border-radius: var(--border-radius-md);
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: var(--transition-smooth);
+  outline: none;
+}
+.btn-sm {
+  padding: 6px 14px;
+  font-size: 0.85rem;
+}
+.btn-primary {
+  background-color: var(--color-sky);
+  color: #000000;
+}
+.btn-primary:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 0 12px var(--color-sky-glow);
+}
+.btn-secondary {
+  background-color: var(--bg-inner);
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+}
+.btn-secondary:hover {
+  background-color: var(--border-color);
+  border-color: var(--text-sub);
+}
+
+.theme-toggle-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-sub);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 50%;
+  transition: var(--transition-smooth);
+}
+.theme-toggle-btn:hover {
+  background: var(--bg-inner);
+  color: var(--text-main);
+}
+
+/* Workspace main */
+.main-container {
+  max-width: 1400px;
+  margin: 24px auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 1;
+}
+.workspace-layout {
+  display: grid;
+  grid-template-columns: 300px 1fr 280px;
+  gap: 24px;
+}
+
+@media (max-width: 1100px) {
+  .workspace-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Card glass structures */
+.card {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  overflow: hidden;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
+}
+.card-inner {
+  padding: 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+h2 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+}
+
+/* Settings Slider UI elements */
+.settings-group {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.group-title {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-sky);
+  margin-bottom: 2px;
+}
+.group-desc {
+  font-size: 0.75rem;
+  color: var(--text-sub);
+  line-height: 1.35;
+}
+.slider-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.slider-wrapper label {
+  font-size: 0.78rem;
+  color: var(--text-sub);
+  display: flex;
+  justify-content: space-between;
+}
+.slider-wrapper input[type="range"] {
+  width: 100%;
+  accent-color: var(--color-sky);
+  cursor: pointer;
+}
+
+/* Select Box style */
+.select-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.select-wrapper label {
+  font-size: 0.78rem;
+  color: var(--text-sub);
+}
+.select-input {
+  background: var(--bg-app);
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  font-family: var(--font-body);
+  outline: none;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+.select-input:hover, .select-input:focus {
+  border-color: var(--color-sky);
+}
+
+/* Canvas Card Viewport */
+.viewport-card {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.relative-pos {
+  position: relative;
+}
+#terrain-canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  cursor: crosshair;
+}
+
+/* Hover coordinates tooltip */
+.coord-tooltip {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: rgba(3, 6, 15, 0.95);
+  border: 1px solid var(--border-color);
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-family: var(--font-code);
+  font-size: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  pointer-events: none;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  z-index: 10;
+}
+.coord-tooltip b {
+  color: var(--color-sky);
+}
+
+/* Landscape analytics card */
+.progress-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  color: var(--text-sub);
+}
+.progress-bar-container {
+  height: 6px;
+  width: 100%;
+  background: var(--bg-inner);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  width: 0;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.fill-water { background-color: #1ea3d8; }
+.fill-plains { background-color: #4ade80; }
+.fill-mountains { background-color: #64748b; }
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 4px 0;
+}
+
+.meta-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.meta-box {
+  background: var(--bg-inner);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.meta-lbl {
+  font-size: 0.72rem;
+  color: var(--text-sub);
+}
+.meta-val {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-sky);
+}
+
+/* Biome reference table list */
+.biome-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.biome-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(0, 0, 0, 0.1);
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+}
+.biome-color-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+.biome-info {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 0.78rem;
+}
+.biome-name {
+  font-weight: 600;
+  color: var(--text-main);
+}
+.biome-range {
+  color: var(--text-mute);
+}
+
+/* Footer styling */
+.app-footer {
+  text-align: center;
+  padding: 24px;
+  font-size: 0.8rem;
+  color: var(--text-mute);
+  border-top: 1px solid var(--border-color);
+  margin-top: 48px;
+  background: var(--bg-panel);
+}
