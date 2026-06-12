@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Target Reach Game — Golden Protocol</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <div class="container">
+        <div class="gold-card">
+            <div id="start-overlay" class="overlay">
+                <h1>Golden Protocol</h1>
+                <p style="color: #aaa; margin-bottom: 30px;">Trigger the nodes in the correct sequence to activate the core. Watch for clues in the grid.</p>
+                <button class="btn-gold" onclick="startGame()">Initiate Link</button>
+            </div>
+
+            <div id="result-overlay" class="overlay hidden">
+                <h1 id="result-title">Protocol Cleared</h1>
+                <p id="result-msg" style="margin-bottom: 30px;"></p>
+                <button class="btn-gold" onclick="startGame()">Next Sector</button>
+            </div>
+
+            <div class="stats-bar">
+                <span>Sector: <span id="level-val">1</span></span>
+                <span>Energy: <span id="move-val">0</span></span>
+            </div>
+
+            <div class="instruction">Sequence required: Reach the Target Node</div>
+
+            <div class="node-grid" id="grid"></div>
+
+            <div id="feedback"></div>
+        </div>
+    </div>
+</body>
+</html>

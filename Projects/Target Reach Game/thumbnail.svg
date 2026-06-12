@@ -1,0 +1,26 @@
+<svg viewBox="0 0 360 240" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gold" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#f8e17c" />
+      <stop offset="100%" stop-color="#d4af37" />
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#f8e17c" flood-opacity="0.5" />
+    </filter>
+  </defs>
+  <rect width="360" height="240" rx="30" fill="#0c0c0c" />
+  <rect x="20" y="20" width="320" height="200" rx="24" fill="#161616" stroke="url(#gold)" stroke-width="4" filter="url(#glow)" />
+  <text x="50%" y="50" text-anchor="middle" fill="url(#gold)" font-family="Cinzel, serif" font-size="24" font-weight="700">TARGET REACH</text>
+  <g fill="#111" stroke="#c9a03c" stroke-width="3">
+    <rect x="42" y="80" width="56" height="56" rx="14" />
+    <rect x="150" y="80" width="56" height="56" rx="14" />
+    <rect x="258" y="80" width="56" height="56" rx="14" />
+    <rect x="42" y="152" width="56" height="56" rx="14" />
+    <rect x="150" y="152" width="56" height="56" rx="14" />
+    <rect x="258" y="152" width="56" height="56" rx="14" />
+  </g>
+  <circle cx="178" cy="110" r="14" fill="#f9e272" stroke="#fff" stroke-width="3" />
+  <path d="M100 108 L150 108" stroke="#f9e272" stroke-width="6" stroke-linecap="round" />
+  <path d="M210 108 L260 108" stroke="#f9e272" stroke-width="6" stroke-linecap="round" />
+  <text x="50%" y="230" text-anchor="middle" fill="#f8f1d8" font-family="Outfit, sans-serif" font-size="14">Golden Protocol</text>
+</svg>
