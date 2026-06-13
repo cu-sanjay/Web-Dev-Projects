@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Cartoon Character Gallery</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <header id="topBar">
+    <input type="text" id="searchInput" placeholder="Search characters..." autocomplete="off">
+    <div id="chipRow">
+      <button class="chip active" data-universe="all">All Universes</button>
+      <button class="chip" data-universe="90s Nostalgia">90s Nostalgia</button>
+      <button class="chip" data-universe="Modern Anime">Modern Anime</button>
+      <button class="chip" data-universe="Sci-Fi Cartoons">Sci-Fi Cartoons</button>
+    </div>
+    <span id="tally">0 characters</span>
+  </header>
+
+  <main id="gallery"></main>
+
+  <aside id="drawer" class="drawer--closed">
+    <div id="drawerBackdrop"></div>
+    <div id="drawerPanel">
+      <button id="drawerClose">&times;</button>
+      <div id="drawerContent"></div>
+    </div>
+  </aside>
+
+  <footer id="footBar">
+    <span>Cartoon Character Gallery &mdash; Vanilla JS</span>
+  </footer>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
