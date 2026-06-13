@@ -93,13 +93,25 @@ function isGrouped(a, b) {
 }
 
 /* ─── Persistent messages ────────────────────────────────── */
+function encode(val) {
+  try { return btoa(unescape(encodeURIComponent(JSON.stringify(val)))); } catch (e) { return ''; }
+}
+
+function decode(raw) {
+  try { return JSON.parse(decodeURIComponent(escape(atob(raw)))); } catch (e) { return null; }
+}
+
 function loadMessages() {
-  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
-  catch (e) { return []; }
+  try {
+    var raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return [];
+    var d = decode(raw);
+    return Array.isArray(d) ? d : [];
+  } catch (e) { return []; }
 }
 
 function saveMessages(msgs) {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(msgs.slice(-MAX_MESSAGES))); }
+  try { localStorage.setItem(STORAGE_KEY, encode(msgs.slice(-MAX_MESSAGES))); }
   catch (e) { /* quota */ }
 }
 
@@ -113,17 +125,20 @@ function setPresence(on) {
   } else {
     delete all[myId];
   }
-  try { localStorage.setItem(PRESENCE_KEY, JSON.stringify(all)); } catch(e) {}
+  try { localStorage.setItem(PRESENCE_KEY, encode(all)); } catch(e) {}
 }
 
 function getPresence() {
   try {
-    const raw = JSON.parse(localStorage.getItem(PRESENCE_KEY)) || {};
+    const raw = localStorage.getItem(PRESENCE_KEY);
+    if (!raw) return {};
+    const d = decode(raw);
+    if (!d || typeof d !== 'object') return {};
     const now = Date.now();
-    Object.keys(raw).forEach(function(id) {
-      if (now - raw[id].ts > 15000) delete raw[id];
+    Object.keys(d).forEach(function(id) {
+      if (now - d[id].ts > 15000) delete d[id];
     });
-    return raw;
+    return d;
   } catch(e) { return {}; }
 }
 
