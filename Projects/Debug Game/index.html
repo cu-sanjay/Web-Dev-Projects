@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Master — NSOC'26</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="header">
+        <div style="font-size: 22px; font-weight: 500;">🐞 Debug Master</div>
+        <div class="stats">
+            Score: <span id="score">0</span>
+        </div>
+    </div>
+
+    <div class="game-container">
+        <div class="difficulty-selector" id="difficultySelector">
+            <button class="difficulty-btn active" data-level="easy">Easy</button>
+            <button class="difficulty-btn" data-level="medium">Medium</button>
+            <button class="difficulty-btn" data-level="hard">Hard</button>
+        </div>
+
+        <div class="stats-bar">
+            <span>Challenge: <span id="challengeNum">1/5</span></span>
+            <span>Difficulty: <span id="currentDiffDisplay">Easy</span></span>
+            <span>Time Left: <span id="timer">30s</span></span>
+        </div>
+
+        <div class="description" id="challengeDesc">
+            Loading challenge...
+        </div>
+
+        <div class="editor-container">
+            <textarea id="codeEditor" spellcheck="false"></textarea>
+        </div>
+
+        <div id="feedbackBox" class="feedback"></div>
+
+        <div class="controls">
+            <button id="resetBtn" class="difficulty-btn">Reset Code</button>
+            <button id="submitBtn" class="primary">Check Code</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>   
+</body>
+</html>
