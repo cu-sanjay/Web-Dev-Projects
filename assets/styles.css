@@ -579,6 +579,37 @@ html[data-cursor="default"] .cursor-icon--arrow { display: inline; }
   gap: 22px;
   align-items: stretch;
 }
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 28px 0 8px;
+  flex-wrap: wrap;
+}
+.pagination__btn {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+  color: var(--ink);
+  padding: 0.82rem 1rem;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition), color var(--transition);
+}
+.pagination__btn:hover:not(:disabled) {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+.pagination__btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.pagination__status {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
 .card {
   background: var(--surface-2);
   border: 1px solid var(--line);

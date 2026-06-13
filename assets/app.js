@@ -6,6 +6,10 @@ const themeToggle = document.getElementById("theme-toggle");
 const sortSelect = document.getElementById("sort-select");
 const tagbar = document.getElementById("tagbar");
 const empty = document.getElementById("empty");
+const pagination = document.getElementById("pagination");
+const prevPageBtn = document.getElementById("prev-page");
+const nextPageBtn = document.getElementById("next-page");
+const paginationStatus = document.getElementById("pagination-status");
 const topnavLinks = Array.from(document.querySelectorAll('.topnav a[href^="#"]'));
 const pageSections = Array.from(document.querySelectorAll('main section[id]'));
 const statCount = document.getElementById("stat-count");
@@ -18,6 +22,8 @@ const hofTrack = document.getElementById("hof-track");
 const hofHint = document.getElementById("hof-hint");
 const hofContribCount = document.getElementById("hof-contributor-count");
 
+const PROJECTS_PER_PAGE = 12;
+
 const state = {
   all: [],
   filtered: [],
@@ -26,6 +32,7 @@ const state = {
   sortBy: "default",
   onlyBookmarks: false,
   authorFilter: null,
+  currentPage: 1,
 };
 
 /* ── GitHub Profile Cache ──────────────────────────── */
@@ -276,6 +283,7 @@ function filterByAuthor(github) {
   state.authorFilter = github;
   state.activeTag = null;
   state.query = "";
+  state.currentPage = 1;
   if (search) search.value = "";
   renderTagbar();
   render();
@@ -315,17 +323,33 @@ function render() {
     list.sort((a, b) => a.title.localeCompare(b.title));
   }
 
+  state.filtered = list;
+  const pageCount = Math.max(1, Math.ceil(list.length / PROJECTS_PER_PAGE));
+  if (state.currentPage > pageCount) state.currentPage = pageCount;
+  const startIndex = (state.currentPage - 1) * PROJECTS_PER_PAGE;
+  const pageList = list.slice(startIndex, startIndex + PROJECTS_PER_PAGE);
+
+  if (pagination && list.length > 0) {
+    pagination.hidden = false;
+    if (paginationStatus) paginationStatus.textContent = `Page ${state.currentPage} of ${pageCount}`;
+    if (prevPageBtn) prevPageBtn.disabled = state.currentPage <= 1;
+    if (nextPageBtn) nextPageBtn.disabled = state.currentPage >= pageCount;
+  } else if (pagination) {
+    pagination.hidden = true;
+  }
+
   grid.replaceChildren();
 
   if (!list.length) {
     empty.hidden = false;
+    if (pagination) pagination.hidden = true;
     return;
   }
   empty.hidden = true;
 
   const bookmarksSet = new Set(bookmarks);
 
-  for (const p of list) {
+  for (const p of pageList) {
     const node = tpl.content.firstElementChild.cloneNode(true);
     node.dataset.slug = p.slug;
 
@@ -416,6 +440,7 @@ function renderTagbar() {
     state.activeTag = null;
     state.authorFilter = null;
     state.onlyBookmarks = false;
+    state.currentPage = 1;
     renderTagbar();
     render();
   });
@@ -445,6 +470,7 @@ function renderTagbar() {
     state.onlyBookmarks = !state.onlyBookmarks;
     state.authorFilter = null;
     state.activeTag = null;
+    state.currentPage = 1;
     renderTagbar();
     render();
   });
@@ -460,6 +486,7 @@ function renderTagbar() {
       state.activeTag = state.activeTag === tag ? null : tag;
       state.authorFilter = null;
       state.onlyBookmarks = false;
+      state.currentPage = 1;
       renderTagbar();
       render();
     });
@@ -729,6 +756,7 @@ if (cursorToggleBtn) {
 if (sortSelect) {
   sortSelect.addEventListener("change", e => {
     state.sortBy = e.target.value;
+    state.currentPage = 1;
     render();
   });
 }
@@ -738,7 +766,25 @@ if (search) {
   search.addEventListener("input", e => {
     state.query = e.target.value;
     state.authorFilter = null;
+    state.currentPage = 1;
     render();
+  });
+}
+
+if (prevPageBtn) {
+  prevPageBtn.addEventListener("click", () => {
+    if (state.currentPage <= 1) return;
+    state.currentPage -= 1;
+    render();
+    grid.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+}
+
+if (nextPageBtn) {
+  nextPageBtn.addEventListener("click", () => {
+    state.currentPage += 1;
+    render();
+    grid.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 }
 
