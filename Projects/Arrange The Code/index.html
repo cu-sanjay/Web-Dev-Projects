@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Arrangement Master</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="game-container">
+    <div class="header">
+        <div>
+            <span id="levelBadge" class="difficulty-badge easy">Easy</span>
+            <h2 id="title">Arrange the Code</h2>
+        </div>
+        <div class="stats">
+            <div>Score: <span id="score">0</span></div>
+            <div>Time: <span id="timer">60s</span></div>
+        </div>
+    </div>
+
+    <p id="description" class="description">Drag the lines of code into the correct order to solve the problem.</p>
+    
+    <div id="codeContainer" class="code-container"></div>
+
+    <div class="controls">
+        <button class="btn-primary" onclick="checkOrder()">Verify Solution</button>
+        <button class="btn-secondary" onclick="shuffleCurrent()">Reshuffle</button>
+    </div>
+
+    <div id="feedback"></div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
