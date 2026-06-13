@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Academic Planner</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="header-left">
+                <h1>🎓 Academic Planner</h1>
+                <p id="currentDate">Today</p>
+            </div>
+            <div class="header-right">
+                <button id="themeToggle" class="btn-icon">🌙</button>
+            </div>
+        </header>
+
+        <div class="dashboard">
+            <!-- Column 1: Subjects & Assignments -->
+            <div class="column">
+                <section class="card">
+                    <div class="card-header">
+                        <h2>📚 Subjects</h2>
+                        <button id="addSubjectBtn" class="btn-small">+ Add</button>
+                    </div>
+                    <ul id="subjectList" class="item-list">
+                        <!-- Subjects will be injected here -->
+                    </ul>
+                </section>
+
+                <section class="card">
+                    <div class="card-header">
+                        <h2>📝 Assignments</h2>
+                        <button id="addAssignmentBtn" class="btn-small">+ Add</button>
+                    </div>
+                    <ul id="assignmentList" class="item-list">
+                        <!-- Assignments will be injected here -->
+                    </ul>
+                </section>
+            </div>
+
+            <!-- Column 2: Exams & Study Planner -->
+            <div class="column">
+                <section class="card">
+                    <div class="card-header">
+                        <h2>📅 Upcoming Exams</h2>
+                        <button id="addExamBtn" class="btn-small">+ Add</button>
+                    </div>
+                    <ul id="examList" class="item-list">
+                        <!-- Exams will be injected here -->
+                    </ul>
+                </section>
+
+                <section class="card timer-card">
+                    <h2>⏱️ Study Timer (Pomodoro)</h2>
+                    <div class="timer-display" id="timerDisplay">25:00</div>
+                    <div class="timer-actions">
+                        <button id="startTimerBtn" class="btn-primary">Start</button>
+                        <button id="resetTimerBtn" class="btn-secondary">Reset</button>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Column 3: Goals & Progress -->
+            <div class="column">
+                <section class="card">
+                    <div class="card-header">
+                        <h2>🎯 Academic Goals</h2>
+                        <button id="addGoalBtn" class="btn-small">+ Add</button>
+                    </div>
+                    <ul id="goalList" class="item-list">
+                        <!-- Goals will be injected here -->
+                    </ul>
+                </section>
+
+                <section class="card summary-card">
+                    <h2>📊 Progress Analytics</h2>
+                    <div class="insight-item">
+                        <span>Assignment Completion</span>
+                        <div class="score-bar">
+                            <div class="score-fill" id="assignmentProgressFill"></div>
+                        </div>
+                        <span id="assignmentProgressText">0%</span>
+                    </div>
+                    <div class="insight-item">
+                        <span>Exam Prep Readiness</span>
+                        <div class="score-bar">
+                            <div class="score-fill" id="examProgressFill"></div>
+                        </div>
+                        <span id="examProgressText">0%</span>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
