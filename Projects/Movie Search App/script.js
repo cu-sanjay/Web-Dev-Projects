@@ -11,6 +11,19 @@ const error = document.getElementById('error');
 const modal = document.getElementById('modal');
 const modalLoading = document.getElementById('modalLoading');
 
+const TIMEOUT_MS = 8000;
+
+async function fetchWithTimeout(url, ms) {
+  const controller = new AbortController();
+  const timer = setTimeout(function() { controller.abort(); }, ms || TIMEOUT_MS);
+  try {
+    const response = await fetch(url, { signal: controller.signal });
+    return response;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 function showLoading() {
   loading.classList.remove('hidden');
   resultsGrid.innerHTML = '';
@@ -60,7 +73,7 @@ async function searchMovies(query) {
 
   try {
     const url = SEARCH_URL.replace('QUERY', encodeURIComponent(query));
-    const response = await fetch(url);
+    const response = await fetchWithTimeout(url);
 
     if (!response.ok) {
       throw new Error('Network response was not ok');
@@ -76,7 +89,7 @@ async function searchMovies(query) {
     resultsGrid.innerHTML = data.Search.map(movie => createMovieCard(movie).outerHTML).join('');
     hideLoading();
   } catch (err) {
-    showError('Failed to fetch movies. Please check your connection and try again.');
+    showError(err.name === 'AbortError' ? 'Request timed out. Please try again.' : 'Failed to fetch movies. Please check your connection and try again.');
   }
 }
 
@@ -87,7 +100,7 @@ async function openMovieDetails(imdbID) {
 
   try {
     const url = DETAIL_URL.replace('IMDBID', imdbID);
-    const response = await fetch(url);
+    const response = await fetchWithTimeout(url);
 
     if (!response.ok) {
       throw new Error('Network response was not ok');
@@ -102,7 +115,7 @@ async function openMovieDetails(imdbID) {
     populateModal(data);
     modalLoading.classList.add('hidden');
   } catch (err) {
-    modalLoading.innerHTML = `<p style="color: var(--text-secondary); padding: 2rem; text-align: center;">Failed to load details.</p>`;
+    modalLoading.innerHTML = `<p style="color: var(--text-secondary); padding: 2rem; text-align: center;">${err.name === 'AbortError' ? 'Request timed out.' : 'Failed to load details.'}</p>`;
   }
 }
 
