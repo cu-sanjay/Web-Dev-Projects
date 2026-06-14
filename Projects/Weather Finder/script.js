@@ -48,6 +48,7 @@ unitToggle.addEventListener('click', () => {
   if (tempC === null) return;
   isCelsius = !isCelsius;
   updateTemps();
+  renderForecast();
   unitToggle.textContent = isCelsius ? '°F' : '°C';
 });
 
@@ -58,7 +59,6 @@ function updateTemps() {
   const f = isCelsius ? `${Math.round(feelsC)}°C` : `${toF(feelsC)}°F`;
   document.getElementById('temp').textContent = t;
   document.getElementById('feels-like').textContent = `Feels like ${f}`;
-  renderForecast();
 }
 
 // ── Search history (localStorage, max 5)
@@ -239,7 +239,8 @@ async function renderWeather(latitude, longitude, name, country, timezone) {
   document.getElementById('visibility').textContent =
     visibility != null ? `${(visibility / 1000).toFixed(1)} km` : '—';
 
-  updateTemps();           // also calls renderForecast()
+  updateTemps();
+  renderForecast();
   resultEl.hidden = true;
   requestAnimationFrame(() => { resultEl.hidden = false; });
   setSky(finalSky);
