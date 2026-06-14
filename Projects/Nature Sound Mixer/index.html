@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nature Sound · Mixer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="top-profile">
+    <div class="profile-brand">
+      <svg class="profile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M12 3v18M5 8h3l4-5 4 5h3" stroke="#00e5ff"/><path d="M5 16h3l4 5 4-5h3" stroke="#00e676"/>
+        <circle cx="12" cy="12" r="2" fill="#ffb800" stroke="none"/>
+        <path d="M3 12h3M18 12h3" stroke="#ffb800"/>
+      </svg>
+      <div>
+        <h1 class="profile-title">Nature Sound · Mixer</h1>
+        <span class="profile-sub">Web Audio Synthesis Laboratory · v1.0</span>
+      </div>
+      <span class="profile-badge">AUDIO · FILTER · VISUALIZER</span>
+    </div>
+    <div class="profile-state">
+      <span class="state-dot" id="stateDot"></span>
+      <span class="state-label" id="stateLabel">STANDBY</span>
+    </div>
+  </header>
+
+  <main class="workspace">
+
+    <!-- TOP MASTER DECK -->
+    <section class="master-deck">
+      <div class="master-row">
+        <div class="master-group">
+          <label class="master-label">Master Volume</label>
+          <div class="master-slider-row">
+            <input type="range" class="master-slider" id="sliderMaster" min="0" max="100" step="1" value="75">
+            <span class="master-val" id="valMaster">75%</span>
+          </div>
+        </div>
+        <button class="master-toggle" id="btnToggle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z" fill="currentColor" id="playIcon"/></svg>
+          <span id="toggleLabel">PLAY</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- CHANNEL MIXER -->
+    <section class="mixer-grid" id="mixerGrid">
+      <!-- Channel strips rendered by JS -->
+    </section>
+
+    <!-- MAIN ROW: Visualizer + Presets -->
+    <section class="main-row">
+      <div class="viz-card">
+        <div class="card-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12"><path d="M3 12h3l2-5 4 10 2-5 3 5 4-7" stroke="#00e5ff"/></svg>
+          <span>Audio Spectrum Waveform</span>
+          <span class="card-badge">FFT · rAF</span>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="vizCanvas"></canvas>
+        </div>
+      </div>
+
+      <div class="presets-card">
+        <div class="card-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8M8 12h8"/></svg>
+          <span>Preset Profiles</span>
+          <span class="card-badge">LOCALSTORAGE</span>
+        </div>
+        <div class="presets-body" id="presetsBody">
+          <div class="preset-save-row">
+            <input type="text" class="preset-name-input" id="presetNameInput" placeholder="Preset name..." maxlength="32">
+            <button class="preset-save-btn" id="btnSavePreset">Save</button>
+          </div>
+          <div class="preset-list" id="presetList">
+            <span class="preset-empty">No saved presets yet.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTROLS -->
+    <footer class="control-deck">
+      <button class="ctrl-btn ctrl-amber" id="btnLoadDeepSleep">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><circle cx="12" cy="12" r="10"/><path d="M12 2v5M12 17v5M2 12h5M17 12h5"/></svg>
+        Load Deep Sleep Template
+      </button>
+      <button class="ctrl-btn ctrl-danger" id="btnPurge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg>
+        Purge Mixer Channels
+      </button>
+    </footer>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
