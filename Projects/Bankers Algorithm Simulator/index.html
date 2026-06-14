@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banker's Algorithm Simulator</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Controls -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fa-solid fa-vault"></i>
+                    <span>BankerOS</span>
+                </div>
+                <span class="badge">Deadlock Pro</span>
+            </div>
+
+            <!-- Presets Section -->
+            <div class="config-section">
+                <h3><i class="fa-solid fa-sliders"></i> Presets & Scenarios</h3>
+                <div class="form-group">
+                    <select id="presetSelect" class="form-control">
+                        <option value="default">Select Scenario...</option>
+                        <option value="safe-3">Standard Safe State (3 Resources)</option>
+                        <option value="unsafe-3">Deadlock Unsafe State (3 Resources)</option>
+                        <option value="safe-4">Safe State Layout (4 Resources)</option>
+                        <option value="complex-request">Heavy Resource Requests Case</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Resource Capacity Definitions -->
+            <div class="config-section">
+                <h3><i class="fa-solid fa-cubes"></i> Total System Resources</h3>
+                <div class="form-group">
+                    <label for="resourceCountSelect">Resource Types</label>
+                    <select id="resourceCountSelect" class="form-control">
+                        <option value="3">3 Types (A, B, C)</option>
+                        <option value="4">4 Types (A, B, C, D)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Total Available Capacity</label>
+                    <div class="resource-capacity-inputs" id="capacityInputsContainer">
+                        <div class="capacity-input-group">
+                            <span class="res-label res-a">A</span>
+                            <input type="number" id="totalA" class="form-control mini" min="0" value="10">
+                        </div>
+                        <div class="capacity-input-group">
+                            <span class="res-label res-b">B</span>
+                            <input type="number" id="totalB" class="form-control mini" min="0" value="5">
+                        </div>
+                        <div class="capacity-input-group">
+                            <span class="res-label res-c">C</span>
+                            <input type="number" id="totalC" class="form-control mini" min="0" value="7">
+                        </div>
+                        <div class="capacity-input-group" id="totalDGroup" style="display: none;">
+                            <span class="res-label res-d">D</span>
+                            <input type="number" id="totalD" class="form-control mini" min="0" value="6">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Request Resources Form -->
+            <div class="config-section">
+                <h3><i class="fa-solid fa-paper-plane"></i> Request Resources</h3>
+                <div class="form-group">
+                    <label for="requestProcessSelect">Requesting Process</label>
+                    <select id="requestProcessSelect" class="form-control">
+                        <!-- Populated dynamically -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Request Vector</label>
+                    <div class="vector-inputs">
+                        <div class="vector-input-group">
+                            <span class="res-label mini res-a">A</span>
+                            <input type="number" id="reqA" class="form-control mini" min="0" value="1">
+                        </div>
+                        <div class="vector-input-group">
+                            <span class="res-label mini res-b">B</span>
+                            <input type="number" id="reqB" class="form-control mini" min="0" value="0">
+                        </div>
+                        <div class="vector-input-group">
+                            <span class="res-label mini res-c">C</span>
+                            <input type="number" id="reqC" class="form-control mini" min="0" value="2">
+                        </div>
+                        <div class="vector-input-group" id="reqDGroup" style="display: none;">
+                            <span class="res-label mini res-d">D</span>
+                            <input type="number" id="reqD" class="form-control mini" min="0" value="0">
+                        </div>
+                    </div>
+                </div>
+                <button id="submitRequestBtn" class="btn btn-primary btn-block">
+                    <i class="fa-solid fa-circle-check"></i> Evaluate Request
+                </button>
+            </div>
+
+            <!-- Add Custom Process Form -->
+            <div class="config-section">
+                <h3><i class="fa-solid fa-circle-plus"></i> Add Custom Process</h3>
+                <div class="form-group">
+                    <label>Allocated Resources</label>
+                    <div class="vector-inputs">
+                        <div class="vector-input-group">
+                            <span class="res-label mini res-a">A</span>
+                            <input type="number" id="addAllocA" class="form-control mini" min="0" value="0">
+                        </div>
+                        <div class="vector-input-group">
+                            <span class="res-label mini res-b">B</span>
+                            <input type="number" id="addAllocB" class="form-control mini" min="0" value="1">
+                        </div>
+                        <div class="vector-input-group">
+                            <span class="res-label mini res-c">C</span>
+                            <input type="number" id="addAllocC" class="form-control mini" min="0" value="0">
+                        </div>
+                        <div class="vector-input-group" id="addAllocDGroup" style="display: none;">
+                            <span class="res-label mini res-d">D</span>
+                            <input type="number" id="addAllocD" class="form-control mini" min="0" value="0">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Max Claim Resources</label>
+                    <div class="vector-inputs">
+                        <div class="vector-input-group">
+                            <span class="res-label mini res-a">A</span>
+                            <input type="number" id="addMaxA" class="form-control mini" min="0" value="4">
+                        </div>
+                        <div class="vector-input-group">
+                            <span class="res-label mini res-b">B</span>
+                            <input type="number" id="addMaxB" class="form-control mini" min="0" value="3">
+                        </div>
+                        <div class="vector-input-group">
+                            <span class="res-label mini res-c">C</span>
+                            <input type="number" id="addMaxC" class="form-control mini" min="0" value="3">
+                        </div>
+                        <div class="vector-input-group" id="addMaxDGroup" style="display: none;">
+                            <span class="res-label mini res-d">D</span>
+                            <input type="number" id="addMaxD" class="form-control mini" min="0" value="0">
+                        </div>
+                    </div>
+                </div>
+
+                <button id="addProcessBtn" class="btn btn-secondary btn-block">
+                    <i class="fa-solid fa-plus"></i> Add Process
+                </button>
+            </div>
+
+            <div class="sidebar-footer">
+                <button id="clearAllBtn" class="btn btn-danger btn-block">
+                    <i class="fa-solid fa-trash-can"></i> Clear All Processes
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Workspace Area -->
+        <main class="workspace">
+            <!-- Top Controls Header -->
+            <header class="workspace-header">
+                <div class="simulation-controls">
+                    <button id="checkSafetyBtn" class="btn btn-success" title="Run safety check automatically">
+                        <i class="fa-solid fa-shield-halved"></i> Check Safety
+                    </button>
+                    <button id="startStepBtn" class="btn btn-info" title="Launch step-by-step verification mode">
+                        <i class="fa-solid fa-shoe-prints"></i> Step safety
+                    </button>
+                    <button id="resetSimBtn" class="btn btn-warning" title="Reset processes to original allocations">
+                        <i class="fa-solid fa-rotate-left"></i> Reset State
+                    </button>
+                    
+                    <div class="divider"></div>
+
+                    <button id="randomizeBtn" class="btn btn-outline" title="Generate random process matrices">
+                        <i class="fa-solid fa-dice"></i> Randomize
+                    </button>
+                    <button id="exportCsvBtn" class="btn btn-outline" title="Export Process Matrix to CSV">
+                        <i class="fa-solid fa-download"></i> Export CSV
+                    </button>
+                </div>
+
+                <div class="status-badge-container">
+                    <span class="label">System Safety</span>
+                    <span id="safetyStatus" class="status-indicator pending">UNCHECKED</span>
+                </div>
+            </header>
+
+            <!-- Telemetry Dashboard -->
+            <section class="telemetry">
+                <!-- Safe Sequence display card -->
+                <div class="card seq-card">
+                    <div class="card-icon blue"><i class="fa-solid fa-route"></i></div>
+                    <div class="card-content">
+                        <span class="card-label">Safe Execution Sequence</span>
+                        <h2 id="safeSequenceDisplay" class="seq-text">-</h2>
+                    </div>
+                </div>
+
+                <!-- Available Resources indicator -->
+                <div class="card vector-card">
+                    <div class="card-icon emerald"><i class="fa-solid fa-box-open"></i></div>
+                    <div class="card-content">
+                        <span class="card-label">System Available Vector</span>
+                        <h2 id="availableVectorDisplay">A:0, B:0, C:0</h2>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step-by-Step Visualization Console (Hidden by default, shown in step mode) -->
+            <section class="stepper-visualizer" id="stepperSection" style="display: none;">
+                <div class="panel-header">
+                    <h3><i class="fa-solid fa-shoe-prints"></i> Safety Evaluation Stepper</h3>
+                    <div class="stepper-actions">
+                        <button id="nextStepBtn" class="btn btn-sm btn-success"><i class="fa-solid fa-chevron-right"></i> Next Step</button>
+                        <button id="exitStepBtn" class="btn btn-sm btn-danger"><i class="fa-solid fa-xmark"></i> Exit Step Mode</button>
+                    </div>
+                </div>
+                
+                <div class="stepper-content">
+                    <div class="stepper-vectors">
+                        <div class="vector-status">
+                            <span class="vector-label">Work Vector</span>
+                            <div class="vector-bubble" id="workVectorBubble">A:0, B:0, C:0</div>
+                        </div>
+                    </div>
+                    <div class="finish-checklist-container">
+                        <span class="vector-label">Process Completion Status (Finish Array)</span>
+                        <div class="finish-bubbles" id="finishBubblesContainer">
+                            <!-- Injected dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Process Matrices Block -->
+            <section class="table-container">
+                <div class="panel-header">
+                    <h3><i class="fa-solid fa-table-cells"></i> Process Allocation & Claim Matrices</h3>
+                    <span class="helper-text"><i class="fa-solid fa-circle-info"></i> Edit matrix cell inputs directly. Remaining claims (Need) calculate dynamically.</span>
+                </div>
+                <div class="table-responsive">
+                    <table class="matrix-table" id="matrixTable">
+                        <thead>
+                            <tr class="header-super">
+                                <th rowspan="2">Process</th>
+                                <th colspan="3" class="col-group allocation-hdr">Allocation</th>
+                                <th colspan="3" class="col-group max-hdr">Max Claim</th>
+                                <th colspan="3" class="col-group need-hdr">Need</th>
+                                <th rowspan="2" style="width: 80px;">Actions</th>
+                            </tr>
+                            <tr class="header-sub" id="matrixTableSubHeader">
+                                <th class="res-col">A</th>
+                                <th class="res-col">B</th>
+                                <th class="res-col">C</th>
+                                <th class="res-col">A</th>
+                                <th class="res-col">B</th>
+                                <th class="res-col">C</th>
+                                <th class="res-col">A</th>
+                                <th class="res-col">B</th>
+                                <th class="res-col">C</th>
+                            </tr>
+                        </thead>
+                        <tbody id="matrixTableBody">
+                            <!-- Process rows are injected dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- System Resource Vectors Detail -->
+            <section class="resource-summary-panel">
+                <div class="vector-detail-card">
+                    <h4>Total Resources</h4>
+                    <div class="vector-detail-values" id="vectorTotalVal">A:10 | B:5 | C:7</div>
+                </div>
+                <div class="vector-detail-arrow"><i class="fa-solid fa-minus"></i></div>
+                <div class="vector-detail-card">
+                    <h4>Total Allocated</h4>
+                    <div class="vector-detail-values" id="vectorAllocatedVal">A:0 | B:0 | C:0</div>
+                </div>
+                <div class="vector-detail-arrow"><i class="fa-solid fa-equals"></i></div>
+                <div class="vector-detail-card highlight">
+                    <h4>Available Vector</h4>
+                    <div class="vector-detail-values" id="vectorAvailableVal">A:0 | B:0 | C:0</div>
+                </div>
+            </section>
+
+            <!-- Terminal logs console -->
+            <section class="logs-container">
+                <div class="panel-header">
+                    <h3><i class="fa-solid fa-terminal"></i> Safety Proof Logs</h3>
+                    <button id="clearLogsBtn" class="btn btn-sm btn-outline">Clear Logs</button>
+                </div>
+                <div class="logs-console" id="logsConsole">
+                    <div class="log-entry system"><span class="log-time">[SYSTEM]</span> BankerOS initialized. Define resource capacities and processes to verify safety.</div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Script File -->
+    <script src="script.js"></script>
+</body>
+</html>
