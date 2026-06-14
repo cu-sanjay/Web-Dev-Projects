@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antonym Ally — The Opposite Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="glass-card">
+        <!-- Start/Game Over Overlay -->
+        <div id="screen-overlay" class="overlay">
+            <h1 id="overlay-title">Antonym Ally 🌸</h1>
+            <p id="overlay-desc" style="margin-bottom: 30px;">How many opposites can you find?</p>
+            <button class="btn-start" onclick="startGame()">Play Game</button>
+        </div>
+
+        <div class="stats">
+            <div>Score: <span id="score">0</span></div>
+            <div>Streak: <span id="streak">0</span> 🔥</div>
+        </div>
+
+        <div class="timer-bar"><div id="timer" class="timer-fill"></div></div>
+
+        <div class="word-display" id="current-word">READY?</div>
+        <div class="prompt">What is the opposite of this word?</div>
+
+        <div class="options-grid" id="options-container">
+            <button class="option-btn">Option 1</button>
+            <button class="option-btn">Option 2</button>
+            <button class="option-btn">Option 3</button>
+            <button class="option-btn">Option 4</button>
+        </div>
+    </div>
+</div>
+<script src = "script.js"></script>
+</body>
+</html>
