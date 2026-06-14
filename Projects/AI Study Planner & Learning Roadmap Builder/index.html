@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Study Planner & Learning Roadmap Builder</title>
+  <!-- Google Fonts: Outfit and Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons for Dashboard aesthetics -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-background"></div>
+
+  <header class="app-header">
+    <div class="header-container">
+      <div class="logo">
+        <i class="fa-solid fa-compass glow-icon"></i>
+        <h1>Learn<span>Flow</span></h1>
+        <span class="badge">AI Roadmap</span>
+      </div>
+      <p class="tagline">Generate structured study schedules, map milestone pathways, and track notes persistently.</p>
+    </div>
+  </header>
+
+  <main class="main-container">
+    <!-- SETUP & STATISTICS SIDEBAR -->
+    <aside class="sidebar-column">
+      <!-- Planner Configuration Card -->
+      <section class="section-card config-card" aria-labelledby="config-heading">
+        <h3 id="config-heading"><i class="fa-solid fa-sliders"></i> Configuration</h3>
+        
+        <div class="form-group mt-1">
+          <label for="select-topic">Study Domain Goal</label>
+          <div class="select-wrapper">
+            <select id="select-topic">
+              <option value="frontend">Frontend Web Development</option>
+              <option value="machine-learning">Machine Learning & Python</option>
+              <option value="dsa">Data Structures & Algorithms</option>
+              <option value="devops">DevOps & Cloud Systems</option>
+              <option value="system-design">Backend System Design</option>
+            </select>
+            <i class="fa-solid fa-chevron-down select-arrow"></i>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="select-pacing">Pacing Strategy</label>
+          <div class="select-wrapper">
+            <select id="select-pacing">
+              <option value="focused">Focused Pacing (High Speed)</option>
+              <option value="balanced" selected>Balanced Pacing (Recommended)</option>
+              <option value="relaxed">Relaxed Pacing (Moderate Speed)</option>
+            </select>
+            <i class="fa-solid fa-chevron-down select-arrow"></i>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="label-row">
+            <label for="range-hours">Study Hours / Week</label>
+            <span id="label-hours" class="text-accent font-bold">15 hrs</span>
+          </div>
+          <input type="range" id="range-hours" min="5" max="40" value="15" class="slider-input">
+        </div>
+
+        <button id="btn-build-roadmap" class="btn btn-primary btn-full">
+          <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Study Plan
+        </button>
+      </section>
+
+      <!-- Analytics Dashboard Stats -->
+      <section class="section-card stats-card" aria-labelledby="stats-heading">
+        <h3 id="stats-heading"><i class="fa-solid fa-chart-line"></i> Learning Telemetry</h3>
+        
+        <div class="overall-progress-radial">
+          <svg class="radial-svg" viewBox="0 0 100 100">
+            <circle class="radial-bg" cx="50" cy="50" r="44"></circle>
+            <circle class="radial-progress" id="progress-indicator" cx="50" cy="50" r="44" style="stroke-dasharray: 276; stroke-dashoffset: 276;"></circle>
+          </svg>
+          <div class="radial-text">
+            <span id="val-completion" class="score-val">0%</span>
+            <span class="score-lbl">Completed</span>
+          </div>
+        </div>
+
+        <div class="stats-telemetry-grid">
+          <div class="tel-item">
+            <span class="tel-lbl">Logged Study</span>
+            <span class="tel-val" id="val-total-hours">0 hrs</span>
+          </div>
+          <div class="tel-item">
+            <span class="tel-lbl">Study Streak</span>
+            <span class="tel-val text-warning" id="val-streak"><i class="fa-solid fa-fire"></i> 0 days</span>
+          </div>
+        </div>
+
+        <div class="active-milestone-panel mt-1">
+          <span class="panel-label">Current Focus Module</span>
+          <p id="val-active-node" class="font-bold text-sm">No active schedule built.</p>
+        </div>
+      </section>
+    </aside>
+
+    <!-- ROADMAP INTERACTIVE CANVAS -->
+    <section class="section-card canvas-card" aria-label="Visual Learning Roadmap">
+      <div class="canvas-header">
+        <div class="canvas-title">
+          <i class="fa-solid fa-route text-accent"></i>
+          <h2 id="roadmap-title">Learning Pathway Canvas</h2>
+        </div>
+        <span class="duration-badge" id="lbl-duration-est">0 Weeks</span>
+      </div>
+
+      <!-- Roadmap Graph Container -->
+      <div class="roadmap-canvas-wrapper">
+        <!-- Overlay SVG lines container -->
+        <svg class="roadmap-svg-lines" id="svg-connectors"></svg>
+
+        <!-- Dynamic Roadmap node list -->
+        <div class="roadmap-nodes-container" id="roadmap-nodes-list">
+          <!-- Guide layout before plan generated -->
+          <div class="roadmap-placeholder">
+            <i class="fa-solid fa-circle-nodes placeholder-icon"></i>
+            <h3>No Roadmap Built Yet</h3>
+            <p>Customize your target topic domain and weekly study capacity, then trigger the generator to map custom milestones linked with connection guides.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- SLIDE-IN DETAIL DRAWER PANEL (RIGHT SIDE) -->
+  <div id="drawer-panel" class="drawer-overlay hidden">
+    <div class="drawer-content">
+      <div class="drawer-header">
+        <div class="drawer-header-title">
+          <span class="node-index-badge" id="drawer-node-index">Node 1</span>
+          <h3 id="drawer-node-name">Introduction to HTML</h3>
+        </div>
+        <button id="btn-close-drawer" class="btn-icon" aria-label="Close drawer"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="drawer-body">
+        <!-- Node State, Log hours -->
+        <div class="drawer-row-split mb-1">
+          <div class="status-selector-group">
+            <label for="select-node-status">Module Status</label>
+            <div class="select-wrapper">
+              <select id="select-node-status">
+                <option value="todo">Not Started</option>
+                <option value="doing">In Progress</option>
+                <option value="done">Completed</option>
+              </select>
+              <i class="fa-solid fa-chevron-down select-arrow"></i>
+            </div>
+          </div>
+
+          <div class="log-hours-form">
+            <label for="num-log-hours">Log Study Hours</label>
+            <div class="input-btn-group">
+              <input type="number" id="num-log-hours" min="1" max="24" value="2">
+              <button id="btn-log-hours" class="btn btn-secondary btn-sm"><i class="fa-solid fa-plus"></i> Add</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="drawer-section">
+          <h4>Module Syllabus & Description</h4>
+          <p id="drawer-node-desc" class="text-secondary text-sm">Detailed syllabus content explaining core skills to cover in this week's milestone schedule.</p>
+        </div>
+
+        <div class="drawer-section">
+          <h4>Key Mastery Checklist</h4>
+          <ul class="mastery-checklist" id="drawer-checklist">
+            <!-- Dynamic checklist items -->
+          </ul>
+        </div>
+
+        <div class="drawer-section">
+          <h4>Study Notepad</h4>
+          <div class="notepad-wrapper">
+            <div class="notepad-header">
+              <span><i class="fa-solid fa-pencil"></i> Quick Notes</span>
+              <span id="notepad-save-indicator" class="notepad-status"><i class="fa-solid fa-circle-check"></i> Saved</span>
+            </div>
+            <textarea id="drawer-notepad" placeholder="Type your class notes, key concepts, or reminders here... (Auto-saves persistently)"></textarea>
+          </div>
+        </div>
+
+        <div class="drawer-section">
+          <h4>Recommended Learning Reference</h4>
+          <div id="drawer-resource-container">
+            <!-- Dynamic resource links -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="app-footer">
+    <div class="footer-container">
+      <p>&copy; 2026 LearnFlow Study System. Open Source Contribution for <a href="https://github.com/cu-sanjay/Web-Dev-Projects" target="_blank" rel="noopener noreferrer">Web Dev Projects</a>.</p>
+      <button id="btn-reset-storage" class="footer-btn"><i class="fa-solid fa-rotate-left"></i> Reset App Data</button>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
