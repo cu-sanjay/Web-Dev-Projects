@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Public Issue Reporting System</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="header-content">
+                <h1>🏙️ Civic Report</h1>
+                <p>Smart Public Issue Reporting System</p>
+            </div>
+            <button id="themeToggle" class="btn-icon" aria-label="Toggle Theme">🌙</button>
+        </header>
+
+        <main class="grid-container">
+            <!-- Left Column: Report Form -->
+            <section class="card form-section">
+                <h2>Report an Issue</h2>
+                <form id="issueForm">
+                    <div class="form-group">
+                        <label for="issueTitle">Issue Title</label>
+                        <input type="text" id="issueTitle" placeholder="E.g., Large pothole on Main St." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="issueCategory">Category</label>
+                        <select id="issueCategory" required>
+                            <option value="">Select Category</option>
+                            <option value="Road Damage">Road Damage</option>
+                            <option value="Streetlight">Streetlight Failure</option>
+                            <option value="Water Leakage">Water Leakage</option>
+                            <option value="Garbage">Garbage Collection</option>
+                            <option value="Drainage">Drainage Problems</option>
+                            <option value="Other">Other Civic Issues</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="issueLocation">Location</label>
+                        <input type="text" id="issueLocation" placeholder="Street address or landmark" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="issuePriority">Priority Level</label>
+                        <select id="issuePriority" required>
+                            <option value="Low">Low</option>
+                            <option value="Medium">Medium</option>
+                            <option value="High">High</option>
+                            <option value="Critical">Critical</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="issueDescription">Description</label>
+                        <textarea id="issueDescription" rows="4" placeholder="Provide more details about the issue..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Submit Report</button>
+                </form>
+            </section>
+
+            <!-- Right Column: Dashboard & Tracking -->
+            <section class="dashboard-section">
+                <!-- Stats Overview -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-value" id="totalIssues">0</span>
+                        <span class="stat-label">Total Reported</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value" id="pendingIssues">0</span>
+                        <span class="stat-label">Pending</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value" id="resolvedIssues">0</span>
+                        <span class="stat-label">Resolved</span>
+                    </div>
+                </div>
+
+                <!-- Filters -->
+                <div class="card filters-card">
+                    <div class="filters-row">
+                        <input type="text" id="searchIssue" placeholder="Search issues...">
+                        <select id="filterStatus">
+                            <option value="All">All Statuses</option>
+                            <option value="Pending">Pending</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Resolved">Resolved</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Issue List -->
+                <div class="card issues-container">
+                    <div class="issues-header">
+                        <h2>Recent Reports</h2>
+                    </div>
+                    <div id="issuesList" class="issues-list">
+                        <!-- Issue cards will be injected here via JS -->
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
