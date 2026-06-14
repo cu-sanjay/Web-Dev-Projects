@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Study Session Planner</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="header">
+      <h1>🧠 Smart Study Planner</h1>
+      <p>Optimize your study time with auto-generated Pomodoro blocks.</p>
+    </header>
+
+    <main class="main-content">
+      <section class="config-section">
+        <div class="card">
+          <h2>1. Define Your Session</h2>
+          
+          <div class="form-group">
+            <label for="total-time">Total Available Study Time (Minutes)</label>
+            <input type="number" id="total-time" min="30" step="30" value="120" placeholder="e.g. 120">
+            <small>Minimum 30 minutes. Recommened to use increments of 30.</small>
+          </div>
+
+          <hr class="divider">
+
+          <div class="form-group">
+            <label>Add Study Topics</label>
+            <div class="input-row">
+              <input type="text" id="topic-input" placeholder="e.g. Calculus Chapter 4">
+              <button id="add-topic-btn" class="btn primary-btn">+</button>
+            </div>
+          </div>
+
+          <ul id="topics-list" class="topics-list">
+            <!-- Topics rendered here -->
+          </ul>
+
+          <button id="generate-btn" class="btn success-btn full-width" disabled>Generate Study Plan</button>
+        </div>
+      </section>
+
+      <section class="plan-section">
+        <div class="card">
+          <h2>2. Your Optimal Study Plan</h2>
+          <div id="plan-timeline" class="timeline">
+            <div class="empty-state">Add topics and click generate to see your plan.</div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  
+  <script src="script.js"></script>
+</body>
+</html>
