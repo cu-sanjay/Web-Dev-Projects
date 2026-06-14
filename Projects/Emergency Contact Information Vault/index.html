@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Contact & Information Vault</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-icon">✚</div>
+                <h2>Vault</h2>
+            </div>
+            
+            <nav class="nav-links">
+                <button class="nav-btn active" data-target="dashboard">Dashboard</button>
+                <button class="nav-btn" data-target="profile">Personal Info</button>
+                <button class="nav-btn" data-target="contacts">Emergency Contacts</button>
+                <button class="nav-btn" data-target="medical">Medical Info</button>
+                <button class="nav-btn" data-target="insurance">Insurance & Docs</button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button id="themeToggle" class="btn btn-outline w-full">Toggle Dark Mode</button>
+                <div class="emergency-badge mt-3 text-center">
+                    <small>EMERGENCY USE ONLY</small>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            
+            <!-- Dashboard View -->
+            <section id="dashboardView" class="view-section active">
+                <header class="view-header emergency-header">
+                    <h1>Emergency Summary Dashboard</h1>
+                    <p>Critical information at a glance. In case of emergency, refer to the details below.</p>
+                </header>
+
+                <div class="dash-grid">
+                    <!-- Profile Summary Card -->
+                    <div class="card profile-card">
+                        <div class="card-header">
+                            <h3>Identification</h3>
+                        </div>
+                        <div class="card-body">
+                            <h2 id="dashName" class="text-xl font-bold mb-2">Not Set</h2>
+                            <div class="info-row"><span class="lbl">DOB:</span> <span class="val" id="dashDob">N/A</span></div>
+                            <div class="info-row mt-2 blood-group-alert">
+                                <span class="lbl">Blood Group:</span> <strong class="val text-danger text-lg" id="dashBloodGroup">N/A</strong>
+                            </div>
+                            <div class="info-row mt-2"><span class="lbl">Address:</span> <span class="val" id="dashAddress">N/A</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Medical Alert Card -->
+                    <div class="card alert-card">
+                        <div class="card-header bg-danger text-white">
+                            <h3>Medical Alerts</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <strong>Allergies:</strong>
+                                <p id="dashAllergies" class="text-danger font-medium mt-1">None reported</p>
+                            </div>
+                            <div class="mb-3">
+                                <strong>Conditions:</strong>
+                                <p id="dashConditions" class="mt-1">None reported</p>
+                            </div>
+                            <div>
+                                <strong>Medications:</strong>
+                                <p id="dashMeds" class="mt-1">None reported</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Emergency Contacts Quick List -->
+                    <div class="card contacts-card span-2">
+                        <div class="card-header">
+                            <h3>Primary Contacts</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="contacts-grid" id="dashContactsGrid">
+                                <!-- Populated by JS -->
+                                <p class="text-muted">No contacts added.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Personal Info View -->
+            <section id="profileView" class="view-section">
+                <header class="view-header">
+                    <h1>Personal Information</h1>
+                    <p>Update your basic identification and location details.</p>
+                </header>
+                <div class="card max-w-3xl">
+                    <form id="profileForm">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Full Name</label>
+                                <input type="text" id="pName" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Date of Birth</label>
+                                <input type="date" id="pDob" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Blood Group</label>
+                                <select id="pBlood" class="form-control" required>
+                                    <option value="">Select Blood Group...</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O-">O-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
+                                    <option value="Unknown">Unknown</option>
+                                </select>
+                            </div>
+                            <div class="form-group span-2">
+                                <label>Primary Address</label>
+                                <textarea id="pAddress" class="form-control" rows="2"></textarea>
+                            </div>
+                            <div class="form-group span-2">
+                                <label>Emergency Notes</label>
+                                <textarea id="pNotes" class="form-control" rows="2" placeholder="e.g. Keep inhaler in left pocket..."></textarea>
+                            </div>
+                        </div>
+                        <div class="mt-4 text-right">
+                            <button type="submit" class="btn btn-primary">Save Profile Info</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Emergency Contacts View -->
+            <section id="contactsView" class="view-section">
+                <header class="view-header flex justify-between align-center">
+                    <div>
+                        <h1>Emergency Contacts</h1>
+                        <p>Manage people to notify in an emergency.</p>
+                    </div>
+                    <button class="btn btn-primary" id="addContactBtn">+ Add Contact</button>
+                </header>
+                
+                <div class="contacts-grid-full" id="fullContactsGrid">
+                    <!-- Populated by JS -->
+                </div>
+                <div id="emptyContacts" class="empty-state">
+                    <p>No contacts added yet. Add a contact to get started.</p>
+                </div>
+            </section>
+
+            <!-- Medical Info View -->
+            <section id="medicalView" class="view-section">
+                <header class="view-header">
+                    <h1>Medical Information</h1>
+                    <p>Details critical for first responders and healthcare providers.</p>
+                </header>
+                <div class="card max-w-3xl">
+                    <form id="medicalForm">
+                        <div class="form-group mb-4">
+                            <label class="text-danger font-bold">Known Allergies (Crucial)</label>
+                            <textarea id="mAllergies" class="form-control" rows="2" placeholder="List medications, food, or environmental allergies..."></textarea>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label>Existing Medical Conditions</label>
+                            <textarea id="mConditions" class="form-control" rows="2" placeholder="e.g. Asthma, Diabetes Type 1, Hypertension..."></textarea>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label>Current Medications</label>
+                            <textarea id="mMeds" class="form-control" rows="2" placeholder="List ongoing medications and dosages..."></textarea>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label>Primary Physician Contact</label>
+                            <input type="text" id="mPhysician" class="form-control" placeholder="Dr. Name - Phone Number">
+                        </div>
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-primary">Save Medical Info</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Insurance & Docs View -->
+            <section id="insuranceView" class="view-section">
+                <header class="view-header">
+                    <h1>Insurance & Important Documents</h1>
+                    <p>Financial and identification references for emergencies.</p>
+                </header>
+                <div class="card max-w-3xl">
+                    <form id="insuranceForm">
+                        <h3 class="mb-3 border-bottom pb-2">Health Insurance</h3>
+                        <div class="form-grid mb-4">
+                            <div class="form-group">
+                                <label>Provider Name</label>
+                                <input type="text" id="iProvider" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Policy Number</label>
+                                <input type="text" id="iPolicy" class="form-control">
+                            </div>
+                            <div class="form-group span-2">
+                                <label>Emergency Claim Phone Number</label>
+                                <input type="text" id="iPhone" class="form-control">
+                            </div>
+                        </div>
+
+                        <h3 class="mb-3 border-bottom pb-2">Identification Metadata</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Driver's License #</label>
+                                <input type="text" id="iLicense" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Passport #</label>
+                                <input type="text" id="iPassport" class="form-control">
+                            </div>
+                        </div>
+                        <div class="mt-4 text-right">
+                            <button type="submit" class="btn btn-primary">Save Documents Info</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Contact Modal -->
+    <div class="modal-overlay hidden" id="contactModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add Contact</h2>
+                <button class="icon-btn close-modal">✕</button>
+            </div>
+            <form id="contactForm">
+                <input type="hidden" id="cId">
+                <div class="form-group mb-3">
+                    <label>Full Name</label>
+                    <input type="text" id="cName" class="form-control" required>
+                </div>
+                <div class="form-group mb-3">
+                    <label>Relationship</label>
+                    <input type="text" id="cRel" class="form-control" required placeholder="e.g. Spouse, Parent, Friend">
+                </div>
+                <div class="form-group mb-3">
+                    <label>Phone Number</label>
+                    <input type="tel" id="cPhone" class="form-control" required>
+                </div>
+                <div class="form-group mb-3">
+                    <label>Type</label>
+                    <select id="cType" class="form-control">
+                        <option value="Primary">Primary</option>
+                        <option value="Secondary">Secondary</option>
+                    </select>
+                </div>
+                <div class="form-actions mt-4 text-right">
+                    <button type="button" class="btn btn-outline close-modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary ml-2">Save Contact</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" class="toast hidden">Saved successfully</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
