@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assignment Deadline Risk Predictor</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="header">
+      <h1>⏳ Deadline Risk Predictor</h1>
+      <p>Evaluate your assignments and manage your time effectively.</p>
+    </header>
+
+    <main class="main-content">
+      <section class="form-section">
+        <div class="card">
+          <h2>Assess New Assignment</h2>
+          <form id="assessment-form">
+            <div class="form-group">
+              <label for="assignment-name">Assignment Name</label>
+              <input type="text" id="assignment-name" required placeholder="e.g., Data Structures Final Project">
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label for="days-left">Days Until Deadline</label>
+                <input type="number" id="days-left" min="0" required placeholder="e.g., 5">
+              </div>
+              <div class="form-group">
+                <label for="est-hours">Estimated Hours Needed</label>
+                <input type="number" id="est-hours" min="1" required placeholder="e.g., 10">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="complexity">Task Complexity</label>
+              <select id="complexity" required>
+                <option value="1">Low (Straightforward)</option>
+                <option value="2">Medium (Requires some research)</option>
+                <option value="3">High (Complex problem solving)</option>
+                <option value="4">Extreme (Major project/thesis)</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn primary-btn">Calculate Risk Level</button>
+          </form>
+        </div>
+      </section>
+
+      <section class="results-section">
+        <div class="card">
+          <h2>Assessed Assignments</h2>
+          <div class="controls">
+            <button id="sort-risk" class="btn secondary-btn">Sort by Risk</button>
+            <button id="clear-all" class="btn outline-btn">Clear All</button>
+          </div>
+          <div id="assignments-list" class="assignments-list">
+            <div class="empty-state">No assignments assessed yet. Fill out the form to get started.</div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  
+  <script src="script.js"></script>
+</body>
+</html>
