@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Biodiversity Index Calculator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="app-header">
+    <div class="header-brand">
+      <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="6" cy="6" r="3"/><circle cx="18" cy="8" r="2.5"/><circle cx="12" cy="18" r="3.5"/><circle cx="6" cy="17" r="2"/>
+        <path d="M9 8l3 7M15 10l-2 6" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <h1 class="brand-title">Biodiversity Index</h1>
+        <span class="brand-sub">Ecosystem Informatics v1.0</span>
+      </div>
+      <span class="brand-badge">CANVAS · ES6+</span>
+    </div>
+  </header>
+
+  <main class="app-main">
+
+    <!-- Species Ledger + Analytics -->
+    <section class="workspace">
+      <!-- Left: Ingestion Table -->
+      <div class="ledger-card">
+        <div class="ledger-header">
+          <span class="ledger-title">Species Ingestion Ledger</span>
+          <button class="add-btn" id="btnAddRow">+ Add Row</button>
+        </div>
+        <div class="ledger-table-wrap">
+          <table class="ledger-table" id="speciesTable">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Species Name</th>
+                <th>Population</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+          </table>
+        </div>
+        <div class="ledger-error" id="ledgerError" role="alert">Invalid entry — empty name or non-positive count detected.</div>
+      </div>
+
+      <!-- Right: Canvases + Telemetry -->
+      <div class="analytics-col">
+        <!-- Bar Chart -->
+        <div class="canvas-card">
+          <div class="canvas-header">
+            <span class="canvas-title">Proportional Abundance</span>
+            <span class="canvas-badge">BAR CHART</span>
+          </div>
+          <div class="canvas-wrap">
+            <canvas id="barCanvas"></canvas>
+          </div>
+        </div>
+        <!-- Gauges -->
+        <div class="canvas-card">
+          <div class="canvas-header">
+            <span class="canvas-title">Index Scale Meters</span>
+            <span class="canvas-badge">GAUGES</span>
+          </div>
+          <div class="canvas-wrap canvas-gauges">
+            <canvas id="gaugeCanvas"></canvas>
+          </div>
+        </div>
+        <!-- Telemetry -->
+        <div class="results-card" id="resultsCard">
+          <div class="results-header">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14" style="color:#00e5ff"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M2 12h20M12 2v20"/><circle cx="12" cy="12" r="2" fill="#00e5ff"/></svg>
+            <span class="results-title">Ecosystem Indices</span>
+            <span class="results-badge" id="verdictBadge">—</span>
+          </div>
+          <div class="results-body">
+            <div class="r-item"><span class="r-label">Richness (S)</span><span class="r-value" id="valS">—</span></div>
+            <div class="r-item"><span class="r-label">Shannon (H')</span><span class="r-value" id="valShannon">—</span></div>
+            <div class="r-item"><span class="r-label">Simpson (D)</span><span class="r-value" id="valSimpson">—</span></div>
+            <div class="r-item"><span class="r-label">Evenness (J')</span><span class="r-value" id="valEvenness">—</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Controls -->
+    <section class="control-deck">
+      <button class="ctrl-btn ctrl-primary" id="btnCompute">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>
+        Compute Analytics
+      </button>
+      <button class="ctrl-btn" id="btnTemplate">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M4 4h16v16H4z"/><path d="M4 9h16M9 4v16"/></svg>
+        Load Rainforest Template
+      </button>
+      <button class="ctrl-btn ctrl-danger" id="btnPurge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg>
+        Purge Data Matrix
+      </button>
+    </section>
+
+  </main>
+
+  <footer class="app-footer">
+    Biodiversity Index Calculator &copy; 2026 &mdash; Canvas API &mdash; Web-Dev-Projects
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
