@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pollinator Garden Planner</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <h1>🌸 Pollinator Garden Planner</h1>
+
+    <div class="palette">
+      <h2>Plant Palette</h2>
+      <div class="plant" draggable="true" data-name="Lavender" data-season="Summer">Lavender 🌿</div>
+      <div class="plant" draggable="true" data-name="Sunflower" data-season="Summer">Sunflower 🌻</div>
+      <div class="plant" draggable="true" data-name="Marigold" data-season="Spring">Marigold 🌼</div>
+      <div class="plant" draggable="true" data-name="Butterfly Bush" data-season="Autumn">Butterfly Bush 🦋</div>
+    </div>
+
+    <div class="garden" id="garden">
+      <h2>Drag plants here</h2>
+    </div>
+
+    <div class="calendar">
+      <h2>🌱 Seasonal Bloom Calendar</h2>
+      <ul id="calendarList"></ul>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
