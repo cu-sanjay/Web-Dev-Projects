@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Resource Directory</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header>
+            <div class="header-content">
+                <h1>🏘️ Community Resource Directory</h1>
+                <p>Find essential local services and resources near you.</p>
+            </div>
+            <button id="themeToggle" class="btn-icon" aria-label="Toggle Theme">🌙</button>
+        </header>
+
+        <!-- Search and Filter Section -->
+        <section class="search-section card">
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search for hospitals, schools, NGOs...">
+            </div>
+            <div class="filters">
+                <select id="categoryFilter">
+                    <option value="All">All Categories</option>
+                    <option value="Hospitals">Hospitals & Clinics</option>
+                    <option value="Pharmacies">Pharmacies</option>
+                    <option value="Emergency">Emergency Services</option>
+                    <option value="Schools">Schools & Colleges</option>
+                    <option value="NGOs">NGOs</option>
+                    <option value="Public">Public Utilities</option>
+                </select>
+                <button id="addResourceBtn" class="btn-primary">+ Add Resource</button>
+            </div>
+        </section>
+
+        <!-- Main Directory Area -->
+        <main class="directory-grid">
+            <!-- Left sidebar: Emergency Contacts & Bookmarks -->
+            <aside class="sidebar">
+                <div class="card emergency-card">
+                    <h2>🚨 Emergency Numbers</h2>
+                    <ul class="emergency-list">
+                        <li><strong>Police:</strong> 100</li>
+                        <li><strong>Fire:</strong> 101</li>
+                        <li><strong>Ambulance:</strong> 102 / 108</li>
+                        <li><strong>Women Helpline:</strong> 1091</li>
+                    </ul>
+                </div>
+
+                <div class="card bookmarks-card">
+                    <h2>⭐ Saved Resources</h2>
+                    <ul id="bookmarksList" class="bookmarks-list">
+                        <li class="empty-text">No saved resources yet.</li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- Right Area: Resource Cards -->
+            <section class="resources-container">
+                <div class="resources-header">
+                    <h2 id="resultsCount">All Resources</h2>
+                </div>
+                <div id="resourcesList" class="resources-list">
+                    <!-- Resource cards injected via JS -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Add Resource Modal -->
+    <div id="resourceModal" class="modal">
+        <div class="modal-content card">
+            <div class="modal-header">
+                <h2>Add New Resource</h2>
+                <button id="closeModalBtn" class="btn-close">&times;</button>
+            </div>
+            <form id="resourceForm">
+                <div class="form-group">
+                    <label for="resName">Name</label>
+                    <input type="text" id="resName" required placeholder="e.g. City General Hospital">
+                </div>
+                <div class="form-group">
+                    <label for="resCategory">Category</label>
+                    <select id="resCategory" required>
+                        <option value="Hospitals">Hospitals & Clinics</option>
+                        <option value="Pharmacies">Pharmacies</option>
+                        <option value="Emergency">Emergency Services</option>
+                        <option value="Schools">Schools & Colleges</option>
+                        <option value="NGOs">NGOs</option>
+                        <option value="Public">Public Utilities</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="resAddress">Address</label>
+                    <input type="text" id="resAddress" required placeholder="123 Main Street">
+                </div>
+                <div class="form-group">
+                    <label for="resContact">Contact Number</label>
+                    <input type="text" id="resContact" required placeholder="+1 234 567 8900">
+                </div>
+                <div class="form-group">
+                    <label for="resHours">Operating Hours</label>
+                    <input type="text" id="resHours" required placeholder="e.g. 24/7 or 9 AM - 5 PM">
+                </div>
+                <div class="form-group">
+                    <label for="resDesc">Description</label>
+                    <textarea id="resDesc" rows="3" required placeholder="Brief description of services provided..."></textarea>
+                </div>
+                <button type="submit" class="btn-primary w-100">Save Resource</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
