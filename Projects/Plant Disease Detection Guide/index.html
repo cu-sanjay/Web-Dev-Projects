@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plant Disease · Detection Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="top-profile">
+    <div class="profile-brand">
+      <svg class="profile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M12 2C8 2 4 5 4 9c0 5 8 12 8 12s8-7 8-12c0-4-4-7-8-7z" stroke="#00e676"/>
+        <path d="M9 9l2 2 4-4" stroke="#00e676" stroke-width="2"/>
+        <circle cx="12" cy="9" r="2" fill="#ffb80022" stroke="#ffb800"/>
+      </svg>
+      <div>
+        <h1 class="profile-title">Plant Disease · Detection Guide</h1>
+        <span class="profile-sub">Expert Systems Diagnostic Laboratory · v1.0</span>
+      </div>
+      <span class="profile-badge">SYMPTOM · CONFIDENCE · TREATMENT</span>
+    </div>
+    <div class="profile-state">
+      <span class="state-dot" id="stateDot"></span>
+      <span class="state-label" id="stateLabel">STANDBY</span>
+    </div>
+  </header>
+
+  <main class="workspace">
+
+    <!-- LEFT: Symptom Ledger -->
+    <section class="symptom-panel">
+      <div class="panel-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>
+        <span>Symptom Selection Ledger</span>
+        <span class="panel-badge" id="symCount">0 selected</span>
+      </div>
+      <div class="symptom-body" id="symptomBody">
+
+        <div class="sym-group">
+          <span class="sym-group-title">Leaf Markers</span>
+          <label class="sym-check"><input type="checkbox" data-symptom="Powdery White Spots"><span class="sym-box"></span>Powdery White Spots</label>
+          <label class="sym-check"><input type="checkbox" data-symptom="Yellowing Mottle"><span class="sym-box"></span>Yellowing Mottle</label>
+          <label class="sym-check"><input type="checkbox" data-symptom="Dark Brown Spots"><span class="sym-box"></span>Dark Brown Spots</label>
+          <label class="sym-check"><input type="checkbox" data-symptom="Wilting Margins"><span class="sym-box"></span>Wilting Margins</label>
+        </div>
+
+        <div class="sym-group">
+          <span class="sym-group-title">Stem Markers</span>
+          <label class="sym-check"><input type="checkbox" data-symptom="Cankers"><span class="sym-box"></span>Cankers</label>
+          <label class="sym-check"><input type="checkbox" data-symptom="Gummy Ooze"><span class="sym-box"></span>Gummy Ooze</label>
+          <label class="sym-check"><input type="checkbox" data-symptom="Stunted Stems"><span class="sym-box"></span>Stunted Stems</label>
+        </div>
+
+        <div class="sym-group">
+          <span class="sym-group-title">Root / Fruit Markers</span>
+          <label class="sym-check"><input type="checkbox" data-symptom="Root Rot"><span class="sym-box"></span>Root Rot</label>
+          <label class="sym-check"><input type="checkbox" data-symptom="Fruit Rot"><span class="sym-box"></span>Fruit Rot</label>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CENTER: Results -->
+    <section class="results-panel">
+      <div class="panel-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12"><circle cx="12" cy="12" r="10"/><path d="M12 8v5M12 16v0"/></svg>
+        <span>Diagnostic Matrix</span>
+        <span class="panel-badge" id="resultCount">0 matches</span>
+      </div>
+      <div class="results-body" id="resultsBody">
+        <div class="results-empty">
+          <span class="empty-icon">◆</span>
+          <span>Botanical Matrix Cleared: No Pathogens Detected. Standing By for Symptom Input.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT: Clinical Action Blueprint -->
+    <section class="clinical-panel" id="clinicalPanel">
+      <div class="panel-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg>
+        <span>Clinical Action Blueprint</span>
+        <span class="panel-badge">DETAILS</span>
+      </div>
+      <div class="clinical-body" id="clinicalBody">
+        <div class="clinical-empty">Select a disease result to view treatment protocols and quarantine guidance.</div>
+      </div>
+    </section>
+
+    <!-- CONTROLS -->
+    <footer class="control-deck">
+      <button class="ctrl-btn ctrl-primary" id="btnAnalyze">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><circle cx="12" cy="12" r="10"/><path d="M12 8v5M12 16v0"/></svg>
+        Execute Diagnostic Analysis Loop
+      </button>
+      <button class="ctrl-btn ctrl-amber" id="btnPreset">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M4 4h16v16H4z"/><path d="M4 9h16M9 4v16"/></svg>
+        Pre-Select Tomato Blight Preset
+      </button>
+      <button class="ctrl-btn ctrl-danger" id="btnPurge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg>
+        Purge Diagnostic Query Canvas
+      </button>
+    </footer>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
