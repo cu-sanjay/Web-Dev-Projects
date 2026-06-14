@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Research Notes Organizer</title>
+  <!-- Google Fonts: Outfit and Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons for layout aesthetics -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-background"></div>
+
+  <!-- HEADER -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="logo">
+        <i class="fa-solid fa-feather-pointed glow-icon"></i>
+        <h1>Research<span>AI</span></h1>
+        <span class="badge">Organizer</span>
+      </div>
+      
+      <div class="header-stats">
+        <span class="stat-badge"><i class="fa-solid fa-book-bookmark text-violet"></i> <span id="lbl-stat-total">0</span> Notes</span>
+        <span class="stat-badge"><i class="fa-solid fa-link text-emerald"></i> <span id="lbl-stat-sources">0</span> Sources</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="main-container">
+    
+    <!-- LEFT COLUMN: CATEGORIES & FILTER CONTROL -->
+    <aside class="sidebar-column">
+      
+      <!-- Global Search -->
+      <section class="section-card search-card" aria-label="Search and filtering parameters">
+        <div class="search-input-wrapper">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="txt-search" placeholder="Search titles, bodies, tags...">
+        </div>
+      </section>
+
+      <!-- Notebook Folders Select Card -->
+      <section class="section-card folders-card" aria-label="Notebook Folders Directory">
+        <div class="card-header-row">
+          <h3><i class="fa-solid fa-folder-tree"></i> Notebooks</h3>
+        </div>
+
+        <div class="folders-list-wrapper" id="folders-list">
+          <!-- Dynamic Notebook Folders -->
+        </div>
+
+        <!-- Add custom Folder input -->
+        <div class="add-folder-group">
+          <input type="text" id="txt-new-folder" placeholder="New notebook folder name..." autocomplete="off">
+          <button id="btn-add-folder" class="btn btn-secondary btn-sm" title="Create Notebook Folder"><i class="fa-solid fa-plus"></i></button>
+        </div>
+      </section>
+
+      <button id="btn-reset-workspace" class="footer-btn"><i class="fa-solid fa-trash-can"></i> Clear Notes Memory</button>
+    </aside>
+
+    <!-- MIDDLE COLUMN: NOTES SELECTION LIST -->
+    <section class="notes-column" aria-label="Research Notes Listing">
+      <div class="notes-header">
+        <div class="notes-title-meta">
+          <h2 id="lbl-active-folder-title">All Notebooks</h2>
+          <span class="results-lbl" id="notes-count">0 Notes</span>
+        </div>
+        <button id="btn-new-note" class="btn btn-primary btn-sm">
+          <i class="fa-solid fa-circle-plus"></i> Add Note
+        </button>
+      </div>
+
+      <div class="notes-grid" id="notes-list">
+        <!-- Dynamic note cards loading -->
+        <div class="welcome-placeholder">
+          <i class="fa-solid fa-book-open placeholder-icon"></i>
+          <h3>Empty Notebook</h3>
+          <p>No research note matches your active notebook directory or search criteria.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT COLUMN: NOTE WRITER & AI ANALYZER PANEL -->
+    <section class="editor-column" aria-label="Research Workspace and AI Assistant">
+      
+      <!-- Workspace Guide View (No Active Note selected) -->
+      <div id="editor-empty" class="editor-welcome-card">
+        <div class="pulse-icon">
+          <i class="fa-solid fa-feather"></i>
+        </div>
+        <h4>Research Notebook Editor</h4>
+        <p>Choose an existing research note from the list, or create a new note to start writing, linking references, and running AI heuristics analyzes.</p>
+      </div>
+
+      <!-- Active Notes Workspace -->
+      <div id="editor-active" class="editor-workspace hidden">
+        
+        <!-- Note Input Form Card -->
+        <section class="section-card edit-card" aria-label="Note content inputs">
+          <div class="form-row">
+            <div class="form-group flex-2">
+              <label for="note-title">Research Title</label>
+              <input type="text" id="note-title" placeholder="e.g. LLM Reasoning Over Multi-Hop Text">
+            </div>
+            
+            <div class="form-group flex-1">
+              <label for="note-folder-select">Notebook Folder</label>
+              <select id="note-folder-select">
+                <!-- Dynamic folders select options -->
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group flex-2">
+              <label for="note-source-title">Reference Title</label>
+              <input type="text" id="note-source-title" placeholder="e.g. arXiv ID: 2305.10403 (Optional)">
+            </div>
+            
+            <div class="form-group flex-1">
+              <label for="note-source-url">Reference URL/Link</label>
+              <input type="text" id="note-source-url" placeholder="e.g. https://arxiv.org/abs/... (Optional)">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="note-body">Research Notes Content</label>
+            <textarea id="note-body" placeholder="Write or paste your research materials here... Support raw summaries, observations, and equations."></textarea>
+          </div>
+
+          <div class="editor-actions">
+            <button id="btn-delete-note" class="btn btn-danger btn-sm" title="Delete Note">
+              <i class="fa-solid fa-trash-can"></i> Delete
+            </button>
+            <div class="actions-right">
+              <button id="btn-analyze-note" class="btn btn-secondary btn-sm" title="Trigger Heuristics AI Analysis">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> AI Organize
+              </button>
+              <button id="btn-save-note" class="btn btn-primary btn-sm" title="Save Research Note">
+                <i class="fa-solid fa-floppy-disk"></i> Save Note
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- AI Panel Drawer -->
+        <section class="section-card ai-drawer-card" aria-label="AI Research Intelligence Panel">
+          <div class="ai-header-row">
+            <h4><i class="fa-solid fa-microchip glow-purple"></i> AI Research Assistant</h4>
+            <span class="ai-status-badge" id="ai-status-text">Status: Idle</span>
+          </div>
+
+          <div class="ai-section">
+            <h5>Auto-Generated Summary</h5>
+            <div class="ai-summary-box" id="ai-summary">
+              Write some research details and click 'AI Organize' to produce an automated text summary outline.
+            </div>
+          </div>
+
+          <div class="ai-section">
+            <h5>Concept Taxonomy Keywords</h5>
+            <div class="ai-tags-container" id="ai-tags">
+              <!-- Dynamic keyword tag labels -->
+              <span class="no-tags-lbl">No keywords generated</span>
+            </div>
+          </div>
+
+          <div class="ai-section">
+            <h5>Suggested Related Notes</h5>
+            <div class="ai-related-notes-list" id="ai-related-notes">
+              <!-- Related Note link components -->
+              <span class="no-related-lbl">No related notes found</span>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="app-footer">
+    <div class="footer-container">
+      <p>&copy; 2026 ResearchAI Organizer. Built for the <a href="https://github.com/cu-sanjay/Web-Dev-Projects" target="_blank" rel="noopener noreferrer">Web Dev Projects</a> repository showcase.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

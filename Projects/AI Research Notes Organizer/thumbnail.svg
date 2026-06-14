@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="200" viewBox="0 0 320 200">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#05080e"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+
+    <!-- Glowing filters -->
+    <filter id="glowPurple" x="-35%" y="-35%" width="170%" height="170%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <filter id="glowGreen" x="-35%" y="-35%" width="170%" height="170%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    
+    <linearGradient id="purpleGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8b5cf6" />
+      <stop offset="100%" stop-color="#10b981" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="320" height="200" fill="url(#bgGrad)" />
+
+  <!-- Directory folders mockup list on the left -->
+  <g transform="translate(15, 45)" opacity="0.8">
+    <rect width="70" height="110" rx="6" fill="#0b0f19" stroke="rgba(255, 255, 255, 0.03)" stroke-width="1" />
+    <!-- Folder 1 -->
+    <path d="M 8,15 L 14,15 L 16,18 L 26,18 L 26,26 L 8,26 Z" fill="#8b5cf6" opacity="0.8" />
+    <rect x="30" y="18" width="32" height="4" rx="2" fill="#94a3b8" />
+    <!-- Folder 2 -->
+    <path d="M 8,35 L 14,35 L 16,38 L 26,38 L 26,46 L 8,46 Z" fill="#8b5cf6" opacity="0.8" />
+    <rect x="30" y="38" width="24" height="4" rx="2" fill="#475569" />
+    <!-- Folder 3 -->
+    <path d="M 8,55 L 14,55 L 16,58 L 26,58 L 26,66 L 8,66 Z" fill="#8b5cf6" opacity="0.8" />
+    <rect x="30" y="58" width="28" height="4" rx="2" fill="#475569" />
+    <!-- Folder 4 -->
+    <path d="M 8,75 L 14,75 L 16,78 L 26,78 L 26,86 L 8,86 Z" fill="#8b5cf6" opacity="0.8" />
+    <rect x="30" y="78" width="20" height="4" rx="2" fill="#475569" />
+  </g>
+
+  <!-- Central Notebook Note card mockup -->
+  <g transform="translate(100, 45)">
+    <rect width="135" height="110" rx="8" fill="#1e293b" stroke="rgba(255, 255, 255, 0.05)" stroke-width="1.5" />
+    <!-- Title Line -->
+    <rect x="12" y="14" width="80" height="6" rx="3" fill="#ffffff" />
+    <rect x="12" y="24" width="40" height="4" rx="2" fill="#8b5cf6" /> <!-- Category tag -->
+    
+    <!-- Lines of text -->
+    <g opacity="0.4" stroke-linecap="round" stroke-width="2.5">
+      <line x1="12" y1="42" x2="120" y2="42" stroke="#94a3b8" />
+      <line x1="12" y1="52" x2="100" y2="52" stroke="#94a3b8" />
+      <line x1="12" y1="62" x2="115" y2="62" stroke="#94a3b8" />
+      <line x1="12" y1="72" x2="75" y2="72" stroke="#94a3b8" />
+    </g>
+
+    <!-- Source URL reference link box representation -->
+    <rect x="12" y="85" width="75" height="12" rx="4" fill="rgba(16, 185, 129, 0.08)" stroke="rgba(16, 185, 129, 0.2)" stroke-width="1" />
+    <circle cx="20" cy="91" r="3" fill="#10b981" />
+    <rect x="28" y="89" width="50" height="4" rx="2" fill="#10b981" />
+  </g>
+
+  <!-- AI Suggestions card details mockup on the right -->
+  <g transform="translate(250, 45)">
+    <rect width="55" height="110" rx="6" fill="#0b0f19" stroke="rgba(139, 92, 246, 0.1)" stroke-width="1" />
+    <!-- Wand spark details -->
+    <g transform="translate(27, 28)">
+      <line x1="0" y1="-8" x2="0" y2="8" stroke="#8b5cf6" stroke-width="1.5" filter="url(#glowPurple)" />
+      <line x1="-8" y1="0" x2="8" y2="0" stroke="#8b5cf6" stroke-width="1.5" filter="url(#glowPurple)" />
+      <circle cx="0" cy="0" r="2.5" fill="#ffffff" />
+    </g>
+    
+    <!-- Suggested keyword taxonomy labels -->
+    <rect x="8" y="55" width="39" height="10" rx="3" fill="rgba(236, 72, 153, 0.08)" stroke="rgba(236, 72, 153, 0.15)" stroke-width="0.8" />
+    <rect x="14" y="58" width="27" height="3" rx="1.5" fill="#ec4899" />
+    
+    <rect x="8" y="70" width="39" height="10" rx="3" fill="rgba(236, 72, 153, 0.08)" stroke="rgba(236, 72, 153, 0.15)" stroke-width="0.8" />
+    <rect x="14" y="73" width="22" height="3" rx="1.5" fill="#ec4899" />
+
+    <rect x="8" y="85" width="39" height="10" rx="3" fill="rgba(236, 72, 153, 0.08)" stroke="rgba(236, 72, 153, 0.15)" stroke-width="0.8" />
+    <rect x="14" y="88" width="25" height="3" rx="1.5" fill="#ec4899" />
+  </g>
+
+  <!-- Brand Typography -->
+  <text x="160" y="24" font-family="'Outfit', 'Inter', sans-serif" font-size="13" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="1">
+    RESEARCH<tspan fill="#8b5cf6">AI</tspan>
+  </text>
+</svg>
