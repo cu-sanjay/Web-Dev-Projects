@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Project Idea Generator</title>
+  <!-- Google Fonts: Outfit and Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons for layout aesthetics -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="glow-bg"></div>
+
+  <!-- HEADER -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="logo">
+        <i class="fa-solid fa-wand-magic-sparkles glow-icon"></i>
+        <h1>Idea<span>Synth</span></h1>
+        <span class="badge">AI Generator</span>
+      </div>
+      
+      <div class="header-stats">
+        <span class="stat-badge"><i class="fa-solid fa-lightbulb text-amber"></i> <span id="lbl-stat-generated">0</span> Generated</span>
+        <span class="stat-badge"><i class="fa-solid fa-bookmark text-cyan"></i> <span id="lbl-stat-bookmarked">0</span> Bookmarks</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="main-container">
+    
+    <!-- LEFT COLUMN: FILTER CONTROLS & BOOKMARKS -->
+    <aside class="sidebar-column">
+      
+      <!-- Filters Configuration -->
+      <section class="section-card filters-card" aria-label="Synthesizer filter configurations">
+        <div class="card-header-row">
+          <h3><i class="fa-solid fa-sliders"></i> Configurations</h3>
+        </div>
+
+        <div class="form-group">
+          <label for="sel-difficulty">Difficulty Level</label>
+          <select id="sel-difficulty">
+            <option value="Beginner">Beginner (MVP focused)</option>
+            <option value="Intermediate" selected>Intermediate (API integrations)</option>
+            <option value="Advanced">Advanced (Data & scalability)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="sel-stack">Technology Focus</label>
+          <select id="sel-stack">
+            <option value="Frontend">Frontend Development</option>
+            <option value="Fullstack" selected>Fullstack Application</option>
+            <option value="AI/ML">AI / Machine Learning</option>
+            <option value="Blockchain">Web3 / Blockchain</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="sel-domain">Industry Domain</label>
+          <select id="sel-domain">
+            <option value="Healthcare">Healthcare & Medicine</option>
+            <option value="Finance">Finance & Fintech</option>
+            <option value="Gaming">Gaming & Interactive</option>
+            <option value="Social">Social Media & Chat</option>
+            <option value="Productivity" selected>Productivity & DevTools</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- Bookmarked Blueprints Lists -->
+      <section class="section-card bookmarks-card" aria-label="Bookmarked Idea Blueprints">
+        <div class="card-header-row">
+          <h3><i class="fa-solid fa-box-archive"></i> Bookmarks</h3>
+        </div>
+
+        <div class="bookmarks-list-wrapper" id="bookmarks-list">
+          <!-- Dynamic bookmarks load -->
+          <div class="welcome-placeholder small-placeholder">
+            <i class="fa-solid fa-folder-open placeholder-icon"></i>
+            <p class="text-secondary text-sm">No bookmarked ideas yet.</p>
+          </div>
+        </div>
+      </section>
+
+      <button id="btn-reset-workspace" class="footer-btn"><i class="fa-solid fa-trash-can"></i> Reset App Data</button>
+    </aside>
+
+    <!-- CENTER COLUMN: GENERATOR SCREEN -->
+    <section class="generator-column" aria-label="Synthesis Engine Controls">
+      
+      <!-- Primary Action Trigger -->
+      <div class="trigger-box">
+        <button id="btn-generate" class="btn btn-primary btn-full btn-lg">
+          <i class="fa-solid fa-gears"></i> Synthesize Project Idea
+        </button>
+      </div>
+
+      <!-- Synthesized Idea Specification Sheet -->
+      <div class="synthesized-idea-sheet" id="idea-sheet-box">
+        <div class="section-card idea-card">
+          <div class="idea-header-row">
+            <div>
+              <span class="difficulty-badge" id="idea-difficulty-badge">Intermediate</span>
+              <h2 id="idea-title">Select parameters and click generate!</h2>
+            </div>
+            <button id="btn-bookmark" class="btn btn-secondary btn-sm" title="Bookmark this Project Idea">
+              <i class="fa-regular fa-star"></i> Bookmark
+            </button>
+          </div>
+
+          <div class="idea-tags-container" id="idea-tags-row">
+            <span class="tag-badge text-cyan" id="tag-stack">Fullstack</span>
+            <span class="tag-badge text-amber" id="tag-domain">Productivity</span>
+          </div>
+
+          <div class="idea-content">
+            <h5>Project Overview</h5>
+            <p id="idea-description" class="text-secondary">Synthesize an idea to view details, features list, and code specifications.</p>
+          </div>
+
+          <div class="idea-content mt-1">
+            <h5>Core Features Outline</h5>
+            <ul class="features-list" id="idea-features">
+              <!-- Dynamically populated core features -->
+            </ul>
+          </div>
+
+          <!-- AI Refinement Section -->
+          <div class="ai-refine-box" id="ai-refine-box-container">
+            <h5><i class="fa-solid fa-wand-magic-sparkles text-cyan"></i> Inject AI Feature Accent</h5>
+            <div class="refine-controls">
+              <select id="sel-ai-refinement">
+                <option value="realtime_sync">Real-time collaboration sync</option>
+                <option value="anomaly_detection">ML anomaly anomaly indicators</option>
+                <option value="nlp_search">NLP text query semantic search</option>
+                <option value="offline_sync">Offline database IndexedDB sync</option>
+                <option value="predictive_analytics">Telemetry predictive statistics</option>
+              </select>
+              <button id="btn-apply-refinement" class="btn btn-primary btn-sm">Inject</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- RIGHT COLUMN: SPECIFICATION NOTEPAD BOARD -->
+    <section class="spec-column" aria-label="Project Spec Architect Board">
+      
+      <!-- Spec empty placeholder -->
+      <div id="spec-empty" class="spec-welcome-card">
+        <div class="pulse-icon">
+          <i class="fa-solid fa-receipt"></i>
+        </div>
+        <h4>Specification Architect</h4>
+        <p>Choose any bookmarked idea from the left sidebar to edit detailed features, write notes, track tasks, and download specifications blueprints.</p>
+      </div>
+
+      <!-- Active Spec Editor -->
+      <div id="spec-active" class="spec-workspace hidden">
+        
+        <section class="section-card spec-card" aria-label="Specification properties editor">
+          <div class="card-header-row">
+            <h3><i class="fa-solid fa-edit"></i> Spec Architect</h3>
+          </div>
+
+          <div class="form-group">
+            <label for="spec-title">Project Title</label>
+            <input type="text" id="spec-title">
+          </div>
+
+          <div class="form-group">
+            <label for="spec-notes">Development Notes &amp; Stack</label>
+            <textarea id="spec-notes" placeholder="Write custom thoughts on frameworks, library modules, or databases..."></textarea>
+          </div>
+
+          <!-- Requirements roadmap checklist -->
+          <div class="spec-checklist-section">
+            <h5>Requirements Checklist</h5>
+            <p class="text-muted text-xs mb-1">Checkoff targets to track progression:</p>
+            <ul class="checklist-ul" id="spec-checklist">
+              <!-- Dynamically populated toggle checkboxes -->
+            </ul>
+          </div>
+
+          <!-- Actions -->
+          <div class="spec-actions">
+            <button id="btn-delete-bookmark" class="btn btn-danger btn-sm" title="Delete Bookmark">
+              <i class="fa-solid fa-trash-can"></i> Delete
+            </button>
+            <button id="btn-export-json" class="btn btn-success btn-sm" title="Export Project Blueprint to JSON">
+              <i class="fa-solid fa-download"></i> Export Spec
+            </button>
+          </div>
+        </section>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="app-footer">
+    <div class="footer-container">
+      <p>&copy; 2026 IdeaSynth Organizer. Built for the <a href="https://github.com/cu-sanjay/Web-Dev-Projects" target="_blank" rel="noopener noreferrer">Web Dev Projects</a> repository showcase.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
