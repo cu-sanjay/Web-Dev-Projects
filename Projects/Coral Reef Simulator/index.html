@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coral Reef · Ecosystem Simulator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="top-bar">
+    <div class="top-brand">
+      <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="1.5">
+        <path d="M12 2a10 10 0 00-10 10 10 10 0 0010 10 10 10 0 0010-10A10 10 0 0012 2z"/>
+        <path d="M12 6v12M6 12h12" stroke-opacity="0.5"/>
+        <circle cx="8" cy="9" r="1.5" fill="#ff6d9e"/><circle cx="14" cy="8" r="1" fill="#ffb800"/>
+        <circle cx="10" cy="15" r="1.2" fill="#d500f9"/><circle cx="16" cy="14" r="0.8" fill="#00e676"/>
+      </svg>
+      <div>
+        <h1 class="top-title">Coral Reef · Ecosystem Simulator</h1>
+        <span class="top-sub">marine biology virtual laboratory v1.0</span>
+      </div>
+      <span class="top-badge">SYMBIOSIS · BLEACHING · ECOLOGY</span>
+    </div>
+    <div class="top-metrics">
+      <span class="metric-chip" id="chipHealth">STATUS <strong id="healthStatus">INITIALIZING</strong></span>
+      <span class="metric-chip accent" id="chipReef">REEF <strong id="reefCover">--</strong></span>
+    </div>
+  </header>
+
+  <main class="workspace">
+
+    <!-- CONTROLS -->
+    <section class="controls-deck">
+      <div class="ctrl-group">
+        <label class="ctrl-label">Sea Surface Temp <span class="ctrl-val" id="valTemp">25°C</span></label>
+        <input type="range" class="ctrl-slider" id="slTemp" min="20" max="35" step="0.5" value="25">
+        <div class="ctrl-zone" id="zoneTemp">OPTIMAL</div>
+      </div>
+      <div class="ctrl-group">
+        <label class="ctrl-label">Water Acidity pH <span class="ctrl-val" id="valPH">8.1</span></label>
+        <input type="range" class="ctrl-slider" id="slPH" min="7" max="8.5" step="0.05" value="8.1">
+        <div class="ctrl-zone" id="zonePH">ALKALINE STABLE</div>
+      </div>
+      <div class="ctrl-group">
+        <label class="ctrl-label">Herbivore Grazer Density <span class="ctrl-val" id="valGrazers">8</span></label>
+        <input type="range" class="ctrl-slider" id="slGrazers" min="0" max="20" step="1" value="8">
+        <div class="ctrl-zone" id="zoneGrazers">MODERATE</div>
+      </div>
+    </section>
+
+    <!-- MAIN -->
+    <div class="main-grid">
+
+      <!-- CANVAS -->
+      <section class="canvas-section">
+        <div class="panel-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="10" height="10"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M2 12h20M12 2v20" stroke-width="0.5"/></svg>
+          <span>Marine Reef · Arena</span>
+          <span class="panel-hint" id="arenaHint">LIVE FEED</span>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="reefCanvas"></canvas>
+        </div>
+      </section>
+
+      <!-- TELEMETRY -->
+      <section class="telemetry-section">
+        <div class="panel-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="10" height="10"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 8h10M7 12h6M7 16h8"/></svg>
+          <span>Reef Health · Telemetry Dashboard</span>
+          <span class="panel-hint">LIVE</span>
+        </div>
+        <div class="tm-body" id="tmBody">
+          <!-- injected by script -->
+        </div>
+        <div class="tm-gauge-row">
+          <div class="gauge-mini"><span class="gm-label">Calcification</span><div class="gm-track"><div class="gm-fill" id="gmCalc" style="width:0%"></div></div></div>
+          <div class="gauge-mini"><span class="gm-label">Zooxanthellae</span><div class="gm-track"><div class="gm-fill" id="gmZoox" style="width:0%"></div></div></div>
+          <div class="gauge-mini"><span class="gm-label">Bleached</span><div class="gm-track"><div class="gm-fill" id="gmBleach" style="width:0%"></div></div></div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ACTIONS -->
+    <footer class="action-bar">
+      <button class="foot-btn foot-warn" id="btnHeatwave">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><circle cx="12" cy="12" r="10"/><path d="M12 2v20M2 12h20"/><path d="M12 8l2 4h-4l2 4" stroke-width="1.5"/></svg>
+        Induce Marine Heatwave Event
+      </button>
+      <button class="foot-btn" id="btnLarvae">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><circle cx="12" cy="12" r="10"/><circle cx="8" cy="9" r="1.5"/><circle cx="14" cy="8" r="1"/><circle cx="10" cy="15" r="1.2"/></svg>
+        Introduce Coral Larvae Seeding
+      </button>
+      <button class="foot-btn foot-critical" id="btnPurge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6"/><path d="M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+        Purge Trophic Matrices &amp; Re-Zero Marine Basin
+      </button>
+    </footer>
+
+  </main>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
