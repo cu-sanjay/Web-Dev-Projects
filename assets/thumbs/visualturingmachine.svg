@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <!-- Background -->
+  <rect width="400" height="300" fill="#040814"/>
+  
+  <defs>
+    <!-- Cyan glow gradient -->
+    <radialGradient id="cyanGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#040814" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="400" height="300" fill="url(#cyanGlow)"/>
+
+  <!-- Subtly grid lines -->
+  <path d="M 0,50 L 400,50 M 0,100 L 400,100 M 0,150 L 400,150 M 0,200 L 400,200 M 0,250 L 400,250" stroke="rgba(255,255,255,0.02)" stroke-width="1"/>
+  <path d="M 50,0 L 50,300 M 100,0 L 100,300 M 150,0 L 150,300 M 200,0 L 200,300 M 250,0 L 250,300 M 300,0 L 300,300 M 350,0 L 350,300" stroke="rgba(255,255,255,0.02)" stroke-width="1"/>
+
+  <!-- State Node q0 -->
+  <circle cx="130" cy="150" r="26" fill="#12182b" stroke="#06b6d4" stroke-width="3" filter="drop-shadow(0 0 6px rgba(6, 182, 212, 0.4))"/>
+  <text x="130" y="154" fill="#f8fafc" font-family="'Outfit', sans-serif" font-size="12" font-weight="600" text-anchor="middle">q0</text>
+  
+  <!-- Start Arrow -->
+  <path d="M 70,150 L 104,150" stroke="#f59e0b" stroke-width="2.5"/>
+  <path d="M 104,150 L 98,145 L 98,155 Z" fill="#f59e0b"/>
+
+  <!-- State Node q1 (Accepting) -->
+  <circle cx="270" cy="150" r="26" fill="#12182b" stroke="#8b5cf6" stroke-width="3" filter="drop-shadow(0 0 6px rgba(139, 92, 246, 0.4))"/>
+  <circle cx="270" cy="150" r="21" fill="none" stroke="#8b5cf6" stroke-width="2"/>
+  <text x="270" y="154" fill="#f8fafc" font-family="'Outfit', sans-serif" font-size="12" font-weight="600" text-anchor="middle">q1</text>
+
+  <!-- Transition Arrow q0 -> q1 (Curved) -->
+  <path d="M 156,150 Q 200,120 244,150" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+  <path d="M 244,150 L 236,146 L 240,154 Z" fill="rgba(255,255,255,0.3)"/>
+  
+  <!-- Transition Label -->
+  <text x="200" y="125" fill="#06b6d4" font-family="'Fira Code', monospace" font-size="9" text-anchor="middle">1 / B, R</text>
+
+  <!-- Self Loop Arrow on q0 -->
+  <path d="M 120,126 A 15,15 0 1,1 140,126" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+  <path d="M 140,126 L 142,132 L 135,130 Z" fill="rgba(255,255,255,0.3)"/>
+  <text x="130" y="96" fill="#06b6d4" font-family="'Fira Code', monospace" font-size="8" text-anchor="middle">0 / 0, R</text>
+
+  <!-- Header Label -->
+  <text x="200" y="45" fill="#f8fafc" font-family="'Outfit', sans-serif" font-size="16" font-weight="800" text-anchor="middle" letter-spacing="1">AUTOMATA COMPILER</text>
+  <text x="200" y="65" fill="#94a3b8" font-family="'Space Grotesk', sans-serif" font-size="10" text-anchor="middle" letter-spacing="3">TURING MACHINE &amp; DFA</text>
+  
+  <!-- Bottom simulated Tape strip preview -->
+  <g transform="translate(100, 220)">
+    <rect x="0" y="0" width="30" height="30" rx="4" fill="#161e32" stroke="rgba(255,255,255,0.1)"/>
+    <text x="15" y="20" fill="#f8fafc" font-family="'Fira Code', monospace" font-size="12" text-anchor="middle">1</text>
+
+    <rect x="35" y="0" width="30" height="30" rx="4" fill="#161e32" stroke="#06b6d4" stroke-width="2" filter="drop-shadow(0 0 4px var(--color-cyan-glow))"/>
+    <text x="50" y="20" fill="#06b6d4" font-family="'Fira Code', monospace" font-size="12" text-anchor="middle" font-weight="600">0</text>
+
+    <rect x="70" y="0" width="30" height="30" rx="4" fill="#161e32" stroke="rgba(255,255,255,0.1)"/>
+    <text x="85" y="20" fill="#f8fafc" font-family="'Fira Code', monospace" font-size="12" text-anchor="middle">1</text>
+
+    <rect x="105" y="0" width="30" height="30" rx="4" fill="#161e32" stroke="rgba(255,255,255,0.1)"/>
+    <text x="120" y="20" fill="#f8fafc" font-family="'Fira Code', monospace" font-size="12" text-anchor="middle">B</text>
+
+    <text x="150" y="20" fill="#94a3b8" font-family="'Space Grotesk', sans-serif" font-size="10">...</text>
+  </g>
+</svg>

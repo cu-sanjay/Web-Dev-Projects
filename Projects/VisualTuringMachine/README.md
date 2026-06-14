@@ -28,4 +28,4 @@ Simply open [index.html](file:///index.html) in your browser, or host it locally
 4. **Presets Included**:
    - **DFA (Even Zero Count)**: Accepts strings with an even number of zeroes.
    - **PDA (Balanced Brackets)**: Stack checking matching brackets `( )`.
-   - **Turing (Binary Incrementer)**: Moves tape head right, then increments binary value right-to-left.
+   - **Turing (Binary Incrementer)**: Moves tape head right, then increments binary value right-to-left. 

@@ -20,6 +20,13 @@ function isTitleCaseWithSpaces(name) {
   return name.split(" ").every((w) => /^[A-Z0-9][A-Za-z0-9]*$/.test(w));
 }
 
+async function findFileCaseInsensitive(dir, targetName) {
+  const files = await readdir(dir);
+  return files.find(
+    (file) => file.toLowerCase() === targetName.toLowerCase()
+  );
+}
+
 async function main() {
   if (!existsSync(PROJECTS_DIR)) {
     await writeFile(OUTPUT, JSON.stringify({ generatedAt: new Date().toISOString(), projects: [] }, null, 2));
@@ -70,8 +77,10 @@ async function main() {
       errors.push(`"${folder}" — entry "${meta.entry}" does not exist.`);
     }
 
-    const readmePath = join(folderPath, "README.md");
-    if (!existsSync(readmePath)) errors.push(`"${folder}" — missing README.md.`);
+    const readmeFile = await findFileCaseInsensitive(folderPath, "README.md");
+    if (!readmeFile) {
+      errors.push(`"${folder}" — missing README.md.`);
+    }
 
     let thumbnail = null;
     if (meta.thumbnail && existsSync(join(folderPath, meta.thumbnail))) {
@@ -80,12 +89,22 @@ async function main() {
 
     const stats = await stat(folderPath);
 
+    const normalizedTags = Array.isArray(meta.tags)
+      ? [...new Set(
+          meta.tags
+            .filter((tag) => typeof tag === "string")
+            .map((tag) => tag.trim().toLowerCase())
+        )].map(
+          (tag) => tag.charAt(0).toUpperCase() + tag.slice(1)
+        )
+      : [];
+
     projects.push({
       slug: folder,
       title: meta.title || folder,
       description: meta.description || "",
       author: meta.author || null,
-      tags: meta.tags || [],
+      tags: normalizedTags,
       entry: `Projects/${encodeURIComponent(folder)}/${meta.entry || "index.html"}`,
       folder: `Projects/${encodeURIComponent(folder)}`,
       thumbnail,

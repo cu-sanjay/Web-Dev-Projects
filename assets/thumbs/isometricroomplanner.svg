@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#020617" />
+    </linearGradient>
+
+    <!-- Wall Gradients -->
+    <linearGradient id="wall-left" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#475569" />
+      <stop offset="100%" stop-color="#334155" />
+    </linearGradient>
+    <linearGradient id="wall-right" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#334155" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+
+    <!-- Floor Gradient -->
+    <linearGradient id="floor" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0ea5e9" stop-opacity="0.15" />
+      <stop offset="100%" stop-color="#0ea5e9" stop-opacity="0.02" />
+    </linearGradient>
+
+    <!-- Furniture Colors -->
+    <linearGradient id="bed-color" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#4f46e5" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bg-grad)" />
+
+  <!-- Title Text -->
+  <text x="40" y="70" font-family="'Outfit', 'Inter', sans-serif" font-size="36" font-weight="800" fill="#f8fafc" letter-spacing="1">Isometric Room Planner</text>
+  <text x="40" y="105" font-family="'Inter', sans-serif" font-size="16" font-weight="600" fill="#0ea5e9" letter-spacing="2">2.5D INTERIOR BLUEPRINT LAB</text>
+
+  <!-- Isometric Room Render -->
+  <g transform="translate(420, 240)">
+    <!-- Floor Grid Shadow/Glow -->
+    <polygon points="0,-120 200,-20 0,80 -200,-20" fill="#000000" opacity="0.4" filter="blur(10px)" />
+
+    <!-- Floor Plane -->
+    <polygon points="0,-120 200,-20 0,80 -200,-20" fill="url(#floor)" stroke="#0ea5e9" stroke-width="2" />
+
+    <!-- Floor Grid Lines -->
+    <!-- Diagonal Lines Left-to-Right -->
+    <line x1="-150" y1="-45" x2="50" y2="55" stroke="#0ea5e9" stroke-dasharray="3 3" opacity="0.3" stroke-width="1" />
+    <line x1="-100" y1="-70" x2="100" y2="30" stroke="#0ea5e9" stroke-dasharray="3 3" opacity="0.3" stroke-width="1" />
+    <line x1="-50" y1="-95" x2="150" y2="5" stroke="#0ea5e9" stroke-dasharray="3 3" opacity="0.3" stroke-width="1" />
+    <!-- Diagonal Lines Right-to-Left -->
+    <line x1="150" y1="-45" x2="-50" y2="55" stroke="#0ea5e9" stroke-dasharray="3 3" opacity="0.3" stroke-width="1" />
+    <line x1="100" y1="-70" x2="-100" y2="30" stroke="#0ea5e9" stroke-dasharray="3 3" opacity="0.3" stroke-width="1" />
+    <line x1="50" y1="-95" x2="-150" y2="5" stroke="#0ea5e9" stroke-dasharray="3 3" opacity="0.3" stroke-width="1" />
+
+    <!-- Left Wall -->
+    <polygon points="-200,-20 0,-120 0,-260 -200,-160" fill="url(#wall-left)" stroke="rgba(255,255,255,0.05)" />
+    <!-- Right Wall -->
+    <polygon points="0,-120 200,-20 200,-160 0,-260" fill="url(#wall-right)" stroke="rgba(255,255,255,0.05)" />
+
+    <!-- Isometric Bed (3D look) -->
+    <g transform="translate(-60, -20)">
+      <!-- Bed Base -->
+      <polygon points="-40,-10 20,20 60,0 0,-30" fill="#312e81" />
+      <polygon points="-40,-10 -40,5 20,35 20,20" fill="#1e1b4b" />
+      <polygon points="20,20 20,35 60,15 60,0" fill="#1e1b4b" />
+      
+      <!-- Mattress (Purple) -->
+      <polygon points="-38,-12 18,16 56,-2 0,-30" fill="url(#bed-color)" />
+      
+      <!-- Blanket (White/Grey accent) -->
+      <polygon points="-10,-14 18,0 36,-9 8,-23" fill="#e2e8f0" />
+      
+      <!-- Pillow -->
+      <polygon points="-28,-20 -12,-12 -2,-17 -18,-25" fill="#f8fafc" />
+    </g>
+
+    <!-- Isometric Side Table -->
+    <g transform="translate(60, -30)">
+      <!-- Table Top -->
+      <polygon points="-20,-10 20,10 40,0 0,-20" fill="#f59e0b" />
+      <!-- Table Front / Side -->
+      <polygon points="-20,-10 -20,10 20,30 20,10" fill="#d97706" />
+      <polygon points="20,10 20,30 40,20 40,0" fill="#b45309" />
+    </g>
+
+    <!-- UI Overlay Blueprint Callouts -->
+    <g transform="translate(0, 0)" opacity="0.85">
+      <!-- Measurement Lines -->
+      <line x1="-210" y1="-15" x2="-10" y2="85" stroke="#f43f5e" stroke-width="2" />
+      <circle cx="-210" cy="-15" r="4" fill="#f43f5e" />
+      <circle cx="-10" cy="85" r="4" fill="#f43f5e" />
+      
+      <rect x="-130" y="30" width="50" height="20" rx="4" fill="#f43f5e" />
+      <text x="-105" y="44" font-family="monospace" font-size="12" fill="#ffffff" text-anchor="middle" font-weight="bold">12 ft</text>
+    </g>
+  </g>
+</svg>

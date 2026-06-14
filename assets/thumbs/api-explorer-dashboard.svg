@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 300" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e1b4b" />
+    </linearGradient>
+    <linearGradient id="primary" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#818cf8" />
+    </linearGradient>
+  </defs>
+
+  <rect width="500" height="300" fill="url(#bg)" />
+  
+  <!-- Decorative Background Elements -->
+  <circle cx="450" cy="50" r="150" fill="#38bdf8" opacity="0.1" />
+  <circle cx="50" cy="250" r="100" fill="#818cf8" opacity="0.15" />
+
+  <!-- Window Frame -->
+  <rect x="40" y="40" width="420" height="220" rx="12" fill="#1e293b" opacity="0.9" stroke="#334155" stroke-width="2"/>
+  
+  <!-- Window Header -->
+  <rect x="40" y="40" width="420" height="30" rx="12" fill="#0f172a"/>
+  <rect x="40" y="60" width="420" height="10" fill="#0f172a"/> <!-- Cover bottom corners of header -->
+  
+  <!-- Window Dots -->
+  <circle cx="60" cy="55" r="5" fill="#ef4444" />
+  <circle cx="80" cy="55" r="5" fill="#eab308" />
+  <circle cx="100" cy="55" r="5" fill="#22c55e" />
+
+  <!-- Sidebar -->
+  <rect x="40" y="70" width="120" height="190" fill="#1e293b" />
+  <rect x="55" y="85" width="90" height="8" rx="4" fill="#334155" />
+  <rect x="55" y="105" width="70" height="6" rx="3" fill="#38bdf8" opacity="0.8" />
+  <rect x="55" y="125" width="80" height="6" rx="3" fill="#334155" />
+  <rect x="55" y="145" width="60" height="6" rx="3" fill="#334155" />
+
+  <!-- Main Content Area -->
+  <rect x="160" y="70" width="300" height="190" fill="#0f172a" />
+  
+  <!-- URL Bar / Request Panel -->
+  <rect x="175" y="85" width="270" height="30" rx="6" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <rect x="185" y="95" width="40" height="10" rx="2" fill="#22c55e" /> <!-- GET Badge -->
+  <rect x="235" y="96" width="140" height="8" rx="4" fill="#64748b" opacity="0.5" /> <!-- URL -->
+  <rect x="400" y="90" width="40" height="20" rx="4" fill="url(#primary)" /> <!-- SEND Btn -->
+
+  <!-- Response Panel -->
+  <rect x="175" y="130" width="270" height="115" rx="6" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <!-- JSON Code Mockup -->
+  <text x="190" y="155" font-family="monospace" font-size="10" fill="#f8fafc">{</text>
+  <text x="205" y="170" font-family="monospace" font-size="10" fill="#38bdf8">"status": <tspan fill="#22c55e">200</tspan>,</text>
+  <text x="205" y="185" font-family="monospace" font-size="10" fill="#38bdf8">"data": <tspan fill="#f8fafc">{</tspan></text>
+  <text x="220" y="200" font-family="monospace" font-size="10" fill="#38bdf8">"message": <tspan fill="#f1f5f9">"API Explorer"</tspan></text>
+  <text x="205" y="215" font-family="monospace" font-size="10" fill="#f8fafc">}</text>
+  <text x="190" y="230" font-family="monospace" font-size="10" fill="#f8fafc">}</text>
+
+  <!-- Title Overlay (Optional) -->
+  <text x="250" y="280" font-family="system-ui, -apple-system, sans-serif" font-weight="bold" font-size="18" fill="#f8fafc" text-anchor="middle" opacity="0.9">API Explorer Dashboard</text>
+</svg>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Color Flood Puzzle</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <aside class="panel left-panel">
+    <div class="panel-header">
+      <div class="brand">MATRIX INVERSION</div>
+      <div class="brand-sub">// Color Flood Engine</div>
+    </div>
+
+    <div class="telemetry-deck">
+      <div class="telem-card">
+        <span class="telem-label">Moves Committed</span>
+        <span id="telem-moves" class="telem-value">00 / 25</span>
+      </div>
+      <div class="telem-card">
+        <span class="telem-label">Saturation</span>
+        <span id="telem-saturation" class="telem-value">0.7%</span>
+      </div>
+      <div class="telem-card">
+        <span class="telem-label">Win Streak</span>
+        <span id="telem-streak" class="telem-value">0</span>
+      </div>
+    </div>
+
+    <div class="color-picker-section">
+      <div class="section-title">COLOR TOKENS</div>
+      <div class="color-token-strip" id="color-tokens"></div>
+    </div>
+
+    <div class="action-buttons">
+      <button id="btn-reset" class="action-btn primary">REGENERATE RANDOM MATRIX</button>
+    </div>
+
+    <div class="diagnostics-bar">
+      <span id="diag-status" class="diag-status">AWAITING SELECTION VECTOR</span>
+    </div>
+  </aside>
+
+  <main class="viewport">
+    <header class="viewport-header">
+      <span class="sim-source">CHROMATIC GRID INTERACTION STAGE</span>
+      <span class="grid-size">12 x 12 MATRIX</span>
+    </header>
+    <div class="grid-stage" id="grid-stage">
+      <div class="grid-container" id="grid-matrix"></div>
+    </div>
+  </main>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

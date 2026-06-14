@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+<rect width="400" height="400" fill="#f4f7f5" rx="8"/>
+<g stroke="#e2ebd9" stroke-width="0.5" opacity="0.5">
+<line x1="40" y1="40" x2="40" y2="360"/>
+<line x1="40" y1="360" x2="360" y2="360"/>
+<line x1="40" y1="80" x2="360" y2="80"/>
+<line x1="40" y1="150" x2="360" y2="150"/>
+<line x1="40" y1="220" x2="360" y2="220"/>
+<line x1="40" y1="290" x2="360" y2="290"/>
+<line x1="100" y1="40" x2="100" y2="360"/>
+<line x1="180" y1="40" x2="180" y2="360"/>
+<line x1="260" y1="40" x2="260" y2="360"/>
+</g>
+<text x="40" y="378" font-family="ui-monospace, monospace" font-size="9" fill="#557a61" opacity="0.6">0</text>
+<text x="96" y="378" font-family="ui-monospace, monospace" font-size="9" fill="#557a61" opacity="0.6">t</text>
+<path d="M 40 85 C 60 85, 80 85, 100 85 C 140 88, 180 100, 220 140 C 260 200, 300 270, 360 350" fill="none" stroke="#4caf50" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M 40 355 C 60 355, 100 355, 140 355 C 180 353, 220 340, 250 300 C 270 270, 280 230, 280 200 C 280 150, 260 100, 220 75 C 180 55, 140 50, 100 50 C 80 50, 60 50, 40 55" fill="none" stroke="#e65100" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M 40 360 C 60 360, 100 360, 140 358 C 180 355, 220 340, 250 300 C 270 270, 280 230, 280 200 C 280 170, 275 145, 260 125" fill="none" stroke="#2e7d32" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+<line x1="280" y1="200" x2="280" y2="40" stroke="#e65100" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+<circle cx="280" cy="200" r="3" fill="#e65100" opacity="0.8"/>
+<text x="260" y="195" font-family="ui-monospace, monospace" font-size="9" fill="#e65100" font-weight="600">I_max</text>
+<g transform="translate(300, 50)">
+<path d="M0,0 C3,-7 7,-11 12,-13 C17,-11 21,-7 24,0 C21,-2 16,-4 12,-4 C7,-4 3,-2 0,0Z" fill="#2e7d32" opacity="0.6"/>
+<path d="M2,2 C5,-3 9,-7 14,-9 C19,-7 23,-3 26,2 C23,0 18,-2 14,-2 C9,-2 5,0 2,2Z" fill="#4caf50" opacity="0.4"/>
+</g>
+<text x="140" y="30" font-family="system-ui, sans-serif" font-size="11" fill="#1b3a24" font-weight="700" letter-spacing="1.5">EPIDEMIC</text>
+<text x="145" y="44" font-family="system-ui, sans-serif" font-size="11" fill="#1b3a24" font-weight="700" letter-spacing="1.5">CURVES</text>
+<rect x="38" y="38" width="324" height="324" fill="none" stroke="#e2ebd9" stroke-width="1" rx="4"/>
+</svg>

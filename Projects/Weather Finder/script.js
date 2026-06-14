@@ -89,13 +89,22 @@ function renderForecast() {
   forecastData.forEach(({ dayLabel, icon, hi, lo }) => {
     const hiDisp = isCelsius ? `${Math.round(hi)}°` : `${toF(hi)}°`;
     const loDisp = isCelsius ? `${Math.round(lo)}°` : `${toF(lo)}°`;
-    forecastEl.insertAdjacentHTML('beforeend', `
-      <div class="forecast-day">
-        <span class="f-day">${dayLabel}</span>
-        <span class="f-icon">${icon}</span>
-        <span class="f-hi">${hiDisp}</span>
-        <span class="f-lo">${loDisp}</span>
-      </div>`);
+    const div = document.createElement('div');
+    div.className = 'forecast-day';
+    const daySpan = document.createElement('span');
+    daySpan.className = 'f-day';
+    daySpan.textContent = dayLabel;
+    const iconSpan = document.createElement('span');
+    iconSpan.className = 'f-icon';
+    iconSpan.textContent = icon;
+    const hiSpan = document.createElement('span');
+    hiSpan.className = 'f-hi';
+    hiSpan.textContent = hiDisp;
+    const loSpan = document.createElement('span');
+    loSpan.className = 'f-lo';
+    loSpan.textContent = loDisp;
+    div.append(daySpan, iconSpan, hiSpan, loSpan);
+    forecastEl.appendChild(div);
   });
 }
 

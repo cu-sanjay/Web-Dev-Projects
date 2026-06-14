@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WordUnscramble — Identify the Word</title>
+<LINK rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="game-card">
+    <div id="start-screen" class="screen-overlay">
+      <h1 style="font-size: 42px; margin: 0;">WordUnscramble</h1>
+      <p style="color: var(--muted); margin-bottom: 30px;">Decipher the mixed-up letters!</p>
+      <button class="primary-btn" onclick="initGame()">Start Playing</button>
+    </div>
+
+    <div id="end-screen" class="screen-overlay hidden">
+      <h2 style="font-size: 32px;">Great Job!</h2>
+      <p style="color: var(--muted); margin-bottom: 30px;">You've completed all levels.</p>
+      <button class="primary-btn" onclick="initGame()">Play Again</button>
+    </div>
+
+    <div class="header">
+      <div class="badge" id="level-indicator">LEVEL 1/10</div>
+      <div style="font-weight: 600;">Score: <span id="score-val" style="color: var(--accent)">0</span></div>
+    </div>
+
+    <div class="scrambled-word" id="word-display">----</div>
+
+    <div class="input-group">
+      <input type="text" id="user-input" placeholder="Type here..." autocomplete="off" onkeydown="if(event.key==='Enter') checkAnswer()">
+      <div id="feedback" class="feedback"></div>
+    </div>
+
+    <button class="primary-btn" onclick="checkAnswer()">Submit Guess</button>
+  </div>
+<script src="script.js"></script>
+</body>
+</html>

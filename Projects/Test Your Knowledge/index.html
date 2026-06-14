@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Your Knowledge</title>
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+    <div class="game-card">
+        <div id="quiz-screen">
+            <h1>Test Your Knowledge</h1>
+            <div class="stats">
+                <span>Question: <span id="current-q">1</span>/10</span>
+                <span>Score: <span id="current-score">0</span></span>
+            </div>
+            <div class="question-text" id="question">Loading...</div>
+            <div class="options-grid" id="options"></div>
+            <button class="btn-action" id="next-btn">Next Question</button>
+        </div>
+
+        <div id="result-screen">
+            <h1>Quiz Completed!</h1>
+            <p style="font-size: 1.5rem;">Your Final Score: <span id="final-score">0</span>/10</p>
+            <p id="performance-msg"></p>
+            <button class="btn-action" id="restart-btn" style="display: inline-block;">Restart Quiz</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

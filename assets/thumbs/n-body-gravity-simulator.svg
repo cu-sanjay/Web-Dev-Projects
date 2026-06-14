@@ -1,0 +1,179 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <radialGradient id="space-bg" cx="50%" cy="50%" r="75%">
+      <stop offset="0%" stop-color="#0b112c"/>
+      <stop offset="45%" stop-color="#050816"/>
+      <stop offset="100%" stop-color="#010206"/>
+    </radialGradient>
+    
+    <radialGradient id="nebula-cyan" cx="20%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#00f2ff" stop-opacity="0.15"/>
+      <stop offset="50%" stop-color="#00aaff" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="nebula-magenta" cx="80%" cy="70%" r="50%">
+      <stop offset="0%" stop-color="#f000ff" stop-opacity="0.12"/>
+      <stop offset="60%" stop-color="#7b00ff" stop-opacity="0.03"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="core-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="20%" stop-color="#fff6bd" stop-opacity="1"/>
+      <stop offset="50%" stop-color="#ff9d00" stop-opacity="0.8"/>
+      <stop offset="75%" stop-color="#ff4500" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#ff0000" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="node-glow-blue" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="30%" stop-color="#00f2ff" stop-opacity="1"/>
+      <stop offset="70%" stop-color="#0044ff" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#0044ff" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="text-gold" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fff2a3"/>
+      <stop offset="30%" stop-color="#ffd000"/>
+      <stop offset="70%" stop-color="#ff9000"/>
+      <stop offset="100%" stop-color="#cc5200"/>
+    </linearGradient>
+
+    <linearGradient id="text-white" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#b5c6e0"/>
+    </linearGradient>
+
+    <filter id="glow-heavy" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="25" result="blur1"/>
+      <feGaussianBlur stdDeviation="12" result="blur2"/>
+      <feMerge>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="glow-subtle" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <filter id="blur-bg" x="0" y="0" width="1280" height="720">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+
+    <filter id="card-shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="15" stdDeviation="20" flood-color="#000000" flood-opacity="0.8"/>
+    </filter>
+  </defs>
+
+  <rect width="1280" height="720" fill="url(#space-bg)"/>
+  <rect width="1280" height="720" fill="url(#nebula-cyan)"/>
+  <rect width="1280" height="720" fill="url(#nebula-magenta)"/>
+
+  <g fill="#ffffff" opacity="0.6">
+    <circle cx="120" cy="80" r="1" />
+    <circle cx="340" cy="150" r="1.5" opacity="0.4" />
+    <circle cx="150" cy="620" r="1" />
+    <circle cx="850" cy="90" r="2" opacity="0.7" />
+    <circle cx="1050" cy="200" r="1" />
+    <circle cx="1200" cy="580" r="1.5" />
+    <circle cx="90" cy="400" r="2" />
+    <circle cx="450" cy="680" r="1" opacity="0.3" />
+    <circle cx="1150" cy="80" r="2.5" fill="#e0f7ff" />
+    <circle cx="700" cy="650" r="1" />
+  </g>
+
+  <g fill="none" stroke-linecap="round" opacity="0.85">
+    <ellipse cx="640" cy="400" rx="420" ry="160" stroke="#00f2ff" stroke-width="2.5" transform="rotate(-15, 640, 400)" stroke-dasharray="800 400" opacity="0.4"/>
+    <ellipse cx="640" cy="400" rx="390" ry="130" stroke="#00a3ff" stroke-width="1.5" transform="rotate(-25, 640, 400)"/>
+    
+    <path d="M 280,450 Q 400,220 640,300 T 1000,350 Q 850,580 640,500 T 280,450" stroke="#bd00ff" stroke-width="2" opacity="0.6" />
+    <path d="M 350,320 Q 640,150 930,320 Q 750,520 640,460 Q 500,380 350,320" stroke="#ff0077" stroke-width="1.5" opacity="0.5" />
+    
+    <ellipse cx="640" cy="390" rx="210" ry="85" stroke="#ff9000" stroke-width="3" transform="rotate(18, 640, 390)" stroke-dasharray="400 150"/>
+    <ellipse cx="640" cy="390" rx="160" ry="60" stroke="#fff000" stroke-width="2" transform="rotate(-35, 640, 390)"/>
+    <ellipse cx="635" cy="395" rx="110" ry="45" stroke="#ff4500" stroke-width="3" transform="rotate(45, 635, 395)"/>
+  </g>
+
+  <g stroke="#ffffff" stroke-width="0.5" opacity="0.25">
+    <line x1="640" y1="390" x2="480" y2="330" />
+    <line x1="640" y1="390" x2="790" y2="450" />
+    <line x1="640" y1="390" x2="550" y2="480" />
+    <line x1="640" y1="390" x2="760" y2="310" />
+    <line x1="480" y1="330" x2="550" y2="480" stroke="#00f2ff" stroke-width="0.7"/>
+    <line x1="790" y1="450" x2="760" y2="310" stroke="#ff0077" stroke-width="0.7"/>
+  </g>
+
+  <circle cx="640" cy="390" r="130" fill="url(#core-glow)" filter="url(#glow-heavy)"/>
+  <circle cx="640" cy="390" r="25" fill="#ffffff" filter="url(#glow-subtle)"/>
+
+  <circle cx="480" cy="330" r="16" fill="url(#node-glow-blue)" filter="url(#glow-subtle)"/>
+  <circle cx="480" cy="330" r="5" fill="#ffffff"/>
+  <path d="M 440,340 Q 460,345 480,330" fill="none" stroke="#00f2ff" stroke-width="4" stroke-linecap="round"/> <circle cx="790" cy="450" r="22" fill="url(#core-glow)" filter="url(#glow-subtle)" opacity="0.8"/>
+  <circle cx="790" cy="450" r="7" fill="#ffddaa"/>
+  <path d="M 830,420 Q 815,440 790,450" fill="none" stroke="#ff6a00" stroke-width="5" stroke-linecap="round"/>
+
+  <circle cx="550" cy="480" r="12" fill="url(#node-glow-blue)" filter="url(#glow-subtle)" opacity="0.9"/>
+  <circle cx="550" cy="480" r="4" fill="#aae7ff"/>
+
+  <circle cx="760" cy="310" r="14" fill="url(#core-glow)" filter="url(#glow-subtle)" opacity="0.7"/>
+  <circle cx="760" cy="310" r="4.5" fill="#ffbc73"/>
+
+  <g fill="#ffffff">
+    <circle cx="610" cy="300" r="3" fill="#ffea84" filter="url(#glow-subtle)"/>
+    <circle cx="690" cy="460" r="2.5" fill="#84f0ff"/>
+    <circle cx="520" cy="380" r="3.5" fill="#ffb484"/>
+    <circle cx="780" cy="360" r="2" />
+    <circle cx="420" cy="410" r="4" fill="#a3e5ff" opacity="0.8"/>
+    <circle cx="840" cy="3plan0" r="3" fill="#fda3ff" opacity="0.7"/>
+    <circle cx="660" cy="320" r="1.5" opacity="0.9"/><circle cx="620" cy="450" r="1" opacity="0.7"/>
+    <circle cx="580" cy="350" r="2" opacity="0.8"/><circle cx="710" cy="410" r="1.5" opacity="0.9"/>
+    <circle cx="670" cy="350" r="1" /><circle cx="600" cy="410" r="2" />
+    <circle cx="630" cy="340" r="1.5" /><circle cx="650" cy="440" r="1.2"/>
+  </g>
+
+
+  <g transform="translate(640, 115)" text-anchor="middle">
+    <text x="0" y="0" font-family="'Montserrat', 'Arial Black', sans-serif" font-size="102" font-weight="900" font-style="italic" fill="#000" opacity="0.9" dx="0" dy="8" filter="url(#glow-heavy)">N-BODY</text>
+    <text x="0" y="0" font-family="'Montserrat', 'Arial Black', sans-serif" font-size="102" font-weight="900" font-style="italic" fill="#000" opacity="1" dx="0" dy="4">N-BODY</text>
+    <text x="0" y="0" font-family="'Montserrat', 'Arial Black', sans-serif" font-size="102" font-weight="900" font-style="italic" fill="url(#text-gold)" letter-spacing="2">N-BODY</text>
+  </g>
+
+  <g transform="translate(640, 195)" text-anchor="middle">
+    <text x="0" y="0" font-family="'Montserrat', 'Arial', sans-serif" font-size="46" font-weight="800" fill="#000000" opacity="0.9" dx="0" dy="4" letter-spacing="6">GRAVITY SIMULATOR</text>
+    <text x="0" y="0" font-family="'Montserrat', 'Arial', sans-serif" font-size="46" font-weight="800" fill="url(#text-white)" letter-spacing="6">GRAVITY SIMULATOR</text>
+  </g>
+
+
+  <g transform="translate(45, 520)" filter="url(#card-shadow)">
+    <rect width="260" height="145" rx="15" fill="#060c24" fill-opacity="0.65" stroke="#00f2ff" stroke-width="1.5"/>
+    <path d="M 15,0 L 40,0 M 0,15 L 0,40 M 245,145 L 220,145 M 260,130 L 260,105" stroke="#ffffff" stroke-width="2" opacity="0.7"/>
+    
+    <text x="25" y="35" font-family="'Courier New', monospace" font-size="14" font-weight="bold" fill="#00f2ff" letter-spacing="1">SYSTEM: ACTIVE</text>
+    
+    <text x="25" y="75" font-family="'Montserrat', sans-serif" font-size="28" font-weight="800" fill="#ffffff">N = 2,048</text>
+    <text x="25" y="100" font-family="'Montserrat', sans-serif" font-size="13" font-weight="600" fill="#788fae" letter-spacing="0.5">PARTICLES SIMULATED</text>
+    
+    <circle cx="230" cy="31" r="5" fill="#00ff66" filter="url(#glow-subtle)"/>
+  </g>
+
+  <g transform="translate(975, 520)" filter="url(#card-shadow)">
+    <rect width="260" height="145" rx="15" fill="#060c24" fill-opacity="0.65" stroke="#ff0077" stroke-width="1.5"/>
+    <path d="M 245,0 L 220,0 M 260,15 L 260,40 M 15,145 L 40,145 M 0,130 L 0,105" stroke="#ffffff" stroke-width="2" opacity="0.7"/>
+
+    <text x="25" y="35" font-family="'Courier New', monospace" font-size="14" font-weight="bold" fill="#ff0077" letter-spacing="1">ENGINE: BARNES-HUT</text>
+    
+    <text x="25" y="75" font-family="'Montserrat', sans-serif" font-size="28" font-weight="800" fill="#ffffff">60 FPS</text>
+    <text x="25" y="100" font-family="'Montserrat', sans-serif" font-size="13" font-weight="600" fill="#788fae" letter-spacing="0.5">REAL-TIME TIME-STEP</text>
+
+    <path d="M 160,80 L 180,65 L 200,75 L 220,55 L 240,60" fill="none" stroke="#00ff66" stroke-width="2" stroke-linecap="round"/>
+  </g>
+
+  <line x1="330" y1="620" x2="950" y2="620" stroke="#ffffff" stroke-width="1" opacity="0.1" stroke-dasharray="10 15"/>
+</svg>

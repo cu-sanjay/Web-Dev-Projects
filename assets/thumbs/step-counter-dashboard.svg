@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200">
+  <rect width="320" height="200" fill="#05060b"/>
+  <!-- tele bar -->
+  <rect x="4" y="4" width="76" height="22" rx="5" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="10" y="13" font-family="system-ui,sans-serif" font-size="5" fill="#475569">TOTAL STEPS</text>
+  <text x="10" y="21" font-family="monospace" font-size="7" font-weight="700" fill="#00f0ff">112,450</text>
+  <rect x="84" y="4" width="76" height="22" rx="5" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="90" y="13" font-family="system-ui,sans-serif" font-size="5" fill="#475569">DISTANCE</text>
+  <text x="90" y="21" font-family="monospace" font-size="7" font-weight="700" fill="#10b981">84.3 km</text>
+  <rect x="164" y="4" width="76" height="22" rx="5" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="170" y="13" font-family="system-ui,sans-serif" font-size="5" fill="#475569">CALORIES</text>
+  <text x="170" y="21" font-family="monospace" font-size="7" font-weight="700" fill="#10b981">4,498 kcal</text>
+  <rect x="244" y="4" width="72" height="22" rx="5" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="250" y="13" font-family="system-ui,sans-serif" font-size="5" fill="#475569">COMPLETION</text>
+  <text x="250" y="21" font-family="monospace" font-size="7" font-weight="700" fill="#f59e0b">74.9%</text>
+  <!-- form -->
+  <rect x="4" y="30" width="94" height="142" rx="6" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="10" y="39" font-family="system-ui,sans-serif" font-size="5" font-weight="700" fill="#475569">LOG DAILY STEPS</text>
+  <text x="10" y="52" font-family="system-ui,sans-serif" font-size="4.5" fill="#64748b">DATE</text>
+  <rect x="8" y="54" width="82" height="12" rx="3" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+  <text x="14" y="63" font-family="monospace" font-size="5" fill="#94a3b8">2026-06-10</text>
+  <text x="10" y="73" font-family="system-ui,sans-serif" font-size="4.5" fill="#64748b">STEPS TAKEN</text>
+  <rect x="8" y="75" width="82" height="12" rx="3" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+  <text x="14" y="84" font-family="monospace" font-size="5" fill="#64748b">8500</text>
+  <text x="10" y="94" font-family="system-ui,sans-serif" font-size="4.5" fill="#64748b">DAILY GOAL</text>
+  <rect x="8" y="96" width="82" height="12" rx="3" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+  <text x="14" y="105" font-family="monospace" font-size="5" fill="#64748b">10000</text>
+  <rect x="8" y="116" width="82" height="14" rx="4" fill="rgba(0,240,255,0.08)" stroke="rgba(0,240,255,0.15)" stroke-width="0.5"/>
+  <text x="49" y="127" font-family="system-ui,sans-serif" font-size="5" font-weight="700" fill="#00f0ff" text-anchor="middle">LOG ENTRY</text>
+  <!-- canvas rings -->
+  <rect x="102" y="30" width="110" height="142" rx="6" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="108" y="39" font-family="system-ui,sans-serif" font-size="5" font-weight="700" fill="#475569">PROGRESSION</text>
+  <!-- 7 concentric arcs -->
+  <circle cx="157" cy="106" r="45" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="4"/>
+  <circle cx="157" cy="106" r="45" fill="none" stroke="#10b981" stroke-width="4" stroke-dasharray="260 30" stroke-linecap="round" transform="rotate(-90 157 106)"/>
+  <circle cx="157" cy="106" r="38" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="4"/>
+  <circle cx="157" cy="106" r="38" fill="none" stroke="#00f0ff" stroke-width="4" stroke-dasharray="210 28" stroke-linecap="round" transform="rotate(-90 157 106)"/>
+  <circle cx="157" cy="106" r="31" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="4"/>
+  <circle cx="157" cy="106" r="31" fill="none" stroke="#f59e0b" stroke-width="4" stroke-dasharray="140 54" stroke-linecap="round" transform="rotate(-90 157 106)"/>
+  <circle cx="157" cy="106" r="24" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="4"/>
+  <circle cx="157" cy="106" r="24" fill="none" stroke="#10b981" stroke-width="4" stroke-dasharray="150 0" stroke-linecap="round" transform="rotate(-90 157 106)"/>
+  <text x="157" y="106" font-family="monospace" font-size="10" font-weight="700" fill="#f59e0b" text-anchor="middle">74.9%</text>
+  <!-- ledger -->
+  <rect x="216" y="30" width="100" height="142" rx="6" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="222" y="39" font-family="system-ui,sans-serif" font-size="5" font-weight="700" fill="#475569">ACTIVITY LOG</text>
+  <text x="225" y="47" font-family="system-ui,sans-serif" font-size="4" fill="#475569">Date</text><text x="255" y="47" font-family="system-ui,sans-serif" font-size="4" fill="#475569">Steps</text><text x="288" y="47" font-family="system-ui,sans-serif" font-size="4" fill="#475569">Status</text>
+  <line x1="217" y1="49" x2="315" y2="49" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+  <text x="222" y="57" font-family="monospace" font-size="4" fill="#94a3b8">06-10</text><text x="258" y="57" font-family="monospace" font-size="4" fill="#94a3b8">8.5K</text><rect x="282" y="52" width="26" height="7" rx="2" fill="rgba(245,158,11,0.08)" stroke="rgba(245,158,11,0.12)" stroke-width="0.3"/><text x="295" y="58" font-family="system-ui,sans-serif" font-size="3.5" fill="#f59e0b" text-anchor="middle">MISSED</text>
+  <text x="222" y="65" font-family="monospace" font-size="4" fill="#94a3b8">06-09</text><text x="258" y="65" font-family="monospace" font-size="4" fill="#94a3b8">12K</text><rect x="282" y="60" width="26" height="7" rx="2" fill="rgba(16,185,129,0.08)" stroke="rgba(16,185,129,0.12)" stroke-width="0.3"/><text x="295" y="66" font-family="system-ui,sans-serif" font-size="3.5" fill="#10b981" text-anchor="middle">MET</text>
+  <text x="222" y="73" font-family="monospace" font-size="4" fill="#94a3b8">06-08</text><text x="258" y="73" font-family="monospace" font-size="4" fill="#94a3b8">7.2K</text><rect x="282" y="68" width="26" height="7" rx="2" fill="rgba(245,158,11,0.08)" stroke="rgba(245,158,11,0.12)" stroke-width="0.3"/><text x="295" y="74" font-family="system-ui,sans-serif" font-size="3.5" fill="#f59e0b" text-anchor="middle">MISSED</text>
+  <text x="222" y="81" font-family="monospace" font-size="4" fill="#94a3b8">06-07</text><text x="258" y="81" font-family="monospace" font-size="4" fill="#94a3b8">10.5K</text><rect x="282" y="76" width="26" height="7" rx="2" fill="rgba(16,185,129,0.08)" stroke="rgba(16,185,129,0.12)" stroke-width="0.3"/><text x="295" y="82" font-family="system-ui,sans-serif" font-size="3.5" fill="#10b981" text-anchor="middle">MET</text>
+  <text x="222" y="89" font-family="monospace" font-size="4" fill="#94a3b8">06-06</text><text x="258" y="89" font-family="monospace" font-size="4" fill="#94a3b8">6.8K</text><rect x="282" y="84" width="26" height="7" rx="2" fill="rgba(245,158,11,0.08)" stroke="rgba(245,158,11,0.12)" stroke-width="0.3"/><text x="295" y="90" font-family="system-ui,sans-serif" font-size="3.5" fill="#f59e0b" text-anchor="middle">MISSED</text>
+  <!-- footer -->
+  <rect x="4" y="178" width="312" height="18" rx="5" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.02)" stroke-width="0.5"/>
+  <rect x="150" y="179" width="82" height="16" rx="3" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.03)" stroke-width="0.3"/>
+  <text x="191" y="191" font-family="system-ui,sans-serif" font-size="5" fill="#64748b" text-anchor="middle">Clear Logs</text>
+  <rect x="236" y="179" width="78" height="16" rx="3" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.03)" stroke-width="0.3"/>
+  <text x="275" y="191" font-family="system-ui,sans-serif" font-size="5" fill="#64748b" text-anchor="middle">Load Samples</text>
+</svg>

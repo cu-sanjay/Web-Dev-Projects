@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 300" width="100%" height="100%">
+  <defs>
+    <!-- Background -->
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" /> <!-- Slate 900 -->
+      <stop offset="100%" stop-color="#1e293b" /> <!-- Slate 800 -->
+    </linearGradient>
+
+    <!-- Highlight -->
+    <linearGradient id="highlight" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="rgba(56, 189, 248, 0.4)" />
+      <stop offset="100%" stop-color="rgba(129, 140, 248, 0.4)" />
+    </linearGradient>
+  </defs>
+
+  <!-- Base Background -->
+  <rect width="500" height="300" fill="url(#bg)" rx="16" />
+
+  <!-- Code Editor Window Wrapper -->
+  <rect x="50" y="40" width="400" height="220" rx="12" fill="#0b1120" />
+  
+  <!-- Editor Header -->
+  <rect x="50" y="40" width="400" height="30" fill="#1e293b" rx="12" />
+  <circle cx="65" cy="55" r="4" fill="#ef4444" />
+  <circle cx="80" cy="55" r="4" fill="#f59e0b" />
+  <circle cx="95" cy="55" r="4" fill="#10b981" />
+  <text x="250" y="59" font-family="monospace" font-size="12" fill="#94a3b8" text-anchor="middle">regex-tester.js</text>
+
+  <!-- Regex Input Bar -->
+  <rect x="70" y="90" width="360" height="40" rx="6" fill="#1e293b" />
+  <text x="85" y="115" font-family="monospace" font-size="18" fill="#f43f5e" font-weight="bold">/[a-z]+[0-9]{3}/g</text>
+
+  <!-- Code Text Lines -->
+  <g font-family="monospace" font-size="16" fill="#94a3b8">
+    <text x="70" y="160">const <tspan fill="#38bdf8">user1</tspan> = "</text>
+    
+    <!-- Match 1 -->
+    <rect x="212" y="145" width="76" height="20" rx="4" fill="url(#highlight)" />
+    <text x="215" y="160" fill="#f8fafc">admin123</text>
+    
+    <text x="290" y="160">";</text>
+    
+    <text x="70" y="190">const <tspan fill="#38bdf8">user2</tspan> = "</text>
+    
+    <!-- Match 2 -->
+    <rect x="212" y="175" width="76" height="20" rx="4" fill="url(#highlight)" />
+    <text x="215" y="190" fill="#f8fafc">guest999</text>
+    
+    <text x="290" y="190">";</text>
+    
+    <text x="70" y="220">const <tspan fill="#38bdf8">user3</tspan> = "invalid";</text>
+  </g>
+
+</svg>

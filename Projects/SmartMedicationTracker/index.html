@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Medication Tracker & Pill Adherence Scheduler</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Style Sheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-logo">
+          <i data-lucide="pill" class="logo-icon"></i>
+        </div>
+        <div class="brand-text">
+          <h1>PillSmart</h1>
+          <span>Adherence Lab</span>
+        </div>
+      </div>
+
+      <nav class="nav-menu">
+        <button class="nav-btn active" data-target="dashboard-section">
+          <i data-lucide="layout-dashboard"></i>
+          <span>Dashboard</span>
+        </button>
+        <button class="nav-btn" data-target="add-med-section">
+          <i data-lucide="plus-circle"></i>
+          <span>Add Med</span>
+        </button>
+        <button class="nav-btn" data-target="inventory-section">
+          <i data-lucide="package"></i>
+          <span>Inventory</span>
+        </button>
+        <button class="nav-btn" data-target="analytics-section">
+          <i data-lucide="line-chart"></i>
+          <span>Analytics</span>
+        </button>
+      </nav>
+
+      <!-- Alarm Widget -->
+      <div class="alarm-widget">
+        <div class="widget-header">
+          <i data-lucide="alarm-clock" class="alarm-icon animate-pulse"></i>
+          <span>Next Reminder</span>
+        </div>
+        <div class="widget-body">
+          <p id="next-reminder-text">No active reminders</p>
+          <span id="next-reminder-time">--:--</span>
+        </div>
+      </div>
+
+      <!-- Quick Actions / Export -->
+      <div class="sidebar-footer">
+        <button id="export-data-btn" class="footer-btn" title="Backup Schedule">
+          <i data-lucide="download"></i>
+          <span>Backup</span>
+        </button>
+        <button id="import-data-btn-trigger" class="footer-btn" title="Restore Schedule">
+          <i data-lucide="upload"></i>
+          <span>Restore</span>
+        </button>
+        <input type="file" id="import-data-file" style="display: none;" accept=".json">
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Top Header -->
+      <header class="main-header">
+        <div class="header-left">
+          <h2 id="greeting-text">Good day!</h2>
+          <p class="subtitle" id="current-date-text">Friday, June 12, 2026</p>
+        </div>
+        <div class="header-right">
+          <!-- Live Local Time -->
+          <div class="time-badge">
+            <i data-lucide="clock"></i>
+            <span id="header-time-text">12:00:00 PM</span>
+          </div>
+          <!-- Theme Toggle -->
+          <button id="theme-toggle-btn" class="icon-btn" title="Toggle Light/Dark Theme">
+            <i data-lucide="moon" id="theme-icon"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- Section: Dashboard -->
+      <section id="dashboard-section" class="tab-content active">
+        <!-- Overview Stats Grid -->
+        <div class="stats-grid">
+          <!-- Circular Compliance Card -->
+          <div class="glass-card stat-card compliance-card">
+            <div class="stat-content">
+              <h3>Today's Progress</h3>
+              <p class="stat-value" id="compliance-percentage">0%</p>
+              <p class="stat-desc" id="compliance-fraction">0 / 0 doses taken</p>
+            </div>
+            <div class="progress-ring-container">
+              <svg class="progress-ring" width="100" height="100">
+                <circle class="progress-ring-circle-bg" stroke="rgba(255,255,255,0.06)" stroke-width="8" fill="transparent" r="40" cx="50" cy="50"/>
+                <circle class="progress-ring-circle" id="compliance-ring" stroke="var(--primary)" stroke-width="8" fill="transparent" r="40" cx="50" cy="50"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Streak Card -->
+          <div class="glass-card stat-card">
+            <div class="icon-wrapper primary-bg">
+              <i data-lucide="flame"></i>
+            </div>
+            <div class="stat-content">
+              <h3>Adherence Streak</h3>
+              <p class="stat-value" id="streak-count">0 Days</p>
+              <p class="stat-desc">Keep up the consistency!</p>
+            </div>
+          </div>
+
+          <!-- Inventory Alerts Card -->
+          <div class="glass-card stat-card" id="alert-card-trigger">
+            <div class="icon-wrapper danger-bg">
+              <i data-lucide="alert-triangle" id="alert-card-icon"></i>
+            </div>
+            <div class="stat-content">
+              <h3>Inventory Status</h3>
+              <p class="stat-value text-danger" id="low-stock-count">0 Low</p>
+              <p class="stat-desc" id="low-stock-desc">All stocks stable</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timeline Section -->
+        <div class="dashboard-body">
+          <div class="timeline-container glass-card">
+            <div class="timeline-header">
+              <div class="header-title">
+                <i data-lucide="calendar"></i>
+                <h2>Today's Intake Schedule</h2>
+              </div>
+              <div class="timeline-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="pending">Pending</button>
+                <button class="filter-btn" data-filter="taken">Taken</button>
+              </div>
+            </div>
+
+            <!-- List of Today's Doses -->
+            <div class="dose-timeline" id="today-timeline-list">
+              <!-- Dynamically populated timeline items -->
+              <div class="empty-state">
+                <i data-lucide="clipboard-list"></i>
+                <p>No medications scheduled for today.</p>
+                <button class="action-btn" onclick="switchTab('add-med-section')">Add Medication</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Add Medication -->
+      <section id="add-med-section" class="tab-content">
+        <div class="form-container glass-card">
+          <div class="form-header">
+            <i data-lucide="plus-circle"></i>
+            <h2>Schedule New Medication</h2>
+          </div>
+
+          <form id="medication-form">
+            <!-- Basic Details -->
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="med-name"><i data-lucide="edit-3"></i> Medication Name *</label>
+                <input type="text" id="med-name" required placeholder="e.g. Lipitor, Multivitamin">
+              </div>
+              <div class="form-group">
+                <label for="med-dosage"><i data-lucide="scale"></i> Dosage / Strength *</label>
+                <input type="text" id="med-dosage" required placeholder="e.g. 10mg, 1 tablet, 5ml">
+              </div>
+            </div>
+
+            <!-- Pill Designer Section -->
+            <div class="pill-designer-box">
+              <h3><i data-lucide="palette"></i> Pill Visual Customizer</h3>
+              <div class="designer-grid">
+                <div class="design-preview-pane">
+                  <div class="pill-render-wrapper" id="pill-preview-render">
+                    <!-- Dynamic Pill Shape -->
+                    <div class="pill-shape tablet bg-pill-primary" id="preview-shape">
+                      <div class="pill-divider"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="design-controls">
+                  <!-- Shape selection -->
+                  <div class="control-group">
+                    <label>Pill Shape</label>
+                    <div class="pill-selector">
+                      <label class="radio-card">
+                        <input type="radio" name="pill-shape" value="tablet" checked>
+                        <span>Tablet</span>
+                      </label>
+                      <label class="radio-card">
+                        <input type="radio" name="pill-shape" value="capsule">
+                        <span>Capsule</span>
+                      </label>
+                      <label class="radio-card">
+                        <input type="radio" name="pill-shape" value="round">
+                        <span>Round</span>
+                      </label>
+                      <label class="radio-card">
+                        <input type="radio" name="pill-shape" value="liquid">
+                        <span>Liquid</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  <!-- Color selection -->
+                  <div class="control-group">
+                    <label>Pill Color Theme</label>
+                    <div class="color-palette-selector">
+                      <button type="button" class="color-dot active" style="background: #ef4444;" data-color="red"></button>
+                      <button type="button" class="color-dot" style="background: #3b82f6;" data-color="blue"></button>
+                      <button type="button" class="color-dot" style="background: #10b981;" data-color="green"></button>
+                      <button type="button" class="color-dot" style="background: #f59e0b;" data-color="yellow"></button>
+                      <button type="button" class="color-dot" style="background: #8b5cf6;" data-color="purple"></button>
+                      <button type="button" class="color-dot" style="background: #ec4899;" data-color="pink"></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Timing Schedule -->
+            <div class="schedule-section">
+              <h3><i data-lucide="calendar-days"></i> Schedule & Frequency</h3>
+              <div class="form-grid">
+                <!-- Select Days -->
+                <div class="form-group">
+                  <label>Frequency (Days of the week)</label>
+                  <div class="days-selector">
+                    <label class="day-checkbox"><input type="checkbox" value="1" checked><span>M</span></label>
+                    <label class="day-checkbox"><input type="checkbox" value="2" checked><span>T</span></label>
+                    <label class="day-checkbox"><input type="checkbox" value="3" checked><span>W</span></label>
+                    <label class="day-checkbox"><input type="checkbox" value="4" checked><span>T</span></label>
+                    <label class="day-checkbox"><input type="checkbox" value="5" checked><span>F</span></label>
+                    <label class="day-checkbox"><input type="checkbox" value="6" checked><span>S</span></label>
+                    <label class="day-checkbox"><input type="checkbox" value="0" checked><span>S</span></label>
+                  </div>
+                </div>
+
+                <!-- Dosage Reminders times -->
+                <div class="form-group">
+                  <label><i data-lucide="clock"></i> Dosage Times</label>
+                  <div id="times-list-container">
+                    <div class="time-input-row">
+                      <input type="time" class="reminder-time-input" required value="08:00">
+                      <button type="button" class="icon-btn remove-time-btn" style="display: none;"><i data-lucide="trash-2"></i></button>
+                    </div>
+                  </div>
+                  <button type="button" id="add-time-row-btn" class="text-btn"><i data-lucide="plus"></i> Add dosage time</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Inventory details -->
+            <div class="inventory-section-box">
+              <h3><i data-lucide="package"></i> Pill Stock Inventory</h3>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="med-stock"><i data-lucide="boxes"></i> Current Pill Quantity</label>
+                  <input type="number" id="med-stock" min="0" placeholder="e.g. 30 (Optional)">
+                </div>
+                <div class="form-group">
+                  <label for="med-low-alert"><i data-lucide="bell"></i> Alert Low Stock Limit</label>
+                  <input type="number" id="med-low-alert" min="0" placeholder="e.g. 5 (Optional)">
+                </div>
+              </div>
+            </div>
+
+            <!-- Extra Notes -->
+            <div class="form-group">
+              <label for="med-notes"><i data-lucide="clipboard"></i> Special Instructions / Notes</label>
+              <textarea id="med-notes" placeholder="e.g. Take with food, Avoid grapefruit juice"></textarea>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="form-actions">
+              <button type="button" class="btn secondary-btn" onclick="switchTab('dashboard-section')">Cancel</button>
+              <button type="submit" class="btn primary-btn"><i data-lucide="save"></i> Save Medication</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- Section: Inventory Manager -->
+      <section id="inventory-section" class="tab-content">
+        <div class="inventory-manager glass-card">
+          <div class="inventory-header">
+            <div class="header-title">
+              <i data-lucide="package"></i>
+              <h2>Medication Stock Manager</h2>
+            </div>
+          </div>
+
+          <!-- Inventory Grid -->
+          <div class="inventory-table-container">
+            <table class="inventory-table">
+              <thead>
+                <tr>
+                  <th>Medication</th>
+                  <th>Visual Code</th>
+                  <th>Current Stock</th>
+                  <th>Alert Level</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="inventory-table-body">
+                <!-- Dynamically populated inventory row -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Analytics -->
+      <section id="analytics-section" class="tab-content">
+        <div class="analytics-container">
+          <!-- Analytics Summary Cards -->
+          <div class="stats-grid">
+            <div class="glass-card stat-card">
+              <div class="icon-wrapper success-bg">
+                <i data-lucide="check-circle-2"></i>
+              </div>
+              <div class="stat-content">
+                <h3>Total Doses Taken</h3>
+                <p class="stat-value" id="stats-total-taken">0</p>
+                <p class="stat-desc">Doses successfully logged</p>
+              </div>
+            </div>
+
+            <div class="glass-card stat-card">
+              <div class="icon-wrapper warning-bg">
+                <i data-lucide="x-circle"></i>
+              </div>
+              <div class="stat-content">
+                <h3>Total Doses Skipped</h3>
+                <p class="stat-value" id="stats-total-skipped">0</p>
+                <p class="stat-desc">Doses skipped by choice</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Weekly History Card -->
+          <div class="glass-card analytics-card-full">
+            <div class="analytics-card-header">
+              <i data-lucide="calendar-range"></i>
+              <h2>Weekly Adherence History</h2>
+            </div>
+            <div class="weekly-history-grid" id="weekly-compliance-history">
+              <!-- Dynamically generated visual weekly report columns -->
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Dynamic Modal Alarms -->
+  <div class="modal-overlay" id="alarm-modal">
+    <div class="alarm-modal-content glass-card">
+      <div class="modal-bell-icon">
+        <i data-lucide="bell" class="alarm-bell-active animate-bounce"></i>
+      </div>
+      <h2>Time for your medication!</h2>
+      <div class="reminder-pill-badge" id="modal-pill-icon-wrapper">
+        <div class="pill-shape tablet bg-pill-red" id="modal-pill-shape">
+          <div class="pill-divider"></div>
+        </div>
+        <span id="modal-med-details">Aspirin - 1 Tablet</span>
+      </div>
+      <p class="modal-time-desc" id="modal-reminder-time">Scheduled at 08:00 AM</p>
+      <div class="modal-notes" id="modal-med-notes">Take with glass of water</div>
+      <div class="modal-buttons">
+        <button class="btn secondary-btn" id="modal-skip-btn">Skip</button>
+        <button class="btn primary-btn" id="modal-taken-btn">Take Dose</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>

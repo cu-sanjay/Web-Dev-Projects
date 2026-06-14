@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Circuits Lab & Interactive Logic Gate Simulator</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Style Sheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- Left Sidebar: Component Catalog -->
+    <aside class="sidebar-catalog glass-card">
+      <div class="brand">
+        <div class="brand-logo">
+          <i data-lucide="cpu" class="logo-icon"></i>
+        </div>
+        <div class="brand-text">
+          <h1>LogiLab 2D</h1>
+          <span>Circuits Sandbox</span>
+        </div>
+      </div>
+
+      <div class="catalog-section">
+        <h3><i data-lucide="component"></i> Component Palette</h3>
+        <p class="section-desc">Drag items onto the canvas or click to add them.</p>
+        <div class="component-list" id="component-palette">
+          <!-- Dynamically populated component list -->
+        </div>
+      </div>
+
+      <div class="catalog-section instructions-section">
+        <h3><i data-lucide="help-circle"></i> Lab Quick Guide</h3>
+        <ul class="help-list">
+          <li><strong>Draw Wires</strong>: Drag from output terminal (right) to input terminal (left).</li>
+          <li><strong>Toggle Switch</strong>: Click any Toggle Switch component on the canvas to flip state (0/1).</li>
+          <li><strong>Select Node</strong>: Click to view details and truth table.</li>
+          <li><strong>Delete Connection</strong>: Click a wire line and press <kbd>Del</kbd> to remove.</li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Center Sandbox Workspace Panel -->
+    <main class="workspace-panel">
+      <header class="workspace-header">
+        <div class="header-left">
+          <h2>Interactive Schematics Canvas</h2>
+          <p class="subtitle">Drag components and wire connections to simulate logical functions</p>
+        </div>
+        <div class="header-right">
+          <!-- Current Lab Status -->
+          <div class="lab-badge animate-pulse" id="active-lab-badge" style="display: none;">
+            <i data-lucide="bookmark"></i>
+            <span id="active-lab-name">Lab Challenge Active</span>
+          </div>
+          <!-- Theme Toggle -->
+          <button id="theme-toggle-btn" class="icon-btn" title="Toggle Light/Dark Theme">
+            <i data-lucide="moon" id="theme-icon"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- Center Interactive Canvas Wrapper -->
+      <div class="canvas-wrapper glass-card" id="canvas-container">
+        <!-- SVG rendering workspace layers for nodes and connection wires -->
+        <svg id="schematic-canvas">
+          <!-- Grid patterns -->
+          <defs>
+            <pattern id="grid-pattern" width="20" height="20" patternUnits="userSpaceOnUse">
+              <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.02)" stroke-width="1"/>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid-pattern)" id="canvas-bg" />
+
+          <!-- Dynamic Wire groups -->
+          <g id="wires-group"></g>
+          <!-- Dynamic temporary drawing wire -->
+          <path id="temp-wire" d="" fill="none" stroke="var(--primary)" stroke-width="3" stroke-dasharray="5 5" style="display: none;"></path>
+          <!-- Dynamic nodes list group -->
+          <g id="nodes-group"></g>
+        </svg>
+
+        <!-- Floating Action menu controls -->
+        <div class="canvas-toolbar">
+          <button id="clear-canvas-btn" class="toolbar-btn text-danger">
+            <i data-lucide="refresh-cw"></i>
+            <span>Clear Circuits</span>
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Right Sidebar: Configuration, Truth Tables & Lab Challenges -->
+    <aside class="sidebar-config glass-card">
+      <!-- Section: Details of selected component -->
+      <div class="config-section">
+        <h3><i data-lucide="info"></i> Selection Details</h3>
+        <div id="selection-details-pane">
+          <div class="empty-selection">
+            <p>Click a logic gate component on the canvas to inspect its current Boolean state.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: Lab Tasks & Challenges -->
+      <div class="config-section">
+        <h3><i data-lucide="graduation-cap"></i> Digital Circuits Lab Tasks</h3>
+        <div class="labs-list">
+          <div class="lab-item-card" data-lab="lab1">
+            <h4>Lab 1: The NAND Inverter</h4>
+            <p>Design a logical NOT gate using exactly one 2-Input NAND gate.</p>
+            <button class="btn secondary-btn w-full start-lab-btn" data-lab="lab1">Start Lab</button>
+          </div>
+
+          <div class="lab-item-card" data-lab="lab2">
+            <h4>Lab 2: Exclusive OR (XOR)</h4>
+            <p>Construct an XOR logic circuit using AND, OR, and NOT gates.</p>
+            <button class="btn secondary-btn w-full start-lab-btn" data-lab="lab2">Start Lab</button>
+          </div>
+
+          <div class="lab-item-card" data-lab="lab3">
+            <h4>Lab 3: Binary Half Adder</h4>
+            <p>Design a Half Adder (Inputs: A, B. Outputs: Sum, Carry) using logic gates.</p>
+            <button class="btn secondary-btn w-full start-lab-btn" data-lab="lab3">Start Lab</button>
+          </div>
+        </div>
+
+        <!-- Verification controls panel -->
+        <div class="verification-panel" id="verification-panel" style="display: none;">
+          <button id="verify-circuit-btn" class="btn primary-btn w-full">
+            <i data-lucide="check-circle-2"></i>
+            <span>Verify Circuit Design</span>
+          </button>
+          <button id="quit-lab-btn" class="btn secondary-btn w-full">
+            <span>Quit Challenge</span>
+          </button>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- JavaScript Code -->
+  <script src="script.js"></script>
+</body>
+</html>

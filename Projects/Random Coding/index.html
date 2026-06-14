@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Challenge — NSOC'26</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="header">
+        <div style="font-size: 22px; font-weight: 500;">🚀 Code Challenge</div>
+        <div>Score: <span id="score">0</span></div>
+    </div>
+
+    <div class="game-container">
+        <div class="filters">
+            <select id="diffFilter"><option value="easy">Easy</option><option value="medium">Medium</option><option value="hard">Hard</option></select>
+            <select id="catFilter"><option value="all">All Categories</option><option value="Arrays">Arrays</option><option value="Strings">Strings</option><option value="Math">Math</option></select>
+            <button id="nextBtn" class="secondary">New Random Challenge</button>
+        </div>
+
+        <div class="challenge-box">
+            <h3 id="challengeTitle">Problem Title</h3>
+            <p id="challengeDesc">Loading description...</p>
+        </div>
+
+        <div class="editor-container">
+            <textarea id="codeEditor" spellcheck="false"></textarea>
+        </div>
+
+        <div id="result"></div>
+
+        <div class="controls">
+            <button id="runBtn" class="primary">Submit Solution</button>
+        </div>
+    </div>
+
+    <!-- Confetti Container -->
+    <div id="confetti-canvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999;"></div>
+
+<script src="script.js"></script>   
+</body>
+</html>

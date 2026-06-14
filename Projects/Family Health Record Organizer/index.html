@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Health Record Organizer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-color-theme="ocean">
+
+    <!-- Auth View (Login / Sign Up) -->
+    <div id="authContainer" class="auth-wrapper glass">
+        <div class="auth-card glass-panel">
+            <div class="auth-header">
+                <span class="auth-icon">🏥</span>
+                <h2>FamilyHealth</h2>
+                <p>Your centralized family health dashboard</p>
+            </div>
+            
+            <!-- Login Form -->
+            <form id="loginForm" class="auth-form">
+                <h3>Welcome Back</h3>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="loginEmail" required placeholder="name@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="loginPassword" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn btn-primary w-full shadow-hover mt-3">Sign In</button>
+                <p class="auth-switch">Don't have an account? <a href="#" id="showSignup">Sign Up</a></p>
+            </form>
+
+            <!-- Signup Form -->
+            <form id="signupForm" class="auth-form hidden">
+                <h3>Create Account</h3>
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="signupName" required placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="signupEmail" required placeholder="name@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="signupPassword" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn btn-primary w-full shadow-hover mt-3">Create Account</button>
+                <p class="auth-switch">Already have an account? <a href="#" id="showLogin">Sign In</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main App Container -->
+    <div class="app-container hidden" id="mainApp">
+        <!-- Sidebar -->
+        <aside class="sidebar glass-panel">
+            <div class="sidebar-header">
+                <div class="brand">
+                    <span class="brand-icon">🏥</span>
+                    <h2>FamilyHealth</h2>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" id="navDashboard">
+                    <span class="icon">📊</span> Overview
+                </a>
+                <a href="#" class="nav-item" id="navMembers">
+                    <span class="icon">👥</span> Family Members
+                </a>
+                <a href="#" class="nav-item" id="navEmergency">
+                    <span class="icon">🚨</span> Emergency Info
+                </a>
+            </nav>
+
+            <div class="theme-settings panel glass-panel">
+                <h3>Theme Settings</h3>
+                <div class="theme-controls">
+                    <button id="themeToggle" class="btn-icon" aria-label="Toggle Dark Mode">🌙</button>
+                    <div class="color-picker">
+                        <button class="color-btn ocean active" data-color="ocean" title="Ocean"></button>
+                        <button class="color-btn emerald" data-color="emerald" title="Emerald"></button>
+                        <button class="color-btn amethyst" data-color="amethyst" title="Amethyst"></button>
+                        <button class="color-btn ruby" data-color="ruby" title="Ruby"></button>
+                        <button class="color-btn amber" data-color="amber" title="Amber"></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="avatar" id="userAvatar">U</div>
+                    <div class="user-info">
+                        <strong id="userNameDisplay">User</strong>
+                        <button id="logoutBtn" class="logout-link">Log out</button>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header">
+                <div>
+                    <h1 class="page-title" id="pageTitle">Family Dashboard</h1>
+                    <p class="page-subtitle" id="pageSubtitle">A centralized view of your family's health.</p>
+                </div>
+                <div id="headerActions">
+                    <button id="addMemberBtn" class="btn btn-primary shadow-hover">
+                        <span class="btn-icon-inner">+</span> Add Member
+                    </button>
+                </div>
+            </header>
+
+            <!-- View: Dashboard Overview -->
+            <div class="view-section" id="dashboardView">
+                <div class="overview-cards">
+                    <div class="card summary-card glass-panel">
+                        <div class="card-icon primary-bg">👨‍👩‍👧‍👦</div>
+                        <div class="card-content">
+                            <h3>Total Members</h3>
+                            <div class="amount text-primary" id="totalMembersStat">0</div>
+                        </div>
+                    </div>
+                    <div class="card summary-card glass-panel">
+                        <div class="card-icon warning-bg">💉</div>
+                        <div class="card-content">
+                            <h3>Pending Vaccinations</h3>
+                            <div class="amount text-warning" id="pendingVaxStat">0</div>
+                        </div>
+                    </div>
+                    <div class="card summary-card glass-panel">
+                        <div class="card-icon success-bg">🩺</div>
+                        <div class="card-content">
+                            <h3>Upcoming Appointments</h3>
+                            <div class="amount text-success" id="upcomingApptsStat">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="card glass-panel profiles-card">
+                        <div class="card-header-flex">
+                            <h3>Family Profiles</h3>
+                            <button class="btn-text" onclick="document.getElementById('navMembers').click()">View All →</button>
+                        </div>
+                        <div class="profiles-list" id="dashboardProfilesList">
+                            <!-- Populated by JS -->
+                            <div class="empty-state-sm text-muted">No family members added yet.</div>
+                        </div>
+                    </div>
+
+                    <div class="card glass-panel">
+                        <h3>Recent Health Activity</h3>
+                        <div class="timeline" id="recentActivityTimeline">
+                            <!-- Populated by JS based on added records -->
+                            <div class="empty-state-sm text-muted">No recent activity.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- View: Members Directory -->
+            <div class="view-section hidden" id="membersView">
+                <div class="members-grid" id="membersGrid">
+                    <!-- Populated by JS -->
+                </div>
+                <div id="noMembersMsg" class="empty-state hidden">
+                    <span class="empty-icon">👥</span>
+                    <h2>Your family directory is empty</h2>
+                    <p>Click "+ Add Member" to start building your profiles.</p>
+                </div>
+            </div>
+
+            <!-- View: Member Details & Records -->
+            <div class="view-section hidden" id="memberDetailView">
+                <button class="btn btn-secondary mb-4" id="backToMembersBtn">← Back to Directory</button>
+                
+                <div class="member-header card glass-panel mb-4" id="memberProfileHeader">
+                    <!-- Populated by JS -->
+                </div>
+
+                <div class="records-grid">
+                    <!-- Medical History -->
+                    <div class="card glass-panel">
+                        <div class="card-header-flex">
+                            <h3>Medical History</h3>
+                            <button class="btn-icon-sm btn-primary-text" onclick="openRecordModal('history')" title="Add Record">➕</button>
+                        </div>
+                        <ul class="record-list" id="listHistory"></ul>
+                    </div>
+
+                    <!-- Vaccinations -->
+                    <div class="card glass-panel">
+                        <div class="card-header-flex">
+                            <h3>Vaccinations</h3>
+                            <button class="btn-icon-sm btn-primary-text" onclick="openRecordModal('vaccine')" title="Add Vaccine">➕</button>
+                        </div>
+                        <ul class="record-list" id="listVaccines"></ul>
+                    </div>
+
+                    <!-- Medications -->
+                    <div class="card glass-panel">
+                        <div class="card-header-flex">
+                            <h3>Medications</h3>
+                            <button class="btn-icon-sm btn-primary-text" onclick="openRecordModal('medication')" title="Add Medication">➕</button>
+                        </div>
+                        <ul class="record-list" id="listMedications"></ul>
+                    </div>
+
+                    <!-- Appointments -->
+                    <div class="card glass-panel">
+                        <div class="card-header-flex">
+                            <h3>Appointments</h3>
+                            <button class="btn-icon-sm btn-primary-text" onclick="openRecordModal('appointment')" title="Add Appointment">➕</button>
+                        </div>
+                        <ul class="record-list" id="listAppointments"></ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- View: Emergency Info -->
+            <div class="view-section hidden" id="emergencyView">
+                <div class="card glass-panel full-height">
+                    <div class="card-header-flex mb-4">
+                        <h3 class="text-danger" style="display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 1.5rem;">🚨</span> Primary Emergency Contacts
+                        </h3>
+                        <button class="btn btn-danger shadow-hover" id="addEmergencyBtn">+ Add Contact</button>
+                    </div>
+                    <div class="emergency-grid" id="emergencyContactsGrid">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal: Add Family Member -->
+    <div class="modal-overlay hidden" id="memberModal">
+        <div class="modal glass-modal">
+            <div class="modal-header">
+                <h2>Add Family Member</h2>
+                <button class="btn-icon close-modal-btn">✕</button>
+            </div>
+            <form id="memberForm">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="memName" required placeholder="e.g. John Doe">
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Relationship</label>
+                        <div class="select-wrapper">
+                            <select id="memRelation" required>
+                                <option value="Self">Self</option>
+                                <option value="Spouse">Spouse</option>
+                                <option value="Child">Child</option>
+                                <option value="Parent">Parent</option>
+                                <option value="Sibling">Sibling</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Date of Birth</label>
+                        <input type="date" id="memDob" required>
+                    </div>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Blood Group</label>
+                        <div class="select-wrapper">
+                            <select id="memBlood">
+                                <option value="Unknown">Unknown</option>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Allergies</label>
+                        <input type="text" id="memAllergies" placeholder="e.g. Peanuts, Penicillin">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary w-full shadow-hover mt-3">Save Member</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: Add Record (Dynamic) -->
+    <div class="modal-overlay hidden" id="recordModal">
+        <div class="modal glass-modal">
+            <div class="modal-header">
+                <h2 id="recordModalTitle">Add Record</h2>
+                <button class="btn-icon close-modal-btn">✕</button>
+            </div>
+            <form id="recordForm">
+                <div id="recordDynamicFields"></div>
+                <button type="submit" class="btn btn-primary w-full shadow-hover mt-4">Save Record</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: Add Emergency Contact -->
+    <div class="modal-overlay hidden" id="emergencyModal">
+        <div class="modal glass-modal">
+            <div class="modal-header">
+                <h2>Add Emergency Contact</h2>
+                <button class="btn-icon close-modal-btn">✕</button>
+            </div>
+            <form id="emergencyForm">
+                <div class="form-group">
+                    <label>Name / Hospital / Provider</label>
+                    <input type="text" id="emName" required placeholder="e.g. Dr. Smith or City Hospital">
+                </div>
+                <div class="form-group">
+                    <label>Role / Specialty</label>
+                    <input type="text" id="emRole" required placeholder="e.g. Primary Care, Cardiologist">
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="emPhone" required placeholder="e.g. 555-0198">
+                </div>
+                <div class="form-group">
+                    <label>Notes / Address</label>
+                    <textarea id="emNotes" rows="2" placeholder="Optional notes"></textarea>
+                </div>
+                <button type="submit" class="btn btn-danger w-full shadow-hover mt-3">Save Contact</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

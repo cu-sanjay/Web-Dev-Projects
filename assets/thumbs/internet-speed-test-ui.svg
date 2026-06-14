@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200">
+  <rect width="320" height="200" fill="#05070c"/>
+  <rect x="4" y="4" width="312" height="18" rx="6" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="10" y="16" font-family="system-ui,sans-serif" font-size="8" font-weight="700" fill="#00f0ff">Speed Test</text>
+  <text x="90" y="16" font-family="system-ui,sans-serif" font-size="5" fill="#475569">PING</text><text x="112" y="16" font-family="monospace" font-size="6" fill="#00f0ff">12.4ms</text>
+  <text x="160" y="16" font-family="system-ui,sans-serif" font-size="5" fill="#475569">JITTER</text><text x="186" y="16" font-family="monospace" font-size="6" fill="#00f0ff">3.2ms</text>
+  <text x="234" y="16" font-family="system-ui,sans-serif" font-size="5" fill="#475569">STATUS</text><text x="264" y="16" font-family="monospace" font-size="6" fill="#10b981">Complete</text>
+  <!-- gauge panel -->
+  <rect x="4" y="26" width="156" height="148" rx="8" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <circle cx="82" cy="96" r="52" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="6"/>
+  <path d="M 82 44 A 52 52 0 0 1 120 60" fill="none" stroke="#00f0ff" stroke-width="6" stroke-linecap="round"/>
+  <path d="M 120 60 A 52 52 0 0 1 134 96" fill="none" stroke="#00f0ff" stroke-width="6" stroke-linecap="round"/>
+  <path d="M 134 96 A 52 52 0 0 1 110 140" fill="none" stroke="#ff2a5f" stroke-width="6" stroke-linecap="round"/>
+  <line x1="82" y1="96" x2="115" y2="60" stroke="#00f0ff" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="82" cy="96" r="5" fill="#05070c" stroke="#00f0ff" stroke-width="1.5"/>
+  <text x="82" y="112" font-family="monospace" font-size="14" font-weight="700" fill="#00f0ff" text-anchor="middle">247</text>
+  <!-- results -->
+  <rect x="164" y="26" width="152" height="56" rx="8" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="170" y="34" font-family="system-ui,sans-serif" font-size="5" font-weight="700" fill="#475569">RESULTS</text>
+  <text x="170" y="48" font-family="system-ui,sans-serif" font-size="6" fill="#64748b">Download</text><text x="300" y="48" font-family="monospace" font-size="7" font-weight="700" fill="#00f0ff" text-anchor="end">187.4 Mbps</text>
+  <text x="170" y="62" font-family="system-ui,sans-serif" font-size="6" fill="#64748b">Upload</text><text x="300" y="62" font-family="monospace" font-size="7" font-weight="700" fill="#ff2a5f" text-anchor="end">42.6 Mbps</text>
+  <text x="170" y="76" font-family="system-ui,sans-serif" font-size="6" fill="#64748b">Ping</text><text x="300" y="76" font-family="monospace" font-size="7" font-weight="700" fill="#10b981" text-anchor="end">12.4 ms</text>
+  <!-- history -->
+  <rect x="164" y="86" width="152" height="88" rx="8" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="170" y="94" font-family="system-ui,sans-serif" font-size="5" font-weight="700" fill="#475569">HISTORY</text>
+  <text x="170" y="108" font-family="monospace" font-size="5" fill="#475569">6/10</text><text x="192" y="108" font-family="monospace" font-size="5" fill="#00f0ff">187.4</text><text x="232" y="108" font-family="monospace" font-size="5" fill="#ff2a5f">42.6</text><text x="272" y="108" font-family="monospace" font-size="5" fill="#10b981">12.4ms</text>
+  <text x="170" y="118" font-family="monospace" font-size="5" fill="#475569">6/9</text><text x="192" y="118" font-family="monospace" font-size="5" fill="#00f0ff">165.2</text><text x="232" y="118" font-family="monospace" font-size="5" fill="#ff2a5f">38.1</text><text x="272" y="118" font-family="monospace" font-size="5" fill="#10b981">14.7ms</text>
+  <text x="170" y="128" font-family="monospace" font-size="5" fill="#475569">6/8</text><text x="192" y="128" font-family="monospace" font-size="5" fill="#00f0ff">210.8</text><text x="232" y="128" font-family="monospace" font-size="5" fill="#ff2a5f">55.3</text><text x="272" y="128" font-family="monospace" font-size="5" fill="#10b981">9.8ms</text>
+  <!-- footer -->
+  <rect x="4" y="178" width="312" height="18" rx="5" fill="none"/>
+  <rect x="4" y="178" width="200" height="18" rx="4" fill="#00f0ff"/>
+  <text x="104" y="191" font-family="system-ui,sans-serif" font-size="7" font-weight="600" fill="#05070c" text-anchor="middle">Initiate Network Diagnostic Scan</text>
+  <rect x="210" y="178" width="106" height="18" rx="4" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="263" y="191" font-family="system-ui,sans-serif" font-size="7" fill="#e2e8f0" text-anchor="middle">Clear History</text>
+</svg>

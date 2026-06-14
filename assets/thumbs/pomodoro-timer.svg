@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f0f13"/>
+      <stop offset="100%" stop-color="#1a1a24"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="400" height="300" fill="url(#bg)" rx="12"/>
+
+  <!-- Card -->
+  <rect x="100" y="28" width="200" height="200" rx="20" fill="#1a1a24" stroke="#2e2e3f" stroke-width="1.5"/>
+
+  <!-- Ring track -->
+  <circle cx="200" cy="128" r="72" fill="none" stroke="#2e2e3f" stroke-width="8"/>
+
+  <!-- Ring progress (~70%) -->
+  <circle cx="200" cy="128" r="72" fill="none"
+    stroke="#ff6b6b" stroke-width="8"
+    stroke-linecap="round"
+    stroke-dasharray="452"
+    stroke-dashoffset="136"
+    transform="rotate(-90 200 128)"
+    filter="url(#glow)"/>
+
+  <defs>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Timer text -->
+  <text x="200" y="120" font-family="Courier New, monospace" font-size="30" font-weight="700"
+    fill="#e8e8f0" text-anchor="middle" dominant-baseline="middle">17:32</text>
+  <text x="200" y="144" font-family="Georgia, serif" font-size="10" fill="#7a7a9a"
+    text-anchor="middle" letter-spacing="1.5">FOCUS TIME</text>
+
+  <!-- Mode tabs -->
+  <rect x="115" y="195" width="52" height="20" rx="6" fill="#ff6b6b"/>
+  <text x="141" y="205" font-family="Georgia,serif" font-size="9" font-weight="700"
+    fill="#fff" text-anchor="middle" dominant-baseline="middle">Pomodoro</text>
+
+  <rect x="173" y="195" width="48" height="20" rx="6" fill="#2e2e3f"/>
+  <text x="197" y="205" font-family="Georgia,serif" font-size="9" fill="#7a7a9a"
+    text-anchor="middle" dominant-baseline="middle">Short</text>
+
+  <rect x="227" y="195" width="44" height="20" rx="6" fill="#2e2e3f"/>
+  <text x="249" y="205" font-family="Georgia,serif" font-size="9" fill="#7a7a9a"
+    text-anchor="middle" dominant-baseline="middle">Long</text>
+
+  <!-- Task strip -->
+  <rect x="60" y="240" width="280" height="44" rx="10" fill="#1a1a24" stroke="#2e2e3f" stroke-width="1"/>
+  <circle cx="82" cy="262" r="7" fill="none" stroke="#ff6b6b" stroke-width="1.5"/>
+  <text x="97" y="262" font-family="Georgia,serif" font-size="11" fill="#e8e8f0"
+    dominant-baseline="middle">Write project README</text>
+  <text x="310" y="262" font-family="Courier New,monospace" font-size="10" fill="#ff6b6b"
+    text-anchor="middle" dominant-baseline="middle">2🍅</text>
+
+  <!-- Label -->
+  <text x="200" y="292" font-family="Georgia,serif" font-size="12" font-weight="700"
+    fill="#7a7a9a" text-anchor="middle">Pomodoro Timer</text>
+</svg>

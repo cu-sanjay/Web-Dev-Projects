@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Split Bill Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+            <h1>Split<span>Bill</span></h1>
+        </header>
+
+        <main>
+            <section class="input-side">
+                <div class="input-group">
+                    <label for="bill-amount">Bill Amount</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-dollar-sign"></i>
+                        <input type="number" id="bill-amount" placeholder="0.00" min="0" step="0.01">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Select Tip %</label>
+                    <div class="tip-options">
+                        <button class="tip-btn" data-tip="10">10%</button>
+                        <button class="tip-btn" data-tip="15">15%</button>
+                        <button class="tip-btn" data-tip="20">20%</button>
+                        <div class="input-wrapper custom-tip-wrapper">
+                             <input type="number" id="custom-tip" placeholder="Custom" min="0">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="num-people">Number of People</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-user"></i>
+                        <input type="number" id="num-people" placeholder="1" min="1" step="1" value="1">
+                    </div>
+                </div>
+
+                <div class="mode-toggle-area">
+                    <div class="toggle-text">
+                        <strong>Custom Split</strong>
+                        <p>Assign manual amounts</p>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="split-mode-toggle">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </section>
+
+            <section class="output-side">
+                <div id="unequal-inputs" class="unequal-inputs hidden">
+                    <h3><i class="fas fa-users-cog"></i> Manual Allocation</h3>
+                    <div id="people-inputs-container"></div>
+                    <div id="validation-msg" class="validation-msg"></div>
+                </div>
+
+                <div class="result-card">
+                    <div class="result-row">
+                        <div class="label">
+                            <span class="main">Tip Amount</span>
+                            <span class="sub">/ total</span>
+                        </div>
+                        <div class="amount" id="total-tip">$0.00</div>
+                    </div>
+                    
+                    <div class="result-row">
+                        <div class="label">
+                            <span class="main">Total Bill</span>
+                            <span class="sub">w/ tip</span>
+                        </div>
+                        <div class="amount" id="total-with-tip">$0.00</div>
+                    </div>
+
+                    <div class="result-row highlight" id="equal-split-result">
+                        <div class="label">
+                            <span class="main">Total Person</span>
+                            <span class="sub">/ split</span>
+                        </div>
+                        <div class="amount" id="amount-per-person">$0.00</div>
+                    </div>
+
+                    <div class="card-actions">
+                        <button id="reset-btn" class="reset-btn" disabled>RESET</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -48,4 +48,4 @@ Simply open [index.html](file:///index.html) in your browser, or host it locally
 - `JNZ addr` (0x0A) - Pops value, jumps if NOT Zero
 - `DUP` (0x0B) - Duplicates top stack value
 - `MUL` (0x0C) - Pops 2 values, pushes product ($x \times y$)
-- `OUT` (0x0D) - Pops value, prints text report to Console Log
+- `OUT` (0x0D) - Pops value, prints text report to Console Log 

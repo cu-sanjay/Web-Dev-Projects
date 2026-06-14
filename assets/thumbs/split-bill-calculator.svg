@@ -1,0 +1,31 @@
+<svg width="800" height="500" viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c5e4e7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f3f8fb;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg-grad)"/>
+  
+  <!-- Icon Representation -->
+  <g transform="translate(400, 200)">
+    <!-- Receipt/Bill -->
+    <rect x="-100" y="-120" width="200" height="240" rx="10" fill="#ffffff" stroke="#00474b" stroke-width="8"/>
+    <line x1="-70" y1="-80" x2="70" y2="-80" stroke="#5e7a7d" stroke-width="6" stroke-linecap="round"/>
+    <line x1="-70" y1="-50" x2="30" y2="-50" stroke="#5e7a7d" stroke-width="6" stroke-linecap="round"/>
+    <line x1="-70" y1="-20" x2="70" y2="-20" stroke="#5e7a7d" stroke-width="6" stroke-linecap="round"/>
+    <line x1="-70" y1="10" x2="0" y2="10" stroke="#5e7a7d" stroke-width="6" stroke-linecap="round"/>
+    
+    <!-- Split lines -->
+    <path d="M-120,80 Q-60,120 0,80 T120,80" fill="none" stroke="#26c2ad" stroke-width="12" stroke-linecap="round"/>
+    
+    <!-- Dollar signs -->
+    <text x="-150" y="100" fill="#00474b" font-family="monospace" font-size="60" font-weight="bold">$</text>
+    <text x="110" y="100" fill="#00474b" font-family="monospace" font-size="60" font-weight="bold">$</text>
+    <text x="-20" y="150" fill="#26c2ad" font-family="monospace" font-size="80" font-weight="bold">$</text>
+  </g>
+  
+  <!-- Text -->
+  <text x="400" y="420" text-anchor="middle" fill="#00474b" font-family="monospace" font-size="48" font-weight="bold" letter-spacing="4">SPLIT BILL</text>
+  <text x="400" y="460" text-anchor="middle" fill="#5e7a7d" font-family="monospace" font-size="20">CALCULATOR</text>
+</svg>

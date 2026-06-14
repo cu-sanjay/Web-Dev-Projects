@@ -41,4 +41,4 @@ Simply open `index.html` in your web browser, or host it locally using a static 
 - [index.html](file:///index.html): Audio workspace design including sequencing grids, sliders, visualizer canvas, and piano key layouts.
 - [style.css](file:///style.css): Core dark mode dashboard styles, HSL neon glows, glassmorphic card overlays, and responsive breaks.
 - [script.js](file:///script.js): Sound synthesis oscillators, drum generator buffers, audio routing nodes, animation visualizer calculations, and import managers.
-- [project.json](file:///project.json): Project configuration metadata.
+- [project.json](file:///project.json): Project configuration metadata. 

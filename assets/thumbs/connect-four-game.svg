@@ -1,0 +1,186 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <!-- Deep Canvas Dark Theme Base Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#04060b" />
+      <stop offset="50%" stop-color="#070a13" />
+      <stop offset="100%" stop-color="#0e1322" />
+    </linearGradient>
+
+    <!-- UI Panel Floating Drop Shadows -->
+    <filter id="panelGlow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#000000" flood-opacity="0.80"/>
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#3b82f6" flood-opacity="0.02"/>
+    </filter>
+
+    <!-- Player Token Radial Lighting Effects -->
+    <radialGradient id="playerOneToken" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#ff6b6b" />
+      <stop offset="70%" stop-color="#ef4444" />
+      <stop offset="100%" stop-color="#991b1b" />
+    </radialGradient>
+
+    <radialGradient id="playerTwoToken" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#fbbf24" />
+      <stop offset="70%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#92400e" />
+    </radialGradient>
+
+    <!-- Glowing Vector Overlay Filter for Winning Track Discs -->
+    <filter id="tokenGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <linearGradient id="gravitasBrand" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ef4444" />
+      <stop offset="100%" stop-color="#f59e0b" />
+    </linearGradient>
+
+    <!-- Technical UI Geometric Grid Pattern Overlay -->
+    <pattern id="uiGrid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="rgba(148, 163, 184, 0.02)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <!-- BACKGROUND BASELAYERS -->
+  <rect width="800" height="500" fill="url(#bgGrad)" />
+  <rect width="800" height="500" fill="url(#uiGrid)" />
+  
+  <!-- Subtle Ambient Backlight Vectors -->
+  <circle cx="680" cy="380" r="200" fill="#ef4444" opacity="0.02" filter="blur(50px)" />
+  <circle cx="450" cy="200" r="150" fill="#3b82f6" opacity="0.02" filter="blur(45px)" />
+
+  <!-- ====================================================================
+       GRAVITAS INTEGRATED WIREFRAME MAIN WINDOW DECK
+       ==================================================================== -->
+  <g transform="translate(50, 45)" filter="url(#panelGlow)">
+    <!-- Main Window Outer Framework Chassis -->
+    <rect width="700" height="380" rx="16" fill="#111827" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1.5"/>
+    
+    <!-- OS Control Points Window Chrome -->
+    <circle cx="24" cy="22" r="5" fill="#ef4444" opacity="0.7"/>
+    <circle cx="40" cy="22" r="5" fill="#f59e0b" opacity="0.7"/>
+    <circle cx="56" cy="22" r="5" fill="#10b981" opacity="0.7"/>
+
+    <!-- App Identity Top Right Flag -->
+    <g transform="translate(595, 15)">
+      <circle cx="5" cy="6" r="4" fill="url(#gravitasBrand)" />
+      <text x="14" y="10" font-family="-apple-system, sans-serif" font-size="11" font-weight="800" fill="#f8fafc" letter-spacing="0.02em">GRAVITAS</text>
+    </g>
+
+    <!-- ==================================================================
+         COLUMN 1: LEFT SIDEBAR STATUS & LEADERBOARD HUD
+         ================================================================== -->
+    <g transform="translate(20, 64)">
+      <text x="0" y="14" font-family="-apple-system, sans-serif" font-size="14" font-weight="800" fill="#ffffff" letter-spacing="-0.02em">Game Status</text>
+      
+      <!-- Current Active Turn Prompter Badge -->
+      <rect y="24" width="126" height="24" rx="6" fill="rgba(239, 68, 68, 0.08)" stroke="rgba(239, 68, 68, 0.2)" stroke-width="1"/>
+      <text x="12" y="39" font-family="-apple-system, sans-serif" font-size="9" font-weight="800" fill="#ff6b6b" letter-spacing="0.02em">● RED'S TURN</text>
+
+      <!-- Match Scoreboard Counter Panels -->
+      <g transform="translate(0, 64)">
+        <rect width="126" height="42" rx="8" fill="#1f2937" opacity="0.5"/>
+        <text x="10" y="16" font-family="-apple-system, sans-serif" font-size="8" font-weight="700" fill="#475569" letter-spacing="0.05em">RED WINS</text>
+        <text x="10" y="34" font-family="monospace" font-size="14" font-weight="800" fill="#ef4444">04 Matches</text>
+      </g>
+
+      <g transform="translate(0, 118)">
+        <rect width="126" height="42" rx="8" fill="#1f2937" opacity="0.5"/>
+        <text x="10" y="16" font-family="-apple-system, sans-serif" font-size="8" font-weight="700" fill="#475569" letter-spacing="0.05em">AMBER WINS</text>
+        <text x="10" y="34" font-family="monospace" font-size="14" font-weight="800" fill="#f59e0b">02 Matches</text>
+      </g>
+
+      <!-- Primary Core Board Flush Button -->
+      <rect y="184" width="126" height="32" rx="6" fill="#1f2937" stroke="rgba(148, 163, 184, 0.1)" stroke-width="1"/>
+      <text x="63" y="204" font-family="-apple-system, sans-serif" font-size="10" font-weight="700" fill="#f8fafc" text-anchor="middle">Clear Matrix</text>
+    </g>
+
+    <!-- Vertical Splitter Layout Column Line 1 -->
+    <line x1="162" y1="46" x2="162" y2="380" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+
+    <!-- ==================================================================
+         COLUMN 2: CENTRAL INTERACTIVE MESH TOKEN GRID (6 x 7)
+         ================================================================== -->
+    <g transform="translate(216, 52)">
+      <!-- Board Outer Unified Polycarbonate Shell Frame Grid Panel -->
+      <rect width="436" height="304" rx="12" fill="#1e293b" stroke="rgba(148, 163, 184, 0.1)" stroke-width="1.5"/>
+
+      <!-- 6 Rows by 7 Columns Cells Matrix Layout Frame -->
+      <!-- Row 1 Nodes (Empty Slot Wireframes) -->
+      <circle cx="34" cy="30" r="18" fill="#070a13" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+      <circle cx="94" cy="30" r="18" fill="#070a13" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+      <circle cx="154" cy="30" r="18" fill="#070a13" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+      <circle cx="214" cy="30" r="18" fill="#070a13" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+      <circle cx="274" cy="30" r="18" fill="#070a13" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+      <circle cx="334" cy="30" r="18" fill="#070a13" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+      <circle cx="394" cy="30" r="18" fill="#070a13" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+
+      <!-- Row 2 Nodes -->
+      <circle cx="34" cy="78" r="18" fill="#070a13" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+      <circle cx="94" cy="78" r="18" fill="#070a13" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+      <circle cx="154" cy="78" r="18" fill="#070a13" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+      <circle cx="214" cy="78" r="18" fill="#070a13" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+      <circle cx="274" cy="78" r="18" fill="#070a13" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+      <circle cx="334" cy="78" r="18" fill="#070a13" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+      <circle cx="394" cy="78" r="18" fill="#070a13" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+
+      <!-- Row 3 Nodes (Active Regular Tokens Dropped) -->
+      <circle cx="34" cy="126" r="18" fill="url(#playerTwoToken)"/>
+      <circle cx="94" cy="126" r="18" fill="#070a13" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+      <circle cx="154" cy="126" r="18" fill="#070a13" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+      <circle cx="214" cy="126" r="18" fill="#070a13" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+      <circle cx="274" cy="126" r="18" fill="#070a13" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+      <circle cx="334" cy="126" r="18" fill="#070a13" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+      <circle cx="394" cy="126" r="18" fill="#070a13" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+
+      <!-- Row 4 Nodes (Demonstrating a Vertical Connected Win Sequence Match Track for Player 1 Red) -->
+      <!-- Winning Node 1 -->
+      <circle cx="34" cy="174" r="18" fill="url(#playerOneToken)" filter="url(#tokenGlow)" stroke="#f8fafc" stroke-width="1.5"/>
+      <circle cx="94" cy="174" r="18" fill="url(#playerTwoToken)"/>
+      <circle cx="154" cy="174" r="18" fill="#070a13" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+      <circle cx="214" cy="174" r="18" fill="#070a13" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+      <circle cx="274" cy="174" r="18" fill="#070a13" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+      <circle cx="334" cy="174" r="18" fill="#070a13" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+      <circle cx="394" cy="174" r="18" fill="#070a13" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+
+      <!-- Winning Node 2 -->
+      <circle cx="34" cy="222" r="18" fill="url(#playerOneToken)" filter="url(#tokenGlow)" stroke="#f8fafc" stroke-width="1.5"/>
+      <circle cx="94" cy="222" r="18" fill="url(#playerOneToken)"/>
+      <circle cx="154" cy="222" r="18" fill="url(#playerTwoToken)"/>
+      <circle cx="214" cy="222" r="18" fill="#070a13" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+      <circle cx="274" cy="222" r="18" fill="#070a13" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+      <circle cx="334" cy="222" r="18" fill="#070a13" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+      <circle cx="394" cy="222" r="18" fill="#070a13" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+
+      <!-- Winning Node 3 & 4 base trail -->
+      <circle cx="34" cy="270" r="18" fill="url(#playerOneToken)" filter="url(#tokenGlow)" stroke="#f8fafc" stroke-width="1.5"/>
+      <circle cx="94" cy="270" r="18" fill="url(#playerTwoToken)"/>
+      <circle cx="154" cy="270" r="18" fill="url(#playerOneToken)"/>
+      <circle cx="214" cy="270" r="18" fill="url(#playerTwoToken)"/>
+      <circle cx="274" cy="270" r="18" fill="#070a13" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+      <circle cx="334" cy="270" r="18" fill="#070a13" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+      <circle cx="394" cy="270" r="18" fill="#070a13" stroke="rgba(148, 163, 184, 0.08)" stroke-width="1"/>
+    </g>
+  </g>
+
+  <!-- ====================================================================
+       FOOTER PIPELINE FRAMEWORK TECHNICAL META OVERLAY CAPSULE
+       ==================================================================== -->
+  <g transform="translate(180, 440)">
+    <rect width="440" height="42" rx="21" fill="rgba(4, 6, 11, 0.95)" stroke="rgba(148, 163, 184, 0.15)" stroke-width="1.5"/>
+    
+    <text x="28" y="26" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="800" fill="#f8fafc" letter-spacing="0.06em">CONNECT FOUR MATRIX</text>
+    <circle cx="174" cy="22" r="2" fill="#475569" />
+    
+    <!-- Code Language Tech Badges -->
+    <text x="190" y="26" font-family="monospace" font-size="12" font-weight="700" fill="#38bdf8">HTML5</text>
+    <text x="240" y="26" font-family="monospace" font-size="12" font-weight="700" fill="#10b981">CSS3</text>
+    <text x="286" y="26" font-family="monospace" font-size="12" font-weight="700" fill="#f59e0b">ES6+</text>
+    
+    <!-- Matrix Processing Validation Reference Tag -->
+    <rect x="334" y="13" width="78" height="16" rx="4" fill="rgba(245, 158, 11, 0.08)" stroke="rgba(245, 158, 11, 0.15)" stroke-width="1"/>
+    <text x="340" y="24" font-family="-apple-system, sans-serif" font-size="8" font-weight="800" fill="#f59e0b" letter-spacing="0.02em">2D_ARRAY_FIX</text>
+  </g>
+</svg>

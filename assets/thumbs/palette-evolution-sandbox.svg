@@ -1,0 +1,30 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <rect width="128" height="128" rx="16" fill="#070a13"/>
+  <rect x="8" y="8" width="112" height="112" rx="10" fill="none" stroke="#1f2937" stroke-width="1.5"/>
+
+  <!-- Parent A (left) and Parent B (right) -->
+  <rect x="16" y="20" width="44" height="36" rx="5" fill="#3b82f6"/>
+  <rect x="68" y="20" width="44" height="36" rx="5" fill="#a855f7"/>
+
+  <!-- Parent labels -->
+  <text x="38" y="44" fill="#f8fafc" font-size="7" font-family="monospace" text-anchor="middle" opacity="0.7">A</text>
+  <text x="90" y="44" fill="#f8fafc" font-size="7" font-family="monospace" text-anchor="middle" opacity="0.7">B</text>
+
+  <!-- Arrow from parents to children -->
+  <line x1="38" y1="56" x2="38" y2="64" stroke="#3b82f6" stroke-width="1" opacity="0.5"/>
+  <line x1="90" y1="56" x2="90" y2="64" stroke="#a855f7" stroke-width="1" opacity="0.5"/>
+  <line x1="38" y1="64" x2="90" y2="64" stroke="#64748b" stroke-width="0.8"/>
+  <polyline points="80,62 84,66 80,70" fill="none" stroke="#f8fafc" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Child swatches row (6) -->
+  <rect x="10" y="72" width="16" height="30" rx="3" fill="#4a7bf7"/>
+  <rect x="28" y="72" width="16" height="30" rx="3" fill="#6c6df5"/>
+  <rect x="46" y="72" width="16" height="30" rx="3" fill="#8b5ff2"/>
+  <rect x="64" y="72" width="16" height="30" rx="3" fill="#a352ef"/>
+  <rect x="82" y="72" width="16" height="30" rx="3" fill="#b745ec"/>
+  <rect x="100" y="72" width="16" height="30" rx="3" fill="#c838e9"/>
+
+  <!-- Generation badge -->
+  <rect x="40" y="108" width="48" height="12" rx="6" fill="none" stroke="#10b981" stroke-width="0.8"/>
+  <text x="64" y="117" fill="#10b981" font-size="7" font-family="monospace" text-anchor="middle">GEN 01</text>
+</svg>

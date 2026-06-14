@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200">
+  <rect width="320" height="200" fill="#05060b"/>
+  <!-- top bar -->
+  <rect x="4" y="4" width="312" height="20" rx="6" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="10" y="18" font-family="system-ui,sans-serif" font-size="9" font-weight="700" fill="#00f0ff">Logo Sketch Board</text>
+  <text x="120" y="18" font-family="system-ui,sans-serif" font-size="9" fill="#e2e8f0">&#8630;</text>
+  <text x="136" y="18" font-family="system-ui,sans-serif" font-size="9" fill="#e2e8f0">&#8631;</text>
+  <text x="152" y="18" font-family="system-ui,sans-serif" font-size="9" fill="#e2e8f0">&#10005;</text>
+  <text x="176" y="18" font-family="system-ui,sans-serif" font-size="5" fill="#475569">PALETTE</text>
+  <circle cx="210" cy="14" r="6" fill="#00f0ff" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+  <circle cx="226" cy="14" r="6" fill="#ff2a5f" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+  <circle cx="242" cy="14" r="6" fill="#10b981" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+  <circle cx="258" cy="14" r="6" fill="#f59e0b" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+  <!-- export btn -->
+  <rect x="278" y="6" width="34" height="16" rx="4" fill="#00f0ff"/>
+  <text x="295" y="18" font-family="system-ui,sans-serif" font-size="6" font-weight="600" fill="#05060b" text-anchor="middle">Export</text>
+
+  <!-- left panel -->
+  <rect x="4" y="28" width="92" height="168" rx="6" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="10" y="38" font-family="system-ui,sans-serif" font-size="5" font-weight="700" fill="#475569" letter-spacing="0.5">TOOLS</text>
+  <rect x="6" y="42" width="88" height="16" rx="3" fill="rgba(0,240,255,0.04)" stroke="#00f0ff" stroke-width="0.5"/>
+  <text x="12" y="54" font-family="system-ui,sans-serif" font-size="6" fill="#00f0ff">&#9998; Freehand</text>
+  <rect x="6" y="60" width="88" height="16" rx="3" fill="rgba(255,255,255,0.015)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="12" y="72" font-family="system-ui,sans-serif" font-size="6" fill="#94a3b8">&#9711; Circle</text>
+  <rect x="6" y="78" width="88" height="16" rx="3" fill="rgba(255,255,255,0.015)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="12" y="90" font-family="system-ui,sans-serif" font-size="6" fill="#94a3b8">&#9632; Square</text>
+
+  <text x="10" y="108" font-family="system-ui,sans-serif" font-size="5" font-weight="700" fill="#475569" letter-spacing="0.5">BRUSH</text>
+  <text x="10" y="120" font-family="system-ui,sans-serif" font-size="5" fill="#64748b">Size</text>
+  <rect x="34" y="114" width="40" height="3" rx="2" fill="rgba(255,255,255,0.04)"/>
+  <circle cx="50" cy="115" r="3" fill="#00f0ff"/>
+  <text x="78" y="120" font-family="monospace" font-size="5" fill="#00f0ff">4</text>
+  <text x="10" y="134" font-family="system-ui,sans-serif" font-size="5" fill="#64748b">Opacity</text>
+  <rect x="34" y="128" width="40" height="3" rx="2" fill="rgba(255,255,255,0.04)"/>
+  <circle cx="74" cy="129" r="3" fill="#00f0ff"/>
+  <text x="78" y="134" font-family="monospace" font-size="5" fill="#00f0ff">100</text>
+
+  <text x="10" y="148" font-family="system-ui,sans-serif" font-size="5" font-weight="700" fill="#475569" letter-spacing="0.5">GRID</text>
+  <rect x="26" y="152" width="8" height="8" rx="1" fill="none" stroke="#94a3b8" stroke-width="0.5"/>
+  <text x="38" y="160" font-family="system-ui,sans-serif" font-size="5" fill="#94a3b8">Snap to Grid</text>
+  <text x="10" y="176" font-family="system-ui,sans-serif" font-size="5" fill="#64748b">Density</text>
+  <rect x="34" y="170" width="40" height="3" rx="2" fill="rgba(255,255,255,0.04)"/>
+  <circle cx="66" cy="171" r="3" fill="#00f0ff"/>
+  <text x="78" y="176" font-family="monospace" font-size="5" fill="#00f0ff">40</text>
+
+  <text x="10" y="190" font-family="system-ui,sans-serif" font-size="5" fill="#475569">Layer: 3 strokes</text>
+
+  <!-- canvas area -->
+  <rect x="100" y="28" width="216" height="168" rx="6" fill="rgba(255,255,255,0.003)" stroke="rgba(255,255,255,0.02)" stroke-width="0.5"/>
+  <!-- grid lines -->
+  <line x1="100" y1="62" x2="316" y2="62" stroke="rgba(255,255,255,0.02)" stroke-width="0.3"/>
+  <line x1="100" y1="96" x2="316" y2="96" stroke="rgba(255,255,255,0.02)" stroke-width="0.3"/>
+  <line x1="100" y1="130" x2="316" y2="130" stroke="rgba(255,255,255,0.02)" stroke-width="0.3"/>
+  <line x1="100" y1="164" x2="316" y2="164" stroke="rgba(255,255,255,0.02)" stroke-width="0.3"/>
+  <line x1="154" y1="28" x2="154" y2="196" stroke="rgba(255,255,255,0.02)" stroke-width="0.3"/>
+  <line x1="208" y1="28" x2="208" y2="196" stroke="rgba(255,255,255,0.02)" stroke-width="0.3"/>
+  <line x1="262" y1="28" x2="262" y2="196" stroke="rgba(255,255,255,0.02)" stroke-width="0.3"/>
+  <!-- drawing: a logo shape -->
+  <circle cx="208" cy="110" r="32" fill="none" stroke="#00f0ff" stroke-width="2.5" opacity="0.8"/>
+  <circle cx="208" cy="110" r="22" fill="none" stroke="#ff2a5f" stroke-width="1.5" opacity="0.6"/>
+  <!-- freehand stroke -->
+  <path d="M 140 150 Q 160 130, 180 140 Q 200 150, 220 130 Q 240 110, 260 120 Q 270 130, 280 120" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round"/>
+  <!-- crosshair cursor -->
+  <line x1="230" y1="90" x2="236" y2="90" stroke="#00f0ff" stroke-width="0.5"/>
+  <line x1="233" y1="87" x2="233" y2="93" stroke="#00f0ff" stroke-width="0.5"/>
+  <!-- coord footer -->
+  <rect x="4" y="196" width="312" height="0" fill="none"/>
+</svg>

@@ -1,4 +1,4 @@
-name: Build project index
+name: Build index & generate thumbnails
 
 on:
   push:
@@ -7,23 +7,20 @@ on:
       - "Projects/**"
       - ".github/scripts/generate-index.mjs"
       - ".github/workflows/index-projects.yml"
-  pull_request:
-    paths:
-      - "Projects/**"
-      - ".github/scripts/generate-index.mjs"
+      - "gen-svgs.js"
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  build-index:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Node
+      - name: Set up Node 20
         uses: actions/setup-node@v4
         with:
           node-version: "20"
@@ -31,15 +28,24 @@ jobs:
       - name: Generate projects.json
         run: node .github/scripts/generate-index.mjs
 
-      - name: Commit updated index (main only)
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      - name: Install Puppeteer (skip Chrome download)
+        env:
+          PUPPETEER_SKIP_DOWNLOAD: "true"
+        run: npm install puppeteer --no-save
+
+      - name: Generate / update thumbnails
+        env:
+          PUPPETEER_EXECUTABLE_PATH: /usr/bin/google-chrome
+        run: node gen-svgs.js
+
+      - name: Commit index + thumbnails
         run: |
-          if [[ -n "$(git status --porcelain projects.json)" ]]; then
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add projects.json
-            git commit -m "chore: rebuild projects.json"
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add projects.json assets/thumbs/
+          if [[ -n "$(git status --porcelain)" ]]; then
+            git commit -m "chore: rebuild index + thumbnails [skip ci]"
             git push
           else
-            echo "No changes to projects.json"
+            echo "Nothing to commit — index and thumbnails are already up to date."
           fi

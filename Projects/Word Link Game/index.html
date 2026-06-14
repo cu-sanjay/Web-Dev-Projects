@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LingoLink — Word Chain Challenge</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="mesh-bg"></div>
+  
+  <div class="game-card">
+    <div id="start-screen" class="screen-overlay">
+      <h1 style="font-size: 42px; margin: 0; letter-spacing: -1px;">LingoLink</h1>
+      <p style="color: var(--muted); margin: 20px 0 40px; line-height: 1.6;">A test of vocabulary and speed. Connect words by their last letter!</p>
+      <button class="primary-btn" onclick="initGame()">Start Challenge</button>
+    </div>
+
+    <div id="end-screen" class="screen-overlay hidden">
+      <h2 style="font-size: 32px; margin-bottom: 8px;">Time's Up!</h2>
+      <p style="color: var(--muted); margin-bottom: 20px;">Your Chain Master Score</p>
+      <div style="font-size: 64px; font-weight: 800; color: var(--accent); margin-bottom: 40px;" id="final-score">0</div>
+      <button class="primary-btn" onclick="initGame()">Try Again</button>
+    </div>
+
+    <div class="header">
+      <div class="badge">Word Chain</div>
+      <div style="font-weight: 600;">Score: <span id="score-val" style="color: var(--accent)">0</span></div>
+    </div>
+
+    <div class="timer-bar"><div id="timer-progress" class="timer-progress"></div></div>
+
+    <div class="current-word-box">
+      <div class="last-label">Connect to:</div>
+      <div class="word-display" id="target-word">---</div>
+    </div>
+
+    <div id="feedback"></div>
+    <input type="text" id="user-input" placeholder="Type word here..." autocomplete="off">
+    <p style="color: var(--muted); font-size: 12px; margin-top: 15px;">Enter word starting with the <span style="color: var(--accent)">highlighted</span> letter.</p>
+  </div>
+<sript src="script.js"></script>
+</body>
+</html>

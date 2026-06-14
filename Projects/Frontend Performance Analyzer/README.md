@@ -31,4 +31,4 @@ Open `index.html` directly in any modern web browser to start analyzing and opti
 
 ## Credits
 
-This project was built from scratch as part of the `Web-Dev-Projects` repository. All rights reserved.
+This project was built from scratch as part of the `Web-Dev-Projects` repository. All rights reserved. 

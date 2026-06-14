@@ -21,4 +21,4 @@ Simply open [index.html](file:///index.html) in your browser, or host it locally
 2. **Real-time Brute-Force Cracking Estimator**:
    - Type target words/passwords and simulate brute-force cracks.
    - Matrix rolling characters guessing frame runs dynamically.
-   - Reports live calculations: password entropy bits ($H = L \log_2(R)$), combinations counts, checked key steps, keys-per-second, and time estimates to match.
+    - Reports live calculations: password entropy bits ($H = L \log_2(R)$), combinations counts, checked key steps, keys-per-second, and time estimates to match. 

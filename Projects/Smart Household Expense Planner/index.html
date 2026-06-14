@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Household Expense Planner</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <h1>🚀 Expense Planner</h1>
+            </div>
+            <div class="theme-toggle">
+                <button id="themeToggleBtn">🌙 Dark Mode</button>
+            </div>
+        </header>
+
+        <main>
+            <section class="dashboard">
+                <div class="card summary-card income-card">
+                    <h3>Total Income</h3>
+                    <h2 id="totalIncome">$0.00</h2>
+                </div>
+                <div class="card summary-card expense-card">
+                    <h3>Total Expenses</h3>
+                    <h2 id="totalExpense">$0.00</h2>
+                </div>
+                <div class="card summary-card balance-card">
+                    <h3>Remaining Balance</h3>
+                    <h2 id="remainingBalance">$0.00</h2>
+                </div>
+            </section>
+
+            <div class="main-content">
+                <div class="left-panel">
+                    <section class="card input-section">
+                        <h2>Add Transaction</h2>
+                        <form id="transactionForm">
+                            <div class="form-group">
+                                <label for="type">Type</label>
+                                <select id="type" required>
+                                    <option value="income">Income</option>
+                                    <option value="expense">Expense</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="category">Category</label>
+                                <select id="category" required>
+                                    <option value="Salary">Salary</option>
+                                    <option value="Food">Food</option>
+                                    <option value="Utilities">Utilities</option>
+                                    <option value="Rent">Rent</option>
+                                    <option value="Transport">Transport</option>
+                                    <option value="Healthcare">Healthcare</option>
+                                    <option value="Education">Education</option>
+                                    <option value="Entertainment">Entertainment</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="amount">Amount</label>
+                                <input type="number" id="amount" step="0.01" min="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="date">Date</label>
+                                <input type="date" id="date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <input type="text" id="description" placeholder="Optional details...">
+                            </div>
+                            <button type="submit" class="btn-primary">Add Transaction</button>
+                        </form>
+                    </section>
+
+                    <section class="card budget-section">
+                        <h2>Set Budget</h2>
+                        <form id="budgetForm">
+                            <div class="form-group">
+                                <label for="budgetAmount">Monthly Budget Goal</label>
+                                <input type="number" id="budgetAmount" step="0.01" min="0" required>
+                            </div>
+                            <button type="submit" class="btn-secondary">Set Budget</button>
+                        </form>
+                        <div class="budget-status" id="budgetStatus">
+                            <!-- Budget status progress bar will go here -->
+                        </div>
+                    </section>
+                </div>
+
+                <div class="right-panel">
+                    <section class="card chart-section">
+                        <h2>Expense Breakdown</h2>
+                        <canvas id="expenseChart"></canvas>
+                    </section>
+
+                    <section class="card transactions-section">
+                        <div class="transactions-header">
+                            <h2>Recent Transactions</h2>
+                            <div class="filters">
+                                <select id="filterType">
+                                    <option value="all">All</option>
+                                    <option value="income">Income</option>
+                                    <option value="expense">Expense</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="transactions-list" id="transactionsList">
+                            <!-- Transactions will be rendered here -->
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

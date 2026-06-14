@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200">
+  <rect width="320" height="200" fill="#04060f"/>
+  <rect x="6" y="6" width="308" height="22" rx="6" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+  <text x="12" y="21" font-family="system-ui,sans-serif" font-size="9" font-weight="700" fill="#00f0ff">Phishing Awareness</text>
+  <text x="134" y="21" font-family="system-ui,sans-serif" font-size="6" fill="#64748b">Score</text>
+  <text x="162" y="21" font-family="monospace" font-size="7" font-weight="700" fill="#00f0ff">140</text>
+  <text x="196" y="21" font-family="system-ui,sans-serif" font-size="6" fill="#64748b">Streak</text>
+  <text x="226" y="21" font-family="monospace" font-size="7" font-weight="700" fill="#00f0ff">3</text>
+  <text x="256" y="21" font-family="system-ui,sans-serif" font-size="6" fill="#64748b">3/11</text>
+  <!-- email card -->
+  <rect x="6" y="32" width="308" height="136" rx="8" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+  <!-- headers -->
+  <rect x="12" y="38" width="296" height="14" rx="3" fill="none"/>
+  <text x="16" y="49" font-family="system-ui,sans-serif" font-size="6" font-weight="700" fill="#64748b">FROM</text>
+  <text x="48" y="49" font-family="system-ui,sans-serif" font-size="7" fill="#e2e8f0">Netflix Security</text>
+  <text x="170" y="49" font-family="system-ui,sans-serif" font-size="6" fill="#475569">&lt;security@netflix-secure.com&gt;</text>
+  <rect x="12" y="56" width="296" height="14" rx="3" fill="rgba(239,68,68,0.04)" stroke="rgba(239,68,68,0.15)" stroke-width="0.5"/>
+  <text x="16" y="67" font-family="system-ui,sans-serif" font-size="6" font-weight="700" fill="#64748b">REPLY-TO</text>
+  <text x="62" y="67" font-family="system-ui,sans-serif" font-size="7" fill="#ef4444">reply@phish-bank.ru</text>
+  <rect x="12" y="74" width="296" height="14" rx="3" fill="none"/>
+  <text x="16" y="85" font-family="system-ui,sans-serif" font-size="6" font-weight="700" fill="#64748b">SUBJECT</text>
+  <text x="68" y="85" font-family="system-ui,sans-serif" font-size="7" font-weight="600" fill="#ef4444">URGENT: Account suspended</text>
+  <!-- body -->
+  <rect x="12" y="92" width="296" height="36" rx="4" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.02)" stroke-width="1"/>
+  <text x="18" y="104" font-family="system-ui,sans-serif" font-size="6" fill="#94a3b8">Dear Valued Customer,</text>
+  <text x="18" y="114" font-family="system-ui,sans-serif" font-size="6" fill="#94a3b8">We detected unusual activity on your account.</text>
+  <text x="18" y="124" font-family="system-ui,sans-serif" font-size="6" fill="#94a3b8">Verify: https://netflix-login.verify-now.ru/update</text>
+  <!-- hover preview -->
+  <rect x="12" y="132" width="296" height="14" rx="3" fill="rgba(0,0,0,0.25)" stroke="rgba(0,240,255,0.08)" stroke-width="0.5"/>
+  <text x="18" y="143" font-family="monospace" font-size="6" fill="#ef4444">https://netflix-login.verify-now.ru/update</text>
+  <!-- action buttons -->
+  <rect x="6" y="172" width="152" height="22" rx="5" fill="rgba(255,255,255,0.02)" stroke="rgba(16,185,129,0.15)" stroke-width="1"/>
+  <text x="82" y="187" font-family="system-ui,sans-serif" font-size="7" font-weight="600" fill="#34d399" text-anchor="middle">Legitimate Email</text>
+  <rect x="162" y="172" width="152" height="22" rx="5" fill="rgba(255,255,255,0.02)" stroke="rgba(239,68,68,0.15)" stroke-width="1"/>
+  <text x="238" y="187" font-family="system-ui,sans-serif" font-size="7" font-weight="600" fill="#ef4444" text-anchor="middle">Phishing Threat</text>
+</svg>

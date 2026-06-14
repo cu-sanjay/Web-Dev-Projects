@@ -1,0 +1,61 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <rect width="128" height="128" rx="16" fill="#070a13"/>
+  <rect x="8" y="8" width="112" height="112" rx="10" fill="none" stroke="#1f2937" stroke-width="1.5"/>
+
+  <!-- Grid dots -->
+  <g fill="#1e293b">
+    <circle cx="28" cy="28" r="1.5"/>
+    <circle cx="48" cy="28" r="1.5"/>
+    <circle cx="68" cy="28" r="1.5"/>
+    <circle cx="88" cy="28" r="1.5"/>
+    <circle cx="100" cy="28" r="1.5"/>
+    <circle cx="28" cy="48" r="1.5"/>
+    <circle cx="48" cy="48" r="1.5"/>
+    <circle cx="68" cy="48" r="1.5"/>
+    <circle cx="88" cy="48" r="1.5"/>
+    <circle cx="100" cy="48" r="1.5"/>
+    <circle cx="28" cy="68" r="1.5"/>
+    <circle cx="48" cy="68" r="1.5"/>
+    <circle cx="68" cy="68" r="1.5"/>
+    <circle cx="88" cy="68" r="1.5"/>
+    <circle cx="100" cy="68" r="1.5"/>
+    <circle cx="28" cy="88" r="1.5"/>
+    <circle cx="48" cy="88" r="1.5"/>
+    <circle cx="68" cy="88" r="1.5"/>
+    <circle cx="88" cy="88" r="1.5"/>
+    <circle cx="100" cy="88" r="1.5"/>
+    <circle cx="28" cy="100" r="1.5"/>
+    <circle cx="48" cy="100" r="1.5"/>
+    <circle cx="68" cy="100" r="1.5"/>
+    <circle cx="88" cy="100" r="1.5"/>
+    <circle cx="100" cy="100" r="1.5"/>
+  </g>
+
+  <!-- Circuit: battery left, wire top, resistor right -->
+  <!-- Wires -->
+  <line x1="28" y1="48" x2="48" y2="48" stroke="#334155" stroke-width="1.5"/>
+  <line x1="48" y1="48" x2="68" y2="48" stroke="#10b981" stroke-width="1.5" opacity="0.7"/>
+  <line x1="88" y1="48" x2="100" y2="48" stroke="#334155" stroke-width="1.5"/>
+  <line x1="28" y1="48" x2="28" y2="88" stroke="#334155" stroke-width="1.5"/>
+  <line x1="100" y1="48" x2="100" y2="88" stroke="#334155" stroke-width="1.5"/>
+  <line x1="28" y1="88" x2="48" y2="88" stroke="#334155" stroke-width="1.5"/>
+  <line x1="68" y1="88" x2="88" y2="88" stroke="#334155" stroke-width="1.5"/>
+  <line x1="48" y1="88" x2="68" y2="88" stroke="#10b981" stroke-width="1.5" opacity="0.7"/>
+
+  <!-- Battery -->
+  <line x1="38" y1="48" x2="38" y2="88" stroke="#f8fafc" stroke-width="1.5"/>
+  <rect x="32" y="52" width="12" height="4" fill="#f8fafc"/>
+  <rect x="34" y="78" width="8" height="6" fill="#f8fafc"/>
+  <text x="32" y="44" fill="#94a3b8" font-size="6" font-family="monospace">9V</text>
+
+  <!-- Resistor zigzag -->
+  <polyline points="68,48 70,40 74,56 78,40 82,56 86,40 88,48" fill="none" stroke="#f8fafc" stroke-width="1.5"/>
+  <text x="70" y="62" fill="#94a3b8" font-size="6" font-family="monospace">100Ω</text>
+
+  <!-- Electron particles -->
+  <circle cx="55" cy="48" r="2.5" fill="#10b981" opacity="0.8"/>
+  <circle cx="58" cy="88" r="2" fill="#10b981" opacity="0.6"/>
+
+  <!-- Bottom label -->
+  <text x="64" y="118" fill="#94a3b8" font-size="8" font-family="monospace" text-anchor="middle" letter-spacing="1">CIRCUIT LAB</text>
+</svg>

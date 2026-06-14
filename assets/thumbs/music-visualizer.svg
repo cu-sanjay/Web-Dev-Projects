@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200">
+  <rect width="320" height="200" fill="#03050a"/>
+  <!-- bars -->
+  <rect x="10" y="60" width="8" height="80" rx="2" fill="#00f0ff" opacity="0.9"/>
+  <rect x="22" y="45" width="8" height="95" rx="2" fill="#00e6ff" opacity="0.85"/>
+  <rect x="34" y="70" width="8" height="70" rx="2" fill="#00ccff" opacity="0.8"/>
+  <rect x="46" y="30" width="8" height="110" rx="2" fill="#00b3ff" opacity="0.8"/>
+  <rect x="58" y="55" width="8" height="85" rx="2" fill="#0099ff" opacity="0.75"/>
+  <rect x="70" y="20" width="8" height="120" rx="2" fill="#0080ff" opacity="0.75"/>
+  <rect x="82" y="50" width="8" height="90" rx="2" fill="#0066ff" opacity="0.7"/>
+  <rect x="94" y="65" width="8" height="75" rx="2" fill="#0052ff" opacity="0.65"/>
+  <rect x="106" y="35" width="8" height="105" rx="2" fill="#4d3dff" opacity="0.65"/>
+  <rect x="118" y="60" width="8" height="80" rx="2" fill="#7a29ff" opacity="0.6"/>
+  <rect x="130" y="25" width="8" height="115" rx="2" fill="#a614ff" opacity="0.6"/>
+  <rect x="142" y="55" width="8" height="85" rx="2" fill="#cc00ff" opacity="0.55"/>
+  <rect x="154" y="40" width="8" height="100" rx="2" fill="#e600e6" opacity="0.55"/>
+  <rect x="166" y="60" width="8" height="80" rx="2" fill="#ff00cc" opacity="0.5"/>
+  <rect x="178" y="45" width="8" height="95" rx="2" fill="#ff1a99" opacity="0.5"/>
+  <rect x="190" y="30" width="8" height="110" rx="2" fill="#ff3366" opacity="0.45"/>
+  <rect x="202" y="55" width="8" height="85" rx="2" fill="#ff4d33" opacity="0.45"/>
+  <rect x="214" y="65" width="8" height="75" rx="2" fill="#ff6622" opacity="0.4"/>
+  <rect x="226" y="40" width="8" height="100" rx="2" fill="#ff8011" opacity="0.4"/>
+  <rect x="238" y="60" width="8" height="80" rx="2" fill="#ff9900" opacity="0.35"/>
+  <rect x="250" y="50" width="8" height="90" rx="2" fill="#ffb300" opacity="0.35"/>
+  <rect x="262" y="35" width="8" height="105" rx="2" fill="#ffcc00" opacity="0.3"/>
+  <rect x="274" y="60" width="8" height="80" rx="2" fill="#ffe600" opacity="0.3"/>
+  <rect x="286" y="45" width="8" height="95" rx="2" fill="#ffff00" opacity="0.25"/>
+  <rect x="298" y="55" width="8" height="85" rx="2" fill="#ffff66" opacity="0.2"/>
+  <!-- ui overlay -->
+  <rect x="50" y="158" width="220" height="34" rx="10" fill="rgba(3,5,10,0.7)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <rect x="58" y="166" width="40" height="18" rx="6" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="78" y="179" font-family="monospace" font-size="6" font-weight="600" fill="#64748b" text-anchor="middle">Open</text>
+  <rect x="104" y="166" width="32" height="18" rx="6" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <polygon points="114,170 126,175 114,180" fill="#64748b"/>
+  <rect x="142" y="166" width="34" height="18" rx="6" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="159" y="179" font-family="monospace" font-size="5" font-weight="700" fill="#64748b" text-anchor="middle">Wave</text>
+  <text x="192" y="179" font-family="monospace" font-size="5" fill="#475569">Sensitivity</text>
+  <line x1="238" y1="175" x2="260" y2="175" stroke="rgba(255,255,255,0.06)" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="248" cy="175" r="5" fill="#00f0ff" stroke="#03050a" stroke-width="2"/>
+</svg>

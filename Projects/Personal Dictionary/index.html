@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LingoLuv — My Cute Dictionary</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Quicksand:wght@500;700&display=swap');
+
+        :root {
+            --primary: #ff85a2; /* Soft Pink */
+            --secondary: #a78bfa; /* Lavender */
+            --accent: #f472b6;
+            --bg: #fff5f7;
+            --card-bg: rgba(255, 255, 255, 0.7);
+            --text: #4b5563;
+            --text-muted: #9ca3af;
+            --glass: rgba(255, 255, 255, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.6);
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #fff5f7 0%, #f3e8ff 100%);
+            color: var(--text);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin: 0;
+            letter-spacing: -1px;
+        }
+
+        header p { color: var(--text-muted); margin-top: 5px; }
+
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 2px solid var(--glass-border);
+            padding: 24px;
+            border-radius: 28px;
+            box-shadow: 0 10px 25px rgba(255, 133, 162, 0.1);
+            margin-bottom: 24px;
+        }
+
+        .search-container {
+            position: relative;
+            margin-bottom: 24px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.8);
+            border: 2px solid transparent;
+            border-radius: 18px;
+            color: var(--text);
+            font-family: inherit;
+            font-size: 1rem;
+            margin-bottom: 12px;
+            box-sizing: border-box;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        input:focus, textarea:focus {
+            border-color: var(--primary);
+            background: white;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 133, 162, 0.3);
+        }
+
+        .word-card {
+            position: relative;
+            padding: 20px;
+            transition: transform 0.3s;
+        }
+
+        .word-card:hover { transform: scale(1.01); }
+
+        .word-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .meaning { line-height: 1.5; margin-bottom: 12px; }
+
+        .tag-group { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+        .tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 8px;
+            text-transform: uppercase;
+        }
+        .tag-syn { background: #dcfce7; color: #166534; }
+        .tag-ant { background: #fee2e2; color: #991b1b; }
+
+        .example {
+            font-size: 0.9rem;
+            font-style: italic;
+            color: var(--text-muted);
+            padding-left: 12px;
+            border-left: 3px solid var(--secondary);
+        }
+
+        .actions {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            opacity: 0.5;
+            transition: opacity 0.2s;
+        }
+
+        .action-btn:hover { opacity: 1; }
+
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>LingoLuv 🌸</h1>
+        <p>Your personal garden of words and meanings</p>
+    </header>
+
+    <div class="glass-card">
+        <input type="text" id="searchInput" placeholder="Search for a word..." oninput="renderDictionary()">
+    </div>
+
+    <div class="glass-card" id="formContainer">
+        <h3 id="formTitle">Add New Word ✨</h3>
+        <input type="text" id="wordInput" placeholder="Enter word">
+        <textarea id="meaningInput" rows="2" placeholder="Meaning"></textarea>
+        <div style="display: flex; gap: 10px;">
+            <input type="text" id="synonymsInput" placeholder="Synonyms (comma separated)">
+            <input type="text" id="antonymsInput" placeholder="Antonyms (comma separated)">
+        </div>
+        <textarea id="exampleInput" rows="2" placeholder="Example sentence"></textarea>
+        <button class="btn-primary" onclick="saveWord()">Save Word</button>
+        <button class="action-btn hidden" id="cancelBtn" onclick="resetForm()" style="width: 100%; margin-top: 10px; font-size: 0.9rem;">Cancel Edit</button>
+    </div>
+
+    <div id="dictionaryList"></div>
+</div>
+
+<script>
+    let dictionary = JSON.parse(localStorage.getItem('my_cute_dict')) || [];
+    let editId = null;
+
+    function saveWord() {
+        const word = document.getElementById('wordInput').value.trim();
+        const meaning = document.getElementById('meaningInput').value.trim();
+        const synonyms = document.getElementById('synonymsInput').value.trim();
+        const antonyms = document.getElementById('antonymsInput').value.trim();
+        const example = document.getElementById('exampleInput').value.trim();
+
+        if (!word || !meaning) return alert("Word and meaning are needed! 🎀");
+
+        const entry = {
+            id: editId || Date.now(),
+            word, meaning, synonyms, antonyms, example
+        };
+
+        if (editId) {
+            dictionary = dictionary.map(w => w.id === editId ? entry : w);
+        } else {
+            dictionary.unshift(entry);
+        }
+
+        localStorage.setItem('my_cute_dict', JSON.stringify(dictionary));
+        resetForm();
+        renderDictionary();
+    }
+
+    function editWord(id) {
+        const w = dictionary.find(x => x.id === id);
+        if (!w) return;
+
+        editId = id;
+        document.getElementById('wordInput').value = w.word;
+        document.getElementById('meaningInput').value = w.meaning;
+        document.getElementById('synonymsInput').value = w.synonyms;
+        document.getElementById('antonymsInput').value = w.antonyms;
+        document.getElementById('exampleInput').value = w.example;
+
+        document.getElementById('formTitle').innerText = "Edit Word ✏️";
+        document.getElementById('cancelBtn').classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function deleteWord(id) {
+        if (!confirm("Are you sure you want to remove this word? 🥺")) return;
+        dictionary = dictionary.filter(w => w.id !== id);
+        localStorage.setItem('my_cute_dict', JSON.stringify(dictionary));
+        renderDictionary();
+    }
+
+    function resetForm() {
+        editId = null;
+        ['wordInput', 'meaningInput', 'synonymsInput', 'antonymsInput', 'exampleInput'].forEach(id => {
+            document.getElementById(id).value = '';
+        });
+        document.getElementById('formTitle').innerText = "Add New Word ✨";
+        document.getElementById('cancelBtn').classList.add('hidden');
+    }
+
+    function renderDictionary() {
+        const list = document.getElementById('dictionaryList');
+        const search = document.getElementById('searchInput').value.toLowerCase();
+        list.innerHTML = '';
+
+        const filtered = dictionary.filter(w => 
+            w.word.toLowerCase().includes(search) || 
+            w.meaning.toLowerCase().includes(search)
+        );
+
+        filtered.forEach(w => {
+            const card = document.createElement('div');
+            card.className = 'glass-card word-card';
+            card.innerHTML = `
+                <div class="actions">
+                    <button class="action-btn" onclick="editWord(${w.id})">✏️</button>
+                    <button class="action-btn" onclick="deleteWord(${w.id})">🗑️</button>
+                </div>
+                <div class="word-title">${w.word}</div>
+                <div class="meaning">${w.meaning}</div>
+                <div class="tag-group">
+                    ${w.synonyms ? `<span class="tag tag-syn">Syn: ${w.synonyms}</span>` : ''}
+                    ${w.antonyms ? `<span class="tag tag-ant">Ant: ${w.antonyms}</span>` : ''}
+                </div>
+                ${w.example ? `<div class="example">"${w.example}"</div>` : ''}
+            `;
+            list.appendChild(card);
+        });
+    }
+
+    renderDictionary();
+</script>
+
+</body>
+</html>

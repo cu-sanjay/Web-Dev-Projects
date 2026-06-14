@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200">
+  <rect width="320" height="200" fill="#05060b"/>
+  <rect x="4" y="4" width="312" height="18" rx="6" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="10" y="16" font-family="system-ui,sans-serif" font-size="8" font-weight="700" fill="#00f0ff">Device Diagnostics</text>
+  <text x="122" y="16" font-family="system-ui,sans-serif" font-size="5" fill="#475569">INTEGRITY</text>
+  <text x="160" y="16" font-family="monospace" font-size="6" font-weight="700" fill="#10b981">Nominal</text>
+  <text x="210" y="16" font-family="system-ui,sans-serif" font-size="5" fill="#475569">ENGINE</text>
+  <text x="240" y="16" font-family="monospace" font-size="6" fill="#00f0ff">Blink/V8</text>
+  <text x="290" y="16" font-family="monospace" font-size="6" fill="#00f0ff">14:32</text>
+  <!-- grid cards -->
+  <rect x="4" y="26" width="100" height="42" rx="6" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="10" y="34" font-family="system-ui,sans-serif" font-size="5" font-weight="700" fill="#475569">OS</text>
+  <text x="10" y="56" font-family="monospace" font-size="11" font-weight="700" fill="#00f0ff">Windows</text>
+  <rect x="108" y="26" width="100" height="42" rx="6" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="114" y="34" font-family="system-ui,sans-serif" font-size="5" font-weight="700" fill="#475569">BROWSER</text>
+  <text x="114" y="56" font-family="monospace" font-size="11" font-weight="700" fill="#00f0ff">Chrome</text>
+  <rect x="212" y="26" width="104" height="42" rx="6" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="218" y="34" font-family="system-ui,sans-serif" font-size="5" font-weight="700" fill="#475569">CPU</text>
+  <text x="218" y="56" font-family="monospace" font-size="11" font-weight="700" fill="#00f0ff">16 cores</text>
+  <rect x="4" y="72" width="100" height="42" rx="6" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="10" y="80" font-family="system-ui,sans-serif" font-size="5" font-weight="700" fill="#475569">SCREEN</text>
+  <text x="10" y="102" font-family="monospace" font-size="11" font-weight="700" fill="#00f0ff">1920x1080</text>
+  <rect x="108" y="72" width="100" height="42" rx="6" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="114" y="80" font-family="system-ui,sans-serif" font-size="5" font-weight="700" fill="#475569">VIEWPORT</text>
+  <text x="114" y="102" font-family="monospace" font-size="11" font-weight="700" fill="#00f0ff">1280x720</text>
+  <rect x="212" y="72" width="104" height="42" rx="6" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="218" y="80" font-family="system-ui,sans-serif" font-size="5" font-weight="700" fill="#475569">DPR</text>
+  <text x="218" y="102" font-family="monospace" font-size="11" font-weight="700" fill="#00f0ff">1.00</text>
+  <!-- battery card (spans wider) -->
+  <rect x="4" y="118" width="158" height="42" rx="6" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="10" y="126" font-family="system-ui,sans-serif" font-size="5" font-weight="700" fill="#475569">BATTERY</text>
+  <text x="10" y="148" font-family="monospace" font-size="13" font-weight="700" fill="#10b981">87%</text>
+  <rect x="60" y="140" width="96" height="6" rx="3" fill="rgba(255,255,255,0.04)"/>
+  <rect x="60" y="140" width="84" height="6" rx="3" fill="#10b981"/>
+  <text x="10" y="156" font-family="monospace" font-size="6" fill="#64748b">🔋 Discharging · 245 min remaining</text>
+  <!-- network card -->
+  <rect x="166" y="118" width="150" height="42" rx="6" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="172" y="126" font-family="system-ui,sans-serif" font-size="5" font-weight="700" fill="#475569">NETWORK</text>
+  <text x="172" y="148" font-family="monospace" font-size="11" font-weight="700" fill="#00f0ff">WiFi</text>
+  <text x="172" y="156" font-family="monospace" font-size="6" fill="#64748b">72 Mbps</text>
+  <!-- footer -->
+  <rect x="4" y="168" width="312" height="28" rx="6" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.02)" stroke-width="0.5"/>
+  <rect x="6" y="170" width="130" height="24" rx="4" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="71" y="187" font-family="system-ui,sans-serif" font-size="6" fill="#e2e8f0" text-anchor="middle">Hardware Probe Refresh</text>
+  <rect x="140" y="170" width="172" height="24" rx="4" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="226" y="187" font-family="system-ui,sans-serif" font-size="6" fill="#e2e8f0" text-anchor="middle">Copy Diagnostic JSON to Clipboard</text>
+</svg>

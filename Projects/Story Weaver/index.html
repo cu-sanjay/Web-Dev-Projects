@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Story Weaver — Creative Tales</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Story Weaver ✍️</h1>
+        <p>Collaborate with the Bot to write magic</p>
+    </header>
+
+    <div id="game-view">
+        <div class="glass-card">
+            <div class="story-display" id="storyBox"></div>
+            <div id="bot-status" class="typing-indicator hidden">Story Bot is thinking...</div>
+            
+            <div id="input-area">
+                <textarea id="userInput" rows="3" placeholder="Add the next sentence to the story..."></textarea>
+                <div class="controls">
+                    <button class="btn btn-primary" onclick="submitSentence()">Send Sentence</button>
+                    <button class="btn btn-secondary" onclick="showEndingChoices()">Finish Story</button>
+                </div>
+            </div>
+
+            <div id="ending-area" class="hidden">
+                <p style="text-align: center; font-weight: 700;">How should it end?</p>
+                <div class="ending-choice">
+                    <button class="btn btn-primary" onclick="wrapUp('happy')">Happy ☀️</button>
+                    <button class="btn btn-secondary" onclick="wrapUp('mystery')">Mystery 🌙</button>
+                    <button class="btn btn-primary" style="background: #4b5563" onclick="wrapUp('drama')">Drama 🔥</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="glass-card">
+        <h3>Saved Stories 📚</h3>
+        <div id="savedStories"></div>
+    </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

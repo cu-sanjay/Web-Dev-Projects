@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Completion Master</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="game-container">
+    <div class="header">
+        <div>
+            <span id="levelBadge" class="difficulty-badge easy">Easy</span>
+            <h2 id="title">Complete the Code</h2>
+        </div>
+        <div class="stats">
+            <div>Score: <span id="score">0</span></div>
+            <div>Time: <span id="timer">30s</span></div>
+        </div>
+    </div>
+
+    <p id="description">Fill in the missing keyword to complete the logic:</p>
+    
+    <div id="codeWindow" class="code-window"></div>
+    
+    <div id="hintBox" class="hint-text"></div>
+
+    <div class="controls">
+        <button class="btn-primary" onclick="checkAnswer()">Submit Answer</button>
+        <button class="btn-secondary" onclick="showHint()">Get Hint (-20 pts)</button>
+    </div>
+
+    <div id="feedback"></div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

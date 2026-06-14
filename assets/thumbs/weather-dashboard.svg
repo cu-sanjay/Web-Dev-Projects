@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0f172a"/><stop offset="100%" stop-color="#1e293b"/></linearGradient>
+  </defs>
+  <rect width="320" height="200" fill="url(#bg)"/>
+  <rect x="10" y="10" width="300" height="180" rx="8" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+  <!-- sidebar -->
+  <rect x="14" y="40" width="62" height="60" rx="6" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <text x="22" y="50" font-family="system-ui, sans-serif" font-size="4" font-weight="700" fill="#64748b">RECENT</text>
+  <rect x="18" y="56" width="54" height="12" rx="3" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <text x="24" y="65" font-family="system-ui, sans-serif" font-size="4" fill="#64748b">New York</text>
+  <rect x="18" y="70" width="54" height="12" rx="3" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <text x="24" y="79" font-family="system-ui, sans-serif" font-size="4" fill="#64748b">Tokyo</text>
+  <rect x="18" y="84" width="54" height="12" rx="3" fill="rgba(59,130,246,0.06)" stroke="rgba(59,130,246,0.12)" stroke-width="1"/>
+  <text x="26" y="93" font-family="system-ui, sans-serif" font-size="4" font-weight="600" fill="#3b82f6">Use My Location</text>
+  <!-- current card -->
+  <rect x="84" y="40" width="222" height="90" rx="10" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <text x="96" y="56" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#e2e8f0">New York</text>
+  <text x="96" y="66" font-family="system-ui, sans-serif" font-size="5" fill="#64748b">Monday, Jun 8, 2026</text>
+  <text x="96" y="76" font-family="system-ui, sans-serif" font-size="6" fill="#64748b">scattered clouds</text>
+  <text x="96" y="108" font-family="system-ui, sans-serif" font-size="30" font-weight="800" fill="#e2e8f0">24°C</text>
+  <text x="220" y="60" font-family="system-ui, sans-serif" font-size="20">⛅</text>
+  <text x="210" y="82" font-family="system-ui, sans-serif" font-size="5" fill="#64748b">Humidity</text>
+  <text x="258" y="82" font-family="monospace" font-size="5" font-weight="600" fill="#e2e8f0">58%</text>
+  <text x="210" y="94" font-family="system-ui, sans-serif" font-size="5" fill="#64748b">Wind</text>
+  <text x="258" y="94" font-family="monospace" font-size="5" font-weight="600" fill="#e2e8f0">4.2 m/s</text>
+  <text x="210" y="106" font-family="system-ui, sans-serif" font-size="5" fill="#64748b">Pressure</text>
+  <text x="258" y="106" font-family="monospace" font-size="5" font-weight="600" fill="#e2e8f0">1015 hPa</text>
+  <!-- 5-day forecast label -->
+  <text x="88" y="146" font-family="system-ui, sans-serif" font-size="5" font-weight="700" fill="#64748b">5-DAY FORECAST</text>
+  <rect x="86" y="152" width="50" height="38" rx="6" fill="rgba(255,255,255,0.015)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <text x="111" y="162" font-family="system-ui, sans-serif" font-size="5" font-weight="700" fill="#64748b" text-anchor="middle">MON</text>
+  <text x="111" y="175" font-family="system-ui, sans-serif" font-size="10">⛅</text>
+  <text x="111" y="186" font-family="system-ui, sans-serif" font-size="5" font-weight="700" fill="#e2e8f0" text-anchor="middle">22°</text>
+  <rect x="142" y="152" width="50" height="38" rx="6" fill="rgba(255,255,255,0.015)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <text x="167" y="162" font-family="system-ui, sans-serif" font-size="5" font-weight="700" fill="#64748b" text-anchor="middle">TUE</text>
+  <text x="167" y="175" font-family="system-ui, sans-serif" font-size="10">☀️</text>
+  <text x="167" y="186" font-family="system-ui, sans-serif" font-size="5" font-weight="700" fill="#e2e8f0" text-anchor="middle">26°</text>
+  <rect x="198" y="152" width="50" height="38" rx="6" fill="rgba(255,255,255,0.015)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <text x="223" y="162" font-family="system-ui, sans-serif" font-size="5" font-weight="700" fill="#64748b" text-anchor="middle">WED</text>
+  <text x="223" y="175" font-family="system-ui, sans-serif" font-size="10">🌧️</text>
+  <text x="223" y="186" font-family="system-ui, sans-serif" font-size="5" font-weight="700" fill="#e2e8f0" text-anchor="middle">18°</text>
+  <rect x="254" y="152" width="50" height="38" rx="6" fill="rgba(255,255,255,0.015)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <text x="279" y="162" font-family="system-ui, sans-serif" font-size="5" font-weight="700" fill="#64748b" text-anchor="middle">THU</text>
+  <text x="279" y="175" font-family="system-ui, sans-serif" font-size="10">☁️</text>
+  <text x="279" y="186" font-family="system-ui, sans-serif" font-size="5" font-weight="700" fill="#e2e8f0" text-anchor="middle">20°</text>
+</svg>

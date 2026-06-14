@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Shopping Budget Assistant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-color-theme="ocean">
+
+    <!-- App Container -->
+    <div class="app-container" id="mainApp">
+        <!-- Sidebar -->
+        <aside class="sidebar glass-panel">
+            <div class="sidebar-header">
+                <div class="brand">
+                    <span class="brand-icon">🛒</span>
+                    <h2>SmartShop</h2>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" id="navDashboard">
+                    <span class="icon">📊</span> Dashboard
+                </a>
+                <a href="#" class="nav-item" id="navLists">
+                    <span class="icon">📝</span> Shopping List
+                </a>
+                <a href="#" class="nav-item" id="navSettings">
+                    <span class="icon">⚙️</span> Settings
+                </a>
+            </nav>
+
+            <div class="theme-settings panel glass-panel mt-auto">
+                <h3>Theme Settings</h3>
+                <div class="theme-controls">
+                    <button id="themeToggle" class="btn-icon" aria-label="Toggle Dark Mode">🌙</button>
+                    <div class="color-picker">
+                        <button class="color-btn ocean active" data-color="ocean" title="Ocean"></button>
+                        <button class="color-btn emerald" data-color="emerald" title="Emerald"></button>
+                        <button class="color-btn amethyst" data-color="amethyst" title="Amethyst"></button>
+                        <button class="color-btn amber" data-color="amber" title="Amber"></button>
+                        <button class="color-btn ruby" data-color="ruby" title="Ruby"></button>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header">
+                <div>
+                    <h1 class="page-title" id="pageTitle">Dashboard</h1>
+                    <p class="page-subtitle" id="pageSubtitle">Overview of your budget and spending.</p>
+                </div>
+                <div id="headerActions">
+                    <button id="setBudgetBtn" class="btn btn-secondary shadow-hover mr-2">
+                        Set Total Budget
+                    </button>
+                    <button id="addItemBtn" class="btn btn-primary shadow-hover">
+                        <span class="btn-icon-inner">+</span> Add Item
+                    </button>
+                </div>
+            </header>
+
+            <!-- View: Dashboard Overview -->
+            <div class="view-section" id="dashboardView">
+                <div class="overview-cards">
+                    <div class="card summary-card glass-panel">
+                        <div class="card-icon primary-bg">💰</div>
+                        <div class="card-content">
+                            <h3>Total Budget</h3>
+                            <div class="amount text-primary" id="statTotalBudget">$0.00</div>
+                        </div>
+                    </div>
+                    <div class="card summary-card glass-panel">
+                        <div class="card-icon warning-bg">⏳</div>
+                        <div class="card-content">
+                            <h3>Estimated Spend</h3>
+                            <div class="amount text-warning" id="statEstimated">$0.00</div>
+                        </div>
+                    </div>
+                    <div class="card summary-card glass-panel">
+                        <div class="card-icon danger-bg" id="actualBg">💳</div>
+                        <div class="card-content">
+                            <h3>Actual Spent</h3>
+                            <div class="amount text-danger" id="statActual">$0.00</div>
+                        </div>
+                    </div>
+                    <div class="card summary-card glass-panel">
+                        <div class="card-icon success-bg">📈</div>
+                        <div class="card-content">
+                            <h3>Remaining</h3>
+                            <div class="amount text-success" id="statRemaining">$0.00</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="card glass-panel">
+                        <div class="card-header-flex">
+                            <h3>Category Breakdown (Actual)</h3>
+                        </div>
+                        <div class="category-breakdown" id="categoryBreakdown">
+                            <!-- Populated by JS -->
+                            <div class="empty-state-sm text-muted">No spending data yet.</div>
+                        </div>
+                    </div>
+
+                    <div class="card glass-panel">
+                        <div class="card-header-flex">
+                            <h3>Budget Alerts</h3>
+                        </div>
+                        <div class="alerts-list" id="alertsList">
+                            <!-- Populated by JS -->
+                            <div class="alert-item success">You are currently within budget limits!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- View: Shopping List -->
+            <div class="view-section hidden" id="listsView">
+                <div class="filter-bar glass-panel mb-4">
+                    <div class="form-group mb-0" style="width: 250px;">
+                        <div class="select-wrapper">
+                            <select id="filterCategory">
+                                <option value="All">All Categories</option>
+                                <option value="Groceries">Groceries</option>
+                                <option value="Electronics">Electronics</option>
+                                <option value="Clothing">Clothing</option>
+                                <option value="Household">Household Items</option>
+                                <option value="Personal Care">Personal Care</option>
+                                <option value="Stationery">Stationery</option>
+                                <option value="Health">Health Products</option>
+                                <option value="Custom">Custom</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group mb-0">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="filterPendingOnly">
+                            <span class="checkmark"></span>
+                            Show Pending Only
+                        </label>
+                    </div>
+                </div>
+
+                <div class="shopping-list-grid" id="shoppingListGrid">
+                    <!-- Populated by JS -->
+                </div>
+                <div id="noItemsMsg" class="empty-state hidden">
+                    <span class="empty-icon">🛒</span>
+                    <h2>Your shopping list is empty</h2>
+                    <p>Click "+ Add Item" to start planning your shopping trip.</p>
+                </div>
+            </div>
+
+            <!-- View: Settings -->
+            <div class="view-section hidden" id="settingsView">
+                <div class="card glass-panel mb-4" style="max-width: 600px;">
+                    <h3>Budget Management</h3>
+                    <form id="globalBudgetForm">
+                        <div class="form-group">
+                            <label>Total Global Budget ($)</label>
+                            <input type="number" step="0.01" id="setGlobalBudgetInput" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-full shadow-hover">Save Budget</button>
+                    </form>
+                </div>
+                
+                <div class="card glass-panel" style="max-width: 600px; border-left: 5px solid var(--danger);">
+                    <h3 class="text-danger">Danger Zone</h3>
+                    <p class="text-muted mb-4">Clear all shopping data and reset the app to factory settings.</p>
+                    <button class="btn btn-danger w-full shadow-hover" id="clearDataBtn">Clear All Data</button>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Modal: Add/Edit Item -->
+    <div class="modal-overlay hidden" id="itemModal">
+        <div class="modal glass-modal">
+            <div class="modal-header">
+                <h2 id="itemModalTitle">Add Item</h2>
+                <button class="btn-icon close-modal-btn">✕</button>
+            </div>
+            <form id="itemForm">
+                <input type="hidden" id="itemId">
+                <div class="form-group">
+                    <label>Item Name</label>
+                    <input type="text" id="itemName" required placeholder="e.g. Milk, Headphones">
+                </div>
+                <div class="form-group">
+                    <label>Category</label>
+                    <div class="select-wrapper">
+                        <select id="itemCategory" required>
+                            <option value="Groceries">Groceries</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Clothing">Clothing</option>
+                            <option value="Household">Household Items</option>
+                            <option value="Personal Care">Personal Care</option>
+                            <option value="Stationery">Stationery</option>
+                            <option value="Health">Health Products</option>
+                            <option value="Custom">Custom</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Estimated Price ($)</label>
+                        <input type="number" step="0.01" id="itemEstPrice" required placeholder="0.00">
+                    </div>
+                    <div class="form-group">
+                        <label>Quantity</label>
+                        <input type="number" id="itemQty" required value="1" min="1">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary w-full shadow-hover mt-3">Save Item</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: Mark Purchased / Checkout Item -->
+    <div class="modal-overlay hidden" id="purchaseModal">
+        <div class="modal glass-modal">
+            <div class="modal-header">
+                <h2>Mark as Purchased</h2>
+                <button class="btn-icon close-modal-btn">✕</button>
+            </div>
+            <form id="purchaseForm">
+                <input type="hidden" id="purchaseItemId">
+                <p class="mb-4" id="purchaseItemDetails">Confirm the actual price paid for the item.</p>
+                <div class="form-group">
+                    <label>Actual Price Paid (Total $)</label>
+                    <input type="number" step="0.01" id="purchaseActualPrice" required placeholder="0.00">
+                </div>
+                <button type="submit" class="btn btn-success w-full shadow-hover mt-3">Confirm Purchase</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: Quick Budget Set -->
+    <div class="modal-overlay hidden" id="budgetModal">
+        <div class="modal glass-modal">
+            <div class="modal-header">
+                <h2>Set Total Budget</h2>
+                <button class="btn-icon close-modal-btn">✕</button>
+            </div>
+            <form id="quickBudgetForm">
+                <div class="form-group">
+                    <label>Budget Amount ($)</label>
+                    <input type="number" step="0.01" id="quickBudgetInput" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-full shadow-hover mt-3">Save</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

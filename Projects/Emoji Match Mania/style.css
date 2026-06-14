@@ -1,0 +1,79 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #0f172a;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+.game-container {
+    background: #1e293b;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    text-align: center;
+    max-width: 450px;
+    width: 100%;
+}
+h2 {
+    color: #38bdf8;
+    margin-bottom: 15px;
+}
+.stats {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: 600;
+    background: #0f172a;
+    padding: 10px;
+    border-radius: 8px;
+}
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.card {
+    height: 80px;
+    background: #334155;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    transform: rotateY(0deg);
+    transition: transform 0.3s, background 0.3s;
+    user-select: none;
+}
+.card.flipped {
+    background: #38bdf8;
+    transform: rotateY(180deg);
+}
+.card.matched {
+    background: #22c55e;
+    cursor: default;
+}
+.restart-btn {
+    background: #ec4899;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+    width: 100%;
+}
+.restart-btn:hover {
+    background: #db2777;
+}

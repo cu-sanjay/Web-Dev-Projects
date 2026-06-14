@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200">
+  <rect width="320" height="200" fill="#05060b"/>
+  <!-- dash -->
+  <rect x="4" y="4" width="312" height="14" rx="4" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="10" y="14" font-family="system-ui,sans-serif" font-size="5" fill="#64748b">FOV</text>
+  <rect x="28" y="7" width="34" height="3" rx="2" fill="rgba(255,255,255,0.04)"/>
+  <circle cx="45" cy="8" r="2.5" fill="#00f0ff"/>
+  <text x="66" y="14" font-family="monospace" font-size="5" fill="#00f0ff">66°</text>
+  <text x="86" y="14" font-family="system-ui,sans-serif" font-size="5" fill="#64748b">Rays</text>
+  <circle cx="118" cy="8" r="2.5" fill="#00f0ff"/>
+  <text x="140" y="14" font-family="monospace" font-size="5" fill="#00f0ff">120</text>
+  <text x="166" y="14" font-family="system-ui,sans-serif" font-size="5" fill="#64748b">Dist</text>
+  <circle cx="198" cy="8" r="2.5" fill="#00f0ff"/>
+  <text x="220" y="14" font-family="monospace" font-size="5" fill="#00f0ff">12</text>
+
+  <!-- 2D canvas -->
+  <rect x="4" y="20" width="156" height="144" rx="5" fill="#0a0c14" stroke="rgba(255,255,255,0.02)" stroke-width="0.5"/>
+  <!-- grid lines -->
+  <line x1="4" y1="56" x2="160" y2="56" stroke="rgba(255,255,255,0.02)" stroke-width="0.3"/>
+  <line x1="4" y1="92" x2="160" y2="92" stroke="rgba(255,255,255,0.02)" stroke-width="0.3"/>
+  <line x1="4" y1="128" x2="160" y2="128" stroke="rgba(255,255,255,0.02)" stroke-width="0.3"/>
+  <line x1="42" y1="20" x2="42" y2="164" stroke="rgba(255,255,255,0.02)" stroke-width="0.3"/>
+  <line x1="81" y1="20" x2="81" y2="164" stroke="rgba(255,255,255,0.02)" stroke-width="0.3"/>
+  <line x1="119" y1="20" x2="119" y2="164" stroke="rgba(255,255,255,0.02)" stroke-width="0.3"/>
+  <!-- wall cells -->
+  <rect x="4" y="20" width="38" height="36" fill="#1a1d2e" stroke="#25283b" stroke-width="0.3"/>
+  <rect x="119" y="20" width="41" height="36" fill="#1a1d2e" stroke="#25283b" stroke-width="0.3"/>
+  <rect x="4" y="128" width="38" height="36" fill="#1a1d2e" stroke="#25283b" stroke-width="0.3"/>
+  <rect x="119" y="128" width="41" height="36" fill="#1a1d2e" stroke="#25283b" stroke-width="0.3"/>
+  <rect x="81" y="56" width="38" height="36" fill="#1a1d2e" stroke="#25283b" stroke-width="0.3"/>
+  <rect x="42" y="92" width="39" height="36" fill="#1a1d2e" stroke="#25283b" stroke-width="0.3"/>
+  <!-- player dot -->
+  <circle cx="55" cy="50" r="3" fill="#00f0ff"/>
+  <line x1="55" y1="50" x2="68" y2="42" stroke="#00f0ff" stroke-width="1"/>
+  <!-- rays -->
+  <line x1="55" y1="50" x2="70" y2="110" stroke="rgba(0,240,255,0.08)" stroke-width="0.3"/>
+  <line x1="55" y1="50" x2="90" y2="100" stroke="rgba(0,240,255,0.08)" stroke-width="0.3"/>
+  <line x1="55" y1="50" x2="95" y2="60" stroke="rgba(0,240,255,0.08)" stroke-width="0.3"/>
+  <line x1="55" y1="50" x2="100" y2="40" stroke="rgba(0,240,255,0.08)" stroke-width="0.3"/>
+
+  <!-- 3D canvas -->
+  <rect x="164" y="20" width="152" height="144" rx="5" fill="#0c0e16" stroke="rgba(255,255,255,0.02)" stroke-width="0.5"/>
+  <!-- sky -->
+  <rect x="164" y="20" width="152" height="72" fill="#0c0e16"/>
+  <!-- floor -->
+  <rect x="164" y="92" width="152" height="72" fill="#080a10"/>
+  <!-- wall columns (pseudo-3D perspective) -->
+  <rect x="164" y="35" width="6" height="114" fill="rgba(255,42,95,0.15)"/>
+  <rect x="171" y="38" width="6" height="108" fill="rgba(255,42,95,0.2)"/>
+  <rect x="178" y="42" width="6" height="100" fill="rgba(255,42,95,0.25)"/>
+  <rect x="185" y="46" width="6" height="92" fill="rgba(255,42,95,0.3)"/>
+  <rect x="192" y="50" width="6" height="84" fill="rgba(255,42,95,0.35)"/>
+  <rect x="199" y="54" width="6" height="76" fill="rgba(255,42,95,0.4)"/>
+  <rect x="206" y="58" width="6" height="68" fill="rgba(255,42,95,0.45)"/>
+  <rect x="213" y="62" width="6" height="60" fill="rgba(255,42,95,0.5)"/>
+  <rect x="220" y="66" width="6" height="52" fill="rgba(255,42,95,0.55)"/>
+  <rect x="227" y="68" width="6" height="48" fill="rgba(255,42,95,0.6)"/>
+  <rect x="234" y="70" width="6" height="44" fill="rgba(255,42,95,0.65)"/>
+  <rect x="241" y="72" width="6" height="40" fill="rgba(255,42,95,0.7)"/>
+  <rect x="248" y="74" width="6" height="36" fill="rgba(255,42,95,0.75)"/>
+  <rect x="255" y="74" width="6" height="36" fill="rgba(255,42,95,0.7)"/>
+  <rect x="262" y="76" width="6" height="32" fill="rgba(255,42,95,0.65)"/>
+  <rect x="269" y="78" width="6" height="28" fill="rgba(255,42,95,0.55)"/>
+  <rect x="276" y="80" width="6" height="24" fill="rgba(255,42,95,0.45)"/>
+  <rect x="283" y="82" width="6" height="20" fill="rgba(255,42,95,0.35)"/>
+  <rect x="290" y="84" width="6" height="16" fill="rgba(255,42,95,0.25)"/>
+  <rect x="297" y="86" width="6" height="12" fill="rgba(255,42,95,0.15)"/>
+  <!-- wall hit on 3D column -->
+  <rect x="213" y="62" width="6" height="60" fill="rgba(255,42,95,0.7)"/>
+
+  <!-- telemetry -->
+  <rect x="4" y="168" width="312" height="10" rx="3" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.02)" stroke-width="0.5"/>
+  <text x="10" y="176" font-family="system-ui,sans-serif" font-size="5" fill="#64748b">Heading:</text>
+  <text x="46" y="176" font-family="monospace" font-size="5" fill="#00f0ff">45°</text>
+  <text x="86" y="176" font-family="system-ui,sans-serif" font-size="5" fill="#64748b">Grid:</text>
+  <text x="106" y="176" font-family="monospace" font-size="5" fill="#00f0ff">(3,2)</text>
+  <text x="162" y="176" font-family="system-ui,sans-serif" font-size="5" fill="#64748b">Rays:</text>
+  <text x="184" y="176" font-family="monospace" font-size="5" fill="#00f0ff">120</text>
+
+  <!-- footer -->
+  <rect x="4" y="182" width="312" height="14" rx="3" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.02)" stroke-width="0.5"/>
+  <rect x="6" y="183" width="50" height="12" rx="3" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="12" y="192" font-family="system-ui,sans-serif" font-size="5" fill="#e2e8f0">Generate Maze</text>
+  <rect x="60" y="183" width="50" height="12" rx="3" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="66" y="192" font-family="system-ui,sans-serif" font-size="5" fill="#e2e8f0">Reset Camera</text>
+  <text x="182" y="192" font-family="system-ui,sans-serif" font-size="4" fill="#475569">WASD/Arrows: move · Click: toggle wall</text>
+</svg>

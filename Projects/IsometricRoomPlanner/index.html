@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Isometric Room Planner & 2.5D Interior Designer</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Style Sheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- Left Panel: Furniture Library Catalog -->
+    <aside class="sidebar-catalog glass-card">
+      <div class="brand">
+        <div class="brand-logo">
+          <i data-lucide="layout-grid" class="logo-icon"></i>
+        </div>
+        <div class="brand-text">
+          <h1>IsoPlan 2.5D</h1>
+          <span>Interior Sandbox</span>
+        </div>
+      </div>
+
+      <div class="catalog-section">
+        <h3><i data-lucide="armchair"></i> Furniture Library</h3>
+        <p class="section-desc">Click items to add them to the room grid.</p>
+        <div class="furniture-grid" id="furniture-catalog">
+          <!-- Dynamically populated furniture library catalog -->
+        </div>
+      </div>
+
+      <div class="catalog-section help-section">
+        <h3><i data-lucide="help-circle"></i> Workspace Controls</h3>
+        <ul class="help-list">
+          <li><span>Click & Drag</span> moves furniture on grid</li>
+          <li><span>Select item</span> and press <kbd>R</kbd> or click rotate to spin</li>
+          <li><span>Backspace/Delete</span> removes selected item</li>
+          <li>Grid snaps items to floor tiles precisely</li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Center Sandbox Workspace Panel -->
+    <main class="workspace-panel">
+      <!-- Top header panel -->
+      <header class="workspace-header">
+        <div class="header-left">
+          <h2>Room Layout Canvas</h2>
+          <p class="subtitle" id="canvas-subtitle">Plan, arrange, and calculate room scale footprint</p>
+        </div>
+        <div class="header-right">
+          <!-- Theme selector -->
+          <button id="theme-toggle-btn" class="icon-btn" title="Toggle Light/Dark Theme">
+            <i data-lucide="moon" id="theme-icon"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- Center Interactive Canvas Wrapper -->
+      <div class="canvas-wrapper glass-card">
+        <canvas id="isometric-canvas"></canvas>
+        <!-- Floating toolbar controls -->
+        <div class="canvas-toolbar">
+          <button id="rotate-item-btn" class="toolbar-btn" title="Rotate Selected Item (R)">
+            <i data-lucide="rotate-cw"></i>
+            <span>Rotate</span>
+          </button>
+          <button id="delete-item-btn" class="toolbar-btn text-danger" title="Remove Selected Item (Del)">
+            <i data-lucide="trash-2"></i>
+            <span>Delete</span>
+          </button>
+          <div class="toolbar-divider"></div>
+          <button id="zoom-in-btn" class="toolbar-btn" title="Zoom In">
+            <i data-lucide="zoom-in"></i>
+          </button>
+          <button id="zoom-out-btn" class="toolbar-btn" title="Zoom Out">
+            <i data-lucide="zoom-out"></i>
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Right Panel: Configurations & Footprint Stats -->
+    <aside class="sidebar-config glass-card">
+      <!-- Section: Room Configuration Settings -->
+      <div class="config-section">
+        <h3><i data-lucide="sliders"></i> Room Setup</h3>
+        
+        <!-- Grid size multiplier -->
+        <div class="input-group">
+          <label for="room-grid-size">Room Dimension: <span id="grid-size-val">10x10</span></label>
+          <input type="range" id="room-grid-size" min="6" max="14" step="1" value="10">
+        </div>
+
+        <!-- Floor tile textures / colors -->
+        <div class="input-group">
+          <label>Floor Style</label>
+          <div class="color-palette-selector" id="floor-style-selector">
+            <button class="color-dot active" style="background: #0ea5e9;" data-style="cyan"></button>
+            <button class="color-dot" style="background: #e2e8f0;" data-style="grid"></button>
+            <button class="color-dot" style="background: #b45309;" data-style="wood"></button>
+            <button class="color-dot" style="background: #64748b;" data-style="slate"></button>
+            <button class="color-dot" style="background: #10b981;" data-style="green"></button>
+          </div>
+        </div>
+
+        <!-- Wall Color Settings -->
+        <div class="input-group">
+          <label>Wall Theme Color</label>
+          <div class="color-palette-selector" id="wall-color-selector">
+            <button class="color-dot active" style="background: #334155;" data-color="#334155"></button>
+            <button class="color-dot" style="background: #4f46e5;" data-color="#4f46e5"></button>
+            <button class="color-dot" style="background: #0891b2;" data-color="#0891b2"></button>
+            <button class="color-dot" style="background: #16a34a;" data-color="#16a34a"></button>
+            <button class="color-dot" style="background: #db2777;" data-color="#db2777"></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: Layout Footprint Stats -->
+      <div class="config-section">
+        <h3><i data-lucide="info"></i> Space Efficiency</h3>
+        
+        <div class="stats-list">
+          <div class="stat-row">
+            <span>Total Floor Area</span>
+            <span class="stat-value" id="stats-total-area">100 sq ft</span>
+          </div>
+          <div class="stat-row">
+            <span>Occupied Footprint</span>
+            <span class="stat-value text-primary" id="stats-occupied-area">0 sq ft</span>
+          </div>
+          <div class="stat-row">
+            <span>Remaining Clearance</span>
+            <span class="stat-value text-success" id="stats-clearance-area">100 sq ft</span>
+          </div>
+          <div class="stat-row">
+            <span>Furnishing Count</span>
+            <span class="stat-value" id="stats-furniture-count">0 items</span>
+          </div>
+        </div>
+
+        <!-- Chart visualization bar -->
+        <div class="occupied-bar-container">
+          <div class="occupied-bar-bg">
+            <div class="occupied-bar" id="occupied-progress-bar" style="width: 0%;"></div>
+          </div>
+          <div class="occupied-percentage-text" id="stats-occupied-pct">0% Floor Occupied</div>
+        </div>
+      </div>
+
+      <!-- Section: File Controls & Storage -->
+      <div class="config-section actions-section">
+        <button id="export-plan-btn" class="btn primary-btn w-full">
+          <i data-lucide="download"></i>
+          <span>Export Blueprint Image</span>
+        </button>
+        <button id="clear-layout-btn" class="btn secondary-btn w-full">
+          <i data-lucide="refresh-cw"></i>
+          <span>Clear Canvas</span>
+        </button>
+      </div>
+    </aside>
+  </div>
+
+  <!-- JavaScript Code -->
+  <script src="script.js"></script>
+</body>
+</html>

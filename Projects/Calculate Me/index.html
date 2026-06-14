@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Sprint Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-card">
+        <h1>Math Sprint</h1>
+        <div class="stats-container">
+            <div>Score: <span id="score">0</span></div>
+            <div>Time: <span id="timer">30</span>s</div>
+        </div>
+        
+        <div id="game-area">
+            <div class="question-box" id="question">? + ?</div>
+            <input type="number" id="answer-input" placeholder="Type answer..." autofocus>
+            <button class="btn btn-submit" id="submit-btn">Submit</button>
+        </div>
+
+        <div id="feedback"></div>
+        <button class="btn btn-restart" id="restart-btn">Play Again</button>
+    </div>
+<script src="script.js"></script>
+</body>
+</html>

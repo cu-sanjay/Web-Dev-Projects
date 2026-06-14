@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e1b4b" />
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#8b5cf6" />
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0.8" />
+    </linearGradient>
+    <filter id="glow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#3b82f6" flood-opacity="0.3" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="url(#bgGrad)" />
+
+  <!-- Grid decoration -->
+  <g stroke="#ffffff" stroke-opacity="0.03" stroke-width="1">
+    <path d="M 0,50 L 400,50 M 0,100 L 400,100 M 0,150 L 400,150 M 0,200 L 400,200 M 0,250 L 400,250" />
+    <path d="M 50,0 L 50,300 M 100,0 L 100,300 M 150,0 L 150,300 M 200,0 L 200,300 M 255,0 L 255,300 M 300,0 L 300,300 M 350,0 L 350,300" />
+  </g>
+
+  <!-- Decorative circles -->
+  <circle cx="80" cy="80" r="120" fill="#3b82f6" opacity="0.1" filter="url(#glow)" />
+  <circle cx="320" cy="220" r="100" fill="#8b5cf6" opacity="0.08" filter="url(#glow)" />
+
+  <!-- Mockup Editor Panel (Left) -->
+  <rect x="30" y="50" width="150" height="200" rx="8" fill="url(#cardGrad)" stroke="#334155" stroke-width="1.5" />
+  <!-- Title bar -->
+  <rect x="30" y="50" width="150" height="25" rx="8" fill="#1e293b" />
+  <circle cx="42" cy="62" r="3" fill="#ef4444" />
+  <circle cx="50" cy="62" r="3" fill="#f59e0b" />
+  <circle cx="58" cy="62" r="3" fill="#10b981" />
+  <rect x="80" y="59" width="50" height="6" rx="3" fill="#475569" />
+
+  <!-- Input mockups -->
+  <rect x="42" y="90" width="126" height="12" rx="4" fill="#334155" />
+  <rect x="48" y="94" width="40" height="4" rx="2" fill="#64748b" />
+  
+  <rect x="42" y="110" width="126" height="12" rx="4" fill="#334155" />
+  <rect x="48" y="114" width="60" height="4" rx="2" fill="#64748b" />
+
+  <rect x="42" y="130" width="126" height="25" rx="4" fill="#334155" />
+  <rect x="48" y="135" width="114" height="4" rx="2" fill="#64748b" />
+  <rect x="48" y="143" width="80" height="4" rx="2" fill="#64748b" />
+
+  <rect x="42" y="165" width="126" height="12" rx="4" fill="#3b82f6" fill-opacity="0.2" stroke="#3b82f6" stroke-width="1" />
+  <rect x="48" y="169" width="50" height="4" rx="2" fill="#3b82f6" />
+
+  <rect x="42" y="195" width="126" height="15" rx="4" fill="url(#accentGrad)" />
+  <text x="105" y="205" fill="#ffffff" font-family="system-ui, sans-serif" font-weight="bold" font-size="8" text-anchor="middle">GENERATE</text>
+
+  <!-- Mockup Preview Panel (Right) -->
+  <rect x="200" y="40" width="170" height="220" rx="12" fill="#ffffff" filter="url(#glow)" />
+  <!-- Profile picture avatar -->
+  <circle cx="285" cy="85" r="22" fill="#e2e8f0" />
+  <!-- Face/Avatar lines -->
+  <circle cx="285" cy="81" r="8" fill="#cbd5e1" />
+  <path d="M 268,101 C 268,93 302,93 302,101 Z" fill="#cbd5e1" />
+  
+  <!-- Text lines (Developer name, title) -->
+  <rect x="230" y="120" width="110" height="8" rx="4" fill="#1e293b" />
+  <rect x="250" y="134" width="70" height="5" rx="2.5" fill="#64748b" />
+
+  <!-- Divider line -->
+  <line x1="220" y1="150" x2="350" y2="150" stroke="#e2e8f0" stroke-width="1" />
+
+  <!-- Skill badges -->
+  <rect x="225" y="162" width="35" height="10" rx="5" fill="#eff6ff" stroke="#bfdbfe" stroke-width="0.5" />
+  <rect x="232" y="165" width="21" height="4" rx="2" fill="#3b82f6" />
+
+  <rect x="265" y="162" width="40" height="10" rx="5" fill="#faf5ff" stroke="#e9d5ff" stroke-width="0.5" />
+  <rect x="272" y="165" width="26" height="4" rx="2" fill="#8b5cf6" />
+
+  <rect x="310" y="162" width="35" height="10" rx="5" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="0.5" />
+  <rect x="317" y="165" width="21" height="4" rx="2" fill="#22c55e" />
+
+  <!-- Mock project card -->
+  <rect x="220" y="185" width="130" height="55" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1" />
+  <rect x="230" y="195" width="60" height="6" rx="3" fill="#1e293b" />
+  <rect x="230" y="207" width="110" height="4" rx="2" fill="#94a3b8" />
+  <rect x="230" y="215" width="90" height="4" rx="2" fill="#94a3b8" />
+  
+  <!-- Mini link icons -->
+  <circle cx="233" cy="229" r="4" fill="#3b82f6" />
+  <circle cx="245" cy="229" r="4" fill="#64748b" />
+</svg>

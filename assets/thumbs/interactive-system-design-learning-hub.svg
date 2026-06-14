@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a081a" />
+      <stop offset="100%" stop-color="#14112e" />
+    </linearGradient>
+
+    <!-- Glowing Filters -->
+    <filter id="glow-cyan" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter id="glow-purple" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="10" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Node Gradient Colors -->
+    <linearGradient id="cyan-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4" />
+      <stop offset="100%" stop-color="#0891b2" />
+    </linearGradient>
+
+    <linearGradient id="purple-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c084fc" />
+      <stop offset="100%" stop-color="#818cf8" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bg-grad)" />
+
+  <!-- Grid Pattern Overlay -->
+  <g opacity="0.08" stroke="#ffffff" stroke-width="1">
+    <path d="M 0,100 L 800,100 M 0,200 L 800,200 M 0,300 L 800,300 M 0,400 L 800,400 M 0,500 L 800,500" />
+    <path d="M 100,0 L 100,600 M 200,0 L 200,600 M 300,0 L 300,600 M 400,0 L 400,600 M 500,0 L 500,600 M 600,0 L 600,600 M 700,0 L 700,600" />
+  </g>
+
+  <!-- Connection Lines (Data Flow paths) -->
+  <g opacity="0.55" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Client to LB -->
+    <path d="M 150,300 L 320,300" stroke="#06b6d4" stroke-width="3" stroke-dasharray="8 6" filter="url(#glow-cyan)" />
+    
+    <!-- LB to Server A -->
+    <path d="M 380,280 L 520,180" stroke="#a78bfa" stroke-width="3" stroke-dasharray="6 4" filter="url(#glow-purple)" />
+    
+    <!-- LB to Server B -->
+    <path d="M 380,300 L 520,300" stroke="#a78bfa" stroke-width="3" stroke-dasharray="6 4" filter="url(#glow-purple)" />
+    
+    <!-- LB to Server C -->
+    <path d="M 380,320 L 520,420" stroke="#a78bfa" stroke-width="3" stroke-dasharray="6 4" filter="url(#glow-purple)" />
+  </g>
+
+  <!-- Client Node -->
+  <g transform="translate(90, 260)">
+    <rect width="80" height="80" rx="16" fill="url(#cyan-grad)" filter="url(#glow-cyan)" />
+    <text x="40" y="46" font-family="'Outfit', sans-serif" font-size="12" font-weight="800" fill="#ffffff" text-anchor="middle">CLIENT</text>
+    <circle cx="40" cy="24" r="6" fill="#ffffff" />
+  </g>
+
+  <!-- Load Balancer Node -->
+  <g transform="translate(300, 250)">
+    <rect width="100" height="100" rx="20" fill="#1e1b4b" stroke="#06b6d4" stroke-width="3" filter="url(#glow-cyan)" />
+    <text x="50" y="45" font-family="'Outfit', sans-serif" font-size="11" font-weight="900" fill="#06b6d4" text-anchor="middle" letter-spacing="1">LOAD</text>
+    <text x="50" y="60" font-family="'Outfit', sans-serif" font-size="11" font-weight="900" fill="#06b6d4" text-anchor="middle" letter-spacing="1">BALANCER</text>
+    <!-- Balance arrows icon -->
+    <path d="M 35,75 L 50,70 L 65,75 M 50,70 L 50,85" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" />
+  </g>
+
+  <!-- Servers Group -->
+  <!-- Server A -->
+  <g transform="translate(540, 130)">
+    <rect width="140" height="70" rx="12" fill="#1e293b" stroke="#a78bfa" stroke-width="2" filter="url(#glow-purple)" />
+    <text x="70" y="32" font-family="'Outfit', sans-serif" font-size="12" font-weight="800" fill="#ffffff" text-anchor="middle">SERVER A</text>
+    <!-- Small status indicator -->
+    <circle cx="20" cy="50" r="4" fill="#10b981" />
+    <text x="32" y="53" font-family="'Space Grotesk', sans-serif" font-size="9" fill="#94a3b8">Active</text>
+  </g>
+
+  <!-- Server B -->
+  <g transform="translate(540, 265)">
+    <rect width="140" height="70" rx="12" fill="#1e293b" stroke="#a78bfa" stroke-width="2" filter="url(#glow-purple)" />
+    <text x="70" y="32" font-family="'Outfit', sans-serif" font-size="12" font-weight="800" fill="#ffffff" text-anchor="middle">SERVER B</text>
+    <circle cx="20" cy="50" r="4" fill="#10b981" />
+    <text x="32" y="53" font-family="'Space Grotesk', sans-serif" font-size="9" fill="#94a3b8">Active</text>
+  </g>
+
+  <!-- Server C -->
+  <g transform="translate(540, 400)">
+    <rect width="140" height="70" rx="12" fill="#1e293b" stroke="#a78bfa" stroke-width="2" filter="url(#glow-purple)" />
+    <text x="70" y="32" font-family="'Outfit', sans-serif" font-size="12" font-weight="800" fill="#ffffff" text-anchor="middle">SERVER C</text>
+    <circle cx="20" cy="50" r="4" fill="#10b981" />
+    <text x="32" y="53" font-family="'Space Grotesk', sans-serif" font-size="9" fill="#94a3b8">Active</text>
+  </g>
+
+  <!-- Title texts -->
+  <text x="400" y="530" font-family="'Outfit', sans-serif" font-size="28" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="2">
+    SYSTEM DESIGN
+  </text>
+  <text x="400" y="565" font-family="'Outfit', sans-serif" font-size="16" font-weight="700" fill="#06b6d4" text-anchor="middle" letter-spacing="4">
+    LEARNING HUB
+  </text>
+</svg>

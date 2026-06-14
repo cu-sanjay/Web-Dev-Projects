@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CMYK to RGB Converter</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="app">
+  <aside id="control-deck">
+    <div class="deck-header">
+      <h1><span class="accent">CHROMO</span> TRACE //</h1>
+      <p class="subtitle">Subtractive Converter</p>
+    </div>
+
+    <div class="slider-rack">
+      <div class="slider-block" data-channel="cyan">
+        <div class="slider-head">
+          <label class="slider-label">CYAN <span class="chem">(C)</span></label>
+          <span class="slider-value" id="val-cyan">0%</span>
+        </div>
+        <input type="range" class="slider-input slider-cyan" id="slider-cyan" min="0" max="100" value="0">
+      </div>
+      <div class="slider-block" data-channel="magenta">
+        <div class="slider-head">
+          <label class="slider-label">MAGENTA <span class="chem">(M)</span></label>
+          <span class="slider-value" id="val-magenta">0%</span>
+        </div>
+        <input type="range" class="slider-input slider-magenta" id="slider-magenta" min="0" max="100" value="0">
+      </div>
+      <div class="slider-block" data-channel="yellow">
+        <div class="slider-head">
+          <label class="slider-label">YELLOW <span class="chem">(Y)</span></label>
+          <span class="slider-value" id="val-yellow">0%</span>
+        </div>
+        <input type="range" class="slider-input slider-yellow" id="slider-yellow" min="0" max="100" value="0">
+      </div>
+      <div class="slider-block" data-channel="key">
+        <div class="slider-head">
+          <label class="slider-label">KEY BLACK <span class="chem">(K)</span></label>
+          <span class="slider-value" id="val-key">0%</span>
+        </div>
+        <input type="range" class="slider-input slider-key" id="slider-key" min="0" max="100" value="0">
+      </div>
+    </div>
+
+    <div class="telemetry-dash">
+      <div class="telemetry-card">
+        <span class="telemetry-label">Additive Vector</span>
+        <span class="telemetry-value mono" id="rgb-string">rgb(255, 255, 255)</span>
+      </div>
+      <div class="telemetry-card">
+        <span class="telemetry-label">Hex Notation</span>
+        <span class="telemetry-value mono" id="hex-string">#FFFFFF</span>
+      </div>
+    </div>
+
+    <button class="action-btn" id="reset-btn">RESET TO STANDARD ATMOSPHERE</button>
+
+    <div class="diagnostics-banner" id="diagnostics-banner">
+      <span class="diag-dot"></span>
+      <span class="diag-text" id="diag-text">AWAITING TRANSFORMATION MATRIX</span>
+    </div>
+  </aside>
+
+  <main id="viewport">
+    <div class="viewport-header">
+      <span class="model-state" id="model-state">CMYK → sRGB</span>
+      <span class="mode-label">Color Space Graphing Mode</span>
+    </div>
+    <div id="preview-swatch">
+      <span class="swatch-sample" id="swatch-sample">Aa</span>
+    </div>
+  </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

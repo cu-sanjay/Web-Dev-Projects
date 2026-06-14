@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+  <rect width="800" height="450" fill="#0f172a"/>
+
+  <text x="400" y="80"
+        font-family="Arial"
+        font-size="34"
+        fill="white"
+        text-anchor="middle">
+    Git Workflow Playground
+  </text>
+
+  <line x1="150" y1="180" x2="650" y2="180"
+        stroke="#60a5fa"
+        stroke-width="6"/>
+
+  <circle cx="220" cy="180" r="18" fill="#22c55e"/>
+  <circle cx="320" cy="180" r="18" fill="#22c55e"/>
+  <circle cx="420" cy="180" r="18" fill="#22c55e"/>
+
+  <line x1="420" y1="180" x2="520" y2="120"
+        stroke="#f97316"
+        stroke-width="5"/>
+
+  <circle cx="520" cy="120" r="18" fill="#f97316"/>
+
+  <line x1="520" y1="120" x2="620" y2="180"
+        stroke="#f97316"
+        stroke-width="5"/>
+
+  <circle cx="620" cy="180" r="18" fill="#22c55e"/>
+
+  <text x="400" y="350"
+        font-family="Arial"
+        font-size="22"
+        fill="#cbd5e1"
+        text-anchor="middle">
+    Commits • Branches • Merges • Rebases
+  </text>
+</svg>

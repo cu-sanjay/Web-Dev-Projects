@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a051b" />
+      <stop offset="50%" stop-color="#0f0c31" />
+      <stop offset="100%" stop-color="#180e29" />
+    </linearGradient>
+
+    <!-- Neon Glow Filters -->
+    <filter id="glow-purple" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="15" result="blur1" />
+      <feGaussianBlur stdDeviation="30" result="blur2" />
+      <feMerge>
+        <feMergeNode in="blur2" />
+        <feMergeNode in="blur1" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter id="glow-gold" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="10" result="blur1" />
+      <feGaussianBlur stdDeviation="25" result="blur2" />
+      <feMerge>
+        <feMergeNode in="blur2" />
+        <feMergeNode in="blur1" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Box Gradient -->
+    <linearGradient id="box-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#9333ea" />
+      <stop offset="100%" stop-color="#4f46e5" />
+    </linearGradient>
+
+    <!-- Gold Accent Gradient -->
+    <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24" />
+      <stop offset="50%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#d97706" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bg-grad)" />
+
+  <!-- Grid Pattern Overlay -->
+  <g opacity="0.07" stroke="#ffffff" stroke-width="1">
+    <path d="M 0,100 L 800,100 M 0,200 L 800,200 M 0,300 L 800,300 M 0,400 L 800,400 M 0,500 L 800,500" />
+    <path d="M 100,0 L 100,600 M 200,0 L 200,600 M 300,0 L 300,600 M 400,0 L 400,600 M 500,0 L 500,600 M 600,0 L 600,600 M 700,0 L 700,600" />
+  </g>
+
+  <!-- Background Glowing Aura -->
+  <circle cx="400" cy="300" r="180" fill="#a855f7" opacity="0.15" filter="url(#glow-purple)" />
+  <circle cx="400" cy="300" r="100" fill="#eab308" opacity="0.1" filter="url(#glow-gold)" />
+
+  <!-- Particle / Sparkles -->
+  <g opacity="0.8">
+    <circle cx="280" cy="180" r="4" fill="#fbbf24" filter="url(#glow-gold)" />
+    <circle cx="530" cy="220" r="6" fill="#a855f7" filter="url(#glow-purple)" />
+    <circle cx="220" cy="380" r="5" fill="#a855f7" filter="url(#glow-purple)" />
+    <circle cx="580" cy="360" r="4" fill="#fbbf24" filter="url(#glow-gold)" />
+    <circle cx="340" cy="480" r="3" fill="#ffffff" />
+    <circle cx="460" cy="120" r="5" fill="#ffffff" filter="url(#glow-gold)" />
+  </g>
+
+  <!-- 3D Mystery Box (Isometric View) -->
+  <g transform="translate(0, -20)">
+    <!-- Box Shadow -->
+    <ellipse cx="400" cy="460" rx="150" ry="35" fill="#000000" opacity="0.6" />
+
+    <!-- Left Side -->
+    <path d="M 400,410 L 270,335 L 270,215 L 400,285 Z" fill="#3b0764" stroke="#6b21a8" stroke-width="2" />
+
+    <!-- Right Side -->
+    <path d="M 400,410 L 530,335 L 530,215 L 400,285 Z" fill="#1e1b4b" stroke="#312e81" stroke-width="2" />
+
+    <!-- Top Lid Front/Left -->
+    <path d="M 400,285 L 250,200 L 400,115 L 550,200 Z" fill="url(#box-grad)" stroke="#a855f7" stroke-width="3" filter="url(#glow-purple)" />
+
+    <!-- Gold Straps / Ribbons -->
+    <!-- Center Left -->
+    <path d="M 335,248 L 335,368 L 350,359 L 350,240 Z" fill="url(#gold-grad)" />
+    <!-- Center Right -->
+    <path d="M 465,248 L 465,368 L 450,359 L 450,240 Z" fill="url(#gold-grad)" opacity="0.9" />
+
+    <!-- Glowing Question Mark (?) on Left Side -->
+    <text x="335" y="295" font-family="'Outfit', 'Inter', sans-serif" font-size="70" font-weight="900" fill="#f59e0b" filter="url(#glow-gold)" opacity="0.9" text-anchor="middle" transform="skewY(27) scale(0.7, 1)">?</text>
+
+    <!-- Glowing Question Mark (?) on Right Side -->
+    <text x="465" y="475" font-family="'Outfit', 'Inter', sans-serif" font-size="70" font-weight="900" fill="#f59e0b" filter="url(#glow-gold)" opacity="0.9" text-anchor="middle" transform="skewY(-27) scale(0.7, 1)">?</text>
+
+    <!-- Giant Glowing Question Mark Rising from Box -->
+    <g transform="translate(400, 190)">
+      <text x="0" y="0" font-family="'Outfit', 'Inter', sans-serif" font-size="110" font-weight="900" fill="#fbbf24" filter="url(#glow-gold)" text-anchor="middle" opacity="0.95">?</text>
+    </g>
+
+    <!-- Sparkles on Lid Corners -->
+    <path d="M 400,115 L 403,118 L 410,118 L 405,122 L 407,129 L 400,125 L 393,129 L 395,122 L 390,118 L 397,118 Z" fill="#ffffff" filter="url(#glow-gold)" />
+    <path d="M 250,200 L 253,203 L 260,203 L 255,207 L 257,214 L 250,210 L 243,214 L 245,207 L 240,203 L 247,203 Z" fill="#ffffff" filter="url(#glow-gold)" />
+    <path d="M 550,200 L 553,203 L 560,203 L 555,207 L 557,214 L 550,210 L 543,214 L 545,207 L 540,203 L 547,203 Z" fill="#ffffff" filter="url(#glow-gold)" />
+  </g>
+
+  <!-- Text Heading -->
+  <text x="400" y="540" font-family="'Outfit', 'Inter', sans-serif" font-size="34" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="2">
+    MYSTERY BOX
+  </text>
+  <text x="400" y="575" font-family="'Outfit', 'Inter', sans-serif" font-size="18" font-weight="600" fill="#a855f7" text-anchor="middle" letter-spacing="4">
+    OPEN GAME
+  </text>
+</svg>

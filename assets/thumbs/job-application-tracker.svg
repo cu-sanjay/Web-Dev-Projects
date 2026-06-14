@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafc" />
+      <stop offset="100%" stop-color="#e2e8f0" />
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#4f46e5" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.08" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="url(#bgGrad)" />
+
+  <!-- Felt / Board Frame -->
+  <rect x="30" y="30" width="740" height="440" rx="16" fill="#ffffff" filter="url(#shadow)" />
+
+  <!-- Kanban Columns Headers (Simulated) -->
+  <g transform="translate(60, 60)">
+    <!-- Column 1: Wishlist -->
+    <rect x="0" y="0" width="120" height="340" rx="8" fill="#f1f5f9" />
+    <rect x="0" y="0" width="120" height="30" rx="8" fill="#e2e8f0" />
+    <circle cx="15" cy="15" r="5" fill="#64748b" />
+    <rect x="28" y="11" width="60" height="8" rx="2" fill="#64748b" />
+    
+    <!-- Cards inside Column 1 -->
+    <rect x="8" y="40" width="104" height="60" rx="6" fill="#ffffff" filter="url(#shadow)" />
+    <rect x="16" y="52" width="60" height="6" rx="1.5" fill="#0f172a" />
+    <rect x="16" y="66" width="80" height="5" rx="1.5" fill="#94a3b8" />
+    <rect x="16" y="76" width="40" height="10" rx="3" fill="#cbd5e1" />
+
+    <!-- Column 2: Applied -->
+    <rect x="140" y="0" width="120" height="340" rx="8" fill="#f1f5f9" />
+    <rect x="140" y="0" width="120" height="30" rx="8" fill="#e2e8f0" />
+    <circle cx="155" cy="15" r="5" fill="#3b82f6" />
+    <rect x="168" y="11" width="60" height="8" rx="2" fill="#3b82f6" />
+
+    <rect x="148" y="40" width="104" height="60" rx="6" fill="#ffffff" filter="url(#shadow)" />
+    <rect x="156" y="52" width="50" height="6" rx="1.5" fill="#0f172a" />
+    <rect x="156" y="66" width="70" height="5" rx="1.5" fill="#94a3b8" />
+    <rect x="156" y="76" width="40" height="10" rx="3" fill="#bfdbfe" />
+
+    <!-- Column 3: Interviewing -->
+    <rect x="280" y="0" width="120" height="340" rx="8" fill="#f1f5f9" />
+    <rect x="280" y="0" width="120" height="30" rx="8" fill="#e2e8f0" />
+    <circle cx="295" cy="15" r="5" fill="#f59e0b" />
+    <rect x="308" y="11" width="60" height="8" rx="2" fill="#f59e0b" />
+
+    <rect x="288" y="40" width="104" height="60" rx="6" fill="#ffffff" filter="url(#shadow)" />
+    <rect x="296" y="52" width="65" height="6" rx="1.5" fill="#0f172a" />
+    <rect x="296" y="66" width="75" height="5" rx="1.5" fill="#94a3b8" />
+    <rect x="296" y="76" width="50" height="10" rx="3" fill="#fef3c7" />
+
+    <!-- Column 4: Offer -->
+    <rect x="420" y="0" width="120" height="340" rx="8" fill="#f1f5f9" />
+    <rect x="420" y="0" width="120" height="30" rx="8" fill="#e2e8f0" />
+    <circle cx="435" cy="15" r="5" fill="#10b981" />
+    <rect x="448" y="11" width="60" height="8" rx="2" fill="#10b981" />
+
+    <!-- Dragged Card Moving Animation indicator -->
+    <rect x="428" y="40" width="104" height="60" rx="6" fill="#ffffff" stroke="#10b981" stroke-width="2" filter="url(#shadow)" />
+    <rect x="436" y="52" width="55" height="6" rx="1.5" fill="#0f172a" />
+    <rect x="436" y="66" width="65" height="5" rx="1.5" fill="#94a3b8" />
+    <rect x="436" y="76" width="40" height="10" rx="3" fill="#d1fae5" />
+
+    <!-- Column 5: Rejected -->
+    <rect x="560" y="0" width="120" height="340" rx="8" fill="#f1f5f9" />
+    <rect x="560" y="0" width="120" height="30" rx="8" fill="#e2e8f0" />
+    <circle cx="575" cy="15" r="5" fill="#ef4444" />
+    <rect x="588" y="11" width="60" height="8" rx="2" fill="#ef4444" />
+  </g>
+
+  <!-- Title Text -->
+  <text x="400" y="440" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="28" font-weight="800" fill="#0f172a" text-anchor="middle" letter-spacing="2">JOB TRACKER</text>
+</svg>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Compare | Product Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <!-- Background Elements -->
+    <div class="bg-mesh"></div>
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+
+    <div class="app-layout">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar glass-bento">
+            <div class="brand">
+                <div class="brand-logo">N_X</div>
+                <h1 class="brand-text">NEXUS</h1>
+            </div>
+            
+            <ul class="nav-links">
+                <li><button class="nav-btn active" data-target="dashboard">
+                    <span class="nav-icon">◱</span> Dashboard
+                </button></li>
+                <li><button class="nav-btn" data-target="compare">
+                    <span class="nav-icon">⇋</span> Compare View
+                </button></li>
+                <li><button class="nav-btn" data-target="wishlist">
+                    <span class="nav-icon">♡</span> Wishlist
+                </button></li>
+            </ul>
+
+            <div class="theme-controls mt-auto">
+                <button id="themeToggle" class="cyber-btn sm">
+                    <span class="cyber-btn-glitch"></span>
+                    <span class="cyber-btn-txt" id="themeLabel">LIGHT MODE</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Main Workspace -->
+        <main class="workspace">
+            <!-- Topbar -->
+            <header class="topbar glass-bento">
+                <div class="search-box">
+                    <span class="search-icon">⌕</span>
+                    <input type="text" id="searchInput" placeholder="Search product matrix...">
+                </div>
+                <div class="top-actions">
+                    <button class="cyber-btn outline" id="addProductBtn">
+                        <span class="cyber-btn-txt">+ NEW ENTRY</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Dashboard View -->
+            <section id="dashboardView" class="view-section active">
+                <div class="bento-grid">
+                    <!-- Stats / Filters -->
+                    <div class="bento-card span-2 glass-bento filter-panel">
+                        <h3 class="bento-title">MATRIX FILTERS</h3>
+                        <div class="filter-controls">
+                            <div class="control-group">
+                                <label>Category</label>
+                                <select id="filterCategory" class="cyber-select">
+                                    <option value="All">All Categories</option>
+                                    <option value="Smartphones">Smartphones</option>
+                                    <option value="Laptops">Laptops</option>
+                                    <option value="Headphones">Headphones</option>
+                                    <option value="Smart Watches">Smart Watches</option>
+                                    <option value="Home Appliances">Home Appliances</option>
+                                    <option value="Gaming Devices">Gaming Devices</option>
+                                    <option value="Cameras">Cameras</option>
+                                    <option value="Custom">Custom</option>
+                                </select>
+                            </div>
+                            <div class="control-group">
+                                <label>Max Price ($)</label>
+                                <input type="range" id="filterPrice" min="0" max="5000" step="50" value="5000" class="cyber-range">
+                                <span class="range-val" id="priceValDisplay">5000</span>
+                            </div>
+                            <div class="control-group">
+                                <label>Sort By</label>
+                                <select id="sortOption" class="cyber-select">
+                                    <option value="newest">Newest Added</option>
+                                    <option value="price-asc">Price (Low to High)</option>
+                                    <option value="price-desc">Price (High to Low)</option>
+                                    <option value="rating-desc">Rating (High to Low)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Compare Quick Actions -->
+                    <div class="bento-card glass-bento compare-status">
+                        <h3 class="bento-title">COMPARE QUEUE</h3>
+                        <div class="queue-count"><span id="compareCount">0</span> / 4</div>
+                        <p class="queue-desc">Select up to 4 items to analyze.</p>
+                        <button class="cyber-btn w-full mt-3" id="goToCompareBtn">
+                            <span class="cyber-btn-txt">ANALYZE NOW</span>
+                        </button>
+                    </div>
+
+                    <!-- Products Grid -->
+                    <div class="bento-card span-3 glass-bento products-area" style="grid-row: span 2;">
+                        <div class="area-header">
+                            <h3 class="bento-title">DATABASE CATALOG</h3>
+                            <span class="catalog-count" id="catalogCount">0 Entities</span>
+                        </div>
+                        <div class="catalog-grid" id="catalogGrid">
+                            <!-- Populated by JS -->
+                        </div>
+                        <div id="emptyCatalog" class="empty-state hidden">
+                            <div class="glitch-icon">∅</div>
+                            <p>DATABASE EMPTY. INITIALIZE NEW ENTRY.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Compare View -->
+            <section id="compareView" class="view-section">
+                <div class="glass-bento compare-container">
+                    <div class="area-header mb-4">
+                        <h2 class="bento-title text-xl">SIDE-BY-SIDE ANALYSIS</h2>
+                        <button class="cyber-btn outline sm" id="clearCompareBtn">
+                            <span class="cyber-btn-txt">CLEAR QUEUE</span>
+                        </button>
+                    </div>
+                    
+                    <div class="compare-table-wrapper" id="compareTableWrapper">
+                        <!-- Populated by JS -->
+                    </div>
+                    <div id="emptyCompare" class="empty-state">
+                        <div class="glitch-icon">⇋</div>
+                        <p>NO ENTRIES IN QUEUE. SELECT FROM DASHBOARD.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Wishlist View -->
+            <section id="wishlistView" class="view-section">
+                <div class="glass-bento h-full flex-col">
+                    <div class="area-header mb-4">
+                        <h2 class="bento-title text-xl">SAVED ENTITIES (WISHLIST)</h2>
+                    </div>
+                    <div class="catalog-grid" id="wishlistGrid">
+                        <!-- Populated by JS -->
+                    </div>
+                    <div id="emptyWishlist" class="empty-state hidden">
+                        <div class="glitch-icon">♡</div>
+                        <p>NO SAVED ENTITIES FOUND.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal: Add/Edit Product -->
+    <div class="modal-overlay hidden" id="productModal">
+        <div class="glass-bento modal-content cyber-borders">
+            <div class="modal-header">
+                <h2 class="bento-title" id="modalTitle">INITIALIZE ENTRY</h2>
+                <button class="icon-btn close-modal">✕</button>
+            </div>
+            <form id="productForm">
+                <input type="hidden" id="productId">
+                <div class="form-grid">
+                    <div class="control-group">
+                        <label>Product Name</label>
+                        <input type="text" id="pName" class="cyber-input" required placeholder="e.g. Nexus Phone">
+                    </div>
+                    <div class="control-group">
+                        <label>Brand</label>
+                        <input type="text" id="pBrand" class="cyber-input" required placeholder="e.g. NexusCorp">
+                    </div>
+                    <div class="control-group">
+                        <label>Category</label>
+                        <select id="pCategory" class="cyber-select" required>
+                            <option value="Smartphones">Smartphones</option>
+                            <option value="Laptops">Laptops</option>
+                            <option value="Headphones">Headphones</option>
+                            <option value="Smart Watches">Smart Watches</option>
+                            <option value="Home Appliances">Home Appliances</option>
+                            <option value="Gaming Devices">Gaming Devices</option>
+                            <option value="Cameras">Cameras</option>
+                            <option value="Custom">Custom</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label>Price ($)</label>
+                        <input type="number" step="0.01" id="pPrice" class="cyber-input" required placeholder="0.00">
+                    </div>
+                    <div class="control-group">
+                        <label>Rating (1-5)</label>
+                        <input type="number" step="0.1" min="1" max="5" id="pRating" class="cyber-input" required placeholder="4.5">
+                    </div>
+                    <div class="control-group">
+                        <label>Warranty Details</label>
+                        <input type="text" id="pWarranty" class="cyber-input" placeholder="e.g. 1 Year Limited">
+                    </div>
+                    <div class="control-group span-2">
+                        <label>Key Specifications (Comma separated)</label>
+                        <input type="text" id="pSpecs" class="cyber-input" placeholder="e.g. 8GB RAM, 256GB SSD, 120Hz Display">
+                    </div>
+                    <div class="control-group span-2">
+                        <label>Features</label>
+                        <textarea id="pFeatures" class="cyber-input" rows="3" placeholder="List amazing features..."></textarea>
+                    </div>
+                </div>
+                <div class="mt-4 flex-end">
+                    <button type="submit" class="cyber-btn">
+                        <span class="cyber-btn-txt" id="saveBtnTxt">SAVE ENTRY</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="cyber-toast hidden">
+        <span class="toast-msg">Action Successful</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

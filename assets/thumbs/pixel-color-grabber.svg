@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200">
+  <rect width="320" height="200" fill="#080911"/>
+  <rect x="20" y="18" width="180" height="164" rx="8" fill="#0b0e18" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <rect x="28" y="26" width="164" height="120" rx="4" fill="#111627"/>
+  <rect x="28" y="26" width="164" height="120" rx="4" fill="url(#g)" opacity="0.3"/>
+  <text x="110" y="95" font-family="monospace" font-size="7" fill="#373e4b" text-anchor="middle">IMAGE PREVIEW</text>
+  <line x1="60" y1="152" x2="156" y2="152" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+  <text x="110" y="167" font-family="monospace" font-size="5" fill="#475569" text-anchor="middle">800 × 600 · click to sample</text>
+  <rect x="214" y="18" width="90" height="40" rx="6" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+  <circle cx="245" cy="38" r="14" fill="#3b82f6" stroke="rgba(255,255,255,0.06)" stroke-width="1.5"/>
+  <text x="214" y="60" font-family="monospace" font-size="4.5" fill="#475569">HEX</text>
+  <text x="250" y="60" font-family="monospace" font-size="4.5" fill="#94a3b8">#3b82f6</text>
+  <rect x="214" y="68" width="90" height="16" rx="4" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+  <text x="220" y="79" font-family="monospace" font-size="4.5" fill="#475569">RGB</text>
+  <text x="250" y="79" font-family="monospace" font-size="4.5" fill="#94a3b8">(59,130,246)</text>
+  <rect x="214" y="90" width="90" height="16" rx="4" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+  <text x="220" y="101" font-family="monospace" font-size="4.5" fill="#475569">HSL</text>
+  <text x="250" y="101" font-family="monospace" font-size="4.5" fill="#94a3b8">(217,91%,60%)</text>
+  <rect x="214" y="118" width="90" height="30" rx="6" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+  <text x="259" y="130" font-family="monospace" font-size="4.5" fill="#475569" text-anchor="middle">PALETTE</text>
+  <g transform="translate(218 140)">
+    <rect x="0" y="0" width="13" height="6" rx="2" fill="#1d4ed8"/>
+    <rect x="16" y="0" width="13" height="6" rx="2" fill="#2563eb"/>
+    <rect x="32" y="0" width="13" height="6" rx="2" fill="#3b82f6"/>
+    <rect x="48" y="0" width="13" height="6" rx="2" fill="#60a5fa"/>
+    <rect x="64" y="0" width="13" height="6" rx="2" fill="#93c5fd"/>
+  </g>
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3b82f6"/><stop offset="50%" stop-color="#8b5cf6"/><stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+  </defs>
+</svg>

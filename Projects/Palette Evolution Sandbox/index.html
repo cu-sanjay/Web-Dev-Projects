@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Palette Evolution Sandbox</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <aside class="panel left-panel">
+    <div class="panel-header">
+      <div class="brand">GENETIC CHROMO</div>
+      <div class="brand-sub">// Palette Evolution</div>
+    </div>
+
+    <div class="telemetry-deck">
+      <div class="telem-card">
+        <span class="telem-label">Active Generation</span>
+        <span id="telem-gen" class="telem-value">GEN: 00</span>
+      </div>
+      <div class="telem-card">
+        <span class="telem-label">Hue Distance</span>
+        <span id="telem-hue-dist" class="telem-value">0°</span>
+      </div>
+      <div class="telem-card">
+        <span class="telem-label">Session Iterations</span>
+        <span id="telem-iter" class="telem-value">0</span>
+      </div>
+    </div>
+
+    <div class="mutate-control">
+      <div class="ctrl-header">
+        <span class="ctrl-label">Mutation Rate</span>
+        <span id="mutate-display" class="ctrl-value">5%</span>
+      </div>
+      <input type="range" id="mutate-slider" min="0" max="20" value="5" step="0.5" class="mutate-range">
+    </div>
+
+    <div class="action-buttons">
+      <button id="btn-evolve" class="action-btn primary">EVOLVE LINEAGE ROW</button>
+      <button id="btn-mutate" class="action-btn secondary">MUTATE RANDOM PARENTAL SEEDS</button>
+    </div>
+
+    <div class="diagnostics-bar">
+      <span id="diag-status" class="diag-status">AWAITING INTERPOLATION VECTOR</span>
+    </div>
+  </aside>
+
+  <main class="viewport">
+    <header class="viewport-header">
+      <span class="sim-source">INTERACTIVE CHROMATIC BREEDING CANVAS</span>
+      <span id="gen-badge" class="gen-badge">GEN 0</span>
+    </header>
+
+    <div class="parent-deck">
+      <div class="parent-card" id="parent-a" style="background:#3b82f6">
+        <div class="parent-overlay">
+          <span class="parent-badge parent-a-badge">PARENT A</span>
+          <div class="parent-inputs">
+            <input type="text" class="hex-input" id="hex-a" value="#3B82F6" spellcheck="false">
+            <input type="color" id="picker-a" value="#3b82f6">
+          </div>
+        </div>
+      </div>
+      <div class="parent-card" id="parent-b" style="background:#a855f7">
+        <div class="parent-overlay">
+          <span class="parent-badge parent-b-badge">PARENT B</span>
+          <div class="parent-inputs">
+            <input type="text" class="hex-input" id="hex-b" value="#A855F7" spellcheck="false">
+            <input type="color" id="picker-b" value="#a855f7">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="offspring-section">
+      <div class="offspring-header">
+        <span class="offspring-title">OFFSPRING LINEAGE</span>
+        <span class="offspring-count">6 CHILDREN</span>
+      </div>
+      <div class="child-strip" id="child-strip"></div>
+    </div>
+  </main>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

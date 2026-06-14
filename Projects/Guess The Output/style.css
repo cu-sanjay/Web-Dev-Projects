@@ -1,0 +1,108 @@
+:root {
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --accent: #d2e3fc;
+            --success: #c6f6d5;
+            --error: #fed7d7;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            color: #e8eaed;
+            font-family: 'Google Sans', Roboto, Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px;
+            width: 90%;
+            max-width: 650px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            position: relative;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            border: 1px solid var(--glass-border);
+        }
+
+        pre {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 24px;
+            border-radius: 12px;
+            font-family: 'Fira Code', 'Consolas', monospace;
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            color: #8ab4f8;
+        }
+
+        .input-area {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 14px 20px;
+            color: white;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus { border-color: #8ab4f8; background: rgba(255, 255, 255, 0.15); }
+
+        button {
+            background: #8ab4f8;
+            color: #202124;
+            border: none;
+            padding: 0 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover { transform: translateY(-2px); opacity: 0.9; }
+
+        .feedback {
+            margin-top: 20px;
+            padding: 16px;
+            border-radius: 12px;
+            display: none;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        .feedback.correct { background: rgba(72, 187, 120, 0.2); color: #81c995; border: 1px solid #81c995; }
+        .feedback.wrong { background: rgba(245, 101, 101, 0.2); color: #f28b82; border: 1px solid #f28b82; }
+
+        .explanation { margin-top: 8px; font-size: 14px; opacity: 0.8; }
+
+        @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Literacy Simulator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Setup Screen -->
+    <div id="setupScreen" class="setup-screen active">
+        <button id="themeToggleSetup" class="btn btn-outline theme-toggle">🌓 Toggle Theme</button>
+        <div class="card max-w-md mx-auto">
+            <h1 class="text-accent mb-2">FinSim</h1>
+            <p class="text-muted mb-4">Embark on a virtual journey to master budgeting, saving, and investing. See how the decisions you make today affect your wealth tomorrow.</p>
+            
+            <form id="setupForm">
+                <div class="form-group text-left">
+                    <label>Select Starting Monthly Salary</label>
+                    <select id="startingIncome" class="form-control" required>
+                        <option value="2500">$2,500 / mo (Entry Level)</option>
+                        <option value="4000" selected>$4,000 / mo (Professional)</option>
+                        <option value="7000">$7,000 / mo (Senior)</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary w-full mt-3">Start Simulation</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- App Layout -->
+    <div id="appLayout" class="app-layout hidden">
+        <header class="header">
+            <div class="logo">
+                <h2>📊 FinSim <span id="timeDisplay" class="text-muted text-sm ml-2">Year 1, Month 1</span></h2>
+            </div>
+            <div class="header-controls">
+                <div class="score-display">
+                    Health Score: <span id="healthScoreDisplay" class="text-accent">50/100</span>
+                </div>
+                <button id="themeToggleApp" class="btn btn-outline icon-btn">🌓</button>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <nav class="nav-links">
+                    <button class="nav-btn active" data-target="dashboard">Dashboard</button>
+                    <button class="nav-btn" data-target="budget">Budget & Flow</button>
+                    <button class="nav-btn" data-target="investments">Investments</button>
+                    <button class="nav-btn" data-target="debt">Debt Management</button>
+                </nav>
+                <div class="sidebar-footer">
+                    <button id="resetBtn" class="btn btn-outline text-danger w-full">Reset Progress</button>
+                </div>
+            </aside>
+
+            <!-- Workspace -->
+            <main class="workspace">
+                
+                <!-- Dashboard View -->
+                <section id="dashboardView" class="view-section active">
+                    <h2 class="view-title">Financial Overview</h2>
+                    
+                    <div class="grid-3 mb-4">
+                        <div class="card stat-card border-accent">
+                            <div class="stat-label">Net Worth</div>
+                            <div class="stat-value text-accent" id="netWorthDisplay">$0</div>
+                        </div>
+                        <div class="card stat-card border-info">
+                            <div class="stat-label">Available Cash</div>
+                            <div class="stat-value text-info" id="cashDisplay">$0</div>
+                        </div>
+                        <div class="card stat-card border-danger">
+                            <div class="stat-label">Total Debt</div>
+                            <div class="stat-value text-danger" id="totalDebtDisplay">$0</div>
+                        </div>
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="card">
+                            <h3 class="mb-3">Monthly Cash Flow</h3>
+                            <div class="flex justify-between mb-2">
+                                <span>Income:</span>
+                                <span class="text-accent font-bold" id="dashIncome">+$0</span>
+                            </div>
+                            <div class="flex justify-between mb-2 border-bottom pb-3">
+                                <span>Expenses:</span>
+                                <span class="text-danger font-bold" id="dashExpenses">-$0</span>
+                            </div>
+                            <div class="flex justify-between font-bold mt-3">
+                                <span>Net Savings:</span>
+                                <span id="dashNetSavings">$0</span>
+                            </div>
+
+                            <div class="mt-4 text-center border-top pt-4">
+                                <button id="advanceBtn" class="btn btn-primary w-full p-lg font-bold">⏩ Advance 1 Month</button>
+                                <p class="text-sm text-muted mt-2">Click to simulate the next month's finances and random events.</p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <h3 class="mb-3">Recent Events Log</h3>
+                            <div id="eventsLog" class="events-log">
+                                <!-- Populated by JS -->
+                                <p class="text-muted text-center mt-4">No events yet.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Budget View -->
+                <section id="budgetView" class="view-section hidden">
+                    <h2 class="view-title">Monthly Budget Planner</h2>
+                    <p class="text-muted mb-4">Adjust your lifestyle choices. Lowering expenses increases your monthly savings rate.</p>
+
+                    <div class="grid-2">
+                        <div class="card">
+                            <h3 class="mb-3">Fixed & Variable Expenses</h3>
+                            
+                            <div class="budget-sliders" id="budgetSliders">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="card stat-card border-danger mb-3">
+                                <div class="stat-label">Total Monthly Expenses</div>
+                                <div class="stat-value text-danger" id="budgetTotalExp">$0</div>
+                            </div>
+                            <div class="card stat-card border-accent mb-3">
+                                <div class="stat-label">Leftover for Savings/Investing</div>
+                                <div class="stat-value text-accent" id="budgetLeftover">$0</div>
+                            </div>
+                            <div class="card">
+                                <h3>Budgeting Tip</h3>
+                                <p class="text-muted text-sm mt-2">Following the 50/30/20 rule? Try to keep Needs (housing, food, utilities) under 50% of your income, Wants under 30%, and allocate 20% to savings and debt payoff.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Investments View -->
+                <section id="investmentsView" class="view-section hidden">
+                    <h2 class="view-title">Investment Portfolio</h2>
+                    
+                    <div class="card stat-card border-accent mb-4">
+                        <div class="stat-label">Total Invested Value</div>
+                        <div class="stat-value text-accent" id="totalInvestmentsDisplay">$0</div>
+                    </div>
+
+                    <div class="grid-3">
+                        <div class="card text-center">
+                            <h3>Index Funds (Stocks)</h3>
+                            <div class="inv-value text-info" id="invStocks">$0</div>
+                            <p class="text-sm text-muted mb-3">Moderate risk. Historical return ~7-10% annually.</p>
+                            <button class="btn btn-outline text-accent border-accent w-full mb-2" onclick="buyAsset('stocks', 500)">Buy $500</button>
+                            <button class="btn btn-outline text-danger border-danger w-full" onclick="sellAsset('stocks', 500)">Sell $500</button>
+                        </div>
+
+                        <div class="card text-center">
+                            <h3>Crypto</h3>
+                            <div class="inv-value text-warning" id="invCrypto">$0</div>
+                            <p class="text-sm text-muted mb-3">High risk. Highly volatile.</p>
+                            <button class="btn btn-outline text-accent border-accent w-full mb-2" onclick="buyAsset('crypto', 100)">Buy $100</button>
+                            <button class="btn btn-outline text-danger border-danger w-full" onclick="sellAsset('crypto', 100)">Sell $100</button>
+                        </div>
+
+                        <div class="card text-center">
+                            <h3>Real Estate (REITs)</h3>
+                            <div class="inv-value text-accent" id="invRealEstate">$0</div>
+                            <p class="text-sm text-muted mb-3">Low risk. Steady slow growth and dividends.</p>
+                            <button class="btn btn-outline text-accent border-accent w-full mb-2" onclick="buyAsset('realEstate', 1000)">Buy $1,000</button>
+                            <button class="btn btn-outline text-danger border-danger w-full" onclick="sellAsset('realEstate', 1000)">Sell $1,000</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Debt View -->
+                <section id="debtView" class="view-section hidden">
+                    <h2 class="view-title">Debt Management</h2>
+                    
+                    <div class="card stat-card border-danger mb-4">
+                        <div class="stat-label">Total Outstanding Debt</div>
+                        <div class="stat-value text-danger" id="debtPageTotal">$0</div>
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="card">
+                            <h3>Credit Card Debt</h3>
+                            <div class="inv-value text-danger" id="debtCreditCard">$0</div>
+                            <p class="text-sm text-muted">Interest Rate: 24% APR (2% per month)</p>
+                            <p class="text-sm text-warning mt-2 mb-3">Warning: High interest debt should be paid off immediately to avoid compounding interest traps.</p>
+                            <button class="btn btn-outline w-full" onclick="payDebt('creditCard', 500)">Make $500 Extra Payment</button>
+                        </div>
+
+                        <div class="card">
+                            <h3>Student Loans</h3>
+                            <div class="inv-value text-danger" id="debtStudentLoan">$0</div>
+                            <p class="text-sm text-muted">Interest Rate: 6% APR (0.5% per month)</p>
+                            <p class="text-sm text-info mt-2 mb-3">Note: Lower interest debt. Continue making regular monthly payments from your budget.</p>
+                            <button class="btn btn-outline w-full" onclick="payDebt('studentLoan', 1000)">Make $1,000 Extra Payment</button>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast hidden"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

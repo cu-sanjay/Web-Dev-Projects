@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FDB813" stop-opacity="0.3"/>
+      <stop offset="40%" stop-color="#FDB813" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#FDB813" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="mercuryGrad" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#e0e0e0"/>
+      <stop offset="100%" stop-color="#b5b5b5"/>
+    </radialGradient>
+    <radialGradient id="venusGrad" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#f5e6c8"/>
+      <stop offset="100%" stop-color="#e8cda0"/>
+    </radialGradient>
+    <radialGradient id="earthGrad" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#6db3e0"/>
+      <stop offset="100%" stop-color="#4b8bbe"/>
+    </radialGradient>
+    <radialGradient id="marsGrad" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#e06030"/>
+      <stop offset="100%" stop-color="#c1440e"/>
+    </radialGradient>
+    <radialGradient id="jupiterGrad" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#e8c8a0"/>
+      <stop offset="100%" stop-color="#d4a574"/>
+    </radialGradient>
+  </defs>
+  <rect width="1280" height="720" fill="#070a13"/>
+  <rect x="0" y="0" width="360" height="720" fill="#111827" rx="0"/>
+  <rect x="360" y="0" width="2" height="720" fill="#1f2937"/>
+  <text x="40" y="60" fill="#f8fafc" font-family="monospace" font-size="14" font-weight="bold" letter-spacing="1.5">ORBITAL MECHANICS</text>
+  <text x="40" y="80" fill="#94a3b8" font-family="monospace" font-size="11" letter-spacing="1">Solar System Engine</text>
+  <rect x="30" y="110" width="300" height="120" fill="rgba(26,31,46,0.8)" rx="8"/>
+  <rect x="30" y="250" width="300" height="90" fill="rgba(26,31,46,0.8)" rx="8"/>
+  <text x="40" y="272" fill="#64748b" font-family="monospace" font-size="11" letter-spacing="1">LIVE TELEMETRY</text>
+  <text x="40" y="300" fill="#64748b" font-family="monospace" font-size="10">SPEED MULTIPLIER</text>
+  <text x="315" y="300" fill="#f8fafc" font-family="monospace" font-size="12" text-anchor="end">1.0x</text>
+  <text x="40" y="320" fill="#64748b" font-family="monospace" font-size="10">SIMULATION TIME</text>
+  <text x="315" y="320" fill="#f8fafc" font-family="monospace" font-size="12" text-anchor="end">00:00:00</text>
+  <rect x="30" y="360" width="300" height="330" fill="rgba(26,31,46,0.8)" rx="8"/>
+  <text x="40" y="382" fill="#64748b" font-family="monospace" font-size="11" letter-spacing="1">SELECTED BODY DOSSIER</text>
+  <text x="40" y="420" fill="#64748b" font-family="monospace" font-size="10">NAME</text>
+  <text x="40" y="436" fill="#f8fafc" font-family="monospace" font-size="13">Earth</text>
+  <line x1="40" y1="446" x2="310" y2="446" stroke="rgba(31,41,55,0.5)" stroke-width="1"/>
+  <text x="40" y="468" fill="#64748b" font-family="monospace" font-size="10">ORBITAL PERIOD</text>
+  <text x="40" y="484" fill="#f8fafc" font-family="monospace" font-size="13">365.25 days</text>
+  <line x1="40" y1="494" x2="310" y2="494" stroke="rgba(31,41,55,0.5)" stroke-width="1"/>
+  <text x="40" y="516" fill="#64748b" font-family="monospace" font-size="10">DISTANCE FROM STAR</text>
+  <text x="40" y="532" fill="#f8fafc" font-family="monospace" font-size="13">1.00 AU</text>
+  <line x1="40" y1="542" x2="310" y2="542" stroke="rgba(31,41,55,0.5)" stroke-width="1"/>
+  <text x="40" y="564" fill="#64748b" font-family="monospace" font-size="10">FUN FACT</text>
+  <text x="40" y="582" fill="#f8fafc" font-family="monospace" font-size="12">The only known planet to</text>
+  <text x="40" y="600" fill="#f8fafc" font-family="monospace" font-size="12">harbor life, with 71% of its</text>
+  <text x="40" y="618" fill="#f8fafc" font-family="monospace" font-size="12">surface covered in water.</text>
+  <circle cx="820" cy="360" r="260" fill="url(#sunGlow)"/>
+  <circle cx="820" cy="360" r="60" fill="#1e293b" fill-opacity="0.15" stroke="#1e293b" stroke-width="1" stroke-dasharray="4,6"/>
+  <circle cx="820" cy="360" r="100" fill="none" stroke="#1e293b" stroke-width="1" stroke-dasharray="4,6"/>
+  <circle cx="820" cy="360" r="145" fill="none" stroke="#1e293b" stroke-width="1" stroke-dasharray="4,6"/>
+  <circle cx="820" cy="360" r="195" fill="none" stroke="#1e293b" stroke-width="1" stroke-dasharray="4,6"/>
+  <circle cx="820" cy="360" r="250" fill="none" stroke="#1e293b" stroke-width="1" stroke-dasharray="4,6"/>
+  <circle cx="820" cy="360" r="22" fill="#FDB813"/>
+  <circle cx="820" cy="360" r="30" fill="none" stroke="rgba(253,184,19,0.3)" stroke-width="2"/>
+  <circle cx="890" cy="360" r="5" fill="url(#mercuryGrad)"/>
+  <circle cx="800" cy="260" r="7" fill="url(#venusGrad)"/>
+  <circle cx="965" cy="360" r="8" fill="url(#earthGrad)"/>
+  <circle cx="820" cy="555" r="6" fill="url(#marsGrad)"/>
+  <circle cx="770" cy="115" r="14" fill="url(#jupiterGrad)"/>
+  <circle cx="965" cy="360" r="13" fill="none" stroke="#10b981" stroke-width="2"/>
+  <circle cx="965" cy="360" r="16" fill="none" stroke="rgba(16,185,129,0.2)" stroke-width="5"/>
+  <text x="890" y="375" fill="#94a3b8" font-family="monospace" font-size="9" text-anchor="middle">Mercury</text>
+  <text x="800" y="277" fill="#94a3b8" font-family="monospace" font-size="9" text-anchor="middle">Venus</text>
+  <text x="965" y="380" fill="#94a3b8" font-family="monospace" font-size="9" text-anchor="middle">Earth</text>
+  <text x="820" y="571" fill="#94a3b8" font-family="monospace" font-size="9" text-anchor="middle">Mars</text>
+  <text x="770" y="139" fill="#94a3b8" font-family="monospace" font-size="9" text-anchor="middle">Jupiter</text>
+  <text x="820" y="670" fill="#64748b" font-family="monospace" font-size="12" text-anchor="middle" letter-spacing="2">SOLAR SYSTEM SIMULATION</text>
+</svg>

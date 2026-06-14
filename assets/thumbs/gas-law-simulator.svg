@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#070a13"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+
+  <rect x="40" y="80" width="620" height="440" rx="0" fill="none" stroke="#1f2937" stroke-width="3"/>
+
+  <rect x="660" y="80" width="6" height="440" rx="0" fill="#f59e0b" stroke="#f59e0b" stroke-width="2"/>
+  <rect x="656" y="90" width="14" height="18" rx="2" fill="#f59e0b66"/>
+  <rect x="656" y="492" width="14" height="18" rx="2" fill="#f59e0b66"/>
+
+  <circle cx="180" cy="260" r="5" fill="#3b82f6" opacity="0.9"/>
+  <circle cx="220" cy="340" r="4" fill="#3b82f6" opacity="0.8"/>
+  <circle cx="300" cy="200" r="5" fill="#4b8bf7" opacity="0.85"/>
+  <circle cx="350" cy="380" r="4" fill="#5b9bf8" opacity="0.7"/>
+  <circle cx="280" cy="320" r="5" fill="#6b9bf9" opacity="0.75"/>
+  <circle cx="420" cy="250" r="4" fill="#8b8bfa" opacity="0.65"/>
+  <circle cx="380" cy="160" r="5" fill="#f97316" opacity="0.7"/>
+  <circle cx="480" cy="300" r="4" fill="#fb923c" opacity="0.6"/>
+  <circle cx="520" cy="220" r="5" fill="#fcb045" opacity="0.55"/>
+  <circle cx="440" cy="400" r="4" fill="#f87171" opacity="0.6"/>
+  <circle cx="560" cy="340" r="5" fill="#ef4444" opacity="0.5"/>
+  <circle cx="160" cy="420" r="4" fill="#3b82f6" opacity="0.7"/>
+  <circle cx="240" cy="180" r="3" fill="#4b8bf7" opacity="0.75"/>
+  <circle cx="340" cy="300" r="5" fill="#6b9bf9" opacity="0.7"/>
+  <circle cx="500" cy="160" r="4" fill="#f97316" opacity="0.6"/>
+  <circle cx="580" cy="280" r="3" fill="#ef4444" opacity="0.5"/>
+  <circle cx="460" cy="460" r="4" fill="#f87171" opacity="0.55"/>
+  <circle cx="200" cy="160" r="3" fill="#3b82f6" opacity="0.8"/>
+  <circle cx="320" cy="440" r="4" fill="#5b9bf8" opacity="0.65"/>
+  <circle cx="600" cy="400" r="4" fill="#ef4444" opacity="0.45"/>
+  <circle cx="400" cy="340" r="5" fill="#fb923c" opacity="0.65"/>
+  <circle cx="260" cy="280" r="3" fill="#3b82f6" opacity="0.75"/>
+  <circle cx="540" cy="440" r="4" fill="#f87171" opacity="0.5"/>
+  <circle cx="140" cy="340" r="4" fill="#3b82f6" opacity="0.7"/>
+  <circle cx="440" cy="180" r="3" fill="#fcb045" opacity="0.6"/>
+
+  <rect x="0" y="0" width="800" height="48" fill="#070a13" opacity="0.85"/>
+  <text x="400" y="29" text-anchor="middle" font-family="ui-monospace,Consolas,monospace" font-size="14" font-weight="700" letter-spacing="2" fill="#f8fafc">GAS DYNAMICS</text>
+  <text x="400" y="42" text-anchor="middle" font-family="ui-monospace,Consolas,monospace" font-size="8" letter-spacing="1.5" fill="#64748b">THERMODYNAMIC LAB</text>
+
+  <rect x="0" y="544" width="800" height="56" fill="#070a13" opacity="0.85"/>
+  <text x="400" y="566" text-anchor="middle" font-family="ui-monospace,Consolas,monospace" font-size="9" fill="#10b981" letter-spacing="1">PV = nRT — IDEAL GAS LAW SIMULATOR</text>
+  <text x="400" y="582" text-anchor="middle" font-family="ui-monospace,Consolas,monospace" font-size="8" fill="#64748b" letter-spacing="0.5">REAL-TIME KINETIC PARTICLE ENGINE</text>
+
+  <text x="90" y="106" font-family="ui-monospace,Consolas,monospace" font-size="8" fill="#64748b">CHAMBER</text>
+  <text x="640" y="106" text-anchor="end" font-family="ui-monospace,Consolas,monospace" font-size="8" fill="#f59e0b">PISTON</text>
+
+  <line x1="0" y1="530" x2="800" y2="530" stroke="#1f2937" stroke-width="0.5"/>
+  <text x="350" y="540" text-anchor="end" font-family="ui-monospace,Consolas,monospace" font-size="8" fill="#f59e0b">P = 2.46 atm</text>
+  <text x="450" y="540" text-anchor="start" font-family="ui-monospace,Consolas,monospace" font-size="8" fill="#3b82f6">T = 300 K</text>
+</svg>

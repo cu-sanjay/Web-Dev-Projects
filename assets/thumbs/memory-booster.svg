@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200">
+  <rect width="320" height="200" fill="#05070c"/>
+  <rect x="10" y="10" width="300" height="180" rx="10" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+  <!-- left telemetry -->
+  <rect x="14" y="14" width="70" height="172" rx="8" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+  <text x="20" y="26" font-family="system-ui, sans-serif" font-size="4" font-weight="700" fill="#475569" letter-spacing="1">TELEMETRY</text>
+  <text x="20" y="40" font-family="system-ui, sans-serif" font-size="5" fill="#64748b">Level</text>
+  <text x="62" y="40" font-family="monospace" font-size="5" font-weight="700" fill="#00f0ff" text-anchor="end">3</text>
+  <text x="20" y="52" font-family="system-ui, sans-serif" font-size="5" fill="#64748b">Mult</text>
+  <text x="62" y="52" font-family="monospace" font-size="5" font-weight="700" fill="#00f0ff" text-anchor="end">x1.4</text>
+  <text x="20" y="64" font-family="system-ui, sans-serif" font-size="5" fill="#64748b">Streak</text>
+  <text x="62" y="64" font-family="monospace" font-size="5" font-weight="700" fill="#00f0ff" text-anchor="end">2</text>
+  <text x="20" y="76" font-family="system-ui, sans-serif" font-size="5" fill="#64748b">Best</text>
+  <text x="62" y="76" font-family="monospace" font-size="5" font-weight="700" fill="#00f0ff" text-anchor="end">5</text>
+  <text x="20" y="88" font-family="system-ui, sans-serif" font-size="5" fill="#64748b">Score</text>
+  <text x="62" y="88" font-family="monospace" font-size="5" font-weight="700" fill="#00f0ff" text-anchor="end">340</text>
+  <rect x="18" y="100" width="62" height="16" rx="4" fill="#00f0ff"/>
+  <text x="49" y="112" font-family="system-ui, sans-serif" font-size="5" font-weight="600" fill="#05070c" text-anchor="middle">New</text>
+  <rect x="18" y="120" width="62" height="16" rx="4" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <text x="49" y="132" font-family="system-ui, sans-serif" font-size="5" fill="#64748b" text-anchor="middle">Reset</text>
+  <!-- grid 4x4 -->
+  <rect x="94" y="36" width="132" height="132" rx="6"/>
+  <rect x="96" y="38" width="30" height="30" rx="4" fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <rect x="130" y="38" width="30" height="30" rx="4" fill="rgba(0,240,255,0.15)" stroke="#00f0ff" stroke-width="1"/>
+  <rect x="164" y="38" width="30" height="30" rx="4" fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <rect x="198" y="38" width="30" height="30" rx="4" fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <rect x="96" y="72" width="30" height="30" rx="4" fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <rect x="130" y="72" width="30" height="30" rx="4" fill="rgba(16,185,129,0.15)" stroke="#10b981" stroke-width="1"/>
+  <rect x="164" y="72" width="30" height="30" rx="4" fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <rect x="198" y="72" width="30" height="30" rx="4" fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <rect x="96" y="106" width="30" height="30" rx="4" fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <rect x="130" y="106" width="30" height="30" rx="4" fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <rect x="164" y="106" width="30" height="30" rx="4" fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <rect x="198" y="106" width="30" height="30" rx="4" fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <rect x="96" y="140" width="30" height="30" rx="4" fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <rect x="130" y="140" width="30" height="30" rx="4" fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <rect x="164" y="140" width="30" height="30" rx="4" fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <rect x="198" y="140" width="30" height="30" rx="4" fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <!-- status text -->
+  <text x="160" y="180" font-family="system-ui, sans-serif" font-size="5" fill="#64748b" text-anchor="middle">Your turn — repeat the pattern</text>
+  <!-- right history -->
+  <rect x="236" y="14" width="70" height="172" rx="8" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+  <text x="242" y="26" font-family="system-ui, sans-serif" font-size="4" font-weight="700" fill="#475569" letter-spacing="1">HISTORY</text>
+  <rect x="240" y="34" width="62" height="12" rx="3" fill="rgba(255,255,255,0.01)"/>
+  <text x="244" y="43" font-family="system-ui, sans-serif" font-size="4" fill="#00f0ff">Lv 5</text>
+  <text x="266" y="43" font-family="system-ui, sans-serif" font-size="4" fill="#10b981">520pt</text>
+  <text x="290" y="43" font-family="system-ui, sans-serif" font-size="4" fill="#64748b">92%</text>
+  <rect x="240" y="50" width="62" height="12" rx="3" fill="rgba(255,255,255,0.01)"/>
+  <text x="244" y="59" font-family="system-ui, sans-serif" font-size="4" fill="#00f0ff">Lv 3</text>
+  <text x="266" y="59" font-family="system-ui, sans-serif" font-size="4" fill="#10b981">310pt</text>
+  <text x="290" y="59" font-family="system-ui, sans-serif" font-size="4" fill="#64748b">78%</text>
+  <rect x="240" y="66" width="62" height="12" rx="3" fill="rgba(255,255,255,0.01)"/>
+  <text x="244" y="75" font-family="system-ui, sans-serif" font-size="4" fill="#00f0ff">Lv 2</text>
+  <text x="266" y="75" font-family="system-ui, sans-serif" font-size="4" fill="#10b981">140pt</text>
+  <text x="290" y="75" font-family="system-ui, sans-serif" font-size="4" fill="#64748b">60%</text>
+</svg>

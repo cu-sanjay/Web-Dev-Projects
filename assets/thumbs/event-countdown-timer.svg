@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200">
+  <rect width="320" height="200" fill="#05070e"/>
+  <rect x="10" y="10" width="300" height="180" rx="8" fill="#05070e" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+  <!-- topbar -->
+  <text x="18" y="28" font-family="system-ui, sans-serif" font-size="7" font-weight="800" fill="#00f0ff">Countdown</text>
+  <text x="70" y="28" font-family="system-ui, sans-serif" font-size="5" fill="#64748b">Event Timer</text>
+  <text x="220" y="28" font-family="monospace" font-size="7" font-weight="700" fill="#00f0ff">2</text>
+  <text x="230" y="28" font-family="system-ui, sans-serif" font-size="4" fill="#64748b">active</text>
+  <text x="262" y="28" font-family="monospace" font-size="7" font-weight="700" fill="#00f0ff">1</text>
+  <text x="272" y="28" font-family="system-ui, sans-serif" font-size="4" fill="#64748b">done</text>
+  <!-- entry -->
+  <rect x="14" y="40" width="145" height="30" rx="4" fill="#080c1a" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <text x="22" y="59" font-family="system-ui, sans-serif" font-size="5" fill="#64748b">Event Name</text>
+  <rect x="164" y="40" width="100" height="30" rx="4" fill="#080c1a" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <text x="172" y="59" font-family="system-ui, sans-serif" font-size="5" fill="#64748b">2027-01-01 00:00</text>
+  <rect x="270" y="40" width="30" height="30" rx="4" fill="#00f0ff"/>
+  <text x="285" y="60" font-family="system-ui, sans-serif" font-size="7" font-weight="700" fill="#05070e" text-anchor="middle">+</text>
+  <!-- card 1 -->
+  <rect x="14" y="82" width="140" height="104" rx="8" fill="rgba(8,12,26,0.75)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <text x="22" y="96" font-family="system-ui, sans-serif" font-size="6" font-weight="700" fill="#00f0ff">New Year 2027</text>
+  <text x="22" y="103" font-family="system-ui, sans-serif" font-size="4" fill="#475569">Jan 1, 2027, 12:00 AM</text>
+  <rect x="22" y="112" width="26" height="40" rx="4" fill="#05070e"/>
+  <text x="35" y="136" font-family="monospace" font-size="16" font-weight="800" fill="#e2e8f0" text-anchor="middle">206</text>
+  <text x="35" y="146" font-family="system-ui, sans-serif" font-size="4" fill="#475569" text-anchor="middle">Days</text>
+  <rect x="54" y="112" width="26" height="40" rx="4" fill="#05070e"/>
+  <text x="67" y="136" font-family="monospace" font-size="16" font-weight="800" fill="#e2e8f0" text-anchor="middle">14</text>
+  <text x="67" y="146" font-family="system-ui, sans-serif" font-size="4" fill="#475569" text-anchor="middle">Hours</text>
+  <rect x="86" y="112" width="26" height="40" rx="4" fill="#05070e"/>
+  <text x="99" y="136" font-family="monospace" font-size="16" font-weight="800" fill="#e2e8f0" text-anchor="middle">32</text>
+  <text x="99" y="146" font-family="system-ui, sans-serif" font-size="4" fill="#475569" text-anchor="middle">Minutes</text>
+  <rect x="118" y="112" width="26" height="40" rx="4" fill="#05070e"/>
+  <text x="131" y="136" font-family="monospace" font-size="16" font-weight="800" fill="#e2e8f0" text-anchor="middle">05</text>
+  <text x="131" y="146" font-family="system-ui, sans-serif" font-size="4" fill="#475569" text-anchor="middle">Seconds</text>
+  <!-- card 2 (completed) -->
+  <rect x="166" y="82" width="140" height="104" rx="8" fill="rgba(8,12,26,0.75)" stroke="rgba(16,185,129,0.2)" stroke-width="1"/>
+  <text x="174" y="96" font-family="system-ui, sans-serif" font-size="6" font-weight="700" fill="#00f0ff">Project Launch</text>
+  <text x="174" y="103" font-family="system-ui, sans-serif" font-size="4" fill="#475569">Jun 1, 2026, 09:00 AM</text>
+  <rect x="174" y="112" width="124" height="40" rx="6" fill="rgba(16,185,129,0.06)" stroke="rgba(16,185,129,0.15)" stroke-width="1"/>
+  <text x="236" y="136" font-family="system-ui, sans-serif" font-size="7" font-weight="700" fill="#10b981" text-anchor="middle">✨ Event Reached ✨</text>
+</svg>

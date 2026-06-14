@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200">
+  <rect width="320" height="200" fill="#060813"/>
+  <rect x="15" y="12" width="290" height="176" rx="6" fill="#080b1a" stroke="rgba(168,85,247,0.04)" stroke-width="1"/>
+  <text x="22" y="26" font-family="monospace" font-size="4.5" fill="#475569">PTS</text>
+  <text x="42" y="26" font-family="monospace" font-size="4.5" fill="#e2e8f0">0</text>
+  <text x="95" y="26" font-family="monospace" font-size="4.5" fill="#475569">MULT</text>
+  <text x="120" y="26" font-family="monospace" font-size="4.5" fill="#facc15">1.0×</text>
+  <text x="185" y="26" font-family="monospace" font-size="4.5" fill="#475569">TIME</text>
+  <text x="210" y="26" font-family="monospace" font-size="4.5" fill="#00f0ff">45</text>
+  <text x="265" y="26" font-family="monospace" font-size="4.5" fill="#475569">BEST</text>
+  <text x="288" y="26" font-family="monospace" font-size="4.5" fill="#e2e8f0">0</text>
+  <circle cx="80" cy="110" r="26" fill="url(#g1)"/>
+  <circle cx="78" cy="102" r="7" fill="rgba(255,255,255,0.13)"/>
+  <circle cx="180" cy="75" r="22" fill="url(#g2)"/>
+  <circle cx="178" cy="69" r="5" fill="rgba(255,255,255,0.13)"/>
+  <circle cx="260" cy="130" r="18" fill="url(#g3)"/>
+  <circle cx="258" cy="125" r="4" fill="rgba(255,255,255,0.13)"/>
+  <circle cx="140" cy="140" r="20" fill="url(#g1)"/>
+  <circle cx="138" cy="133" r="5" fill="rgba(255,255,255,0.13)"/>
+  <defs>
+    <radialGradient id="g1" cx="35%" cy="30%"><stop offset="0%" stop-color="#ff2a5f"/><stop offset="100%" stop-color="#4a0015"/></radialGradient>
+    <radialGradient id="g2" cx="35%" cy="30%"><stop offset="0%" stop-color="#00f0ff"/><stop offset="100%" stop-color="#003540"/></radialGradient>
+    <radialGradient id="g3" cx="35%" cy="30%"><stop offset="0%" stop-color="#a855f7"/><stop offset="100%" stop-color="#2d0050"/></radialGradient>
+  </defs>
+</svg>

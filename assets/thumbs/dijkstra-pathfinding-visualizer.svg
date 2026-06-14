@@ -1,0 +1,152 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <style>
+      .bg { fill: #f4f7f5; }
+      .panel { fill: #ffffff; stroke: #e2ebd9; stroke-width: 1.5; }
+      .cell-wall { fill: #556b2f; }
+      .cell-start { fill: #1b3a24; }
+      .cell-target { fill: #c62828; }
+      .cell-visited { fill: #a5d6a7; }
+      .cell-open { fill: #c8e6c9; }
+      .cell-path { fill: #2e7d32; }
+      .cell-empty { fill: #ffffff; stroke: #e2ebd9; stroke-width: 0.5; }
+      .text-primary { fill: #1b3a24; font-family: ui-monospace, Consolas, monospace; }
+      .text-secondary { fill: #557a61; font-family: ui-monospace, Consolas, monospace; }
+      .text-white { fill: #ffffff; font-family: ui-monospace, Consolas, monospace; font-weight: bold; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="512" height="512" rx="12"/>
+  <rect class="panel" x="24" y="24" width="464" height="464" rx="10"/>
+
+  <text x="256" y="55" text-anchor="middle" class="text-primary" font-size="13" font-weight="bold" letter-spacing="1">PATH-SPROUT</text>
+  <text x="256" y="70" text-anchor="middle" class="text-secondary" font-size="9" letter-spacing="0.5">Graph Search Visualizer</text>
+
+  <line x1="40" y1="80" x2="472" y2="80" stroke="#e2ebd9" stroke-width="1"/>
+
+  <g transform="translate(40, 90)">
+    <rect class="cell-empty" x="0" y="0" width="20" height="20"/>
+    <rect class="cell-empty" x="20" y="0" width="20" height="20"/>
+    <rect class="cell-empty" x="40" y="0" width="20" height="20"/>
+    <rect class="cell-wall" x="60" y="0" width="20" height="20"/>
+    <rect class="cell-wall" x="80" y="0" width="20" height="20"/>
+    <rect class="cell-empty" x="100" y="0" width="20" height="20"/>
+    <rect class="cell-empty" x="120" y="0" width="20" height="20"/>
+    <rect class="cell-empty" x="140" y="0" width="20" height="20"/>
+    <rect class="cell-empty" x="160" y="0" width="20" height="20"/>
+    <rect class="cell-empty" x="180" y="0" width="20" height="20"/>
+    <rect class="cell-empty" x="200" y="0" width="20" height="20"/>
+    <rect class="cell-empty" x="220" y="0" width="20" height="20"/>
+    <rect class="cell-empty" x="240" y="0" width="20" height="20"/>
+    <rect class="cell-wall" x="260" y="0" width="20" height="20"/>
+    <rect class="cell-wall" x="280" y="0" width="20" height="20"/>
+    <rect class="cell-wall" x="300" y="0" width="20" height="20"/>
+    <rect class="cell-wall" x="320" y="0" width="20" height="20"/>
+    <rect class="cell-empty" x="340" y="0" width="20" height="20"/>
+    <rect class="cell-empty" x="360" y="0" width="20" height="20"/>
+    <rect class="cell-empty" x="380" y="0" width="20" height="20"/>
+
+    <rect class="cell-empty" x="0" y="20" width="20" height="20"/>
+    <rect class="cell-empty" x="20" y="20" width="20" height="20"/>
+    <rect class="cell-open" x="40" y="20" width="20" height="20"/>
+    <rect class="cell-wall" x="60" y="20" width="20" height="20"/>
+    <rect class="cell-empty" x="80" y="20" width="20" height="20"/>
+    <rect class="cell-empty" x="100" y="20" width="20" height="20"/>
+    <rect class="cell-open" x="120" y="20" width="20" height="20"/>
+    <rect class="cell-visited" x="140" y="20" width="20" height="20"/>
+    <rect class="cell-visited" x="160" y="20" width="20" height="20"/>
+    <rect class="cell-visited" x="180" y="20" width="20" height="20"/>
+    <rect class="cell-open" x="200" y="20" width="20" height="20"/>
+    <rect class="cell-empty" x="220" y="20" width="20" height="20"/>
+    <rect class="cell-empty" x="240" y="20" width="20" height="20"/>
+    <rect class="cell-wall" x="260" y="20" width="20" height="20"/>
+    <rect class="cell-wall" x="280" y="20" width="20" height="20"/>
+    <rect class="cell-empty" x="300" y="20" width="20" height="20"/>
+    <rect class="cell-empty" x="320" y="20" width="20" height="20"/>
+    <rect class="cell-empty" x="340" y="20" width="20" height="20"/>
+    <rect class="cell-empty" x="360" y="20" width="20" height="20"/>
+    <rect class="cell-empty" x="380" y="20" width="20" height="20"/>
+
+    <rect class="cell-empty" x="0" y="40" width="20" height="20"/>
+    <rect class="cell-start" x="20" y="40" width="20" height="20"/>
+    <rect class="cell-visited" x="40" y="40" width="20" height="20"/>
+    <rect class="cell-wall" x="60" y="40" width="20" height="20"/>
+    <rect class="cell-empty" x="80" y="40" width="20" height="20"/>
+    <rect class="cell-empty" x="100" y="40" width="20" height="20"/>
+    <rect class="cell-visited" x="120" y="40" width="20" height="20"/>
+    <rect class="cell-visited" x="140" y="40" width="20" height="20"/>
+    <rect class="cell-path" x="160" y="40" width="20" height="20"/>
+    <rect class="cell-path" x="180" y="40" width="20" height="20"/>
+    <rect class="cell-visited" x="200" y="40" width="20" height="20"/>
+    <rect class="cell-open" x="220" y="40" width="20" height="20"/>
+    <rect class="cell-empty" x="240" y="40" width="20" height="20"/>
+    <rect class="cell-wall" x="260" y="40" width="20" height="20"/>
+    <rect class="cell-empty" x="280" y="40" width="20" height="20"/>
+    <rect class="cell-empty" x="300" y="40" width="20" height="20"/>
+    <rect class="cell-empty" x="320" y="40" width="20" height="20"/>
+    <rect class="cell-empty" x="340" y="40" width="20" height="20"/>
+    <rect class="cell-empty" x="360" y="40" width="20" height="20"/>
+    <rect class="cell-empty" x="380" y="40" width="20" height="20"/>
+
+    <rect class="cell-empty" x="0" y="60" width="20" height="20"/>
+    <rect class="cell-empty" x="20" y="60" width="20" height="20"/>
+    <rect class="cell-visited" x="40" y="60" width="20" height="20"/>
+    <rect class="cell-wall" x="60" y="60" width="20" height="20"/>
+    <rect class="cell-empty" x="80" y="60" width="20" height="20"/>
+    <rect class="cell-empty" x="100" y="60" width="20" height="20"/>
+    <rect class="cell-visited" x="120" y="60" width="20" height="20"/>
+    <rect class="cell-visited" x="140" y="60" width="20" height="20"/>
+    <rect class="cell-visited" x="160" y="60" width="20" height="20"/>
+    <rect class="cell-visited" x="180" y="60" width="20" height="20"/>
+    <rect class="cell-visited" x="200" y="60" width="20" height="20"/>
+    <rect class="cell-visited" x="220" y="60" width="20" height="20"/>
+    <rect class="cell-empty" x="240" y="60" width="20" height="20"/>
+    <rect class="cell-wall" x="260" y="60" width="20" height="20"/>
+    <rect class="cell-empty" x="280" y="60" width="20" height="20"/>
+    <rect class="cell-empty" x="300" y="60" width="20" height="20"/>
+    <rect class="cell-target" x="320" y="60" width="20" height="20"/>
+    <rect class="cell-empty" x="340" y="60" width="20" height="20"/>
+    <rect class="cell-empty" x="360" y="60" width="20" height="20"/>
+    <rect class="cell-empty" x="380" y="60" width="20" height="20"/>
+
+    <rect class="cell-empty" x="0" y="80" width="20" height="20"/>
+    <rect class="cell-empty" x="20" y="80" width="20" height="20"/>
+    <rect class="cell-empty" x="40" y="80" width="20" height="20"/>
+    <rect class="cell-wall" x="60" y="80" width="20" height="20"/>
+    <rect class="cell-empty" x="80" y="80" width="20" height="20"/>
+    <rect class="cell-empty" x="100" y="80" width="20" height="20"/>
+    <rect class="cell-open" x="120" y="80" width="20" height="20"/>
+    <rect class="cell-empty" x="140" y="80" width="20" height="20"/>
+    <rect class="cell-empty" x="160" y="80" width="20" height="20"/>
+    <rect class="cell-empty" x="180" y="80" width="20" height="20"/>
+    <rect class="cell-open" x="200" y="80" width="20" height="20"/>
+    <rect class="cell-empty" x="220" y="80" width="20" height="20"/>
+    <rect class="cell-empty" x="240" y="80" width="20" height="20"/>
+    <rect class="cell-wall" x="260" y="80" width="20" height="20"/>
+    <rect class="cell-wall" x="280" y="80" width="20" height="20"/>
+    <rect class="cell-wall" x="300" y="80" width="20" height="20"/>
+    <rect class="cell-empty" x="320" y="80" width="20" height="20"/>
+    <rect class="cell-empty" x="340" y="80" width="20" height="20"/>
+    <rect class="cell-empty" x="360" y="80" width="20" height="20"/>
+    <rect class="cell-empty" x="380" y="80" width="20" height="20"/>
+  </g>
+
+  <line x1="40" y1="365" x2="472" y2="365" stroke="#e2ebd9" stroke-width="1"/>
+
+  <rect x="60" y="378" width="130" height="28" rx="4" fill="#e8f5e9" stroke="#e2ebd9" stroke-width="1"/>
+  <text x="125" y="396" text-anchor="middle" class="text-secondary" font-size="9">Dijkstra: 42 steps</text>
+
+  <rect x="206" y="378" width="130" height="28" rx="4" fill="#e0f2f1" stroke="#e2ebd9" stroke-width="1"/>
+  <text x="271" y="396" text-anchor="middle" class="text-secondary" font-size="9">A*: 28 steps</text>
+
+  <rect x="352" y="378" width="100" height="28" rx="4" fill="#e8f5e9" stroke="#e2ebd9" stroke-width="1"/>
+  <text x="402" y="396" text-anchor="middle" class="text-secondary" font-size="9">BFS: 44 steps</text>
+
+  <line x1="40" y1="420" x2="472" y2="420" stroke="#e2ebd9" stroke-width="1"/>
+
+  <rect x="60" y="434" width="180" height="30" rx="4" fill="#1b3a24"/>
+  <text x="150" y="453" text-anchor="middle" class="text-white" font-size="10">SHORTEST PATH RESOLVED</text>
+
+  <path d="M280 444 Q310 436 340 444 Q370 452 400 444" fill="none" stroke="#2e7d32" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M400 444 Q420 438 440 446" fill="none" stroke="#2e7d32" stroke-width="1.5" stroke-linecap="round"/>
+</svg>

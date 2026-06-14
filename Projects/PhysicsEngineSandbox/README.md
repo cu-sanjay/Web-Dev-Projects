@@ -41,4 +41,4 @@ Simply open `index.html` in your web browser, or host it locally using a static 
 - [index.html](file:///index.html): Simulation layout, drawing board selectors, properties faders, and timeline managers.
 - [style.css](file:///style.css): Dark mode glassmorphic templates, accent faders, custom ranges, and responsive layouts.
 - [script.js](file:///script.js): Collision resolution vectors, constraint spring loops, spatial partitioning check optimizations, presets, and requestAnimationFrame loops.
-- [project.json](file:///project.json): Project configuration metadata.
+- [project.json](file:///project.json): Project configuration metadata. 

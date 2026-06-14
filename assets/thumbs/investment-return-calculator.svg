@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200">
+  <rect width="320" height="200" fill="#05070c"/>
+  <!-- tele bar -->
+  <rect x="4" y="4" width="76" height="22" rx="5" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="10" y="13" font-family="system-ui,sans-serif" font-size="5" fill="#475569">PRINCIPAL</text>
+  <text x="10" y="21" font-family="monospace" font-size="7" font-weight="700" fill="#00f0ff">$220K</text>
+  <rect x="84" y="4" width="76" height="22" rx="5" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="90" y="13" font-family="system-ui,sans-serif" font-size="5" fill="#475569">WEALTH GAIN</text>
+  <text x="90" y="21" font-family="monospace" font-size="7" font-weight="700" fill="#10b981">$487K</text>
+  <rect x="164" y="4" width="76" height="22" rx="5" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="170" y="13" font-family="system-ui,sans-serif" font-size="5" fill="#475569">FUTURE VALUE</text>
+  <text x="170" y="21" font-family="monospace" font-size="7" font-weight="700" fill="#00f0ff">$707K</text>
+  <rect x="244" y="4" width="72" height="22" rx="5" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="250" y="13" font-family="system-ui,sans-serif" font-size="5" fill="#475569">ABSOLUTE ROI</text>
+  <text x="250" y="21" font-family="monospace" font-size="7" font-weight="700" fill="#10b981">221%</text>
+  <!-- main deck -->
+  <rect x="4" y="30" width="94" height="142" rx="6" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="10" y="39" font-family="system-ui,sans-serif" font-size="5" font-weight="700" fill="#475569">PARAMETERS</text>
+  <text x="10" y="52" font-family="system-ui,sans-serif" font-size="4.5" fill="#94a3b8">Initial</text>
+  <rect x="8" y="54" width="86" height="3" rx="1.5" fill="rgba(255,255,255,0.04)"/>
+  <rect x="8" y="54" width="43" height="3" rx="1.5" fill="#00f0ff"/>
+  <text x="10" y="64" font-family="system-ui,sans-serif" font-size="4.5" fill="#94a3b8">Monthly</text>
+  <rect x="8" y="66" width="86" height="3" rx="1.5" fill="rgba(255,255,255,0.04)"/>
+  <rect x="8" y="66" width="38" height="3" rx="1.5" fill="#00f0ff"/>
+  <text x="10" y="76" font-family="system-ui,sans-serif" font-size="4.5" fill="#94a3b8">Return</text>
+  <rect x="8" y="78" width="86" height="3" rx="1.5" fill="rgba(255,255,255,0.04)"/>
+  <rect x="8" y="78" width="28" height="3" rx="1.5" fill="#00f0ff"/>
+  <text x="10" y="88" font-family="system-ui,sans-serif" font-size="4.5" fill="#94a3b8">Horizon</text>
+  <rect x="8" y="90" width="86" height="3" rx="1.5" fill="rgba(255,255,255,0.04)"/>
+  <rect x="8" y="90" width="50" height="3" rx="1.5" fill="#00f0ff"/>
+  <!-- canvas area -->
+  <rect x="102" y="30" width="110" height="142" rx="6" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="108" y="39" font-family="system-ui,sans-serif" font-size="5" font-weight="700" fill="#475569">GROWTH TRAJECTORY</text>
+  <rect x="108" y="44" width="98" height="120" rx="4" fill="rgba(0,0,0,0.2)"/>
+  <!-- chart bars (cyan) -->
+  <rect x="122" y="140" width="6" height="20" rx="1" fill="rgba(0,240,255,0.2)"/>
+  <rect x="130" y="132" width="6" height="28" rx="1" fill="rgba(0,240,255,0.2)"/>
+  <rect x="138" y="124" width="6" height="36" rx="1" fill="rgba(0,240,255,0.2)"/>
+  <rect x="146" y="116" width="6" height="44" rx="1" fill="rgba(0,240,255,0.2)"/>
+  <rect x="154" y="108" width="6" height="52" rx="1" fill="rgba(0,240,255,0.2)"/>
+  <rect x="162" y="100" width="6" height="60" rx="1" fill="rgba(0,240,255,0.2)"/>
+  <rect x="170" y="92" width="6" height="68" rx="1" fill="rgba(0,240,255,0.2)"/>
+  <rect x="178" y="84" width="6" height="76" rx="1" fill="rgba(0,240,255,0.2)"/>
+  <rect x="186" y="76" width="6" height="84" rx="1" fill="rgba(0,240,255,0.2)"/>
+  <rect x="194" y="68" width="6" height="92" rx="1" fill="rgba(0,240,255,0.2)"/>
+  <!-- growth curve (emerald) -->
+  <polyline points="125,144 133,130 141,116 149,100 157,84 165,68 173,52 181,38 189,26 197,18" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round"/>
+  <!-- dots -->
+  <circle cx="125" cy="144" r="2" fill="#10b981"/><circle cx="133" cy="130" r="2" fill="#10b981"/>
+  <circle cx="141" cy="116" r="2" fill="#10b981"/><circle cx="149" cy="100" r="2" fill="#10b981"/>
+  <circle cx="157" cy="84" r="2" fill="#10b981"/><circle cx="165" cy="68" r="2" fill="#10b981"/>
+  <circle cx="173" cy="52" r="2" fill="#10b981"/><circle cx="181" cy="38" r="2" fill="#10b981"/>
+  <circle cx="189" cy="26" r="2" fill="#10b981"/><circle cx="197" cy="18" r="2" fill="#10b981"/>
+  <!-- ledger -->
+  <rect x="216" y="30" width="100" height="142" rx="6" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="222" y="39" font-family="system-ui,sans-serif" font-size="5" font-weight="700" fill="#475569">SCHEDULE</text>
+  <text x="225" y="47" font-family="system-ui,sans-serif" font-size="4" fill="#475569">Yr</text>
+  <text x="243" y="47" font-family="system-ui,sans-serif" font-size="4" fill="#475569">Invested</text>
+  <text x="271" y="47" font-family="system-ui,sans-serif" font-size="4" fill="#475569">Interest</text>
+  <text x="299" y="47" font-family="system-ui,sans-serif" font-size="4" fill="#475569">Value</text>
+  <line x1="217" y1="49" x2="315" y2="49" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+  <text x="222" y="57" font-family="monospace" font-size="4.5" fill="#475569">1</text><text x="248" y="57" font-family="monospace" font-size="4.5" fill="#94a3b8">$16K</text><text x="276" y="57" font-family="monospace" font-size="4.5" fill="#94a3b8">$0.9K</text><text x="298" y="57" font-family="monospace" font-size="4.5" fill="#00f0ff">$17K</text>
+  <text x="222" y="65" font-family="monospace" font-size="4.5" fill="#475569">5</text><text x="248" y="65" font-family="monospace" font-size="4.5" fill="#94a3b8">$46K</text><text x="276" y="65" font-family="monospace" font-size="4.5" fill="#94a3b8">$14K</text><text x="298" y="65" font-family="monospace" font-size="4.5" fill="#00f0ff">$60K</text>
+  <text x="222" y="73" font-family="monospace" font-size="4.5" fill="#475569">10</text><text x="248" y="73" font-family="monospace" font-size="4.5" fill="#94a3b8">$76K</text><text x="276" y="73" font-family="monospace" font-size="4.5" fill="#94a3b8">$67K</text><text x="298" y="73" font-family="monospace" font-size="4.5" fill="#00f0ff">$143K</text>
+  <text x="222" y="81" font-family="monospace" font-size="4.5" fill="#475569">15</text><text x="248" y="81" font-family="monospace" font-size="4.5" fill="#94a3b8">$106K</text><text x="276" y="81" font-family="monospace" font-size="4.5" fill="#94a3b8">$194K</text><text x="298" y="81" font-family="monospace" font-size="4.5" fill="#00f0ff">$300K</text>
+  <text x="222" y="89" font-family="monospace" font-size="4.5" fill="#475569">20</text><text x="248" y="89" font-family="monospace" font-size="4.5" fill="#94a3b8">$136K</text><text x="276" y="89" font-family="monospace" font-size="4.5" fill="#94a3b8">$492K</text><text x="298" y="89" font-family="monospace" font-size="4.5" fill="#00f0ff">$628K</text>
+  <!-- area fill -->
+  <polygon points="125,164 125,144 133,130 141,116 149,100 157,84 165,68 173,52 181,38 189,26 197,18 197,164" fill="rgba(16,185,129,0.05)"/>
+  <!-- footer -->
+  <rect x="4" y="178" width="312" height="18" rx="5" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.02)" stroke-width="0.5"/>
+  <rect x="244" y="179" width="70" height="16" rx="3" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.03)" stroke-width="0.3"/>
+  <text x="279" y="191" font-family="system-ui,sans-serif" font-size="5" fill="#64748b">Reset Model</text>
+</svg>

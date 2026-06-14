@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <style>
+      .bg { fill: #f4f7f5; }
+      .panel { fill: #ffffff; stroke: #e2ebd9; stroke-width: 1.5; }
+      .slot-empty { fill: #e8f5e9; stroke: #e2ebd9; stroke-width: 1; }
+      .slot-hit { fill: #2e7d32; stroke: #1b3a24; stroke-width: 1; }
+      .slot-fault { fill: #c62828; stroke: #1b3a24; stroke-width: 1; }
+      .slot-occupied { fill: #ffffff; stroke: #e2ebd9; stroke-width: 1; }
+      .text-primary { fill: #1b3a24; font-family: ui-monospace, Consolas, monospace; }
+      .text-secondary { fill: #557a61; font-family: ui-monospace, Consolas, monospace; }
+      .text-hit { fill: #2e7d32; font-family: ui-monospace, Consolas, monospace; font-weight: bold; }
+      .text-fault { fill: #c62828; font-family: ui-monospace, Consolas, monospace; font-weight: bold; }
+      .text-white { fill: #ffffff; font-family: ui-monospace, Consolas, monospace; font-weight: bold; }
+      .accent { fill: none; stroke: #1b3a24; stroke-width: 2; stroke-linecap: round; }
+      .leaf-green { fill: #2e7d32; }
+      .leaf-light { fill: #4caf50; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="512" height="512" rx="12"/>
+
+  <rect class="panel" x="24" y="24" width="464" height="464" rx="10"/>
+
+  <text x="256" y="60" text-anchor="middle" class="text-primary" font-size="14" font-weight="bold" letter-spacing="1">PAGI-SPROUT</text>
+  <text x="256" y="76" text-anchor="middle" class="text-secondary" font-size="9" letter-spacing="0.5">Page Replacement Simulator</text>
+
+  <line x1="40" y1="86" x2="472" y2="86" stroke="#e2ebd9" stroke-width="1"/>
+
+  <rect class="slot-empty" x="40" y="100" width="48" height="36" rx="3"/>
+  <rect class="slot-occupied" x="96" y="100" width="48" height="36" rx="3"/>
+  <rect class="slot-empty" x="152" y="100" width="48" height="36" rx="3"/>
+  <rect class="slot-empty" x="208" y="100" width="48" height="36" rx="3"/>
+  <rect class="slot-occupied" x="264" y="100" width="48" height="36" rx="3"/>
+  <rect class="slot-empty" x="320" y="100" width="48" height="36" rx="3"/>
+  <rect class="slot-occupied" x="376" y="100" width="48" height="36" rx="3"/>
+  <rect class="slot-empty" x="424" y="100" width="48" height="36" rx="3"/>
+
+  <text x="120" y="123" text-anchor="middle" class="text-primary" font-size="14">7</text>
+  <text x="288" y="123" text-anchor="middle" class="text-primary" font-size="14">2</text>
+  <text x="400" y="123" text-anchor="middle" class="text-primary" font-size="14">5</text>
+
+  <text x="256" y="158" text-anchor="middle" class="text-secondary" font-size="9">Physical Frame Array</text>
+
+  <line x1="40" y1="170" x2="472" y2="170" stroke="#e2ebd9" stroke-width="1" stroke-dasharray="4,4"/>
+
+  <rect class="slot-hit" x="140" y="186" width="64" height="40" rx="4"/>
+  <text x="172" y="211" text-anchor="middle" class="text-white" font-size="13">HIT</text>
+
+  <rect class="slot-fault" x="308" y="186" width="64" height="40" rx="4"/>
+  <text x="340" y="211" text-anchor="middle" class="text-white" font-size="11">FAULT</text>
+
+  <text x="256" y="250" text-anchor="middle" class="text-secondary" font-size="9">Page Fault Rate &amp; Cache Hit Ratio Telemetry</text>
+
+  <line x1="40" y1="262" x2="472" y2="262" stroke="#e2ebd9" stroke-width="1" stroke-dasharray="4,4"/>
+
+  <rect x="60" y="278" width="140" height="60" rx="6" fill="#ffffff" stroke="#e2ebd9" stroke-width="1"/>
+  <text x="130" y="302" text-anchor="middle" class="text-secondary" font-size="8">TOTAL FAULTS</text>
+  <text x="130" y="325" text-anchor="middle" class="text-fault" font-size="20">9</text>
+
+  <rect x="216" y="278" width="140" height="60" rx="6" fill="#ffffff" stroke="#e2ebd9" stroke-width="1"/>
+  <text x="286" y="302" text-anchor="middle" class="text-secondary" font-size="8">CACHE HIT RATIO</text>
+  <text x="286" y="325" text-anchor="middle" class="text-hit" font-size="18">64.3%</text>
+
+  <rect x="372" y="278" width="100" height="60" rx="6" fill="#ffffff" stroke="#e2ebd9" stroke-width="1"/>
+  <text x="422" y="302" text-anchor="middle" class="text-secondary" font-size="8">VARIANCE</text>
+  <text x="422" y="325" text-anchor="middle" class="text-hit" font-size="18">-2</text>
+
+  <line x1="40" y1="356" x2="472" y2="356" stroke="#e2ebd9" stroke-width="1"/>
+
+  <text x="256" y="378" text-anchor="middle" class="text-secondary" font-size="9">Algorithm Indicators</text>
+
+  <circle cx="100" cy="398" r="6" fill="#4caf50"/>
+  <text x="115" y="402" class="text-primary" font-size="11">FIFO</text>
+
+  <circle cx="230" cy="398" r="6" fill="#009688"/>
+  <text x="245" y="402" class="text-primary" font-size="11">LRU</text>
+
+  <circle cx="350" cy="398" r="6" fill="#8d6e63"/>
+  <text x="365" y="402" class="text-primary" font-size="11">OPT</text>
+
+  <line x1="40" y1="420" x2="472" y2="420" stroke="#e2ebd9" stroke-width="1"/>
+
+  <rect x="60" y="434" width="180" height="30" rx="4" fill="#1b3a24"/>
+  <text x="150" y="453" text-anchor="middle" class="text-white" font-size="10">AWAITING TRANSITION TIMELINE</text>
+
+  <path d="M280 442 Q310 434 340 442 Q370 450 400 442" class="accent" fill="none"/>
+  <path d="M400 442 Q420 436 440 444" class="accent" fill="none"/>
+
+  <path d="M68 90 Q64 84 70 80 Q76 76 72 70" class="leaf-green" fill="none" stroke="#2e7d32" stroke-width="1.5"/>
+  <path d="M440 90 Q444 84 438 80 Q432 76 436 70" class="leaf-green" fill="none" stroke="#2e7d32" stroke-width="1.5"/>
+</svg>

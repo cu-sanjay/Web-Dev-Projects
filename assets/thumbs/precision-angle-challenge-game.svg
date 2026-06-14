@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 300" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#111827" />
+      <stop offset="100%" stop-color="#374151" />
+    </linearGradient>
+    <linearGradient id="primary" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#3b82f6" />
+    </linearGradient>
+  </defs>
+
+  <rect width="500" height="300" fill="url(#bg)" />
+
+  <!-- Protractor / Circle Graphic -->
+  <g transform="translate(250, 160)">
+    <!-- Base Circle -->
+    <circle cx="0" cy="0" r="100" fill="none" stroke="#4b5563" stroke-width="8" />
+    
+    <!-- Inner Area representing drawn angle (e.g. 60 deg) -->
+    <path d="M 0 0 L 100 0 A 100 100 0 0 0 50 -86.6 Z" fill="url(#primary)" opacity="0.4" />
+    
+    <!-- 0 Degree Line -->
+    <line x1="0" y1="0" x2="100" y2="0" stroke="#f3f4f6" stroke-width="6" stroke-linecap="round" />
+    
+    <!-- Drawn Angle Line (60 deg) -->
+    <line x1="0" y1="0" x2="50" y2="-86.6" stroke="#f3f4f6" stroke-width="6" stroke-linecap="round" />
+    
+    <!-- Target Indicator (Dotted line around 65 deg) -->
+    <line x1="0" y1="0" x2="42.2" y2="-90.6" stroke="#fbbf24" stroke-width="4" stroke-dasharray="6,4" />
+    
+    <!-- Center Dot -->
+    <circle cx="0" cy="0" r="12" fill="#10b981" />
+    <circle cx="0" cy="0" r="6" fill="#111827" />
+    
+    <!-- Arc for angle text -->
+    <path d="M 40 0 A 40 40 0 0 0 20 -34.6" fill="none" stroke="#f3f4f6" stroke-width="2" />
+    <text x="30" y="-15" font-family="sans-serif" font-weight="bold" font-size="16" fill="#f3f4f6" text-anchor="middle">60°</text>
+  </g>
+
+  <!-- Title Text -->
+  <text x="250" y="45" font-family="system-ui, -apple-system, sans-serif" font-weight="800" font-size="28" fill="#10b981" text-anchor="middle" letter-spacing="1">PRECISION ANGLE</text>
+  <text x="250" y="270" font-family="system-ui, -apple-system, sans-serif" font-weight="600" font-size="16" fill="#9ca3af" text-anchor="middle" letter-spacing="2">CHALLENGE GAME</text>
+
+  <!-- Decorative Target -->
+  <path d="M 450 40 L 450 60 M 440 50 L 460 50" stroke="#fbbf24" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="450" cy="50" r="15" fill="none" stroke="#fbbf24" stroke-width="2"/>
+</svg>

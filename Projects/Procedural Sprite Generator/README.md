@@ -46,4 +46,4 @@ Simply open `index.html` in your web browser, or host it locally to start genera
 ## 🎨 Presets & Customizing
 
 - **Palette Presets**: Select from `Retro Game`, `Neon Cyber`, and `Soft Pastel` colors or use the custom HTML color picker to create unique styles.
-- **Theme**: Click the header Sun/Moon icon to switch between a vibrant glassmorphic dark mode and a sleek light mode.
+- **Theme**: Click the header Sun/Moon icon to switch between a vibrant glassmorphic dark mode and a sleek light mode. 

@@ -81,11 +81,15 @@ function formatTime(ts) {
 }
 
 function uid() {
-  return Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
+  return crypto.randomUUID();
 }
 
 function escHtml(s) {
-  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+function sanitizeInput(s, maxLen) {
+  return s.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g, '').slice(0, maxLen || 1000);
 }
 
 function isGrouped(a, b) {
@@ -137,10 +141,22 @@ function renderOnlineList() {
     const color = stringToHsl(p.nickname);
     const li = document.createElement('li');
     li.className = 'online-user';
-    li.innerHTML =
-      '<div class="online-user__dot"></div>' +
-      '<div class="online-user__avatar" style="background:' + color + '">' + escHtml(initials(p.nickname)) + '</div>' +
-      '<span class="online-user__name">' + escHtml(p.nickname) + (id === myId ? ' (you)' : '') + '</span>';
+
+    const dot = document.createElement('div');
+    dot.className = 'online-user__dot';
+    li.appendChild(dot);
+
+    const avatar = document.createElement('div');
+    avatar.className = 'online-user__avatar';
+    avatar.style.background = color;
+    avatar.textContent = initials(p.nickname);
+    li.appendChild(avatar);
+
+    const name = document.createElement('span');
+    name.className = 'online-user__name';
+    name.textContent = p.nickname + (id === myId ? ' (you)' : '');
+    li.appendChild(name);
+
     $onlineList.appendChild(li);
   });
 }
@@ -244,7 +260,7 @@ function sendMessage(text) {
     id:        uid(),
     senderId:  myId,
     sender:    myNickname,
-    text:      text.trim(),
+    text:      sanitizeInput(text.trim(), 2000),
     timestamp: Date.now(),
     own:       true,
   };
@@ -306,7 +322,7 @@ function showModal() {
 }
 
 function joinChat(nickname) {
-  myNickname = nickname.trim();
+  myNickname = sanitizeInput(nickname.trim(), 30);
   myId       = uid();
 
   // Open BroadcastChannel

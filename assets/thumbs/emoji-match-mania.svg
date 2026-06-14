@@ -1,0 +1,61 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4f46e5"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+
+  <rect width="512" height="512" rx="40" fill="url(#bg)"/>
+
+  <text
+    x="256"
+    y="90"
+    text-anchor="middle"
+    font-family="Arial, sans-serif"
+    font-size="36"
+    font-weight="700"
+    fill="white">
+    Emoji Match Mania
+  </text>
+
+  <g filter="url(#shadow)">
+    <rect x="96" y="130" width="90" height="90" rx="18" fill="#ffffff"/>
+    <rect x="211" y="130" width="90" height="90" rx="18" fill="#ffffff"/>
+    <rect x="326" y="130" width="90" height="90" rx="18" fill="#ffffff"/>
+
+    <rect x="96" y="245" width="90" height="90" rx="18" fill="#ffffff"/>
+    <rect x="211" y="245" width="90" height="90" rx="18" fill="#ffffff"/>
+    <rect x="326" y="245" width="90" height="90" rx="18" fill="#ffffff"/>
+
+    <rect x="96" y="360" width="90" height="90" rx="18" fill="#ffffff"/>
+    <rect x="211" y="360" width="90" height="90" rx="18" fill="#ffffff"/>
+    <rect x="326" y="360" width="90" height="90" rx="18" fill="#ffffff"/>
+  </g>
+
+  <text x="141" y="190" text-anchor="middle" font-size="44">😀</text>
+  <text x="256" y="190" text-anchor="middle" font-size="44">🎮</text>
+  <text x="371" y="190" text-anchor="middle" font-size="44">😀</text>
+
+  <text x="141" y="305" text-anchor="middle" font-size="44">🚀</text>
+  <text x="256" y="305" text-anchor="middle" font-size="44">🎮</text>
+  <text x="371" y="305" text-anchor="middle" font-size="44">🚀</text>
+
+  <text x="141" y="420" text-anchor="middle" font-size="44">⭐</text>
+  <text x="256" y="420" text-anchor="middle" font-size="44">⭐</text>
+  <text x="371" y="420" text-anchor="middle" font-size="44">⏱️</text>
+
+  <text
+    x="256"
+    y="485"
+    text-anchor="middle"
+    font-family="Arial, sans-serif"
+    font-size="18"
+    fill="rgba(255,255,255,0.9)">
+    Match Pairs • Track Moves • Beat Your Time
+  </text>
+</svg>

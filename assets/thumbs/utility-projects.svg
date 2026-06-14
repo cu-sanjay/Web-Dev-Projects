@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200">
+  <rect width="320" height="200" fill="#04060b"/>
+  <!-- top bar -->
+  <rect x="4" y="4" width="312" height="18" rx="6" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="10" y="16" font-family="system-ui,sans-serif" font-size="8" font-weight="700" fill="#00f0ff">Geo Telemetry</text>
+  <rect x="8" y="0" width="0" height="0"/>
+  <text x="102" y="16" font-family="system-ui,sans-serif" font-size="5" fill="#475569">API</text>
+  <text x="122" y="16" font-family="monospace" font-size="6" font-weight="700" fill="#10b981">Active</text>
+  <text x="172" y="16" font-family="system-ui,sans-serif" font-size="5" fill="#475569">PERM</text>
+  <text x="196" y="16" font-family="monospace" font-size="6" font-weight="700" fill="#10b981">Granted</text>
+  <text x="250" y="16" font-family="system-ui,sans-serif" font-size="5" fill="#475569">WATCH</text>
+  <text x="278" y="16" font-family="monospace" font-size="6" font-weight="700" fill="#10b981">Active</text>
+  <circle cx="298" cy="13" r="3" fill="#10b981"/>
+
+  <!-- telemetry grid -->
+  <rect x="4" y="26" width="102" height="52" rx="6" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="10" y="36" font-family="system-ui,sans-serif" font-size="5" font-weight="700" fill="#475569">LATITUDE</text>
+  <text x="10" y="60" font-family="monospace" font-size="18" font-weight="700" fill="#00f0ff">51.5074</text>
+
+  <rect x="110" y="26" width="102" height="52" rx="6" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="116" y="36" font-family="system-ui,sans-serif" font-size="5" font-weight="700" fill="#475569">LONGITUDE</text>
+  <text x="116" y="60" font-family="monospace" font-size="18" font-weight="700" fill="#00f0ff">-0.1278</text>
+
+  <rect x="216" y="26" width="100" height="52" rx="6" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="222" y="36" font-family="system-ui,sans-serif" font-size="5" font-weight="700" fill="#475569">HEADING</text>
+  <text x="222" y="60" font-family="monospace" font-size="18" font-weight="700" fill="#00f0ff">142°</text>
+
+  <rect x="4" y="82" width="102" height="52" rx="6" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="10" y="92" font-family="system-ui,sans-serif" font-size="5" font-weight="700" fill="#475569">SPEED</text>
+  <text x="10" y="116" font-family="monospace" font-size="18" font-weight="700" fill="#00f0ff">3.2 km/h</text>
+
+  <rect x="110" y="82" width="102" height="52" rx="6" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="116" y="92" font-family="system-ui,sans-serif" font-size="5" font-weight="700" fill="#475569">ACCURACY</text>
+  <text x="116" y="116" font-family="monospace" font-size="18" font-weight="700" fill="#00f0ff">12 m</text>
+
+  <rect x="216" y="82" width="100" height="52" rx="6" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="222" y="92" font-family="system-ui,sans-serif" font-size="5" font-weight="700" fill="#475569">TIMESTAMP</text>
+  <text x="222" y="116" font-family="monospace" font-size="13" font-weight="700" fill="#00f0ff">14:32:07</text>
+
+  <!-- log panel -->
+  <rect x="4" y="138" width="312" height="24" rx="4" fill="rgba(255,255,255,0.005)" stroke="rgba(255,255,255,0.02)" stroke-width="0.5"/>
+  <text x="10" y="150" font-family="monospace" font-size="6" fill="#475569">[14:32:05]</text>
+  <text x="64" y="150" font-family="monospace" font-size="6" fill="#64748b">Starting live tracking stream...</text>
+  <text x="10" y="158" font-family="monospace" font-size="6" fill="#475569">[14:32:07]</text>
+  <text x="64" y="158" font-family="monospace" font-size="6" fill="#64748b">Position acquired: 51.5074, -0.1278</text>
+
+  <!-- footer -->
+  <rect x="4" y="166" width="312" height="30" rx="6" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.02)" stroke-width="0.5"/>
+  <rect x="6" y="168" width="74" height="26" rx="4" fill="rgba(255,255,255,0.02)" stroke="rgba(0,240,255,0.15)" stroke-width="0.5"/>
+  <text x="43" y="185" font-family="system-ui,sans-serif" font-size="6" fill="#e2e8f0" text-anchor="middle">One-Time Ping</text>
+  <rect x="84" y="168" width="80" height="26" rx="4" fill="rgba(255,255,255,0.02)" stroke="rgba(16,185,129,0.15)" stroke-width="0.5"/>
+  <text x="124" y="185" font-family="system-ui,sans-serif" font-size="6" fill="#e2e8f0" text-anchor="middle">Live Tracking Stream</text>
+  <rect x="168" y="168" width="74" height="26" rx="4" fill="rgba(255,255,255,0.02)" stroke="rgba(239,68,68,0.15)" stroke-width="0.5"/>
+  <text x="205" y="185" font-family="system-ui,sans-serif" font-size="6" fill="#64748b" text-anchor="middle">Terminate</text>
+  <rect x="246" y="168" width="66" height="26" rx="4" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+  <text x="279" y="185" font-family="system-ui,sans-serif" font-size="6" fill="#e2e8f0" text-anchor="middle">Clear Log</text>
+</svg>

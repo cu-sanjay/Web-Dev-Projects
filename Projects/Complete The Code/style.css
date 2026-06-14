@@ -1,0 +1,115 @@
+ :root {
+            --bg: #0f172a;
+            --card: #1e293b;
+            --primary: #8b5cf6;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --text: #f8fafc;
+            --code-bg: #000000;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .game-container {
+            background: var(--card);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 700px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 1rem;
+        }
+
+        .stats {
+            display: flex;
+            gap: 1.5rem;
+            font-weight: bold;
+        }
+
+        .difficulty-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+        }
+
+        .easy { background: var(--success); }
+        .medium { background: var(--warning); }
+        .hard { background: var(--danger); }
+
+        .code-window {
+            background: var(--code-bg);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            line-height: 1.6;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            white-space: pre-wrap;
+            position: relative;
+            border: 1px solid #334155;
+        }
+
+        .code-blank {
+            background: #334155;
+            border: 2px solid var(--primary);
+            color: var(--success);
+            font-family: inherit;
+            font-size: inherit;
+            width: 80px;
+            padding: 0 5px;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        .hint-text {
+            color: #94a3b8;
+            font-style: italic;
+            margin-bottom: 1rem;
+            display: none;
+            padding: 0.5rem;
+            background: rgba(139, 92, 246, 0.1);
+            border-left: 3px solid var(--primary);
+        }
+
+        .controls {
+            display: flex;
+            gap: 1rem;
+        }
+
+        button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+        .btn-secondary { background: #475569; color: white; }
+
+        #feedback {
+            margin-top: 1rem;
+            font-weight: bold;
+            height: 1.5rem;
+        }

@@ -1,0 +1,657 @@
+/* CSS Variables for customized look and feel */
+:root {
+  --bg: #090d16;
+  --sidebar-bg: rgba(15, 23, 42, 0.4);
+  --card-bg: rgba(30, 41, 59, 0.45);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --text: #f8fafc;
+  --text-muted: #94a3b8;
+  --primary: #00f2fe;
+  --primary-glow: rgba(0, 242, 254, 0.15);
+  --success: #10b981;
+  --success-glow: rgba(16, 185, 129, 0.15);
+  --danger: #f43f5e;
+  --danger-glow: rgba(244, 63, 94, 0.15);
+  --warning: #f59e0b;
+  --sidebar-width: 290px;
+  --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --font-title: 'Outfit', 'Inter', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+}
+
+[data-theme="light"] {
+  --bg: #f8fafc;
+  --sidebar-bg: rgba(255, 255, 255, 0.85);
+  --card-bg: rgba(255, 255, 255, 0.75);
+  --card-border: rgba(0, 0, 0, 0.06);
+  --text: #0f172a;
+  --text-muted: #64748b;
+  --primary: #0284c7;
+  --primary-glow: rgba(2, 132, 199, 0.1);
+  --success: #059669;
+  --danger: #dc2626;
+  --warning: #d97706;
+}
+
+/* Reset and Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  transition: background-color 0.4s ease, color 0.4s ease;
+  overflow: hidden;
+}
+
+/* App Container Layout */
+.app-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* Glass Card Definition */
+.glass-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+}
+
+/* Sidebar Catalog Styling (Left) */
+.sidebar-catalog {
+  width: var(--sidebar-width);
+  border-right: 1px solid var(--card-border);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 8px;
+}
+
+.brand-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--primary) 0%, #00c6ff 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #020617;
+  box-shadow: 0 4px 12px rgba(0, 242, 254, 0.3);
+}
+
+.brand-logo i {
+  width: 20px;
+  height: 20px;
+}
+
+.brand-text h1 {
+  font-family: var(--font-title);
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.brand-text span {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Catalog Sections layout */
+.catalog-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.catalog-section h3 {
+  font-family: var(--font-title);
+  font-size: 0.95rem;
+  color: var(--text);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.catalog-section h3 i {
+  width: 16px;
+  height: 16px;
+  color: var(--primary);
+}
+
+.section-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Component palette element items list */
+.component-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.palette-item {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.palette-item:hover {
+  transform: translateX(4px);
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--primary);
+}
+
+.palette-item i {
+  width: 20px;
+  height: 20px;
+  color: var(--primary);
+}
+
+.palette-item span {
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* Help Box Info */
+.instructions-section {
+  margin-top: auto;
+  border-top: 1px solid var(--card-border);
+  padding-top: 16px;
+}
+
+.help-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.help-list li {
+  line-height: 1.4;
+}
+
+.help-list kbd {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--card-border);
+  border-radius: 4px;
+  padding: 1px 4px;
+  font-family: monospace;
+  font-size: 0.7rem;
+  color: var(--text);
+}
+
+/* Center Workspace Layout */
+.workspace-panel {
+  flex-grow: 1;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
+}
+
+.workspace-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.workspace-header h2 {
+  font-family: var(--font-title);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.subtitle {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Lab Indicators Badge */
+.lab-badge {
+  background: var(--warning);
+  color: #020617;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.lab-badge i {
+  width: 14px;
+  height: 14px;
+}
+
+/* Central interactive schematic canvas block */
+.canvas-wrapper {
+  flex-grow: 1;
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.25);
+  min-height: 0;
+}
+
+#schematic-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+[data-theme="light"] #schematic-canvas {
+  background: #f1f5f9;
+}
+
+/* Dynamic svg rendering objects styling */
+.wire-path {
+  fill: none;
+  stroke: #475569;
+  stroke-width: 4;
+  stroke-linecap: round;
+  cursor: pointer;
+  transition: stroke 0.2s, stroke-width 0.2s;
+}
+
+.wire-path:hover {
+  stroke: var(--primary) !important;
+  stroke-width: 6;
+}
+
+.wire-path.active {
+  stroke: var(--primary);
+  filter: drop-shadow(0 0 4px var(--primary));
+}
+
+.wire-path.selected {
+  stroke: var(--warning) !important;
+  stroke-dasharray: 4 4;
+}
+
+/* Gate schematic elements styled elements */
+.gate-body {
+  fill: #1e293b;
+  stroke: #475569;
+  stroke-width: 2.5;
+  cursor: move;
+  transition: stroke 0.2s, fill 0.2s;
+}
+
+.gate-body.selected {
+  stroke: var(--primary);
+  fill: #0f172a;
+}
+
+.terminal-pin {
+  fill: #475569;
+  cursor: crosshair;
+  transition: fill 0.2s, r 0.2s;
+}
+
+.terminal-pin:hover {
+  fill: var(--primary);
+  r: 7;
+}
+
+.terminal-pin.active {
+  fill: var(--primary);
+}
+
+.gate-label {
+  fill: var(--text);
+  font-family: var(--font-title);
+  font-size: 13px;
+  font-weight: bold;
+  pointer-events: none;
+}
+
+/* Toggle Switches */
+.switch-base {
+  fill: #1e293b;
+  stroke: #475569;
+  stroke-width: 2.5;
+  cursor: pointer;
+}
+
+.switch-lever {
+  fill: #64748b;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.switch-base.active + .switch-lever {
+  fill: var(--primary);
+  transform: translate(16px, 0); /* Move lever */
+}
+
+/* Output light bulb indicators styling */
+.bulb-glow {
+  fill: none;
+  transition: fill 0.3s;
+}
+
+.bulb-glow.active {
+  fill: var(--primary);
+  fill-opacity: 0.15;
+}
+
+.bulb-core {
+  fill: #475569;
+  stroke: #64748b;
+  stroke-width: 2.5;
+  transition: fill 0.3s, filter 0.3s;
+}
+
+.bulb-core.active {
+  fill: var(--primary);
+  stroke: var(--primary);
+  filter: drop-shadow(0 0 10px var(--primary));
+}
+
+/* Floating Toolbar controls */
+.canvas-toolbar {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 5;
+}
+
+.toolbar-btn {
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--card-border);
+  color: var(--text-muted);
+  border-radius: 20px;
+  padding: 8px 18px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.toolbar-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+}
+
+.toolbar-btn.text-danger:hover {
+  background: var(--danger-glow);
+  color: var(--danger);
+  border-color: var(--danger);
+}
+
+/* Sidebar Config Styling (Right) */
+.sidebar-config {
+  width: var(--sidebar-width);
+  border-left: 1px solid var(--card-border);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.config-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.config-section h3 {
+  font-family: var(--font-title);
+  font-size: 0.95rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.config-section h3 i {
+  width: 16px;
+  height: 16px;
+  color: var(--primary);
+}
+
+/* Inspection Details elements selection panels */
+.empty-selection {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  text-align: center;
+  padding: 24px 0;
+  border: 1.5px dashed var(--card-border);
+  border-radius: 12px;
+}
+
+.detail-card {
+  background: rgba(255,255,255,0.01);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.detail-title {
+  font-family: var(--font-title);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--primary);
+}
+
+.detail-state {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+}
+
+.state-badge {
+  padding: 2px 10px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.state-badge.high { background: var(--primary-glow); color: var(--primary); }
+.state-badge.low { background: rgba(255,255,255,0.04); color: var(--text-muted); }
+
+/* Truth Table elements stylings */
+.truth-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+  font-size: 0.75rem;
+}
+
+.truth-table th, .truth-table td {
+  padding: 8px 10px;
+  border: 1px solid var(--card-border);
+  text-align: center;
+}
+
+.truth-table th {
+  background: rgba(255,255,255,0.02);
+  color: var(--text-muted);
+}
+
+.truth-table tr.active-row td {
+  background: var(--primary-glow) !important;
+  color: var(--primary);
+  font-weight: bold;
+}
+
+/* Education Lab Cards items lists */
+.labs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.lab-item-card {
+  background: rgba(255,255,255,0.01);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: var(--transition);
+}
+
+.lab-item-card:hover {
+  border-color: var(--warning);
+}
+
+.lab-item-card.completed {
+  border-color: var(--success);
+}
+
+.lab-item-card.completed h4::after {
+  content: " ✓";
+  color: var(--success);
+  font-weight: bold;
+}
+
+.lab-item-card h4 {
+  font-family: var(--font-title);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.lab-item-card p {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.verification-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+/* Global button systems */
+.btn {
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: var(--transition);
+}
+
+.w-full { width: 100%; }
+
+.primary-btn {
+  background: var(--primary);
+  color: #020617;
+  border: 1px solid var(--primary);
+}
+
+.primary-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--primary-glow);
+}
+
+.secondary-btn {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--card-border);
+  color: var(--text);
+}
+
+.secondary-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.icon-btn {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--card-border);
+  color: var(--text-muted);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.icon-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+}
+
+/* Animations helpers */
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .5; }
+}
+
+/* Responsive UI rules */
+@media (max-width: 1000px) {
+  .app-container {
+    flex-direction: column;
+    overflow-y: auto;
+  }
+  .sidebar-catalog, .sidebar-config {
+    width: 100%;
+    height: auto;
+    border: none;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .workspace-panel {
+    height: 500px;
+  }
+}

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glass">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2" />
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="200" height="200" fill="url(#grad)" />
+  
+  <!-- Glass panels -->
+  <g opacity="0.9" filter="url(#glass)">
+    <!-- Left panel (Editor) -->
+    <rect x="10" y="20" width="80" height="160" rx="8" fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+    
+    <!-- Right panel (Preview) -->
+    <rect x="100" y="20" width="80" height="160" rx="8" fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+  </g>
+  
+  <!-- Editor icon (pencil) -->
+  <g transform="translate(25, 35)">
+    <path d="M 5 25 L 0 30 L 2 30 L 8 24 Z" fill="#fff" opacity="0.8"/>
+    <path d="M 8 8 L 20 20 L 18 22 L 6 10 Z" fill="#fff" opacity="0.8"/>
+  </g>
+  
+  <!-- Preview content (text) -->
+  <g transform="translate(110, 35)">
+    <line x1="0" y1="0" x2="50" y2="0" stroke="#fff" stroke-width="2" opacity="0.8"/>
+    <line x1="0" y1="8" x2="60" y2="8" stroke="#fff" stroke-width="1" opacity="0.6"/>
+    <line x1="0" y1="14" x2="55" y2="14" stroke="#fff" stroke-width="1" opacity="0.6"/>
+  </g>
+  
+  <!-- Title -->
+  <text x="100" y="185" font-size="14" font-weight="bold" text-anchor="middle" fill="#fff">Markdown Editor</text>
+</svg>

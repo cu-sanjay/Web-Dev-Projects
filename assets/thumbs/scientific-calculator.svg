@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200">
+  <rect width="320" height="200" fill="#05070c"/>
+  <rect x="20" y="6" width="280" height="188" rx="14" fill="rgba(5,7,12,0.95)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <!-- display -->
+  <rect x="34" y="18" width="252" height="40" rx="8" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <text x="40" y="30" font-family="monospace" font-size="5" fill="#64748b">45 * sin(π/2)</text>
+  <text x="270" y="50" font-family="monospace" font-size="16" font-weight="700" fill="#e2e8f0" text-anchor="end">45</text>
+  <rect x="38" y="20" width="20" height="10" rx="2" fill="rgba(255,255,255,0.04)"/>
+  <text x="48" y="28" font-family="system-ui, sans-serif" font-size="4" font-weight="700" fill="#64748b" text-anchor="middle">DEG</text>
+  <!-- keypad grid 5-col -->
+  <!-- row 1 -->
+  <rect x="34" y="68" width="44" height="22" rx="5" fill="rgba(0,240,255,0.03)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <text x="56" y="83" font-family="system-ui, sans-serif" font-size="5" fill="#00f0ff" text-anchor="middle">sin</text>
+  <rect x="84" y="68" width="44" height="22" rx="5" fill="rgba(0,240,255,0.03)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <text x="106" y="83" font-family="system-ui, sans-serif" font-size="5" fill="#00f0ff" text-anchor="middle">cos</text>
+  <rect x="134" y="68" width="44" height="22" rx="5" fill="rgba(0,240,255,0.03)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <text x="156" y="83" font-family="system-ui, sans-serif" font-size="5" fill="#00f0ff" text-anchor="middle">tan</text>
+  <rect x="184" y="68" width="44" height="22" rx="5" fill="rgba(0,240,255,0.03)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <text x="206" y="83" font-family="system-ui, sans-serif" font-size="5" fill="#00f0ff" text-anchor="middle">ln</text>
+  <rect x="234" y="68" width="44" height="22" rx="5" fill="rgba(0,240,255,0.03)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <text x="256" y="83" font-family="system-ui, sans-serif" font-size="5" fill="#00f0ff" text-anchor="middle">√</text>
+  <!-- row 2 -->
+  <rect x="34" y="94" width="44" height="22" rx="5" fill="rgba(255,255,255,0.015)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <text x="56" y="109" font-family="system-ui, sans-serif" font-size="4" fill="#64748b" text-anchor="middle">MC</text>
+  <rect x="84" y="94" width="44" height="22" rx="5" fill="rgba(255,255,255,0.015)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <text x="106" y="109" font-family="system-ui, sans-serif" font-size="4" fill="#64748b" text-anchor="middle">MR</text>
+  <rect x="134" y="94" width="44" height="22" rx="5" fill="rgba(255,255,255,0.015)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <text x="156" y="109" font-family="system-ui, sans-serif" font-size="4" fill="#64748b" text-anchor="middle">M+</text>
+  <rect x="184" y="94" width="44" height="22" rx="5" fill="rgba(255,255,255,0.015)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <text x="206" y="109" font-family="system-ui, sans-serif" font-size="4" fill="#64748b" text-anchor="middle">M−</text>
+  <rect x="234" y="94" width="44" height="22" rx="5" fill="rgba(245,158,11,0.04)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <text x="256" y="109" font-family="system-ui, sans-serif" font-size="5" fill="#f59e0b" text-anchor="middle">xʸ</text>
+  <!-- row 3 -->
+  <rect x="34" y="120" width="44" height="22" rx="5" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <text x="56" y="135" font-family="system-ui, sans-serif" font-size="7" fill="#e2e8f0" text-anchor="middle">7</text>
+  <rect x="84" y="120" width="44" height="22" rx="5" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <text x="106" y="135" font-family="system-ui, sans-serif" font-size="7" fill="#e2e8f0" text-anchor="middle">8</text>
+  <rect x="134" y="120" width="44" height="22" rx="5" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <text x="156" y="135" font-family="system-ui, sans-serif" font-size="7" fill="#e2e8f0" text-anchor="middle">9</text>
+  <rect x="184" y="120" width="44" height="22" rx="5" fill="rgba(245,158,11,0.04)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <text x="206" y="135" font-family="system-ui, sans-serif" font-size="6" fill="#f59e0b" text-anchor="middle">÷</text>
+  <rect x="234" y="120" width="44" height="22" rx="5" fill="rgba(0,240,255,0.03)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <text x="256" y="135" font-family="system-ui, sans-serif" font-size="5" fill="#00f0ff" text-anchor="middle">DEG</text>
+  <!-- row 4 -->
+  <rect x="34" y="146" width="44" height="22" rx="5" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <text x="56" y="161" font-family="system-ui, sans-serif" font-size="7" fill="#e2e8f0" text-anchor="middle">4</text>
+  <rect x="84" y="146" width="44" height="22" rx="5" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <text x="106" y="161" font-family="system-ui, sans-serif" font-size="7" fill="#e2e8f0" text-anchor="middle">5</text>
+  <rect x="134" y="146" width="44" height="22" rx="5" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <text x="156" y="161" font-family="system-ui, sans-serif" font-size="7" fill="#e2e8f0" text-anchor="middle">6</text>
+  <rect x="184" y="146" width="44" height="22" rx="5" fill="rgba(245,158,11,0.04)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <text x="206" y="161" font-family="system-ui, sans-serif" font-size="6" fill="#f59e0b" text-anchor="middle">×</text>
+  <rect x="234" y="146" width="44" height="22" rx="5" fill="rgba(0,240,255,0.03)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <text x="256" y="161" font-family="system-ui, sans-serif" font-size="6" fill="#00f0ff" text-anchor="middle">π</text>
+  <!-- row 5 eval -->
+  <rect x="34" y="172" width="44" height="22" rx="5" fill="rgba(239,68,68,0.06)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <text x="56" y="188" font-family="system-ui, sans-serif" font-size="6" fill="#ef4444" text-anchor="middle">AC</text>
+  <rect x="84" y="172" width="44" height="22" rx="5" fill="rgba(255,255,255,0.015)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <text x="106" y="188" font-family="system-ui, sans-serif" font-size="6" fill="#64748b" text-anchor="middle">⌫</text>
+  <rect x="134" y="172" width="44" height="22" rx="5" fill="rgba(255,255,255,0.015)" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <text x="156" y="188" font-family="system-ui, sans-serif" font-size="5" fill="#64748b" text-anchor="middle">HIST</text>
+  <rect x="184" y="172" width="94" height="22" rx="5" fill="#10b981"/>
+  <text x="231" y="188" font-family="system-ui, sans-serif" font-size="7" font-weight="700" fill="#fff" text-anchor="middle">=</text>
+</svg>

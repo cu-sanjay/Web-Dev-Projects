@@ -28,4 +28,4 @@ Simply open [index.html](file:///index.html) in your browser, or host it locally
 
 5. **Analytical Analytics Dashboard**:
    - Computes percentages for water levels, plains, mountains, average height, and maximum peaks.
-   - Flat 2D inspector tooltip reports height coordinates and biome titles on cursor hovering.
+   - Flat 2D inspector tooltip reports height coordinates and biome titles on cursor hovering. 

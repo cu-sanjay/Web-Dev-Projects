@@ -1,0 +1,115 @@
+ :root {
+            --bg: #0f172a;
+            --card: #1e293b;
+            --primary: #8b5cf6;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --text: #f8fafc;
+            --code-bg: #000000;
+            --drag-hover: #334155;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .game-container {
+            background: var(--card);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 800px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 1rem;
+        }
+
+        .stats {
+            display: flex;
+            gap: 1.5rem;
+            font-weight: bold;
+        }
+
+        .difficulty-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+        }
+
+        .easy { background: var(--success); }
+        .medium { background: var(--warning); }
+        .hard { background: var(--danger); }
+
+        .code-container {
+            background: var(--code-bg);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            min-height: 200px;
+            margin-bottom: 1.5rem;
+            border: 1px solid #334155;
+        }
+
+        .code-line {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 0.375rem;
+            cursor: grab;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            border: 1px solid #475569;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .code-line:active { cursor: grabbing; }
+        .code-line.dragging { opacity: 0.5; border: 2px dashed var(--primary); }
+        .code-line .drag-handle { color: #64748b; cursor: grab; }
+
+        .controls {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+        .btn-secondary { background: #475569; color: white; }
+
+        #feedback {
+            margin-top: 1rem;
+            font-weight: bold;
+            height: 1.5rem;
+        }
+
+        .description {
+            margin-bottom: 1rem;
+            color: #94a3b8;
+        }

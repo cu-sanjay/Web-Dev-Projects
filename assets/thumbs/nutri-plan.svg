@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0A0A0A"/>
+      <stop offset="100%" style="stop-color:#1A1A0A"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#D4AF37"/>
+      <stop offset="100%" style="stop-color:#FFD700"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1E8449"/>
+      <stop offset="100%" style="stop-color:#2ECC71"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="400" height="300" fill="url(#bg)" rx="12"/>
+  <!-- Top bar -->
+  <rect x="0" y="0" width="400" height="4" fill="url(#gold)" rx="2"/>
+  <!-- Logo leaf -->
+  <ellipse cx="55" cy="50" rx="20" ry="28" fill="#2ECC71" opacity="0.9" transform="rotate(-20,55,50)"/>
+  <ellipse cx="65" cy="48" rx="14" ry="22" fill="#27AE60" opacity="0.7" transform="rotate(10,65,48)"/>
+  <line x1="55" y1="72" x2="55" y2="85" stroke="#D4AF37" stroke-width="2.5"/>
+  <!-- App name -->
+  <text x="90" y="44" font-family="Arial,sans-serif" font-size="22" font-weight="bold" fill="#D4AF37">Nutri</text>
+  <text x="136" y="44" font-family="Arial,sans-serif" font-size="22" font-weight="bold" fill="#2ECC71">Plan</text>
+  <text x="90" y="58" font-family="Arial,sans-serif" font-size="9" fill="#888">YOUR PERSONALIZED NUTRITION APP</text>
+  <!-- Macro donut rings -->
+  <circle cx="80" cy="170" r="48" fill="none" stroke="#1A1A1A" stroke-width="14"/>
+  <circle cx="80" cy="170" r="48" fill="none" stroke="#D4AF37" stroke-width="14" stroke-dasharray="120 182" stroke-dashoffset="-30" stroke-linecap="round"/>
+  <circle cx="80" cy="170" r="48" fill="none" stroke="#2ECC71" stroke-width="14" stroke-dasharray="80 182" stroke-dashoffset="-155" stroke-linecap="round"/>
+  <circle cx="80" cy="170" r="48" fill="none" stroke="#4A90E2" stroke-width="14" stroke-dasharray="52 182" stroke-dashoffset="-238" stroke-linecap="round"/>
+  <text x="80" y="165" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#fff">1,840</text>
+  <text x="80" y="178" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#888">kcal today</text>
+  <!-- Legend -->
+  <rect x="145" y="148" width="8" height="8" fill="#D4AF37" rx="2"/>
+  <text x="158" y="157" font-family="Arial,sans-serif" font-size="9" fill="#ccc">Carbs  48%</text>
+  <rect x="145" y="163" width="8" height="8" fill="#2ECC71" rx="2"/>
+  <text x="158" y="172" font-family="Arial,sans-serif" font-size="9" fill="#ccc">Protein 31%</text>
+  <rect x="145" y="178" width="8" height="8" fill="#4A90E2" rx="2"/>
+  <text x="158" y="187" font-family="Arial,sans-serif" font-size="9" fill="#ccc">Fats    21%</text>
+  <!-- Meal cards -->
+  <rect x="230" y="100" width="150" height="42" fill="#1A1A1A" rx="8" stroke="#D4AF37" stroke-width="1" stroke-opacity="0.3"/>
+  <text x="245" y="116" font-family="Arial,sans-serif" font-size="9" fill="#D4AF37">🌅 BREAKFAST</text>
+  <text x="245" y="130" font-family="Arial,sans-serif" font-size="10" fill="#fff">Avocado Toast</text>
+  <text x="345" y="130" text-anchor="end" font-family="Arial,sans-serif" font-size="9" fill="#2ECC71">320 kcal</text>
+  <rect x="230" y="150" width="150" height="42" fill="#1A1A1A" rx="8" stroke="#2ECC71" stroke-width="1" stroke-opacity="0.4"/>
+  <text x="245" y="166" font-family="Arial,sans-serif" font-size="9" fill="#2ECC71">☀️ LUNCH</text>
+  <text x="245" y="180" font-family="Arial,sans-serif" font-size="10" fill="#fff">Grilled Chicken</text>
+  <text x="345" y="180" text-anchor="end" font-family="Arial,sans-serif" font-size="9" fill="#2ECC71">480 kcal</text>
+  <rect x="230" y="200" width="150" height="42" fill="#1A1A1A" rx="8" stroke="#888" stroke-width="1" stroke-opacity="0.3"/>
+  <text x="245" y="216" font-family="Arial,sans-serif" font-size="9" fill="#888">🌙 DINNER</text>
+  <text x="245" y="230" font-family="Arial,sans-serif" font-size="10" fill="#ccc">Salmon Bowl</text>
+  <text x="345" y="230" text-anchor="end" font-family="Arial,sans-serif" font-size="9" fill="#888">560 kcal</text>
+  <!-- Bottom stats bar -->
+  <rect x="20" y="245" width="360" height="40" fill="#111" rx="8"/>
+  <text x="60" y="262" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#888">STREAK</text>
+  <text x="60" y="276" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#D4AF37">🔥 7d</text>
+  <text x="155" y="262" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#888">WATER</text>
+  <text x="155" y="276" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#4A90E2">💧 6/8</text>
+  <text x="250" y="262" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#888">GOAL</text>
+  <text x="250" y="276" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#2ECC71">✓ 91%</text>
+  <text x="345" y="262" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#888">BMI</text>
+  <text x="345" y="276" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#fff">22.4</text>
+</svg>

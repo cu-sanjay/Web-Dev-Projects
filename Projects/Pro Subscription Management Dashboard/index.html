@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription Management Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="logo">S</div>
+                <h2>SubManager</h2>
+            </div>
+            <nav class="nav-menu">
+                <button class="nav-item active" data-view="dashboard">
+                    <span class="icon">📊</span> Dashboard
+                </button>
+                <button class="nav-item" data-view="subscriptions">
+                    <span class="icon">📋</span> Subscriptions
+                </button>
+                <button class="nav-item" data-view="analytics">
+                    <span class="icon">📈</span> Analytics
+                </button>
+            </nav>
+            <div class="sidebar-bottom">
+                <button id="themeToggle" class="theme-toggle">
+                    <span class="icon">🌓</span> Toggle Theme
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-header">
+                <h1>Overview</h1>
+                <div class="header-actions">
+                    <div class="search-bar">
+                        <span class="icon">🔍</span>
+                        <input type="text" id="searchInput" placeholder="Search subscriptions...">
+                    </div>
+                    <button class="btn btn-primary" id="addBtn">+ New Subscription</button>
+                </div>
+            </header>
+
+            <!-- Dashboard View -->
+            <section id="dashboardView" class="view-section active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-title">Monthly Cost</div>
+                        <div class="stat-value" id="monthlyCost">$0.00</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">Annual Cost</div>
+                        <div class="stat-value" id="annualCost">$0.00</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">Active Subscriptions</div>
+                        <div class="stat-value" id="activeSubs">0</div>
+                    </div>
+                    <div class="stat-card warning-card">
+                        <div class="stat-title">Upcoming Renewals (7 Days)</div>
+                        <div class="stat-value" id="upcomingRenewals">0</div>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="card subscriptions-list-preview">
+                        <div class="card-header">
+                            <h3>Upcoming Renewals</h3>
+                            <button class="btn btn-text" onclick="document.querySelector('[data-view=subscriptions]').click()">View All</button>
+                        </div>
+                        <div class="list-container" id="upcomingList">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                    
+                    <div class="card category-breakdown">
+                        <div class="card-header">
+                            <h3>Expense by Category</h3>
+                        </div>
+                        <div class="category-bars" id="categoryBars">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Subscriptions View -->
+            <section id="subscriptionsView" class="view-section">
+                <div class="filters-bar">
+                    <select id="filterCategory" class="input-field">
+                        <option value="All">All Categories</option>
+                        <option value="Streaming Services">Streaming Services</option>
+                        <option value="Music Platforms">Music Platforms</option>
+                        <option value="Cloud Storage">Cloud Storage</option>
+                        <option value="Productivity Tools">Productivity Tools</option>
+                        <option value="Online Learning Platforms">Online Learning Platforms</option>
+                        <option value="Gaming Memberships">Gaming Memberships</option>
+                        <option value="Software Licenses">Software Licenses</option>
+                        <option value="News & Magazines">News & Magazines</option>
+                        <option value="Fitness Applications">Fitness Applications</option>
+                        <option value="Custom">Custom</option>
+                    </select>
+                    <select id="sortOption" class="input-field">
+                        <option value="date-asc">Renewal Date (Soonest)</option>
+                        <option value="cost-desc">Cost (Highest)</option>
+                        <option value="cost-asc">Cost (Lowest)</option>
+                    </select>
+                </div>
+                
+                <div class="subs-grid" id="subsGrid">
+                    <!-- Populated by JS -->
+                </div>
+                <div id="emptySubs" class="empty-state hidden">
+                    <div class="empty-icon">📂</div>
+                    <p>No subscriptions found. Add your first one!</p>
+                </div>
+            </section>
+
+            <!-- Analytics View -->
+            <section id="analyticsView" class="view-section">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Financial Insights</h3>
+                    </div>
+                    <div class="insights-grid" id="insightsContainer">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal Form -->
+    <div class="modal-overlay hidden" id="subModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add Subscription</h2>
+                <button class="close-btn" id="closeModal">✕</button>
+            </div>
+            <form id="subForm">
+                <input type="hidden" id="subId">
+                <div class="form-group">
+                    <label>Service Name</label>
+                    <input type="text" id="subName" class="input-field" required placeholder="e.g. Netflix">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Cost ($)</label>
+                        <input type="number" id="subCost" class="input-field" step="0.01" required placeholder="15.99">
+                    </div>
+                    <div class="form-group">
+                        <label>Billing Cycle</label>
+                        <select id="subCycle" class="input-field" required>
+                            <option value="Monthly">Monthly</option>
+                            <option value="Yearly">Yearly</option>
+                            <option value="Weekly">Weekly</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select id="subCategory" class="input-field" required>
+                            <option value="Streaming Services">Streaming Services</option>
+                            <option value="Music Platforms">Music Platforms</option>
+                            <option value="Cloud Storage">Cloud Storage</option>
+                            <option value="Productivity Tools">Productivity Tools</option>
+                            <option value="Online Learning Platforms">Online Learning Platforms</option>
+                            <option value="Gaming Memberships">Gaming Memberships</option>
+                            <option value="Software Licenses">Software Licenses</option>
+                            <option value="News & Magazines">News & Magazines</option>
+                            <option value="Fitness Applications">Fitness Applications</option>
+                            <option value="Custom">Custom</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Next Renewal Date</label>
+                        <input type="date" id="subDate" class="input-field" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Notes (Optional)</label>
+                    <input type="text" id="subNotes" class="input-field" placeholder="Account info, shared with family, etc.">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-outline" id="cancelBtn">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Subscription</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

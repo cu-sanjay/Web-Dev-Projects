@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200">
+  <rect width="320" height="200" fill="#05070c"/>
+  <rect x="8" y="8" width="304" height="30" rx="8" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+  <text x="18" y="28" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#00f0ff">Exam Countdown</text>
+  <text x="170" y="28" font-family="system-ui, sans-serif" font-size="7" fill="#64748b">3 exams · 9 pending</text>
+  <rect x="248" y="14" width="56" height="18" rx="5" fill="#00f0ff"/>
+  <text x="276" y="27" font-family="system-ui, sans-serif" font-size="7" font-weight="600" fill="#05070c" text-anchor="middle">+ Create</text>
+
+  <!-- Card 1 -->
+  <rect x="8" y="44" width="148" height="148" rx="10" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+  <text x="18" y="60" font-family="system-ui, sans-serif" font-size="8" font-weight="700" fill="#e2e8f0">Database Mgmt</text>
+  <text x="18" y="72" font-family="system-ui, sans-serif" font-size="6" fill="#475569">2026-07-23</text>
+  <!-- count blocks -->
+  <rect x="14" y="80" width="32" height="28" rx="4" fill="rgba(255,255,255,0.02)"/><text x="30" y="98" font-family="monospace" font-size="12" font-weight="700" fill="#00f0ff" text-anchor="middle">45</text><text x="30" y="106" font-family="system-ui, sans-serif" font-size="5" fill="#475569" text-anchor="middle">DAYS</text>
+  <rect x="50" y="80" width="32" height="28" rx="4" fill="rgba(255,255,255,0.02)"/><text x="66" y="98" font-family="monospace" font-size="12" font-weight="700" fill="#00f0ff" text-anchor="middle">10</text><text x="66" y="106" font-family="system-ui, sans-serif" font-size="5" fill="#475569" text-anchor="middle">HOURS</text>
+  <rect x="86" y="80" width="32" height="28" rx="4" fill="rgba(255,255,255,0.02)"/><text x="102" y="98" font-family="monospace" font-size="12" font-weight="700" fill="#00f0ff" text-anchor="middle">32</text><text x="102" y="106" font-family="system-ui, sans-serif" font-size="5" fill="#475569" text-anchor="middle">MIN</text>
+  <rect x="122" y="80" width="28" height="28" rx="4" fill="rgba(255,255,255,0.02)"/><text x="136" y="98" font-family="monospace" font-size="12" font-weight="700" fill="#00f0ff" text-anchor="middle">15</text><text x="136" y="106" font-family="system-ui, sans-serif" font-size="5" fill="#475569" text-anchor="middle">SEC</text>
+  <!-- progress -->
+  <rect x="14" y="114" width="120" height="3" rx="2" fill="rgba(255,255,255,0.04)"/>
+  <rect x="14" y="114" width="45" height="3" rx="2" fill="#00f0ff"/>
+  <text x="138" y="116" font-family="monospace" font-size="6" fill="#64748b">0%</text>
+  <text x="18" y="132" font-family="system-ui, sans-serif" font-size="5" fill="#475569">☐ ER Diagrams</text>
+  <text x="18" y="142" font-family="system-ui, sans-serif" font-size="5" fill="#475569">☐ SQL Queries</text>
+  <text x="18" y="152" font-family="system-ui, sans-serif" font-size="5" fill="#475569">☐ Transactions</text>
+  <text x="18" y="162" font-family="system-ui, sans-serif" font-size="5" fill="#475569">☐ Indexing &amp; B+</text>
+  <rect x="14" y="176" width="50" height="12" rx="3" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+  <text x="20" y="185" font-family="system-ui, sans-serif" font-size="5" fill="#64748b">Show Tasks</text>
+  <rect x="70" y="176" width="40" height="12" rx="3" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+  <text x="76" y="185" font-family="system-ui, sans-serif" font-size="5" fill="#64748b">Delete</text>
+
+  <!-- Card 2 -->
+  <rect x="164" y="44" width="148" height="148" rx="10" fill="rgba(255,255,255,0.01)" stroke="rgba(239,68,68,0.2)" stroke-width="1"/>
+  <text x="174" y="60" font-family="system-ui, sans-serif" font-size="8" font-weight="700" fill="#e2e8f0">Network Security</text>
+  <text x="174" y="72" font-family="system-ui, sans-serif" font-size="6" fill="#475569">2026-06-09</text>
+  <!-- urgent count blocks in red -->
+  <rect x="170" y="80" width="32" height="28" rx="4" fill="rgba(255,255,255,0.02)"/><text x="186" y="98" font-family="monospace" font-size="12" font-weight="700" fill="#ef4444" text-anchor="middle">00</text><text x="186" y="106" font-family="system-ui, sans-serif" font-size="5" fill="#475569" text-anchor="middle">DAYS</text>
+  <rect x="206" y="80" width="32" height="28" rx="4" fill="rgba(255,255,255,0.02)"/><text x="222" y="98" font-family="monospace" font-size="12" font-weight="700" fill="#ef4444" text-anchor="middle">14</text><text x="222" y="106" font-family="system-ui, sans-serif" font-size="5" fill="#475569" text-anchor="middle">HOURS</text>
+  <rect x="242" y="80" width="32" height="28" rx="4" fill="rgba(255,255,255,0.02)"/><text x="258" y="98" font-family="monospace" font-size="12" font-weight="700" fill="#00f0ff" text-anchor="middle">05</text><text x="258" y="106" font-family="system-ui, sans-serif" font-size="5" fill="#475569" text-anchor="middle">MIN</text>
+  <rect x="278" y="80" width="28" height="28" rx="4" fill="rgba(255,255,255,0.02)"/><text x="292" y="98" font-family="monospace" font-size="12" font-weight="700" fill="#00f0ff" text-anchor="middle">22</text><text x="292" y="106" font-family="system-ui, sans-serif" font-size="5" fill="#475569" text-anchor="middle">SEC</text>
+  <rect x="170" y="114" width="120" height="3" rx="2" fill="rgba(255,255,255,0.04)"/>
+  <rect x="170" y="114" width="30" height="3" rx="2" fill="#00f0ff"/>
+  <text x="294" y="116" font-family="monospace" font-size="6" fill="#64748b">20%</text>
+
+  <!-- Card 3 (partial) -->
+  <rect x="8" y="46" width="0" height="0" fill="none"/>
+</svg>
