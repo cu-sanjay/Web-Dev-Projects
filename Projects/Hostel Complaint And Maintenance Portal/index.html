@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hostel Complaint & Maintenance Portal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="header">
+      <h1>🛠️ Hostel Maintenance Portal</h1>
+      <p>Log your room issues and track their resolution status.</p>
+    </header>
+
+    <main class="main-content">
+      <!-- Form Section -->
+      <section class="form-section">
+        <div class="card">
+          <h2>Log a New Complaint</h2>
+          <form id="complaint-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="room-number">Room Number</label>
+                <input type="text" id="room-number" required placeholder="e.g. A-204">
+              </div>
+              <div class="form-group">
+                <label for="category">Category</label>
+                <select id="category" required>
+                  <option value="" disabled selected>Select an issue type</option>
+                  <option value="Electrical">⚡ Electrical</option>
+                  <option value="Plumbing">💧 Plumbing</option>
+                  <option value="Carpentry">🚪 Carpentry</option>
+                  <option value="Cleaning">🧹 Cleaning / Hygiene</option>
+                  <option value="Internet">🌐 Internet / Wi-Fi</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="description">Detailed Description</label>
+              <textarea id="description" rows="4" required placeholder="Please describe the exact issue..."></textarea>
+            </div>
+
+            <button type="submit" class="btn primary-btn">Submit Complaint</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- Dashboard Section -->
+      <section class="dashboard-section">
+        <div class="card">
+          <div class="dashboard-header">
+            <h2>Active Complaints</h2>
+            <div class="filter-controls">
+              <select id="status-filter">
+                <option value="All">All Statuses</option>
+                <option value="Pending">Pending</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Resolved">Resolved</option>
+              </select>
+            </div>
+          </div>
+          
+          <div id="complaints-list" class="complaints-list">
+            <!-- Complaint cards will be injected here -->
+            <div class="empty-state">No complaints found.</div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
