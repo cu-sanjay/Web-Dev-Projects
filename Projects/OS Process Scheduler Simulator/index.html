@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OS Process Scheduler Simulator</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar: Configurations & Inputs -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fa-solid fa-microchip"></i>
+                    <span>SchedOS Pro</span>
+                </div>
+                <span class="badge">v2.0</span>
+            </div>
+
+            <!-- Presets Section -->
+            <div class="config-section">
+                <h3><i class="fa-solid fa-sliders"></i> Presets & Scenarios</h3>
+                <div class="form-group">
+                    <select id="presetSelect" class="form-control">
+                        <option value="default">Select Preset...</option>
+                        <option value="simple">Basic Multi-Process</option>
+                        <option value="starvation">Priority Starvation Case</option>
+                        <option value="overhead">Round Robin Overhead</option>
+                        <option value="io-interrupt">I/O Interrupt Heavy</option>
+                        <option value="mlfq-demo">MLFQ Demotion Demo</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Algorithm Configuration -->
+            <div class="config-section">
+                <h3><i class="fa-solid fa-gears"></i> Scheduling Parameters</h3>
+                <div class="form-group">
+                    <label for="algorithmSelect">Algorithm</label>
+                    <select id="algorithmSelect" class="form-control">
+                        <option value="fcfs">First Come First Served (FCFS)</option>
+                        <option value="sjf">Shortest Job First (SJF)</option>
+                        <option value="srtf">Shortest Remaining Time First (SRTF)</option>
+                        <option value="priority">Priority Scheduling (Non-Preemptive)</option>
+                        <option value="priority-preemptive">Priority Scheduling (Preemptive)</option>
+                        <option value="rr">Round Robin (RR)</option>
+                        <option value="mlfq">Multi-Level Feedback Queue (MLFQ)</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="quantumGroup" style="display: none;">
+                    <label for="timeQuantum">Time Quantum (ticks)</label>
+                    <input type="number" id="timeQuantum" class="form-control" min="1" value="2">
+                </div>
+
+                <div class="form-group" id="contextSwitchGroup">
+                    <label for="contextSwitchCost">Context Switch Cost (ticks)</label>
+                    <input type="number" id="contextSwitchCost" class="form-control" min="0" value="1">
+                </div>
+
+                <div class="form-group toggle-group" id="ageingGroup" style="display: none;">
+                    <label for="ageingToggle">Enable Priority Ageing</label>
+                    <label class="switch">
+                        <input type="checkbox" id="ageingToggle">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+
+                <div class="form-group" id="ageingThresholdGroup" style="display: none;">
+                    <label for="ageingThreshold">Ageing Rate (Ticks before Priority +1)</label>
+                    <input type="number" id="ageingThreshold" class="form-control" min="1" value="5">
+                </div>
+
+                <!-- MLFQ Specific Parameters -->
+                <div id="mlfqParams" style="display: none;">
+                    <div class="form-group">
+                        <label for="mlfqQueuesCount">Number of Queues</label>
+                        <select id="mlfqQueuesCount" class="form-control">
+                            <option value="3">3 Queues</option>
+                            <option value="4">4 Queues</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Quanta (Q0, Q1, Q2, Q3)</label>
+                        <div class="multi-inputs">
+                            <input type="number" id="mlfqQ0" class="form-control mini" value="2" title="Q0 Quantum">
+                            <input type="number" id="mlfqQ1" class="form-control mini" value="4" title="Q1 Quantum">
+                            <input type="number" id="mlfqQ2" class="form-control mini" value="8" title="Q2 Quantum">
+                            <input type="number" id="mlfqQ3" class="form-control mini" value="16" title="Q3 Quantum" style="display: none;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Process Form -->
+            <div class="config-section">
+                <h3><i class="fa-solid fa-plus"></i> Add Custom Process</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="pArrival">Arrival Time</label>
+                        <input type="number" id="pArrival" class="form-control" min="0" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="pBurst">Burst Time</label>
+                        <input type="number" id="pBurst" class="form-control" min="1" value="5">
+                    </div>
+                    <div class="form-group" id="formPriorityGroup">
+                        <label for="pPriority">Priority (Lower = Higher)</label>
+                        <input type="number" id="pPriority" class="form-control" min="1" value="3">
+                    </div>
+                    <div class="form-group">
+                        <label for="pIoStart" title="Tick during burst when I/O starts">I/O Trigger At</label>
+                        <input type="number" id="pIoStart" class="form-control" min="0" value="0" placeholder="0 = None">
+                    </div>
+                    <div class="form-group">
+                        <label for="pIoDuration" title="Duration in clock cycles of the I/O operation">I/O Duration</label>
+                        <input type="number" id="pIoDuration" class="form-control" min="0" value="0" placeholder="0 = None">
+                    </div>
+                </div>
+                <button id="addProcessBtn" class="btn btn-primary btn-block">
+                    <i class="fa-solid fa-circle-plus"></i> Add Process
+                </button>
+            </div>
+
+            <div class="sidebar-footer">
+                <button id="resetAllBtn" class="btn btn-danger btn-block">
+                    <i class="fa-solid fa-trash-can"></i> Clear All Processes
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Workspace Area -->
+        <main class="workspace">
+            <!-- Top Header & Controls -->
+            <header class="workspace-header">
+                <div class="simulation-controls">
+                    <button id="playBtn" class="btn btn-success" title="Play Simulation">
+                        <i class="fa-solid fa-play"></i> Play
+                    </button>
+                    <button id="stepBtn" class="btn btn-secondary" title="Step 1 Tick Forward">
+                        <i class="fa-solid fa-forward-step"></i> Step
+                    </button>
+                    <button id="resetSimBtn" class="btn btn-warning" title="Reset Simulation Clock">
+                        <i class="fa-solid fa-rotate-left"></i> Reset
+                    </button>
+
+                    <div class="divider"></div>
+
+                    <!-- Speed Control -->
+                    <div class="speed-control">
+                        <i class="fa-solid fa-gauge-high"></i>
+                        <input type="range" id="speedSlider" min="100" max="2000" step="100" value="800" title="Control simulation tick speed">
+                        <span id="speedValue">800ms</span>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <!-- Generate Random -->
+                    <button id="randomizeBtn" class="btn btn-info" title="Generate Random Processes">
+                        <i class="fa-solid fa-dice"></i> Randomize
+                    </button>
+                    <!-- CSV Export -->
+                    <button id="exportCsvBtn" class="btn btn-outline" title="Export Process Metrics to CSV">
+                        <i class="fa-solid fa-download"></i> Export CSV
+                    </button>
+                </div>
+
+                <div class="clock-display">
+                    <span class="label">Clock Cycle</span>
+                    <span id="clockTick" class="tick">0</span>
+                </div>
+            </header>
+
+            <!-- Dashboard Telemetry Cards -->
+            <section class="telemetry">
+                <div class="card">
+                    <div class="card-icon blue"><i class="fa-solid fa-chart-simple"></i></div>
+                    <div class="card-content">
+                        <span class="card-label">Avg Waiting Time</span>
+                        <h2 id="avgWaitingTime">0.00 <span class="unit">ticks</span></h2>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-icon purple"><i class="fa-solid fa-arrows-spin"></i></div>
+                    <div class="card-content">
+                        <span class="card-label">Avg Turnaround Time</span>
+                        <h2 id="avgTurnaroundTime">0.00 <span class="unit">ticks</span></h2>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-icon emerald"><i class="fa-solid fa-bolt"></i></div>
+                    <div class="card-content">
+                        <span class="card-label">Avg Response Time</span>
+                        <h2 id="avgResponseTime">0.00 <span class="unit">ticks</span></h2>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-icon orange"><i class="fa-solid fa-gauge"></i></div>
+                    <div class="card-content">
+                        <span class="card-label">CPU Utilization</span>
+                        <h2 id="cpuUtilization">0%</h2>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CPU Queues Visualization (State transitions) -->
+            <section class="queue-states">
+                <!-- Ready Queue -->
+                <div class="queue-card ready-queue-panel">
+                    <div class="panel-header">
+                        <h3><i class="fa-solid fa-list-check"></i> Ready Queue</h3>
+                        <span class="count-badge" id="readyCount">0</span>
+                    </div>
+                    <div class="queue-list" id="readyQueueList">
+                        <!-- Processes in Ready State -->
+                        <div class="empty-state">No ready processes</div>
+                    </div>
+                </div>
+
+                <!-- CPU / Running Area -->
+                <div class="queue-card cpu-panel">
+                    <div class="panel-header">
+                        <h3><i class="fa-solid fa-microchip"></i> Running CPU</h3>
+                        <span class="status-indicator" id="cpuStatus">IDLE</span>
+                    </div>
+                    <div class="cpu-core" id="cpuCore">
+                        <div class="empty-state">CPU is currently idle</div>
+                    </div>
+                    <div class="cpu-controls">
+                        <button id="triggerIoBtn" class="btn btn-warning btn-sm btn-block" disabled title="Interrupt process and push to Blocked state">
+                            <i class="fa-solid fa-hand"></i> Trigger Interactive I/O
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Blocked / IO Queue -->
+                <div class="queue-card blocked-queue-panel">
+                    <div class="panel-header">
+                        <h3><i class="fa-solid fa-hourglass-half"></i> Blocked (I/O)</h3>
+                        <span class="count-badge" id="blockedCount">0</span>
+                    </div>
+                    <div class="queue-list" id="blockedQueueList">
+                        <!-- Processes in Blocked State -->
+                        <div class="empty-state">No blocked processes</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- MLFQ Multi-Tier Visualizer (Only visible when MLFQ is selected) -->
+            <section class="mlfq-queues-container" id="mlfqQueuesSection" style="display: none;">
+                <div class="panel-header">
+                    <h3><i class="fa-solid fa-layer-group"></i> Multi-Level Feedback Queues</h3>
+                </div>
+                <div class="mlfq-levels" id="mlfqLevelsContainer">
+                    <!-- Dynamic level lanes will be injected here -->
+                </div>
+            </section>
+
+            <!-- Gantt Chart Timeline -->
+            <section class="timeline-container">
+                <div class="panel-header">
+                    <h3><i class="fa-solid fa-chart-gantt"></i> Gantt Chart Timeline</h3>
+                    <div class="timeline-legend">
+                        <span class="legend-item"><span class="legend-color cs-color"></span>Context Switch</span>
+                        <span class="legend-item"><span class="legend-color idle-color"></span>Idle</span>
+                        <span class="legend-item"><span class="legend-color active-color"></span>Executing</span>
+                    </div>
+                </div>
+                <div class="gantt-chart-wrapper">
+                    <div class="gantt-ruler" id="ganttRuler">
+                        <!-- Dynamic cycle rulers -->
+                    </div>
+                    <div class="gantt-track" id="ganttTrack">
+                        <!-- Dynamic Gantt blocks -->
+                        <div class="empty-state">Simulation has not started yet</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Processes Statistics Table -->
+            <section class="table-container">
+                <div class="panel-header">
+                    <h3><i class="fa-solid fa-table-list"></i> Process Scheduling Metrics</h3>
+                </div>
+                <div class="table-responsive">
+                    <table class="metrics-table" id="metricsTable">
+                        <thead>
+                            <tr>
+                                <th>PID</th>
+                                <th>Arrival</th>
+                                <th>Burst</th>
+                                <th>Priority</th>
+                                <th>I/O Info</th>
+                                <th>Remaining</th>
+                                <th>Response</th>
+                                <th>Turnaround</th>
+                                <th>Waiting</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="metricsTableBody">
+                            <!-- Injected rows -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Bottom Section: Terminal Logs -->
+            <section class="logs-container">
+                <div class="panel-header">
+                    <h3><i class="fa-solid fa-terminal"></i> Simulation Activity Logs</h3>
+                    <button id="clearLogsBtn" class="btn btn-sm btn-outline">Clear Logs</button>
+                </div>
+                <div class="logs-console" id="logsConsole">
+                    <div class="log-entry system"><span class="log-time">[SYSTEM]</span> Simulator initialized. Add processes and click "Play" to start.</div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Script File -->
+    <script src="script.js"></script>
+</body>
+</html>
