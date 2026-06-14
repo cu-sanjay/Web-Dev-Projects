@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Disaster · Preparedness Trainer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="top-bar">
+    <div class="top-brand">
+      <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="#ffb800" stroke-width="1.5">
+        <polygon points="12 2 15 9 22 9 16 14 18 22 12 17 6 22 8 14 2 9 9 9"/>
+      </svg>
+      <div>
+        <h1 class="top-title">Disaster · Preparedness Trainer</h1>
+        <span class="top-sub">emergency management operations v1.0</span>
+      </div>
+      <span class="top-badge" id="topBadge">STANDBY</span>
+    </div>
+    <div class="top-metrics">
+      <span class="metric-chip" id="chipPrep">PREP <strong id="prepVal">0%</strong></span>
+      <span class="metric-chip" id="chipStruct">STRUCT <strong id="structVal">100%</strong></span>
+      <span class="metric-chip accent" id="chipEvac">EVAC <strong id="evacVal">0</strong></span>
+    </div>
+  </header>
+
+  <main class="workspace">
+
+    <!-- CRISIS SELECTOR -->
+    <div class="crisis-ribbon">
+      <span class="ribbon-label">Active Crisis Mode</span>
+      <button class="crisis-btn active" data-crisis="earthquake">Seismic Earthquake Fault</button>
+      <button class="crisis-btn" data-crisis="flood">Flash Hydro-Flood</button>
+      <button class="crisis-btn" data-crisis="cyclone">Category-5 Cyclone Vortex</button>
+      <span class="ribbon-hint" id="ribbonHint">SELECT MODE</span>
+    </div>
+
+    <div class="main-grid">
+
+      <!-- LEFT: RESOURCE PANEL -->
+      <section class="resource-section">
+        <div class="panel-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="10" height="10"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M2 12h20M12 2v20" stroke-width="0.5"/></svg>
+          <span>Resource Allocation · Check-Grid</span>
+          <span class="panel-hint">DEPLOY ASSETS</span>
+        </div>
+        <div class="resource-body" id="resourceBody">
+          <div class="res-item" data-item="rations">
+            <input type="checkbox" id="chkRations"><label for="chkRations">Emergency Rations Kit</label>
+            <span class="res-pts" id="ptsRations">+0</span>
+          </div>
+          <div class="res-item" data-item="sandbags">
+            <input type="checkbox" id="chkSandbags"><label for="chkSandbags">Structural Sandbag Girders</label>
+            <span class="res-pts" id="ptsSandbags">+0</span>
+          </div>
+          <div class="res-item" data-item="shutters">
+            <input type="checkbox" id="chkShutters"><label for="chkShutters">Reinforced Window Shutters</label>
+            <span class="res-pts" id="ptsShutters">+0</span>
+          </div>
+          <div class="res-item" data-item="valves">
+            <input type="checkbox" id="chkValves"><label for="chkValves">Seismic Utility Shutoff Valves</label>
+            <span class="res-pts" id="ptsValves">+0</span>
+          </div>
+          <div class="res-item" data-item="horns">
+            <input type="checkbox" id="chkHorns"><label for="chkHorns">Community Evacuation Horns</label>
+            <span class="res-pts" id="ptsHorns">+0</span>
+          </div>
+        </div>
+        <div class="resource-foot">
+          <span class="rf-label">Preparedness Score</span>
+          <span class="rf-val" id="prepScore">0%</span>
+        </div>
+      </section>
+
+      <!-- CENTER: CANVAS + DILEMMAS -->
+      <section class="viz-section">
+        <div class="panel-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="10" height="10"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M2 12h20M12 2v20" stroke-width="0.5"/></svg>
+          <span>Crisis Simulator · Canvas Viewport</span>
+          <span class="panel-hint" id="vizHint">STABLE</span>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="crisisCanvas"></canvas>
+        </div>
+        <div class="dilemma-panel" id="dilemmaPanel">
+          <div class="dilemma-idle" id="dilemmaIdle">
+            <p class="dl-text">Select a crisis mode and deploy resources. Then click "Commence Crisis Evaluation" to begin the simulation.</p>
+          </div>
+          <div class="dilemma-card hidden" id="dilemmaCard">
+            <p class="dl-scenario" id="dlScenario"></p>
+            <div class="dl-choices" id="dlChoices"></div>
+            <div class="dl-feedback hidden" id="dlFeedback"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT: STATUS -->
+      <section class="status-section">
+        <div class="panel-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="10" height="10"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 8h10M7 12h6M7 16h8"/></svg>
+          <span>Operational · Status Instrumentation</span>
+          <span class="panel-hint">LIVE</span>
+        </div>
+        <div class="status-body" id="statusBody">
+          <!-- injected by script -->
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ACTIONS -->
+    <footer class="action-bar">
+      <button class="foot-btn foot-eval" id="btnEvaluate">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><circle cx="12" cy="12" r="10"/><path d="M12 16V8M8 12l4-4 4 4"/></svg>
+        Commence Crisis Evaluation Tick
+      </button>
+      <button class="foot-btn" id="btnAid">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        Deploy Immediate Emergency Aid Forces
+      </button>
+      <button class="foot-btn foot-critical" id="btnPurge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6"/><path d="M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+        Purge Workspace Arrays &amp; Clear Alarms
+      </button>
+    </footer>
+
+  </main>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
