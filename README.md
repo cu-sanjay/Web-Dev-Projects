@@ -160,6 +160,14 @@ Explore any of them, read the README and follow the structure.
 
 The showcase is deployed using **GitHub Pages** directly from the **main** branch.
 
+## 🖼️ Usage Screenshots
+
+Below are screenshots of the running showcase website.
+
+![Showcase Home](./assets/showcase-home.png)
+
+![Project Preview](./assets/project-preview.png)
+
 ## 🏆 Open Source Programs Supported
 
 - **NSoC 2026** → https://www.nsoc.in/
