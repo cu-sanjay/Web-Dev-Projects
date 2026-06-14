@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campus Event Discovery Hub</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <h1 class="logo">🎉 CampusEvents</h1>
+      <div class="nav-links">
+        <a href="#" class="active">Discover</a>
+        <a href="#">My RSVPs (<span id="rsvp-count">0</span>)</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-content">
+      <h2>Find Your Next Campus Adventure</h2>
+      <p>Discover club meetings, tech workshops, sports games, and social events happening near you.</p>
+      
+      <div class="search-bar">
+        <input type="text" id="search-input" placeholder="Search events, clubs, or keywords...">
+        <select id="category-filter">
+          <option value="all">All Categories</option>
+          <option value="Academic">Academic</option>
+          <option value="Social">Social</option>
+          <option value="Sports">Sports</option>
+          <option value="Arts">Arts</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="section-header">
+      <h3>Upcoming Events</h3>
+      <span id="results-count" class="results-text">Showing 0 events</span>
+    </div>
+    
+    <div class="events-grid" id="events-grid">
+      <!-- Event cards rendered here by JS -->
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
