@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#03040b" />
+      <stop offset="100%" stop-color="#0a0b16" />
+    </linearGradient>
+    
+    <!-- Accent Indigo/Violet Gradient -->
+    <linearGradient id="accent-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#a78bfa" />
+    </linearGradient>
+
+    <!-- Success Green Gradient -->
+    <linearGradient id="green-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#34d399" />
+    </linearGradient>
+
+    <!-- Glow Filter -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="320" height="200" rx="16" fill="url(#bg-grad)" />
+  <rect width="320" height="200" rx="16" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="2" />
+
+  <!-- Background decorative glows -->
+  <circle cx="270" cy="50" r="50" fill="#6366f1" opacity="0.1" filter="url(#glow)" />
+  <circle cx="50" cy="150" r="45" fill="#10b981" opacity="0.06" filter="url(#glow)" />
+
+  <!-- LEFT CARD: JSON Schema Editor Mockup -->
+  <g transform="translate(25, 30)">
+    <!-- Card Frame -->
+    <rect width="115" height="115" rx="8" fill="rgba(14, 16, 33, 0.5)" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1" />
+    
+    <!-- Header tabs -->
+    <circle cx="10" cy="10" r="3" fill="#ef4444" opacity="0.8" />
+    <circle cx="18" cy="10" r="3" fill="#f59e0b" opacity="0.8" />
+    <circle cx="26" cy="10" r="3" fill="#10b981" opacity="0.8" />
+    <rect x="75" y="6" width="30" height="8" rx="3" fill="rgba(99, 102, 241, 0.15)" stroke="rgba(99, 102, 241, 0.3)" stroke-width="0.5" />
+    <text x="90" y="12" font-family="'Inter', sans-serif" font-size="5" fill="#a78bfa" text-anchor="middle" font-weight="700">SCHEMA</text>
+
+    <!-- Schema Code rows -->
+    <!-- Line 1: { -->
+    <text x="12" y="28" font-family="'Courier New', monospace" font-size="8" fill="#f3f4f6" font-weight="700">{</text>
+    
+    <!-- Line 2: "type": "object", -->
+    <text x="22" y="40" font-family="'Courier New', monospace" font-size="7" font-weight="700" fill="#a78bfa">"type"<tspan fill="#f3f4f6">:</tspan> <tspan fill="#34d399">"object"</tspan><tspan fill="#f3f4f6">,</tspan></text>
+    
+    <!-- Line 3: "properties": { -->
+    <text x="22" y="52" font-family="'Courier New', monospace" font-size="7" font-weight="700" fill="#a78bfa">"properties"<tspan fill="#f3f4f6">:</tspan> <tspan fill="#f3f4f6">{</tspan></text>
+    
+    <!-- Line 4: "name": { -->
+    <text x="32" y="64" font-family="'Courier New', monospace" font-size="7" font-weight="700" fill="#a78bfa">"name"<tspan fill="#f3f4f6">:</tspan> <tspan fill="#f3f4f6">{</tspan></text>
+    
+    <!-- Line 5: "type": "string", -->
+    <text x="42" y="76" font-family="'Courier New', monospace" font-size="7" font-weight="700" fill="#a78bfa">"type"<tspan fill="#f3f4f6">:</tspan> <tspan fill="#34d399">"string"</tspan><tspan fill="#f3f4f6">,</tspan></text>
+    
+    <!-- Line 6: "minLength": 3 -->
+    <text x="42" y="88" font-family="'Courier New', monospace" font-size="7" font-weight="700" fill="#a78bfa">"minLength"<tspan fill="#f3f4f6">:</tspan> <tspan fill="#f59e0b">3</tspan></text>
+    
+    <!-- Line 7: } } } -->
+    <text x="32" y="100" font-family="'Courier New', monospace" font-size="7" font-weight="700" fill="#f3f4f6">}</text>
+    <text x="22" y="108" font-family="'Courier New', monospace" font-size="7" font-weight="700" fill="#f3f4f6">}</text>
+    <text x="12" y="114" font-family="'Courier New', monospace" font-size="8" fill="#f3f4f6" font-weight="700">}</text>
+  </g>
+
+  <!-- MIDDLE CONNECTIVE ELEMENT: Compile compiler sparkles -->
+  <g transform="translate(145, 80)">
+    <path d="M-2,10 L30,10" fill="none" stroke="rgba(255, 255, 255, 0.08)" stroke-width="2" stroke-dasharray="3 3" />
+    <!-- Glowing validation node -->
+    <path d="M10,-10 L13,-4 L19,-1 L13,2 L10,8 L7,2 L1,-1 L7,-4 Z" fill="url(#accent-grad)" filter="url(#glow)" opacity="0.8" />
+  </g>
+
+  <!-- RIGHT CARD: Dynamic Form Builder Mockup -->
+  <g transform="translate(180, 30)">
+    <!-- Card Frame -->
+    <rect width="115" height="115" rx="8" fill="rgba(14, 16, 33, 0.5)" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1" />
+    
+    <!-- Header tabs -->
+    <circle cx="10" cy="10" r="3" fill="#ef4444" opacity="0.8" />
+    <circle cx="18" cy="10" r="3" fill="#f59e0b" opacity="0.8" />
+    <circle cx="26" cy="10" r="3" fill="#10b981" opacity="0.8" />
+    <rect x="75" y="6" width="30" height="8" rx="3" fill="rgba(16, 185, 129, 0.15)" stroke="rgba(16, 185, 129, 0.3)" stroke-width="0.5" />
+    <text x="90" y="12" font-family="'Inter', sans-serif" font-size="5" fill="#34d399" text-anchor="middle" font-weight="700">FORM</text>
+
+    <!-- Simulated Input Fields -->
+    <!-- Label: Full Name -->
+    <text x="12" y="32" font-family="'Inter', sans-serif" font-size="6" font-weight="700" fill="#9ca3af">Full Name*</text>
+    <!-- Text Box -->
+    <rect x="12" y="36" width="91" height="14" rx="3" fill="rgba(0,0,0,0.25)" stroke="rgba(255,255,255,0.08)" stroke-width="0.8" />
+    <text x="18" y="45" font-family="'Inter', sans-serif" font-size="6.5" fill="#f3f4f6">Jane Doe</text>
+
+    <!-- Label: Age -->
+    <text x="12" y="60" font-family="'Inter', sans-serif" font-size="6" font-weight="700" fill="#9ca3af">Age*</text>
+    <!-- Number Box -->
+    <rect x="12" y="64" width="91" height="14" rx="3" fill="rgba(0,0,0,0.25)" stroke="rgba(255,255,255,0.08)" stroke-width="0.8" />
+    <text x="18" y="73" font-family="'Inter', sans-serif" font-size="6.5" fill="#f3f4f6">25</text>
+
+    <!-- Checkbox Group: Subscribe -->
+    <rect x="12" y="90" width="8" height="8" rx="2" fill="none" stroke="#6366f1" stroke-width="1" />
+    <!-- Checkmark inside checkbox -->
+    <path d="M14,92 L15,95 L18,91" fill="none" stroke="#6366f1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="24" y="96" font-family="'Inter', sans-serif" font-size="6.5" font-weight="600" fill="#9ca3af">Subscribe</text>
+
+    <!-- Validation Checkmark badge -->
+    <circle cx="100" cy="100" r="8" fill="url(#green-grad)" filter="url(#glow)" />
+    <path d="M97,100 L99,102 L103,98" fill="none" stroke="#ffffff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+
+  <!-- BRANDING / TEXT LABELS -->
+  <g transform="translate(160, 172)">
+    <text font-family="'Outfit', 'Inter', sans-serif" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff" letter-spacing="0.5">
+      Schema<tspan fill="#6366f1">Play</tspan>
+    </text>
+    <text y="12" font-family="'Inter', sans-serif" font-size="7" font-weight="600" text-anchor="middle" fill="#9ca3af" letter-spacing="1" opacity="0.8">
+      JSON SCHEMA PLAYGROUND
+    </text>
+  </g>
+</svg>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSON Schema Playground & Form Builder</title>
+  <!-- Google Fonts: Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- CSS Styles -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Background Decorative Glowing Orbs -->
+  <div class="decor-glow">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+  </div>
+
+  <div class="playground-layout">
+    <!-- TOP NAVBAR -->
+    <header class="app-header bg-glass">
+      <div class="brand">
+        <div class="brand-logo">
+          <i class="fa-solid fa-square-poll-vertical"></i>
+        </div>
+        <div class="brand-text">
+          <h1>SchemaPlay</h1>
+          <span>JSON Schema Validator & Form Builder</span>
+        </div>
+      </div>
+      
+      <!-- Preset Dropdown Selector -->
+      <div class="preset-controls">
+        <label for="select-preset">Schema Presets:</label>
+        <div class="select-wrapper">
+          <select id="select-preset">
+            <option value="user-registration">User Registration Profile</option>
+            <option value="product-inventory">E-Commerce Product Item</option>
+            <option value="complex-config">App System Configurations</option>
+          </select>
+          <i class="fa-solid fa-chevron-down select-arrow"></i>
+        </div>
+      </div>
+
+      <!-- Quick Status Indicators -->
+      <div class="global-status-badges">
+        <div class="status-badge" id="schema-status-badge">
+          <span class="badge-label">Schema:</span>
+          <span class="badge-value text-accent" id="schema-status-text">Draft-07</span>
+        </div>
+        <div class="status-badge" id="validation-status-badge">
+          <span class="badge-label">Data:</span>
+          <span class="badge-value text-success" id="validation-status-text">Valid</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN GRID CONTAINER -->
+    <main class="grid-container">
+      
+      <!-- COLUMN 1: JSON SCHEMA EDITOR -->
+      <section class="pane-card bg-glass" aria-labelledby="header-schema-editor">
+        <div class="pane-header">
+          <h2 id="header-schema-editor"><i class="fa-solid fa-shield-halved text-accent"></i> JSON Schema</h2>
+          <div class="pane-actions">
+            <button id="btn-format-schema" class="btn btn-secondary btn-sm" title="Format Schema code"><i class="fa-solid fa-align-left"></i> Format</button>
+            <button id="btn-minify-schema" class="btn btn-secondary btn-sm" title="Minify Schema code"><i class="fa-solid fa-compress"></i> Minify</button>
+          </div>
+        </div>
+        <div class="textarea-container">
+          <textarea id="schema-editor-textarea" placeholder="Write or paste your JSON Schema draft-07 configuration here..." autocomplete="off"></textarea>
+        </div>
+        <!-- Schema Parsing Error Card -->
+        <div class="validation-alert hidden" id="schema-error-alert">
+          <i class="fa-solid fa-triangle-exclamation alert-icon"></i>
+          <div class="alert-content">
+            <h4>Invalid Schema JSON</h4>
+            <p id="schema-error-msg">Parsing error details</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- COLUMN 2: JSON INSTANCE DATA EDITOR -->
+      <section class="pane-card bg-glass" aria-labelledby="header-instance-editor">
+        <div class="pane-header">
+          <h2 id="header-instance-editor"><i class="fa-solid fa-file-invoice text-success"></i> JSON Test Instance</h2>
+          <div class="pane-actions">
+            <button id="btn-format-data" class="btn btn-secondary btn-sm" title="Format instance JSON"><i class="fa-solid fa-align-left"></i> Format</button>
+            <button id="btn-minify-data" class="btn btn-secondary btn-sm" title="Minify instance JSON"><i class="fa-solid fa-compress"></i> Minify</button>
+            <button id="btn-copy-data" class="btn btn-secondary btn-sm" title="Copy instance to clipboard"><i class="fa-solid fa-copy"></i> Copy</button>
+            <button id="btn-clear-data" class="btn btn-icon text-danger btn-sm" title="Clear instance data"><i class="fa-solid fa-trash-can"></i></button>
+          </div>
+        </div>
+        <div class="textarea-container">
+          <textarea id="data-editor-textarea" placeholder="Write or paste your JSON test instance data here..." autocomplete="off"></textarea>
+        </div>
+        <!-- Instance Parsing Error Card -->
+        <div class="validation-alert hidden" id="data-error-alert">
+          <i class="fa-solid fa-triangle-exclamation alert-icon"></i>
+          <div class="alert-content">
+            <h4>Invalid Instance JSON</h4>
+            <p id="data-error-msg">Parsing error details</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- COLUMN 3: INTERACTIVE FORMS & REPORTS -->
+      <section class="pane-card bg-glass" aria-labelledby="header-interactive-panel">
+        <div class="pane-header-tabs">
+          <div class="tab-triggers">
+            <button class="tab-trigger active" data-tab="form">
+              <i class="fa-solid fa-wpforms"></i> Interactive Form
+            </button>
+            <button class="tab-trigger" data-tab="docs">
+              <i class="fa-solid fa-book-open"></i> Schema Docs
+            </button>
+          </div>
+        </div>
+        
+        <div class="pane-body">
+          <!-- TAB PANE: DYNAMIC AUTO-GENERATED FORM -->
+          <div class="tab-pane active" id="pane-dynamic-form">
+            <div id="dynamic-form-container">
+              <!-- Dynamically populated schema HTML form elements -->
+            </div>
+          </div>
+
+          <!-- TAB PANE: SCHEMA DOCUMENTATION TABLE -->
+          <div class="tab-pane" id="pane-schema-docs">
+            <div class="docs-viewport">
+              <div class="docs-search-bar">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" id="docs-search-input" placeholder="Search schema properties..." autocomplete="off">
+              </div>
+              <div class="docs-list" id="schema-docs-list">
+                <!-- Dynamically generated property list items -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STICKY BOTTOM PANEL: VALIDATION ERROR LOGS -->
+        <div class="validation-reports-card border-glass">
+          <div class="report-header">
+            <h3><i class="fa-solid fa-list-check"></i> Validation Logs</h3>
+            <span class="report-count-badge" id="report-count">0 Errors</span>
+          </div>
+          <div class="report-body" id="validation-logs-list">
+            <!-- Dynamically populated validation reports list -->
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- AJV JSON Schema Validator library from CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ajv/8.12.0/ajv7.min.js"></script>
+  <!-- App JS Script -->
+  <script src="script.js"></script>
+</body>
+</html>
