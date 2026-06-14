@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campus Resource Exchange</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <h1 class="logo">🎓 CampusExchange</h1>
+      <button id="post-btn" class="btn primary">Post a Resource</button>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <h2>Trade, Borrow, and Share Academic Resources</h2>
+    <p>Find textbooks, calculators, lab gear, and notes shared by your peers.</p>
+    
+    <div class="search-bar">
+      <input type="text" id="search-input" placeholder="Search for textbooks, gear...">
+      <select id="category-filter">
+        <option value="all">All Categories</option>
+        <option value="Textbooks">Textbooks</option>
+        <option value="Electronics">Electronics</option>
+        <option value="Supplies">Supplies</option>
+        <option value="Notes">Notes</option>
+      </select>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="listings-grid" id="listings-grid">
+      <!-- Cards rendered via JS -->
+    </div>
+  </main>
+
+  <!-- Modal for Posting -->
+  <div class="modal-overlay hidden" id="post-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Post a Resource</h3>
+        <button id="close-modal" class="close-btn">&times;</button>
+      </div>
+      <form id="post-form">
+        <div class="form-group">
+          <label>Resource Title</label>
+          <input type="text" id="item-title" required placeholder="e.g., Campbell Biology 12th Ed">
+        </div>
+        <div class="form-group">
+          <label>Category</label>
+          <select id="item-category" required>
+            <option value="Textbooks">Textbook</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Supplies">Supplies</option>
+            <option value="Notes">Notes</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Condition</label>
+          <select id="item-condition" required>
+            <option value="Like New">Like New</option>
+            <option value="Good">Good</option>
+            <option value="Fair">Fair</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Exchange Type</label>
+          <select id="item-type" required>
+            <option value="Trade">Looking to Trade</option>
+            <option value="Giveaway">Free Giveaway</option>
+            <option value="Lend">Lending for Semester</option>
+          </select>
+        </div>
+        <button type="submit" class="btn primary full-width">Publish Listing</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
