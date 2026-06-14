@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <rect width="400" height="300" fill="#f4f7fc" rx="24" ry="24" />
+  <!-- main card -->
+  <rect x="20" y="20" width="360" height="260" fill="#ffffff" rx="20" ry="20" stroke="#e2edf7" stroke-width="1.5" />
+  
+  <!-- header / title -->
+  <text x="45" y="58" font-family="Arial, sans-serif" font-weight="700" font-size="18" fill="#1e293b">📝 Word Counter</text>
+  <rect x="45" y="70" width="170" height="6" fill="#cbd5e1" rx="3" />
+  
+  <!-- textarea placeholder imitation -->
+  <rect x="40" y="96" width="320" height="90" fill="#fefefe" stroke="#cbd5e6" stroke-width="1.8" rx="16" rx="16" />
+  <rect x="58" y="116" width="180" height="8" fill="#cbd5e6" rx="4" />
+  <rect x="58" y="136" width="250" height="8" fill="#cbd5e6" rx="4" />
+  <rect x="58" y="156" width="140" height="8" fill="#cbd5e6" rx="4" />
+  
+  <!-- stats cards (three blocks) -->
+  <rect x="40" y="208" width="96" height="52" fill="#f1f5f9" rx="16" stroke="#e2edf2" stroke-width="1" />
+  <text x="88" y="230" font-family="Arial" font-weight="bold" font-size="20" fill="#0f2b3d" text-anchor="middle">12</text>
+  <text x="88" y="250" font-family="Arial" font-size="8" fill="#5a6e8a" text-anchor="middle" text-transform="uppercase">WORDS</text>
+  
+  <rect x="152" y="208" width="96" height="52" fill="#f1f5f9" rx="16" stroke="#e2edf2" stroke-width="1" />
+  <text x="200" y="230" font-family="Arial" font-weight="bold" font-size="20" fill="#0f2b3d" text-anchor="middle">68</text>
+  <text x="200" y="250" font-family="Arial" font-size="8" fill="#5a6e8a" text-anchor="middle">CHARS (w/ spaces)</text>
+  
+  <rect x="264" y="208" width="96" height="52" fill="#f1f5f9" rx="16" stroke="#e2edf2" stroke-width="1" />
+  <text x="312" y="230" font-family="Arial" font-weight="bold" font-size="20" fill="#0f2b3d" text-anchor="middle">54</text>
+  <text x="312" y="250" font-family="Arial" font-size="8" fill="#5a6e8a" text-anchor="middle">NO SPACES</text>
+  
+  <!-- tiny buttons hint -->
+  <circle cx="290" cy="280" r="10" fill="#eef2f8" stroke="#b9c8e0" stroke-width="1" />
+  <text x="290" y="284" font-family="Arial" font-size="8" fill="#435574" text-anchor="middle">🗑️</text>
+  <circle cx="325" cy="280" r="10" fill="#eef2f8" stroke="#b9c8e0" stroke-width="1" />
+  <text x="325" y="284" font-family="Arial" font-size="8" fill="#435574" text-anchor="middle">📋</text>
+</svg>
