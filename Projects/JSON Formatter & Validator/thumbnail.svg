@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#05060f" />
+      <stop offset="100%" stop-color="#0a0b18" />
+    </linearGradient>
+    
+    <!-- Accent Indigo/Violet Gradient -->
+    <linearGradient id="accent-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#a78bfa" />
+    </linearGradient>
+
+    <!-- Success Green Gradient -->
+    <linearGradient id="green-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#34d399" />
+    </linearGradient>
+
+    <!-- Glow Filter -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="320" height="200" rx="16" fill="url(#bg-grad)" />
+  <rect width="320" height="200" rx="16" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="2" />
+
+  <!-- Background glows -->
+  <circle cx="280" cy="50" r="55" fill="#6366f1" opacity="0.12" filter="url(#glow)" />
+  <circle cx="40" cy="150" r="45" fill="#34d399" opacity="0.08" filter="url(#glow)" />
+
+  <!-- LEFT PANEL: Raw/Pretty JSON Editor Mockup -->
+  <g transform="translate(25, 35)">
+    <!-- Card Base -->
+    <rect width="115" height="110" rx="8" fill="rgba(16, 20, 42, 0.4)" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1" />
+    
+    <!-- Window Header Controls -->
+    <circle cx="10" cy="10" r="3" fill="#ef4444" opacity="0.8" />
+    <circle cx="18" cy="10" r="3" fill="#f59e0b" opacity="0.8" />
+    <circle cx="26" cy="10" r="3" fill="#10b981" opacity="0.8" />
+    <rect x="75" y="6" width="30" height="8" rx="3" fill="rgba(99, 102, 241, 0.15)" stroke="rgba(99, 102, 241, 0.3)" stroke-width="0.5" />
+    <text x="90" y="12" font-family="'Inter', sans-serif" font-size="5" fill="#a78bfa" text-anchor="middle" font-weight="700">JSON</text>
+
+    <!-- Simulated JSON Code Rows -->
+    <!-- Line 1: { -->
+    <text x="12" y="30" font-family="'Courier New', monospace" font-size="8" fill="#f3f4f6" font-weight="700">{</text>
+    
+    <!-- Line 2: "status": "active", -->
+    <text x="22" y="42" font-family="'Courier New', monospace" font-size="7" font-weight="700" fill="#a78bfa">"status"<tspan fill="#f3f4f6">:</tspan> <tspan fill="#34d399">"active"</tspan><tspan fill="#f3f4f6">,</tspan></text>
+    
+    <!-- Line 3: "lines": 28, -->
+    <text x="22" y="54" font-family="'Courier New', monospace" font-size="7" font-weight="700" fill="#a78bfa">"lines"<tspan fill="#f3f4f6">:</tspan> <tspan fill="#f59e0b">28</tspan><tspan fill="#f3f4f6">,</tspan></text>
+    
+    <!-- Line 4: "valid": true, -->
+    <text x="22" y="66" font-family="'Courier New', monospace" font-size="7" font-weight="700" fill="#a78bfa">"valid"<tspan fill="#f3f4f6">:</tspan> <tspan fill="#60a5fa">true</tspan><tspan fill="#f3f4f6">,</tspan></text>
+    
+    <!-- Line 5: "info": { -->
+    <text x="22" y="78" font-family="'Courier New', monospace" font-size="7" font-weight="700" fill="#a78bfa">"info"<tspan fill="#f3f4f6">:</tspan> <tspan fill="#f3f4f6">{</tspan></text>
+    
+    <!-- Line 6: "depth": 3 -->
+    <text x="32" y="90" font-family="'Courier New', monospace" font-size="7" font-weight="700" fill="#a78bfa">"depth"<tspan fill="#f3f4f6">:</tspan> <tspan fill="#f59e0b">3</tspan></text>
+    
+    <!-- Line 7: } -->
+    <text x="22" y="102" font-family="'Courier New', monospace" font-size="7" font-weight="700" fill="#f3f4f6">}</text>
+  </g>
+
+  <!-- MIDDLE CONNECTIVE ELEMENT: Magic Formatting Wand -->
+  <g transform="translate(145, 80)">
+    <!-- Decorative connection line -->
+    <path d="M-5,10 L35,10" fill="none" stroke="rgba(255, 255, 255, 0.08)" stroke-width="2" stroke-dasharray="3 3" />
+    
+    <!-- Formatting Sparkles -->
+    <path d="M12,-12 L15,-6 L21,-3 L15,0 L12,6 L9,0 L3,-3 L9,-6 Z" fill="url(#accent-grad)" filter="url(#glow)" opacity="0.8" />
+    <path d="M22,18 L24,21 L27,22 L24,23 L22,26 L20,23 L17,22 L20,21 Z" fill="#34d399" opacity="0.6" />
+  </g>
+
+  <!-- RIGHT PANEL: Collapsible Interactive Tree Mockup -->
+  <g transform="translate(180, 35)">
+    <!-- Card Base -->
+    <rect width="115" height="110" rx="8" fill="rgba(16, 20, 42, 0.4)" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1" />
+    
+    <!-- Window Header Controls -->
+    <circle cx="10" cy="10" r="3" fill="#ef4444" opacity="0.8" />
+    <circle cx="18" cy="10" r="3" fill="#f59e0b" opacity="0.8" />
+    <circle cx="26" cy="10" r="3" fill="#10b981" opacity="0.8" />
+    <rect x="75" y="6" width="30" height="8" rx="3" fill="rgba(16, 185, 129, 0.15)" stroke="rgba(16, 185, 129, 0.3)" stroke-width="0.5" />
+    <text x="90" y="12" font-family="'Inter', sans-serif" font-size="5" fill="#34d399" text-anchor="middle" font-weight="700">TREE</text>
+
+    <!-- Tree Branches visual -->
+    <!-- Root Node { } -->
+    <path d="M10,30 L13,27 L16,30" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" /> <!-- down arrow -->
+    <text x="22" y="31" font-family="'Courier New', monospace" font-size="8" fill="#f3f4f6" font-weight="700">{ }</text>
+
+    <!-- Branch line 1 -->
+    <path d="M13,36 L13,92" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.2" />
+    
+    <!-- Child 1: status -->
+    <path d="M13,46 L22,46" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.2" />
+    <circle cx="25" cy="46" r="2" fill="#34d399" />
+    <text x="32" y="49" font-family="'Courier New', monospace" font-size="7" font-weight="700" fill="#a78bfa">status: <tspan fill="#34d399">"active"</tspan></text>
+
+    <!-- Child 2: lines -->
+    <path d="M13,60 L22,60" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.2" />
+    <circle cx="25" cy="60" r="2" fill="#f59e0b" />
+    <text x="32" y="63" font-family="'Courier New', monospace" font-size="7" font-weight="700" fill="#a78bfa">lines: <tspan fill="#f59e0b">28</tspan></text>
+
+    <!-- Child 3: info (Collapsed Folder) -->
+    <path d="M13,74 L22,74" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.2" />
+    <!-- Collapsed chevron pointing right -->
+    <path d="M22,72 L26,74 L22,76" fill="none" stroke="#f3f4f6" stroke-width="1.2" stroke-linecap="round" />
+    <text x="32" y="77" font-family="'Courier New', monospace" font-size="7" font-weight="700" fill="#a78bfa">info: <tspan fill="rgba(255,255,255,0.4)">{ 1 key }</tspan></text>
+
+    <!-- Validation Checkmark badge -->
+    <circle cx="100" cy="95" r="9" fill="url(#green-grad)" filter="url(#glow)" />
+    <path d="M97,95 L99,97 L103,93" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+
+  <!-- BRANDING / TEXT LABELS -->
+  <g transform="translate(160, 172)">
+    <text font-family="'Outfit', 'Inter', sans-serif" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff" letter-spacing="0.5">
+      JSON<tspan fill="#6366f1">Align</tspan>
+    </text>
+    <text y="12" font-family="'Inter', sans-serif" font-size="7" font-weight="600" text-anchor="middle" fill="#9ca3af" letter-spacing="1" opacity="0.8">
+      FORMATTER &amp; VALIDATOR
+    </text>
+  </g>
+</svg>
