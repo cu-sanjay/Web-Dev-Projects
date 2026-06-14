@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Startup Management Simulator</title>
+  <meta name="description" content="An interactive startup simulation game to manage resources, build products, and grow valuation.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <h1>🚀 Startup Management Simulator</h1>
+      <p>Manage your budget, hire a team, and reach a $10M valuation before going bankrupt!</p>
+    </header>
+
+    <div id="game-over-modal" class="modal hidden">
+      <div class="modal-content">
+        <h2 id="modal-title">Game Over</h2>
+        <p id="modal-message">You ran out of cash!</p>
+        <button id="restart-btn" class="btn primary">Play Again</button>
+      </div>
+    </div>
+
+    <main class="dashboard">
+      <!-- Top Stats Row -->
+      <section class="stats-row">
+        <div class="stat-card">
+          <h3>Month</h3>
+          <p id="stat-month" class="stat-value">1</p>
+        </div>
+        <div class="stat-card">
+          <h3>Cash Runway</h3>
+          <p id="stat-cash" class="stat-value">$100,000</p>
+          <span id="stat-burn" class="stat-subtitle">Burn: $0 /mo</span>
+        </div>
+        <div class="stat-card highlight">
+          <h3>Valuation</h3>
+          <p id="stat-valuation" class="stat-value">$500,000</p>
+        </div>
+        <div class="stat-card">
+          <h3>Active Users</h3>
+          <p id="stat-users" class="stat-value">0</p>
+          <span id="stat-growth" class="stat-subtitle">+0 /mo</span>
+        </div>
+      </section>
+
+      <div class="main-content">
+        <!-- Team Management -->
+        <section class="panel team-panel">
+          <h2>👥 Team & Hiring</h2>
+          <div class="employee-type">
+            <div class="emp-info">
+              <h4>Software Engineers</h4>
+              <p>Builds product features (+$20k valuation/mo)</p>
+              <span class="cost">Cost: $8,000 /mo</span>
+            </div>
+            <div class="emp-actions">
+              <span id="count-engineers" class="badge">0</span>
+              <button class="btn" onclick="game.hire('engineer')">Hire</button>
+            </div>
+          </div>
+
+          <div class="employee-type">
+            <div class="emp-info">
+              <h4>Marketers</h4>
+              <p>Acquires new users (+500 users/mo)</p>
+              <span class="cost">Cost: $5,000 /mo</span>
+            </div>
+            <div class="emp-actions">
+              <span id="count-marketers" class="badge">0</span>
+              <button class="btn" onclick="game.hire('marketer')">Hire</button>
+            </div>
+          </div>
+          
+          <div class="employee-type">
+            <div class="emp-info">
+              <h4>Sales Reps</h4>
+              <p>Generates revenue (+$10k cash/mo)</p>
+              <span class="cost">Cost: $6,000 /mo</span>
+            </div>
+            <div class="emp-actions">
+              <span id="count-sales" class="badge">0</span>
+              <button class="btn" onclick="game.hire('sales')">Hire</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Actions & Upgrades -->
+        <section class="panel action-panel">
+          <h2>⚡ Actions</h2>
+          <p class="panel-desc">Execute strategies to boost your startup instantly.</p>
+          
+          <div class="action-grid">
+            <button class="action-btn" onclick="game.raiseCapital()">
+              <h4>Raise Seed Round</h4>
+              <p>Gain $250k cash (Costs 20% Valuation)</p>
+            </button>
+            <button class="action-btn" onclick="game.launchCampaign()">
+              <h4>Viral Campaign</h4>
+              <p>Gain 5,000 users (Costs $20k cash)</p>
+            </button>
+            <button class="action-btn" onclick="game.releaseFeature()">
+              <h4>Major Feature Release</h4>
+              <p>Boost valuation by $100k (Requires 2+ Engineers)</p>
+            </button>
+          </div>
+        </section>
+      </div>
+
+      <!-- Progression -->
+      <section class="progression-panel">
+        <button id="next-month-btn" class="btn massive" onclick="game.nextMonth()">Advance to Next Month ⏳</button>
+      </section>
+
+      <!-- Event Log -->
+      <section class="log-panel">
+        <h2>📜 Event Log</h2>
+        <ul id="event-log" class="event-list">
+          <li>Day 1: Startup founded. Let's get to work!</li>
+        </ul>
+      </section>
+    </main>
+  </div>
+  
+  <script src="script.js"></script>
+</body>
+</html>
