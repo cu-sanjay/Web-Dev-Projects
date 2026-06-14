@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Air Quality · Visual Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- TOP CONTROLS -->
+  <header class="top-bar">
+    <div class="top-brand">
+      <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="12" cy="12" r="10" stroke="var(--aq)" opacity="0.3"/>
+        <circle cx="12" cy="12" r="6" stroke="var(--aq)" opacity="0.5"/>
+        <circle cx="12" cy="12" r="2" fill="var(--aq)"/>
+        <path d="M12 2v4M12 18v4M2 12h4M18 12h4" stroke="var(--aq)" stroke-width="1.2"/>
+      </svg>
+      <div>
+        <h1 class="top-title">Air Quality · Visual Dashboard</h1>
+        <span class="top-sub">atmospheric telemetry station v1.0</span>
+      </div>
+      <span class="top-badge" id="topBadge">AQI MONITOR</span>
+    </div>
+    <div class="top-controls">
+      <div class="tc-group">
+        <span class="tc-label">City Profile</span>
+        <div class="select-wrap">
+          <select id="selectCity">
+            <option value="industrial">Industrial Complex</option>
+            <option value="coastal" selected>Coastal Metropolis</option>
+            <option value="alpine">Alpine Sanctuary</option>
+            <option value="desert">Desert Hub</option>
+          </select>
+        </div>
+      </div>
+      <div class="tc-group">
+        <span class="tc-label">Temp <span id="valTemp">26°C</span></span>
+        <input type="range" class="ctrl-slider" id="sliderTemp" min="-10" max="50" step="1" value="26">
+      </div>
+      <div class="tc-group">
+        <span class="tc-label">Wind <span id="valWind">14 km/h</span></span>
+        <input type="range" class="ctrl-slider" id="sliderWind" min="0" max="40" step="1" value="14">
+      </div>
+    </div>
+  </header>
+
+  <main class="workspace">
+
+    <!-- MAIN GRID -->
+    <div class="main-grid">
+
+      <!-- LEFT: AQI GAUGE + CANVAS -->
+      <section class="gauge-section">
+        <div class="panel-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="10" height="10"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          <span>Air Quality Index · Composite Gauge</span>
+          <span class="panel-hint" id="gaugeHint">STABLE</span>
+        </div>
+        <div class="gauge-body">
+          <div class="aqi-ring" id="aqiRing">
+            <svg viewBox="0 0 200 200" width="180" height="180">
+              <circle cx="100" cy="100" r="85" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="14"/>
+              <circle cx="100" cy="100" r="85" fill="none" stroke="var(--aq)" stroke-width="14" stroke-linecap="round"
+                stroke-dasharray="534" stroke-dashoffset="534" id="aqiArc" transform="rotate(-90 100 100)" style="transition:stroke-dashoffset 0.6s cubic-bezier(0.16,1,0.3,1),stroke 0.4s ease"/>
+              <text x="100" y="86" text-anchor="middle" fill="var(--txt)" font-family="'Orbitron',monospace" font-size="32" font-weight="700" id="aqiText">42</text>
+              <text x="100" y="108" text-anchor="middle" fill="var(--txt2)" font-family="'JetBrains Mono',monospace" font-size="7" font-weight="500" id="aqiLabel">GOOD</text>
+            </svg>
+          </div>
+          <div class="gauge-meta">
+            <div class="gm-row"><span class="gm-lbl">PM2.5</span><span class="gm-val" id="gmPM25">--</span></div>
+            <div class="gm-row"><span class="gm-lbl">PM10</span><span class="gm-val" id="gmPM10">--</span></div>
+            <div class="gm-row"><span class="gm-lbl">NO₂</span><span class="gm-val" id="gmNO2">--</span></div>
+            <div class="gm-row"><span class="gm-lbl">CO</span><span class="gm-val" id="gmCO">--</span></div>
+          </div>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="smogCanvas"></canvas>
+        </div>
+      </section>
+
+      <!-- RIGHT: POLLUTANT BREAKDOWNS -->
+      <section class="pollutant-section">
+        <div class="panel-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="10" height="10"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          <span>Multi-Pollutant · Sub-Index Breakdown</span>
+          <span class="panel-hint" id="pollHint">LIVE</span>
+        </div>
+        <div class="poll-body" id="pollBody">
+          <!-- injected by script -->
+        </div>
+      </section>
+
+      <!-- FAR RIGHT: HEALTH ADVISORY -->
+      <aside class="health-section">
+        <div class="panel-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="10" height="10"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          <span>Clinical Health · Advisory Panel</span>
+          <span class="panel-hint" id="healthHint">MONITORING</span>
+        </div>
+        <div class="health-body" id="healthBody">
+          <!-- injected by script -->
+        </div>
+      </aside>
+
+    </div>
+
+    <!-- ACTIONS -->
+    <footer class="action-bar">
+      <button class="foot-btn" id="btnTraffic">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        Trigger Peak Traffic Inflow Spike
+      </button>
+      <button class="foot-btn foot-purify" id="btnPurifier">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/><path d="M12 22V12"/></svg>
+        Engage Regional Air Purifier System
+      </button>
+      <button class="foot-btn foot-critical" id="btnPurge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6"/><path d="M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+        Purge Pollutants &amp; Re-Zero Telemetry
+      </button>
+    </footer>
+
+  </main>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
