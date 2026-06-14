@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medication Reminder & Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body data-color-theme="teal">
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="brand">
+                    <span class="brand-icon">💊</span>
+                    <h2>MediTrack</h2>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" id="navDashboard">
+                    <span class="icon">📊</span> Dashboard
+                </a>
+                <a href="#" class="nav-item" id="navMedications">
+                    <span class="icon">📋</span> My Medications
+                </a>
+                <a href="#" class="nav-item" id="navSchedule">
+                    <span class="icon">📅</span> Daily Schedule
+                </a>
+            </nav>
+
+            <div class="theme-settings panel glass">
+                <h3>Theme Settings</h3>
+                <div class="theme-controls">
+                    <button id="themeToggle" class="btn-icon" aria-label="Toggle Dark Mode">🌙</button>
+                    <div class="color-picker">
+                        <button class="color-btn teal active" data-color="teal"></button>
+                        <button class="color-btn blue" data-color="blue"></button>
+                        <button class="color-btn rose" data-color="rose"></button>
+                        <button class="color-btn purple" data-color="purple"></button>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header">
+                <div>
+                    <h1 class="page-title" id="pageTitle">Health Dashboard</h1>
+                    <p class="page-subtitle" id="pageSubtitle">Track your adherence and upcoming doses.</p>
+                </div>
+                <button id="addMedBtn" class="btn btn-primary shadow-hover">+ Add Medication</button>
+            </header>
+
+            <!-- View: Dashboard -->
+            <div class="view-section" id="dashboardView">
+                <div class="overview-cards">
+                    <div class="card summary-card glass">
+                        <div class="card-icon primary-bg">✅</div>
+                        <div class="card-content">
+                            <h3>Adherence Rate</h3>
+                            <div class="amount text-primary" id="adherenceRate">100%</div>
+                        </div>
+                    </div>
+                    <div class="card summary-card glass">
+                        <div class="card-icon warning-bg">⏰</div>
+                        <div class="card-content">
+                            <h3>Pending Today</h3>
+                            <div class="amount text-warning" id="pendingDoses">0</div>
+                        </div>
+                    </div>
+                    <div class="card summary-card glass">
+                        <div class="card-icon danger-bg">❌</div>
+                        <div class="card-content">
+                            <h3>Missed Doses</h3>
+                            <div class="amount text-danger" id="missedDoses">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-bottom-grid">
+                    <div class="card glass">
+                        <h3>Up Next</h3>
+                        <div class="schedule-list" id="upNextList">
+                            <!-- Populated by JS -->
+                            <div class="empty-state-sm text-muted">All caught up for today!</div>
+                        </div>
+                    </div>
+
+                    <div class="card glass">
+                        <h3>Quick Stats</h3>
+                        <div class="stats-container">
+                            <div class="stat-row">
+                                <span>Total Medications</span>
+                                <span class="fw-bold" id="statTotalMeds">0</span>
+                            </div>
+                            <div class="stat-row">
+                                <span>Total Doses Taken (All Time)</span>
+                                <span class="fw-bold text-success" id="statDosesTaken">0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- View: Medications -->
+            <div class="view-section hidden" id="medicationsView">
+                <div class="card glass full-height">
+                    <h3>My Prescriptions</h3>
+                    <div class="med-grid" id="medicationGrid">
+                        <!-- Populated by JS -->
+                    </div>
+                    <div id="noMedsMsg" class="empty-state">
+                        <span class="empty-icon">💊</span>
+                        <p>No medications added yet.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- View: Schedule -->
+            <div class="view-section hidden" id="scheduleView">
+                <div class="card glass full-height">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h3>Today's Schedule</h3>
+                        <div class="date-display fw-bold text-primary" id="todayDateDisplay"></div>
+                    </div>
+                    <div class="schedule-timeline" id="dailyScheduleList">
+                        <!-- Populated by JS -->
+                    </div>
+                    <div id="noScheduleMsg" class="empty-state">
+                        <span class="empty-icon">📅</span>
+                        <p>No doses scheduled for today.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Medication Modal -->
+    <div class="modal-overlay hidden" id="medModal">
+        <div class="modal glass-modal">
+            <div class="modal-header">
+                <h2>Add New Medication</h2>
+                <button id="closeModalBtn" class="btn-icon">×</button>
+            </div>
+            <form id="medForm">
+                <div class="form-group">
+                    <label>Medication Name</label>
+                    <input type="text" id="medName" required placeholder="e.g. Amoxicillin">
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Dosage</label>
+                        <input type="text" id="medDosage" required placeholder="e.g. 500mg">
+                    </div>
+                    <div class="form-group">
+                        <label>Frequency (Times per day)</label>
+                        <input type="number" id="medFreq" required min="1" max="10" value="1">
+                    </div>
+                </div>
+                
+                <div id="timeInputsContainer">
+                    <div class="form-group">
+                        <label>Time for Dose 1</label>
+                        <input type="time" class="dose-time-input" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Instructions (Optional)</label>
+                    <input type="text" id="medInstructions" placeholder="e.g. Take with food">
+                </div>
+                
+                <button type="submit" class="btn btn-primary w-full shadow-hover">Save Medication</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
