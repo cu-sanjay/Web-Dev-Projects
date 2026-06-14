@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Prompt Library Manager</title>
+  <!-- Google Fonts: Outfit and Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons for Dashboard aesthetics -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-background"></div>
+
+  <!-- MAIN BRAND HEADER -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="logo">
+        <i class="fa-solid fa-terminal glow-icon"></i>
+        <h1>Prompt<span>Forge</span></h1>
+        <span class="badge">AI Library</span>
+      </div>
+      
+      <div class="backup-actions-row">
+        <!-- Import/Export buttons -->
+        <button id="btn-export-backup" class="btn btn-secondary btn-sm" title="Export full library as JSON file">
+          <i class="fa-solid fa-file-export"></i> Export JSON
+        </button>
+        <label for="input-import-backup" class="btn btn-secondary btn-sm" title="Import prompt database from JSON file">
+          <i class="fa-solid fa-file-import"></i> Import JSON
+          <input type="file" id="input-import-backup" accept=".json" class="hidden-file-input">
+        </label>
+        <button id="btn-open-creator" class="btn btn-primary btn-sm">
+          <i class="fa-solid fa-plus"></i> Add Template
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- WORKSPACE WRAPPER -->
+  <main class="main-container">
+    <!-- LEFT SIDEBAR: FILTERS & STATS -->
+    <aside class="sidebar-column">
+      <!-- Search Panel -->
+      <section class="section-card filter-card" aria-label="Search filter">
+        <div class="search-input-wrapper">
+          <input type="text" id="input-search" placeholder="Search prompts..." class="search-input">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        </div>
+      </section>
+
+      <!-- Category Filter Tabs -->
+      <section class="section-card category-card" aria-label="Prompt Categories">
+        <h3>Categories</h3>
+        <nav class="category-nav" aria-label="Prompt categories nav">
+          <button class="nav-btn active" data-category="all">All Templates (<span id="cnt-all">0</span>)</button>
+          <button class="nav-btn" data-category="coding">Coding & Dev (<span id="cnt-coding">0</span>)</button>
+          <button class="nav-btn" data-category="writing">Content Writing (<span id="cnt-writing">0</span>)</button>
+          <button class="nav-btn" data-category="marketing">Marketing & Sales (<span id="cnt-marketing">0</span>)</button>
+          <button class="nav-btn" data-category="data">Data & ML (<span id="cnt-data">0</span>)</button>
+          <button class="nav-btn" data-category="general">Productivity & Roleplay (<span id="cnt-general">0</span>)</button>
+        </nav>
+      </section>
+
+      <!-- Telemetry Dashboard -->
+      <section class="section-card telemetry-card" aria-label="Library stats">
+        <h3>Telemetry metrics</h3>
+        <div class="telemetry-grid mt-1">
+          <div class="tel-item">
+            <span class="tel-lbl">Saved Prompts</span>
+            <span class="tel-val" id="val-total-prompts">0</span>
+          </div>
+          <div class="tel-item">
+            <span class="tel-lbl">Total Copies</span>
+            <span class="tel-val text-accent" id="val-total-copies">0</span>
+          </div>
+        </div>
+        <button id="btn-reset-data" class="footer-btn mt-1"><i class="fa-solid fa-trash-can"></i> Reset Library database</button>
+      </section>
+    </aside>
+
+    <!-- CENTER AREA: CATALOG CARDS GRID -->
+    <section class="catalog-area" aria-label="Prompts Templates Grid">
+      <div class="catalog-header">
+        <h2>Prompts Registry</h2>
+        <span class="results-count" id="lbl-catalog-count">Showing 0 prompts</span>
+      </div>
+
+      <div class="prompts-grid" id="prompts-cards-list">
+        <!-- Dynamic card elements go here -->
+        <div class="placeholder-msg">
+          <i class="fa-solid fa-folder-open placeholder-icon"></i>
+          <h3>No templates match</h3>
+          <p>Please load presets or click 'Add Template' to begin building your prompt catalog.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT SIDEBAR: COMPILED SANDBOX PLAYGROUND -->
+    <section class="section-card sandbox-card" aria-label="Interactive sandbox compile area">
+      <div class="sandbox-header">
+        <h3><i class="fa-solid fa-wand-magic-sparkles text-accent"></i> Sandbox Compiler</h3>
+      </div>
+
+      <!-- Playground empty guide -->
+      <div id="sandbox-empty" class="sandbox-welcome">
+        <div class="pulse-icon">
+          <i class="fa-solid fa-sliders"></i>
+        </div>
+        <h4>Select a Template</h4>
+        <p>Choose any prompt card from the registry to load it here. The compiler will automatically extract bracketed tags into custom fields for live compilation.</p>
+      </div>
+
+      <!-- Active sandbox workspace -->
+      <div id="sandbox-active" class="sandbox-workspace hidden">
+        <div class="sandbox-meta-row">
+          <span class="active-title" id="val-active-name">Active Prompt</span>
+          <span class="active-badge" id="val-active-model">Claude 3.5</span>
+        </div>
+
+        <div class="sandbox-scroll-area">
+          <!-- Dynamically spawned variable input fields -->
+          <div class="variables-form-section">
+            <h5>Variable Placeholders</h5>
+            <div id="sandbox-variables-form" class="variables-inputs-grid">
+              <!-- Inputs generated on load -->
+            </div>
+          </div>
+
+          <!-- Final Compiled Output Textbox -->
+          <div class="compiled-output-section">
+            <div class="label-row">
+              <h5>Compiled Output</h5>
+              <button id="btn-copy-prompt" class="btn btn-secondary btn-sm" title="Copy compiled prompt text to clipboard">
+                <i class="fa-solid fa-copy"></i> Copy Prompt
+              </button>
+            </div>
+            <textarea id="txt-compiled-preview" readonly placeholder="Compiled template values display here..."></textarea>
+          </div>
+
+          <!-- Simulated Response simulator dashboard -->
+          <div class="mock-generator-section">
+            <button id="btn-simulate-run" class="btn btn-secondary btn-sm btn-full">
+              <i class="fa-solid fa-terminal"></i> Test Run Prompt (Mock AI)
+            </button>
+            <div id="mock-response-box" class="mock-response hidden">
+              <h6>Mock AI Response:</h6>
+              <p id="lbl-mock-ai-text">Analyzing variables...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- MODAL: PROMPT CREATOR -->
+  <div id="creator-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Create New Prompt Template</h3>
+        <button id="btn-close-creator" class="btn-icon" aria-label="Close modal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      
+      <form id="creator-form">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="prompt-title">Prompt Title <span class="required">*</span></label>
+            <input type="text" id="prompt-title" placeholder="e.g. Asynchronous Code Auditor" required>
+          </div>
+
+          <div class="form-group">
+            <label for="prompt-desc">Short Description <span class="required">*</span></label>
+            <input type="text" id="prompt-desc" placeholder="e.g. Scans JS scripts for microtask nesting bottlenecks." required>
+          </div>
+
+          <div class="form-group-row">
+            <div class="form-group">
+              <label for="prompt-category">Category</label>
+              <div class="select-wrapper">
+                <select id="prompt-category">
+                  <option value="coding">Coding &amp; Dev</option>
+                  <option value="writing">Content Writing</option>
+                  <option value="marketing">Marketing &amp; Sales</option>
+                  <option value="data">Data &amp; ML</option>
+                  <option value="general">Productivity &amp; Roleplay</option>
+                </select>
+                <i class="fa-solid fa-chevron-down select-arrow"></i>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="prompt-model">Recommended Model</label>
+              <div class="select-wrapper">
+                <select id="prompt-model">
+                  <option value="Claude 3.5 Sonnet">Claude 3.5 Sonnet</option>
+                  <option value="GPT-4o">GPT-4o</option>
+                  <option value="Gemini 1.5 Pro">Gemini 1.5 Pro</option>
+                  <option value="Llama 3 70B">Llama 3 70B</option>
+                </select>
+                <i class="fa-solid fa-chevron-down select-arrow"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="label-row">
+              <label for="prompt-body">Prompt Template Body <span class="required">*</span></label>
+              <span class="tooltip-info"><i class="fa-solid fa-circle-question"></i> Use brackets like <code>[Topic]</code> for variables</span>
+            </div>
+            <textarea id="prompt-body" required placeholder="Write your system instructions here. e.g. 'You are a senior auditor. Scan this [Language] function code script: [Code] and recommend [FixesCount] fixes...'"></textarea>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" id="btn-cancel-creator" class="btn btn-secondary">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Template</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="app-footer">
+    <div class="footer-container">
+      <p>&copy; 2026 PromptForge Sandbox. Released for public use in <a href="https://github.com/cu-sanjay/Web-Dev-Projects" target="_blank" rel="noopener noreferrer">Web Dev Projects</a>.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
