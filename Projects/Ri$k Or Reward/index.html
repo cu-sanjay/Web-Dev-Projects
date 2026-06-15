@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RI$K OR REWARD — NO CAP 🧢</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="start-screen" class="overlay">
+        <h1 style="color: #00ff00;">RI$K OR REWARD</h1>
+        <p style="color: #fff; font-size: 1.5rem;">ARE YOU READYYY? 🔥😎</p>
+        <button class="btn btn-safe" onclick="startGame()">LETS GOOOOOO</button>
+    </div>
+
+    <div id="game-over" class="overlay hidden">
+        <h1 style="color: #ff0000;">GAME OVER BRUH 💀</h1>
+        <p id="final-score" style="color: #fff; font-size: 2rem;"></p>
+        <button class="btn btn-risky" onclick="startGame()">TRY AGAIN NOOB</button>
+    </div>
+
+    <div class="container">
+        <h1>STREET CRED: <span id="score">0</span></h1>
+        
+        <div class="stats">
+            STREAK: <span id="streak">0</span> 🔥<br>
+            HIGH SCORE: <span id="high-score">0</span> 👑
+        </div>
+
+        <div id="game-ui">
+            <div class="message" id="message">Choose your destiny... 🔮</div>
+            
+            <div class="choices">
+                <button class="btn btn-safe" onclick="play(false)">
+                    SAFE BET<br>
+                    <span id="safe-reward">+10</span> 🥱
+                </button>
+                <button class="btn btn-risky" onclick="play(true)">
+                    BIG RISK<br>
+                    <span id="risky-reward">+50</span> 🤑
+                </button>
+            </div>
+            
+            <p style="color: #666; font-size: 0.8rem; margin-top: 20px;">
+                Difficulty Level: <span id="level">1</span>
+            </p>
+        </div>
+    </div>
+<script src="script.js"></script>
+</body>
+</html>
