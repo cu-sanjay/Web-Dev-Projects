@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Telemedicine & Online Consultation</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+
+  <!-- Sidebar Navigation -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="logo-box">
+        <i class="ph-fill ph-heartbeat"></i>
+      </div>
+      <h2>TeleHealth Plus</h2>
+    </div>
+    
+    <nav class="sidebar-menu">
+      <ul>
+        <li class="active" data-tab="dashboard">
+          <i class="ph ph-squares-four"></i> Dashboard
+        </li>
+        <li data-tab="doctors">
+          <i class="ph ph-stethoscope"></i> Find a Doctor
+        </li>
+        <li data-tab="appointments">
+          <i class="ph ph-calendar-plus"></i> Appointments
+        </li>
+        <li data-tab="records">
+          <i class="ph ph-file-text"></i> Medical Records
+        </li>
+      </ul>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-profile">
+        <img src="https://ui-avatars.com/api/?name=Vishwa+Mistry&background=0284c7&color=fff" alt="User Avatar" class="avatar">
+        <div class="user-info">
+          <strong>Vishwa Mistry</strong>
+          <span>Patient ID: #8492</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content Wrapper -->
+  <main class="main-content">
+    
+    <!-- Top Header -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <button id="mobile-menu-btn" class="icon-btn"><i class="ph ph-list"></i></button>
+        <div class="search-input">
+          <i class="ph ph-magnifying-glass"></i>
+          <input type="text" placeholder="Search for doctors, specialties, or symptoms...">
+        </div>
+      </div>
+      <div class="topbar-right">
+        <button class="icon-btn notification-btn"><i class="ph ph-bell"></i><span class="badge">2</span></button>
+        <button class="btn primary-btn" onclick="document.querySelector('[data-tab=\\'doctors\\']').click()"><i class="ph ph-video-camera"></i> Book Consult</button>
+      </div>
+    </header>
+
+    <!-- Scrollable Body Area -->
+    <div class="body-area">
+      
+      <!-- ================= DASHBOARD TAB ================= -->
+      <section id="dashboard" class="tab-content active">
+        
+        <div class="welcome-card">
+          <div class="welcome-text">
+            <h1>Good morning, Vishwa! ☀️</h1>
+            <p>Your next virtual consultation with Dr. Sarah Jenkins is scheduled for today at 2:30 PM.</p>
+          </div>
+          <button class="btn secondary-btn"><i class="ph ph-video-camera"></i> Join Waiting Room</button>
+        </div>
+
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-icon bg-blue-light text-blue"><i class="ph-fill ph-calendar-check"></i></div>
+            <div class="metric-data">
+              <h3>Upcoming Visits</h3>
+              <h2>2</h2>
+            </div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon bg-green-light text-green"><i class="ph-fill ph-pill"></i></div>
+            <div class="metric-data">
+              <h3>Active Prescriptions</h3>
+              <h2>3</h2>
+            </div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon bg-purple-light text-purple"><i class="ph-fill ph-flask"></i></div>
+            <div class="metric-data">
+              <h3>Lab Results</h3>
+              <h2>1 New</h2>
+            </div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon bg-orange-light text-orange"><i class="ph-fill ph-heart"></i></div>
+            <div class="metric-data">
+              <h3>Avg Heart Rate</h3>
+              <h2>72 bpm</h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="split-layout">
+          <!-- Upcoming Appointments -->
+          <div class="panel col-span-2">
+            <div class="panel-header flex-between">
+              <h3>Upcoming Appointments</h3>
+              <button class="text-btn" onclick="document.querySelector('[data-tab=\\'appointments\\']').click()">View All</button>
+            </div>
+            <div class="panel-body p-0">
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Doctor</th>
+                    <th>Specialty</th>
+                    <th>Date & Time</th>
+                    <th>Type</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="recent-appointments-tbody">
+                  <!-- Injected via JavaScript -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Vital Signs / Quick Stats -->
+          <div class="panel">
+            <div class="panel-header">
+              <h3>Recent Vitals</h3>
+            </div>
+            <div class="panel-body">
+              <ul class="vitals-list">
+                <li class="vital-item">
+                  <div class="vital-icon bg-red-light text-red"><i class="ph-fill ph-drop"></i></div>
+                  <div class="vital-info">
+                    <h4>Blood Pressure</h4>
+                    <p>120/80 mmHg</p>
+                  </div>
+                  <span class="status-indicator good">Normal</span>
+                </li>
+                <li class="vital-item">
+                  <div class="vital-icon bg-blue-light text-blue"><i class="ph-fill ph-thermometer"></i></div>
+                  <div class="vital-info">
+                    <h4>Temperature</h4>
+                    <p>98.6 °F</p>
+                  </div>
+                  <span class="status-indicator good">Normal</span>
+                </li>
+                <li class="vital-item">
+                  <div class="vital-icon bg-purple-light text-purple"><i class="ph-fill ph-activity"></i></div>
+                  <div class="vital-info">
+                    <h4>SpO2</h4>
+                    <p>98%</p>
+                  </div>
+                  <span class="status-indicator good">Normal</span>
+                </li>
+                <li class="vital-item">
+                  <div class="vital-icon bg-orange-light text-orange"><i class="ph-fill ph-barbell"></i></div>
+                  <div class="vital-info">
+                    <h4>Weight</h4>
+                    <p>155 lbs</p>
+                  </div>
+                  <span class="status-indicator neutral">Stable</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ================= DOCTORS TAB ================= -->
+      <section id="doctors" class="tab-content hidden">
+        <div class="page-heading flex-between">
+          <div>
+            <h1>Find a Doctor</h1>
+            <p class="text-muted">Browse top-rated specialists and book your online consultation.</p>
+          </div>
+          <div class="filter-group">
+            <select class="form-select">
+              <option>All Specialties</option>
+              <option>Cardiology</option>
+              <option>Dermatology</option>
+              <option>General Practice</option>
+              <option>Pediatrics</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="doctor-grid" id="doctor-grid">
+          <!-- Injected via JavaScript -->
+        </div>
+      </section>
+
+      <!-- ================= APPOINTMENTS TAB ================= -->
+      <section id="appointments" class="tab-content hidden">
+        <div class="page-heading">
+          <h1>My Appointments</h1>
+          <p class="text-muted">Manage your upcoming schedules and past visit history.</p>
+        </div>
+
+        <div class="panel">
+          <div class="panel-body p-0">
+             <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Doctor</th>
+                    <th>Specialty</th>
+                    <th>Date & Time</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="all-appointments-tbody">
+                  <!-- Injected via JavaScript -->
+                </tbody>
+              </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= RECORDS TAB ================= -->
+      <section id="records" class="tab-content hidden">
+        <div class="page-heading">
+          <h1>Medical Records</h1>
+          <p class="text-muted">Access your prescriptions, lab results, and visit summaries securely.</p>
+        </div>
+
+        <div class="split-layout">
+          <div class="panel col-span-2">
+            <div class="panel-header">
+              <h3>Recent Documents</h3>
+            </div>
+            <div class="panel-body">
+              <div class="document-list" id="document-list">
+                <!-- Injected via JavaScript -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
