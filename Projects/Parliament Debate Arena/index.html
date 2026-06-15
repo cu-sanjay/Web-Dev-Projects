@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Parliament Debate Arena — Debate topics and use a voting system to pass or reject motions.">
+  <title>Parliament Debate Arena</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <h1><span aria-hidden="true">&#x1F3DB;</span> Parliament Debate Arena</h1>
+      <p class="subtitle">Debate Topics &middot; Voting System</p>
+    </header>
+
+    <div class="dashboard">
+      <div class="stats-row">
+        <div class="stat-card"><span class="stat-label">Government</span><span class="stat-value" id="govSeats" style="color:var(--red)">0</span></div>
+        <div class="stat-card"><span class="stat-label">Opposition</span><span class="stat-value" id="oppSeats" style="color:var(--blue)">0</span></div>
+        <div class="stat-card"><span class="stat-label">Session</span><span class="stat-value gold" id="sessionVal">1</span></div>
+        <div class="stat-card"><span class="stat-label">Motions Passed</span><span class="stat-value" id="passedVal" style="color:var(--green)">0</span></div>
+      </div>
+
+      <div class="main-grid">
+        <div class="panel">
+          <h2>Debate Topics</h2>
+          <div class="topic-list" id="topicList"></div>
+        </div>
+
+        <div class="panel">
+          <h2>Debate Chamber</h2>
+          <div id="chamber">
+            <div class="chamber-placeholder" id="chamberPlaceholder">
+              <p>Select a debate topic to begin the parliamentary session.</p>
+            </div>
+            <div id="chamberContent" style="display:none">
+              <h3 class="motion-title" id="motionTitle"></h3>
+              <p class="motion-desc" id="motionDesc"></p>
+              <div class="speaker-area">
+                <div class="speech-bubble gov" id="govSpeech">
+                  <strong>Government:</strong> <span id="speechGov"></span>
+                </div>
+                <div class="speech-bubble opp" id="oppSpeech">
+                  <strong>Opposition:</strong> <span id="speechOpp"></span>
+                </div>
+              </div>
+              <div class="vote-area">
+                <div class="vote-counts">
+                  <div class="vote-count"><span class="label">For</span><span class="val" id="voteFor">0</span></div>
+                  <div class="vote-count"><span class="label">Against</span><span class="val" id="voteAgainst">0</span></div>
+                  <div class="vote-count"><span class="label">Abstain</span><span class="val" id="voteAbstain">0</span></div>
+                </div>
+                <div class="vote-bar"><div class="vote-fill" id="voteFill" style="width:0%"></div></div>
+                <div class="vote-actions">
+                  <button class="btn for" id="voteForBtn">Vote For</button>
+                  <button class="btn against" id="voteAgainstBtn">Vote Against</button>
+                  <button class="btn abstain" id="voteAbstainBtn">Abstain</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel wide">
+          <h2>Session Log</h2>
+          <div class="log-entries" id="logEntries"><p class="empty-state">Parliament is in session. Select a topic to debate.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
