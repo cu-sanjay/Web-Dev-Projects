@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terminal Portfolio</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="terminal-container">
+  <!-- ─── CANVAS BACKDROP ─── -->
+  <canvas id="matrixCanvas"></canvas>
+
+  <!-- ─── FAKE WINDOW HEADER ─── -->
+  <div class="term-header">
+    <div class="win-dots">
+      <span class="dot close"></span>
+      <span class="dot minimize"></span>
+      <span class="dot maximize"></span>
+    </div>
+    <div class="win-title">guest@girish-madarkar-v2026: ~</div>
+    <div class="win-spacer"></div>
+  </div>
+
+  <!-- ─── OUTPUT LOG ─── -->
+  <div class="term-body" id="termBody">
+    <div class="log-line welcome">[SYSTEM] Terminal Portfolio v2026 initialized</div>
+    <div class="log-line welcome">[SYSTEM] Type 'help' for available commands</div>
+  </div>
+
+  <!-- ─── INPUT LINE ─── -->
+  <div class="term-input-line">
+    <span class="prompt">guest@girish:~$</span>
+    <input type="text" id="termInput" autofocus autocomplete="off">
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
