@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solar Eclipse Simulator - Dual Viewport Sandbox</title>
+  <meta name="description" content="Interactive solar eclipse sandbox illustrating orbital geometry, umbra/penumbra shadow cones, lunar tilt, and total/annular sky animations.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- TOP HEADER -->
+    <header class="app-header">
+      <div class="brand">
+        <div class="brand-logo">
+          <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2">
+            <!-- Sun circle -->
+            <circle cx="12" cy="12" r="6" fill="#ffcc00" fill-opacity="0.3" stroke="#ffcc00"></circle>
+            <!-- Moon overlapping -->
+            <circle cx="9" cy="12" r="6" fill="#02040b" stroke="#38bdf8"></circle>
+            <path d="M 12 6 A 6 6 0 0 1 12 18" fill="none" stroke="#ff007f"></path>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>SOLAR ECLIPSE DECK</h1>
+          <h2>Geometric Shadow Cones &amp; Sky Visualizer</h2>
+        </div>
+      </div>
+
+      <!-- Quick Metrics HUD -->
+      <div class="quick-hud" aria-label="Global Eclipse Stats">
+        <div class="hud-stat">
+          <span class="hud-lbl">Eclipse Phase</span>
+          <span class="hud-val" id="hud-eclipse-phase">Out of Alignment</span>
+        </div>
+        <div class="hud-stat">
+          <span class="hud-lbl">Sky Ambient Light</span>
+          <span class="hud-val" id="hud-sky-light">100% (Day)</span>
+        </div>
+        <div class="hud-stat">
+          <span class="hud-lbl">Active Observer Zone</span>
+          <span class="hud-val" id="hud-observer-zone">Outside Penumbra</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="main-layout">
+      <!-- LEFT SIDEBAR: Eclipse Geometry Inputs -->
+      <aside class="sidebar left-sidebar" aria-label="Eclipse Configuration Settings">
+        <div class="panel-section">
+          <h3><span class="sec-num">01</span> Lunar Orbit Geometry</h3>
+          
+          <div class="control-group">
+            <div class="control-header">
+              <label for="input-moon-distance">Moon Distance (km):</label>
+              <input type="number" id="num-moon-distance" min="356000" max="406000" value="363300" step="500">
+            </div>
+            <input type="range" id="input-moon-distance" min="356000" max="406000" value="363300" step="500">
+            <div class="range-labels"><span>356,000 (Perigee)</span><span>406,000 (Apogee)</span></div>
+          </div>
+
+          <div class="control-group">
+            <div class="control-header">
+              <label for="input-inclination">Orbital Inclination (°):</label>
+              <input type="number" id="num-inclination" min="0.0" max="8.0" value="5.14" step="0.05">
+            </div>
+            <input type="range" id="input-inclination" min="0" max="8" value="5.14" step="0.05">
+            <div class="range-labels"><span>0° (Coplanar)</span><span>5.14° (Real Earth/Moon)</span><span>8°</span></div>
+          </div>
+
+          <div class="control-group">
+            <div class="control-header">
+              <label for="input-node-align">Node Alignment Offset (°):</label>
+              <input type="number" id="num-node-align" min="-12.0" max="12.0" value="0.0" step="0.1">
+            </div>
+            <input type="range" id="input-node-align" min="-12" max="12" value="0.0" step="0.1">
+            <div class="range-labels"><span>-12° (Misaligned)</span><span>0° (Perfect Node)</span><span>12°</span></div>
+          </div>
+        </div>
+
+        <div class="panel-section">
+          <h3><span class="sec-num">02</span> Ground Observer Position</h3>
+          
+          <div class="control-group">
+            <div class="control-header">
+              <label for="input-viewer-lat">Observer Latitudinal Offset (km):</label>
+              <input type="number" id="num-viewer-lat" min="-150" max="150" value="0" step="5">
+            </div>
+            <input type="range" id="input-viewer-lat" min="-150" max="150" value="0" step="5">
+            <div class="range-labels"><span>-150 km (South)</span><span>0 km (Central Path)</span><span>150 km (North)</span></div>
+          </div>
+        </div>
+
+        <div class="panel-section">
+          <h3><span class="sec-num">03</span> Simulation Toggles</h3>
+          <div class="toggle-list">
+            <label class="toggle-control">
+              <input type="checkbox" id="chk-show-rays" checked>
+              <span class="toggle-slider"></span>
+              Show Umbra/Penumbra Rays
+            </label>
+            <label class="toggle-control">
+              <input type="checkbox" id="chk-highlight-cones" checked>
+              <span class="toggle-slider"></span>
+              Highlight Shadow Cones
+            </label>
+            <label class="toggle-control">
+              <input type="checkbox" id="chk-show-moon-orbit" checked>
+              <span class="toggle-slider"></span>
+              Show Lunar Orbit Path
+            </label>
+            <label class="toggle-control">
+              <input type="checkbox" id="chk-enable-coronal-flare" checked>
+              <span class="toggle-slider"></span>
+              Enable Coronal Flaring Particle Animation
+            </label>
+          </div>
+        </div>
+      </aside>
+
+      <!-- CENTER VIEWPORT: Dual Canvases -->
+      <main class="canvas-workspace">
+        <div class="dual-canvas-grid">
+          <!-- Pane 1: Orbital Geometry -->
+          <div class="canvas-box" id="orbit-viewport">
+            <div class="canvas-header">
+              <span>ORBITAL SHADOW CONES (GEOMETRIC PLANE VIEW - NOT TO SCALE)</span>
+            </div>
+            <div class="canvas-wrapper">
+              <canvas id="orbit-canvas"></canvas>
+            </div>
+            <div class="canvas-badge bottom-left">
+              <span>Click &amp; Drag Moon to shift conjunction timeline manually</span>
+            </div>
+          </div>
+
+          <!-- Pane 2: Sky View -->
+          <div class="canvas-box" id="sky-viewport">
+            <div class="canvas-header">
+              <span>GROUND SKY VISUALIZATION (OBSERVER VIEW)</span>
+            </div>
+            <div class="canvas-wrapper">
+              <canvas id="sky-canvas"></canvas>
+              
+              <!-- Floating Totality Overlay Indicator -->
+              <div id="totality-badge" class="totality-badge hidden">
+                TOTALITY ACTIVE
+              </div>
+            </div>
+            <div class="canvas-badge bottom-right">
+              <span>Corona flares and Baily's beads active during conjunction</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Simulation Scrubbing Timeline Slider -->
+        <div class="timeline-bar">
+          <div class="timeline-header">
+            <span>Conjunction Timeline (Scrubber)</span>
+            <span id="label-time-scrub" class="font-mono">T-Minus 120 mins</span>
+          </div>
+          <input type="range" id="input-time-scrub" min="-120" max="120" value="-80" step="1">
+        </div>
+      </main>
+
+      <!-- RIGHT SIDEBAR: Presets & Telemetry -->
+      <aside class="sidebar right-sidebar" aria-label="Presets and Observational Data">
+        <div class="panel-section">
+          <h3><span class="sec-num">04</span> Eclipse Presets</h3>
+          <div class="presets-grid">
+            <button id="btn-preset-total" class="btn btn-preset" title="Moon at perigee, perfect alignment: Sun fully blocked, corona visible">
+              Total Solar Eclipse
+            </button>
+            <button id="btn-preset-annular" class="btn btn-preset" title="Moon at apogee, perfect alignment: Moon too small, Ring of Fire visible">
+              Annular Solar Eclipse
+            </button>
+            <button id="btn-preset-partial" class="btn btn-preset" title="Moon offset from node: shadow misses center, crescent Sun visible">
+              Partial Solar Eclipse
+            </button>
+            <button id="btn-preset-miss" class="btn btn-preset" title="Inclination tilt causes shadow to miss Earth completely">
+              No Alignment (New Moon)
+            </button>
+          </div>
+        </div>
+
+        <!-- Observational Dossier -->
+        <div class="panel-section flex-grow">
+          <h3><span class="sec-num">05</span> Ground Observational Telemetry</h3>
+          <div class="telemetry-box" id="observational-details">
+            <div class="tel-row">
+              <span class="tel-lbl">Shadow Type at Observer</span>
+              <span class="tel-val text-primary" id="tel-shadow-type">-</span>
+            </div>
+            <div class="tel-row">
+              <span class="tel-lbl">Moon Angular Diameter</span>
+              <span class="tel-val" id="tel-moon-diam">-</span>
+            </div>
+            <div class="tel-row">
+              <span class="tel-lbl">Sun Angular Diameter</span>
+              <span class="tel-val" id="tel-sun-diam">-</span>
+            </div>
+            <div class="tel-row">
+              <span class="tel-lbl">Solar Obscuration Ratio</span>
+              <span class="tel-val" id="tel-obscuration">-</span>
+            </div>
+            <div class="tel-row">
+              <span class="tel-lbl">Max Duration of Totality</span>
+              <span class="tel-val" id="tel-totality-duration">-</span>
+            </div>
+            <div class="tel-row">
+              <span class="tel-lbl">Sky Lux Level</span>
+              <span class="tel-val" id="tel-ambient-lux">-</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Simulation Player Controls -->
+        <div class="panel-section">
+          <h3><span class="sec-num">06</span> Conjunction Animation</h3>
+          <div class="warp-controls">
+            <button id="btn-pause-play" class="btn btn-control active" title="Pause or Play conjunction progress">
+              <span id="lbl-pause-icon">⏸️</span> <span id="lbl-pause-text">Pause</span>
+            </button>
+            <div class="select-warp-group">
+              <label for="select-warp">Time Speed:</label>
+              <select id="select-warp">
+                <option value="0.2">Slow motion (0.2m/s)</option>
+                <option value="1" selected>Normal Speed (1m/s)</option>
+                <option value="5">Time Acceleration (5m/s)</option>
+                <option value="20">Fast Scrub (20m/s)</option>
+              </select>
+            </div>
+            <button id="btn-reset" class="btn btn-control reset" title="Return conjunction scrubber to starting state">
+              🔄 Reset
+            </button>
+          </div>
+        </div>
+
+        <!-- Scrolling Ground Control Logs -->
+        <div class="panel-section" style="height: 140px; min-height: 140px;">
+          <h3><span class="sec-num">07</span> Observatory Console Logs</h3>
+          <div class="console-box" id="console-logs" aria-live="polite">
+            <div class="log-line text-info">&gt; Solar Observatory Ground Station initialized.</div>
+            <div class="log-line text-info">&gt; Monitoring lunar orbit nodes conjunctions.</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
