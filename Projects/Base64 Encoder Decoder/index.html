@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Base64 Encoder Decoder</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="terminal-badge">[ BASE64 ENCODER/DECODER — BINARY TRANSMISSION COCKPIT ]</div>
+
+<div class="app-grid">
+
+  <!-- ─── MODE SELECTOR RIBBON ─── -->
+  <div class="mode-ribbon">
+    <button id="modeText" class="mode-btn active">PLAIN TEXT CONVERSION BOX</button>
+    <button id="modeFile" class="mode-btn">LOCAL ASSET FILE INGESTOR DROPZONE</button>
+  </div>
+
+  <!-- ─── DIRECTION TOGGLE ─── -->
+  <div class="direction-bar">
+    <button id="dirEncode" class="dir-btn active">ENCODE <span class="dir-arrow">→</span></button>
+    <button id="dirDecode" class="dir-btn">DECODE <span class="dir-arrow">←</span></button>
+  </div>
+
+  <!-- ─── LEFT: INPUT ─── -->
+  <div class="panel input-panel">
+    <div class="panel-header">RAW SOURCE INPUT CHANNEL</div>
+
+    <!-- Text Mode Input -->
+    <div id="textInputGroup" class="input-group">
+      <textarea id="sourceText" spellcheck="false" placeholder="Enter text to encode or base64 string to decode...">Hello, Base64 World!</textarea>
+    </div>
+
+    <!-- File Mode Dropzone -->
+    <div id="fileInputGroup" class="input-group hidden">
+      <div id="dropzone" class="dropzone">
+        <div class="dropzone-icon">⬆</div>
+        <div class="dropzone-text">DROP ASSET FILE HERE<br><span class="dropzone-sub">or click to browse</span></div>
+        <input type="file" id="filePicker" class="file-picker">
+      </div>
+      <div id="fileInfo" class="file-info hidden">
+        <span id="fileName" class="file-name"></span>
+        <span id="fileSize" class="file-size"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── RIGHT: OUTPUT ─── -->
+  <div class="panel output-panel">
+    <div class="panel-header">SERIALIZED BASE64 OUTPUT BUFFER</div>
+    <textarea id="outputText" spellcheck="false" readonly placeholder="Base64 output will appear here..."></textarea>
+    <div class="output-actions">
+      <button id="btnCopy" class="action-btn">COPY TO CLIPBOARD BUFFER</button>
+      <button id="btnDownload" class="action-btn">DOWNLOAD AS ASSET FILE</button>
+    </div>
+  </div>
+
+  <!-- ─── TELEMETRY ─── -->
+  <div class="panel telemetry-panel">
+    <div class="panel-header">BINARY TELEMETRY DASHBOARD</div>
+    <div class="tele-row"><span class="tele-label">OPERATION STATE</span><span id="tOp" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">DATA LENGTH</span><span id="tBytes" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">EXPANSION SIZE</span><span id="tExpansion" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">PADDING CHARS</span><span id="tPadding" class="tele-val">--</span></div>
+    <div class="ctrl-divider"></div>
+    <div class="tele-row" style="grid-column:1/-1;"><span id="tBadge" class="tele-badge standby">STANDBY</span></div>
+    <div class="ctrl-divider"></div>
+    <div id="errorDetail" class="error-detail"></div>
+  </div>
+
+  <!-- ─── ADMIN FOOTER ─── -->
+  <div class="admin-footer">
+    <button id="btnExecute" class="admin-btn execute">EXECUTE ENCODING STREAM</button>
+    <button id="btnDecode" class="admin-btn decode">EXECUTE DECODING STREAM</button>
+    <button id="btnPurge" class="admin-btn purge">PURGE DATA BUFFERS &amp; RE-ZERO MATRICES</button>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

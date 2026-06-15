@@ -1,0 +1,160 @@
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background:#05060b; color:rgba(255,255,255,0.75);
+  font-family:'JetBrains Mono','Consolas','Courier New',monospace;
+  min-height:100vh; padding:2vmin;
+  display:flex; flex-direction:column; align-items:center;
+}
+
+.terminal-badge {
+  font-size:clamp(8px,1.3vmin,15px); letter-spacing:3px;
+  padding:0.5em 1.6em; border:1px solid rgba(0,229,255,0.2);
+  background:rgba(0,229,255,0.04); color:#00e5ff;
+  text-align:center; margin-bottom:1.5vmin;
+  text-shadow:0 0 10px rgba(0,229,255,0.2);
+}
+
+.app-grid {
+  width:100%; max-width:1480px;
+  display:grid;
+  grid-template-columns:1fr 140fr 80fr;
+  grid-template-rows:auto auto auto auto;
+  gap:1.2vmin;
+}
+
+/* ─── MODE RIBBON ─── */
+.mode-ribbon { grid-column:1/-1; display:flex; gap:0.6vmin; flex-wrap:wrap; }
+.mode-btn {
+  padding:0.6em 1.2em;
+  background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06);
+  color:rgba(255,255,255,0.2);
+  font:600 clamp(7px,0.75vmin,10px) 'JetBrains Mono',monospace;
+  letter-spacing:2px; cursor:pointer; transition:all 0.3s; flex:1;
+}
+.mode-btn:hover { color:rgba(255,255,255,0.4); }
+.mode-btn.active { color:#00e5ff; border-color:rgba(0,229,255,0.3); background:rgba(0,229,255,0.04); }
+
+.direction-bar { grid-column:1/-1; display:flex; gap:0.6vmin; flex-wrap:wrap; }
+.dir-btn {
+  padding:0.4em 1em;
+  background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06);
+  color:rgba(255,255,255,0.15);
+  font:600 clamp(7px,0.7vmin,9px) 'JetBrains Mono',monospace;
+  letter-spacing:2px; cursor:pointer; transition:all 0.3s;
+}
+.dir-btn:hover { color:rgba(255,255,255,0.3); }
+.dir-btn.active { color:#00e5ff; border-color:rgba(0,229,255,0.25); }
+.dir-arrow { color:rgba(255,255,255,0.08); }
+
+/* ─── PANELS ─── */
+.panel {
+  background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.05);
+  padding:1.4vmin;
+}
+.panel-header {
+  font-size:clamp(6px,0.7vmin,9px); letter-spacing:2px;
+  color:rgba(255,255,255,0.12);
+  margin-bottom:0.8vmin; border-bottom:1px solid rgba(255,255,255,0.04);
+  padding-bottom:0.5vmin;
+}
+.ctrl-divider { height:1px; background:rgba(255,255,255,0.04); margin:0.6vmin 0; }
+
+/* ─── INPUT ─── */
+.input-panel { grid-column:1/2; }
+.input-group { display:flex; flex-direction:column; gap:0.8vmin; }
+.input-group.hidden { display:none; }
+#sourceText {
+  width:100%; min-height:320px;
+  background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.04);
+  color:rgba(255,255,255,0.35); padding:0.8em;
+  font:inherit; font-size:clamp(7px,0.8vmin,11px);
+  resize:none; outline:none; line-height:1.6;
+}
+#sourceText:focus { border-color:rgba(0,229,255,0.12); }
+
+/* ─── DROPZONE ─── */
+.dropzone {
+  min-height:280px; border:1px dashed rgba(255,255,255,0.06);
+  background:rgba(0,0,0,0.15);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:0.8vmin; cursor:pointer; transition:all 0.3s;
+  padding:2em;
+}
+.dropzone:hover { border-color:rgba(0,229,255,0.15); background:rgba(0,229,255,0.02); }
+.dropzone.drag-over { border-color:#00e5ff; background:rgba(0,229,255,0.06); box-shadow:inset 0 0 20px rgba(0,229,255,0.03); }
+.dropzone-icon { font-size:clamp(20px,3vmin,36px); color:rgba(255,255,255,0.04); }
+.dropzone-text { font-size:clamp(7px,0.7vmin,9px); color:rgba(255,255,255,0.1); text-align:center; letter-spacing:1px; }
+.dropzone-sub { font-size:clamp(5px,0.5vmin,7px); color:rgba(255,255,255,0.04); }
+.file-picker { display:none; }
+
+.file-info {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:0.6em 0.8em;
+  border:1px solid rgba(0,229,255,0.1); background:rgba(0,229,255,0.02);
+}
+.file-info.hidden { display:none; }
+.file-name { font-size:clamp(7px,0.75vmin,10px); color:#00e5ff; }
+.file-size { font-size:clamp(6px,0.65vmin,8px); color:rgba(255,255,255,0.2); }
+
+/* ─── OUTPUT ─── */
+.output-panel { grid-column:2/3; display:flex; flex-direction:column; }
+#outputText {
+  flex:1; min-height:260px;
+  background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.04);
+  color:rgba(255,255,255,0.35); padding:0.8em;
+  font:inherit; font-size:clamp(7px,0.8vmin,11px);
+  resize:none; outline:none; line-height:1.5;
+}
+.output-actions { display:flex; gap:0.6vmin; margin-top:0.8vmin; flex-wrap:wrap; }
+.action-btn {
+  flex:1; padding:0.5em 0.8em;
+  background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06);
+  color:rgba(255,255,255,0.2);
+  font:600 clamp(6px,0.65vmin,8px) 'JetBrains Mono',monospace;
+  letter-spacing:1px; cursor:pointer; transition:all 0.3s;
+}
+.action-btn:hover { color:rgba(255,255,255,0.4); border-color:rgba(0,229,255,0.2); }
+
+/* ─── TELEMETRY ─── */
+.telemetry-panel { grid-column:3/4; }
+.tele-row {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:0.35em 0; border-bottom:1px solid rgba(255,255,255,0.02);
+}
+.tele-label { font-size:clamp(5px,0.6vmin,8px); color:rgba(255,255,255,0.1); letter-spacing:1px; }
+.tele-val { font-size:clamp(8px,0.9vmin,12px); color:#00e5ff; font-weight:600; }
+.tele-badge {
+  display:block; text-align:center;
+  font-size:clamp(6px,0.65vmin,9px); padding:0.3em 0.5em; letter-spacing:2px;
+}
+.tele-badge.standby { color:rgba(255,255,255,0.12); background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.04); }
+.tele-badge.valid { color:#00e676; background:rgba(0,230,118,0.06); border:1px solid rgba(0,230,118,0.2); box-shadow:0 0 6px rgba(0,230,118,0.05); }
+.tele-badge.invalid { color:#ffc800; background:rgba(255,200,0,0.06); border:1px solid rgba(255,200,0,0.2); }
+.tele-badge.warn { color:#ff1744; background:rgba(255,20,68,0.06); border:1px solid rgba(255,20,68,0.2); }
+
+.error-detail {
+  font-size:clamp(5px,0.55vmin,7px);
+  color:rgba(255,255,255,0.06); letter-spacing:0.5px;
+  line-height:1.6;
+}
+.error-detail.active { color:#ffc800; }
+
+/* ─── ADMIN FOOTER ─── */
+.admin-footer { grid-column:1/-1; display:flex; gap:0.6vmin; flex-wrap:wrap; }
+.admin-btn {
+  flex:1; min-width:180px; padding:0.7em 0.5em;
+  background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06);
+  color:rgba(255,255,255,0.3);
+  font:600 clamp(7px,0.8vmin,10px) 'JetBrains Mono',monospace;
+  letter-spacing:2px; cursor:pointer; transition:all 0.3s;
+}
+.admin-btn:hover { color:rgba(255,255,255,0.5); }
+.admin-btn.execute:hover { border-color:#00e5ff; color:#00e5ff; }
+.admin-btn.decode:hover { border-color:#00e676; color:#00e676; }
+.admin-btn.purge:hover { border-color:#ff1744; color:#ff1744; }
+
+@media (max-width:820px) {
+  .app-grid { grid-template-columns:1fr; }
+  .input-panel,.output-panel,.telemetry-panel { grid-column:1; }
+}
