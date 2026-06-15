@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Hydration · Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="top-bar">
+    <div class="top-brand">
+      <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="1.5">
+        <path d="M12 2C8 2 6 6 6 10c0 4 6 12 6 12s6-8 6-12c0-4-2-8-6-8z" stroke="#00e5ff"/>
+        <path d="M10 9c1-1 2-1 3 0s2 0 3 0" stroke="#00e5ff" stroke-width="0.8"/>
+      </svg>
+      <div>
+        <h1 class="top-title">Daily Hydration · Dashboard</h1>
+        <span class="top-sub">biometric tracking terminal v1.0</span>
+      </div>
+      <span class="top-badge" id="topBadge">STANDBY</span>
+    </div>
+    <div class="top-metrics">
+      <span class="metric-chip" id="chipProgress">PROGRESS <strong id="progressVal">0%</strong></span>
+      <span class="metric-chip accent" id="chipIntake">INTAKE <strong id="intakeVal">0</strong> mL</span>
+      <span class="metric-chip" id="chipTarget">TARGET <strong id="targetVal">--</strong> mL</span>
+    </div>
+  </header>
+
+  <main class="workspace">
+
+    <!-- BIOMETRIC CONFIG -->
+    <section class="config-section">
+      <div class="config-row">
+        <div class="config-field">
+          <label class="cf-label">Body Weight</label>
+          <div class="cf-ctrl">
+            <input type="number" class="cf-input" id="inputWeight" value="70" min="20" max="350" step="0.5">
+            <span class="cf-unit">kg</span>
+          </div>
+        </div>
+        <div class="config-field">
+          <label class="cf-label">Daily Exercise</label>
+          <div class="cf-ctrl">
+            <input type="number" class="cf-input" id="inputExercise" value="30" min="0" max="480" step="5">
+            <span class="cf-unit">mins</span>
+          </div>
+        </div>
+        <button class="cf-btn" id="btnCalc">Calculate Target</button>
+        <div class="config-field">
+          <label class="cf-label">Custom Volume</label>
+          <div class="cf-ctrl">
+            <input type="number" class="cf-input" id="inputCustom" value="200" min="1" max="2000" step="50">
+            <span class="cf-unit">mL</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIN GRID -->
+    <div class="main-grid">
+
+      <!-- CANVAS BOTTLE -->
+      <section class="bottle-section">
+        <div class="panel-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="10" height="10"><path d="M12 2C8 2 6 6 6 10c0 4 6 12 6 12s6-8 6-12c0-4-2-8-6-8z"/></svg>
+          <span>Hydration Vessel</span>
+          <span class="panel-hint" id="bottleHint">--%</span>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="bottleCanvas"></canvas>
+        </div>
+      </section>
+
+      <!-- QUICK LOG -->
+      <section class="log-section">
+        <div class="panel-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="10" height="10"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 12h6M12 9v6"/></svg>
+          <span>Quick Ingestion</span>
+          <span class="panel-hint" id="logHint">TODAY</span>
+        </div>
+        <div class="log-body">
+          <button class="log-chip" data-ml="250">Log 250mL Glass</button>
+          <button class="log-chip" data-ml="500">Log 500mL Flask</button>
+          <button class="log-chip" data-ml="750">Log 750mL Sport Bottle</button>
+          <button class="log-chip custom" id="btnCustom">Log Custom Volume</button>
+        </div>
+        <div class="weekly-track">
+          <div class="wt-label">Weekly Completion</div>
+          <div class="wt-bars" id="wtBars"></div>
+          <div class="wt-label small" id="wtText">-- days at target</div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ACTIONS -->
+    <footer class="action-bar">
+      <button class="foot-btn foot-run" id="btnLog">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><polyline points="20 6 9 17 4 12"/></svg>
+        Register Hydro Intake Event
+      </button>
+      <button class="foot-btn foot-preset" id="btnRemind">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+        Toggle Smart Hydro Reminders
+      </button>
+      <button class="foot-btn foot-reset" id="btnPurge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6"/><path d="M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+        Purge Logging History
+      </button>
+    </footer>
+
+  </main>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
