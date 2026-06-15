@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Competitive Programming Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container" role="application" aria-label="Competitive Programming Tracker">
+    <aside class="left-panel" role="region" aria-label="Navigation">
+      <div class="panel-header">
+        <div class="brand">
+          <svg class="brand-icon" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+            <polygon points="12 2 22 7 22 17 12 22 2 17 2 7" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linejoin="round"/>
+            <polyline points="2 7 12 12 22 7" fill="none" stroke="#38bdf8" stroke-width="2"/>
+            <polyline points="12 12 12 22" fill="none" stroke="#38bdf8" stroke-width="2"/>
+          </svg>
+          <div class="brand-text">
+            <h1>CP TRACKER</h1>
+            <p class="brand-subtitle">Competitive Programming Progress Dashboard</p>
+          </div>
+        </div>
+      </div>
+
+      <nav class="nav-section" role="tablist" aria-label="Dashboard sections">
+        <button class="nav-btn active" data-tab="overview" role="tab" aria-selected="true" tabindex="0">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+          Overview
+        </button>
+        <button class="nav-btn" data-tab="topics" role="tab" aria-selected="false" tabindex="-1">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          Topics
+        </button>
+        <button class="nav-btn" data-tab="streaks" role="tab" aria-selected="false" tabindex="-1">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          Streaks
+        </button>
+        <button class="nav-btn" data-tab="problems" role="tab" aria-selected="false" tabindex="-1">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/></svg>
+          Problems
+        </button>
+      </nav>
+
+      <div class="profile-card">
+        <div class="profile-avatar">SC</div>
+        <div class="profile-info">
+          <span class="profile-name">Shruti Narsulwar</span>
+          <span class="profile-handle">@Shrutiii01</span>
+        </div>
+      </div>
+
+      <div class="quick-stats">
+        <div class="qs-item">
+          <span class="qs-value" id="qs-solved">156</span>
+          <span class="qs-label">Solved</span>
+        </div>
+        <div class="qs-item">
+          <span class="qs-value" id="qs-rating">1423</span>
+          <span class="qs-label">Rating</span>
+        </div>
+        <div class="qs-item">
+          <span class="qs-value" id="qs-streak">12</span>
+          <span class="qs-label">Day Streak</span>
+        </div>
+        <div class="qs-item">
+          <span class="qs-value" id="qs-rank">#892</span>
+          <span class="qs-label">Global Rank</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="right-panel" role="region" aria-label="Dashboard content">
+      <div class="tab-content active" id="tab-overview" role="tabpanel">
+        <div class="section-header">
+          <h2 class="section-title">Dashboard Overview</h2>
+          <span class="section-date" id="current-date"></span>
+        </div>
+
+        <div class="overview-cards">
+          <div class="overview-card">
+            <span class="ov-icon easy">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            <span class="ov-label">Easy</span>
+            <span class="ov-value" id="ov-easy">78</span>
+            <span class="ov-sub">solved</span>
+          </div>
+          <div class="overview-card">
+            <span class="ov-icon medium">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            <span class="ov-label">Medium</span>
+            <span class="ov-value" id="ov-medium">54</span>
+            <span class="ov-sub">solved</span>
+          </div>
+          <div class="overview-card">
+            <span class="ov-icon hard">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            <span class="ov-label">Hard</span>
+            <span class="ov-value" id="ov-hard">24</span>
+            <span class="ov-sub">solved</span>
+          </div>
+          <div class="overview-card">
+            <span class="ov-icon total">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </span>
+            <span class="ov-label">Contest Rating</span>
+            <span class="ov-value" id="ov-rating">1423</span>
+            <span class="ov-sub">top 15%</span>
+          </div>
+        </div>
+
+        <div class="chart-section">
+          <h3 class="section-title-sm">Monthly Activity</h3>
+          <div class="activity-chart" id="activity-chart" aria-label="Monthly problem solving activity chart"></div>
+        </div>
+
+        <div class="recent-section">
+          <h3 class="section-title-sm">Recent Submissions</h3>
+          <div class="recent-list" id="recent-list"></div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="tab-topics" role="tabpanel" hidden>
+        <div class="section-header">
+          <h2 class="section-title">Topic-Wise Progress</h2>
+          <span class="section-date">Mastery Breakdown</span>
+        </div>
+        <div class="topics-grid" id="topics-grid"></div>
+      </div>
+
+      <div class="tab-content" id="tab-streaks" role="tabpanel" hidden>
+        <div class="section-header">
+          <h2 class="section-title">Streak Tracker</h2>
+          <span class="section-date" id="streak-header-info">Current streak: 12 days</span>
+        </div>
+        <div class="streak-stats-bar">
+          <div class="ss-item"><span class="ss-value" id="ss-current">12</span><span class="ss-label">Current Streak</span></div>
+          <div class="ss-item"><span class="ss-value" id="ss-longest">47</span><span class="ss-label">Longest Streak</span></div>
+          <div class="ss-item"><span class="ss-value" id="ss-total">89</span><span class="ss-label">Total Active Days</span></div>
+          <div class="ss-item"><span class="ss-value" id="ss-consistency">68%</span><span class="ss-label">Consistency</span></div>
+        </div>
+        <div class="streak-calendar" id="streak-calendar" aria-label="Activity calendar"></div>
+      </div>
+
+      <div class="tab-content" id="tab-problems" role="tabpanel" hidden>
+        <div class="section-header">
+          <h2 class="section-title">Problem List</h2>
+          <div class="problem-filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="easy">Easy</button>
+            <button class="filter-btn" data-filter="medium">Medium</button>
+            <button class="filter-btn" data-filter="hard">Hard</button>
+          </div>
+        </div>
+        <div class="problem-list" id="problem-list"></div>
+      </div>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
