@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="FOOD-NET // Food Chain Visualizer - Premium interactive laboratory dashboard for force-directed food webs, biomagnification, and trophic cascade modeling.">
+  <title>FOOD-NET // Food Chain Visualizer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="food-net-theme">
+  <!-- Interactive background visual grid -->
+  <div class="net-grid-overlay"></div>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="logo-area">
+        <span class="logo-icon">🕸️</span>
+        <div>
+          <h1>FOOD-NET <span class="logo-sub">// TROPHIC VISUALIZER</span></h1>
+          <p class="subtitle">Ecosystem Network Physics, Bio-Accumulation, & Trophic Cascades</p>
+        </div>
+      </div>
+      
+      <div class="header-controls">
+        <div class="control-group">
+          <label for="biotope-preset">Ecosystem Biotope:</label>
+          <select id="biotope-preset" class="glass-input">
+            <option value="forest">Deciduous Forest Web</option>
+            <option value="marine">Pelagic Marine Web</option>
+            <option value="grassland">African Grassland Web</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <label for="pollutant-type">Active Pollutant:</label>
+          <select id="pollutant-type" class="glass-input">
+            <option value="ddt">DDT (Pesticide)</option>
+            <option value="mercury">Methylmercury (Heavy Metal)</option>
+            <option value="microplastics">Microplastics (Synthetic Polymer)</option>
+          </select>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Grid -->
+    <main class="main-grid">
+
+      <!-- Left Column: Trophic Disturbances & Energy Pyramid -->
+      <section class="controls-column">
+        <!-- Cascade Scenarios -->
+        <div class="glass-card disruptors-card">
+          <div class="card-header">
+            <h3>Trophic Cascade Scenarios</h3>
+            <span class="badge hazard-badge">DISTURBANCE</span>
+          </div>
+          
+          <div class="disrupter-buttons">
+            <button id="btn-kill-apex" class="glow-button danger small">🛑 Remove Apex Predators</button>
+            <button id="btn-runoff" class="glow-button success small">🌱 Trigger Nutrient Runoff</button>
+            <button id="btn-disease" class="glow-button purple small">🦠 Simulate Herbivore Plague</button>
+            <button id="btn-restore" class="glow-button secondary small">🔄 Restore Ecosystem Balance</button>
+          </div>
+        </div>
+
+        <!-- Lindeman's 10% Energy Pyramid -->
+        <div class="glass-card energy-card">
+          <div class="card-header">
+            <h3>Lindeman's 10% Energy Pyramid</h3>
+          </div>
+          
+          <div class="energy-pyramid-wrapper">
+            <div class="pyramid-tier tier-apex" data-tier="4">
+              <div class="tier-label">Trophic 4: Apex Predator</div>
+              <div class="tier-energy" id="pyramid-val-apex">10 J</div>
+              <div class="heat-loss" title="90% energy lost to metabolic respiration">💨 90 J Lost</div>
+            </div>
+            
+            <div class="pyramid-tier tier-predator" data-tier="3">
+              <div class="tier-label">Trophic 3: Secondary Consumer</div>
+              <div class="tier-energy" id="pyramid-val-pred">100 J</div>
+              <div class="heat-loss" title="90% energy lost">💨 900 J Lost</div>
+            </div>
+
+            <div class="pyramid-tier tier-herbivore" data-tier="2">
+              <div class="tier-label">Trophic 2: Primary Consumer</div>
+              <div class="tier-energy" id="pyramid-val-herb">1,000 J</div>
+              <div class="heat-loss" title="90% energy lost">💨 9,000 J Lost</div>
+            </div>
+
+            <div class="pyramid-tier tier-producer" data-tier="1">
+              <div class="tier-label">Trophic 1: Primary Producer</div>
+              <div class="tier-energy" id="pyramid-val-prod">10,000 J</div>
+              <div class="heat-loss" title="90% energy lost from sunlight conversion">💨 90,000 J Lost</div>
+            </div>
+          </div>
+
+          <div class="energy-pyramid-caption text-muted">
+            Lindeman's rule states only ~10% of energy transfers up. The remaining 90% is dissipated as metabolic heat.
+          </div>
+        </div>
+      </section>
+
+      <!-- Center Column: The Force-directed Food Web Canvas -->
+      <section class="canvas-column">
+        <div class="glass-card arena-card">
+          <div class="card-header">
+            <h3>Trophic Interaction Network</h3>
+            <div class="layout-toggles">
+              <label class="switch-container">
+                <input type="checkbox" id="chk-toggle-hierarchy">
+                <span class="slider-switch"></span> Align Trophic Hierarchy
+              </label>
+            </div>
+          </div>
+
+          <div class="canvas-container">
+            <canvas id="network-canvas"></canvas>
+            <div id="canvas-overlay-alert" class="canvas-alert hidden">LETHAL TOXICITY WARNING</div>
+            
+            <!-- Live physics parameters overlay -->
+            <div class="canvas-telemetry font-mono">
+              <div>Physics: <span id="lbl-physics-state">ACTIVE</span></div>
+              <div>Nodes Repel: <span id="lbl-repel-val">220</span></div>
+              <div>Connected Links: <span id="lbl-links-count">0</span></div>
+            </div>
+          </div>
+
+          <div class="canvas-toolbar">
+            <button id="btn-play-physics" class="glow-button primary small">Freeze Layout</button>
+            
+            <div class="slider-group inline-slider">
+              <span class="label">Repel Strength</span>
+              <input type="range" id="slider-repel" min="50" max="400" value="220" class="glass-range">
+            </div>
+          </div>
+
+          <!-- Toxin Injection Bench -->
+          <div class="toxin-bench">
+            <div class="bench-header">
+              <span class="bench-title">☣️ Pollutant Injection Bench</span>
+            </div>
+            <div class="bench-body">
+              <div class="slider-group">
+                <div class="slider-header">
+                  <span class="label">Pollutant Influx Rate</span>
+                  <span class="value" id="val-toxin-influx">0.50 ppm</span>
+                </div>
+                <input type="range" id="slider-toxin-influx" min="5" max="100" value="50" class="glass-range">
+              </div>
+              <button id="btn-inject-toxin" class="glow-button danger">Inject Pollutant</button>
+              <button id="btn-flush-toxin" class="text-button">Flush Toxin</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Column: Biomagnification PPM Chart & Node Profiles -->
+      <section class="analytics-column">
+        <!-- Node Detail Info Panel -->
+        <div class="glass-card info-card">
+          <div class="card-header">
+            <h3>Species Profile Card</h3>
+            <span class="badge tech-badge" id="lbl-node-status">SELECT AN AGENT</span>
+          </div>
+
+          <div id="species-info-body" class="species-info-body">
+            <!-- Dynamically populated selected node profile -->
+            <div class="profile-placeholder">
+              Click on a node in the network to inspect its place in the food web, trophic connections, and toxic accumulation data.
+            </div>
+          </div>
+        </div>
+
+        <!-- Biomagnification logarithmic chart -->
+        <div class="glass-card chart-card">
+          <div class="card-header">
+            <h3>Bio-Accumulation Telemetry</h3>
+            <span class="badge live-badge">PPM INCREASE</span>
+          </div>
+          <div class="ppm-chart-container">
+            <canvas id="ppm-chart"></canvas>
+          </div>
+          <div class="ppm-chart-caption text-muted">
+            Visualizes the parts-per-million (ppm) accumulation factor across the four trophic levels. Note the exponential scaling at upper tiers.
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <div class="footer-left">
+        <span>FOOD-NET // ECO-SYSTEM WORKBENCH</span>
+        <span class="dot-separator">•</span>
+        <span>FORCE-DIRECTED GRAPH ENGINE</span>
+      </div>
+      <div class="footer-right">
+        <span>offline-first thermodynamic modeling</span>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
