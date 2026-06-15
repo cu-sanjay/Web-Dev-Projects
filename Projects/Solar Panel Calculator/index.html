@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solar Panel · Efficiency Calculator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="top-bar">
+    <div class="top-brand">
+      <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="#ffd600" stroke-width="1.5">
+        <circle cx="12" cy="12" r="5" fill="#ffd600" stroke="none"/>
+        <path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12" stroke="#ffd600" stroke-width="1.2"/>
+      </svg>
+      <div>
+        <h1 class="top-title">Solar Panel · Efficiency Calculator</h1>
+        <span class="top-sub">photovoltaic energy terminal v1.0</span>
+      </div>
+      <span class="top-badge" id="topBadge">GRID READY</span>
+    </div>
+    <div class="top-metrics">
+      <span class="metric-chip accent" id="chipYield">YIELD <strong id="yieldVal">--</strong></span>
+      <span class="metric-chip" id="chipSavings">SAVINGS <strong id="savingsVal">--</strong></span>
+      <span class="metric-chip" id="chipCarbon">CO₂ <strong id="carbonVal">--</strong></span>
+    </div>
+  </header>
+
+  <main class="workspace">
+
+    <!-- PRESET BAR -->
+    <div class="preset-ribbon">
+      <span class="ribbon-label">Photovoltaic Preset</span>
+      <button class="preset-btn" data-preset="roof">Residential Roof Grid</button>
+      <button class="preset-btn" data-preset="farm">Commercial Solar Farm</button>
+      <button class="preset-btn" data-preset="cabin">Off-Grid Cabin Unit</button>
+      <button class="preset-btn" data-preset="monsoon">Saturated Monsoon Array</button>
+    </div>
+
+    <!-- MAIN GRID -->
+    <div class="main-grid">
+
+      <!-- LEFT: PARAMETERS -->
+      <section class="params-section">
+        <div class="panel-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="10" height="10"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 9h16M9 4v16"/></svg>
+          <span>Photovoltaic Parameter Intake</span>
+        </div>
+        <div class="params-body" id="paramsBody">
+          <div class="param-row">
+            <div class="param-info">
+              <span class="p-label">System Surface Area</span>
+              <span class="p-unit">m²</span>
+            </div>
+            <div class="param-ctl">
+              <input type="range" class="p-slider" id="sliderArea" min="1" max="5000" step="1" value="50">
+              <input type="number" class="p-input" id="inputArea" value="50" min="1">
+            </div>
+          </div>
+          <div class="param-row">
+            <div class="param-info">
+              <span class="p-label">Panel Conversion Efficiency</span>
+              <span class="p-unit">%</span>
+            </div>
+            <div class="param-ctl">
+              <input type="range" class="p-slider" id="sliderEff" min="5" max="26" step="0.1" value="20">
+              <input type="number" class="p-input" id="inputEff" value="20" min="5" max="26" step="0.1">
+            </div>
+          </div>
+          <div class="param-row">
+            <div class="param-info">
+              <span class="p-label">Daily Peak Sun Hours</span>
+              <span class="p-unit">hrs</span>
+            </div>
+            <div class="param-ctl">
+              <input type="range" class="p-slider" id="sliderSun" min="1" max="12" step="0.5" value="5">
+              <input type="number" class="p-input" id="inputSun" value="5" min="1" max="12" step="0.5">
+            </div>
+          </div>
+          <div class="param-row">
+            <div class="param-info">
+              <span class="p-label">Grid Utility Tariff</span>
+              <span class="p-unit">$/kWh</span>
+            </div>
+            <div class="param-ctl">
+              <input type="range" class="p-slider" id="sliderTariff" min="0.05" max="0.50" step="0.01" value="0.12">
+              <input type="number" class="p-input" id="inputTariff" value="0.12" min="0.05" max="0.50" step="0.01">
+            </div>
+          </div>
+          <div class="param-row">
+            <div class="param-info">
+              <span class="p-label">Installation Cost</span>
+              <span class="p-unit">$</span>
+            </div>
+            <div class="param-ctl">
+              <input type="range" class="p-slider" id="sliderCost" min="500" max="50000" step="100" value="10000">
+              <input type="number" class="p-input" id="inputCost" value="10000" min="500" max="200000" step="100">
+            </div>
+          </div>
+        </div>
+        <div class="alert-banner" id="alertBanner" style="display:none"></div>
+      </section>
+
+      <!-- CENTER: CANVAS -->
+      <section class="canvas-section">
+        <div class="panel-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="10" height="10"><polyline points="2 20 6 12 10 16 14 8 18 12 22 4"/></svg>
+          <span>Energy Trajectory &amp; ROI Payback</span>
+          <span class="panel-hint" id="chartHint">STANDBY</span>
+        </div>
+        <div class="canvas-stack">
+          <div class="canvas-slide"><canvas id="energyCanvas"></canvas></div>
+          <div class="canvas-slide mini"><canvas id="roiCanvas"></canvas></div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- SUMMARY PANEL -->
+    <section class="summary-row" id="sumRow">
+      <div class="sum-card" id="sumGen">
+        <div class="sum-lbl">Annual Generation</div>
+        <div class="sum-val" id="sumGenVal">--</div>
+        <div class="sum-sub">kWh / yr</div>
+      </div>
+      <div class="sum-card" id="sumSave">
+        <div class="sum-lbl">Annual Utility Savings</div>
+        <div class="sum-val" id="sumSaveVal">--</div>
+        <div class="sum-sub">$ / yr</div>
+      </div>
+      <div class="sum-card" id="sumPay">
+        <div class="sum-lbl">Payback Horizon</div>
+        <div class="sum-val" id="sumPayVal">--</div>
+        <div class="sum-sub">years</div>
+      </div>
+      <div class="sum-card" id="sumCO2">
+        <div class="sum-lbl">Carbon Footprint Avoided</div>
+        <div class="sum-val" id="sumCO2Val">--</div>
+        <div class="sum-sub">metric tons CO₂ / yr</div>
+      </div>
+    </section>
+
+    <!-- ACTIONS -->
+    <footer class="action-bar">
+      <button class="foot-btn foot-run" id="btnRun">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        Execute Photovoltaic Grid Run
+      </button>
+      <button class="foot-btn foot-caution" id="btnMonsoon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><path d="M12 2v4M17 7l-3 3M7 7l3 3M4 14h16M6 22l6-10 6 10"/></svg>
+        Load Saturated Monsoon Array Preset
+      </button>
+      <button class="foot-btn foot-reset" id="btnFlush">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6"/><path d="M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+        Flush Analytical Cache
+      </button>
+    </footer>
+
+  </main>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
