@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs><linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0b1220"/><stop offset="100%" stop-color="#0f172a"/></linearGradient><linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#818cf8"/></linearGradient></defs>
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <text x="60" y="50" font-family="ui-monospace,monospace" font-size="20" font-weight="800" fill="#f8fafc" letter-spacing="1">WORLD LANGUAGE MAP</text>
+  <text x="60" y="72" font-family="ui-monospace,monospace" font-size="11" fill="#64748b">Language Distribution &amp; Population Statistics</text>
+  <text x="1080" y="72" font-family="ui-monospace,monospace" font-size="11" fill="#64748b"><tspan fill="#38bdf8" font-weight="700">12</tspan> languages · <tspan fill="#38bdf8" font-weight="700">5.4B</tspan> total speakers</text>
+  <rect x="60" y="95" width="240" height="50" rx="8" fill="#111827" stroke="#334155" stroke-width="1"/><circle cx="82" cy="120" r="6" fill="none" stroke="#64748b" stroke-width="1.5"/><line x1="86" y1="124" x2="92" y2="130" stroke="#64748b" stroke-width="1.5"/><text x="100" y="124" font-family="ui-monospace,monospace" font-size="12" fill="#64748b">Search languages...</text>
+  <rect x="60" y="155" width="240" height="510" rx="10" fill="#111827" stroke="#334155" stroke-width="1"/>
+  <g transform="translate(75,170)">
+    <rect x="0" y="0" width="210" height="40" rx="6" fill="rgba(56,189,248,.06)" stroke="rgba(56,189,248,.2)" stroke-width="1"/><text x="12" y="24" font-family="ui-monospace,monospace" font-size="12" font-weight="600" fill="#38bdf8">Mandarin Chinese</text><text x="200" y="24" font-family="ui-monospace,monospace" font-size="9" fill="#64748b" text-anchor="end">1,120M</text>
+    <rect x="0" y="46" width="210" height="40" rx="6" fill="rgba(34,197,94,.06)" stroke="rgba(34,197,94,.2)" stroke-width="1"/><text x="12" y="70" font-family="ui-monospace,monospace" font-size="12" font-weight="600" fill="#22c55e">English</text><text x="200" y="70" font-family="ui-monospace,monospace" font-size="9" fill="#64748b" text-anchor="end">1,450M</text>
+    <rect x="0" y="92" width="210" height="40" rx="6" fill="rgba(245,158,11,.06)" stroke="rgba(245,158,11,.2)" stroke-width="1"/><text x="12" y="116" font-family="ui-monospace,monospace" font-size="12" font-weight="600" fill="#f59e0b">Hindi</text><text x="200" y="116" font-family="ui-monospace,monospace" font-size="9" fill="#64748b" text-anchor="end">650M</text>
+    <text x="0" y="156" font-family="ui-monospace,monospace" font-size="12" font-weight="600" fill="#cbd5e1">Spanish</text><text x="200" y="156" font-family="ui-monospace,monospace" font-size="9" fill="#64748b" text-anchor="end">600M</text>
+    <text x="0" y="180" font-family="ui-monospace,monospace" font-size="12" fill="#cbd5e1">Arabic</text><text x="200" y="180" font-family="ui-monospace,monospace" font-size="9" fill="#64748b" text-anchor="end">420M</text>
+    <text x="0" y="204" font-family="ui-monospace,monospace" font-size="12" fill="#cbd5e1">Bengali</text><text x="200" y="204" font-family="ui-monospace,monospace" font-size="9" fill="#64748b" text-anchor="end">300M</text>
+    <text x="0" y="228" font-family="ui-monospace,monospace" font-size="12" fill="#cbd5e1">Portuguese</text><text x="200" y="228" font-family="ui-monospace,monospace" font-size="9" fill="#64748b" text-anchor="end">260M</text>
+    <text x="0" y="252" font-family="ui-monospace,monospace" font-size="12" fill="#cbd5e1">Russian</text><text x="200" y="252" font-family="ui-monospace,monospace" font-size="9" fill="#64748b" text-anchor="end">260M</text>
+    <text x="0" y="276" font-family="ui-monospace,monospace" font-size="12" fill="#cbd5e1">French</text><text x="200" y="276" font-family="ui-monospace,monospace" font-size="9" fill="#64748b" text-anchor="end">320M</text>
+    <text x="0" y="300" font-family="ui-monospace,monospace" font-size="12" fill="#cbd5e1">Swahili</text><text x="200" y="300" font-family="ui-monospace,monospace" font-size="9" fill="#64748b" text-anchor="end">200M</text>
+    <text x="0" y="324" font-family="ui-monospace,monospace" font-size="12" fill="#cbd5e1">Japanese</text><text x="200" y="324" font-family="ui-monospace,monospace" font-size="9" fill="#64748b" text-anchor="end">125M</text>
+    <text x="0" y="348" font-family="ui-monospace,monospace" font-size="12" fill="#cbd5e1">German</text><text x="200" y="348" font-family="ui-monospace,monospace" font-size="9" fill="#64748b" text-anchor="end">135M</text>
+  </g>
+  <rect x="330" y="95" width="890" height="390" rx="10" fill="#111827" stroke="#334155" stroke-width="1"/>
+  <text x="360" y="125" font-family="ui-monospace,monospace" font-size="13" font-weight="700" fill="#f8fafc">Language Distribution by Region</text>
+  <svg x="340" y="140" width="870" height="330">
+    <rect x="250" y="60" width="100" height="140" rx="8" fill="#38bdf8" opacity=".15" stroke="#475569" stroke-width="1"/><text x="300" y="135" text-anchor="middle" font-family="ui-monospace,monospace" font-size="13" font-weight="600" fill="#cbd5e1">Americas</text>
+    <rect x="420" y="30" width="140" height="90" rx="8" fill="#22c55e" opacity=".15" stroke="#475569" stroke-width="1"/><text x="490" y="80" text-anchor="middle" font-family="ui-monospace,monospace" font-size="13" font-weight="600" fill="#cbd5e1">Europe</text>
+    <rect x="440" y="170" width="150" height="120" rx="8" fill="#f59e0b" opacity=".15" stroke="#475569" stroke-width="1"/><text x="515" y="235" text-anchor="middle" font-family="ui-monospace,monospace" font-size="13" font-weight="600" fill="#cbd5e1">Africa</text>
+    <rect x="680" y="80" width="180" height="130" rx="8" fill="#38bdf8" opacity=".15" stroke="#475569" stroke-width="1"/><text x="770" y="150" text-anchor="middle" font-family="ui-monospace,monospace" font-size="13" font-weight="600" fill="#cbd5e1">Asia</text>
+    <rect x="780" y="240" width="80" height="50" rx="6" fill="#14b8a6" opacity=".15" stroke="#475569" stroke-width="1"/><text x="820" y="270" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="#cbd5e1">Oceania</text>
+  </svg>
+  <rect x="330" y="500" width="890" height="165" rx="8" fill="#1f2937" stroke="#334155" stroke-width="1"/>
+  <g transform="translate(355,520)">
+    <text font-family="ui-monospace,monospace" font-size="14" font-weight="700" fill="#38bdf8">Mandarin Chinese</text>
+    <text font-family="ui-monospace,monospace" font-size="10" fill="#cbd5e1" y="20">Sino-Tibetan · Chinese characters (hanzi)</text>
+    <rect x="0" y="32" width="140" height="45" rx="6" fill="#111827" stroke="#334155" stroke-width="1"/><text x="70" y="52" text-anchor="middle" font-family="ui-monospace,monospace" font-size="16" font-weight="700" fill="#38bdf8">1,120M</text><text x="70" y="68" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8" fill="#64748b">SPEAKERS</text>
+    <rect x="148" y="32" width="80" height="45" rx="6" fill="#111827" stroke="#334155" stroke-width="1"/><text x="188" y="52" text-anchor="middle" font-family="ui-monospace,monospace" font-size="16" font-weight="700" fill="#38bdf8">3</text><text x="188" y="68" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8" fill="#64748b">COUNTRIES</text>
+    <rect x="236" y="32" width="80" height="45" rx="6" fill="#111827" stroke="#334155" stroke-width="1"/><text x="276" y="52" text-anchor="middle" font-family="ui-monospace,monospace" font-size="16" font-weight="700" fill="#38bdf8">Asia</text><text x="276" y="68" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8" fill="#64748b">REGION</text>
+    <text y="100" font-family="ui-monospace,monospace" font-size="11" fill="#cbd5e1">The most spoken language in the world by native speakers. Uses logographic</text>
+    <text y="116" font-family="ui-monospace,monospace" font-size="11" fill="#cbd5e1">characters and tonal pronunciation.</text>
+    <text y="136" font-family="ui-monospace,monospace" font-size="9" fill="#64748b">Countries: China, Taiwan, Singapore</text>
+  </g>
+  <rect x="0" y="718" width="1280" height="2" fill="url(#accent)" opacity=".4"/>
+</svg>

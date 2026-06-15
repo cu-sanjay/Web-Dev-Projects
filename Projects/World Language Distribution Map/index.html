@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>World Language Distribution Map</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="main-header">
+      <div class="brand"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10A15.3 15.3 0 0112 2z"/></svg>
+        <div><h1>WORLD LANGUAGE MAP</h1><p>Language Distribution &amp; Population Statistics</p></div>
+      </div>
+      <div class="header-stats"><span><strong id="total-langs">0</strong> languages</span><span><strong id="total-speakers">0</strong> total speakers</span></div>
+    </header>
+    <div class="main-layout">
+      <aside class="side-panel">
+        <div class="search-box"><input type="text" id="search-input" placeholder="Search languages..." aria-label="Search languages"></div>
+        <div class="lang-list" id="lang-list"></div>
+      </aside>
+      <main class="map-area">
+        <svg class="map-svg" id="map-svg" viewBox="0 0 1000 480" aria-label="World language distribution">
+          <rect x="0" y="0" width="1000" height="480" fill="#0a0f1a" rx="8"/>
+          <g id="map-regions" stroke="#334155" stroke-width="1" fill="none"></g>
+          <g id="map-labels" font-family="ui-monospace,monospace" font-size="8" fill="#64748b"></g>
+        </svg>
+        <div class="detail-panel" id="detail-panel">
+          <div class="detail-placeholder">Select a language to view distribution details</div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
