@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Waste Management</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <nav class="global-nav">
+    <div class="brand">
+      <i class="ph-fill ph-recycle text-primary"></i> <span>EcoCity</span>
+    </div>
+    
+    <div class="nav-links">
+      <button class="nav-tab active" data-tab="schedule">Collection Schedule</button>
+      <button class="nav-tab" data-tab="report">Report Issue</button>
+      <button class="nav-tab" data-tab="dept" style="display: none;" id="dept-tab-btn">Sanitation Dept</button>
+    </div>
+
+    <div class="nav-actions">
+      <!-- Role Switcher -->
+      <div class="role-selector">
+        <select id="role-select">
+          <option value="citizen">Citizen View</option>
+          <option value="dept">Sanitation Dept</option>
+        </select>
+      </div>
+
+      <button class="icon-btn"><i class="ph ph-bell"></i></button>
+      <img src="https://ui-avatars.com/api/?name=Local+Citizen&background=10b981&color=fff" alt="Avatar" id="user-avatar" class="avatar">
+    </div>
+  </nav>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav">
+    <button class="nav-tab active" data-tab="schedule"><i class="ph ph-calendar"></i></button>
+    <button class="nav-tab" data-tab="report"><i class="ph ph-warning-circle"></i></button>
+    <button class="nav-tab" data-tab="dept" id="mobile-dept-tab-btn" style="display: none;"><i class="ph ph-truck"></i></button>
+  </div>
+
+  <main class="main-content">
+    
+    <!-- ================= SCHEDULE TAB (CITIZEN) ================= -->
+    <section id="schedule" class="tab-content active">
+      <div class="page-heading">
+        <h1>Neighborhood Collection Schedule</h1>
+        <p class="text-muted">Stay up to date with your local trash, recycling, and compost pickup dates.</p>
+      </div>
+
+      <div class="split-layout mt-3">
+        <!-- Upcoming Pickups -->
+        <div class="panel col-span-2">
+          <div class="panel-header flex-between">
+            <h3>Upcoming Pickups for Zone 4A</h3>
+            <button class="btn outline-btn btn-sm"><i class="ph ph-map-pin"></i> Change Zone</button>
+          </div>
+          <div class="panel-body p-0">
+            <table class="custom-table">
+              <thead>
+                <tr><th>Waste Type</th><th>Next Collection Date</th><th>Instructions</th><th>Status</th></tr>
+              </thead>
+              <tbody id="citizen-schedule-tbody">
+                <!-- Injected via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Request Bulk Pickup -->
+        <div class="panel">
+          <div class="panel-header">
+            <h3>Special Services</h3>
+          </div>
+          <div class="panel-body flex-column flex-center text-center">
+            <i class="ph ph-couch text-primary mb-2" style="font-size: 3rem;"></i>
+            <h3 class="mb-1">Bulk Item Pickup</h3>
+            <p class="text-muted" style="font-size: 0.9rem; margin-bottom: 1.5rem;">Have old furniture or large appliances? Schedule a special pickup directly from your curb.</p>
+            <button class="btn primary-btn" style="width:100%">Schedule Now</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= REPORT ISSUE TAB (CITIZEN) ================= -->
+    <section id="report" class="tab-content hidden">
+      <div class="page-heading">
+        <h1>Report Illegal Dumping</h1>
+        <p class="text-muted">Help keep our streets clean. Report overflowing bins or illegal dumping sites.</p>
+      </div>
+
+      <div class="split-layout mt-3">
+        <div class="panel col-span-2">
+          <div class="panel-header">
+            <h3>Submit a Report</h3>
+          </div>
+          <div class="panel-body">
+            <form class="report-form" onsubmit="event.preventDefault(); alert('Report Submitted to Sanitation Dept!');">
+              <div class="form-group">
+                <label>Issue Type</label>
+                <select class="form-input">
+                  <option>Illegal Dumping</option>
+                  <option>Overflowing Public Bin</option>
+                  <option>Missed Collection</option>
+                  <option>Hazardous Waste Spill</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Location (Street Address or Intersection)</label>
+                <input type="text" class="form-input" placeholder="e.g. 123 Main St">
+              </div>
+              <div class="form-group">
+                <label>Description</label>
+                <textarea class="form-input" rows="4" placeholder="Provide any helpful details..."></textarea>
+              </div>
+              <div class="form-group">
+                <label>Upload Photo</label>
+                <div class="upload-box flex-center">
+                  <div class="text-center text-muted">
+                    <i class="ph ph-camera" style="font-size: 2rem;"></i>
+                    <p>Click to attach an image</p>
+                  </div>
+                </div>
+              </div>
+              <button class="btn primary-btn" type="submit" style="width: 100%;">Submit Report</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SANITATION DEPT PORTAL ================= -->
+    <section id="dept" class="tab-content hidden">
+      <div class="page-heading flex-between">
+        <div>
+          <h1>Sanitation Dept Dashboard</h1>
+          <p class="text-muted">Monitor smart bin capacities, active routes, and citizen reports.</p>
+        </div>
+        <button class="btn outline-btn"><i class="ph ph-truck"></i> Fleet Status</button>
+      </div>
+
+      <div class="metrics-grid mt-2">
+        <div class="metric-card">
+          <div class="metric-icon bg-orange-light text-orange"><i class="ph-fill ph-trash"></i></div>
+          <div class="metric-data"><h3>Critical Bins (>90%)</h3><h2>24</h2></div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon bg-blue-light text-blue"><i class="ph-fill ph-map-pin-line"></i></div>
+          <div class="metric-data"><h3>Active Routes</h3><h2>18</h2></div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon bg-red-light text-red"><i class="ph-fill ph-warning-circle"></i></div>
+          <div class="metric-data"><h3>Pending Citizen Reports</h3><h2>12</h2></div>
+        </div>
+      </div>
+
+      <div class="split-layout mt-3">
+        <div class="panel col-span-2">
+          <div class="panel-header">
+            <h3>Smart Bin Capacity Alerts</h3>
+          </div>
+          <div class="panel-body p-0">
+            <table class="custom-table">
+              <thead>
+                <tr><th>Bin ID</th><th>Location</th><th>Waste Type</th><th>Fill Level</th><th>Action</th></tr>
+              </thead>
+              <tbody id="dept-bins-tbody">
+                 <!-- Injected via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
