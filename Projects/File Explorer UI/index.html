@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>File Explorer UI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="terminal-badge">[ FILE EXPLORER UI — VIRTUAL STORAGE COMMAND DECK ]</div>
+
+<div class="app-grid">
+
+  <!-- ─── TOP NAVIGATION RIBBON ─── -->
+  <div class="nav-ribbon">
+    <div class="nav-row">
+      <button id="btnNewFolder" class="nav-btn">NEW FOLDER</button>
+      <button id="btnNewFile" class="nav-btn">NEW CODE FILE [JS]</button>
+      <button id="btnUp" class="nav-btn">NAVIGATE UP</button>
+    </div>
+    <div class="nav-row">
+      <span class="breadcrumb" id="breadcrumb">ROOT</span>
+      <input type="text" id="searchInput" class="search-field" placeholder="Search files &amp; folders...">
+    </div>
+  </div>
+
+  <!-- ─── LEFT SIDEBAR ─── -->
+  <div class="sidebar">
+    <div class="panel-header">FOLDER ROUTES</div>
+    <div id="sidebarTree" class="sidebar-tree"></div>
+  </div>
+
+  <!-- ─── MAIN GRID ─── -->
+  <div class="main-panel">
+    <div class="main-toolbar">
+      <span class="item-count" id="itemCount">0 items</span>
+    </div>
+    <div class="items-grid" id="itemsGrid"></div>
+  </div>
+
+  <!-- ─── INSPECTOR ─── -->
+  <div class="panel inspector-panel">
+    <div class="panel-header">ASSET TELEMETRY METRICS</div>
+    <div id="inspectorContent" class="inspector-content">
+      <div class="inspector-row"><span class="ins-label">FILE NAME</span><span id="insName" class="ins-val">--</span></div>
+      <div class="inspector-row"><span class="ins-label">EXTENSION</span><span id="insExt" class="ins-val">--</span></div>
+      <div class="inspector-row"><span class="ins-label">BYTE SIZE</span><span id="insSize" class="ins-val">--</span></div>
+      <div class="inspector-row"><span class="ins-label">PARENT INDEX</span><span id="insParent" class="ins-val">--</span></div>
+      <div class="ctrl-divider"></div>
+      <div class="tele-row" style="grid-column:1/-1;"><span id="tBadge" class="tele-badge standby">STANDBY</span></div>
+    </div>
+  </div>
+
+  <!-- ─── ADMIN FOOTER ─── -->
+  <div class="admin-footer">
+    <button id="btnReconstruct" class="admin-btn reconstruct">RECONSTRUCT DIRECTORY MATRIX BASELINE</button>
+    <button id="btnDeploy" class="admin-btn deploy">DEPLOY VIRTUAL STORAGE EXPANSION BLOCK</button>
+    <button id="btnFlush" class="admin-btn flush">PURGE SYSTEM VIRTUAL MEMORY</button>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
