@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Missing Person Search Simulator</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="app-container">
+  <header><div class="brand"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#eab308" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><div><h1>MISSING PERSON SEARCH SIMULATOR</h1><p>Search Areas · Analyze Clues · Probability Heatmap</p></div></div><span id="search-status">Search Area: Sector A</span></header>
+  <div class="main-layout">
+    <aside class="search-panel">
+      <h3>Sectors</h3>
+      <div class="sector-list">
+        <button class="sector-btn active" data-sector="a">Sector A 🏙️</button>
+        <button class="sector-btn" data-sector="b">Sector B 🌲</button>
+        <button class="sector-btn" data-sector="c">Sector C 🌊</button>
+        <button class="sector-btn" data-sector="d">Sector D 🏔️</button>
+      </div>
+      <h3>Clues Found</h3>
+      <div class="clue-log" id="clue-log">
+        <div class="clue-entry">👣 Footprints near riverbank</div>
+        <div class="clue-entry">📱 Phone signal pinged Sector B</div>
+        <div class="clue-entry">👕 Clothing fragment found</div>
+      </div>
+      <div class="search-stats"><div>Searched: <span id="searched-pct">25%</span></div><div>Probability: <span id="prob-pct" class="prob-high">72%</span></div></div>
+      <button id="btn-search-area" class="btn btn-primary">Search Area 🔍</button>
+    </aside>
+    <main class="map-area">
+      <div class="heatmap-container">
+        <canvas id="heatmap" width="600" height="500"></canvas>
+        <div class="heatmap-legend"><span>Low</span><span class="gradient-bar"></span><span>High</span></div>
+      </div>
+      <div class="action-log" id="action-log">
+        <div class="log-entry">Search initiated. Probability map generated.</div>
+      </div>
+    </main>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
