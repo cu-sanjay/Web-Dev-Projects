@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="An interactive client-side Blockchain Explorer Simulator. Mine blocks, tamper with transactions, watch the chain break, re-mine to restore consensus, and search the ledger.">
+  <title>Blockchain Explorer Simulator - Interactive Ledger Demo</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Dashboard Main Container -->
+  <div class="app-container">
+    
+    <!-- Top Header -->
+    <header class="app-header">
+      <div class="header-logo">
+        <div class="logo-icon"></div>
+        <div class="logo-text">
+          <h1>BLOC<span>KRAFT</span></h1>
+          <p>Blockchain Simulator & Explorer</p>
+        </div>
+      </div>
+      
+      <!-- Live Metrics Dashboard -->
+      <section class="live-metrics" aria-label="Network Health Dashboard">
+        <div class="metric-card" id="status-card">
+          <span class="metric-label">Network Status</span>
+          <div class="status-indicator-container">
+            <span class="status-dot green" id="status-dot"></span>
+            <span class="metric-value font-highlight" id="chain-status">SECURE</span>
+          </div>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Height (Blocks)</span>
+          <span class="metric-value" id="metric-blocks">1</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Mempool Pool</span>
+          <span class="metric-value" id="metric-mempool">0</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Mining Difficulty</span>
+          <span class="metric-value" id="metric-difficulty">2</span>
+        </div>
+      </section>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="dashboard-grid">
+      
+      <!-- Side Controls (Transactions, Mining Settings, Peer Nodes) -->
+      <aside class="sidebar-panel">
+        
+        <!-- Transaction Creator Section -->
+        <section class="control-card glass-panel" aria-labelledby="tx-creator-title">
+          <h2 id="tx-creator-title" class="section-title">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+            Create Transaction
+          </h2>
+          <form id="tx-form" class="panel-form" novalidate>
+            <div class="input-group">
+              <label for="tx-sender">Sender Address</label>
+              <input type="text" id="tx-sender" placeholder="e.g. Alice, 0x71C...8b4f" required value="Alice">
+            </div>
+            <div class="input-group">
+              <label for="tx-recipient">Recipient Address</label>
+              <input type="text" id="tx-recipient" placeholder="e.g. Bob, 0x3Fd...19a2" required value="Bob">
+            </div>
+            <div class="input-group">
+              <label for="tx-amount">Amount (ETH)</label>
+              <input type="number" id="tx-amount" min="0.0001" step="any" placeholder="0.5" required value="1.5">
+            </div>
+            <button type="submit" class="btn btn-primary" id="btn-add-tx">
+              Add to Mempool
+            </button>
+          </form>
+        </section>
+
+        <!-- Mining difficulty control Section -->
+        <section class="control-card glass-panel" aria-labelledby="mining-config-title">
+          <h2 id="mining-config-title" class="section-title">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+            Miner Settings
+          </h2>
+          <div class="setting-controls">
+            <div class="input-group">
+              <label for="difficulty-select">Target Hashing Difficulty</label>
+              <select id="difficulty-select" aria-describedby="difficulty-desc">
+                <option value="1">1 Zero (Very Easy)</option>
+                <option value="2" selected>2 Zeroes (Medium)</option>
+                <option value="3">3 Zeroes (Hard)</option>
+                <option value="4">4 Zeroes (Intense)</option>
+              </select>
+              <span id="difficulty-desc" class="input-help">Sets the number of prefix zeros required for block hash solution.</span>
+            </div>
+            
+            <div class="mining-status-display hide" id="mining-status-display">
+              <div class="mining-animation">
+                <div class="spinner"></div>
+                <span>Mining Block...</span>
+              </div>
+              <div class="mining-stats font-mono">
+                <div>Nonces tried: <span id="mine-nonces">0</span></div>
+                <div>Hashrate: <span id="mine-hashrate">0</span> H/s</div>
+              </div>
+            </div>
+
+            <button type="button" class="btn btn-accent pulse-effect" id="btn-mine-block">
+              <span class="btn-text">Mine Mempool Block</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- Node & P2P Simulator Status -->
+        <section class="control-card glass-panel" aria-labelledby="p2p-title">
+          <h2 id="p2p-title" class="section-title">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.53c-.26-.81-1-1.4-1.9-1.4h-1v-3c0-.55-.45-1-1-1h-6v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.4z"/></svg>
+            Network Peers (Nodes)
+          </h2>
+          <div class="nodes-list">
+            <div class="node-item">
+              <span class="node-name">Node #1 (Validator)</span>
+              <span class="node-badge sync">Synced</span>
+            </div>
+            <div class="node-item">
+              <span class="node-name">Node #2 (Mining Rig)</span>
+              <span class="node-badge mining" id="node2-badge">Idle</span>
+            </div>
+            <div class="node-item">
+              <span class="node-name">Node #3 (Light Client)</span>
+              <span class="node-badge sync">Synced</span>
+            </div>
+          </div>
+          <button type="button" class="btn btn-secondary btn-sm" id="btn-reset-chain">
+            Reset Ledger to Genesis
+          </button>
+        </section>
+      </aside>
+
+      <!-- Ledger Explorer & Blocks Visualization Area -->
+      <section class="ledger-explorer-panel" aria-label="Ledger Explorer and Visualizer">
+        
+        <!-- Search Explorer Interface -->
+        <div class="search-panel glass-panel">
+          <div class="search-bar-container">
+            <svg class="search-icon" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+            <input type="text" id="explorer-search" placeholder="Search blocks by height, transaction sender/recipient, block hash, or tx hash..." aria-label="Blockchain Explorer Search Query">
+            <button class="btn btn-primary btn-search" id="btn-search">Search</button>
+          </div>
+          <div class="search-results-overlay hide" id="search-results-overlay">
+            <div class="search-results-header">
+              <h3>Search Results</h3>
+              <button class="btn-close-results" id="btn-close-results">&times;</button>
+            </div>
+            <div class="search-results-body" id="search-results-body">
+              <!-- Dynamically populated search result cards -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Pending Transactions Mempool Tray -->
+        <div class="mempool-container glass-panel">
+          <div class="mempool-header">
+            <h3>Mempool (Pending Transactions)</h3>
+            <span class="mempool-count-badge" id="mempool-badge">0 pending</span>
+          </div>
+          <div class="mempool-scroller" id="mempool-list">
+            <div class="empty-mempool-message" id="empty-mempool">
+              No pending transactions. Add some in the creator panel above or mine genesis!
+            </div>
+          </div>
+        </div>
+
+        <!-- Chain Visual Scroll Wrapper -->
+        <div class="blockchain-visual-wrapper">
+          <div class="blockchain-header-row">
+            <h3>Blockchain Ledger</h3>
+            <span class="scroll-instruction">Scroll horizontally to view older or newer blocks &rarr;</span>
+          </div>
+          <div class="blockchain-scroller" id="blockchain-scroller" tabIndex="0" aria-label="Blockchain block ledger timeline">
+            <!-- Dynamic Blocks will be inserted here -->
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Network Event Log / Console Console -->
+    <footer class="app-console glass-panel">
+      <div class="console-header">
+        <div class="console-title">
+          <span class="console-dot"></span>
+          <h2>P2P Consensus Network Broadcasts</h2>
+        </div>
+        <button class="btn-clear-console" id="btn-clear-console">Clear Events</button>
+      </div>
+      <div class="console-logs font-mono" id="console-logs" aria-live="polite">
+        <div class="log-entry system">[SYSTEM] Blockchain Simulator started successfully. Genesis block deployed.</div>
+        <div class="log-entry p2p">[P2P] Broadcasted local state of Blockchain to all nodes. Synced.</div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Detail Dialog / Modal for inspecting blocks/transactions -->
+  <div class="modal-backdrop hide" id="detail-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-container glass-panel">
+      <div class="modal-header">
+        <h3 id="modal-title">Inspect Details</h3>
+        <button class="btn-close-modal" id="btn-close-modal" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-body" id="modal-body">
+        <!-- Dynamically filled details -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Javascript Logic -->
+  <script src="script.js"></script>
+</body>
+</html>
