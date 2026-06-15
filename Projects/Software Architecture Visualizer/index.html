@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Software Architecture Visualizer</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="app-container">
+  <header><div class="brand"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22 8.5 12 15.5 2 8.5"/></svg><div><h1>SOFTWARE ARCHITECTURE VISUALIZER</h1><p>Visualize · Analyze · Document Architecture Patterns</p></div></div></header>
+  <div class="main-layout">
+    <aside class="pattern-panel">
+      <h3>Architecture Patterns</h3>
+      <div class="pattern-list">
+        <button class="pattern-btn active" data-pattern="microservices">Microservices</button>
+        <button class="pattern-btn" data-pattern="monolith">Monolith</button>
+        <button class="pattern-btn" data-pattern="layered">Layered</button>
+        <button class="pattern-btn" data-pattern="event">Event-Driven</button>
+        <button class="pattern-btn" data-pattern="hexagonal">Hexagonal</button>
+        <button class="pattern-btn" data-pattern="cqrs">CQRS</button>
+      </div>
+      <div class="pattern-info" id="pattern-info"><h4 id="pat-name">Microservices</h4><p id="pat-desc">Decompose applications into small, independent services that communicate over a network.</p><div class="pat-stats"><div><span>Complexity</span><span class="stat-high" id="pat-complexity">High</span></div><div><span>Scalability</span><span class="stat-high" id="pat-scalability">Excellent</span></div><div><span>Team Fit</span><span class="stat-med" id="pat-team">Medium+</span></div></div></div>
+    </aside>
+    <main class="viz-area">
+      <div class="viz-toolbar"><span id="viz-name">Microservices Architecture</span><button id="btn-legend" class="btn">Toggle Legend</button></div>
+      <div class="viz-container" id="viz-container"><canvas id="viz-canvas" width="900" height="500"></canvas></div>
+      <div class="legend-bar hidden" id="legend-bar">
+        <div class="legend-item"><span class="lg-dot" style="background:#3b82f6"></span>Service</div>
+        <div class="legend-item"><span class="lg-dot" style="background:#f97316"></span>Database</div>
+        <div class="legend-item"><span class="lg-dot" style="background:#22c55e"></span>Queue</div>
+        <div class="legend-item"><span class="lg-dot" style="background:#a78bfa"></span>API Gateway</div>
+        <div class="legend-item"><span class="lg-dot" style="background:#ef4444"></span>Cache</div>
+      </div>
+    </main>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
