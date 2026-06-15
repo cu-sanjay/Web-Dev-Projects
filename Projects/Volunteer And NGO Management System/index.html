@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Volunteer & NGO Management</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+
+  <!-- Top Navigation for Role Switching -->
+  <nav class="global-nav">
+    <div class="brand">
+      <i class="ph-fill ph-hands-clapping text-primary"></i> <span>ImpactHub</span>
+    </div>
+    <div class="role-selector">
+      <span style="margin-right: 1rem; color: var(--text-muted); font-size: 0.9rem;">View As:</span>
+      <button class="role-btn active" data-role="volunteer"><i class="ph ph-user"></i> Volunteer</button>
+      <button class="role-btn" data-role="ngo"><i class="ph ph-buildings"></i> NGO Admin</button>
+    </div>
+    <div class="nav-actions">
+      <button class="icon-btn"><i class="ph ph-bell"></i><span class="badge">3</span></button>
+      <img src="https://ui-avatars.com/api/?name=Vishwa+Mistry&background=14b8a6&color=fff" alt="Avatar" id="user-avatar" class="avatar">
+    </div>
+  </nav>
+
+  <div class="app-container">
+    
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <ul class="sidebar-menu" id="sidebar-menu">
+        <!-- Injected dynamically based on role -->
+      </ul>
+      <div class="sidebar-bottom">
+        <button class="btn outline-btn" style="width: 100%"><i class="ph ph-sign-out"></i> Log Out</button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      
+      <!-- ================= VOLUNTEER DASHBOARD ================= -->
+      <section id="volunteer-view" class="role-view active">
+        <div class="page-heading">
+          <h1>Welcome back, Vishwa! 👋</h1>
+          <p class="text-muted">You are making a difference. Check out your latest impact metrics.</p>
+        </div>
+
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-icon bg-primary-light text-primary"><i class="ph-fill ph-clock"></i></div>
+            <div class="metric-data"><h3>Total Impact Hours</h3><h2>124 hrs</h2></div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon bg-green-light text-green"><i class="ph-fill ph-check-circle"></i></div>
+            <div class="metric-data"><h3>Events Completed</h3><h2>18</h2></div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon bg-orange-light text-orange"><i class="ph-fill ph-medal"></i></div>
+            <div class="metric-data"><h3>Current Rank</h3><h2>Community Leader</h2></div>
+          </div>
+        </div>
+
+        <div class="split-layout mt-3">
+          <!-- Upcoming Shifts -->
+          <div class="panel col-span-2">
+            <div class="panel-header flex-between">
+              <h3>My Upcoming Shifts</h3>
+              <button class="text-btn">Browse Events</button>
+            </div>
+            <div class="panel-body p-0">
+              <table class="custom-table">
+                <thead>
+                  <tr><th>Event Name</th><th>Organization</th><th>Date & Time</th><th>Status</th></tr>
+                </thead>
+                <tbody id="vol-shifts-tbody">
+                  <!-- Injected -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Suggested Causes -->
+          <div class="panel">
+            <div class="panel-header">
+              <h3>Suggested Causes</h3>
+            </div>
+            <div class="panel-body flex-column gap-1" id="vol-causes-list">
+              <!-- Injected -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= NGO DASHBOARD ================= -->
+      <section id="ngo-view" class="role-view hidden">
+        <div class="page-heading flex-between">
+          <div>
+            <h1>Global Relief Foundation</h1>
+            <p class="text-muted">Manage your active campaigns and volunteer base.</p>
+          </div>
+          <button class="btn primary-btn"><i class="ph ph-plus"></i> Create Campaign</button>
+        </div>
+
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-icon bg-blue-light text-blue"><i class="ph-fill ph-users"></i></div>
+            <div class="metric-data"><h3>Active Volunteers</h3><h2>850</h2></div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon bg-green-light text-green"><i class="ph-fill ph-calendar-check"></i></div>
+            <div class="metric-data"><h3>Ongoing Campaigns</h3><h2>4</h2></div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon bg-purple-light text-purple"><i class="ph-fill ph-hands-clapping"></i></div>
+            <div class="metric-data"><h3>Total Hours Logged</h3><h2>4,250 hrs</h2></div>
+          </div>
+        </div>
+
+        <div class="split-layout mt-3">
+          <div class="panel col-span-2">
+            <div class="panel-header"><h3>Recent Applications</h3></div>
+            <div class="panel-body p-0">
+              <table class="custom-table">
+                <thead>
+                  <tr><th>Volunteer Name</th><th>Campaign</th><th>Applied On</th><th>Status</th><th>Action</th></tr>
+                </thead>
+                <tbody id="ngo-apps-tbody">
+                  <!-- Injected -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
