@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Protein Structure Viewer</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="app-container">
+  <header><div class="brand"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><path d="M12 2a10 10 0 0 1 10 10"/><path d="M12 22a10 10 0 0 0 10-10"/><path d="M2 12a10 10 0 0 0 10 10"/><path d="M2 12A10 10 0 0 1 12 2"/><circle cx="12" cy="12" r="3"/></svg><div><h1>PROTEIN STRUCTURE VIEWER</h1><p>3D Protein Visualization · Amino Acid Explorer</p></div></div></header>
+  <div class="main-layout">
+    <aside class="side-panel">
+      <h3>Proteins</h3>
+      <div class="protein-list" id="protein-list">
+        <button class="protein-btn active" data-protein="hemoglobin">Hemoglobin</button>
+        <button class="protein-btn" data-protein="insulin">Insulin</button>
+        <button class="protein-btn" data-protein="collagen">Collagen</button>
+        <button class="protein-btn" data-protein="lysozyme">Lysozyme</button>
+      </div>
+      <div class="protein-info" id="protein-info"><h4 id="p-name">Hemoglobin</h4><p id="p-desc">Oxygen transport protein in red blood cells</p><div class="p-stats"><div><span>Structure</span><span id="p-structure">α2β2 tetramer</span></div><div><span>Residues</span><span id="p-residues">574</span></div><div><span>MW (kDa)</span><span id="p-mw">64.5</span></div></div></div>
+      <h3>Display</h3>
+      <div class="display-options"><button class="btn active" id="disp-ribbon">Ribbon</button><button class="btn" id="disp-sphere">Spheres</button><button class="btn" id="disp-wire">Wireframe</button></div>
+    </aside>
+    <main class="viewer-area">
+      <canvas id="canvas" width="800" height="600"></canvas>
+      <div class="viewer-controls"><span class="hint">Drag to rotate · Scroll to zoom</span></div>
+    </main>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
