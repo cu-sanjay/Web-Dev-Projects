@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hyperlocal Services Platform</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <nav class="global-nav">
+    <div class="brand">
+      <i class="ph-fill ph-wrench text-primary"></i> <span>QuickFix</span>
+    </div>
+    
+    <div class="nav-links">
+      <button class="nav-tab active" data-tab="discover">Find a Pro</button>
+      <button class="nav-tab" data-tab="bookings">My Bookings</button>
+      <button class="nav-tab" data-tab="provider" style="display: none;" id="provider-tab-btn">Provider Dashboard</button>
+    </div>
+
+    <div class="nav-actions">
+      <!-- Role Switcher -->
+      <div class="role-selector">
+        <select id="role-select">
+          <option value="customer">Customer View</option>
+          <option value="provider">Provider View</option>
+        </select>
+      </div>
+
+      <button class="icon-btn"><i class="ph ph-bell"></i></button>
+      <img src="https://ui-avatars.com/api/?name=Local+Customer&background=10b981&color=fff" alt="Avatar" id="user-avatar" class="avatar">
+    </div>
+  </nav>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav">
+    <button class="nav-tab active" data-tab="discover"><i class="ph ph-magnifying-glass"></i></button>
+    <button class="nav-tab" data-tab="bookings"><i class="ph ph-calendar-check"></i></button>
+    <button class="nav-tab" data-tab="provider" id="mobile-provider-tab-btn" style="display: none;"><i class="ph ph-briefcase"></i></button>
+  </div>
+
+  <main class="main-content">
+    
+    <!-- ================= DISCOVER TAB (CUSTOMER) ================= -->
+    <section id="discover" class="tab-content active">
+      <div class="hero-banner">
+        <div>
+          <h1>Expert Help, Right at Your Doorstep</h1>
+          <p>Book trusted, background-checked local professionals for any home service.</p>
+        </div>
+        <div class="search-box">
+          <i class="ph ph-map-pin"></i>
+          <input type="text" placeholder="Enter your zip code or service needed...">
+          <button class="btn primary-btn">Search</button>
+        </div>
+      </div>
+
+      <div class="section-header mt-3">
+        <h2>Top Rated Professionals</h2>
+        <div class="filter-pills">
+          <span class="pill active">All Services</span>
+          <span class="pill">Plumbing</span>
+          <span class="pill">Electrical</span>
+          <span class="pill">Cleaning</span>
+        </div>
+      </div>
+
+      <div class="pro-grid" id="pro-grid">
+        <!-- Injected via JS -->
+      </div>
+    </section>
+
+    <!-- ================= MY BOOKINGS TAB (CUSTOMER) ================= -->
+    <section id="bookings" class="tab-content hidden">
+      <div class="page-heading">
+        <h1>My Bookings</h1>
+        <p class="text-muted">Manage your upcoming service appointments.</p>
+      </div>
+
+      <div class="split-layout mt-3">
+        <div class="panel col-span-2">
+          <div class="panel-header">
+            <h3>Upcoming Appointments</h3>
+          </div>
+          <div class="panel-body p-0">
+            <table class="custom-table">
+              <thead>
+                <tr><th>Service</th><th>Professional</th><th>Date & Time</th><th>Status</th><th>Action</th></tr>
+              </thead>
+              <tbody id="customer-bookings-tbody">
+                <!-- Injected via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <h3>Quick Actions</h3>
+          </div>
+          <div class="panel-body flex-column gap-1">
+            <button class="btn outline-btn" style="width:100%"><i class="ph ph-headset"></i> Contact Support</button>
+            <button class="btn outline-btn" style="width:100%"><i class="ph ph-clock-counter-clockwise"></i> View History</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PROVIDER DASHBOARD TAB ================= -->
+    <section id="provider" class="tab-content hidden">
+      <div class="page-heading flex-between">
+        <div>
+          <h1>Provider Dashboard</h1>
+          <p class="text-muted">Manage incoming service requests and track your earnings.</p>
+        </div>
+        <div>
+          <span class="badge success" style="padding: 0.6rem 1rem; font-size: 0.9rem;"><i class="ph-fill ph-check-circle"></i> Accepting Jobs</span>
+        </div>
+      </div>
+
+      <div class="metrics-grid mt-2">
+        <div class="metric-card">
+          <div class="metric-icon bg-blue-light text-blue"><i class="ph-fill ph-calendar-plus"></i></div>
+          <div class="metric-data"><h3>New Requests</h3><h2>5</h2></div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon bg-green-light text-green"><i class="ph-fill ph-check-square"></i></div>
+          <div class="metric-data"><h3>Completed Jobs</h3><h2>128</h2></div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon bg-purple-light text-purple"><i class="ph-fill ph-currency-circle-dollar"></i></div>
+          <div class="metric-data"><h3>Earnings (This Week)</h3><h2>$1,450</h2></div>
+        </div>
+      </div>
+
+      <div class="split-layout mt-3">
+        <div class="panel col-span-2">
+          <div class="panel-header">
+            <h3>Incoming Service Requests</h3>
+          </div>
+          <div class="panel-body p-0">
+            <table class="custom-table">
+              <thead>
+                <tr><th>Customer</th><th>Job Type</th><th>Location</th><th>Requested Time</th><th>Action</th></tr>
+              </thead>
+              <tbody id="provider-requests-tbody">
+                 <!-- Injected via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
