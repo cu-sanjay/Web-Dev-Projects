@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Digital Detective Notebook</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="app-container">
+  <header><div class="brand"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><div><h1>DIGITAL DETECTIVE NOTEBOOK</h1><p>Store Clues · Track Suspects · Map Connections</p></div></div><div class="case-counter">Case: <span id="case-progress">0/3</span></div></header>
+  <div class="main-layout">
+    <aside class="notebook-tabs">
+      <button class="tab-btn active" data-tab="clues">🔍 Clues</button>
+      <button class="tab-btn" data-tab="suspects">👤 Suspects</button>
+      <button class="tab-btn" data-tab="graph">🕸️ Graph</button>
+      <button class="tab-btn" data-tab="progress">📊 Progress</button>
+    </aside>
+    <main class="notebook-content">
+      <div class="tab-content active" id="tab-clues">
+        <div class="tab-header"><h2>Clue Log</h2><button id="btn-add-clue" class="btn">+ Add Clue</button></div>
+        <div class="clue-list" id="clue-list">
+          <div class="clue-card"><span class="clue-icon">📸</span><div><strong>CCTV footage</strong><p>Shows someone entering at 11PM</p></div><span class="clue-tag">Timestamp: 23:00</span></div>
+          <div class="clue-card"><span class="clue-icon">🔪</span><div><strong>Murder weapon</strong><p>Found in kitchen sink</p></div><span class="clue-tag">Location: Kitchen</span></div>
+        </div></div>
+      <div class="tab-content" id="tab-suspects">
+        <div class="tab-header"><h2>Suspect Profiles</h2><button id="btn-add-suspect" class="btn">+ Add Suspect</button></div>
+        <div class="suspect-cards" id="suspect-cards">
+          <div class="suspect-card"><div class="suspect-avatar">JD</div><div><strong>John Doe</strong><p>Motive: Inheritance</p><p>Alibi: Working late</p></div><span class="suspect-status">🔴 Prime</span></div>
+        </div></div>
+      <div class="tab-content" id="tab-graph">
+        <div class="tab-header"><h2>Relationship Graph</h2></div>
+        <div class="graph-container"><canvas id="graph-canvas" width="700" height="400"></canvas></div></div>
+      <div class="tab-content" id="tab-progress">
+        <div class="tab-header"><h2>Case Progress</h2></div>
+        <div class="progress-grid"><div class="p-item"><span>Clues Collected</span><strong id="p-clues">2</strong></div><div class="p-item"><span>Suspects Identified</span><strong id="p-suspects">1</strong></div><div class="p-item"><span>Connections Found</span><strong id="p-connections">3</strong></div><div class="p-item"><span>Case Completion</span><strong id="p-completion">33%</strong></div></div>
+        <div class="progress-bar-lg"><div class="progress-fill-lg" id="progress-fill-lg" style="width:33%"></div></div>
+      </div>
+    </main>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
