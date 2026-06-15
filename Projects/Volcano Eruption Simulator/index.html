@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="VOLCANO-OS // Volcano Eruption Simulator - Premium geophysics terminal for particle eruptions, fluid viscosity flow, and real-time seismograph harmonics.">
+  <title>VOLCANO-OS // Volcano Eruption Simulator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="volcano-os-theme">
+  <!-- Volcanic HUD grid background -->
+  <div class="hud-grid-overlay"></div>
+
+  <div class="app-container" id="shake-envelope">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="logo-area">
+        <span class="logo-icon">🌋</span>
+        <div>
+          <h1>VOLCANO-OS <span class="logo-sub">// ERUPTION SIMULATOR</span></h1>
+          <p class="subtitle">Magmatic Fluid Mechanics & Seismological Telemetry Terminal</p>
+        </div>
+      </div>
+      
+      <div class="header-status-bar">
+        <div class="control-group">
+          <label for="eruption-preset">Eruption Preset:</label>
+          <select id="eruption-preset" class="glass-input">
+            <option value="hawaiian">Hawaiian Effusive (Shield Flow)</option>
+            <option value="strombolian">Strombolian Explosive (Lava Bombs)</option>
+            <option value="plinian">Plinian Colossal (Ash Column)</option>
+          </select>
+        </div>
+        
+        <div class="vei-hud font-mono">
+          <span class="label">EXPLOSIVITY:</span> <span id="telemetry-vei">VEI 0</span>
+        </div>
+
+        <div class="pressure-gauge-hud">
+          <span class="label">MAGMA CHAMBER:</span>
+          <div class="pressure-bar-outer">
+            <div id="telemetry-pressure-fill" class="pressure-fill" style="width: 20%"></div>
+          </div>
+          <span id="telemetry-pressure-val" class="font-mono">20%</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Layout Grid -->
+    <main class="main-grid">
+
+      <!-- Left Column: Magmatic Modifiers & Rupture Controls -->
+      <section class="controls-column">
+        <!-- Geophysics sliders -->
+        <div class="glass-card geophysics-card">
+          <div class="card-header">
+            <h3>Geophysics Controls</h3>
+            <span class="badge tech-badge">ARRHENIUS ENGINE</span>
+          </div>
+
+          <div class="control-sliders">
+            <!-- Magma Viscosity -->
+            <div class="slider-group">
+              <div class="slider-header">
+                <span class="label">Magma Viscosity (Pa·s)</span>
+                <span class="value" id="val-viscosity">Low (Basaltic)</span>
+              </div>
+              <input type="range" id="slider-viscosity" min="1" max="3" value="1" class="glass-range">
+            </div>
+
+            <!-- Magma Gas Content -->
+            <div class="slider-group">
+              <div class="slider-header">
+                <span class="label">Volatile Gas Content</span>
+                <span class="value" id="val-gas">15%</span>
+              </div>
+              <input type="range" id="slider-gas" min="5" max="100" value="15" class="glass-range">
+            </div>
+
+            <!-- Vent Diameter -->
+            <div class="slider-group">
+              <div class="slider-header">
+                <span class="label">Conduit Vent Diameter</span>
+                <span class="value" id="val-vent">15 m</span>
+              </div>
+              <input type="range" id="slider-vent" min="5" max="50" value="15" class="glass-range">
+            </div>
+
+            <!-- Wind Speed -->
+            <div class="slider-group">
+              <div class="slider-header">
+                <span class="label">Atmospheric Wind Speed</span>
+                <span class="value" id="val-wind">10 km/h (East)</span>
+              </div>
+              <input type="range" id="slider-wind" min="-100" max="100" value="10" class="glass-range">
+            </div>
+          </div>
+        </div>
+
+        <!-- Rupture Controls -->
+        <div class="glass-card rupture-card">
+          <div class="card-header">
+            <h3>Chamber Operations</h3>
+          </div>
+          
+          <div class="operation-controls">
+            <div class="toggle-group-row">
+              <span class="label">Build Chamber Pressure</span>
+              <label class="switch">
+                <input type="checkbox" id="toggle-pressurize">
+                <span class="slider-toggle"></span>
+              </label>
+            </div>
+            
+            <button id="btn-erupt" class="glow-button danger" title="Trigger manual vent rupture">Trigger Eruption</button>
+            <button id="btn-cool" class="glow-button secondary" title="Reset/Cool down chamber">Cool Down / Reset</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Center Column: Volcanic Cross-Section Viewport -->
+      <section class="viewport-column">
+        <div class="glass-card viewport-card">
+          <div class="card-header">
+            <h3>Volcano Cross-Section Viewport</h3>
+            <span class="badge live-badge" id="system-status-indicator">CHAMBER STABLE</span>
+          </div>
+
+          <div class="canvas-container">
+            <canvas id="volcano-canvas"></canvas>
+            
+            <!-- Live telemetry overlay -->
+            <div class="conduit-telemetry font-mono">
+              <div>Plume Velocity: <span id="telemetry-plume-vel">0.0 m/s</span></div>
+              <div>Lava Visco-Flow: <span id="telemetry-flow-rate">0.0 m/s</span></div>
+              <div>Thermal Level: <span id="telemetry-temp">720 °C</span></div>
+            </div>
+          </div>
+
+          <div class="legend-area">
+            <span class="legend-item"><span class="legend-dot dot-magma"></span> Magma Conduit</span>
+            <span class="legend-item"><span class="legend-dot dot-lava"></span> Viscous Flow</span>
+            <span class="legend-item"><span class="legend-dot dot-pyro"></span> Pyroclastic Ejecta</span>
+            <span class="legend-item"><span class="legend-dot dot-ash"></span> Ash Cloud</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Column: Seismology & Telemetry readouts -->
+      <section class="telemetry-column">
+        <!-- Seismograph -->
+        <div class="glass-card seismograph-card">
+          <div class="card-header">
+            <h3>Harmonic Tremor Seismograph</h3>
+            <span class="badge hazard-badge" id="seismic-alarm-hud">NORMAL</span>
+          </div>
+          <div class="seismic-chart-container">
+            <canvas id="seismograph-canvas"></canvas>
+          </div>
+          <div class="seismic-metrics font-mono">
+            <div>Tremor Amp: <span id="lbl-tremor-amp">1.2 mm/s</span></div>
+            <div>Frequency: <span id="lbl-tremor-freq">3.5 Hz</span></div>
+          </div>
+        </div>
+
+        <!-- Hazards Telemetry -->
+        <div class="glass-card hazards-card">
+          <div class="card-header">
+            <h3>Active Volcanic Hazards</h3>
+          </div>
+          
+          <div class="hazards-list" id="hazards-alert-log">
+            <!-- Dynamically populated hazards warnings -->
+            <div class="hazard-alert safe">
+              <span class="hazard-icon">✅</span>
+              <div>
+                <strong>Chamber Quiet:</strong> No active eruption hazards detected. Magmatic pressure at normal levels.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <div class="footer-left">
+        <span>VOLCANO-OS // GEOPHYSICS DECK</span>
+        <span class="dot-separator">•</span>
+        <span>HTML5 CANVAS PARTICLE ENGINE</span>
+      </div>
+      <div class="footer-right">
+        <span>Seismic tremor analyzer</span>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Dark main background -->
+  <rect width="400" height="400" fill="#0a0b10" rx="12"/>
+  
+  <!-- Subtle futuristic red HUD grid lines -->
+  <g stroke="#ef4444" stroke-width="1" opacity="0.04">
+    <line x1="40" y1="0" x2="40" y2="400"/>
+    <line x1="80" y1="0" x2="80" y2="400"/>
+    <line x1="120" y1="0" x2="120" y2="400"/>
+    <line x1="160" y1="0" x2="160" y2="400"/>
+    <line x1="200" y1="0" x2="200" y2="400"/>
+    <line x1="240" y1="0" x2="240" y2="400"/>
+    <line x1="280" y1="0" x2="280" y2="400"/>
+    <line x1="320" y1="0" x2="320" y2="400"/>
+    <line x1="360" y1="0" x2="360" y2="400"/>
+    
+    <line x1="0" y1="40" x2="400" y2="40"/>
+    <line x1="0" y1="80" x2="400" y2="80"/>
+    <line x1="0" y1="120" x2="400" y2="120"/>
+    <line x1="0" y1="160" x2="400" y2="160"/>
+    <line x1="0" y1="200" x2="400" y2="200"/>
+    <line x1="0" y1="240" x2="400" y2="240"/>
+    <line x1="0" y1="280" x2="400" y2="280"/>
+    <line x1="0" y1="320" x2="400" y2="320"/>
+    <line x1="0" y1="360" x2="400" y2="360"/>
+  </g>
+
+  <!-- Gradients -->
+  <defs>
+    <radialGradient id="chamber-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffd8a8"/>
+      <stop offset="40%" stop-color="#f97316"/>
+      <stop offset="90%" stop-color="#ea580c"/>
+      <stop offset="100%" stop-color="#ea580c" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="conduit-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ea580c"/>
+      <stop offset="50%" stop-color="#ff9045"/>
+      <stop offset="100%" stop-color="#ea580c"/>
+    </linearGradient>
+    <radialGradient id="cloud-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f87171" stop-opacity="0.25"/>
+      <stop offset="60%" stop-color="#64748b" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#64748b" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Ash Cloud Plume (Background) -->
+  <circle cx="200" cy="110" r="45" fill="url(#cloud-glow)"/>
+  <circle cx="240" cy="95" r="35" fill="url(#cloud-glow)"/>
+  <circle cx="165" cy="100" r="30" fill="url(#cloud-glow)"/>
+  <circle cx="215" cy="70" r="50" fill="url(#cloud-glow)"/>
+
+  <!-- Volcano Mountain Body (with cutout vent area) -->
+  <clipPath id="mountain-clip">
+    <path d="M 20 340 
+             Q 100 240, 185 200 
+             L 185 300
+             L 215 300
+             L 215 200
+             Q 300 240, 380 340 
+             L 380 340
+             L 380 350
+             L 20 350 Z"/>
+  </clipPath>
+  
+  <!-- Strata Layers within clipped mountain -->
+  <g clip-path="url(#mountain-clip)">
+    <rect x="0" y="200" width="400" height="25" fill="#1c1917"/>
+    <rect x="0" y="225" width="400" height="25" fill="#0f172a"/>
+    <rect x="0" y="250" width="400" height="25" fill="#1e293b"/>
+    <rect x="0" y="275" width="400" height="25" fill="#111827"/>
+    <rect x="0" y="300" width="400" height="25" fill="#1c1917"/>
+    <rect x="0" y="325" width="400" height="25" fill="#0f172a"/>
+  </g>
+
+  <!-- Volcano Silhouette Edge Outlines -->
+  <path d="M 20 340 Q 100 240, 185 200" fill="none" stroke="#475569" stroke-width="3" stroke-linecap="round"/>
+  <path d="M 215 200 Q 300 240, 380 340" fill="none" stroke="#475569" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Magma Chamber & Conduit Glow (Overlay) -->
+  <rect x="186" y="200" width="28" height="110" fill="url(#conduit-grad)"/>
+  <circle cx="200" cy="305" r="32" fill="url(#chamber-glow)"/>
+
+  <!-- Magma Bubbles inside chamber -->
+  <circle cx="200" cy="315" r="3" fill="#fef08a" opacity="0.8"/>
+  <circle cx="185" cy="305" r="2.5" fill="#fef08a" opacity="0.6"/>
+  <circle cx="212" cy="298" r="2" fill="#fef08a" opacity="0.7"/>
+  <circle cx="198" cy="270" r="3" fill="#fef08a" opacity="0.8"/>
+  <circle cx="204" cy="235" r="2.5" fill="#fef08a" opacity="0.9"/>
+  <circle cx="192" cy="210" r="3" fill="#fef08a" opacity="0.8"/>
+
+  <!-- Glowing Magma Pool at vent -->
+  <ellipse cx="200" cy="200" rx="15" ry="3" fill="#ffd8a8"/>
+
+  <!-- Ejecta Projectiles (parabolic arcs with trailing fire) -->
+  <path d="M 200 200 Q 160 130, 110 160" fill="none" stroke="#ea580c" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+  <circle cx="110" cy="160" r="3.5" fill="#ffd8a8"/>
+  
+  <path d="M 200 200 Q 230 110, 280 130" fill="none" stroke="#ea580c" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+  <circle cx="280" cy="130" r="4" fill="#ffd8a8"/>
+
+  <path d="M 200 200 Q 210 150, 220 180" fill="none" stroke="#ea580c" stroke-width="1.8" stroke-linecap="round" opacity="0.7"/>
+  <circle cx="220" cy="180" r="2.5" fill="#ffd8a8"/>
+
+  <!-- Seismograph overlay line near the bottom -->
+  <path d="M 50 360 L 90 360 L 100 355 L 110 365 L 120 350 L 130 370 L 140 345 L 150 375 L 160 340 L 170 380 L 180 330 L 190 390 L 200 320 L 210 395 L 220 310 L 230 390 L 240 330 L 250 375 L 260 345 L 270 370 L 280 352 L 290 365 L 300 358 L 310 360 L 350 360" fill="none" stroke="#00e5ff" stroke-width="1.5" stroke-linejoin="round" opacity="0.8"/>
+
+  <!-- Labels -->
+  <text x="200" y="380" font-family="'Fira Code', monospace" font-size="11" fill="#ef4444" font-weight="700" letter-spacing="2" text-anchor="middle">VOLCANO ERUPTION</text>
+  <text x="200" y="393" font-family="'Inter', sans-serif" font-size="8" fill="#94a3b8" letter-spacing="1.2" text-anchor="middle">GEOPHYSICS SIMULATOR</text>
+  
+  <!-- Outer glass border HUD frame -->
+  <rect x="15" y="15" width="370" height="370" fill="none" stroke="rgba(255, 255, 255, 0.05)" stroke-width="1" rx="8"/>
+</svg>

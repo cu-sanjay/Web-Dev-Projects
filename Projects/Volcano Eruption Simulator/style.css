@@ -1,0 +1,681 @@
+/* VOLCANO-OS // Volcano Eruption Simulator Stylesheet */
+
+/* --- CSS VARIABLES & TOKENS --- */
+:root {
+  --bg-main: #0a0b10;
+  --bg-card: rgba(12, 14, 20, 0.75);
+  --bg-card-hover: rgba(18, 20, 30, 0.85);
+  --border-glass: rgba(255, 255, 255, 0.05);
+  --border-focus: rgba(239, 68, 68, 0.4);
+  
+  /* Text colors */
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #475569;
+  
+  /* Volcanic color systems */
+  --color-magma: #ea580c;      /* Magma: Deep Orange */
+  --color-lava: #f97316;       /* Lava Flow: Bright Orange */
+  --color-pyro: #f87171;       /* Pyroclasts: Light Red */
+  --color-ash: #64748b;        /* Ash Cloud: Slate Grey */
+  --color-spark: #eab308;      /* Gas sparks: Yellow */
+  
+  /* Glow shadows */
+  --glow-red: 0 0 15px rgba(239, 68, 68, 0.45);
+  --glow-orange: 0 0 15px rgba(249, 115, 22, 0.45);
+  --glow-yellow: 0 0 12px rgba(234, 179, 8, 0.35);
+  
+  /* Brand colors */
+  --color-brand: #ef4444;       /* Volcanic Red */
+  --color-brand-dim: rgba(239, 68, 68, 0.15);
+  --color-cyan: #00e5ff;
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  
+  /* Fonts */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Fira Code', monospace;
+  
+  /* Spacing */
+  --radius-lg: 16px;
+  --radius-md: 10px;
+  --radius-sm: 6px;
+}
+
+/* --- BASE STYLES --- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body.volcano-os-theme {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  line-height: 1.5;
+}
+
+/* Volcanic HUD grid background */
+.hud-grid-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(rgba(239, 68, 68, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(239, 68, 68, 0.015) 1px, transparent 1px);
+  background-size: 30px 30px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.01);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-brand-dim);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+.text-danger { color: var(--color-brand); }
+.text-success { color: var(--color-success); }
+.text-warning { color: var(--color-warning); }
+
+/* --- APP LAYOUT --- */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+  max-width: 1600px;
+  margin: 0 auto;
+  transition: transform 0.05s ease;
+}
+
+/* --- SEISMIC TREMOR DASHBOARD SHAKING ANIMATIONS --- */
+.shaking-mild {
+  animation: tremor-vibrate 0.12s infinite;
+}
+
+.shaking-intense {
+  animation: tremor-vibrate 0.06s infinite;
+}
+
+@keyframes tremor-vibrate {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  20% { transform: translate(-1.5px, 0.5px) rotate(-0.1deg); }
+  40% { transform: translate(1px, -1px) rotate(0.1deg); }
+  60% { transform: translate(-0.5px, -0.5px) rotate(0deg); }
+  80% { transform: translate(1.5px, 1px) rotate(-0.1deg); }
+  100% { transform: translate(-1px, -1px) rotate(0.1deg); }
+}
+
+/* --- HEADER --- */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-glass);
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo-icon {
+  font-size: 2.2rem;
+  text-shadow: 0 0 10px rgba(239, 68, 68, 0.4);
+  animation: logo-rumble 0.8s ease-in-out infinite;
+}
+
+@keyframes logo-rumble {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-0.5px, 0.5px); }
+  75% { transform: translate(0.5px, -0.5px); }
+}
+
+.logo-area h1 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #fff;
+}
+
+.logo-area h1 .logo-sub {
+  color: var(--color-brand);
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.logo-area .subtitle {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.header-status-bar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-glass);
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  backdrop-filter: blur(10px);
+  flex-wrap: wrap;
+}
+
+/* VEI display */
+.vei-hud {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--color-brand);
+  min-width: 120px;
+  text-align: center;
+  box-shadow: var(--glow-red);
+}
+
+.vei-hud .label {
+  color: var(--text-secondary);
+  font-size: 0.72rem;
+}
+
+/* Pressure HUD */
+.pressure-gauge-hud {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pressure-gauge-hud .label {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.pressure-bar-outer {
+  width: 110px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-glass);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.pressure-fill {
+  height: 100%;
+  border-radius: 6px;
+  transition: width 0.3s ease, background-color 0.3s ease;
+  background-color: var(--color-success);
+}
+
+/* Change fill colors based on threat level in JS */
+.pressure-fill.normal { background-color: var(--color-success); }
+.pressure-fill.critical { background-color: var(--color-warning); box-shadow: 0 0 5px var(--color-warning); }
+.pressure-fill.danger { background-color: var(--color-brand); box-shadow: var(--glow-red); }
+
+/* --- MAIN GRID --- */
+.main-grid {
+  display: grid;
+  grid-template-columns: 310px 1fr 340px;
+  gap: 20px;
+  flex: 1;
+}
+
+@media (max-width: 1200px) {
+  .main-grid {
+    grid-template-columns: 290px 1fr;
+  }
+  .telemetry-column {
+    grid-column: 1 / span 2;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-grid {
+    grid-template-columns: 1fr;
+  }
+  .telemetry-column {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- CARDS & GLASSMORPHISM --- */
+.glass-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.2s;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.glass-card:hover {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.card-header h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  letter-spacing: 1px;
+}
+
+.tech-badge {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-glass);
+}
+
+.live-badge {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--color-brand);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  box-shadow: var(--glow-red);
+}
+
+.hazard-badge {
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--color-warning);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+/* --- SLIDERS & CONTROLS --- */
+.control-sliders {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.slider-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.slider-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+}
+
+.slider-header .label {
+  color: var(--text-secondary);
+}
+
+.slider-header .value {
+  font-family: var(--font-mono);
+  color: var(--color-cyan);
+  font-weight: bold;
+}
+
+.glass-range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 2px;
+  outline: none;
+}
+
+.glass-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-brand);
+  cursor: pointer;
+  box-shadow: var(--glow-red);
+  transition: transform 0.1s ease;
+}
+
+.glass-range::-webkit-slider-thumb:hover {
+  transform: scale(1.25);
+}
+
+/* Switches */
+.toggle-group-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-glass);
+}
+
+.toggle-group-row .label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider-toggle {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-glass);
+  transition: .25s;
+  border-radius: 20px;
+}
+
+.slider-toggle:before {
+  position: absolute;
+  content: "";
+  height: 12px;
+  width: 12px;
+  left: 3px;
+  bottom: 3px;
+  background-color: var(--text-secondary);
+  transition: .25s;
+  border-radius: 50%;
+}
+
+.switch input:checked + .slider-toggle {
+  background-color: rgba(239, 68, 68, 0.15);
+  border-color: var(--color-brand);
+}
+
+.switch input:checked + .slider-toggle:before {
+  transform: translateX(20px);
+  background-color: var(--color-brand);
+  box-shadow: 0 0 5px var(--color-brand);
+}
+
+/* Buttons */
+.operation-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.glow-button {
+  background: var(--color-brand);
+  border: none;
+  border-radius: var(--radius-sm);
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 9px 18px;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: var(--glow-red);
+}
+
+.glow-button:hover {
+  background: #fff;
+  color: #000;
+  box-shadow: 0 0 15px rgba(255,255,255,0.4);
+}
+
+.glow-button.secondary {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-glass);
+  color: var(--text-primary);
+  box-shadow: none;
+}
+
+.glow-button.secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--color-cyan);
+}
+
+.glass-input {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  outline: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.glass-input:focus {
+  border-color: var(--color-brand);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+select.glass-input {
+  padding-right: 25px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 14px;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* --- CENTER VIEWPORT CANVAS --- */
+.viewport-card {
+  flex: 1;
+  min-height: 480px;
+}
+
+.canvas-container {
+  position: relative;
+  background: radial-gradient(circle at center, rgba(16, 12, 24, 0.3) 0%, rgba(4, 5, 8, 0.95) 100%);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.02);
+  flex: 1;
+  overflow: hidden;
+}
+
+#volcano-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Conduit metrics overlays */
+.conduit-telemetry {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 0.7rem;
+  background: rgba(0,0,0,0.7);
+  border: 1px solid var(--border-glass);
+  padding: 6px 12px;
+  border-radius: 4px;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  color: var(--color-cyan);
+}
+
+.legend-area {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-glass);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.legend-item {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.legend-dot.dot-magma { background: var(--color-magma); box-shadow: var(--glow-red); }
+.legend-dot.dot-lava { background: var(--color-lava); box-shadow: var(--glow-orange); }
+.legend-dot.dot-pyro { background: var(--color-pyro); }
+.legend-dot.dot-ash { background: var(--color-ash); }
+
+/* --- RIGHT PANEL: SEISMOGRAPH & TELEMETRY --- */
+.seismograph-card {
+  height: 220px;
+  margin-bottom: 20px;
+}
+
+.seismic-chart-container {
+  flex: 1;
+  position: relative;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.02);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+#seismograph-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.seismic-metrics {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+}
+
+.seismic-metrics div span {
+  color: var(--color-cyan);
+  font-weight: bold;
+}
+
+/* Volcanic Hazard Warnings Deck */
+.hazards-card {
+  flex: 1;
+}
+
+.hazards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 210px;
+  overflow-y: auto;
+}
+
+.hazard-alert {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-glass);
+  border-left: 4px solid transparent;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.hazard-alert .hazard-icon {
+  font-size: 1.15rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.hazard-alert.safe {
+  border-left-color: var(--color-success);
+  color: #a7f3d0;
+}
+
+.hazard-alert.warn {
+  border-left-color: var(--color-warning);
+  color: #fef08a;
+  background: rgba(245, 158, 11, 0.04);
+}
+
+.hazard-alert.danger {
+  border-left-color: var(--color-brand);
+  color: #fca5a5;
+  background: rgba(239, 68, 68, 0.04);
+  box-shadow: inset 0 0 10px rgba(239, 68, 68, 0.05);
+}
+
+/* --- FOOTER --- */
+.app-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 15px;
+  border-top: 1px solid var(--border-glass);
+  margin-top: 30px;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+}
+
+.dot-separator {
+  margin: 0 8px;
+}
