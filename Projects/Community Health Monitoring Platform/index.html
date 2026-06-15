@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Community Health Monitor</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+
+  <!-- Sidebar Navigation -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="logo-box">
+        <i class="ph-fill ph-pulse"></i>
+      </div>
+      <h2>HealthWatch</h2>
+    </div>
+    
+    <nav class="sidebar-menu">
+      <ul>
+        <li class="active" data-tab="dashboard">
+          <i class="ph ph-squares-four"></i> Overview
+        </li>
+        <li data-tab="outbreaks">
+          <i class="ph ph-warning-circle"></i> Outbreaks
+        </li>
+        <li data-tab="resources">
+          <i class="ph ph-first-aid"></i> Resources
+        </li>
+        <li data-tab="reports">
+          <i class="ph ph-file-text"></i> Daily Reports
+        </li>
+      </ul>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-profile">
+        <img src="https://ui-avatars.com/api/?name=Vishwa+Mistry&background=0ea5e9&color=fff" alt="User Avatar" class="avatar">
+        <div class="user-info">
+          <strong>Vishwa Mistry</strong>
+          <span>Admin</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content Wrapper -->
+  <main class="main-content">
+    
+    <!-- Top Header -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <button id="mobile-menu-btn" class="icon-btn"><i class="ph ph-list"></i></button>
+        <div class="search-input">
+          <i class="ph ph-magnifying-glass"></i>
+          <input type="text" placeholder="Search districts, diseases, or clinics...">
+        </div>
+      </div>
+      <div class="topbar-right">
+        <button class="icon-btn notification-btn"><i class="ph ph-bell"></i><span class="badge">4</span></button>
+        <button class="btn primary-btn"><i class="ph ph-export"></i> Export Data</button>
+      </div>
+    </header>
+
+    <!-- Scrollable Body Area -->
+    <div class="body-area">
+      
+      <!-- ================= DASHBOARD TAB ================= -->
+      <section id="dashboard" class="tab-content active">
+        
+        <div class="welcome-card">
+          <div class="welcome-text">
+            <h1>Regional Health Overview</h1>
+            <p>Data last updated: Today, 08:30 AM. District 4 is currently under a high-alert watch for Influenza.</p>
+          </div>
+          <button class="btn secondary-btn" onclick="document.querySelector('[data-tab=\\'outbreaks\\']').click()"><i class="ph ph-warning"></i> View Alerts</button>
+        </div>
+
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-icon bg-red-light text-red"><i class="ph-fill ph-virus"></i></div>
+            <div class="metric-data">
+              <h3>Active Cases</h3>
+              <h2>4,205 <span class="trend up"><i class="ph ph-trend-up"></i> 5%</span></h2>
+            </div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon bg-green-light text-green"><i class="ph-fill ph-heartbeat"></i></div>
+            <div class="metric-data">
+              <h3>Recoveries</h3>
+              <h2>12,840 <span class="trend up"><i class="ph ph-trend-up"></i> 12%</span></h2>
+            </div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon bg-blue-light text-blue"><i class="ph-fill ph-bed"></i></div>
+            <div class="metric-data">
+              <h3>Bed Capacity</h3>
+              <h2>68% <span class="trend down"><i class="ph ph-trend-down"></i> 2%</span></h2>
+            </div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon bg-purple-light text-purple"><i class="ph-fill ph-syringe"></i></div>
+            <div class="metric-data">
+              <h3>Vaccinated</h3>
+              <h2>75.2% <span class="trend up"><i class="ph ph-trend-up"></i> 1%</span></h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="split-layout">
+          <!-- Critical Alerts -->
+          <div class="panel">
+            <div class="panel-header flex-between">
+              <h3>Critical Alerts</h3>
+              <span class="badge status-critical">3 Active</span>
+            </div>
+            <div class="panel-body p-0">
+              <ul class="alert-list" id="alert-list">
+                <!-- Injected via JS -->
+              </ul>
+            </div>
+          </div>
+
+          <!-- Capacity Distribution -->
+          <div class="panel">
+            <div class="panel-header">
+              <h3>ICU Capacity by Zone</h3>
+            </div>
+            <div class="panel-body">
+              <div class="progress-group">
+                <div class="progress-info"><span>North Zone</span><span>85%</span></div>
+                <div class="progress-bar"><div class="progress-fill bg-red" style="width: 85%;"></div></div>
+              </div>
+              <div class="progress-group">
+                <div class="progress-info"><span>South Zone</span><span>60%</span></div>
+                <div class="progress-bar"><div class="progress-fill bg-orange" style="width: 60%;"></div></div>
+              </div>
+              <div class="progress-group">
+                <div class="progress-info"><span>East Zone</span><span>45%</span></div>
+                <div class="progress-bar"><div class="progress-fill bg-green" style="width: 45%;"></div></div>
+              </div>
+              <div class="progress-group">
+                <div class="progress-info"><span>West Zone</span><span>70%</span></div>
+                <div class="progress-bar"><div class="progress-fill bg-orange" style="width: 70%;"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ================= OUTBREAKS TAB ================= -->
+      <section id="outbreaks" class="tab-content hidden">
+        <div class="page-heading flex-between">
+          <div>
+            <h1>Outbreak Tracking</h1>
+            <p class="text-muted">Monitor infectious disease spread across community zones.</p>
+          </div>
+          <div class="filter-group">
+            <select class="form-select">
+              <option>All Diseases</option>
+              <option>Influenza</option>
+              <option>COVID-19</option>
+              <option>Dengue</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-body p-0">
+             <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Zone/District</th>
+                    <th>Disease Type</th>
+                    <th>Active Cases</th>
+                    <th>Trend</th>
+                    <th>Risk Level</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="outbreaks-tbody">
+                  <!-- Injected via JavaScript -->
+                </tbody>
+              </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= RESOURCES TAB ================= -->
+      <section id="resources" class="tab-content hidden">
+        <div class="page-heading">
+          <h1>Medical Resources</h1>
+          <p class="text-muted">Track supplies, vaccine stock, and personnel distribution.</p>
+        </div>
+
+        <div class="resource-grid" id="resource-grid">
+          <!-- Injected via JavaScript -->
+        </div>
+      </section>
+
+      <!-- ================= REPORTS TAB ================= -->
+      <section id="reports" class="tab-content hidden">
+        <div class="page-heading">
+          <h1>Daily Health Reports</h1>
+          <p class="text-muted">Access official bulletins, situation reports, and press releases.</p>
+        </div>
+
+        <div class="split-layout">
+          <div class="panel col-span-2">
+            <div class="panel-header">
+              <h3>Latest Documents</h3>
+            </div>
+            <div class="panel-body">
+              <div class="document-list" id="document-list">
+                <!-- Injected via JavaScript -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
