@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chroma Quest — The Alchemist's Hue</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <div id="start-screen" class="overlay">
+            <h1>CHROMA QUEST</h1>
+            <p style="color: var(--text-dim); margin-bottom: 2rem;">Master the art of color mixing. Match the Alchemist's target hue.</p>
+            <button class="btn-submit" onclick="startGame()">Start Quest</button>
+        </div>
+
+        <div id="result-screen" class="overlay hidden">
+            <h2 id="result-title" style="font-size: 2rem; margin-bottom: 0.5rem;">PERFECT MATCH!</h2>
+            <p id="result-stats" style="color: var(--text-dim); margin-bottom: 2rem;"></p>
+            <button class="btn-submit" onclick="nextLevel()">Next Level</button>
+        </div>
+
+        <div class="stats">
+            <div>Level: <span id="level-val">1</span></div>
+            <div>Score: <span id="score-val">0</span></div>
+        </div>
+
+        <div class="color-display">
+            <div class="orb-wrapper">
+                <div class="orb-label">Target</div>
+                <div id="target-orb" class="color-orb"></div>
+            </div>
+            <div class="orb-wrapper">
+                <div class="orb-label">Your Mix</div>
+                <div id="user-orb" class="color-orb"></div>
+            </div>
+        </div>
+
+        <div class="mixer-controls">
+            <div class="control-group">
+                <div class="control-label" style="color: #ef4444;">RED</div>
+                <input type="range" id="red-slider" min="0" max="255" value="0" oninput="updateMix()">
+            </div>
+            <div class="control-group">
+                <div class="control-label" style="color: #22c55e;">GREEN</div>
+                <input type="range" id="green-slider" min="0" max="255" value="0" oninput="updateMix()">
+            </div>
+            <div class="control-group">
+                <div class="control-label" style="color: #3b82f6;">BLUE</div>
+                <input type="range" id="blue-slider" min="0" max="255" value="0" oninput="updateMix()">
+            </div>
+        </div>
+
+        <button class="btn-submit" onclick="submitMatch()">Submit Mix</button>
+    </div>
+<script src="script.js"></script>
+</body>
+</html>
