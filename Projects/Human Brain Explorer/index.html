@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Human Brain Explorer</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="app-container">
+  <header><div class="brand"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><path d="M12 2C7 2 4 5 4 9c0 2.5 1.5 4.5 3 6l1 2h8l1-2c1.5-1.5 3-3.5 3-6 0-4-3-7-8-7z"/></svg><div><h1>HUMAN BRAIN EXPLORER</h1><p>Interactive Brain Anatomy · Lobes &amp; Functions</p></div></div></header>
+  <div class="main-layout">
+    <main class="lobes-area">
+      <svg id="brain-svg" viewBox="0 0 500 400" width="500" height="400">
+        <defs>
+          <radialGradient id="bg"><stop offset="0%" stop-color="#1a2030"/><stop offset="100%" stop-color="#0b1220"/></radialGradient>
+          <filter id="glow"><feGaussianBlur stdDeviation="2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+        <rect width="500" height="400" fill="url(#bg)" rx="10"/>
+        <!-- Frontal lobe -->
+        <path id="lobe-frontal" class="lobe" data-lobe="frontal" d="M250 60 Q200 50 160 80 Q120 110 110 160 Q105 200 130 230 Q150 250 180 250 Q200 250 250 240 Z" fill="#3b82f6" opacity="0.6" stroke="#3b82f6" stroke-width="2"/>
+        <path id="lobe-frontal-r" class="lobe" data-lobe="frontal" d="M250 60 Q300 50 340 80 Q380 110 390 160 Q395 200 370 230 Q350 250 320 250 Q300 250 250 240 Z" fill="#3b82f6" opacity="0.6" stroke="#3b82f6" stroke-width="2"/>
+        <!-- Parietal lobe -->
+        <path id="lobe-parietal" class="lobe" data-lobe="parietal" d="M130 230 Q120 260 130 290 Q145 320 175 320 Q200 320 230 300 Q240 280 250 260 Z" fill="#22c55e" opacity="0.6" stroke="#22c55e" stroke-width="2"/>
+        <path id="lobe-parietal-r" class="lobe" data-lobe="parietal" d="M370 230 Q380 260 370 290 Q355 320 325 320 Q300 320 270 300 Q260 280 250 260 Z" fill="#22c55e" opacity="0.6" stroke="#22c55e" stroke-width="2"/>
+        <!-- Temporal lobe -->
+        <path id="lobe-temporal" class="lobe" data-lobe="temporal" d="M140 250 Q110 270 100 300 Q95 330 120 350 Q140 360 170 350 Q190 340 200 310 Q205 290 210 270 Z" fill="#f97316" opacity="0.6" stroke="#f97316" stroke-width="2"/>
+        <path id="lobe-temporal-r" class="lobe" data-lobe="temporal" d="M360 250 Q390 270 400 300 Q405 330 380 350 Q360 360 330 350 Q310 340 300 310 Q295 290 290 270 Z" fill="#f97316" opacity="0.6" stroke="#f97316" stroke-width="2"/>
+        <!-- Occipital lobe -->
+        <path id="lobe-occipital" class="lobe" data-lobe="occipital" d="M160 310 Q140 330 145 355 Q155 370 185 370 Q210 370 230 350 Q240 335 245 315 Z" fill="#ec4899" opacity="0.6" stroke="#ec4899" stroke-width="2"/>
+        <path id="lobe-occipital-r" class="lobe" data-lobe="occipital" d="M340 310 Q360 330 355 355 Q345 370 315 370 Q290 370 270 350 Q260 335 255 315 Z" fill="#ec4899" opacity="0.6" stroke="#ec4899" stroke-width="2"/>
+        <!-- Cerebellum -->
+        <path d="M200 365 Q210 385 230 390 Q250 395 270 390 Q290 385 300 365 Q280 375 250 378 Q220 375 200 365 Z" fill="#a78bfa" opacity="0.6" stroke="#a78bfa" stroke-width="2"/>
+        <!-- Brain stem -->
+        <rect x="242" y="390" width="16" height="10" rx="3" fill="#64748b" opacity="0.6"/>
+        <!-- Center line -->
+        <line x1="250" y1="50" x2="250" y2="390" stroke="#334155" stroke-width="1" opacity="0.4"/>
+      </svg>
+    </main>
+    <aside class="info-panel" id="info-panel">
+      <div class="lobe-detail" id="lobe-detail">
+        <h2 id="lobe-name">Frontal Lobe</h2>
+        <div class="lobe-functions"><h3>Functions</h3><ul id="lobe-functions-list"><li>Executive functions</li><li>Decision making</li><li>Social behavior</li><li>Motor planning</li></ul></div>
+        <div class="lobe-desc" id="lobe-desc">The frontal lobe is the largest lobe of the brain, located at the front of each hemisphere. It is associated with higher cognitive functions including reasoning, planning, problem-solving, and social interaction.</div>
+        <div class="lobe-stats"><div><span class="stat-label">Size</span><span class="stat-value">~30% of cortex</span></div><div><span class="stat-label">Brodmann Areas</span><span class="stat-value">4, 6, 8-10, 44-47</span></div></div>
+      </div>
+      <div class="lobe-legend">
+        <h3>Legend</h3>
+        <div class="legend-item" style="color:#3b82f6"><span class="dot" style="background:#3b82f6"></span>Frontal</div>
+        <div class="legend-item" style="color:#22c55e"><span class="dot" style="background:#22c55e"></span>Parietal</div>
+        <div class="legend-item" style="color:#f97316"><span class="dot" style="background:#f97316"></span>Temporal</div>
+        <div class="legend-item" style="color:#ec4899"><span class="dot" style="background:#ec4899"></span>Occipital</div>
+        <div class="legend-item" style="color:#a78bfa"><span class="dot" style="background:#a78bfa"></span>Cerebellum</div>
+      </div>
+    </aside>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

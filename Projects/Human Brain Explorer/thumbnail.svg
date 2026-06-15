@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0b1220"/><stop offset="100%" stop-color="#1a1520"/></linearGradient></defs>
+  <rect width="1280" height="720" fill="url(#g)"/>
+  <!-- brain shape -->
+  <ellipse cx="640" cy="400" rx="180" ry="140" fill="none" stroke="#334155" stroke-width="1"/>
+  <path d="M520 320 Q500 260 540 220 Q580 190 640 200 Q700 190 740 220 Q780 260 760 320" fill="none" stroke="#3b82f6" stroke-width="4" opacity=".6"/>
+  <path d="M520 320 Q500 370 520 420 Q550 450 620 440" fill="none" stroke="#22c55e" stroke-width="4" opacity=".6"/>
+  <path d="M760 320 Q780 370 760 420 Q730 450 660 440" fill="none" stroke="#22c55e" stroke-width="4" opacity=".6"/>
+  <path d="M560 330 Q520 360 500 400 Q490 430 520 460 Q550 480 600 450" fill="none" stroke="#f97316" stroke-width="4" opacity=".6"/>
+  <path d="M720 330 Q760 360 780 400 Q790 430 760 460 Q730 480 680 450" fill="none" stroke="#f97316" stroke-width="4" opacity=".6"/>
+  <path d="M580 440 Q560 470 570 500 Q590 520 630 500 Q650 490 660 470" fill="none" stroke="#ec4899" stroke-width="4" opacity=".6"/>
+  <path d="M700 440 Q720 470 710 500 Q690 520 650 500 Q630 490 620 470" fill="none" stroke="#ec4899" stroke-width="4" opacity=".6"/>
+  <ellipse cx="640" cy="520" rx="60" ry="30" fill="none" stroke="#a78bfa" stroke-width="3" opacity=".5"/>
+  <line x1="640" y1="545" x2="640" y2="570" stroke="#64748b" stroke-width="4" opacity=".4"/>
+  <!-- dots -->
+  <circle cx="550" cy="270" r="6" fill="#3b82f6" opacity=".8"/><text x="530" y="260" font-family="monospace" font-size="16" fill="#3b82f6">Frontal</text>
+  <circle cx="550" cy="400" r="6" fill="#22c55e" opacity=".8"/><text x="500" y="395" font-family="monospace" font-size="16" fill="#22c55e">Parietal</text>
+  <circle cx="500" cy="450" r="6" fill="#f97316" opacity=".8"/><text x="430" y="455" font-family="monospace" font-size="16" fill="#f97316">Temporal</text>
+  <circle cx="600" cy="510" r="6" fill="#ec4899" opacity=".8"/><text x="615" y="515" font-family="monospace" font-size="16" fill="#ec4899">Occipital</text>
+  <circle cx="640" cy="550" r="6" fill="#a78bfa" opacity=".8"/><text x="660" y="555" font-family="monospace" font-size="16" fill="#a78bfa">Cerebellum</text>
+  <line x1="640" y1="570" x2="640" y2="590" stroke="#64748b" stroke-width="2" opacity=".4"/>
+  <rect x="620" y="590" width="40" height="15" rx="4" fill="#64748b" opacity=".4"/>
+  <text x="640" y="100" text-anchor="middle" font-family="ui-monospace,monospace" font-size="26" font-weight="800" fill="#f8fafc" letter-spacing="1">HUMAN BRAIN EXPLORER</text>
+  <text x="640" y="125" text-anchor="middle" font-family="ui-monospace,monospace" font-size="13" fill="#64748b">Interactive Brain Anatomy · Lobes &amp; Functions</text>
+</svg>
