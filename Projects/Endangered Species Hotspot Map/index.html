@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Endangered Species Hotspot Map — Conservation Intelligence Platform</title>
+  <meta name="description" content="Explore global endangered species hotspots, filter by species category, visualize population trends, and learn about conservation efforts protecting Earth's biodiversity.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="app" class="app">
+    <aside class="panel panel--left" aria-label="Conservation Intelligence Center">
+      <header class="panel-header">
+        <h1 class="logo">
+          <span class="logo-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#34d399" stroke-width="1.5">
+              <path d="M12 2L2 7v10l10 5 10-5V7l-10-5z"/>
+              <path d="M12 12l-8-4 8-4 8 4-8 4z"/>
+              <path d="M4 14l8-4 8 4"/>
+            </svg>
+          </span>
+          <span class="logo-text">Endangered Species Hotspot Map</span>
+        </h1>
+        <p class="panel-subtitle">Global Wildlife Conservation Monitoring System</p>
+      </header>
+
+      <div class="search-module">
+        <div class="search-wrapper">
+          <svg class="search-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#64748b" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="M21 21l-4.35-4.35"/>
+          </svg>
+          <input type="search" id="searchInput" class="search-input" placeholder="Search species, scientific name, region..." aria-label="Search endangered species" autocomplete="off">
+        </div>
+      </div>
+
+      <section class="filters-section" aria-label="Species type filters">
+        <h2 class="section-label">Species Categories</h2>
+        <div class="filter-chips" id="filterChips" role="group" aria-label="Filter by species type">
+          <button class="chip chip--active" data-filter="all" aria-pressed="true">All Species</button>
+          <button class="chip" data-filter="mammal" aria-pressed="false">Mammals</button>
+          <button class="chip" data-filter="bird" aria-pressed="false">Birds</button>
+          <button class="chip" data-filter="reptile" aria-pressed="false">Reptiles</button>
+          <button class="chip" data-filter="amphibian" aria-pressed="false">Amphibians</button>
+          <button class="chip" data-filter="marine" aria-pressed="false">Marine</button>
+          <button class="chip" data-filter="insect" aria-pressed="false">Insects</button>
+        </div>
+      </section>
+
+      <section class="stats-section" aria-label="Conservation statistics">
+        <h2 class="section-label">Conservation Dashboard</h2>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-value" id="statTotal">0</span>
+            <span class="stat-label">Species Tracked</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value" id="statHotspots">0</span>
+            <span class="stat-label">Active Hotspots</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value" id="statCritical">0</span>
+            <span class="stat-label">Critically Endangered</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value" id="statProtected">0</span>
+            <span class="stat-label">Regions Protected</span>
+          </div>
+        </div>
+        <div class="progress-bar-wrapper" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+          <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
+        </div>
+        <div class="stats-success">
+          <span class="success-label">Conservation Success Rate</span>
+          <span class="success-value" id="statSuccess">0%</span>
+        </div>
+      </section>
+
+      <section class="threat-section" aria-label="Threat level monitor">
+        <h2 class="section-label">Threat Level Monitor</h2>
+        <div class="threat-levels" id="threatLevels">
+          <div class="threat-level" data-status="low">
+            <span class="threat-dot threat-dot--low"></span>
+            <span class="threat-name">Low Risk</span>
+            <span class="threat-count" id="threatLow">0</span>
+          </div>
+          <div class="threat-level" data-status="vulnerable">
+            <span class="threat-dot threat-dot--vulnerable"></span>
+            <span class="threat-name">Vulnerable</span>
+            <span class="threat-count" id="threatVulnerable">0</span>
+          </div>
+          <div class="threat-level" data-status="endangered">
+            <span class="threat-dot threat-dot--endangered"></span>
+            <span class="threat-name">Endangered</span>
+            <span class="threat-count" id="threatEndangered">0</span>
+          </div>
+          <div class="threat-level" data-status="critical">
+            <span class="threat-dot threat-dot--critical"></span>
+            <span class="threat-name">Critically Endangered</span>
+            <span class="threat-count" id="threatCritical">0</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="activity-section" aria-label="Exploration activity feed">
+        <h2 class="section-label">Activity Feed</h2>
+        <div class="activity-feed" id="activityFeed" role="log" aria-live="polite" aria-relevant="additions">
+          <p class="activity-empty">No species explored yet. Click a hotspot marker on the map to begin.</p>
+        </div>
+      </section>
+    </aside>
+
+    <main class="panel panel--right" aria-label="Interactive Global Hotspot Map">
+      <div class="map-header" id="mapHeader">
+        <div class="map-header-info">
+          <span class="map-header-label">Selected Species</span>
+          <span class="map-header-value" id="activeSpecies">—</span>
+        </div>
+        <div class="map-header-info">
+          <span class="map-header-label">Status</span>
+          <span class="map-header-value" id="activeStatus">—</span>
+        </div>
+        <div class="map-header-info">
+          <span class="map-header-label">Region</span>
+          <span class="map-header-value" id="activeRegion">—</span>
+        </div>
+        <div class="map-header-info">
+          <span class="map-header-label">Population</span>
+          <span class="map-header-value mono" id="activePopulation">—</span>
+        </div>
+      </div>
+
+      <div class="map-workspace" id="mapWorkspace">
+        <div class="map-container" id="mapContainer">
+          <svg class="world-map" id="worldMap" viewBox="0 0 800 400" aria-label="Interactive world map showing endangered species hotspots" role="application">
+            <defs>
+              <radialGradient id="hotspotGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#dc2626" stop-opacity="0.6"/>
+                <stop offset="100%" stop-color="#dc2626" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="hotspotGlowMammal" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.5"/>
+                <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="hotspotGlowBird" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.5"/>
+                <stop offset="100%" stop-color="#3b82f6" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="hotspotGlowReptile" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#84cc16" stop-opacity="0.5"/>
+                <stop offset="100%" stop-color="#84cc16" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="hotspotGlowMarine" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#0ea5e9" stop-opacity="0.5"/>
+                <stop offset="100%" stop-color="#0ea5e9" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="hotspotGlowAmphibian" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#a855f7" stop-opacity="0.5"/>
+                <stop offset="100%" stop-color="#a855f7" stop-opacity="0"/>
+              </radialGradient>
+              <filter id="mapGlow">
+                <feGaussianBlur stdDeviation="2" result="blur"/>
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+              <filter id="continentShadow">
+                <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#000" flood-opacity="0.3"/>
+              </filter>
+            </defs>
+
+            <rect x="0" y="0" width="800" height="400" fill="#07111f"/>
+
+            <g class="map-grid" stroke="#1e293b" stroke-width="0.5" fill="none" opacity="0.4">
+              <line x1="0" y1="50" x2="800" y2="50"/>
+              <line x1="0" y1="100" x2="800" y2="100"/>
+              <line x1="0" y1="150" x2="800" y2="150"/>
+              <line x1="0" y1="200" x2="800" y2="200"/>
+              <line x1="0" y1="250" x2="800" y2="250"/>
+              <line x1="0" y1="300" x2="800" y2="300"/>
+              <line x1="0" y1="350" x2="800" y2="350"/>
+              <line x1="100" y1="0" x2="100" y2="400"/>
+              <line x1="200" y1="0" x2="200" y2="400"/>
+              <line x1="300" y1="0" x2="300" y2="400"/>
+              <line x1="400" y1="0" x2="400" y2="400"/>
+              <line x1="500" y1="0" x2="500" y2="400"/>
+              <line x1="600" y1="0" x2="600" y2="400"/>
+              <line x1="700" y1="0" x2="700" y2="400"/>
+            </g>
+
+            <g class="continents" filter="url(#continentShadow)">
+              <path class="continent" d="M 85 40 L 115 35 L 155 38 L 180 45 L 195 55 L 200 70 L 195 85 L 185 95 L 190 110 L 195 125 L 190 140 L 180 148 L 170 155 L 155 158 L 140 155 L 130 160 L 120 155 L 110 145 L 100 140 L 90 130 L 82 115 L 78 100 L 75 80 L 78 60 Z" fill="#0f172a" stroke="#1e3a5f" stroke-width="0.8"/>
+              <path class="continent" d="M 195 20 L 215 18 L 235 22 L 240 35 L 235 50 L 220 55 L 205 52 L 195 42 Z" fill="#0f172a" stroke="#1e3a5f" stroke-width="0.8"/>
+              <path class="continent" d="M 170 165 L 185 162 L 200 168 L 212 178 L 220 195 L 225 215 L 228 235 L 225 255 L 218 270 L 208 285 L 195 295 L 185 300 L 178 295 L 172 280 L 168 260 L 165 240 L 163 220 L 162 200 L 165 185 Z" fill="#0f172a" stroke="#1e3a5f" stroke-width="0.8"/>
+              <path class="continent" d="M 355 40 L 370 35 L 385 32 L 400 35 L 415 40 L 425 48 L 430 58 L 435 68 L 432 78 L 425 88 L 415 95 L 405 100 L 395 102 L 385 100 L 375 95 L 365 88 L 358 78 L 352 65 L 350 52 Z" fill="#0f172a" stroke="#1e3a5f" stroke-width="0.8"/>
+              <path class="continent" d="M 365 105 L 380 100 L 395 98 L 410 100 L 425 105 L 435 115 L 440 130 L 442 150 L 440 170 L 435 190 L 425 210 L 412 225 L 398 235 L 385 240 L 375 235 L 368 220 L 362 200 L 358 180 L 355 155 L 355 135 L 358 118 Z" fill="#0f172a" stroke="#1e3a5f" stroke-width="0.8"/>
+              <path class="continent" d="M 415 35 L 440 30 L 470 28 L 500 30 L 530 35 L 560 40 L 590 48 L 615 55 L 635 65 L 648 78 L 655 95 L 652 110 L 645 125 L 635 135 L 620 140 L 600 142 L 580 140 L 560 135 L 540 130 L 520 128 L 500 125 L 480 120 L 460 115 L 445 105 L 432 95 L 425 80 L 418 65 L 415 50 Z" fill="#0f172a" stroke="#1e3a5f" stroke-width="0.8"/>
+              <path class="continent" d="M 450 120 L 465 118 L 478 125 L 485 140 L 480 158 L 470 168 L 458 165 L 450 152 L 445 138 Z" fill="#0f172a" stroke="#1e3a5f" stroke-width="0.8"/>
+              <path class="continent" d="M 510 140 L 530 138 L 550 142 L 565 150 L 570 160 L 560 168 L 545 170 L 530 165 L 518 158 L 512 148 Z" fill="#0f172a" stroke="#1e3a5f" stroke-width="0.8"/>
+              <path class="continent" d="M 540 172 L 555 170 L 570 175 L 580 182 L 575 190 L 560 192 L 548 185 L 540 178 Z" fill="#0f172a" stroke="#1e3a5f" stroke-width="0.8"/>
+              <path class="continent" d="M 640 230 L 660 225 L 680 228 L 695 235 L 705 248 L 708 265 L 700 278 L 688 288 L 672 292 L 658 290 L 648 282 L 640 270 L 635 255 Z" fill="#0f172a" stroke="#1e3a5f" stroke-width="0.8"/>
+              <path class="continent" d="M 60 370 L 120 365 L 200 362 L 300 360 L 400 358 L 500 360 L 600 362 L 680 365 L 740 370 L 750 380 L 740 390 L 680 395 L 600 398 L 500 400 L 400 400 L 300 398 L 200 395 L 120 390 L 60 385 Z" fill="#0f172a" stroke="#1e3a5f" stroke-width="0.8"/>
+              <path class="continent" d="M 628 62 L 638 58 L 645 65 L 648 78 L 642 88 L 635 85 L 628 75 Z" fill="#0f172a" stroke="#1e3a5f" stroke-width="0.8"/>
+              <path class="continent" d="M 350 42 L 358 38 L 362 45 L 360 55 L 354 58 L 348 52 Z" fill="#0f172a" stroke="#1e3a5f" stroke-width="0.8"/>
+              <path class="continent" d="M 447 192 L 455 188 L 460 198 L 458 212 L 452 220 L 445 215 L 442 205 Z" fill="#0f172a" stroke="#1e3a5f" stroke-width="0.8"/>
+            </g>
+
+            <ellipse cx="400" cy="15" rx="180" ry="15" fill="#0f2942" opacity="0.25"/>
+
+            <!-- Heatmap overlay zones -->
+            <g class="heat-zones" opacity="0.08">
+              <ellipse cx="280" cy="330" rx="50" ry="40" fill="#dc2626"/>
+              <ellipse cx="580" cy="240" rx="60" ry="45" fill="#dc2626"/>
+              <ellipse cx="400" cy="180" rx="45" ry="35" fill="#f59e0b"/>
+              <ellipse cx="700" cy="160" rx="40" ry="30" fill="#f59e0b"/>
+              <ellipse cx="220" cy="200" rx="35" ry="25" fill="#f59e0b"/>
+              <ellipse cx="660" cy="280" rx="30" ry="25" fill="#dc2626"/>
+              <ellipse cx="500" cy="360" rx="80" ry="30" fill="#dc2626"/>
+            </g>
+
+            <g id="markersGroup" aria-label="Species hotspot markers"></g>
+          </svg>
+
+          <div class="map-controls">
+            <button class="map-control-btn" id="heatmapToggle" aria-label="Toggle biodiversity heatmap" title="Heatmap">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M12 2v20M2 12h20"/></svg>
+            </button>
+            <button class="map-control-btn" id="zoomInBtn" aria-label="Zoom in" title="Zoom in">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
+            </button>
+            <button class="map-control-btn" id="zoomOutBtn" aria-label="Zoom out" title="Zoom out">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="map-legend">
+          <span class="legend-item"><span class="legend-dot" style="background:#f59e0b"></span>Mammals</span>
+          <span class="legend-item"><span class="legend-dot" style="background:#3b82f6"></span>Birds</span>
+          <span class="legend-item"><span class="legend-dot" style="background:#84cc16"></span>Reptiles</span>
+          <span class="legend-item"><span class="legend-dot" style="background:#a855f7"></span>Amphibians</span>
+          <span class="legend-item"><span class="legend-dot" style="background:#0ea5e9"></span>Marine</span>
+          <span class="legend-item"><span class="legend-dot" style="background:#dc2626"></span>Critical</span>
+        </div>
+      </div>
+
+      <!-- Species info card -->
+      <div class="info-card-overlay" id="infoCardOverlay" hidden aria-hidden="true">
+        <div class="info-card" id="infoCard" role="dialog" aria-modal="true" aria-labelledby="infoCardTitle">
+          <button class="info-card-close" id="infoCardClose" aria-label="Close information card">&times;</button>
+          <div class="info-card-hero" id="infoCardHero"></div>
+          <div class="info-card-body">
+            <div class="info-card-header">
+              <div>
+                <h2 class="info-card-title" id="infoCardTitle"></h2>
+                <span class="info-card-scientific" id="infoScientific"></span>
+              </div>
+              <span class="info-card-badge" id="infoCardBadge"></span>
+            </div>
+
+            <div class="info-card-grid">
+              <div class="info-card-detail">
+                <span class="detail-label">Category</span>
+                <span class="detail-value" id="infoCategory"></span>
+              </div>
+              <div class="info-card-detail">
+                <span class="detail-label">Population</span>
+                <span class="detail-value mono" id="infoPopulation"></span>
+              </div>
+              <div class="info-card-detail">
+                <span class="detail-label">Region</span>
+                <span class="detail-value" id="infoRegion"></span>
+              </div>
+              <div class="info-card-detail">
+                <span class="detail-label">Climate</span>
+                <span class="detail-value" id="infoClimate"></span>
+              </div>
+              <div class="info-card-detail info-card-detail--full">
+                <span class="detail-label">Habitat Type</span>
+                <span class="detail-value" id="infoHabitat"></span>
+              </div>
+              <div class="info-card-detail info-card-detail--full">
+                <span class="detail-label">Geographic Range</span>
+                <span class="detail-value" id="infoRange"></span>
+              </div>
+            </div>
+
+            <!-- Population trend -->
+            <div class="info-card-section">
+              <h3 class="info-card-section-title">Population Trend</h3>
+              <div class="trend-chart" id="trendChart"></div>
+            </div>
+
+            <!-- Threat analysis -->
+            <div class="info-card-section">
+              <h3 class="info-card-section-title">Threat Analysis</h3>
+              <div class="threat-bars" id="threatBars"></div>
+            </div>
+
+            <!-- Conservation actions -->
+            <div class="info-card-section">
+              <h3 class="info-card-section-title">Conservation Actions</h3>
+              <ul class="info-card-list" id="infoConservation"></ul>
+            </div>
+
+            <!-- Facts -->
+            <div class="info-card-section">
+              <h3 class="info-card-section-title">Wildlife Facts</h3>
+              <ul class="info-card-list" id="infoFacts"></ul>
+            </div>
+
+            <div class="info-card-actions">
+              <button class="info-card-action-btn" id="bookmarkBtn" aria-label="Bookmark this species">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                <span>Bookmark</span>
+              </button>
+              <button class="info-card-action-btn" id="compareBtn" aria-label="Compare species">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M8 3H3v5M3 16v5h5M21 16v5h-5"/></svg>
+                <span>Compare</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <!-- Comparison Modal -->
+  <div class="modal-overlay" id="compareModal" hidden aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="compareModalTitle">
+      <div class="modal-header">
+        <h2 id="compareModalTitle">Species Comparison</h2>
+        <button class="modal-close" id="compareModalClose" aria-label="Close comparison">&times;</button>
+      </div>
+      <div class="modal-body" id="compareModalBody"></div>
+    </div>
+  </div>
+
+  <!-- Quiz Modal -->
+  <div class="modal-overlay" id="quizModal" hidden aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="quizModalTitle">
+      <div class="modal-header">
+        <h2 id="quizModalTitle">Wildlife Quiz Challenge</h2>
+        <button class="modal-close" id="quizModalClose" aria-label="Close quiz">&times;</button>
+      </div>
+      <div class="modal-body" id="quizModalBody"></div>
+    </div>
+  </div>
+
+  <!-- History Modal -->
+  <div class="modal-overlay" id="historyModal" hidden aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="historyModalTitle">
+      <div class="modal-header">
+        <h2 id="historyModalTitle">Exploration History</h2>
+        <button class="modal-close" id="historyModalClose" aria-label="Close history">&times;</button>
+      </div>
+      <div class="modal-body" id="historyModalBody"></div>
+    </div>
+  </div>
+
+  <!-- Success Stories Modal -->
+  <div class="modal-overlay" id="storiesModal" hidden aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="storiesModalTitle">
+      <div class="modal-header">
+        <h2 id="storiesModalTitle">Conservation Success Stories</h2>
+        <button class="modal-close" id="storiesModalClose" aria-label="Close stories">&times;</button>
+      </div>
+      <div class="modal-body" id="storiesModalBody"></div>
+    </div>
+  </div>
+
+  <nav class="action-bar" aria-label="Quick actions">
+    <button class="action-bar-btn" id="showHistoryBtn" aria-label="Show exploration history" title="History">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      <span>History</span>
+    </button>
+    <button class="action-bar-btn" id="showAchievementsBtn" aria-label="Show achievements" title="Achievements">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 21l4-4 4 4M12 17v-7M6 3h12l2 4-6 6-6-6 2-4z"/></svg>
+      <span>Achievements</span>
+    </button>
+    <button class="action-bar-btn" id="showQuizBtn" aria-label="Start wildlife quiz" title="Quiz">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <span>Quiz</span>
+    </button>
+    <button class="action-bar-btn" id="showStoriesBtn" aria-label="Show conservation success stories" title="Stories">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6-4.8-6 4.8 2.4-7.2-6-4.8h7.6z"/></svg>
+      <span>Stories</span>
+    </button>
+    <button class="action-bar-btn" id="randomFactBtn" aria-label="Show random species fact" title="Fact">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+      <span>Fact</span>
+    </button>
+  </nav>
+
+  <script src="script.js"></script>
+</body>
+</html>
