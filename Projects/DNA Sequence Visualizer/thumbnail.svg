@@ -1,0 +1,179 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <!-- Definitions for Gradients and Filters -->
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#05070f" />
+      <stop offset="100%" stop-color="#0e1324" />
+    </linearGradient>
+
+    <!-- Base Gradients -->
+    <linearGradient id="aGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff7b9f" />
+      <stop offset="100%" stop-color="#ff2a5f" />
+    </linearGradient>
+    <linearGradient id="tGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffe066" />
+      <stop offset="100%" stop-color="#ffb800" />
+    </linearGradient>
+    <linearGradient id="cGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#66ffa6" />
+      <stop offset="100%" stop-color="#00e575" />
+    </linearGradient>
+    <linearGradient id="gGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#70d6ff" />
+      <stop offset="100%" stop-color="#00b2ff" />
+    </linearGradient>
+
+    <!-- Neon Glow Filter -->
+    <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bgGrad)" />
+
+  <!-- Grid overlay -->
+  <g opacity="0.08">
+    <!-- Horizontal lines -->
+    <line x1="0" y1="50" x2="800" y2="50" stroke="#00e5ff" stroke-width="1" />
+    <line x1="0" y1="100" x2="800" y2="100" stroke="#00e5ff" stroke-width="1" />
+    <line x1="0" y1="150" x2="800" y2="150" stroke="#00e5ff" stroke-width="1" />
+    <line x1="0" y1="200" x2="800" y2="200" stroke="#00e5ff" stroke-width="1" />
+    <line x1="0" y1="250" x2="800" y2="250" stroke="#00e5ff" stroke-width="1" />
+    <line x1="0" y1="300" x2="800" y2="300" stroke="#00e5ff" stroke-width="1" />
+    <line x1="0" y1="350" x2="800" y2="350" stroke="#00e5ff" stroke-width="1" />
+    <line x1="0" y1="400" x2="800" y2="400" stroke="#00e5ff" stroke-width="1" />
+    <line x1="0" y1="450" x2="800" y2="450" stroke="#00e5ff" stroke-width="1" />
+    <!-- Vertical lines -->
+    <line x1="80" y1="0" x2="80" y2="500" stroke="#00e5ff" stroke-width="1" />
+    <line x1="160" y1="0" x2="160" y2="500" stroke="#00e5ff" stroke-width="1" />
+    <line x1="240" y1="0" x2="240" y2="500" stroke="#00e5ff" stroke-width="1" />
+    <line x1="320" y1="0" x2="320" y2="500" stroke="#00e5ff" stroke-width="1" />
+    <line x1="400" y1="0" x2="400" y2="500" stroke="#00e5ff" stroke-width="1" />
+    <line x1="480" y1="0" x2="480" y2="500" stroke="#00e5ff" stroke-width="1" />
+    <line x1="560" y1="0" x2="560" y2="500" stroke="#00e5ff" stroke-width="1" />
+    <line x1="640" y1="0" x2="640" y2="500" stroke="#00e5ff" stroke-width="1" />
+    <line x1="720" y1="0" x2="720" y2="500" stroke="#00e5ff" stroke-width="1" />
+  </g>
+
+  <!-- Glowing background elements -->
+  <circle cx="200" cy="250" r="100" fill="#ff2a5f" opacity="0.04" filter="url(#neonGlow)" />
+  <circle cx="600" cy="250" r="120" fill="#00b2ff" opacity="0.04" filter="url(#neonGlow)" />
+
+  <!-- DNA Helix Strands & Connector Bars -->
+  <g transform="translate(100, 0)">
+    <!-- Base pair connector lines -->
+    <g opacity="0.45" stroke="#ffffff" stroke-width="2">
+      <line x1="100" y1="100" x2="300" y2="100" />
+      <line x1="120" y1="140" x2="280" y2="140" />
+      <line x1="150" y1="180" x2="250" y2="180" />
+      <line x1="200" y1="220" x2="200" y2="220" /> <!-- crossover -->
+      <line x1="150" y1="260" x2="250" y2="260" />
+      <line x1="120" y1="300" x2="280" y2="300" />
+      <line x1="100" y1="340" x2="300" y2="340" />
+      <line x1="120" y1="380" x2="280" y2="380" />
+      <line x1="150" y1="420" x2="250" y2="420" />
+    </g>
+
+    <!-- Sine strand A (backbone curve) -->
+    <path d="M 100 100 Q 110 120 120 140 T 200 220 T 280 300 T 300 340 T 200 420" fill="none" stroke="#00e5ff" stroke-width="4" filter="url(#neonGlow)" opacity="0.8" />
+    <!-- Sine strand B (anti-parallel backbone curve) -->
+    <path d="M 300 100 Q 290 120 280 140 T 200 220 T 120 300 T 100 340 T 200 420" fill="none" stroke="#e040fb" stroke-width="4" filter="url(#neonGlow)" opacity="0.8" />
+
+    <!-- Nodes (Base Nucleotides) -->
+    <!-- Y=100 -->
+    <circle cx="100" cy="100" r="10" fill="url(#aGrad)" filter="url(#neonGlow)" />
+    <circle cx="300" cy="100" r="10" fill="url(#tGrad)" filter="url(#neonGlow)" />
+
+    <!-- Y=140 -->
+    <circle cx="120" cy="140" r="9" fill="url(#cGrad)" filter="url(#neonGlow)" />
+    <circle cx="280" cy="140" r="9" fill="url(#gGrad)" filter="url(#neonGlow)" />
+
+    <!-- Y=180 -->
+    <circle cx="150" cy="180" r="8" fill="url(#gGrad)" filter="url(#neonGlow)" />
+    <circle cx="250" cy="180" r="8" fill="url(#cGrad)" filter="url(#neonGlow)" />
+
+    <!-- Y=220 (center crossover) -->
+    <circle cx="200" cy="220" r="7.5" fill="url(#aGrad)" filter="url(#neonGlow)" />
+
+    <!-- Y=260 -->
+    <circle cx="150" cy="260" r="8.5" fill="url(#tGrad)" filter="url(#neonGlow)" />
+    <circle cx="250" cy="260" r="8.5" fill="url(#aGrad)" filter="url(#neonGlow)" />
+
+    <!-- Y=300 -->
+    <circle cx="120" cy="300" r="9" fill="url(#gGrad)" filter="url(#neonGlow)" />
+    <circle cx="280" cy="300" r="9" fill="url(#cGrad)" filter="url(#neonGlow)" />
+
+    <!-- Y=340 -->
+    <circle cx="100" cy="340" r="10" fill="url(#aGrad)" filter="url(#neonGlow)" />
+    <circle cx="300" cy="340" r="10" fill="url(#tGrad)" filter="url(#neonGlow)" />
+
+    <!-- Y=380 -->
+    <circle cx="120" cy="380" r="9" fill="url(#tGrad)" filter="url(#neonGlow)" />
+    <circle cx="280" cy="380" r="9" fill="url(#aGrad)" filter="url(#neonGlow)" />
+
+    <!-- Y=420 -->
+    <circle cx="150" cy="420" r="8" fill="url(#cGrad)" filter="url(#neonGlow)" />
+    <circle cx="250" cy="420" r="8" fill="url(#gGrad)" filter="url(#neonGlow)" />
+  </g>
+
+  <!-- Bioinformatics Overlays (Right Side) -->
+  <g transform="translate(480, 80)">
+    <!-- Header Title -->
+    <text x="0" y="20" fill="#ffffff" font-family="'Inter', sans-serif" font-size="28" font-weight="900" letter-spacing="1">GENE-OS</text>
+    <text x="135" y="20" fill="#00e5ff" font-family="'Inter', sans-serif" font-size="18" font-weight="500" letter-spacing="0.5">// VISUALIZER</text>
+    
+    <!-- Code / Sequence Overlay -->
+    <g transform="translate(0, 50)" fill="#94a3b8" font-family="'Fira Code', monospace" font-size="12" opacity="0.8">
+      <text x="0" y="20"><tspan fill="#64748b">5'-</tspan><tspan fill="#ff2a5f">ATG </tspan><tspan fill="#ffb800">GTG </tspan><tspan fill="#00e575">CAC </tspan><tspan fill="#00b2ff">CTG </tspan><tspan fill="#ff2a5f">ACT </tspan><tspan fill="#ff2a5f">CCT </tspan><tspan fill="#ffb800">GAG </tspan><tspan fill="#00e575">GAG</tspan><tspan fill="#64748b">-3'</tspan></text>
+      <text x="0" y="40"><tspan fill="#64748b">3'-</tspan><tspan fill="#ffb800">TAC </tspan><tspan fill="#ff2a5f">CAC </tspan><tspan fill="#00b2ff">GTG </tspan><tspan fill="#00e575">GAC </tspan><tspan fill="#ffb800">TGA </tspan><tspan fill="#ffb800">GGA </tspan><tspan fill="#ff2a5f">CTC </tspan><tspan fill="#ffb800">CTC</tspan><tspan fill="#64748b">-5'</tspan></text>
+      
+      <!-- Transcription -->
+      <path d="M 0 55 L 250 55" stroke="rgba(255,255,255,0.06)" stroke-width="1" />
+      <text x="0" y="75" fill="#e040fb"><tspan fill="#64748b">mRNA: </tspan>AUG GUG CAC CUG ACU CCU GAG GAG</text>
+      
+      <!-- Translation -->
+      <text x="0" y="95" fill="#00e5ff"><tspan fill="#64748b">AA:   </tspan> M   V   H   L   T   P   E   E</text>
+    </g>
+
+    <!-- Telemetry Panel -->
+    <g transform="translate(0, 200)">
+      <!-- Panel Border -->
+      <rect x="0" y="0" width="260" height="150" rx="8" fill="rgba(13, 20, 38, 0.5)" stroke="rgba(255,255,255,0.06)" stroke-width="1.5" />
+      
+      <!-- Panel Header -->
+      <text x="15" y="25" fill="#00e5ff" font-family="'Inter', sans-serif" font-size="11" font-weight="700" letter-spacing="1">MOLECULAR TELEMETRY</text>
+      <line x1="15" y1="35" x2="245" y2="35" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+
+      <!-- Stats -->
+      <text x="15" y="60" fill="#94a3b8" font-family="'Inter', sans-serif" font-size="12">Sequence Length:</text>
+      <text x="245" y="60" fill="#ffffff" font-family="'Fira Code', monospace" font-size="12" font-weight="700" text-anchor="end">717 bp</text>
+
+      <text x="15" y="85" fill="#94a3b8" font-family="'Inter', sans-serif" font-size="12">GC Content Ratio:</text>
+      <text x="245" y="85" fill="#ffffff" font-family="'Fira Code', monospace" font-size="12" font-weight="700" text-anchor="end">61.2%</text>
+
+      <text x="15" y="110" fill="#94a3b8" font-family="'Inter', sans-serif" font-size="12">Melting Temp (Tm):</text>
+      <text x="245" y="110" fill="#00e575" font-family="'Fira Code', monospace" font-size="12" font-weight="700" text-anchor="end">78.4 °C</text>
+
+      <text x="15" y="135" fill="#94a3b8" font-family="'Inter', sans-serif" font-size="12">Molecular Weight:</text>
+      <text x="245" y="135" fill="#ffb800" font-family="'Fira Code', monospace" font-size="12" font-weight="700" text-anchor="end">221.6 kDa</text>
+    </g>
+  </g>
+
+  <!-- Glowing HUD borders -->
+  <rect x="15" y="15" width="770" height="470" rx="12" fill="none" stroke="rgba(0, 229, 255, 0.15)" stroke-width="2" />
+  <rect x="25" y="25" width="750" height="450" rx="8" fill="none" stroke="rgba(255, 255, 255, 0.02)" stroke-width="1" />
+  
+  <!-- Corner Tech Details -->
+  <line x1="15" y1="35" x2="15" y2="65" stroke="#00e5ff" stroke-width="3" />
+  <line x1="15" y1="35" x2="45" y2="35" stroke="#00e5ff" stroke-width="3" />
+
+  <line x1="785" y1="465" x2="785" y2="435" stroke="#00e5ff" stroke-width="3" />
+  <line x1="785" y1="465" x2="755" y2="465" stroke="#00e5ff" stroke-width="3" />
+</svg>

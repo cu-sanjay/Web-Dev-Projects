@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="GENE-OS // DNA Sequence Visualizer - Premium bio-informatics tool for interactive double-helix mapping, transcription, translation, mutation simulation, and restriction analysis.">
+  <title>GENE-OS // DNA Sequence Visualizer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="gene-os-theme">
+  <!-- Top Tech Grid Overlay -->
+  <div class="tech-grid-overlay"></div>
+
+  <!-- Main Container -->
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="logo-area">
+        <span class="logo-icon">🧬</span>
+        <div>
+          <h1>GENE-OS <span class="logo-sub">// SEQUENCE VISUALIZER</span></h1>
+          <p class="subtitle">Bioinformatics Analytics Terminal & Dynamic Mutation Sandbox</p>
+        </div>
+      </div>
+      <div class="header-controls">
+        <div class="control-group">
+          <label for="preset-selector">Preset Sequence:</label>
+          <select id="preset-selector" class="glass-input">
+            <option value="gfp">Green Fluorescent Protein (GFP) Gene</option>
+            <option value="hbb">Beta-Globin (HBB) Sickle-Cell Region</option>
+            <option value="sars2">SARS-CoV-2 Spike Fragment</option>
+            <option value="custom">-- Custom FASTA/Raw Sequence --</option>
+          </select>
+        </div>
+        <button id="btn-custom-input" class="glow-button secondary" title="Input custom DNA sequence">
+          <span class="btn-icon">📥</span> Input FASTA
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="main-grid">
+      
+      <!-- Left Column: Double Helix Visuals & Controls -->
+      <section class="visuals-column">
+        <div class="glass-card visualizer-card">
+          <div class="card-header">
+            <h3>Interactive 3D-Perspective Helix</h3>
+            <span class="badge live-badge">LIVE RENDER</span>
+          </div>
+          <div class="canvas-container">
+            <canvas id="helix-canvas"></canvas>
+            <div id="helix-tooltip" class="helix-tooltip hidden"></div>
+            <!-- Canvas Overlay Telemetry -->
+            <div class="canvas-telemetry">
+              <div>RPM: <span id="telemetry-rpm">30</span></div>
+              <div>Pitch: <span id="telemetry-pitch">32px</span></div>
+              <div>Bases: <span id="telemetry-length">0 bp</span></div>
+            </div>
+          </div>
+          <div class="canvas-controls">
+            <div class="slider-group">
+              <div class="slider-header">
+                <span class="label">Rotation Speed</span>
+                <span class="value" id="val-speed">30 RPM</span>
+              </div>
+              <input type="range" id="slider-speed" min="0" max="100" value="30" class="glass-range">
+            </div>
+            
+            <div class="slider-group">
+              <div class="slider-header">
+                <span class="label">Perspective Zoom</span>
+                <span class="value" id="val-zoom">1.0x</span>
+              </div>
+              <input type="range" id="slider-zoom" min="5" max="20" value="10" class="glass-range">
+            </div>
+
+            <div class="slider-group">
+              <div class="slider-header">
+                <span class="label">Strand Separation</span>
+                <span class="value" id="val-spacing">70px</span>
+              </div>
+              <input type="range" id="slider-spacing" min="30" max="120" value="70" class="glass-range">
+            </div>
+
+            <div class="slider-group">
+              <div class="slider-header">
+                <span class="label">Wave Frequency</span>
+                <span class="value" id="val-freq">1.0x</span>
+              </div>
+              <input type="range" id="slider-freq" min="5" max="25" value="10" class="glass-range">
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card controls-card">
+          <div class="card-header">
+            <h3>Mutation History & Log</h3>
+            <button id="btn-reset-mutations" class="text-button" disabled>Reset Sequence</button>
+          </div>
+          <div class="mutation-log-container">
+            <ul id="mutation-log-list" class="log-list">
+              <li class="log-placeholder">No mutations recorded. Click on a base in the explorer to mutate.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Column: Sequence Explorer, Engine, Telemetry -->
+      <section class="data-column">
+        
+        <!-- Row 1: Molecular Stats Dashboard -->
+        <div class="stats-row">
+          <div class="glass-card stat-card" id="card-bp">
+            <span class="stat-icon">📏</span>
+            <div class="stat-content">
+              <span class="stat-label">Sequence Length</span>
+              <span class="stat-value" id="stat-bp-val">0 <span class="unit">bp</span></span>
+            </div>
+          </div>
+          <div class="glass-card stat-card" id="card-gc">
+            <span class="stat-icon">🧬</span>
+            <div class="stat-content">
+              <span class="stat-label">GC Content Ratio</span>
+              <span class="stat-value" id="stat-gc-val">0.0 <span class="unit">%</span></span>
+            </div>
+          </div>
+          <div class="glass-card stat-card" id="card-tm">
+            <span class="stat-icon">🌡️</span>
+            <div class="stat-content">
+              <span class="stat-label">Melting Temp (Tm)</span>
+              <span class="stat-value" id="stat-tm-val">0.0 <span class="unit">°C</span></span>
+            </div>
+          </div>
+          <div class="glass-card stat-card" id="card-mw">
+            <span class="stat-icon">⚖️</span>
+            <div class="stat-content">
+              <span class="stat-label">Molecular Weight</span>
+              <span class="stat-value" id="stat-mw-val">0.0 <span class="unit">kDa</span></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 2: Live Sequence Browser -->
+        <div class="glass-card sequence-card">
+          <div class="card-header">
+            <div class="header-main">
+              <h3>Live Sequence Explorer</h3>
+              <p class="header-desc">Grouped in codon triplets. Hover bases for statistics, click to mutate/insert/delete.</p>
+            </div>
+            <div class="sequence-view-controls">
+              <div class="toggle-group">
+                <button id="btn-frame-1" class="frame-toggle active" data-frame="1">Frame +1</button>
+                <button id="btn-frame-2" class="frame-toggle" data-frame="2">Frame +2</button>
+                <button id="btn-frame-3" class="frame-toggle" data-frame="3">Frame +3</button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="sequence-explorer-wrapper">
+            <!-- Codon nucleotide tiles rendered dynamically -->
+            <div id="sequence-explorer-grid" class="sequence-grid"></div>
+          </div>
+          
+          <!-- Key Legend -->
+          <div class="base-legend">
+            <span class="legend-item"><span class="legend-dot base-a"></span> A (Adenine)</span>
+            <span class="legend-item"><span class="legend-dot base-t"></span> T (Thymine)</span>
+            <span class="legend-item"><span class="legend-dot base-c"></span> C (Cytosine)</span>
+            <span class="legend-item"><span class="legend-dot base-g"></span> G (Guanine)</span>
+            <span class="legend-item"><span class="legend-dot mutated-border"></span> Mutated Base</span>
+          </div>
+        </div>
+
+        <!-- Row 3: Transcription & Translation Workspace -->
+        <div class="glass-card translation-card">
+          <div class="card-header">
+            <h3>Bio-Analysis Desk</h3>
+            <span class="badge tech-badge">GENOMIC ENGINE</span>
+          </div>
+          
+          <div class="workspace-panels">
+            <!-- DNA strands -->
+            <div class="workspace-section">
+              <h4 class="section-title">Coding DNA Strand <span class="dir-tag">5′ → 3′</span></h4>
+              <div class="scroll-wrapper font-mono" id="panel-dna-coding"></div>
+            </div>
+
+            <div class="workspace-section">
+              <h4 class="section-title">Template DNA Strand <span class="dir-tag">3′ → 5′</span></h4>
+              <div class="scroll-wrapper font-mono text-muted" id="panel-dna-template"></div>
+            </div>
+
+            <!-- mRNA -->
+            <div class="workspace-section">
+              <h4 class="section-title">Transcribed mRNA Strand <span class="dir-tag">5′ → 3′</span></h4>
+              <div class="scroll-wrapper font-mono text-mrna" id="panel-mrna"></div>
+            </div>
+
+            <!-- Protein -->
+            <div class="workspace-section">
+              <h4 class="section-title">Translated Amino Acid Chain <span class="dir-tag">N-Terminus → C-Terminus</span></h4>
+              <div class="scroll-wrapper amino-acid-chain" id="panel-protein"></div>
+            </div>
+          </div>
+
+          <div class="amino-acid-legend">
+            <span class="legend-tag am-hydrophobic">Hydrophobic (A,V,I,L,M,F,Y,W)</span>
+            <span class="legend-tag am-polar">Polar / Neutral (S,T,N,Q,C,G,P)</span>
+            <span class="legend-tag am-acidic">Acidic / Neg (-) (D,E)</span>
+            <span class="legend-tag am-basic">Basic / Pos (+) (K,R,H)</span>
+            <span class="legend-tag am-stop">Stop Codon (*)</span>
+          </div>
+        </div>
+
+        <!-- Row 4: Restriction Digest Mapper & Nucleotide Distribution -->
+        <div class="split-row">
+          
+          <!-- Restriction enzyme mapper -->
+          <div class="glass-card digest-card">
+            <div class="card-header">
+              <h3>Restriction Site Mapper</h3>
+            </div>
+            <div class="enzyme-toggles">
+              <label class="checkbox-container">
+                <input type="checkbox" id="chk-enzyme-ecori" checked>
+                <span class="checkmark chk-ecori"></span> EcoRI (GAATTC)
+              </label>
+              <label class="checkbox-container">
+                <input type="checkbox" id="chk-enzyme-hindiii" checked>
+                <span class="checkmark chk-hindiii"></span> HindIII (AAGCTT)
+              </label>
+              <label class="checkbox-container">
+                <input type="checkbox" id="chk-enzyme-bamhi" checked>
+                <span class="checkmark chk-bamhi"></span> BamHI (GGATCC)
+              </label>
+              <label class="checkbox-container">
+                <input type="checkbox" id="chk-enzyme-alui">
+                <span class="checkmark chk-alui"></span> AluI (AGCT)
+              </label>
+              <label class="checkbox-container">
+                <input type="checkbox" id="chk-enzyme-hhai">
+                <span class="checkmark chk-hhai"></span> HhaI (GCGC)
+              </label>
+            </div>
+
+            <div class="digest-visual-container">
+              <!-- Render linear representation of DNA cuts -->
+              <svg id="digest-map-svg" viewBox="0 0 500 50" width="100%"></svg>
+            </div>
+            
+            <div id="digest-results-summary" class="digest-results">
+              <!-- Dynamic cuts listing -->
+              <div class="no-cuts">No cut sites detected for active enzymes.</div>
+            </div>
+          </div>
+
+          <!-- Base distribution stats chart -->
+          <div class="glass-card distribution-card">
+            <div class="card-header">
+              <h3>Nucleotide Distribution</h3>
+            </div>
+            <div class="chart-flex">
+              <div class="chart-svg-container">
+                <svg id="distribution-pie-chart" viewBox="0 0 100 100" width="100%"></svg>
+              </div>
+              <div class="chart-legend" id="distribution-legend">
+                <!-- Legend values injected here -->
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <div class="footer-left">
+        <span>GENE-OS // VERSION 1.1.0</span>
+        <span class="dot-separator">•</span>
+        <span>VANILLA JS ENGINE</span>
+      </div>
+      <div class="footer-right">
+        <span>Offline-first local processing</span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Custom Input Modal / Overlay Panel -->
+  <div id="custom-input-modal" class="modal-overlay hidden">
+    <div class="glass-modal">
+      <div class="modal-header">
+        <h2>Input DNA Sequence</h2>
+        <button id="btn-close-modal" class="close-button">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-tip">Accepts FASTA format or raw nucleotide strands. Numbers, spaces, and other symbols will be automatically filtered out. Non-standard bases will be rejected.</p>
+        <div class="form-group">
+          <label for="fasta-title">Sequence Identifier (FASTA title):</label>
+          <input type="text" id="fasta-title" class="glass-input" placeholder="e.g., GFP_Gene_Mutant_A">
+        </div>
+        <div class="form-group">
+          <label for="fasta-sequence">DNA Sequence (5′ → 3′ coding strand):</label>
+          <textarea id="fasta-sequence" class="glass-textarea font-mono" rows="8" placeholder="e.g., ATGGTGAGCAAGGGCGAGGAGCTGTTC..."></textarea>
+        </div>
+        <div class="sequence-validator-status" id="validator-status">
+          Bases entered: <span id="valid-bases-count">0</span> | Invalid characters filtered: <span id="invalid-char-count">0</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-cancel-input" class="glow-button secondary">Cancel</button>
+        <button id="btn-apply-sequence" class="glow-button primary">Load Sequence</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mutation Interactive Dialog (Floating Card / Popover) -->
+  <div id="mutation-panel" class="mutation-panel hidden">
+    <div class="mutation-panel-header">
+      <h4>Base Mutation: Index <span id="mut-base-idx">0</span> (<span id="mut-base-char">A</span>)</h4>
+      <button id="btn-close-mutation" class="close-button">&times;</button>
+    </div>
+    <div class="mutation-panel-body">
+      <div class="mutation-ops">
+        <h5>Substitute Nucleotide:</h5>
+        <div class="nucleotide-options">
+          <button class="mut-option-btn color-a" data-base="A">A</button>
+          <button class="mut-option-btn color-t" data-base="T">T</button>
+          <button class="mut-option-btn color-c" data-base="C">C</button>
+          <button class="mut-option-btn color-g" data-base="G">G</button>
+        </div>
+        
+        <div class="mutation-action-divider"></div>
+
+        <h5>Frame Shift Mutations:</h5>
+        <div class="frame-shift-ops">
+          <button id="btn-mut-delete" class="glow-button danger small">🗑️ Delete Base</button>
+          
+          <div class="insert-op">
+            <button id="btn-mut-insert" class="glow-button primary small">➕ Insert Before:</button>
+            <select id="insert-base-selector" class="glass-input small-input">
+              <option value="A">A</option>
+              <option value="T">T</option>
+              <option value="C">C</option>
+              <option value="G">G</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
