@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atomic Structure Explorer - Bohr Quantum Transitions & Isotope Builder</title>
+  <meta name="description" content="Build elements from Hydrogen to Calcium, balance protons and neutrons for isotopic stability, and trigger Bohr quantum electron transitions to emit spectral lines.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-title-wrapper">
+        <div class="pulse-indicator"></div>
+        <h1>ATOMIC STRUCTURE EXPLORER</h1>
+        <span class="version-tag">v2.5.0-QUANTUM</span>
+      </div>
+      <p class="header-subtitle">Interactive Bohr Quantum Transition Model & Isotope Builder Sandbox</p>
+    </header>
+
+    <!-- Main Workspace Dashboard Grid -->
+    <main class="dashboard-grid">
+      
+      <!-- Left Panel: Particle Builder & Transitions -->
+      <section class="panel panel-left" aria-labelledby="controls-heading">
+        <h2 id="controls-heading" class="panel-title">NUCLEUS & SHELLS</h2>
+        
+        <!-- Particle Sandbox Builder -->
+        <div class="control-group">
+          <label class="control-label">NUCLEAR PARTICLES BUILDER</label>
+          
+          <!-- Protons (Red) -->
+          <div class="particle-counter-row">
+            <div class="particle-label">
+              <span class="dot-particle proton-dot"></span>
+              Protons (Z)
+            </div>
+            <div class="counter-controls">
+              <button class="cnt-btn" id="btn-dec-protons" aria-label="Decrease Protons">-</button>
+              <span class="cnt-val" id="val-protons">6</span>
+              <button class="cnt-btn" id="btn-inc-protons" aria-label="Increase Protons">+</button>
+            </div>
+          </div>
+
+          <!-- Neutrons (Grey) -->
+          <div class="particle-counter-row">
+            <div class="particle-label">
+              <span class="dot-particle neutron-dot"></span>
+              Neutrons (N)
+            </div>
+            <div class="counter-controls">
+              <button class="cnt-btn" id="btn-dec-neutrons" aria-label="Decrease Neutrons">-</button>
+              <span class="cnt-val" id="val-neutrons">6</span>
+              <button class="cnt-btn" id="btn-inc-neutrons" aria-label="Increase Neutrons">+</button>
+            </div>
+          </div>
+
+          <!-- Electrons (Blue) -->
+          <div class="particle-counter-row">
+            <div class="particle-label">
+              <span class="dot-particle electron-dot"></span>
+              Electrons (e⁻)
+            </div>
+            <div class="counter-controls">
+              <button class="cnt-btn" id="btn-dec-electrons" aria-label="Decrease Electrons">-</button>
+              <span class="cnt-val" id="val-electrons">6</span>
+              <button class="cnt-btn" id="btn-inc-electrons" aria-label="Increase Electrons">+</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quantum Transition Trigger -->
+        <div class="control-group">
+          <label class="control-label">BOHR QUANTUM TRANSITIONS</label>
+          
+          <div class="select-row">
+            <div class="select-wrapper">
+              <label for="select-initial-shell" class="sub-label">Initial (n<sub>i</sub>)</label>
+              <select id="select-initial-shell">
+                <option value="4">Shell 4 (N)</option>
+                <option value="3" selected>Shell 3 (M)</option>
+                <option value="2">Shell 2 (L)</option>
+              </select>
+            </div>
+            
+            <div class="select-wrapper">
+              <label for="select-final-shell" class="sub-label">Final (n<sub>f</sub>)</label>
+              <select id="select-final-shell">
+                <option value="3">Shell 3 (M)</option>
+                <option value="2" selected>Shell 2 (L)</option>
+                <option value="1">Shell 1 (K)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="transition-buttons">
+            <button class="transition-btn excite-btn" id="btn-transition-excite">
+              <span>⚛️</span> Excite Electron
+            </button>
+            <button class="transition-btn relax-btn" id="btn-transition-relax">
+              <span>🌈</span> Relax & Emit
+            </button>
+          </div>
+        </div>
+
+        <!-- Instruction Help Panel -->
+        <div class="panel-info">
+          <h3>📌 Quick Operator Guide</h3>
+          <div id="guide-text" class="guide-scroll">
+            Modify Protons, Neutrons, and Electrons to build stable isotopes and ions. Trigger transitions ending at n<sub>f</sub>=2 (Balmer Series) to watch visible photon emissions and spectrometer lines.
+          </div>
+        </div>
+      </section>
+
+      <!-- Center Panel: Interactive Bohr Viewport -->
+      <section class="panel panel-center" aria-labelledby="canvas-heading">
+        <div class="canvas-header-row">
+          <h2 id="canvas-heading" class="panel-title">BOHR ORBITAL CHAMBER</h2>
+          <div id="sim-status-badge" class="status-badge live">ATOM ENGINE</div>
+        </div>
+
+        <!-- Canvas Container -->
+        <div class="canvas-container">
+          <canvas id="sim-canvas" width="600" height="400"></canvas>
+          
+          <!-- HUD Overlays -->
+          <div class="canvas-hud">
+            <div class="hud-item">
+              <span class="hud-label">Mass (A):</span>
+              <span id="hud-mass" class="hud-value">12</span>
+            </div>
+            <div class="hud-item">
+              <span class="hud-label">Protons (Z):</span>
+              <span id="hud-protons" class="hud-value">6</span>
+            </div>
+            <div class="hud-item">
+              <span class="hud-label">Charge (q):</span>
+              <span id="hud-charge" class="hud-value">0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timeline / Playback Controls -->
+        <div class="playback-controls">
+          <button id="btn-play-pause" class="playback-btn primary" title="Play/Pause electron orbits">
+            <span id="play-icon">⏸️</span> <span id="play-text">Pause</span>
+          </button>
+          <button id="btn-reset-atom" class="playback-btn" title="Reset particles to Carbon-12">
+            <span>🔄</span> Reset to C-12
+          </button>
+          
+          <div class="speed-control">
+            <span class="speed-label">ORBIT SPEED:</span>
+            <div class="speed-options">
+              <button class="speed-btn" data-speed="0.25">0.25x</button>
+              <button class="speed-btn" data-speed="0.5">0.5x</button>
+              <button class="speed-btn active" data-speed="1.0">1.0x</button>
+              <button class="speed-btn" data-speed="2.0">2.0x</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Panel: Presets & Spectrometer Ledger -->
+      <section class="panel panel-right" aria-labelledby="telemetry-heading">
+        <h2 id="telemetry-heading" class="panel-title">PRESETS & SPECTRUM</h2>
+
+        <!-- Element presets -->
+        <div class="control-group">
+          <label class="control-label">ELEMENT PRESETS</label>
+          <div class="presets-grid">
+            <button class="preset-btn" data-preset="preset-h">Hydrogen (Z=1)</button>
+            <button class="preset-btn" data-preset="preset-he">Helium (Z=2)</button>
+            <button class="preset-btn active" data-preset="preset-c">Carbon (Z=6)</button>
+            <button class="preset-btn" data-preset="preset-o">Oxygen (Z=8)</button>
+            <button class="preset-btn" data-preset="preset-ne">Neon (Z=10)</button>
+            <button class="preset-btn" data-preset="preset-na">Sodium (Z=11)</button>
+            <button class="preset-btn" data-preset="preset-ca">Calcium (Z=20)</button>
+          </div>
+        </div>
+
+        <!-- Telemetry Data Ledger Card -->
+        <div class="ledger-container">
+          <div class="ledger-header">
+            <span id="led-element-name">CARBON-12</span>
+            <span id="lbl-isotope-stability" class="green-glow">STABLE ISOTOPE</span>
+          </div>
+          <div class="ledger-body">
+            <div class="ledger-row">
+              <span>Net Ion Charge:</span>
+              <strong id="led-ion-type">NEUTRAL ATOM</strong>
+            </div>
+            <div class="ledger-row">
+              <span>Electron Configuration:</span>
+              <strong id="led-electron-config">2, 4</strong>
+            </div>
+            <div class="ledger-row">
+              <span>Inner shells occupancy:</span>
+              <strong id="led-shell-ledger">K: 2, L: 4, M: 0, N: 0</strong>
+            </div>
+            <div class="ledger-row">
+              <span>Transition Wavelength (&lambda;):</span>
+              <strong id="led-wavelength">N/A</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Spectrometer Canvas Strip -->
+        <div class="spectrometer-container">
+          <div class="spectrometer-header">
+            <span>🌈 BALMER SPECTROMETER</span>
+            <span id="lbl-spectral-series" class="yellow-glow">VIS-LINE</span>
+          </div>
+          <canvas id="canvas-spectrometer" width="300" height="40"></canvas>
+          <div class="spectrometer-labels">
+            <span>410nm</span>
+            <span>434nm</span>
+            <span>486nm</span>
+            <span>656nm</span>
+          </div>
+        </div>
+
+        <!-- Observatory CRT Logs -->
+        <div class="logger-container">
+          <div class="logger-header">
+            <span>📟 CRT FLIGHT LOGS</span>
+            <button id="btn-clear-logs" class="text-btn">Clear Logs</button>
+          </div>
+          <div id="logger-console" class="logger-console-body">
+            <div class="log-entry log-sys">[SYS] Quantum engine online. Valley of stability locked.</div>
+            <div class="log-entry log-phys">[PHYSICS] Element Carbon-12 loaded. Group 14, Period 2.</div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p>Atomic Structure Explorer • Nuclear density and isotopic warning lookups are validated for first 20 elements. Transitions emit photons via Rydberg formula.</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
