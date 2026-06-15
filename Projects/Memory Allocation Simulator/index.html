@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory Allocation Simulator - First Fit, Best Fit, Worst Fit Visualizer</title>
+  <meta name="description" content="An interactive simulator for memory management allocation algorithms featuring Fixed and Dynamic partitioning, real-time memory visual bars, internal/external fragmentation tracking, and queue buffers.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-logo">
+        <a href="../../" class="back-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        </a>
+        <div class="logo-text">
+          <h1>Memory Allocation <span class="accent-text">Simulator</span></h1>
+          <p class="subtitle">Operating Systems Memory Partitioning Visualizer</p>
+        </div>
+      </div>
+      
+      <div class="header-presets">
+        <div class="control-group">
+          <label for="partition-preset">Load Partition Scheme:</label>
+          <select id="partition-preset" class="custom-select">
+            <option value="fixed-equal">Fixed Partitioning: Equal Size</option>
+            <option value="fixed-unequal" selected>Fixed Partitioning: Unequal Size</option>
+            <option value="dynamic-single">Dynamic Partitioning: Single Large Block</option>
+          </select>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Dashboard Grid -->
+    <main class="dashboard-grid">
+      
+      <!-- Left Column: Configuration & Memory Visual Map -->
+      <section class="left-column">
+        
+        <!-- Setup Settings Card -->
+        <div class="card config-card">
+          <h2 class="card-title">Simulator Configuration</h2>
+          
+          <div class="config-grid">
+            <div class="config-item">
+              <label for="partition-mode">Partitioning Scheme</label>
+              <select id="partition-mode" class="custom-select-small">
+                <option value="fixed">Fixed Partitions</option>
+                <option value="dynamic">Dynamic Partitions</option>
+              </select>
+            </div>
+
+            <div class="config-item">
+              <label for="fit-algorithm">Fit Algorithm</label>
+              <select id="fit-algorithm" class="custom-select-small">
+                <option value="first">First Fit</option>
+                <option value="best">Best Fit</option>
+                <option value="worst">Worst Fit</option>
+                <option value="next">Next Fit</option>
+              </select>
+            </div>
+
+            <div class="config-item">
+              <label for="memory-capacity">Total Memory Size (KB)</label>
+              <input type="number" id="memory-capacity" min="100" max="4000" value="1000" class="custom-input-small">
+            </div>
+
+            <div class="config-item" id="fixed-layout-builder">
+              <label for="fixed-blocks-input">Partitions Config (Sizes comma-separated)</label>
+              <input type="text" id="fixed-blocks-input" value="150, 300, 100, 200, 250" class="custom-input-small">
+            </div>
+          </div>
+
+          <button id="btn-reconfigure" class="btn btn-primary btn-full mt-16">Apply Settings &amp; Clear Memory</button>
+        </div>
+
+        <!-- Linear Memory Visual Block Representation -->
+        <div class="card memory-map-card">
+          <div class="memory-map-header">
+            <h2 class="card-title">Contiguous Memory Map (0 KB &rarr; <span id="memory-limit-txt">1000</span> KB)</h2>
+            <div class="pointer-status" id="next-fit-pointer-status">
+              Next Fit Pointer: <strong id="next-pointer-addr" class="text-cyan">0 KB</strong>
+            </div>
+          </div>
+          
+          <div class="memory-bar-wrapper">
+            <div id="memory-bar" class="memory-bar-container">
+              <!-- Memory segments render here dynamically -->
+            </div>
+          </div>
+
+          <div class="memory-legend">
+            <div class="legend-item">
+              <span class="legend-color free"></span>
+              <span>Free Memory Block</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-color allocated"></span>
+              <span>Allocated Block</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-color frag"></span>
+              <span>Internal Fragmentation</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-arrow align-arrow">&darr;</span>
+              <span>Search Pointer</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Partition Grid List Table -->
+        <div class="card table-card">
+          <h2 class="card-title">Partition Allocations Details</h2>
+          <div class="table-container">
+            <table id="partitions-table" class="custom-table">
+              <thead>
+                <tr>
+                  <th>Partition ID</th>
+                  <th>Base Addr (KB)</th>
+                  <th>Limit Addr (KB)</th>
+                  <th>Size (KB)</th>
+                  <th>Status</th>
+                  <th>Process Info</th>
+                  <th>Internal Wasted (KB)</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Populated dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Column: Process Loader & Waiting Queue -->
+      <section class="right-column">
+        
+        <!-- Memory Analytics Stats Dashboard -->
+        <div id="stats-panel" class="stats-panel-card card green-gradient">
+          <div class="stats-grid">
+            <div class="stat-unit">
+              <span class="stat-lbl">Memory Utilization</span>
+              <span id="stat-util" class="stat-num">0%</span>
+            </div>
+            <div class="stat-unit">
+              <span class="stat-lbl">Internal Wasted</span>
+              <span id="stat-internal" class="stat-num text-danger">0 KB</span>
+            </div>
+            <div class="stat-unit">
+              <span class="stat-lbl">External Fragmented</span>
+              <span id="stat-external" class="stat-num text-warning">0 KB</span>
+            </div>
+          </div>
+          <div class="progress-bar-container">
+            <div id="mem-progress-bar" class="progress-bar-fill" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <!-- Process Allocator Loader -->
+        <div class="card process-card">
+          <h2 class="card-title">Process Loader</h2>
+          
+          <div class="process-form">
+            <div class="form-row">
+              <div class="form-item">
+                <label for="proc-name">Process Name</label>
+                <input type="text" id="proc-name" value="P1" maxlength="6" class="custom-input">
+              </div>
+              <div class="form-item">
+                <label for="proc-size">Size Required (KB)</label>
+                <input type="number" id="proc-size" min="10" max="2000" value="120" class="custom-input">
+              </div>
+            </div>
+            
+            <div class="form-row mt-12">
+              <div class="form-item flex-1">
+                <label for="proc-duration">Optional Timeout Duration (seconds)</label>
+                <input type="number" id="proc-duration" min="0" max="120" value="0" placeholder="0 = infinite" class="custom-input">
+              </div>
+            </div>
+
+            <button id="btn-allocate" class="btn btn-primary btn-full mt-16">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+              Allocate Process Block
+            </button>
+          </div>
+        </div>
+
+        <!-- Waiting / Starving Process Queue Card -->
+        <div class="card queue-card">
+          <div class="queue-header">
+            <h2 class="card-title">Waiting Queue <small class="text-muted" id="queue-count">(0 processes)</small></h2>
+            <button id="btn-clear-queue" class="btn btn-small">Clear Queue</button>
+          </div>
+          <p class="alert-info-message select-info">
+            Processes queue automatically when fit allocations fail. They will allocate automatically once enough memory splits are freed.
+          </p>
+          <div id="waiting-queue" class="queue-list-container">
+            <!-- Empty state or list items -->
+            <div class="queue-empty-msg">No processes currently waiting.</div>
+          </div>
+        </div>
+
+        <!-- Console Log Visualizer -->
+        <div class="card log-card">
+          <div class="log-header">
+            <h3 class="card-title">Allocation Trace Log</h3>
+            <button id="btn-clear-logs" class="btn btn-small">Clear Log</button>
+          </div>
+          <div id="log-console" class="console">
+            <!-- Filled dynamically -->
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Bottom Section: Theory & OS Learning Hub -->
+    <section class="theory-section card">
+      <h3 class="section-title">Educational Resources & Theory</h3>
+      
+      <div class="theory-grid">
+        <div class="theory-card">
+          <h4>Memory Fragmentation</h4>
+          <p>
+            Memory allocation algorithms aim to limit wasted space. Fragmentation is divided into:
+          </p>
+          <ul>
+            <li><strong>Internal Fragmentation:</strong> Space wasted *inside* an allocated partition. Happens in Fixed Partitioning when a process size is smaller than the partition limit. The leftover space in that partition block cannot be accessed by other jobs.</li>
+            <li><strong>External Fragmentation:</strong> Space wasted *outside* partitions. Occurs in Dynamic Partitioning when free memory holes are fragmented into small blocks scattered across addresses. The sum of free holes is large enough to serve a process, but because it is not *contiguous*, allocation fails.</li>
+          </ul>
+        </div>
+
+        <div class="theory-card">
+          <h4>Dynamic Coalescing & compaction</h4>
+          <p>
+            To combat external fragmentation, operating systems deploy memory consolidation techniques:
+          </p>
+          <ul>
+            <li><strong>Coalescing:</strong> When a process terminates and releases its partition block, the simulator checks if adjacent blocks (left or right) are also free. If so, they are merged into a single contiguous free hole.</li>
+            <li><strong>Compaction:</strong> Moves all allocated process blocks to one end of the physical address space, merging all scattered free fragments into one large contiguous free block.</li>
+          </ul>
+        </div>
+
+        <div class="theory-card">
+          <h4>Fit Allocation Policies Comparison</h4>
+          <ul>
+            <li><strong>First Fit:</strong> Fast search (stops at first match). Promotes fragmentation at the beginning of memory.</li>
+            <li><strong>Best Fit:</strong> Searches full memory to find the closest match. Saves larger blocks, but leaves tiny, unusable fragments.</li>
+            <li><strong>Worst Fit:</strong> Allocates the largest available partition. Reduces small fragments but depletes large partitions needed for heavy processes.</li>
+            <li><strong>Next Fit:</strong> Continues searches from the last point of allocation. Distributes allocations more evenly but can fragment the end of memory blocks.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Main JavaScript File -->
+  <script src="script.js"></script>
+</body>
+</html>
