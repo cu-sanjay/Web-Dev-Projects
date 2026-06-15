@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CHEM-LAB // Chemical Reaction Simulator - Premium interactive laboratory simulation for chemical kinetics, thermodynamics, and particle collisions.">
+  <title>CHEM-LAB // Chemical Reaction Simulator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="chem-lab-theme">
+  <!-- Grid layout background overlay -->
+  <div class="lab-grid-overlay"></div>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="logo-area">
+        <span class="logo-icon">🧪</span>
+        <div>
+          <h1>CHEM-LAB <span class="logo-sub">// REACTION SIMULATOR</span></h1>
+          <p class="subtitle">Interactive Collision Kinetics & Thermodynamic Sandbox</p>
+        </div>
+      </div>
+      <div class="header-equation-bar">
+        <div class="control-group">
+          <label for="reaction-preset">Reaction Preset:</label>
+          <select id="reaction-preset" class="glass-input">
+            <option value="neutralization">Acid-Base Neutralization (HCl + NaOH)</option>
+            <option value="combustion">Hydrogen Combustion (H₂ + O₂)</option>
+            <option value="displacement">Metal Displacement (Fe + CuSO₄)</option>
+            <option value="decomposition">Catalytic Decomposition (H₂O₂)</option>
+            <option value="precipitation">Precipitation Reaction (AgNO₃ + NaCl)</option>
+          </select>
+        </div>
+        <div id="balanced-equation-display" class="equation-display font-mono">
+          <!-- Populated by JS -->
+          <span class="coeff">2</span>H₂ + O₂ → <span class="coeff">2</span>H₂O
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Layout Grid -->
+    <main class="main-grid">
+
+      <!-- Left Panel: Kinetics Controllers & Safety Diamonds -->
+      <section class="controls-column">
+        <div class="glass-card kinetics-card">
+          <div class="card-header">
+            <h3>Kinetics Controllers</h3>
+            <span class="badge tech-badge">ARRHENIUS ENGINE</span>
+          </div>
+
+          <div class="control-sliders">
+            <!-- Temperature slider -->
+            <div class="slider-group">
+              <div class="slider-header">
+                <span class="label">Temperature</span>
+                <span class="value" id="val-temp">25 °C</span>
+              </div>
+              <input type="range" id="slider-temp" min="0" max="150" value="25" class="glass-range">
+            </div>
+
+            <!-- Concentration slider -->
+            <div class="slider-group">
+              <div class="slider-header">
+                <span class="label">Reactant Concentration</span>
+                <span class="value" id="val-conc">50%</span>
+              </div>
+              <input type="range" id="slider-conc" min="10" max="100" value="50" class="glass-range">
+            </div>
+
+            <!-- Surface Area slider -->
+            <div class="slider-group">
+              <div class="slider-header">
+                <span class="label">Solid Surface Area</span>
+                <span class="value" id="val-surface">Medium (Powder)</span>
+              </div>
+              <input type="range" id="slider-surface" min="1" max="3" value="2" class="glass-range">
+            </div>
+
+            <!-- Catalyst Toggle -->
+            <div class="toggle-group-row">
+              <span class="label">Add Catalyst</span>
+              <label class="switch">
+                <input type="checkbox" id="toggle-catalyst">
+                <span class="slider-toggle"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Safety Hazmat Card -->
+        <div class="glass-card hazard-card">
+          <div class="card-header">
+            <h3>NFPA Hazard Data</h3>
+            <span class="badge hazard-badge">SAFETY CODES</span>
+          </div>
+          
+          <div class="hazard-split">
+            <!-- Reactant NFPA Diamond -->
+            <div class="nfpa-diamond-container">
+              <div class="nfpa-title" id="nfpa-chemical-name">HCl</div>
+              <div class="nfpa-diamond">
+                <div class="nfpa-quad health" id="nfpa-health">3</div>
+                <div class="nfpa-quad fire" id="nfpa-fire">0</div>
+                <div class="nfpa-quad instability" id="nfpa-instability">1</div>
+                <div class="nfpa-quad special" id="nfpa-special">W</div>
+              </div>
+            </div>
+            
+            <div class="hazard-details" id="hazard-text-log">
+              <!-- Dynamically populated danger alerts -->
+              <div class="alert danger"><strong>Corrosive:</strong> Causes severe skin burns and eye damage.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Center Panel: The Reaction Beaker -->
+      <section class="beaker-column">
+        <div class="glass-card beaker-card">
+          <div class="card-header">
+            <h3>Molecular Collision Beaker</h3>
+            <span class="badge live-badge" id="thermal-glow-indicator">STABLE</span>
+          </div>
+          
+          <div class="beaker-container-outer">
+            <!-- Beaker Glass Ring Representation -->
+            <div class="beaker-glass-glow" id="beaker-glow-envelope">
+              <div class="beaker-water-fill" id="beaker-liquid-fill"></div>
+              <canvas id="beaker-canvas"></canvas>
+            </div>
+            
+            <!-- Real-time particles telemetry overlay -->
+            <div class="beaker-telemetry">
+              <div>System State: <span id="telemetry-state" class="text-success">RUNNING</span></div>
+              <div>Reactant A (Red): <span id="count-a">0</span></div>
+              <div>Reactant B (Blue): <span id="count-b">0</span></div>
+              <div>Products (Green/Yellow): <span id="count-prod">0</span></div>
+            </div>
+          </div>
+
+          <div class="beaker-actions">
+            <button id="btn-play" class="glow-button primary" title="Play simulation">Play</button>
+            <button id="btn-pause" class="glow-button secondary" title="Pause simulation">Pause</button>
+            <button id="btn-reset" class="glow-button danger" title="Reset beaker particles">Reset</button>
+            <button id="btn-add-reactants" class="glow-button success" title="Inject reactants">Inject Reactants</button>
+          </div>
+
+          <div class="particles-legend">
+            <span class="legend-item"><span class="legend-dot particle-red"></span> Reactant A</span>
+            <span class="legend-item"><span class="legend-dot particle-blue"></span> Reactant B</span>
+            <span class="legend-item"><span class="legend-dot particle-green"></span> Product C</span>
+            <span class="legend-item"><span class="legend-dot particle-yellow"></span> Insoluble Salt</span>
+            <span class="legend-item"><span class="legend-dot particle-grey"></span> Bubble (Gas)</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Panel: Graphs & Analytics -->
+      <section class="analytics-column">
+        <!-- Concentration Over Time Graph -->
+        <div class="glass-card graph-card">
+          <div class="card-header">
+            <h3>Reaction Rate Telemetry</h3>
+            <span class="badge tech-badge">LIVE CHART</span>
+          </div>
+          <div class="chart-container">
+            <canvas id="concentration-chart"></canvas>
+          </div>
+          <div class="chart-labels">
+            <span class="label-color color-reactants">Reactants</span>
+            <span class="label-color color-products">Products</span>
+          </div>
+        </div>
+
+        <!-- Thermodynamics Energy Profile Diagram -->
+        <div class="glass-card energy-card">
+          <div class="card-header">
+            <h3>Potential Energy Profile</h3>
+          </div>
+          <div class="energy-svg-wrapper">
+            <svg id="energy-profile-svg" viewBox="0 0 300 180" width="100%"></svg>
+          </div>
+          <div class="thermo-metrics">
+            <div>Reaction Type: <span id="lbl-reaction-thermo" class="font-mono text-danger">EXOTHERMIC</span></div>
+            <div>ΔH: <span id="lbl-delta-h" class="font-mono">-184 kJ/mol</span></div>
+            <div>Ea (Catalyzed): <span id="lbl-ea-val" class="font-mono">15 kJ/mol</span></div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <div class="footer-left">
+        <span>CHEM-LAB // SYSTEM TERMINAL</span>
+        <span class="dot-separator">•</span>
+        <span>HTML5 CANVAS PHYSICS ENGINE</span>
+      </div>
+      <div class="footer-right">
+        <span>Collision-frequency kinetics tracker</span>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
