@@ -1,0 +1,17 @@
+{
+  "title": "JWT Token Decoder",
+  "description": "A cryptographic identity debugging cockpit for JWT inspection with three-segment token decomposition, base64url padding reconstruction (4 - len % 4) % 4, try/catch exception handling, live ticking expiration chronometer via setInterval, claims validation, and three preset token configurations (valid admin, expired session, malformed).",
+  "entry": "index.html",
+  "tags": [
+    "jwt",
+    "token",
+    "decoder",
+    "cryptographic",
+    "claims",
+    "base64url"
+  ],
+  "author": {
+    "name": "Girish Madarkar",
+    "github": "Girish0902"
+  }
+}
