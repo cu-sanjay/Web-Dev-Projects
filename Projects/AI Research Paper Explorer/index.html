@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>AI Research Paper Explorer</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="app-container">
+  <header><div class="brand"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><div><h1>AI RESEARCH PAPER EXPLORER</h1><p>Browse · Search · Discover AI Research</p></div></div>
+    <div class="search-bar"><input type="text" id="search-input" placeholder="Search papers by title, author, or keyword..."><button id="btn-search" class="btn">Search</button></div></header>
+  <div class="main-layout">
+    <aside class="filter-panel">
+      <h3>Categories</h3>
+      <div class="filter-list" id="filter-list">
+        <button class="filter-btn active" data-cat="all">All</button>
+        <button class="filter-btn" data-cat="nlp">NLP</button>
+        <button class="filter-btn" data-cat="cv">Computer Vision</button>
+        <button class="filter-btn" data-cat="rl">Reinforcement Learning</button>
+        <button class="filter-btn" data-cat="gen">Generative AI</button>
+        <button class="filter-btn" data-cat="theory">Theory</button>
+      </div>
+      <h3>Year</h3>
+      <div class="filter-list" id="year-filter">
+        <button class="filter-btn active" data-year="all">All</button>
+        <button class="filter-btn" data-year="2024">2024</button>
+        <button class="filter-btn" data-year="2023">2023</button>
+        <button class="filter-btn" data-year="2022">2022</button>
+      </div>
+    </aside>
+    <main class="papers-area">
+      <div class="results-count"><span id="result-count">8</span> papers found</div>
+      <div class="papers-grid" id="papers-grid"></div>
+    </main>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
