@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Constitution Learning Hub — Explore articles, amendments, and test your knowledge with interactive quizzes.">
+  <title>Constitution Learning Hub</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <h1><span aria-hidden="true">&#x2696;</span> Constitution Learning Hub</h1>
+      <p class="subtitle">Articles &middot; Amendments &middot; Quiz</p>
+    </header>
+
+    <nav class="tab-bar" role="tablist" aria-label="Sections">
+      <button class="tab-btn active" role="tab" aria-selected="true" data-tab="articles">Articles</button>
+      <button class="tab-btn" role="tab" aria-selected="false" data-tab="amendments">Amendments</button>
+      <button class="tab-btn" role="tab" aria-selected="false" data-tab="quiz">Quiz Mode</button>
+    </nav>
+
+    <main class="content">
+      <section class="tab-panel active" id="panel-articles" role="tabpanel">
+        <div class="search-bar">
+          <input type="text" id="articleSearch" placeholder="Search articles..." aria-label="Search articles">
+          <select id="articleFilter" aria-label="Filter by part">
+            <option value="all">All Parts</option>
+          </select>
+        </div>
+        <div class="card-grid" id="articleList"></div>
+      </section>
+
+      <section class="tab-panel" id="panel-amendments" role="tabpanel">
+        <div class="search-bar">
+          <input type="text" id="amendSearch" placeholder="Search amendments..." aria-label="Search amendments">
+        </div>
+        <div class="card-grid" id="amendList"></div>
+      </section>
+
+      <section class="tab-panel" id="panel-quiz" role="tabpanel">
+        <div class="quiz-container" id="quizContainer">
+          <div class="quiz-header">
+            <div class="quiz-progress" id="quizProgress">Question 1 / 10</div>
+            <div class="quiz-score" id="quizScore">Score: 0</div>
+          </div>
+          <div class="quiz-card" id="quizCard">
+            <p class="quiz-question" id="quizQuestion"></p>
+            <div class="quiz-options" id="quizOptions"></div>
+          </div>
+          <div class="quiz-feedback" id="quizFeedback"></div>
+          <div class="quiz-controls">
+            <button class="btn" id="quizNext" disabled>Next</button>
+            <button class="btn secondary" id="quizRestart">Restart</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Constitution Learning Hub &mdash; Educational Reference</p>
+    </footer>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
