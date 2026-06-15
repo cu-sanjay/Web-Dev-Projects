@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wave Propagation Simulator - Interactive 1D & 2D Physics Visualizer</title>
+  <meta name="description" content="Explore wave mechanics, harmonics, diffraction, and Young's double-slit interference with this interactive real-time client-side physics simulator.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-title-wrapper">
+        <div class="pulse-indicator"></div>
+        <h1>WAVE PROPAGATION SIMULATOR</h1>
+        <span class="version-tag">v2.1.0-PHYSICS</span>
+      </div>
+      <p class="header-subtitle">Interactive 1D & 2D Finite-Difference Hyperbolic Solver & Harmonic Wave Modeler</p>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="dashboard-grid">
+      
+      <!-- Left Sidebar: Controls & Parameters -->
+      <section class="panel panel-left" aria-labelledby="controls-heading">
+        <h2 id="controls-heading" class="panel-title">CONTROL PANEL</h2>
+        
+        <!-- Simulation Mode Toggle -->
+        <div class="control-group">
+          <label class="control-label">SIMULATION ARCHITECTURE</label>
+          <div class="mode-selector">
+            <button id="btn-mode-1d-transverse" class="mode-btn active" data-mode="1d-transverse">
+              <span class="mode-icon">〰️</span>
+              <span class="mode-text">1D Transverse</span>
+            </button>
+            <button id="btn-mode-1d-longitudinal" class="mode-btn" data-mode="1d-longitudinal">
+              <span class="mode-icon">🪱</span>
+              <span class="mode-text">1D Longitudinal</span>
+            </button>
+            <button id="btn-mode-2d-ripple" class="mode-btn" data-mode="2d-ripple">
+              <span class="mode-icon">🌀</span>
+              <span class="mode-text">2D Sandbox</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Dynamic Parameters -->
+        <div class="control-group">
+          <div class="group-header">
+            <label class="control-label">PHYSICS COUPLING</label>
+            <button id="btn-reset-params" class="text-btn" title="Reset parameters to default">Reset Values</button>
+          </div>
+          
+          <!-- Wave Speed (c) -->
+          <div class="slider-wrapper">
+            <div class="slider-label-row">
+              <label for="slider-wave-speed" id="lbl-wave-speed">Propagation Speed (c)</label>
+              <span id="val-wave-speed" class="slider-val">1.00</span>
+            </div>
+            <input type="range" id="slider-wave-speed" min="0.2" max="2.0" step="0.05" value="1.00" aria-labelledby="lbl-wave-speed">
+          </div>
+
+          <!-- Frequency (f) -->
+          <div class="slider-wrapper">
+            <div class="slider-label-row">
+              <label for="slider-frequency" id="lbl-frequency">Driver Frequency (f)</label>
+              <span id="val-frequency" class="slider-val">1.50 Hz</span>
+            </div>
+            <input type="range" id="slider-frequency" min="0.1" max="4.0" step="0.05" value="1.50" aria-labelledby="lbl-frequency">
+          </div>
+
+          <!-- Amplitude (A) -->
+          <div class="slider-wrapper">
+            <div class="slider-label-row">
+              <label for="slider-amplitude" id="lbl-amplitude">Wave Amplitude (A)</label>
+              <span id="val-amplitude" class="slider-val">1.20</span>
+            </div>
+            <input type="range" id="slider-amplitude" min="0.1" max="2.5" step="0.05" value="1.20" aria-labelledby="lbl-amplitude">
+          </div>
+
+          <!-- Damping (gamma) -->
+          <div class="slider-wrapper">
+            <div class="slider-label-row">
+              <label for="slider-damping" id="lbl-damping">Medium Damping (γ)</label>
+              <span id="val-damping" class="slider-val">0.005</span>
+            </div>
+            <input type="range" id="slider-damping" min="0.000" max="0.050" step="0.001" value="0.005" aria-labelledby="lbl-damping">
+          </div>
+        </div>
+
+        <!-- 1D Specific Boundary Options -->
+        <div id="section-1d-options" class="control-group">
+          <label class="control-label">BOUNDARY CONDITIONS (1D)</label>
+          <div class="select-wrapper">
+            <select id="select-1d-boundary" aria-label="1D boundary condition">
+              <option value="absorbing">Absorbing End (Infinite String)</option>
+              <option value="fixed">Fixed End (Reflection with Phase Inversion)</option>
+              <option value="free">Free End (Reflection without Phase Inversion)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- 2D Specific Brush & Sandbox Options -->
+        <div id="section-2d-options" class="control-group hidden">
+          <label class="control-label">INTERACTIVE VECTOR BRUSH</label>
+          <div class="brush-selector">
+            <button id="btn-brush-source" class="brush-btn active" data-brush="source">
+              <span class="brush-color dot-source"></span>
+              Add Wave Source
+            </button>
+            <button id="btn-brush-wall" class="brush-btn" data-brush="wall">
+              <span class="brush-color dot-wall"></span>
+              Draw Wall Barrier
+            </button>
+            <button id="btn-brush-erase" class="brush-btn" data-brush="erase">
+              <span class="brush-color dot-erase"></span>
+              Erase (Wall/Source)
+            </button>
+            <button id="btn-brush-inspect" class="brush-btn" data-brush="inspect">
+              <span class="brush-color dot-inspect"></span>
+              Move Telemetry Probe
+            </button>
+          </div>
+          
+          <div class="slider-wrapper margin-top">
+            <div class="slider-label-row">
+              <label for="slider-brush-size" id="lbl-brush-size">Brush Radius</label>
+              <span id="val-brush-size" class="slider-val">2 px</span>
+            </div>
+            <input type="range" id="slider-brush-size" min="1" max="6" step="1" value="2" aria-labelledby="lbl-brush-size">
+          </div>
+
+          <div class="checkbox-wrapper">
+            <label class="checkbox-label" for="chk-absorbing-boundaries">
+              <input type="checkbox" id="chk-absorbing-boundaries" checked>
+              <span class="checkbox-custom"></span>
+              Engage Absorbing Boundaries
+            </label>
+          </div>
+        </div>
+
+        <!-- Instructions Panel -->
+        <div class="panel-info">
+          <h3>📌 Quick Operator Guide</h3>
+          <div id="guide-text" class="guide-scroll">
+            Select "1D Transverse" to inspect waves vibrating on a string. You can modify wave metrics on the fly, or click the standing wave harmonics on the right to visualize resonance modes.
+          </div>
+        </div>
+      </section>
+
+      <!-- Center Panel: The Physics Sandbox Canvas -->
+      <section class="panel panel-center" aria-labelledby="canvas-heading">
+        <div class="canvas-header-row">
+          <h2 id="canvas-heading" class="panel-title">OBSERVATION CHAMBER</h2>
+          <div id="sim-status-badge" class="status-badge live">LIVE</div>
+        </div>
+
+        <div class="canvas-container">
+          <!-- Main Canvas -->
+          <canvas id="sim-canvas" width="600" height="400"></canvas>
+          
+          <!-- Floating UI Hud Details -->
+          <div class="canvas-hud">
+            <div class="hud-item">
+              <span class="hud-label">FPS:</span>
+              <span id="hud-fps" class="hud-value">--</span>
+            </div>
+            <div class="hud-item">
+              <span class="hud-label">Active Drivers:</span>
+              <span id="hud-sources" class="hud-value">0</span>
+            </div>
+            <div class="hud-item">
+              <span class="hud-label">Stability Index (C):</span>
+              <span id="hud-stability" class="hud-value">0.40</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Simulation Scrubbers & Playback -->
+        <div class="playback-controls">
+          <button id="btn-play-pause" class="playback-btn primary" title="Play/Pause simulation">
+            <span id="play-icon">⏸️</span> <span id="play-text">Pause</span>
+          </button>
+          <button id="btn-step" class="playback-btn" title="Simulate one timestep forward">
+            <span>⏯️</span> Step Frame
+          </button>
+          <button id="btn-clear" class="playback-btn warning" title="Clear canvas of all waves/walls">
+            <span>🧹</span> Clear Simulator
+          </button>
+          
+          <div class="speed-control">
+            <span class="speed-label">TIME WARP:</span>
+            <div class="speed-options">
+              <button class="speed-btn" data-speed="0.25">0.25x</button>
+              <button class="speed-btn" data-speed="0.5">0.5x</button>
+              <button class="speed-btn active" data-speed="1.0">1.0x</button>
+              <button class="speed-btn" data-speed="2.0">2.0x</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Panel: Presets, Oscilloscope & Observatory Logs -->
+      <section class="panel panel-right" aria-labelledby="telemetry-heading">
+        <h2 id="telemetry-heading" class="panel-title">PRESETS & TELEMETRY</h2>
+
+        <!-- Presets Section -->
+        <div class="control-group">
+          <label class="control-label">PHYSICAL CONFIGURATIONS (PRESETS)</label>
+          
+          <!-- 1D Presets List -->
+          <div id="presets-1d" class="presets-grid">
+            <button class="preset-btn" data-preset="1d-harmonic-1">Fundamental (n=1)</button>
+            <button class="preset-btn" data-preset="1d-harmonic-2">2nd Harmonic (n=2)</button>
+            <button class="preset-btn" data-preset="1d-harmonic-3">3rd Harmonic (n=3)</button>
+            <button class="preset-btn" data-preset="1d-harmonic-4">4th Harmonic (n=4)</button>
+            <button class="preset-btn" data-preset="1d-pulse">Reflective Pulse</button>
+          </div>
+
+          <!-- 2D Presets List -->
+          <div id="presets-2d" class="presets-grid hidden">
+            <button class="preset-btn" data-preset="2d-double-slit">Young's Double Slit</button>
+            <button class="preset-btn" data-preset="2d-single-slit">Single Slit Diffraction</button>
+            <button class="preset-btn" data-preset="2d-parabolic">Parabolic Mirror Focus</button>
+            <button class="preset-btn" data-preset="2d-corner-reflector">90° Corner Reflector</button>
+            <button class="preset-btn" data-preset="2d-standing-box">Closed Resonator Box</button>
+            <button class="preset-btn" data-preset="2d-pulse-ripple">Single Ripple Pulse</button>
+          </div>
+        </div>
+
+        <!-- Oscilloscope Graph / Amplitude Plotter -->
+        <div class="oscilloscope-container">
+          <div class="oscilloscope-header">
+            <span>📊 OSCILLOSCOPE TELEMETRY</span>
+            <span id="oscilloscope-coords">PROBE: FIXED CENTER</span>
+          </div>
+          <canvas id="oscilloscope-canvas" width="300" height="110"></canvas>
+          <div class="oscilloscope-footer">
+            <span>Amplitude displacement: <strong id="lbl-probe-amp">0.00</strong></span>
+            <span>Freq: <strong id="lbl-probe-freq">--</strong></span>
+          </div>
+        </div>
+
+        <!-- Observatory Logger Console -->
+        <div class="logger-container">
+          <div class="logger-header">
+            <span>📟 OBSERVATORY CONSOLE LOGS</span>
+            <button id="btn-clear-logs" class="text-btn">Clear Logs</button>
+          </div>
+          <div id="logger-console" class="logger-console-body">
+            <div class="log-entry log-sys">[SYS] Observatory initialized. Loaded core mechanics.</div>
+            <div class="log-entry log-phys">[PHYSICS] Active mode: 1D Transverse Wave on fixed boundary string.</div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p>Wave Propagation Simulator • Built using vanilla HTML5 Canvas, CSS3, & JS. Meets Courant numerical stability criteria ($C < 0.5$).</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
