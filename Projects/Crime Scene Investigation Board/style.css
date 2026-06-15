@@ -1,0 +1,35 @@
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0b1220;--surface:#111827;--secondary:#1f2937;--border:#334155;--primary:#f8fafc;--sec:#cbd5e1;--muted:#64748b;--accent:#ef4444;--radius:10px;--font-code:ui-monospace,Consolas,monospace;--font-ui:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+html{font-size:14px}
+body{font-family:var(--font-ui);background:var(--bg);color:var(--primary);height:100vh;overflow:hidden}
+.app-container{max-width:1500px;margin:0 auto;display:flex;flex-direction:column;height:100vh;padding:14px 18px;gap:10px}
+header{display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.brand{display:flex;align-items:center;gap:10px}
+.brand h1{font-size:14px;font-weight:700;letter-spacing:.8px}
+.brand p{font-size:10px;color:var(--muted)}
+.btn{padding:6px 12px;border:1px solid var(--border);border-radius:5px;background:var(--secondary);color:var(--sec);font-size:10px;cursor:pointer;font-family:var(--font-ui);transition:all .3s}
+.btn-sm{padding:4px 10px;font-size:10px}
+.btn:hover{background:var(--surface);border-color:var(--accent)}
+.main-layout{display:grid;grid-template-columns:200px 1fr;gap:12px;flex:1;min-height:0}
+@media(max-width:850px){.main-layout{grid-template-columns:1fr}}
+.tools-panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;display:flex;flex-direction:column;gap:8px;overflow-y:auto}
+.tools-panel h3{font-size:11px;font-weight:600;color:var(--sec);text-transform:uppercase;letter-spacing:.5px}
+.evidence-list,.suspect-list{display:flex;flex-direction:column;gap:4px}
+.ev-item,.sus-item{padding:6px 10px;background:var(--secondary);border:1px solid var(--border);border-radius:5px;font-size:11px;cursor:grab;transition:all .3s}
+.ev-item:hover,.sus-item:hover{border-color:var(--accent);background:var(--surface)}
+.timeline-input{display:flex;gap:4px}
+#tl-input{flex:1;padding:6px 8px;background:var(--secondary);border:1px solid var(--border);border-radius:4px;color:var(--primary);font-size:10px;outline:none;font-family:var(--font-ui)}
+#tl-input:focus{border-color:var(--accent)}
+.tl-list{display:flex;flex-direction:column;gap:3px}
+.tl-item{padding:4px 8px;background:var(--secondary);border-radius:4px;font-size:10px;color:var(--muted);border-left:2px solid var(--accent)}
+.board-area{display:flex;flex-direction:column}
+.board{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;min-height:400px}
+#board-svg{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none}
+.board-item{position:absolute;padding:8px 14px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;transition:transform .2s;z-index:2;white-space:nowrap}
+.board-item:hover{transform:scale(1.05)}
+.board-item.evidence{background:#2e1a1a;border:2px solid #ef4444;color:#ef4444}
+.board-item.suspect{border:2px solid #3b82f6;color:#3b82f6}
+.board-item.suspect.john{background:#1a1a2e}.board-item.suspect.jane{background:#1a2e1a}.board-item.suspect.bob{background:#2e1a2e}
+.board-item .remove-btn{position:absolute;top:-8px;right:-8px;width:16px;height:16px;border-radius:50%;background:#ef4444;color:#fff;font-size:9px;border:none;cursor:pointer;display:none;align-items:center;justify-content:center}
+.board-item:hover .remove-btn{display:flex}
+.board-instructions{color:var(--muted);font-size:11px;text-align:center;pointer-events:none;z-index:1}

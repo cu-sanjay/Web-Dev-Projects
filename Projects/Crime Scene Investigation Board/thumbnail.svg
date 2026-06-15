@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0b1220"/><stop offset="100%" stop-color="#1a0a0a"/></linearGradient></defs>
+  <rect width="1280" height="720" fill="url(#g)"/>
+  <!-- board -->
+  <rect x="100" y="150" width="1080" height="420" rx="8" fill="#111827" stroke="#334155" stroke-width="2"/>
+  <!-- evidence on board -->
+  <rect x="200" y="220" width="100" height="35" rx="6" fill="#2e1a1a" stroke="#ef4444" stroke-width="2"/>
+  <text x="250" y="243" text-anchor="middle" font-family="monospace" font-size="11" fill="#ef4444">🖐️ Fingerprint</text>
+  <rect x="500" y="200" width="90" height="35" rx="6" fill="#2e1a1a" stroke="#ef4444" stroke-width="2"/>
+  <text x="545" y="223" text-anchor="middle" font-family="monospace" font-size="11" fill="#ef4444">🔪 Weapon</text>
+  <rect x="800" y="240" width="90" height="35" rx="6" fill="#2e1a1a" stroke="#ef4444" stroke-width="2"/>
+  <text x="845" y="263" text-anchor="middle" font-family="monospace" font-size="11" fill="#ef4444">📝 Letter</text>
+  <!-- suspects -->
+  <rect x="300" y="360" width="100" height="35" rx="6" fill="#1a1a2e" stroke="#3b82f6" stroke-width="2"/>
+  <text x="350" y="383" text-anchor="middle" font-family="monospace" font-size="11" fill="#3b82f6">👤 John Doe</text>
+  <rect x="600" y="380" width="100" height="35" rx="6" fill="#1a2e1a" stroke="#3b82f6" stroke-width="2"/>
+  <text x="650" y="403" text-anchor="middle" font-family="monospace" font-size="11" fill="#3b82f6">👩 Jane Smith</text>
+  <!-- connection lines -->
+  <line x1="300" y1="255" x2="545" y2="235" stroke="#ef4444" stroke-width="2" stroke-dasharray="6 3" opacity=".5"/>
+  <line x1="590" y1="235" x2="845" y2="275" stroke="#ef4444" stroke-width="2" stroke-dasharray="6 3" opacity=".5"/>
+  <line x1="300" y1="255" x2="350" y2="360" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="4 4" opacity=".3"/>
+  <text x="640" y="100" text-anchor="middle" font-family="ui-monospace,monospace" font-size="26" font-weight="800" fill="#f8fafc" letter-spacing="1">CRIME SCENE INVESTIGATION BOARD</text>
+  <text x="640" y="125" text-anchor="middle" font-family="ui-monospace,monospace" font-size="13" fill="#64748b">Pin Evidence · Connect Suspects · Reconstruct Timeline</text>
+</svg>
