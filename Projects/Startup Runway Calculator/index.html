@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Startup Runway Calculator</title>
+  <!-- Google Fonts: Outfit (headings) and Inter (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="glow-bg"></div>
+
+  <!-- HEADER -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="logo">
+        <i class="fa-solid fa-chart-line glow-icon"></i>
+        <h1>Runway<span>Sync</span></h1>
+        <span class="badge">Pro Forecaster</span>
+      </div>
+      
+      <div class="header-stats">
+        <div class="header-stat">
+          <span class="h-label">Global Health Status</span>
+          <span id="lbl-header-status" class="status-indicator status-green">DEFAULT ALIVE</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="main-container">
+    
+    <!-- LEFT COLUMN: INPUTS & PARAMETERS -->
+    <aside class="sidebar-column" aria-label="Financial parameters entry forms">
+      
+      <!-- Core Capital Section -->
+      <section class="section-card">
+        <div class="card-header-row">
+          <h3><i class="fa-solid fa-vault"></i> Core Capital</h3>
+        </div>
+        
+        <div class="form-group">
+          <label for="txt-cash">Current Cash Balance ($)</label>
+          <input type="number" id="txt-cash" value="500000" min="0" step="1000">
+        </div>
+      </section>
+
+      <!-- Revenue & Growth Section -->
+      <section class="section-card">
+        <div class="card-header-row">
+          <h3><i class="fa-solid fa-hand-holding-dollar"></i> Revenues &amp; Growth</h3>
+        </div>
+
+        <div class="form-group">
+          <label for="txt-revenue">Current Monthly Revenue ($)</label>
+          <input type="number" id="txt-revenue" value="25000" min="0" step="500">
+        </div>
+
+        <div class="form-group">
+          <div class="slider-label-row">
+            <label for="slider-growth">Monthly Growth Rate (%)</label>
+            <span class="slider-val" id="lbl-growth-val">5%</span>
+          </div>
+          <input type="range" id="slider-growth" min="-10" max="30" value="5" step="1">
+        </div>
+      </section>
+
+      <!-- Operating Expenses Section (OpEx) -->
+      <section class="section-card">
+        <div class="card-header-row">
+          <h3><i class="fa-solid fa-receipt"></i> Monthly OpEx</h3>
+        </div>
+
+        <div class="form-group">
+          <label for="txt-payroll">Salaries &amp; Payroll ($)</label>
+          <input type="number" id="txt-payroll" value="40000" min="0" step="500">
+        </div>
+
+        <div class="form-group">
+          <label for="txt-marketing">Marketing &amp; Growth ($)</label>
+          <input type="number" id="txt-marketing" value="8000" min="0" step="500">
+        </div>
+
+        <div class="form-group">
+          <label for="txt-saas">SaaS &amp; Servers ($)</label>
+          <input type="number" id="txt-saas" value="3000" min="0" step="100">
+        </div>
+
+        <div class="form-group">
+          <label for="txt-rent">Office Space &amp; Overhead ($)</label>
+          <input type="number" id="txt-rent" value="4000" min="0" step="100">
+        </div>
+
+        <div class="form-group">
+          <label for="txt-misc">Legal &amp; Administrative ($)</label>
+          <input type="number" id="txt-misc" value="2000" min="0" step="100">
+        </div>
+      </section>
+
+      <button id="btn-reset-workspace" class="footer-btn"><i class="fa-solid fa-trash-can"></i> Clear Projections Memory</button>
+    </aside>
+
+    <!-- CENTER COLUMN: FORECAST FORECASTER AND SVG CHART -->
+    <section class="chart-column" aria-label="Financial projection charts and metrics">
+      
+      <!-- Metrics summary dashboard -->
+      <div class="metrics-grid">
+        
+        <div class="metric-card">
+          <span class="m-lbl">Runway Remaining</span>
+          <span class="m-val" id="lbl-runway">0.0 mo</span>
+          <span class="m-sub" id="lbl-runway-urgency">Evaluating...</span>
+        </div>
+
+        <div class="metric-card">
+          <span class="m-lbl">Monthly Net Burn</span>
+          <span class="m-val text-rose" id="lbl-net-burn">$0</span>
+          <span class="m-sub" id="lbl-burn-sub">Revenues vs Expenses</span>
+        </div>
+
+        <div class="metric-card">
+          <span class="m-lbl">Zero Cash Date</span>
+          <span class="m-val text-amber" id="lbl-zero-date">--/--</span>
+          <span class="m-sub" id="lbl-date-sub">Estimated depletion</span>
+        </div>
+
+        <div class="metric-card">
+          <span class="m-lbl">Core Status</span>
+          <span class="m-val" id="lbl-classification">---</span>
+          <span class="m-sub" id="lbl-status-sub">Profitability Index</span>
+        </div>
+
+      </div>
+
+      <!-- Projection line graph workspace -->
+      <section class="section-card chart-card">
+        <div class="card-header-row">
+          <h3><i class="fa-solid fa-chart-area"></i> 24-Month Cash Balance Projection</h3>
+          <div class="chart-legend">
+            <span class="legend-item"><span class="legend-dot dot-cyan"></span> Projected Cash</span>
+            <span class="legend-item"><span class="legend-dot dot-emerald"></span> Revenue</span>
+          </div>
+        </div>
+
+        <div class="chart-container" id="chart-container">
+          <!-- The SVG elements drawn dynamically in script.js -->
+          <svg id="projection-svg" viewBox="0 0 800 320" preserveAspectRatio="xMidYMid meet">
+            <!-- Drawn via JavaScript -->
+          </svg>
+        </div>
+      </section>
+
+      <!-- Monthly Breakdown Data Table (collapsible/scrollable list) -->
+      <section class="section-card table-card">
+        <div class="card-header-row">
+          <h3><i class="fa-solid fa-list-check"></i> Monthly Forecast Ledgers</h3>
+        </div>
+        <div class="table-wrapper">
+          <table class="forecast-table">
+            <thead>
+              <tr>
+                <th>Month</th>
+                <th>Starting Cash</th>
+                <th>Revenue</th>
+                <th>OpEx</th>
+                <th>Net Burn</th>
+                <th>Ending Cash</th>
+              </tr>
+            </thead>
+            <tbody id="forecast-table-body">
+              <!-- Dynamically populated table lists -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </section>
+
+    <!-- RIGHT COLUMN: SCENARIOS & ADVISORS FEED -->
+    <aside class="sidebar-column" aria-label="Scenario modeling and advice feeds">
+      
+      <!-- Scenario planning snapshot vault -->
+      <section class="section-card scenario-card">
+        <div class="card-header-row">
+          <h3><i class="fa-solid fa-boxes-packing"></i> Scenario Vault</h3>
+        </div>
+
+        <div class="scenario-save-form">
+          <div class="form-group">
+            <label for="txt-scenario-name">Scenario Name</label>
+            <input type="text" id="txt-scenario-name" placeholder="e.g. Aggressive Hiring Push..." autocomplete="off">
+          </div>
+          <button id="btn-save-scenario" class="btn btn-primary btn-sm"><i class="fa-solid fa-cloud-arrow-up"></i> Save Current Plan</button>
+        </div>
+
+        <div class="saved-scenarios-section">
+          <h5>Saved Configurations</h5>
+          <ul class="scenario-ul" id="scenario-list">
+            <!-- Dynamically populated scenario items -->
+          </ul>
+        </div>
+      </section>
+
+      <!-- Advisory recommendations feed -->
+      <section class="section-card advisory-card">
+        <div class="card-header-row">
+          <h3><i class="fa-solid fa-wand-magic-sparkles"></i> Runway Intelligence</h3>
+        </div>
+        <div class="advisory-feed" id="recommendations-feed">
+          <!-- Context alerts dynamically placed -->
+        </div>
+      </section>
+
+    </aside>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="app-footer">
+    <div class="footer-container">
+      <p>&copy; 2026 RunwaySync Dashboard. Built for the <a href="https://github.com/cu-sanjay/Web-Dev-Projects" target="_blank" rel="noopener noreferrer">Web Dev Projects</a> repository showcase.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
