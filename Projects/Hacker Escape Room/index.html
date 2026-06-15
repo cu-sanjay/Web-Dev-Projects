@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Hacker Escape Room</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="app-container">
+  <header><div class="brand"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><div><h1>HACKER ESCAPE ROOM</h1><p>Crack the Code · Escape the System</p></div></div><div class="timer"><span class="timer-label">TIME</span><span id="timer-display">15:00</span></div></header>
+  <div class="main-layout">
+    <aside class="terminal-panel">
+      <div class="terminal" id="terminal"><div class="terminal-output" id="terminal-output"><div class="line"><span class="prompt">$</span> Welcome to the Hacker Escape Room.</div><div class="line"><span class="prompt">$</span> Complete all 5 challenges to escape.</div></div>
+        <div class="terminal-input-line"><span class="prompt">$</span><input type="text" id="terminal-input" class="terminal-input" placeholder="type command..." autofocus></div></div>
+      <div class="hints"><span class="hint-label">HINT:</span><span id="hint-text">Use "help" to see available commands</span></div>
+    </aside>
+    <main class="challenge-area">
+      <div class="challenge-header"><h2 id="challenge-title">Challenge 1: Port Scan</h2><span class="challenge-status" id="challenge-status">🔒 Locked</span></div>
+      <div class="challenge-body" id="challenge-body">
+        <div class="challenge-desc" id="challenge-desc">Scan the network to find open ports. Use: scan [ip]</div>
+        <div class="challenge-visual" id="challenge-visual">
+          <div class="port-grid" id="port-grid">
+            <div class="port" data-port="22">22 SSH</div><div class="port" data-port="80">80 HTTP</div><div class="port" data-port="443">443 HTTPS</div><div class="port" data-port="3306">3306 MySQL</div><div class="port" data-port="8080">8080 Proxy</div>
+            <div class="port" data-port="21">21 FTP</div><div class="port" data-port="25">25 SMTP</div><div class="port" data-port="53">53 DNS</div><div class="port" data-port="6379">6379 Redis</div><div class="port" data-port="27017">27017 Mongo</div>
+          </div>
+        </div>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+      <div class="progress-labels"><span>1/5</span><span>2/5</span><span>3/5</span><span>4/5</span><span>5/5</span></div>
+    </main>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
