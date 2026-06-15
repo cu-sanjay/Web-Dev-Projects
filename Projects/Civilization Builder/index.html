@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Civilization Builder</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="app-container">
+  <header><div class="brand"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="12" y1="3" x2="12" y2="21"/></svg><div><h1>CIVILIZATION BUILDER</h1><p>City-Building Strategy Game</p></div></div>
+    <div class="header-stats"><span>Turn <span id="turn-display">1</span></span><span>👥 <span id="pop-display">10</span></span><span>💰 <span id="gold-display">100</span></span><span>🌾 <span id="food-display">50</span></span></div></header>
+  <div class="main-layout">
+    <aside class="build-panel">
+      <h3>Buildings</h3>
+      <div class="build-list" id="build-list">
+        <button class="build-btn" data-building="house">House 🏠<span class="cost">20💰</span></button>
+        <button class="build-btn" data-building="farm">Farm 🌾<span class="cost">15💰</span></button>
+        <button class="build-btn" data-building="mine">Mine ⛏️<span class="cost">30💰</span></button>
+        <button class="build-btn" data-building="market">Market 🏪<span class="cost">40💰</span></button>
+        <button class="build-btn" data-building="barracks">Barracks ⚔️<span class="cost">50💰</span></button>
+        <button class="build-btn" data-building="library">Library 📚<span class="cost">60💰</span></button>
+      </div>
+      <button id="btn-next" class="btn btn-primary">Next Turn ⏭️</button>
+      <button id="btn-reset" class="btn">Reset Game</button>
+    </aside>
+    <main class="game-area">
+      <div class="grid-container" id="grid-container"><div class="grid" id="grid"></div></div>
+      <div class="game-log" id="game-log"><div class="log-entry">Game started. Turn 1.</div></div>
+    </main>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

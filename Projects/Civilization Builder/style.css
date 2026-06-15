@@ -1,0 +1,38 @@
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0b1220;--surface:#111827;--secondary:#1f2937;--border:#334155;--primary:#f8fafc;--sec:#cbd5e1;--muted:#64748b;--accent:#f97316;--radius:10px;--font-ui:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+html{font-size:14px}
+body{font-family:var(--font-ui);background:var(--bg);color:var(--primary);height:100vh;overflow:hidden}
+.app-container{max-width:1500px;margin:0 auto;display:flex;flex-direction:column;height:100vh;padding:14px 18px;gap:10px}
+header{display:flex;align-items:center;justify-content:space-between;flex-shrink:0;flex-wrap:wrap;gap:8px}
+.brand{display:flex;align-items:center;gap:10px}
+.brand h1{font-size:14px;font-weight:700;letter-spacing:.8px}
+.brand p{font-size:10px;color:var(--muted)}
+.header-stats{display:flex;gap:14px;font-size:12px;font-family:ui-monospace,monospace}
+.header-stats span{color:var(--sec)}
+.header-stats span span{color:var(--accent);font-weight:700}
+.main-layout{display:grid;grid-template-columns:180px 1fr;gap:12px;flex:1;min-height:0}
+@media(max-width:800px){.main-layout{grid-template-columns:1fr}}
+.build-panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;display:flex;flex-direction:column;gap:6px;overflow-y:auto}
+.build-panel h3{font-size:11px;font-weight:600;color:var(--sec);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.build-list{display:flex;flex-direction:column;gap:4px}
+.build-btn{display:flex;justify-content:space-between;padding:8px 10px;border:1px solid var(--border);border-radius:6px;background:var(--secondary);color:var(--sec);font-size:11px;font-weight:600;cursor:pointer;transition:all .3s;font-family:var(--font-ui)}
+.build-btn:hover{background:var(--surface);border-color:var(--accent);color:var(--primary)}
+.build-btn .cost{font-size:10px;color:var(--muted);font-family:ui-monospace,monospace}
+.btn{padding:8px 16px;border:1px solid var(--border);border-radius:6px;background:var(--secondary);color:var(--sec);font-size:11px;font-weight:600;cursor:pointer;text-align:center;transition:all .3s;font-family:var(--font-ui);margin-top:4px}
+.btn-primary{background:var(--accent);color:#000;border-color:var(--accent)}
+.btn-primary:hover{background:#fb923c}
+.btn:hover{background:var(--surface)}
+.game-area{display:grid;grid-template-rows:1fr auto;gap:10px;min-height:0}
+.grid-container{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:flex;align-items:center;justify-content:center;padding:10px}
+.grid{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;max-width:400px}
+.cell{aspect-ratio:1;background:var(--secondary);border:1px solid var(--border);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;transition:all .3s;min-width:40px;min-height:40px}
+.cell:hover{border-color:var(--accent);background:var(--surface)}
+.cell.building-house{background:#1e293b;border-color:#f97316}
+.cell.building-farm{background:#1a2e1a;border-color:#22c55e}
+.cell.building-mine{background:#2e1a1a;border-color:#a78bfa}
+.cell.building-market{background:#2e2e1a;border-color:#eab308}
+.cell.building-barracks{background:#2e1a2e;border-color:#ef4444}
+.cell.building-library{background:#1a1a2e;border-color:#3b82f6}
+.game-log{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:8px 12px;max-height:80px;overflow-y:auto}
+.log-entry{font-size:10px;color:var(--muted);padding:2px 0;font-family:ui-monospace,monospace}
+.log-entry:first-child{color:var(--sec)}

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs><linearGradient id="g" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#0b1220"/><stop offset="100%" stop-color="#1a1a0a"/></linearGradient></defs>
+  <rect width="1280" height="720" fill="url(#g)"/>
+  <!-- city grid -->
+  <rect x="390" y="200" width="500" height="400" rx="8" fill="none" stroke="#334155" stroke-width="2"/>
+  <g opacity=".6">
+    <rect x="400" y="210" width="75" height="60" rx="4" fill="#1e293b" stroke="#f97316" stroke-width="1.5"/>
+    <text x="438" y="248" text-anchor="middle" font-size="24">🏠</text>
+    <rect x="485" y="210" width="75" height="60" rx="4" fill="#1a2e1a" stroke="#22c55e" stroke-width="1.5"/>
+    <text x="523" y="248" text-anchor="middle" font-size="24">🌾</text>
+    <rect x="570" y="210" width="75" height="60" rx="4" fill="#2e1a1a" stroke="#a78bfa" stroke-width="1.5"/>
+    <text x="608" y="248" text-anchor="middle" font-size="24">⛏️</text>
+    <rect x="655" y="210" width="75" height="60" rx="4" fill="#2e2e1a" stroke="#eab308" stroke-width="1.5"/>
+    <text x="693" y="248" text-anchor="middle" font-size="24">🏪</text>
+    <rect x="740" y="210" width="75" height="60" rx="4" fill="#2e1a2e" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="778" y="248" text-anchor="middle" font-size="24">⚔️</text>
+    <rect x="400" y="280" width="75" height="60" rx="4" fill="#1a1a2e" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="438" y="318" text-anchor="middle" font-size="24">📚</text>
+    <rect x="485" y="280" width="155" height="60" rx="4" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+    <text x="563" y="318" text-anchor="middle" font-size="18" fill="#64748b">empty</text>
+    <rect x="650" y="280" width="155" height="60" rx="4" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+    <text x="728" y="318" text-anchor="middle" font-size="18" fill="#64748b">empty</text>
+  </g>
+  <rect x="440" y="400" width="400" height="40" rx="6" fill="#1f2937"/>
+  <text x="640" y="425" text-anchor="middle" font-family="ui-monospace,monospace" font-size="14" fill="#f97316">💰 100 &nbsp;&nbsp;🌾 50 &nbsp;&nbsp;👥 10 &nbsp;&nbsp;Turn 1</text>
+  <text x="640" y="100" text-anchor="middle" font-family="ui-monospace,monospace" font-size="26" font-weight="800" fill="#f8fafc" letter-spacing="1">CIVILIZATION BUILDER</text>
+  <text x="640" y="125" text-anchor="middle" font-family="ui-monospace,monospace" font-size="13" fill="#64748b">City-Building Strategy Game</text>
+</svg>
