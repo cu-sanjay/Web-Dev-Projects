@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interview Conversation Simulator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container" role="application" aria-label="Interview Conversation Simulator">
+    <aside class="left-panel" role="region" aria-label="Interview session">
+      <div class="panel-header">
+        <div class="brand">
+          <svg class="brand-icon" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+            <path d="M12 2a10 10 0 00-7.07 17.07l-1.41 1.41a1 1 0 00.7 1.71H12a10 10 0 000-20z" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round"/>
+            <path d="M12 6v6l4 2" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <div class="brand-text">
+            <h1>INTERVIEW SIMULATOR</h1>
+            <p class="brand-subtitle">AI-Powered Interview Practice Platform</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="interviewer-card">
+        <div class="interviewer-avatar">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="1.5" aria-hidden="true">
+            <circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 00-16 0"/>
+          </svg>
+        </div>
+        <div class="interviewer-info">
+          <span class="interviewer-name">AI Interviewer</span>
+          <span class="interviewer-title" id="interviewer-title">Technical Interview</span>
+        </div>
+        <div class="question-counter" id="question-counter">1 / 8</div>
+      </div>
+
+      <div class="timer-section">
+        <div class="timer-ring-container">
+          <svg class="timer-ring" viewBox="0 0 100 100" aria-hidden="true">
+            <circle cx="50" cy="50" r="42" fill="none" stroke="#1f2937" stroke-width="6"/>
+            <circle class="timer-fill" id="timer-fill" cx="50" cy="50" r="42" fill="none" stroke="#38bdf8" stroke-width="6" stroke-linecap="round" stroke-dasharray="263.9" stroke-dashoffset="0" transform="rotate(-90 50 50)"/>
+            <text class="timer-text" id="timer-text" x="50" y="56" text-anchor="middle" font-size="24" font-weight="700" font-family="ui-monospace, monospace" fill="#f8fafc">2:00</text>
+          </svg>
+        </div>
+        <div class="timer-controls">
+          <span class="timer-status" id="timer-status">Ready</span>
+        </div>
+      </div>
+
+      <div class="question-card" id="question-card">
+        <div class="question-header">
+          <span class="question-category" id="question-category">Technical</span>
+        </div>
+        <div class="question-text" id="question-text">
+          Press "Start Interview" to begin the simulation.
+        </div>
+      </div>
+
+      <div class="progress-section">
+        <div class="progress-header">
+          <span class="progress-label">Session Progress</span>
+          <span class="progress-pct" id="progress-pct">0%</span>
+        </div>
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill" id="progress-bar-fill" style="width:0%"></div>
+        </div>
+        <div class="progress-dots" id="progress-dots"></div>
+      </div>
+    </aside>
+
+    <main class="right-panel" role="region" aria-label="Answer and feedback">
+      <div class="session-controls">
+        <button id="btn-start" class="btn btn-primary" tabindex="0">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Start Interview
+        </button>
+        <button id="btn-next" class="btn btn-secondary" tabindex="0" disabled>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+          Next Question
+        </button>
+        <button id="btn-end" class="btn btn-secondary danger" tabindex="0" disabled>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+          End Session
+        </button>
+      </div>
+
+      <div class="answer-section" id="answer-section">
+        <div class="answer-header">
+          <label for="answer-input" class="answer-label">Your Answer</label>
+          <span class="answer-hint">Be specific and include technical details</span>
+        </div>
+        <div class="answer-wrapper">
+          <textarea id="answer-input" class="answer-input"
+            placeholder="Type your answer here..."
+            spellcheck="true"
+            aria-label="Your answer"
+            disabled
+            tabindex="0"></textarea>
+        </div>
+        <div class="answer-footer">
+          <span id="answer-stats">0 words</span>
+          <button id="btn-submit" class="btn btn-primary small" disabled>
+            Submit Answer
+          </button>
+        </div>
+      </div>
+
+      <div class="feedback-section" id="feedback-section">
+        <div class="feedback-header">
+          <h3 class="section-title">Evaluation</h3>
+          <span class="feedback-score" id="feedback-score">--</span>
+        </div>
+        <div class="evaluation-grid" id="evaluation-grid">
+          <div class="eval-item">
+            <span class="eval-label">Relevance</span>
+            <div class="eval-bar-track"><div class="eval-bar-fill" id="eval-relevance" style="width:0%"></div></div>
+          </div>
+          <div class="eval-item">
+            <span class="eval-label">Depth</span>
+            <div class="eval-bar-track"><div class="eval-bar-fill" id="eval-depth" style="width:0%"></div></div>
+          </div>
+          <div class="eval-item">
+            <span class="eval-label">Keywords</span>
+            <div class="eval-bar-track"><div class="eval-bar-fill" id="eval-keywords" style="width:0%"></div></div>
+          </div>
+          <div class="eval-item">
+            <span class="eval-label">Clarity</span>
+            <div class="eval-bar-track"><div class="eval-bar-fill" id="eval-clarity" style="width:0%"></div></div>
+          </div>
+        </div>
+        <div class="feedback-detail" id="feedback-detail">
+          <p class="feedback-placeholder">Submit an answer to receive evaluation.</p>
+        </div>
+      </div>
+
+      <div class="report-section" id="report-section">
+        <div class="report-header">
+          <h3 class="section-title">Session Report</h3>
+        </div>
+        <div class="report-stats">
+          <div class="report-stat">
+            <span class="rs-label">Questions</span>
+            <span class="rs-value" id="report-questions">0 / 0</span>
+          </div>
+          <div class="report-stat">
+            <span class="rs-label">Avg Score</span>
+            <span class="rs-value" id="report-avg-score">--</span>
+          </div>
+          <div class="report-stat">
+            <span class="rs-label">Time Used</span>
+            <span class="rs-value" id="report-time">0:00</span>
+          </div>
+          <div class="report-stat">
+            <span class="rs-label">Streak</span>
+            <span class="rs-value" id="report-streak">0</span>
+          </div>
+        </div>
+        <div class="report-questions" id="report-questions-detail"></div>
+      </div>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
