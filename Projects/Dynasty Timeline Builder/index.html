@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Dynasty Timeline Builder</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="app-container">
+  <header><div class="brand"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg><div><h1>DYNASTY TIMELINE BUILDER</h1><p>Kings · Wars · Historical Events</p></div></div></header>
+  <div class="main-layout">
+    <aside class="dynasty-panel">
+      <h3>Dynasties</h3>
+      <button class="dynasty-btn active" data-dynasty="ming">Ming Dynasty 🏯</button>
+      <button class="dynasty-btn" data-dynasty="tudor">Tudor Dynasty 👑</button>
+      <button class="dynasty-btn" data-dynasty="ottoman">Ottoman Empire 🕌</button>
+      <button class="dynasty-btn" data-dynasty="maurya">Maurya Empire 🐘</button>
+      <hr class="divider">
+      <div class="dynasty-summary"><h4 id="dynasty-name">Ming Dynasty</h4><div class="dynasty-dates"><span id="dynasty-from">1368</span> — <span id="dynasty-to">1644</span></div><p id="dynasty-desc">The Ming ruled China for 276 years, known for maritime exploration, construction of the Forbidden City, and porcelain.</p></div>
+    </aside>
+    <main class="timeline-area">
+      <div class="timeline-scroll" id="timeline-scroll">
+        <div class="timeline-bar" id="timeline-bar"></div>
+        <div class="timeline-events" id="timeline-events"></div>
+      </div>
+    </main>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
