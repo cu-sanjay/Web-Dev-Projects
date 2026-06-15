@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs><linearGradient id="g" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#0b1220"/><stop offset="100%" stop-color="#101020"/></linearGradient></defs>
+  <rect width="1280" height="720" fill="url(#g)"/>
+  <!-- notebook -->
+  <rect x="180" y="160" width="920" height="440" rx="10" fill="#111827" stroke="#334155" stroke-width="2"/>
+  <!-- tabs -->
+  <rect x="100" y="180" width="100" height="40" rx="6" fill="#1e1a30" stroke="#3b82f6" stroke-width="2"/>
+  <text x="150" y="205" text-anchor="middle" font-family="monospace" font-size="12" fill="#3b82f6">🔍 Clues</text>
+  <rect x="100" y="230" width="100" height="40" rx="6" fill="#1f2937" stroke="#334155" stroke-width="1"/>
+  <text x="150" y="255" text-anchor="middle" font-family="monospace" font-size="12" fill="#64748b">👤 Suspects</text>
+  <rect x="100" y="280" width="100" height="40" rx="6" fill="#1f2937" stroke="#334155" stroke-width="1"/>
+  <text x="150" y="305" text-anchor="middle" font-family="monospace" font-size="12" fill="#64748b">🕸️ Graph</text>
+  <!-- clue cards -->
+  <rect x="240" y="200" width="380" height="60" rx="6" fill="#1f2937" stroke="#334155" stroke-width="1"/>
+  <text x="260" y="225" font-size="16">📸</text>
+  <text x="290" y="225" font-family="monospace" font-size="12" fill="#cbd5e1" font-weight="600">CCTV footage</text>
+  <text x="290" y="245" font-family="monospace" font-size="10" fill="#64748b">Shows someone entering at 11PM</text>
+  <text x="560" y="225" font-family="monospace" font-size="9" fill="#3b82f6">23:00</text>
+  <rect x="240" y="270" width="380" height="60" rx="6" fill="#1f2937" stroke="#334155" stroke-width="1"/>
+  <text x="260" y="295" font-size="16">🔪</text>
+  <text x="290" y="295" font-family="monospace" font-size="12" fill="#cbd5e1" font-weight="600">Murder weapon</text>
+  <text x="290" y="315" font-family="monospace" font-size="10" fill="#64748b">Found in kitchen sink</text>
+  <!-- graph on right -->
+  <circle cx="720" cy="250" r="18" fill="rgba(239,68,68,0.15)" stroke="#ef4444" stroke-width="2"/>
+  <text x="720" y="255" text-anchor="middle" font-family="monospace" font-size="8" fill="#ef4444">CCTV</text>
+  <circle cx="820" cy="320" r="18" fill="rgba(59,130,246,0.15)" stroke="#3b82f6" stroke-width="2"/>
+  <text x="820" y="325" text-anchor="middle" font-family="monospace" font-size="8" fill="#3b82f6">John</text>
+  <line x1="730" y1="260" x2="808" y2="310" stroke="#334155" stroke-width="1" stroke-dasharray="4 4"/>
+  <text x="640" y="100" text-anchor="middle" font-family="ui-monospace,monospace" font-size="26" font-weight="800" fill="#f8fafc" letter-spacing="1">DIGITAL DETECTIVE NOTEBOOK</text>
+  <text x="640" y="125" text-anchor="middle" font-family="ui-monospace,monospace" font-size="13" fill="#64748b">Store Clues · Track Suspects · Map Connections</text>
+</svg>

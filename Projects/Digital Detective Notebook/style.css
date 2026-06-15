@@ -1,0 +1,40 @@
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0b1220;--surface:#111827;--secondary:#1f2937;--border:#334155;--primary:#f8fafc;--sec:#cbd5e1;--muted:#64748b;--accent:#3b82f6;--radius:10px;--font-code:ui-monospace,Consolas,monospace;--font-ui:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+html{font-size:14px}
+body{font-family:var(--font-ui);background:var(--bg);color:var(--primary);height:100vh;overflow:hidden}
+.app-container{max-width:1500px;margin:0 auto;display:flex;flex-direction:column;height:100vh;padding:14px 18px;gap:10px}
+header{display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.brand{display:flex;align-items:center;gap:10px}
+.brand h1{font-size:14px;font-weight:700;letter-spacing:.8px}
+.brand p{font-size:10px;color:var(--muted)}
+.case-counter{font-size:11px;color:var(--muted);font-family:var(--font-code)}
+.case-counter span{color:var(--accent);font-weight:700}
+.main-layout{display:grid;grid-template-columns:120px 1fr;gap:12px;flex:1;min-height:0}
+@media(max-width:750px){.main-layout{grid-template-columns:1fr}}
+.notebook-tabs{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px;display:flex;flex-direction:column;gap:6px;overflow-y:auto}
+.tab-btn{padding:10px 8px;border:1px solid var(--border);border-radius:6px;background:var(--secondary);color:var(--muted);font-size:11px;cursor:pointer;text-align:center;font-family:var(--font-ui);transition:all .3s}
+.tab-btn.active,.tab-btn:hover{background:var(--surface);border-color:var(--accent);color:var(--accent)}
+.notebook-content{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;overflow-y:auto}
+.tab-content{display:none;height:100%;flex-direction:column;gap:10px}
+.tab-content.active{display:flex}
+.tab-header{display:flex;justify-content:space-between;align-items:center}
+.tab-header h2{font-size:14px;color:var(--primary)}
+.btn{padding:6px 12px;border:1px solid var(--border);border-radius:5px;background:var(--secondary);color:var(--sec);font-size:10px;cursor:pointer;font-family:var(--font-ui);transition:all .3s}
+.btn:hover{background:var(--surface);border-color:var(--accent)}
+.clue-list,.suspect-cards{display:flex;flex-direction:column;gap:6px}
+.clue-card,.suspect-card{display:flex;align-items:center;gap:10px;padding:10px;background:var(--secondary);border-radius:6px;border:1px solid var(--border)}
+.clue-icon{font-size:20px}
+.clue-card strong,.suspect-card strong{font-size:12px;color:var(--sec);display:block}
+.clue-card p,.suspect-card p{font-size:10px;color:var(--muted)}
+.clue-tag{font-size:9px;color:var(--accent);margin-left:auto;white-space:nowrap;font-family:var(--font-code)}
+.suspect-avatar{width:36px;height:36px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.suspect-status{font-size:9px;padding:3px 8px;border-radius:8px;margin-left:auto}
+.suspect-status{background:#ef444420;color:#ef4444;border:1px solid #ef4444}
+.graph-container{flex:1;background:#0a0f1a;border-radius:6px;overflow:hidden;display:flex;align-items:center;justify-content:center;min-height:300px}
+#graph-canvas{width:100%;height:auto}
+.progress-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.p-item{text-align:center;padding:12px;background:var(--secondary);border-radius:6px}
+.p-item span{display:block;font-size:9px;color:var(--muted);text-transform:uppercase}
+.p-item strong{font-size:18px;color:var(--accent)}
+.progress-bar-lg{height:12px;background:var(--secondary);border-radius:6px;overflow:hidden}
+.progress-fill-lg{height:100%;background:var(--accent);border-radius:6px;transition:width .5s}
