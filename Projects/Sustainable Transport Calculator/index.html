@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sustainable Transport Calculator</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="terminal-badge">[ SUSTAINABLE TRANSPORT CALCULATOR ]</div>
+
+<div class="app-grid">
+
+  <!-- ─── PRESET RIBBON ─── -->
+  <div class="ribbon">
+    <button class="preset-btn" data-d="25" data-p="1">DAILY SUBURB COMMUTE [25 km]</button>
+    <button class="preset-btn" data-d="120" data-p="2">CROSS-CITY HEAVY TRANSIT [120 km]</button>
+    <button class="preset-btn" data-d="5" data-p="1">MICRO-URBAN SPRINT [5 km]</button>
+  </div>
+
+  <!-- ─── LEFT: INPUT CONSOLE ─── -->
+  <div class="panel input-panel">
+    <div class="panel-header">MOBILITY INPUT CONSOLE</div>
+
+    <label class="ctrl-label">COMMUTE DISTANCE [km]</label>
+    <div class="slider-wrap">
+      <input type="range" id="distSlider" min="1" max="200" value="25">
+      <span id="distVal" class="slider-num">25 km</span>
+    </div>
+
+    <label class="ctrl-label">PASSENGERS SHARING</label>
+    <div class="slider-wrap">
+      <input type="range" id="passSlider" min="1" max="6" value="1">
+      <span id="passVal" class="slider-num">1</span>
+    </div>
+
+    <label class="ctrl-label">FUEL COST INDEX [$/L]</label>
+    <div class="slider-wrap">
+      <input type="range" id="fuelSlider" min="0.5" max="3" step="0.1" value="1.5">
+      <span id="fuelVal" class="slider-num">$1.50</span>
+    </div>
+
+    <div class="ctrl-divider"></div>
+    <div class="ctrl-note">EF = g CO₂ per km · passenger</div>
+  </div>
+
+  <!-- ─── CENTER TOP: CANVAS ─── -->
+  <div class="panel canvas-panel">
+    <div class="panel-header">CARBON FOOTPRINT COMPARISON</div>
+    <div class="canvas-wrap">
+      <canvas id="emissionsCanvas"></canvas>
+    </div>
+  </div>
+
+  <!-- ─── CENTER BOTTOM: SEQUESTRATION ─── -->
+  <div class="panel seq-panel">
+    <div class="panel-header">ENVIRONMENTAL SEQUESTRATION ANALYSIS</div>
+    <div id="seqContent" class="seq-empty">ADJUST PARAMETERS TO COMPUTE</div>
+  </div>
+
+  <!-- ─── RIGHT: TELEMETRY ─── -->
+  <div class="panel telemetry-panel">
+    <div class="panel-header">OPERATIONAL STATUS TELEMETRY</div>
+    <div class="tele-row"><span class="tele-label">COMMUTE DISTANCE</span><span id="tDist" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">NET CARBON DELTA</span><span id="tCarbon" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">SEQUESTRATION TREE-DAYS</span><span id="tTrees" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">SUBSIDY ACTIVE</span><span id="tSubsidy" class="tele-val">OFF</span></div>
+    <div class="tele-row"><span class="tele-label">EFFICIENCY TIER</span><span id="tBadge" class="tele-badge standby">STANDBY</span></div>
+  </div>
+
+  <!-- ─── ADMIN FOOTER ─── -->
+  <div class="admin-footer">
+    <button id="btnCompute" class="admin-btn compute">COMPUTE ENVIRONMENTAL FOOTPRINT</button>
+    <button id="btnSubsidy" class="admin-btn subsidy">INJECT CLEAN ENERGY GRID SUBSIDY</button>
+    <button id="btnFlush" class="admin-btn flush">FLUSH COMMUTING CACHE &amp; RE-ZERO</button>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
