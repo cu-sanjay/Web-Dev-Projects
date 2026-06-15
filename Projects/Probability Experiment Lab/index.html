@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Probability Experiment Lab</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="terminal-badge">[ PROBABILITY EXPERIMENT LAB ]</div>
+
+<div class="app-grid">
+
+  <!-- ─── MODE RIBBON ─── -->
+  <div class="ribbon">
+    <button class="mode-btn active" data-mode="coin">BINOMIAL COIN FLIP</button>
+    <button class="mode-btn" data-mode="dice">DISCRETE 6-SIDED DICE ROLL</button>
+    <button class="mode-btn" data-mode="card">RANDOM CARD SUIT DRAW</button>
+  </div>
+
+  <!-- ─── LEFT: SAMPLE CONTROL DECK ─── -->
+  <div class="panel control-deck">
+    <div class="panel-header">SAMPLE CONTROL DECK</div>
+    <label class="ctrl-label">BATCH RUN VOLUME</label>
+    <div class="batch-grid">
+      <button class="batch-btn active" data-batch="1">1</button>
+      <button class="batch-btn" data-batch="10">10</button>
+      <button class="batch-btn" data-batch="100">100</button>
+      <button class="batch-btn" data-batch="1000">1000</button>
+    </div>
+    <label class="ctrl-label">BIAS / VARIANCE %</label>
+    <div class="slider-wrap">
+      <input type="range" id="biasSlider" min="0" max="100" value="50">
+      <span id="biasVal">50%</span>
+    </div>
+    <div class="coutcom-wrap">
+      <span class="coutcom-label">THEORETICAL TARGET</span>
+      <span id="theoreticalDisplay" class="coutcom-val">50.0%</span>
+    </div>
+  </div>
+
+  <!-- ─── CENTER: CANVAS ─── -->
+  <div class="panel canvas-panel">
+    <div class="panel-header">FREQUENCY DISTRIBUTION</div>
+    <canvas id="histCanvas"></canvas>
+  </div>
+
+  <!-- ─── CENTER RIGHT: LEDGER ─── -->
+  <div class="panel ledger-panel">
+    <div class="panel-header">OUTCOME LEDGER</div>
+    <div class="ledger-scroll">
+      <table id="ledgerTable">
+        <thead><tr><th>OUTCOME</th><th>FREQ</th><th>EXP%</th><th>Δ</th></tr></thead>
+        <tbody id="ledgerBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ─── RIGHT: TELEMETRY ─── -->
+  <div class="panel telemetry-panel">
+    <div class="panel-header">STATISTICAL TELEMETRY</div>
+    <div class="tele-row"><span class="tele-label">CUMULATIVE TRIALS</span><span id="teleTrials" class="tele-val">0</span></div>
+    <div class="tele-row"><span class="tele-label">DEVIATION Δ VARIANCE</span><span id="teleDelta" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">CONVERGENCE STATUS</span><span id="teleBadge" class="tele-badge standby">STANDBY</span></div>
+    <div class="tele-breakdown" id="breakdownContainer"></div>
+  </div>
+
+  <!-- ─── ADMIN FOOTER ─── -->
+  <div class="admin-footer">
+    <button id="btnRun" class="admin-btn run">EXECUTE STOCHASTIC SAMPLE LOOP</button>
+    <button id="btnMCSweep" class="admin-btn sweep">RUN MAX 10K TRIAL MONTE CARLO SWEEP</button>
+    <button id="btnPurge" class="admin-btn purge">PURGE EXPERIMENTAL CACHE</button>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
