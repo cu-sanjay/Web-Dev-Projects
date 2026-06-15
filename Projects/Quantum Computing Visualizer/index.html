@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Quantum Computing Visualizer</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="app-container">
+  <header><div class="brand"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="8" cy="8" r="2" opacity=".5"/><circle cx="16" cy="14" r="2" opacity=".5"/></svg><div><h1>QUANTUM COMPUTING VISUALIZER</h1><p>Qubits · Quantum Gates · Circuit Simulation</p></div></div></header>
+  <div class="main-layout">
+    <aside class="side-panel">
+      <h3>Gates</h3>
+      <div class="gate-list" id="gate-list">
+        <button class="gate-btn" data-gate="H">H Hadamard</button>
+        <button class="gate-btn" data-gate="X">X Pauli-X</button>
+        <button class="gate-btn" data-gate="Y">Y Pauli-Y</button>
+        <button class="gate-btn" data-gate="Z">Z Pauli-Z</button>
+        <button class="gate-btn" data-gate="S">S Phase</button>
+        <button class="gate-btn" data-gate="T">T π/8</button>
+      </div>
+      <h3 style="margin-top:12px">Bloch Sphere</h3>
+      <div class="bloch-container"><canvas id="bloch" width="200" height="200"></canvas></div>
+      <div id="qubit-state" class="qubit-state">|ψ⟩ = 1.00|0⟩ + 0.00|1⟩</div>
+      <button id="btn-reset" class="btn" style="width:100%;margin-top:8px">Reset Qubit</button>
+    </aside>
+    <main class="circuit-area">
+      <div class="circuit-container" id="circuit-container">
+        <canvas id="circuit" width="700" height="300"></canvas>
+      </div>
+      <div class="probabilities" id="probs">
+        <div class="prob-bar"><span class="prob-label">|0⟩</span><div class="prob-track"><div class="prob-fill" id="prob-0" style="width:100%"></div></div><span class="prob-value" id="prob-val-0">100%</span></div>
+        <div class="prob-bar"><span class="prob-label">|1⟩</span><div class="prob-track"><div class="prob-fill" id="prob-1" style="width:0%"></div></div><span class="prob-value" id="prob-val-1">0%</span></div>
+      </div>
+    </main>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

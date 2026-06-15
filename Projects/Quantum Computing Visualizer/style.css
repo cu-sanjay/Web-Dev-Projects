@@ -1,0 +1,31 @@
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0b1220;--surface:#111827;--secondary:#1f2937;--border:#334155;--primary:#f8fafc;--sec:#cbd5e1;--muted:#64748b;--accent:#06b6d4;--radius:10px;--font-code:ui-monospace,Consolas,monospace;--font-ui:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+html{font-size:14px}
+body{font-family:var(--font-ui);background:var(--bg);color:var(--primary);height:100vh;overflow:hidden}
+.app-container{max-width:1500px;margin:0 auto;display:flex;flex-direction:column;height:100vh;padding:14px 18px;gap:10px}
+header{flex-shrink:0}
+.brand{display:flex;align-items:center;gap:10px}
+.brand h1{font-size:14px;font-weight:700;letter-spacing:.8px}
+.brand p{font-size:10px;color:var(--muted)}
+.main-layout{display:grid;grid-template-columns:220px 1fr;gap:12px;flex:1;min-height:0}
+@media(max-width:800px){.main-layout{grid-template-columns:1fr}}
+.side-panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;overflow-y:auto}
+.side-panel h3{font-size:11px;font-weight:600;color:var(--sec);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.gate-list{display:flex;flex-direction:column;gap:4px}
+.gate-btn{padding:8px 12px;border:1px solid var(--border);border-radius:6px;background:var(--secondary);color:var(--sec);font-size:11px;font-weight:600;cursor:pointer;transition:all .3s;font-family:var(--font-code);text-align:left}
+.gate-btn:hover{background:var(--surface);border-color:var(--accent);color:var(--accent)}
+.btn{padding:8px 12px;border:1px solid var(--border);border-radius:6px;background:var(--secondary);color:var(--sec);font-size:11px;font-weight:600;cursor:pointer;font-family:var(--font-ui)}
+.btn:hover{background:var(--surface);border-color:var(--accent)}
+.bloch-container{background:#0a0f1a;border-radius:6px;overflow:hidden}
+#bloch{width:100%;height:auto}
+.qubit-state{font-family:var(--font-code);font-size:11px;color:var(--accent);text-align:center;margin-top:6px;padding:6px;background:var(--secondary);border-radius:4px}
+.circuit-area{display:flex;flex-direction:column;gap:10px}
+.circuit-container{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;flex:1;display:flex;align-items:center;justify-content:center}
+#circuit{width:100%;height:auto;display:block}
+.probabilities{display:flex;flex-direction:column;gap:6px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px 16px}
+.prob-bar{display:flex;align-items:center;gap:10px}
+.prob-label{width:25px;font-family:var(--font-code);font-size:11px;color:var(--sec)}
+.prob-track{flex:1;height:10px;background:var(--secondary);border-radius:5px;overflow:hidden}
+.prob-fill{height:100%;border-radius:5px;transition:width .4s ease}
+#prob-0{background:var(--accent)}#prob-1{background:#f97316}
+.prob-value{width:45px;font-family:var(--font-code);font-size:11px;color:var(--muted);text-align:right}
