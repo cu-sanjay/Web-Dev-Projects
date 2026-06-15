@@ -1,0 +1,169 @@
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background:#05060b; color:rgba(255,255,255,0.75);
+  font-family:'JetBrains Mono','Consolas','Courier New',monospace;
+  min-height:100vh; padding:2vmin;
+  display:flex; flex-direction:column; align-items:center;
+}
+
+.terminal-badge {
+  font-size:clamp(8px,1.3vmin,15px); letter-spacing:3px;
+  padding:0.5em 1.6em; border:1px solid rgba(0,229,255,0.2);
+  background:rgba(0,229,255,0.04); color:#00e5ff;
+  text-align:center; margin-bottom:1.5vmin;
+  text-shadow:0 0 10px rgba(0,229,255,0.2);
+}
+
+.app-grid {
+  width:100%; max-width:1480px;
+  display:grid;
+  grid-template-columns:1fr 1.2fr 80fr;
+  grid-template-rows:auto auto auto auto;
+  gap:1.2vmin;
+}
+
+/* ─── PRESET BAR ─── */
+.preset-bar { grid-column:1/-1; display:flex; gap:0.6vmin; flex-wrap:wrap; }
+.preset-btn {
+  flex:1; padding:0.6em 1em;
+  background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06);
+  color:rgba(255,255,255,0.2);
+  font:600 clamp(6px,0.7vmin,9px) 'JetBrains Mono',monospace;
+  letter-spacing:2px; cursor:pointer; transition:all 0.3s;
+}
+.preset-btn:hover { color:rgba(255,255,255,0.4); }
+.preset-btn:nth-child(1):hover { border-color:#00e5ff; color:#00e5ff; }
+.preset-btn:nth-child(2):hover { border-color:#b388ff; color:#b388ff; }
+.preset-btn:nth-child(3):hover { border-color:#ffc800; color:#ffc800; }
+
+/* ─── PANELS ─── */
+.panel {
+  background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.05);
+  padding:1.4vmin;
+}
+.panel-header {
+  font-size:clamp(6px,0.7vmin,9px); letter-spacing:2px;
+  color:rgba(255,255,255,0.12);
+  margin-bottom:0.8vmin; border-bottom:1px solid rgba(255,255,255,0.04);
+  padding-bottom:0.5vmin;
+}
+.ctrl-divider { height:1px; background:rgba(255,255,255,0.04); margin:0.6vmin 0; }
+
+/* ─── INTAKE ─── */
+.intake-panel { grid-column:1; display:flex; flex-direction:column; }
+#urlInput {
+  flex:1; min-height:140px;
+  background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.04);
+  color:rgba(255,255,255,0.35); padding:0.8em;
+  font:inherit; font-size:clamp(7px,0.8vmin,11px);
+  resize:none; outline:none; line-height:1.6; word-break:break-all;
+}
+#urlInput:focus { border-color:rgba(0,229,255,0.12); }
+.action-btn {
+  width:100%; padding:0.6em;
+  background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06);
+  color:rgba(255,255,255,0.25); margin-top:0.6vmin;
+  font:600 clamp(7px,0.75vmin,9px) 'JetBrains Mono',monospace;
+  letter-spacing:2px; cursor:pointer; transition:all 0.3s;
+}
+.action-btn:hover { color:#00e5ff; border-color:rgba(0,229,255,0.2); }
+
+.rebuild-row {
+  display:flex; align-items:center; gap:0.6vmin; margin-top:0.6vmin;
+  padding:0.5em 0; border-top:1px solid rgba(255,255,255,0.02);
+}
+.rebuild-label { font-size:clamp(5px,0.5vmin,7px); color:rgba(255,255,255,0.08); letter-spacing:1px; white-space:nowrap; }
+.rebuild-field {
+  flex:1; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.04);
+  color:rgba(255,255,255,0.2); padding:0.4em 0.6em;
+  font:inherit; font-size:clamp(6px,0.65vmin,9px); outline:none;
+}
+
+/* ─── CENTER ─── */
+.center-stack { grid-column:2/3; display:flex; flex-direction:column; gap:0.8vmin; }
+
+/* ─── SEGMENTS ─── */
+.segments-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(100px,1fr)); gap:0.6vmin; }
+.seg-block { text-align:center; padding:0.8vmin; }
+.seg-label { font-size:clamp(5px,0.55vmin,7px); letter-spacing:2px; margin-bottom:0.4em; }
+.proto-label { color:#ff3b30 !important; border-bottom-color:rgba(255,59,48,0.12) !important; }
+.host-label { color:#00e5ff !important; border-bottom-color:rgba(0,229,255,0.12) !important; }
+.port-label { color:#ffc800 !important; border-bottom-color:rgba(255,200,0,0.12) !important; }
+.path-label { color:#b388ff !important; border-bottom-color:rgba(179,136,255,0.12) !important; }
+.hash-label { color:#00e676 !important; border-bottom-color:rgba(0,230,118,0.12) !important; }
+.seg-val {
+  display:block; font-size:clamp(7px,0.8vmin,10px);
+  color:rgba(255,255,255,0.25); word-break:break-all;
+  padding:0.3em 0; min-height:1.6em;
+}
+
+/* ─── QUERY TABLE ─── */
+.query-panel { }
+.query-table { font-size:clamp(6px,0.7vmin,9px); }
+.query-header {
+  display:grid; grid-template-columns:1fr 1fr 30px; gap:0.4vmin;
+  padding:0.4em 0; border-bottom:1px solid rgba(255,255,255,0.04);
+  color:rgba(255,255,255,0.08); letter-spacing:1px;
+}
+.query-row {
+  display:grid; grid-template-columns:1fr 1fr 30px; gap:0.4vmin;
+  padding:0.3em 0; border-bottom:1px solid rgba(255,255,255,0.02);
+  align-items:center;
+}
+.query-row input {
+  background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.04);
+  color:rgba(255,255,255,0.3); padding:0.3em 0.5em;
+  font:inherit; font-size:inherit; outline:none;
+}
+.query-row input:focus { border-color:rgba(0,229,255,0.15); }
+.query-row .del-btn {
+  background:none; border:1px solid rgba(255,255,255,0.04);
+  color:rgba(255,255,255,0.08); cursor:pointer;
+  font-size:clamp(8px,0.8vmin,11px); padding:0.2em;
+  transition:all 0.3s; text-align:center;
+}
+.query-row .del-btn:hover { color:#ff1744; border-color:#ff1744; }
+
+/* ─── TELEMETRY ─── */
+.telemetry-panel { grid-column:3/4; }
+.tele-row {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:0.35em 0; border-bottom:1px solid rgba(255,255,255,0.02);
+}
+.tele-label { font-size:clamp(5px,0.6vmin,8px); color:rgba(255,255,255,0.1); letter-spacing:1px; }
+.tele-val { font-size:clamp(8px,0.9vmin,12px); color:#00e5ff; font-weight:600; }
+.tele-badge {
+  display:block; text-align:center;
+  font-size:clamp(6px,0.65vmin,9px); padding:0.3em 0.5em; letter-spacing:2px;
+}
+.tele-badge.standby { color:rgba(255,255,255,0.12); background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.04); }
+.tele-badge.valid { color:#00e676; background:rgba(0,230,118,0.06); border:1px solid rgba(0,230,118,0.2); box-shadow:0 0 6px rgba(0,230,118,0.05); }
+.tele-badge.invalid { color:#ffc800; background:rgba(255,200,0,0.06); border:1px solid rgba(255,200,0,0.2); }
+.tele-badge.warn { color:#ff1744; background:rgba(255,20,68,0.06); border:1px solid rgba(255,20,68,0.2); }
+
+.error-detail {
+  font-size:clamp(5px,0.55vmin,7px);
+  color:rgba(255,255,255,0.06); letter-spacing:0.5px;
+  line-height:1.6;
+}
+.error-detail.active { color:#ffc800; }
+
+/* ─── ADMIN FOOTER ─── */
+.admin-footer { grid-column:1/-1; display:flex; gap:0.6vmin; flex-wrap:wrap; }
+.admin-btn {
+  flex:1; min-width:180px; padding:0.7em 0.5em;
+  background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06);
+  color:rgba(255,255,255,0.3);
+  font:600 clamp(7px,0.8vmin,10px) 'JetBrains Mono',monospace;
+  letter-spacing:2px; cursor:pointer; transition:all 0.3s;
+}
+.admin-btn:hover { color:rgba(255,255,255,0.5); }
+.admin-btn.reconstruct:hover { border-color:#00e5ff; color:#00e5ff; }
+.admin-btn.addparam:hover { border-color:#b388ff; color:#b388ff; }
+.admin-btn.flush:hover { border-color:#ff1744; color:#ff1744; }
+
+@media (max-width:820px) {
+  .app-grid { grid-template-columns:1fr; }
+  .intake-panel,.center-stack,.telemetry-panel { grid-column:1; }
+}

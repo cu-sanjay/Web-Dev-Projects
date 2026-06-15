@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>URL Parser</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="terminal-badge">[ URL PARSER — NETWORK INFORMATICS COMMAND DECK ]</div>
+
+<div class="app-grid">
+
+  <!-- ─── PRESET RIBBON ─── -->
+  <div class="preset-bar">
+    <button id="presetEcom" class="preset-btn">COMPLEX E-COMMERCE TRACKING LINK</button>
+    <button id="presetOAuth" class="preset-btn">SECURE OAUTH REDIRECT CALL WITH TOKENS</button>
+    <button id="presetLocal" class="preset-btn">LOCAL DEV SERVER PORT ROUTE WITH ANCHORS</button>
+  </div>
+
+  <!-- ─── LEFT: URL INTAKE ─── -->
+  <div class="panel intake-panel">
+    <div class="panel-header">URL STRING INTAKE CONSOLE</div>
+    <textarea id="urlInput" spellcheck="false" placeholder="Paste URL to parse...">https://shop.example.com:443/products/category?page=2&sort=price_asc&limit=24&filter=in_stock#reviews</textarea>
+    <button id="btnParse" class="action-btn parse-btn">EXECUTE DECOMPOSITION LOOP</button>
+    <div class="rebuild-row">
+      <span class="rebuild-label">REBUILT URL</span>
+      <input type="text" id="rebuiltUrl" class="rebuild-field" readonly placeholder="Rebuilt URL appears here...">
+    </div>
+  </div>
+
+  <!-- ─── CENTER: SEGMENTS + QUERY TABLE ─── -->
+  <div class="center-stack">
+
+    <!-- Segmented Token Output -->
+    <div class="segments-grid">
+      <div class="panel seg-block"><div class="seg-label proto-label">PROTOCOL</div><span id="segProtocol" class="seg-val">--</span></div>
+      <div class="panel seg-block"><div class="seg-label host-label">DOMAIN HOST</div><span id="segHost" class="seg-val">--</span></div>
+      <div class="panel seg-block"><div class="seg-label port-label">PORT</div><span id="segPort" class="seg-val">--</span></div>
+      <div class="panel seg-block"><div class="seg-label path-label">PATHNAME</div><span id="segPath" class="seg-val">--</span></div>
+      <div class="panel seg-block"><div class="seg-label hash-label">HASH FRAGMENT</div><span id="segHash" class="seg-val">--</span></div>
+    </div>
+
+    <!-- Query Parameter Table -->
+    <div class="panel query-panel">
+      <div class="panel-header">EDITABLE QUERY PARAMETERS MATRIX</div>
+      <div id="queryTable" class="query-table">
+        <div class="query-header"><span>KEY</span><span>VALUE</span><span></span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ─── TELEMETRY ─── -->
+  <div class="panel telemetry-panel">
+    <div class="panel-header">NETWORK TELEMETRY DASHBOARD</div>
+    <div class="tele-row"><span class="tele-label">CHAR LENGTH</span><span id="tChars" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">PARAM COUNT</span><span id="tParams" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">PORT STATUS</span><span id="tPort" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">SSL COMPLIANCE</span><span id="tSSL" class="tele-val">--</span></div>
+    <div class="ctrl-divider"></div>
+    <div class="tele-row" style="grid-column:1/-1;"><span id="tBadge" class="tele-badge standby">STANDBY</span></div>
+    <div class="ctrl-divider"></div>
+    <div id="errorDetail" class="error-detail"></div>
+  </div>
+
+  <!-- ─── ADMIN FOOTER ─── -->
+  <div class="admin-footer">
+    <button id="btnReconstruct" class="admin-btn reconstruct">RECONSTRUCT UNIFORM RESOURCE VECTOR</button>
+    <button id="btnAddParam" class="admin-btn addparam">ADD NEW BLANK QUERY PARAMETER ROW</button>
+    <button id="btnFlush" class="admin-btn flush">FLUSH PARSER CHANNELS &amp; RE-ZERO MATRICES</button>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
