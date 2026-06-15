@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi-Vendor Marketplace</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+
+  <!-- Top Navigation for Role Switching -->
+  <nav class="global-nav">
+    <div class="brand">
+      <i class="ph-fill ph-storefront"></i> <span>MarketHub</span>
+    </div>
+    <div class="role-selector">
+      <span style="margin-right: 1rem; color: var(--text-muted); font-size: 0.9rem;">Current View:</span>
+      <button class="role-btn active" data-role="admin"><i class="ph ph-shield-check"></i> Admin</button>
+      <button class="role-btn" data-role="vendor"><i class="ph ph-storefront"></i> Vendor</button>
+      <button class="role-btn" data-role="customer"><i class="ph ph-user"></i> Customer</button>
+    </div>
+    <div class="nav-actions">
+      <button class="icon-btn"><i class="ph ph-bell"></i></button>
+      <img src="https://ui-avatars.com/api/?name=Admin+User&background=0f172a&color=fff" alt="Avatar" id="user-avatar" class="avatar">
+    </div>
+  </nav>
+
+  <div class="app-container">
+    
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <ul class="sidebar-menu" id="sidebar-menu">
+        <!-- Injected dynamically based on role -->
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      
+      <!-- ================= ADMIN DASHBOARD ================= -->
+      <section id="admin-view" class="role-view active">
+        <div class="page-heading">
+          <h1>Platform Overview</h1>
+          <p class="text-muted">Global marketplace analytics and vendor management.</p>
+        </div>
+
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-icon bg-blue-light text-blue"><i class="ph-fill ph-currency-dollar"></i></div>
+            <div class="metric-data"><h3>Total Gross Volume</h3><h2>$1.24M</h2></div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon bg-green-light text-green"><i class="ph-fill ph-users-three"></i></div>
+            <div class="metric-data"><h3>Active Customers</h3><h2>45,210</h2></div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon bg-purple-light text-purple"><i class="ph-fill ph-storefront"></i></div>
+            <div class="metric-data"><h3>Registered Vendors</h3><h2>342</h2></div>
+          </div>
+        </div>
+
+        <div class="split-layout mt-3">
+          <div class="panel col-span-2">
+            <div class="panel-header"><h3>Recent Vendor Applications</h3></div>
+            <div class="panel-body p-0">
+              <table class="custom-table">
+                <thead>
+                  <tr><th>Store Name</th><th>Category</th><th>Applied On</th><th>Action</th></tr>
+                </thead>
+                <tbody id="admin-vendors-tbody">
+                  <!-- Injected -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= VENDOR DASHBOARD ================= -->
+      <section id="vendor-view" class="role-view hidden">
+        <div class="page-heading flex-between">
+          <div>
+            <h1>TechHaven Store</h1>
+            <p class="text-muted">Manage your products and orders.</p>
+          </div>
+          <button class="btn primary-btn"><i class="ph ph-plus"></i> Add Product</button>
+        </div>
+
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-icon bg-green-light text-green"><i class="ph-fill ph-money"></i></div>
+            <div class="metric-data"><h3>Net Earnings</h3><h2>$12,450.00</h2></div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon bg-orange-light text-orange"><i class="ph-fill ph-package"></i></div>
+            <div class="metric-data"><h3>Pending Orders</h3><h2>24</h2></div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon bg-blue-light text-blue"><i class="ph-fill ph-star"></i></div>
+            <div class="metric-data"><h3>Store Rating</h3><h2>4.8 / 5.0</h2></div>
+          </div>
+        </div>
+
+        <div class="split-layout mt-3">
+          <div class="panel col-span-2">
+            <div class="panel-header"><h3>Active Inventory</h3></div>
+            <div class="panel-body p-0">
+              <table class="custom-table">
+                <thead>
+                  <tr><th>Product Name</th><th>Price</th><th>Stock</th><th>Status</th><th>Action</th></tr>
+                </thead>
+                <tbody id="vendor-inventory-tbody">
+                  <!-- Injected -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= CUSTOMER DASHBOARD ================= -->
+      <section id="customer-view" class="role-view hidden">
+        <div class="page-heading">
+          <h1>My Account</h1>
+          <p class="text-muted">Track orders and manage your wishlist.</p>
+        </div>
+
+        <div class="metrics-grid" style="grid-template-columns: repeat(3, 1fr);">
+          <div class="metric-card">
+            <div class="metric-icon bg-blue-light text-blue"><i class="ph-fill ph-shopping-bag"></i></div>
+            <div class="metric-data"><h3>Total Orders</h3><h2>12</h2></div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon bg-orange-light text-orange"><i class="ph-fill ph-truck"></i></div>
+            <div class="metric-data"><h3>In Transit</h3><h2>2</h2></div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon bg-red-light text-red"><i class="ph-fill ph-heart"></i></div>
+            <div class="metric-data"><h3>Wishlist Items</h3><h2>8</h2></div>
+          </div>
+        </div>
+
+        <div class="split-layout mt-3">
+          <div class="panel col-span-2">
+            <div class="panel-header"><h3>Recent Orders</h3></div>
+            <div class="panel-body p-0">
+              <table class="custom-table">
+                <thead>
+                  <tr><th>Order ID</th><th>Store</th><th>Date</th><th>Total</th><th>Status</th></tr>
+                </thead>
+                <tbody id="customer-orders-tbody">
+                  <!-- Injected -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
