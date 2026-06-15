@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learning Management System</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <i class="ph ph-graduation-cap text-primary icon-large"></i>
+        <h2>EduCore LMS</h2>
+      </div>
+      <nav class="sidebar-nav">
+        <ul>
+          <li class="active" data-tab="dashboard"><i class="ph ph-squares-four"></i> Dashboard</li>
+          <li data-tab="courses"><i class="ph ph-books"></i> My Courses</li>
+          <li data-tab="assignments"><i class="ph ph-clipboard-text"></i> Assignments</li>
+          <li data-tab="catalog"><i class="ph ph-magnifying-glass"></i> Course Catalog</li>
+        </ul>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-profile">
+          <img src="https://ui-avatars.com/api/?name=Student+User&background=4f46e5&color=fff" alt="User Avatar" class="avatar">
+          <div class="user-info">
+            <strong>Student User</strong>
+            <span>Computer Science</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="top-header">
+        <button id="mobile-menu-btn" class="icon-btn"><i class="ph ph-list"></i></button>
+        <div class="search-bar">
+          <i class="ph ph-magnifying-glass"></i>
+          <input type="text" placeholder="Search courses, assignments...">
+        </div>
+        <div class="header-actions">
+          <button class="icon-btn notification-btn">
+            <i class="ph ph-bell"></i>
+            <span class="badge">3</span>
+          </button>
+        </div>
+      </header>
+
+      <div class="content-wrapper">
+        
+        <!-- Dashboard Tab -->
+        <section id="dashboard" class="tab-content active">
+          <div class="welcome-banner">
+            <div>
+              <h1>Welcome back, Student!</h1>
+              <p>You have 2 assignments due this week. Keep up the good work!</p>
+            </div>
+            <img src="https://illustrations.popsy.co/amber/student-going-to-school.svg" alt="Student Illustration" class="banner-img">
+          </div>
+
+          <div class="dashboard-grid">
+            <!-- Stats -->
+            <div class="stat-card">
+              <div class="stat-icon bg-blue-light text-blue"><i class="ph ph-books"></i></div>
+              <div class="stat-details">
+                <h3>Enrolled Courses</h3>
+                <p class="stat-number">4</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon bg-green-light text-green"><i class="ph ph-check-circle"></i></div>
+              <div class="stat-details">
+                <h3>Completed Courses</h3>
+                <p class="stat-number">12</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon bg-orange-light text-orange"><i class="ph ph-clock-countdown"></i></div>
+              <div class="stat-details">
+                <h3>Pending Assignments</h3>
+                <p class="stat-number">5</p>
+              </div>
+            </div>
+
+            <!-- Active Courses Overview -->
+            <div class="card col-span-2">
+              <div class="card-header">
+                <h2>Current Courses</h2>
+                <button class="text-btn view-all-btn" data-target="courses">View All</button>
+              </div>
+              <div class="card-body">
+                <div class="course-list" id="dashboard-courses">
+                  <!-- Injected via JS -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Upcoming Deadlines -->
+            <div class="card">
+              <div class="card-header">
+                <h2>Upcoming Deadlines</h2>
+              </div>
+              <div class="card-body">
+                <ul class="deadline-list" id="dashboard-deadlines">
+                  <!-- Injected via JS -->
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Courses Tab -->
+        <section id="courses" class="tab-content">
+          <div class="page-header">
+            <h1>My Courses</h1>
+            <div class="filter-group">
+              <select class="filter-select">
+                <option>All Semesters</option>
+                <option>Fall 2026</option>
+                <option>Spring 2026</option>
+              </select>
+            </div>
+          </div>
+          <div class="course-grid" id="full-course-grid">
+            <!-- Injected via JS -->
+          </div>
+        </section>
+
+        <!-- Assignments Tab -->
+        <section id="assignments" class="tab-content">
+          <div class="page-header">
+            <h1>Assignments</h1>
+            <div class="tabs-simple">
+              <button class="tab-btn active">Pending</button>
+              <button class="tab-btn">Submitted</button>
+              <button class="tab-btn">Graded</button>
+            </div>
+          </div>
+          <div class="card">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Task Name</th>
+                    <th>Course</th>
+                    <th>Due Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="assignments-table-body">
+                  <!-- Injected via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Course Catalog Tab -->
+        <section id="catalog" class="tab-content">
+          <div class="page-header">
+            <h1>Course Catalog</h1>
+            <div class="search-bar">
+              <i class="ph ph-magnifying-glass"></i>
+              <input type="text" placeholder="Search for a subject or course code...">
+            </div>
+          </div>
+          <div class="course-grid" id="catalog-grid">
+            <!-- Injected via JS -->
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
