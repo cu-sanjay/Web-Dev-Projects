@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Public Policy Impact Simulator — Enact policy changes and observe their economic effects.">
+  <title>Public Policy Impact Simulator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <h1><span aria-hidden="true">&#x1F4CA;</span> Public Policy Impact Simulator</h1>
+      <p class="subtitle">Policy Changes &middot; Economic Effects</p>
+    </header>
+
+    <div class="dashboard">
+      <div class="indicators">
+        <div class="indicator"><span class="ind-label">GDP Growth</span><span class="ind-value" id="gdpVal">2.1%</span></div>
+        <div class="indicator"><span class="ind-label">Unemployment</span><span class="ind-value" id="unempVal">4.8%</span></div>
+        <div class="indicator"><span class="ind-label">Inflation</span><span class="ind-value" id="inflVal">2.3%</span></div>
+        <div class="indicator"><span class="ind-label">Budget Deficit</span><span class="ind-value" id="defVal">$340B</span></div>
+        <div class="indicator"><span class="ind-label">Consumer Confidence</span><span class="ind-value" id="confVal">72</span></div>
+        <div class="indicator"><span class="ind-label">Year</span><span class="ind-value" id="yearVal">2026</span></div>
+      </div>
+
+      <div class="main-grid">
+        <div class="panel">
+          <h2>Available Policies</h2>
+          <div class="policy-list" id="policyList"></div>
+        </div>
+
+        <div class="panel">
+          <h2>Enacted Policies</h2>
+          <div id="enactedPolicies"><p class="empty-state">No policies enacted yet. Choose from the left panel.</p></div>
+        </div>
+
+        <div class="panel wide">
+          <h2>Economic Impact Timeline</h2>
+          <div class="chart-area" id="chartArea">
+            <div class="chart-bars" id="chartBars"></div>
+          </div>
+          <div class="chart-legend">
+            <span><span class="dot" style="background:var(--green)"></span> GDP</span>
+            <span><span class="dot" style="background:var(--red)"></span> Unemployment</span>
+            <span><span class="dot" style="background:var(--gold)"></span> Inflation</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-log">
+        <h3>Policy Impact Log</h3>
+        <div class="log-entries" id="logEntries"><p class="empty-state">Simulation started. Enact policies to see their effects.</p></div>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
