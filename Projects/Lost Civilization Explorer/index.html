@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Lost Civilization Explorer</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="app-container">
+  <header><div class="brand"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><path d="M12 2a10 10 0 0 1 10 10"/><path d="M12 22a10 10 0 0 0 10-10"/><path d="M2 12a10 10 0 0 0 10 10"/><path d="M2 12A10 10 0 0 1 12 2"/></svg><div><h1>LOST CIVILIZATION EXPLORER</h1><p>Mayan · Indus Valley · Atlantis Theories</p></div></div></header>
+  <div class="main-layout">
+    <aside class="civ-panel">
+      <h3>Civilizations</h3>
+      <button class="civ-btn active" data-civ="mayan">Mayan 🌴</button>
+      <button class="civ-btn" data-civ="indus">Indus Valley 🏛️</button>
+      <button class="civ-btn" data-civ="minoan">Minoan 🏺</button>
+      <button class="civ-btn" data-civ="atlantis">Atlantis 🌊</button>
+      <hr class="divider">
+      <div class="civ-facts" id="civ-facts"><h4 id="civ-name">Mayan Civilization</h4><div class="fact-list" id="fact-list"><div class="fact">📅 Advanced calendar system</div><div class="fact">🔤 Hieroglyphic writing</div><div class="fact">🏛️ Pyramid architecture</div><div class="fact">🔢 Concept of zero</div></div></div>
+    </aside>
+    <main class="explore-area">
+      <div class="civ-hero" id="civ-hero">
+        <svg viewBox="0 0 600 300" width="600" height="300">
+          <rect width="600" height="300" fill="#0a0515" rx="6"/>
+          <g id="civ-art">
+            <rect x="150" y="150" width="80" height="100" rx="2" fill="#8B7355" opacity=".7"/>
+            <rect x="150" y="140" width="80" height="15" rx="2" fill="#A0895D" opacity=".7"/>
+            <polygon points="170,100 190,140 210,100" fill="#8B7355" opacity=".7"/>
+            <rect x="250" y="130" width="60" height="120" rx="2" fill="#8B7355" opacity=".6"/>
+            <rect x="250" y="120" width="60" height="15" rx="2" fill="#A0895D" opacity=".6"/>
+            <polygon points="265,80 280,120 295,80" fill="#8B7355" opacity=".6"/>
+            <rect x="370" y="160" width="70" height="90" rx="2" fill="#8B7355" opacity=".5"/>
+            <rect x="370" y="150" width="70" height="15" rx="2" fill="#A0895D" opacity=".5"/>
+            <polygon points="390,110 405,150 420,110" fill="#8B7355" opacity=".5"/>
+          </g>
+          <text x="300" y="270" text-anchor="middle" id="civ-period" font-family="monospace" font-size="10" fill="#64748b">2000 BCE - 900 CE</text>
+        </svg>
+      </div>
+      <div class="civ-content" id="civ-content">
+        <div class="content-section"><h3>Overview</h3><p id="civ-overview">The Maya civilization flourished in Mesoamerica, known for its hieroglyphic script, advanced mathematics, and astronomical systems.</p></div>
+        <div class="content-section"><h3>Key Achievements</h3><ul id="civ-achievements"><li>Developed the only fully developed writing system in pre-Columbian Americas</li><li>Created accurate calendars based on astronomical observations</li><li>Built monumental pyramids and cities</li></ul></div>
+        <div class="content-section"><h3>Mysteries</h3><p id="civ-mystery">The Classic Maya collapse around 900 CE remains debated — causes include drought, overpopulation, deforestation, and political instability.</p></div>
+      </div>
+    </main>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
