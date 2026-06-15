@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Map — Neural Recall</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="glass-card">
+            <div id="game-overlay" class="overlay">
+                <h1 id="overlay-title">Memory Map</h1>
+                <p id="overlay-desc" style="margin-bottom: 30px; opacity: 0.7;">Memorize the pattern. Reconstruct the map.</p>
+                <button class="btn-main" onclick="startGame()">Initialize Recall</button>
+            </div>
+
+            <div class="stats">
+                <span>Level: <span id="level-val">1</span></span>
+                <span>Score: <span id="score-val">0</span></span>
+            </div>
+
+            <div id="status-msg" class="message">Memorize!</div>
+            <div class="grid-container" id="grid"></div>
+        </div>
+    </div>
+<script src="script.js"></script>
+</body>
+</html>
