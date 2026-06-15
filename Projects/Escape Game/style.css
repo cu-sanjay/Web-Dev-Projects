@@ -1,0 +1,122 @@
+:root {
+    --bg: #0f172a;
+    --card-bg: #1e293b;
+    --accent: #38bdf8;
+    --urgent: #f43f5e;
+    --success: #10b981;
+    --text: #f1f5f9;
+    --text-dim: #94a3b8;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.game-container {
+    width: 90%;
+    max-width: 600px;
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+header h1 {
+    text-align: center;
+    margin-top: 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent);
+    text-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+}
+
+#hud {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: rgba(15, 23, 42, 0.5);
+    border-radius: 0.5rem;
+}
+
+.label {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+}
+
+#timer {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--urgent);
+}
+
+.progress-bar {
+    height: 8px;
+    background: #334155;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+}
+
+#progress-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--success);
+    transition: width 0.4s ease;
+}
+
+.description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    min-height: 100px;
+    margin-bottom: 2rem;
+    color: var(--text-dim);
+}
+
+.input-area {
+    display: flex;
+    gap: 0.5rem;
+}
+
+input {
+    flex: 1;
+    background: #0f172a;
+    border: 1px solid #334155;
+    padding: 0.75rem;
+    border-radius: 0.4rem;
+    color: white;
+    font-size: 1rem;
+}
+
+button {
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.4rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+button:hover { opacity: 0.9; }
+
+.feedback-msg {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    height: 1.2rem;
+    text-align: center;
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escape the Exam Hall</title>
+    <link rel="stylesheet" href="escape.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-container">
+        <header>
+            <h1>Escape the Hall</h1>
+            <div id="hud">
+                <div class="timer-box">
+                    <span class="label">Time Remaining</span>
+                    <span id="timer">05:00</span>
+                </div>
+                <div class="progress-box">
+                    <span class="label">Progress</span>
+                    <div class="progress-bar"><div id="progress-fill"></div></div>
+                </div>
+            </div>
+        </header>
+
+        <main id="game-screen">
+            <div id="puzzle-content">
+                <p class="description" id="scene-desc">Loading escape protocol...</p>
+                <div class="input-area">
+                    <input type="text" id="answer-input" placeholder="Enter solution..." autocomplete="off">
+                    <button id="submit-btn">Submit</button>
+                </div>
+            </div>
+            <p id="feedback" class="feedback-msg"></p>
+        </main>
+    </div>
+
+    <script src="escape.js"></script>
+</body>
+</html>
