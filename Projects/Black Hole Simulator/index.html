@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Black Hole Simulator</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="app-container">
+  <header><div class="brand"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg><div><h1>BLACK HOLE SIMULATOR</h1><p>Event Horizon &amp; Gravitational Lensing Visualization</p></div></div>
+    <div class="controls-bar"><button id="btn-reset" class="btn">Reset View</button><span id="mass-display" class="mass-display">Mass: 10 M☉</span></div>
+  </header>
+  <div class="main-layout">
+    <aside class="side-panel">
+      <div class="control-group"><label>Mass (Solar Masses)</label><input type="range" id="mass-slider" min="1" max="100" value="10"><span id="mass-value">10 M☉</span></div>
+      <div class="control-group"><label>Accretion Disk</label><input type="range" id="disk-slider" min="0" max="100" value="60"><span id="disk-value">60%</span></div>
+      <div class="control-group"><label>Rotation Speed</label><input type="range" id="spin-slider" min="0" max="100" value="30"><span id="spin-value">0.3</span></div>
+      <div class="info-panel"><h3>About</h3><p id="bh-info">A black hole is a region of spacetime where gravity is so strong that nothing can escape. The boundary is called the <strong>event horizon</strong>. The intense gravity bends light from background stars — this is <strong>gravitational lensing</strong>.</p></div>
+    </aside>
+    <main class="canvas-area"><canvas id="canvas" width="900" height="600"></canvas></main>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
