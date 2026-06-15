@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Cyber Attack Defense Simulator</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="app-container">
+  <header><div class="brand"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><div><h1>CYBER ATTACK DEFENSE SIMULATOR</h1><p>Defend Your Network · Stop the Attack</p></div></div><div class="game-stats"><span>Wave <span id="wave">1</span></span><span>❤️ <span id="health">100</span></span><span>🛡️ <span id="score">0</span></span></div></header>
+  <div class="main-layout">
+    <aside class="defense-panel">
+      <h3>Defenses</h3>
+      <button class="def-btn" data-type="firewall">Firewall 🧱<span class="cost">10</span></button>
+      <button class="def-btn" data-type="antivirus">Antivirus 🛡️<span class="cost">15</span></button>
+      <button class="def-btn" data-type="ids">IDS 🔍<span class="cost">25</span></button>
+      <button class="def-btn" data-type="waf">WAF 🌐<span class="cost">30</span></button>
+      <button class="def-btn" data-type="backup">Backup 💾<span class="cost">20</span></button>
+      <hr class="divider">
+      <div class="resource-bar"><span>Points: <span id="points">50</span></span></div>
+      <button id="btn-next-wave" class="btn btn-primary">Next Wave ⚡</button>
+      <button id="btn-reset" class="btn">Reset</button>
+    </aside>
+    <main class="battle-area">
+      <div class="network-map" id="network-map">
+        <div class="node protected" data-node="web"><span class="node-icon">🌐</span><span>Web Server</span><div class="node-health" style="width:100%"></div></div>
+        <div class="node protected" data-node="db"><span class="node-icon">🗄️</span><span>Database</span><div class="node-health" style="width:100%"></div></div>
+        <div class="node protected" data-node="mail"><span class="node-icon">📧</span><span>Mail Server</span><div class="node-health" style="width:100%"></div></div>
+        <div class="node protected" data-node="dns"><span class="node-icon">🔗</span><span>DNS</span><div class="node-health" style="width:100%"></div></div>
+        <div class="node protected" data-node="app"><span class="node-icon">📱</span><span>App Server</span><div class="node-health" style="width:100%"></div></div>
+      </div>
+      <div class="attack-log" id="attack-log"><div class="log-entry">System online. Defenses ready.</div></div>
+    </main>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
