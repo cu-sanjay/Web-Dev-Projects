@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel Planning & Itinerary</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="brand">
+        <i class="ph-fill ph-paper-plane-tilt text-primary"></i> <span>TripGenie</span>
+      </div>
+
+      <nav class="sidebar-menu">
+        <button class="nav-btn active" data-target="trips"><i class="ph ph-map-trifold"></i> My Trips</button>
+        <button class="nav-btn" data-target="itinerary"><i class="ph ph-calendar-check"></i> Itinerary Builder</button>
+        <button class="nav-btn" data-target="budget"><i class="ph ph-wallet"></i> Budget Tracker</button>
+      </nav>
+
+      <div class="user-profile">
+        <img src="https://ui-avatars.com/api/?name=Vishwa+Mistry&background=8b5cf6&color=fff" alt="User">
+        <div>
+          <div class="user-name">Vishwa Mistry</div>
+          <div class="user-status">Pro Traveler</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      
+      <!-- Topbar -->
+      <header class="topbar flex-between">
+        <div class="search-box">
+          <i class="ph ph-magnifying-glass"></i>
+          <input type="text" placeholder="Search for places, flights, or activities...">
+        </div>
+        <button class="icon-btn"><i class="ph ph-bell"></i></button>
+      </header>
+
+      <!-- Views -->
+      <div class="scroll-area">
+        
+        <!-- My Trips View -->
+        <section id="trips" class="view active">
+          <div class="flex-between mb-3">
+            <div>
+              <h1 class="page-title">My Upcoming Trips</h1>
+              <p class="text-muted">You have 2 trips planned for this year.</p>
+            </div>
+            <button class="primary-btn"><i class="ph ph-plus"></i> Create New Trip</button>
+          </div>
+
+          <div class="trips-grid">
+            <!-- Japan Trip -->
+            <div class="trip-card">
+              <div class="trip-img" style="background-image: url('https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&q=80&w=600');">
+                <span class="badge" style="background: rgba(0,0,0,0.6); color: white; border: none;">In 12 Days</span>
+              </div>
+              <div class="trip-info">
+                <h3>Tokyo Autumn Explorer</h3>
+                <p class="text-muted"><i class="ph-fill ph-calendar"></i> Oct 15 - Oct 25, 2026</p>
+                <div class="mt-2 flex-between">
+                  <div class="trip-avatars">
+                    <img src="https://ui-avatars.com/api/?name=V+M&background=8b5cf6&color=fff">
+                    <img src="https://ui-avatars.com/api/?name=S+J&background=10b981&color=fff">
+                  </div>
+                  <button class="btn outline-btn btn-sm" onclick="document.querySelector('[data-target=\\'itinerary\\']').click()">Open Itinerary</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Paris Trip -->
+            <div class="trip-card">
+              <div class="trip-img" style="background-image: url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&q=80&w=600');">
+                <span class="badge" style="background: rgba(0,0,0,0.6); color: white; border: none;">Planning</span>
+              </div>
+              <div class="trip-info">
+                <h3>Paris Romantic Getaway</h3>
+                <p class="text-muted"><i class="ph-fill ph-calendar"></i> Dec 10 - Dec 15, 2026</p>
+                <div class="mt-2 flex-between">
+                  <div class="trip-avatars">
+                    <img src="https://ui-avatars.com/api/?name=V+M&background=8b5cf6&color=fff">
+                  </div>
+                  <button class="btn outline-btn btn-sm">Resume Planning</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Itinerary View -->
+        <section id="itinerary" class="view hidden">
+          <div class="flex-between mb-3">
+            <div>
+              <h1 class="page-title">Tokyo Autumn Explorer</h1>
+              <p class="text-muted"><i class="ph ph-map-pin"></i> Tokyo, Kyoto, Osaka</p>
+            </div>
+            <button class="primary-btn"><i class="ph ph-plus"></i> Add Event</button>
+          </div>
+
+          <div class="itinerary-layout">
+            <!-- Day Selector -->
+            <div class="day-selector">
+              <div class="day-tab active">
+                <div class="day-num">Day 1</div>
+                <div class="day-date">Oct 15</div>
+              </div>
+              <div class="day-tab">
+                <div class="day-num">Day 2</div>
+                <div class="day-date">Oct 16</div>
+              </div>
+              <div class="day-tab">
+                <div class="day-num">Day 3</div>
+                <div class="day-date">Oct 17</div>
+              </div>
+            </div>
+
+            <!-- Timeline -->
+            <div class="timeline" id="timeline-container">
+               <!-- Injected via JS -->
+            </div>
+          </div>
+        </section>
+
+        <!-- Budget View -->
+        <section id="budget" class="view hidden">
+          <div class="flex-between mb-3">
+            <div>
+              <h1 class="page-title">Budget Tracker</h1>
+              <p class="text-muted">Tokyo Autumn Explorer</p>
+            </div>
+            <button class="primary-btn"><i class="ph ph-plus"></i> Add Expense</button>
+          </div>
+
+          <div class="budget-overview panel mb-3">
+            <div class="panel-body">
+              <div class="budget-stats">
+                <div>
+                  <div class="text-muted">Total Budget</div>
+                  <h2>$3,500</h2>
+                </div>
+                <div>
+                  <div class="text-muted">Spent So Far</div>
+                  <h2 class="text-purple">$2,150</h2>
+                </div>
+                <div>
+                  <div class="text-muted">Remaining</div>
+                  <h2 class="text-green">$1,350</h2>
+                </div>
+              </div>
+              <div class="progress-bar-container mt-3">
+                <div class="progress-bar" style="width: 61%; background: var(--purple);"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="split-layout">
+            <div class="panel col-span-2">
+              <div class="panel-header"><h3>Recent Expenses</h3></div>
+              <div class="panel-body p-0">
+                <table class="custom-table">
+                  <thead>
+                    <tr><th>Category</th><th>Description</th><th>Date</th><th>Amount</th></tr>
+                  </thead>
+                  <tbody id="expenses-tbody">
+                    <!-- Injected via JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
