@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="METEO-OS // Weather Pattern Simulator - Premium atmospheric geophysics terminal for thermodynamic grids, pressure winds, and local sky particle physics.">
+  <title>METEO-OS // Weather Pattern Simulator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="weather-os-theme">
+  <!-- Volcanic HUD grid background -->
+  <div class="hud-grid-overlay"></div>
+
+  <div class="app-container" id="shake-envelope">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="logo-area">
+        <span class="logo-icon">🌤️</span>
+        <div>
+          <h1>METEO-OS <span class="logo-sub">// WEATHER PATTERN SIMULATOR</span></h1>
+          <p class="subtitle">Thermodynamic Atmospheric Fluid Grid & Sky Telemetry Terminal</p>
+        </div>
+      </div>
+      
+      <div class="header-status-bar">
+        <div class="control-group">
+          <label for="weather-preset">Preset Scenario:</label>
+          <select id="weather-preset" class="glass-input">
+            <option value="afternoon_storm">Afternoon Convective Storm</option>
+            <option value="cyclone">Coriolis Cyclone (Oceanic Vortex)</option>
+            <option value="tornado_alley">Tornado Alley (Frontal Collision)</option>
+            <option value="blizzard">Arctic Blizzard (Freezing Gale)</option>
+            <option value="desert_heatwave">Desert Heatwave (High Dome)</option>
+          </select>
+        </div>
+        
+        <div class="time-hud font-mono">
+          <span class="label">TIME:</span> <span id="telemetry-time">12:00</span>
+        </div>
+
+        <div class="solar-heating-hud">
+          <span class="label">SOLAR INSOLATION:</span>
+          <div class="solar-bar-outer">
+            <div id="telemetry-solar-fill" class="solar-fill" style="width: 80%"></div>
+          </div>
+          <span id="telemetry-solar-val" class="font-mono">80%</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Layout Grid -->
+    <main class="main-grid">
+
+      <!-- Left Column: Atmospheric Modifiers & Rupture Controls -->
+      <section class="controls-column">
+        <!-- Weather Paintbrush -->
+        <div class="glass-card paintbrush-card">
+          <div class="card-header">
+            <h3>Weather Paintbrush</h3>
+            <span class="badge tech-badge">METEO-GRID EDITOR</span>
+          </div>
+
+          <div class="control-sliders">
+            <!-- Brush Property -->
+            <div class="slider-group">
+              <label class="label">Inject Parameter</label>
+              <div class="brush-selector-grid">
+                <button class="brush-btn active" data-property="temp" data-value="hot" title="Paint warm thermal mass">☀️ Heat</button>
+                <button class="brush-btn" data-property="temp" data-value="cold" title="Paint cold thermal mass">❄️ Cold</button>
+                <button class="brush-btn" data-property="pressure" data-value="high" title="Paint high pressure ridge">📈 High P</button>
+                <button class="brush-btn" data-property="pressure" data-value="low" title="Paint low pressure trough">📉 Low P</button>
+                <button class="brush-btn" data-property="moisture" data-value="wet" title="Inject moisture vapor">💧 Humid</button>
+                <button class="brush-btn" data-property="moisture" data-value="dry" title="Dry out air mass">🏜️ Dry</button>
+              </div>
+            </div>
+
+            <!-- Brush Size -->
+            <div class="slider-group">
+              <div class="slider-header">
+                <span class="label">Brush Radius</span>
+                <span class="value" id="val-brush-size">2 Cells</span>
+              </div>
+              <input type="range" id="slider-brush-size" min="1" max="5" value="2" class="glass-range">
+            </div>
+          </div>
+        </div>
+
+        <!-- Simulation Operations -->
+        <div class="glass-card operations-card">
+          <div class="card-header">
+            <h3>Atmospheric Controls</h3>
+          </div>
+          
+          <div class="operation-controls">
+            <div class="toggle-group-row">
+              <span class="label">Run Day/Night Cycle</span>
+              <label class="switch">
+                <input type="checkbox" id="toggle-diurnal" checked>
+                <span class="slider-toggle"></span>
+              </label>
+            </div>
+
+            <div class="toggle-group-row">
+              <span class="label">Enable Coastline Terrain</span>
+              <label class="switch">
+                <input type="checkbox" id="toggle-coastline" checked>
+                <span class="slider-toggle"></span>
+              </label>
+            </div>
+
+            <div class="slider-group">
+              <div class="slider-header">
+                <span class="label">Global Wind Shear</span>
+                <span class="value" id="val-shear">0%</span>
+              </div>
+              <input type="range" id="slider-shear" min="0" max="100" value="0" class="glass-range">
+            </div>
+
+            <div class="button-row">
+              <button id="btn-pause" class="glow-button secondary" title="Pause simulation updates">Pause</button>
+              <button id="btn-reset" class="glow-button danger" title="Reset map to standard states">Reset Map</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Center Column: Viewports -->
+      <section class="viewport-column">
+        <!-- Map Viewport -->
+        <div class="glass-card map-card">
+          <div class="card-header">
+            <h3>Regional Weather Map (2D Grid)</h3>
+            <div class="map-layer-tabs">
+              <button class="tab-btn active" data-layer="temp">Temperature</button>
+              <button class="tab-btn" data-layer="pressure">Pressure</button>
+              <button class="tab-btn" data-layer="moisture">Moisture</button>
+              <button class="tab-btn" data-layer="clouds">Clouds</button>
+            </div>
+          </div>
+
+          <div class="canvas-container map-container">
+            <canvas id="map-canvas"></canvas>
+            
+            <div class="map-overlay-controls">
+              <label class="checkbox-container">
+                <input type="checkbox" id="chk-wind-vectors" checked>
+                <span class="checkmark"></span> Wind Vectors
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Local Sky Viewport -->
+        <div class="glass-card sky-card">
+          <div class="card-header">
+            <h3>Local Sky Viewport</h3>
+            <span class="badge live-badge" id="selected-cell-coord">CELL: (10, 10)</span>
+          </div>
+
+          <div class="canvas-container sky-container">
+            <canvas id="sky-canvas"></canvas>
+            
+            <!-- Live telemetry overlay -->
+            <div class="sky-telemetry font-mono">
+              <div>Cell Temp: <span id="telemetry-cell-temp">25.0 °C</span></div>
+              <div>Cell Pressure: <span id="telemetry-cell-pressure">1013 hPa</span></div>
+              <div>Relative Hum: <span id="telemetry-cell-humidity">55%</span></div>
+              <div>Cloud Density: <span id="telemetry-cell-clouds">20%</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Column: Analytics & Alert center -->
+      <section class="telemetry-column">
+        <!-- Analytics -->
+        <div class="glass-card analytics-card">
+          <div class="card-header">
+            <h3>Regional Analytics</h3>
+            <span class="badge tech-badge">LIVE METRICS</span>
+          </div>
+          
+          <div class="analytics-metrics font-mono">
+            <div class="metric-row">
+              <span class="label">MAX WIND SPEED:</span>
+              <span class="value" id="val-max-wind">12 km/h</span>
+            </div>
+            <div class="metric-progress-bar">
+              <div id="bar-max-wind" class="progress-fill cyan" style="width: 12%"></div>
+            </div>
+
+            <div class="metric-row">
+              <span class="label">AVG CLOUD COVER:</span>
+              <span class="value" id="val-avg-clouds">35%</span>
+            </div>
+            <div class="metric-progress-bar">
+              <div id="bar-avg-clouds" class="progress-fill white" style="width: 35%"></div>
+            </div>
+
+            <div class="metric-row">
+              <span class="label">CAPE INSTABILITY:</span>
+              <span class="value" id="val-cape">Low (210 J)</span>
+            </div>
+            <div class="metric-progress-bar">
+              <div id="bar-cape" class="progress-fill yellow" style="width: 15%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Weather Alerts -->
+        <div class="glass-card alerts-card">
+          <div class="card-header">
+            <h3>Weather Alert Center</h3>
+          </div>
+          
+          <div class="alerts-list" id="alerts-log">
+            <!-- Dynamically populated weather alerts -->
+            <div class="alert-item safe">
+              <span class="alert-icon">✅</span>
+              <div>
+                <strong>Advisories Normal:</strong> Regional weather conditions are stable. No active hazard advisories or warnings in effect.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <div class="footer-left">
+        <span>METEO-OS // ATMOSPHERIC DECK</span>
+        <span class="dot-separator">•</span>
+        <span>THERMODYNAMIC FLUID CONVECTION SOLVER</span>
+      </div>
+      <div class="footer-right">
+        <span>2D Coriolis Wind Field Model</span>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
