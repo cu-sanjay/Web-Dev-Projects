@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tourism Management Portal</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <nav class="global-nav">
+    <div class="brand">
+      <i class="ph-fill ph-airplane-tilt text-primary"></i> <span>Wanderlust</span>
+    </div>
+    
+    <div class="nav-links">
+      <button class="nav-tab active" data-tab="explore">Explore Packages</button>
+      <button class="nav-tab" data-tab="bookings">My Bookings</button>
+      <button class="nav-tab" data-tab="admin" style="display: none;" id="admin-tab-btn">Admin Dashboard</button>
+    </div>
+
+    <div class="nav-actions">
+      <!-- Role Switcher -->
+      <div class="role-selector">
+        <select id="role-select">
+          <option value="customer">Customer View</option>
+          <option value="admin">Admin View</option>
+        </select>
+      </div>
+
+      <button class="icon-btn"><i class="ph ph-bell"></i></button>
+      <img src="https://ui-avatars.com/api/?name=Vishwa+Mistry&background=0ea5e9&color=fff" alt="Avatar" id="user-avatar" class="avatar">
+    </div>
+  </nav>
+
+  <!-- Mobile Nav (Visible only on small screens) -->
+  <div class="mobile-nav">
+    <button class="nav-tab active" data-tab="explore"><i class="ph ph-compass"></i></button>
+    <button class="nav-tab" data-tab="bookings"><i class="ph ph-ticket"></i></button>
+    <button class="nav-tab" data-tab="admin" id="mobile-admin-tab-btn" style="display: none;"><i class="ph ph-shield-check"></i></button>
+  </div>
+
+  <main class="main-content">
+    
+    <!-- ================= EXPLORE TAB (CUSTOMER) ================= -->
+    <section id="explore" class="tab-content active">
+      <div class="hero-banner">
+        <div>
+          <h1>Discover Your Next Adventure 🌍</h1>
+          <p>Book exclusive tour packages to the world's most beautiful destinations.</p>
+        </div>
+        <div class="search-box">
+          <i class="ph ph-map-pin"></i>
+          <input type="text" placeholder="Where do you want to go?">
+          <button class="btn primary-btn">Search</button>
+        </div>
+      </div>
+
+      <div class="section-header mt-3">
+        <h2>Popular Packages</h2>
+        <div class="filter-pills">
+          <span class="pill active">All</span>
+          <span class="pill">Beach</span>
+          <span class="pill">Mountain</span>
+          <span class="pill">City Tours</span>
+        </div>
+      </div>
+
+      <div class="tour-grid" id="tour-grid">
+        <!-- Injected via JS -->
+      </div>
+    </section>
+
+    <!-- ================= MY BOOKINGS TAB (CUSTOMER) ================= -->
+    <section id="bookings" class="tab-content hidden">
+      <div class="page-heading">
+        <h1>My Bookings</h1>
+        <p class="text-muted">Manage your upcoming trips and past travel history.</p>
+      </div>
+
+      <div class="split-layout mt-3">
+        <!-- Upcoming Trips -->
+        <div class="panel col-span-2">
+          <div class="panel-header">
+            <h3>Upcoming Trips</h3>
+          </div>
+          <div class="panel-body p-0">
+            <table class="custom-table">
+              <thead>
+                <tr><th>Destination</th><th>Dates</th><th>Guests</th><th>Status</th><th>Action</th></tr>
+              </thead>
+              <tbody id="upcoming-bookings-tbody">
+                <!-- Injected via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Travel Stats -->
+        <div class="panel">
+          <div class="panel-header">
+            <h3>Travel Stats</h3>
+          </div>
+          <div class="panel-body">
+            <div class="stat-card mb-2">
+              <div class="text-muted">Total Trips</div>
+              <div class="text-2xl font-bold">12</div>
+            </div>
+            <div class="stat-card mb-2">
+              <div class="text-muted">Countries Visited</div>
+              <div class="text-2xl font-bold">5</div>
+            </div>
+            <div class="stat-card">
+              <div class="text-muted">Loyalty Points</div>
+              <div class="text-2xl font-bold text-orange">2,450</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= ADMIN DASHBOARD TAB ================= -->
+    <section id="admin" class="tab-content hidden">
+      <div class="page-heading flex-between">
+        <div>
+          <h1>Admin Dashboard</h1>
+          <p class="text-muted">Manage the portal, review bookings, and monitor revenue.</p>
+        </div>
+        <button class="btn primary-btn"><i class="ph ph-plus"></i> Add Package</button>
+      </div>
+
+      <div class="metrics-grid mt-2">
+        <div class="metric-card">
+          <div class="metric-icon bg-blue-light text-blue"><i class="ph-fill ph-users"></i></div>
+          <div class="metric-data"><h3>Active Users</h3><h2>1,240</h2></div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon bg-green-light text-green"><i class="ph-fill ph-ticket"></i></div>
+          <div class="metric-data"><h3>Bookings This Month</h3><h2>86</h2></div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon bg-purple-light text-purple"><i class="ph-fill ph-currency-dollar"></i></div>
+          <div class="metric-data"><h3>Monthly Revenue</h3><h2>$42,500</h2></div>
+        </div>
+      </div>
+
+      <div class="split-layout mt-3">
+        <!-- Recent Bookings -->
+        <div class="panel col-span-2">
+          <div class="panel-header"><h3>Recent Booking Requests</h3></div>
+          <div class="panel-body p-0">
+            <table class="custom-table">
+              <thead>
+                <tr><th>Customer</th><th>Package</th><th>Date</th><th>Amount</th><th>Status</th></tr>
+              </thead>
+              <tbody id="admin-bookings-tbody">
+                 <!-- Injected via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
