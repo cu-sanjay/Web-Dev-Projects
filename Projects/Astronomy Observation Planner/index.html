@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Astronomy Observation Planner</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="app-container">
+  <header><div class="brand"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#eab308" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/></svg><div><h1>ASTRONOMY OBSERVATION PLANNER</h1><p>Night Sky Planner · Celestial Events</p></div></div></header>
+  <div class="main-layout">
+    <aside class="side-panel">
+      <div class="control-group"><label>Latitude</label><input type="range" id="lat-slider" min="-90" max="90" value="40"><span id="lat-value">40° N</span></div>
+      <div class="control-group"><label>Month</label><input type="range" id="month-slider" min="1" max="12" value="6"><span id="month-value">June</span></div>
+      <div class="control-group"><label>Time</label><input type="range" id="time-slider" min="18" max="6" value="22" step="0.5"><span id="time-value">22:00</span></div>
+      <hr class="divider">
+      <h3>Celestial Events</h3>
+      <div class="events-list" id="events-list">
+        <div class="event-item"><div class="event-marker" style="background:#eab308"></div><div><strong>Perseid Meteor Shower</strong><span class="event-date">Aug 11-13</span></div></div>
+        <div class="event-item"><div class="event-marker" style="background:#a78bfa"></div><div><strong>Jupiter Opposition</strong><span class="event-date">Sep 26</span></div></div>
+        <div class="event-item"><div class="event-marker" style="background:#f97316"></div><div><strong>Venus Evening</strong><span class="event-date">Mar-May</span></div></div>
+        <div class="event-item"><div class="event-marker" style="background:#06b6d4"></div><div><strong>Saturn Opposition</strong><span class="event-date">Aug 14</span></div></div>
+      </div>
+    </aside>
+    <main class="sky-area">
+      <canvas id="sky-canvas" width="800" height="600"></canvas>
+      <div class="sky-controls"><span class="hint">Observing conditions: <span id="conditions">Good</span></span></div>
+    </main>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0b1220;--surface:#111827;--secondary:#1f2937;--border:#334155;--primary:#f8fafc;--sec:#cbd5e1;--muted:#64748b;--accent:#eab308;--radius:10px;--font-code:ui-monospace,Consolas,monospace;--font-ui:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+html{font-size:14px}
+body{font-family:var(--font-ui);background:var(--bg);color:var(--primary);height:100vh;overflow:hidden}
+.app-container{max-width:1500px;margin:0 auto;display:flex;flex-direction:column;height:100vh;padding:14px 18px;gap:10px}
+header{flex-shrink:0}
+.brand{display:flex;align-items:center;gap:10px}
+.brand h1{font-size:14px;font-weight:700;letter-spacing:.8px}
+.brand p{font-size:10px;color:var(--muted)}
+.main-layout{display:grid;grid-template-columns:220px 1fr;gap:12px;flex:1;min-height:0}
+@media(max-width:800px){.main-layout{grid-template-columns:1fr}}
+.side-panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;display:flex;flex-direction:column;gap:10px;overflow-y:auto}
+.control-group label{display:block;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.control-group input[type=range]{width:100%;accent-color:var(--accent);height:4px}
+.control-group span{font-size:11px;font-family:var(--font-code);color:var(--accent)}
+.divider{border:none;border-top:1px solid var(--border);margin:4px 0}
+.side-panel h3{font-size:11px;font-weight:600;color:var(--sec);text-transform:uppercase;letter-spacing:.5px}
+.events-list{display:flex;flex-direction:column;gap:6px}
+.event-item{display:flex;align-items:flex-start;gap:8px;padding:6px 8px;background:var(--secondary);border-radius:6px}
+.event-marker{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:3px}
+.event-item strong{display:block;font-size:11px;color:var(--sec)}
+.event-date{font-size:10px;color:var(--muted)}
+.sky-area{display:flex;flex-direction:column;gap:6px}
+#sky-canvas{width:100%;height:auto;max-height:100%;display:block;background:#0a0510;border:1px solid var(--border);border-radius:var(--radius)}
+.sky-controls{display:flex;justify-content:center}
+.hint{font-size:10px;color:var(--muted)}
+#conditions{color:var(--accent);font-weight:600}
