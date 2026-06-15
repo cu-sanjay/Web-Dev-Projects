@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Epidemiology Spread Simulator Pro - Biohazard Control Command</title>
+  <!-- Google Fonts: Inter & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header Command Block -->
+    <header class="dashboard-header">
+      <div class="header-logo-title">
+        <div class="biohazard-logo">
+          <svg viewBox="0 0 100 100" class="logo-svg">
+            <path d="M50 15A12 12 0 0 0 38.8 29.4C43 31.4 46.5 35 48.5 39.2c1.7-1.1 3.8-1.7 6-1.7a12 12 0 0 1 12 12c0 2.2-.6 4.3-1.7 6 4.2 2 7.8 5.5 9.8 9.7A12 12 0 0 0 86 54a12 12 0 0 0-12-12c-2.2 0-4.3.6-6 1.7-2-4.2-5.5-7.8-9.8-9.8A12 12 0 0 0 62 25a12 12 0 0 0-12-10z" fill="none" stroke="var(--color-hazard)" stroke-width="4"/>
+            <circle cx="50" cy="50" r="10" fill="none" stroke="var(--color-hazard)" stroke-width="3"/>
+            <path d="M50 25c-13.8 0-25 11.2-25 25s11.2 25 25 25 25-11.2 25-25" fill="none" stroke="var(--color-danger)" stroke-width="2" stroke-dasharray="3 3"/>
+          </svg>
+        </div>
+        <div class="title-meta">
+          <h1>EPIDEMIOLOGY SPREAD SIMULATOR <span class="pro-badge">PRO</span></h1>
+          <p class="subtitle">BIO-HAZARD DIAGNOSTIC & TRANSMISSION INTERVENTIONS WORKSTATION</p>
+        </div>
+      </div>
+      
+      <!-- Scenario Preset Controls -->
+      <div class="preset-selector">
+        <label for="presetSelect">SCENARIO PRESETS</label>
+        <select id="presetSelect" class="styled-select">
+          <option value="covid">COVID-like Pandemic</option>
+          <option value="flu">Seasonal Influenza</option>
+          <option value="measles">High-Contagion Measles</option>
+          <option value="zombie">Zombie Pathogen Outbreak</option>
+        </select>
+      </div>
+
+      <!-- Master Control Operations -->
+      <div class="master-controls">
+        <button id="playPauseBtn" class="control-btn run-btn" title="Run / Pause Simulation">
+          <span class="icon">▶</span> <span class="text">RUN SIMULATOR</span>
+        </button>
+        <button id="stepBtn" class="control-btn step-btn" title="Advance 1 Step (Day)">
+          <span class="icon">⏭</span> <span class="text">STEP</span>
+        </button>
+        <button id="resetBtn" class="control-btn reset-btn" title="Reset Simulation Parameters">
+          <span class="icon">↻</span> <span class="text">RESET</span>
+        </button>
+        <button id="exportCsvBtn" class="control-btn export-btn" title="Export Simulation Logs as CSV">
+          <span class="icon">⬇</span> <span class="text">CSV</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="dashboard-grid">
+      <!-- Left Panel: Parameter Deck -->
+      <aside class="panel parameter-deck">
+        <div class="panel-header">
+          <h2>PARAMETRIC ADJUSTMENTS</h2>
+          <div class="simulation-mode-toggle">
+            <span class="mode-label">ENGINE:</span>
+            <button id="modeOdeBtn" class="toggle-mode-btn active" title="Use mathematical continuous differential equations">ODE</button>
+            <button id="modeAgentBtn" class="toggle-mode-btn" title="Use discrete stochastic agent-based physics">AGENT</button>
+          </div>
+        </div>
+        
+        <div class="scrollable-content">
+          <!-- pathogen characteristics -->
+          <section class="control-group">
+            <h3><span class="group-icon">🧬</span> PATHOGEN TRANSMISSION CHARACTERISTICS</h3>
+            <div class="slider-wrapper">
+              <div class="slider-labels">
+                <label for="paramBeta">Transmission Rate (β)</label>
+                <span id="valBeta" class="slider-val">0.35</span>
+              </div>
+              <input type="range" id="paramBeta" min="0.05" max="1.5" step="0.01" value="0.35">
+              <span class="slider-description">Daily probability of infection transmission per contact.</span>
+            </div>
+
+            <div class="slider-wrapper">
+              <div class="slider-labels">
+                <label for="paramIncubation">Incubation Period (Days)</label>
+                <span id="valIncubation" class="slider-val">5.0</span>
+              </div>
+              <input type="range" id="paramIncubation" min="1.0" max="14.0" step="0.5" value="5.0">
+              <span class="slider-description">Average time spent in the Exposed (E) latent compartment.</span>
+            </div>
+
+            <div class="slider-wrapper">
+              <div class="slider-labels">
+                <label for="paramInfectious">Infectious Duration (Days)</label>
+                <span id="valInfectious" class="slider-val">8.0</span>
+              </div>
+              <input type="range" id="paramInfectious" min="1.0" max="21.0" step="0.5" value="8.0">
+              <span class="slider-description">Average duration an infected individual spreads the disease.</span>
+            </div>
+
+            <div class="slider-wrapper">
+              <div class="slider-labels">
+                <label for="paramSeverity">Hospitalization Rate (%)</label>
+                <span id="valSeverity" class="slider-val">12</span>
+              </div>
+              <input type="range" id="paramSeverity" min="0" max="50" step="1" value="12">
+              <span class="slider-description">Percentage of infectious cases requiring critical care beds.</span>
+            </div>
+          </section>
+
+          <!-- clinical healthcare capabilities -->
+          <section class="control-group">
+            <h3><span class="group-icon">🏥</span> HEALTHCARE SYSTEM CAPACITY</h3>
+            <div class="slider-wrapper">
+              <div class="slider-labels">
+                <label for="paramHospitalCapacity">ICU Bed Capacity (% of Pop)</label>
+                <span id="valHospitalCapacity" class="slider-val">2.5%</span>
+              </div>
+              <input type="range" id="paramHospitalCapacity" min="0.5" max="10.0" step="0.1" value="2.5">
+              <span class="slider-description">Maximum capacity of the critical care hospital unit.</span>
+            </div>
+
+            <div class="slider-wrapper">
+              <div class="slider-labels">
+                <label for="paramBaseMortality">Base Hospital Mortality (%)</label>
+                <span id="valBaseMortality" class="slider-val">5.0</span>
+              </div>
+              <input type="range" id="paramBaseMortality" min="0.1" max="50.0" step="0.1" value="5.0">
+              <span class="slider-description">Base fatality rate of hospitalized cases under normal capacity.</span>
+            </div>
+
+            <div class="slider-wrapper">
+              <div class="slider-labels">
+                <label for="paramOverloadMultiplier">Surge Mortality Penalty</label>
+                <span id="valOverloadMultiplier" class="slider-val">3.0x</span>
+              </div>
+              <input type="range" id="paramOverloadMultiplier" min="1.0" max="10.0" step="0.5" value="3.0">
+              <span class="slider-description">Mortality multiplication factor when ICU bed capacity is breached.</span>
+            </div>
+          </section>
+
+          <!-- immunizations & vaccinations -->
+          <section class="control-group">
+            <h3><span class="group-icon">💉</span> IMMUNIZATION & VACCINATION</h3>
+            <div class="slider-wrapper">
+              <div class="slider-labels">
+                <label for="paramVaccineEfficacy">Vaccine Efficacy (%)</label>
+                <span id="valVaccineEfficacy" class="slider-val">90</span>
+              </div>
+              <input type="range" id="paramVaccineEfficacy" min="10" max="100" step="1" value="90">
+              <span class="slider-description">Sufficient immunity probability for vaccinated individuals.</span>
+            </div>
+
+            <div class="slider-wrapper">
+              <div class="slider-labels">
+                <label for="paramVaccineSpeed">Daily Vaccine Speed (% of Pop)</label>
+                <span id="valVaccineSpeed" class="slider-val">0.2</span>
+              </div>
+              <input type="range" id="paramVaccineSpeed" min="0.0" max="2.0" step="0.05" value="0.2">
+              <span class="slider-description">Maximum percentage of susceptible population vaccinated per day.</span>
+            </div>
+          </section>
+        </div>
+      </aside>
+
+      <!-- Center Panel: Agent Sandbox -->
+      <main class="panel sandbox-container">
+        <div class="panel-header">
+          <h2>REAL-TIME AGENT PHYSIC WORKSPACE</h2>
+          <div class="sandbox-stats">
+            <span class="particle-count-badge">POPULATION size: <span id="agentPopCount">300</span></span>
+          </div>
+        </div>
+        
+        <div class="canvas-viewport">
+          <canvas id="sandboxCanvas" width="680" height="420"></canvas>
+          <div id="particleLegend" class="legend-grid">
+            <div class="legend-item susceptible"><span class="bullet"></span> Susceptible (<span id="countS">300</span>)</div>
+            <div class="legend-item exposed"><span class="bullet"></span> Exposed (<span id="countE">0</span>)</div>
+            <div class="legend-item infectious"><span class="bullet"></span> Infectious (<span id="countI">1</span>)</div>
+            <div class="legend-item hospitalized"><span class="bullet"></span> Critical/ICU (<span id="countH">0</span>)</div>
+            <div class="legend-item recovered"><span class="bullet"></span> Recovered (<span id="countR">0</span>)</div>
+            <div class="legend-item deceased"><span class="bullet"></span> Deceased (<span id="countD">0</span>)</div>
+            <div class="legend-item vaccinated"><span class="bullet"></span> Vaccinated (<span id="countV">0</span>)</div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Right Panel: Analytics & Timelines -->
+      <aside class="panel analytics-panel">
+        <div class="panel-header">
+          <h2>TRANSMISSION ANALYTICS</h2>
+          <div class="telemetry-day">DAY <span id="telemetryDay">0</span></div>
+        </div>
+
+        <div class="scrollable-content">
+          <!-- Charts Section -->
+          <div class="chart-wrapper">
+            <canvas id="curveChart" width="350" height="180"></canvas>
+          </div>
+          <div class="chart-wrapper">
+            <canvas id="rtChart" width="350" height="90"></canvas>
+          </div>
+
+          <!-- NPI Scheduler Section -->
+          <section class="npi-scheduler-section">
+            <h3><span class="group-icon">📅</span> NON-PHARMACEUTICAL INTERVENTIONS SCHEDULE</h3>
+            
+            <div class="npi-schedule-lane">
+              <div class="lane-info">
+                <div class="lane-title">
+                  <input type="checkbox" id="npiLockdownCheck" class="styled-checkbox">
+                  <label for="npiLockdownCheck">Social Lockdown</label>
+                </div>
+                <span class="lane-status" id="statusLockdown">INACTIVE</span>
+              </div>
+              <div class="timeline-slider-row">
+                <label for="npiLockdownDay">Activate Day:</label>
+                <input type="range" id="npiLockdownDay" min="1" max="100" value="15">
+                <span class="timeline-day-val" id="valLockdownDay">Day 15</span>
+              </div>
+            </div>
+
+            <div class="npi-schedule-lane">
+              <div class="lane-info">
+                <div class="lane-title">
+                  <input type="checkbox" id="npiMaskCheck" class="styled-checkbox">
+                  <label for="npiMaskCheck">Mask Mandate</label>
+                </div>
+                <span class="lane-status" id="statusMask">INACTIVE</span>
+              </div>
+              <div class="timeline-slider-row">
+                <label for="npiMaskDay">Activate Day:</label>
+                <input type="range" id="npiMaskDay" min="1" max="100" value="10">
+                <span class="timeline-day-val" id="valMaskDay">Day 10</span>
+              </div>
+            </div>
+
+            <div class="npi-schedule-lane">
+              <div class="lane-info">
+                <div class="lane-title">
+                  <input type="checkbox" id="npiTestingCheck" class="styled-checkbox">
+                  <label for="npiTestingCheck">Testing & Isolation</label>
+                </div>
+                <span class="lane-status" id="statusTesting">INACTIVE</span>
+              </div>
+              <div class="timeline-slider-row">
+                <label for="npiTestingDay">Activate Day:</label>
+                <input type="range" id="npiTestingDay" min="1" max="100" value="8">
+                <span class="timeline-day-val" id="valTestingDay">Day 8</span>
+              </div>
+            </div>
+
+            <div class="npi-schedule-lane">
+              <div class="lane-info">
+                <div class="lane-title">
+                  <input type="checkbox" id="npiVaccineCheck" class="styled-checkbox">
+                  <label for="npiVaccineCheck">Mass Vaccination</label>
+                </div>
+                <span class="lane-status" id="statusVaccine">INACTIVE</span>
+              </div>
+              <div class="timeline-slider-row">
+                <label for="npiVaccineDay">Activate Day:</label>
+                <input type="range" id="npiVaccineDay" min="1" max="100" value="25">
+                <span class="timeline-day-val" id="valVaccineDay">Day 25</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- Telemetry KPI Dashboard -->
+          <section class="telemetry-dashboard">
+            <h3><span class="group-icon">📈</span> telemetry stats</h3>
+            <div class="kpi-grid">
+              <div class="kpi-card">
+                <span class="kpi-label">Peak Infection</span>
+                <span class="kpi-value" id="kpiPeakInfected">0.0%</span>
+                <span class="kpi-sub" id="kpiPeakInfectedDay">Day 0</span>
+              </div>
+              <div class="kpi-card">
+                <span class="kpi-label">Total Deceased</span>
+                <span class="kpi-value" id="kpiTotalDeceased">0</span>
+                <span class="kpi-sub" id="kpiMortalityRate">0.0% mortality</span>
+              </div>
+              <div class="kpi-card">
+                <span class="kpi-label">Peak ICU Burden</span>
+                <span class="kpi-value" id="kpiIcuBurden">0.0%</span>
+                <span class="kpi-sub" id="kpiIcuBreached">NO BREACH</span>
+              </div>
+              <div class="kpi-card">
+                <span class="kpi-label">Effective R<sub>t</sub></span>
+                <span class="kpi-value" id="kpiRt">0.00</span>
+                <span class="kpi-sub" id="kpiRtStatus">Below Threshold</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- System Alert Log -->
+          <section class="alert-log-section">
+            <h3><span class="group-icon">📟</span> system status logs</h3>
+            <div id="alertLog" class="alert-log">
+              <div class="log-entry system">[SYSTEM] Awaiting initialization...</div>
+            </div>
+          </section>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
