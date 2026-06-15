@@ -1,4 +1,4 @@
-# Maze Generator & Solver
+# Maze Generator And Solver
 
 A graph-theoretic labyrinth engineering platform with dual-generation algorithms (Randomized DFS Backtracker, Binary Tree) and triple-pathfinding pipelines (BFS, DFS, A* with Manhattan heuristic). Real-time Canvas rendering of cell walls, frontier exploration, and emerald solution paths.
 
