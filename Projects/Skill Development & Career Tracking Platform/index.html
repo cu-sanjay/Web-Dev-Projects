@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkillDev & Career Tracker</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo-box">
+        <i class="ph-fill ph-rocket"></i>
+      </div>
+      <h2>SkillDev</h2>
+    </div>
+    
+    <nav class="sidebar-nav">
+      <ul>
+        <li class="active" data-tab="dashboard">
+          <i class="ph ph-squares-four"></i>
+          <span>Dashboard</span>
+        </li>
+        <li data-tab="learning-paths">
+          <i class="ph ph-path"></i>
+          <span>Learning Paths</span>
+        </li>
+        <li data-tab="my-skills">
+          <i class="ph ph-barbell"></i>
+          <span>My Skills</span>
+        </li>
+        <li data-tab="career-goals">
+          <i class="ph ph-target"></i>
+          <span>Career Goals</span>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-profile">
+        <img src="https://ui-avatars.com/api/?name=Vishwa+Mistry&background=6366f1&color=fff" alt="User" class="avatar">
+        <div class="user-info">
+          <strong>Vishwa Mistry</strong>
+          <span>Frontend Developer</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <button id="mobile-menu-btn" class="icon-btn"><i class="ph ph-list"></i></button>
+        <div class="search-bar">
+          <i class="ph ph-magnifying-glass"></i>
+          <input type="text" placeholder="Search skills, paths, or goals...">
+        </div>
+      </div>
+      <div class="topbar-right">
+        <button class="icon-btn"><i class="ph ph-bell"></i><span class="badge">2</span></button>
+        <button class="btn primary-btn"><i class="ph ph-plus"></i> New Goal</button>
+      </div>
+    </header>
+
+    <!-- Scrollable Content Area -->
+    <div class="content-area">
+      
+      <!-- ================= DASHBOARD TAB ================= -->
+      <section id="dashboard" class="tab-content active">
+        
+        <div class="welcome-section">
+          <div class="welcome-text">
+            <h1>Ready to level up, Vishwa? 🚀</h1>
+            <p>You are 75% of the way to reaching your Senior Frontend Developer goal!</p>
+          </div>
+          <div class="goal-progress-box">
+            <div class="progress-info">
+              <span>Goal Progress</span>
+              <strong>75%</strong>
+            </div>
+            <div class="progress-bar-bg">
+              <div class="progress-bar" style="width: 75%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon bg-purple"><i class="ph ph-certificate"></i></div>
+            <div class="stat-data">
+              <h3>Active Skills</h3>
+              <h2>12</h2>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon bg-orange"><i class="ph ph-fire"></i></div>
+            <div class="stat-data">
+              <h3>Day Streak</h3>
+              <h2>14</h2>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon bg-green"><i class="ph ph-check-circle"></i></div>
+            <div class="stat-data">
+              <h3>Completed Paths</h3>
+              <h2>3</h2>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon bg-blue"><i class="ph ph-clock-countdown"></i></div>
+            <div class="stat-data">
+              <h3>Hours Learned</h3>
+              <h2>124</h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2-col">
+          <!-- Recent Activity / Focus -->
+          <div class="card">
+            <div class="card-header flex-between">
+              <h3>Current Focus</h3>
+              <button class="btn outline-btn btn-sm" onclick="switchTab('learning-paths')">View Path</button>
+            </div>
+            <div class="card-body">
+              <div class="focus-item">
+                <div class="focus-icon"><i class="ph-fill ph-file-jsx"></i></div>
+                <div class="focus-details">
+                  <h4>Advanced React Patterns</h4>
+                  <p>Module 4: Custom Hooks & Context</p>
+                  <div class="progress-bar-bg mt-1">
+                    <div class="progress-bar bg-primary" style="width: 60%"></div>
+                  </div>
+                </div>
+                <button class="btn primary-btn btn-sm">Continue</button>
+              </div>
+              <hr class="divider">
+              <div class="focus-item">
+                <div class="focus-icon bg-yellow text-dark"><i class="ph-fill ph-file-ts"></i></div>
+                <div class="focus-details">
+                  <h4>TypeScript Fundamentals</h4>
+                  <p>Module 1: Types & Interfaces</p>
+                  <div class="progress-bar-bg mt-1">
+                    <div class="progress-bar bg-yellow" style="width: 20%"></div>
+                  </div>
+                </div>
+                <button class="btn primary-btn btn-sm">Continue</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Upcoming Milestones -->
+          <div class="card">
+            <div class="card-header">
+              <h3>Upcoming Milestones</h3>
+            </div>
+            <div class="card-body">
+              <ul class="timeline">
+                <li class="timeline-item">
+                  <div class="timeline-marker bg-primary"></div>
+                  <div class="timeline-content">
+                    <h4>Finish React Course</h4>
+                    <p>Due in 3 days</p>
+                  </div>
+                </li>
+                <li class="timeline-item">
+                  <div class="timeline-marker bg-orange"></div>
+                  <div class="timeline-content">
+                    <h4>Build Portfolio Project</h4>
+                    <p>Due in 2 weeks</p>
+                  </div>
+                </li>
+                <li class="timeline-item">
+                  <div class="timeline-marker bg-gray"></div>
+                  <div class="timeline-content text-muted">
+                    <h4>Apply for Senior Role</h4>
+                    <p>Next Month</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= LEARNING PATHS TAB ================= -->
+      <section id="learning-paths" class="tab-content hidden">
+        <div class="page-header">
+          <div>
+            <h1>Learning Paths</h1>
+            <p class="text-muted">Structured guides to achieve your career objectives.</p>
+          </div>
+        </div>
+
+        <div class="path-grid" id="paths-container">
+          <!-- Injected via JS -->
+        </div>
+      </section>
+
+      <!-- ================= MY SKILLS TAB ================= -->
+      <section id="my-skills" class="tab-content hidden">
+        <div class="page-header flex-between">
+          <div>
+            <h1>My Skills Radar</h1>
+            <p class="text-muted">Track your proficiency levels across different technologies.</p>
+          </div>
+          <button class="btn outline-btn"><i class="ph ph-plus"></i> Add Skill</button>
+        </div>
+
+        <div class="skills-container">
+          <div class="skill-category">
+            <h3 class="category-title">Frontend Frameworks</h3>
+            <div class="skill-list" id="skills-frontend">
+              <!-- Injected via JS -->
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <h3 class="category-title">Core Web</h3>
+            <div class="skill-list" id="skills-core">
+              <!-- Injected via JS -->
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <h3 class="category-title">Tools & Infrastructure</h3>
+            <div class="skill-list" id="skills-tools">
+              <!-- Injected via JS -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= CAREER GOALS TAB ================= -->
+      <section id="career-goals" class="tab-content hidden">
+        <div class="page-header">
+          <h1>Career Objectives</h1>
+          <p class="text-muted">Set long-term goals and track the milestones needed to achieve them.</p>
+        </div>
+
+        <div class="goal-card master-goal">
+          <div class="goal-header flex-between">
+            <div>
+              <span class="badge bg-primary-light text-primary">Primary Goal</span>
+              <h2>Senior Frontend Engineer</h2>
+              <p>Target Date: Dec 2026</p>
+            </div>
+            <div class="radial-progress" style="--progress: 75; --color: var(--primary);">
+              <div class="circle">
+                <div class="mask full">
+                  <div class="fill"></div>
+                </div>
+                <div class="mask half">
+                  <div class="fill"></div>
+                </div>
+                <div class="inside-circle"> 75% </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="milestones mt-3">
+            <h3>Required Milestones</h3>
+            <div class="milestone-item completed">
+              <i class="ph-fill ph-check-circle"></i>
+              <span>Master Advanced React & Redux</span>
+            </div>
+            <div class="milestone-item completed">
+              <i class="ph-fill ph-check-circle"></i>
+              <span>Learn TypeScript</span>
+            </div>
+            <div class="milestone-item active">
+              <i class="ph-fill ph-circle text-primary"></i>
+              <span>Build 3 Complex Open Source Projects</span>
+            </div>
+            <div class="milestone-item pending">
+              <i class="ph ph-circle text-muted"></i>
+              <span>System Design for Frontend</span>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
