@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTTP Status Code Explorer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="terminal-badge">[ HTTP STATUS CODE EXPLORER — PROTOCOL DIAGNOSTICS DESK ]</div>
+
+<div class="app-grid">
+
+  <!-- ─── SEARCH & FILTER TOOLBAR ─── -->
+  <div class="toolbar">
+    <div class="search-row">
+      <input type="text" id="searchInput" class="search-field" placeholder="Search by code or phrase...">
+      <button id="btnCopyAll" class="toolbar-btn">COPY ALL RESULTS</button>
+    </div>
+    <div class="filter-row" id="filterRow">
+      <button class="filter-btn active" data-class="all">ALL CODES</button>
+      <button class="filter-btn" data-class="1">1xx INFORMATIONAL</button>
+      <button class="filter-btn" data-class="2">2xx SUCCESS</button>
+      <button class="filter-btn" data-class="3">3xx REDIRECTION</button>
+      <button class="filter-btn" data-class="4">4xx CLIENT ERROR</button>
+      <button class="filter-btn" data-class="5">5xx SERVER ERROR</button>
+    </div>
+  </div>
+
+  <!-- ─── LEFT: CARDS GRID ─── -->
+  <div class="cards-panel">
+    <div class="panel-header">STATUS CODE REGISTRY — <span id="resultCount">16</span> RESULTS</div>
+    <div class="cards-grid" id="cardsGrid"></div>
+  </div>
+
+  <!-- ─── RIGHT: INSPECTOR ─── -->
+  <div class="panel inspector-panel">
+    <div class="panel-header">PROTOCOL INSPECTOR SLATE</div>
+    <div id="inspectorContent" class="inspector-content">
+      <div class="inspector-empty">SELECT A STATUS CODE TO INSPECT</div>
+    </div>
+  </div>
+
+  <!-- ─── TELEMETRY ─── -->
+  <div class="panel telemetry-panel">
+    <div class="panel-header">NETWORK ANALYTICS DASHBOARD</div>
+    <div class="tele-row"><span class="tele-label">ACTIVE FILTER</span><span id="tFilter" class="tele-val">ALL</span></div>
+    <div class="tele-row"><span class="tele-label">FILTERED COUNT</span><span id="tCount" class="tele-val">16</span></div>
+    <div class="tele-row"><span class="tele-label">CACHE-CONTROL</span><span id="tCache" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">CONNECTION TYPE</span><span id="tConn" class="tele-val">--</span></div>
+    <div class="ctrl-divider"></div>
+    <div class="tele-row" style="grid-column:1/-1;"><span id="tBadge" class="tele-badge standby">STANDBY</span></div>
+    <div class="ctrl-divider"></div>
+    <div id="errorDetail" class="error-detail"></div>
+  </div>
+
+  <!-- ─── ADMIN FOOTER ─── -->
+  <div class="admin-footer">
+    <button id="btnSync" class="admin-btn sync">EXECUTE PROTOCOL REGISTRY SYNC</button>
+    <button id="btnErrors" class="admin-btn errors">ISOLATE RESTFUL ERROR CLUSTERS</button>
+    <button id="btnFlush" class="admin-btn flush">FLUSH SELECTION FILTERS &amp; RE-ZERO MATRICES</button>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
