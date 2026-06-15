@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shelf Sorter — Sunshine Edition</title>
+   <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="start-overlay" class="overlay">
+        <h1>Shelf Sorter ☀️</h1>
+        <p style="margin-bottom: 30px;">Keep the library tidy! Arrange the books correctly.</p>
+        <button class="btn-start" onclick="startGame()">Open Library</button>
+    </div>
+
+    <div id="win-overlay" class="overlay hidden">
+        <h1 style="color: var(--grass)">PRISTINE! ✨</h1>
+        <p id="win-msg">The shelf is perfectly organized.</p>
+        <button class="btn-start" onclick="nextLevel()">Next Challenge</button>
+    </div>
+
+    <header>
+        <h1>SHELF SORTER</h1>
+        <div class="stats-bar">
+            <div>Level: <span id="level-val">1</span></div>
+            <div>Score: <span id="score-val">0</span></div>
+        </div>
+    </header>
+
+    <div class="timer-circle" id="timer">30</div>
+
+    <div class="instruction-box" id="rule-text">
+        Loading rule...
+    </div>
+
+    <div class="shelf-container" id="shelf">
+        <!-- Books will be injected here -->
+    </div>
+
+    <p style="margin-top: 40px; color: var(--wood); font-weight: 600;">Drag and drop to rearrange the books</p>
+<script src="script.js"></script>
+</body>
+</html>
