@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex Architect — Bridge Physics</title>
+   <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>APEX ARCHITECT // V1.0</h1>
+        <div class="stats-bar">
+            <div class="stat">
+                <span class="stat-label">Resources</span>
+                <span id="steel-val" class="stat-value">100 / 100</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Level</span>
+                <span id="level-val" class="stat-value">1</span>
+            </div>
+        </div>
+    </header>
+
+    <div id="canvas-container">
+        <div id="start-overlay" class="overlay">
+            <div class="level-card">
+                <h2 style="font-size: 3rem; margin-bottom: 0.5rem;">MISSION START</h2>
+                <p style="color: var(--steel); margin-bottom: 2rem;">Construct a stable path for the rover.</p>
+                <button class="btn btn-primary" onclick="initLevel()">Initiate Construction</button>
+            </div>
+        </div>
+
+        <div id="win-overlay" class="overlay hidden">
+            <div class="level-card">
+                <h2 style="font-size: 3rem; margin-bottom: 0.5rem; color: var(--success);">SUCCESS</h2>
+                <p id="win-msg" style="color: var(--steel); margin-bottom: 2rem;">The structure held firm.</p>
+                <button class="btn btn-primary" onclick="nextLevel()">Next Sector</button>
+            </div>
+        </div>
+
+        <div id="fail-overlay" class="overlay hidden">
+            <div class="level-card">
+                <h2 style="font-size: 3rem; margin-bottom: 0.5rem; color: var(--danger);">COLLAPSE</h2>
+                <p style="color: var(--steel); margin-bottom: 2rem;">The structural integrity failed.</p>
+                <button class="btn btn-primary" onclick="initLevel()">Reconstruct</button>
+            </div>
+        </div>
+
+        <canvas id="gameCanvas"></canvas>
+
+        <div class="controls">
+            <button class="btn" onclick="clearBridge()">Clear All</button>
+            <button class="btn btn-primary" id="test-btn" onclick="testBridge()">Launch Rover</button>
+        </div>
+    </div>
+<script src="script.js"></script>
+</body>
+</html>
