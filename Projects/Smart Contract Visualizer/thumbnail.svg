@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="100%" height="100%">
+  <!-- Definition gradients & filters -->
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#090c15" />
+      <stop offset="50%" stop-color="#121827" />
+      <stop offset="100%" stop-color="#06090e" />
+    </linearGradient>
+    <linearGradient id="primary-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#00f2fe" />
+    </linearGradient>
+    <linearGradient id="accent-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+    <linearGradient id="stack-node-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#c084fc" stop-opacity="0.05" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="400" fill="url(#bg-grad)" />
+
+  <!-- Background Grid lines for tech vibe -->
+  <path d="M 0,50 L 600,50 M 0,100 L 600,100 M 0,150 L 600,150 M 0,200 L 600,200 M 0,250 L 600,250 M 0,300 L 600,300 M 0,350 L 600,350" stroke="rgba(255,255,255,0.02)" stroke-width="1" />
+  <path d="M 50,0 L 50,400 M 100,0 L 100,400 M 150,0 L 150,400 M 200,0 L 200,400 M 250,0 L 250,400 M 300,0 L 300,400 M 350,0 L 350,400 M 400,0 L 400,400 M 450,0 L 450,400 M 500,0 L 500,400 M 550,0 L 550,400" stroke="rgba(255,255,255,0.02)" stroke-width="1" />
+
+  <!-- Title Text -->
+  <text x="300" y="70" fill="#ffffff" font-family="'Outfit', sans-serif" font-size="28" font-weight="800" text-anchor="middle" letter-spacing="-0.5">VM<tspan fill="url(#primary-grad)">KRAFT</tspan></text>
+  <text x="300" y="95" fill="#9ca3af" font-family="'Outfit', sans-serif" font-size="14" font-weight="500" text-anchor="middle" letter-spacing="1">SMART CONTRACT VISUALIZER</text>
+
+  <!-- Left Side: IDE / Code Editor Mockup -->
+  <g transform="translate(60, 130)">
+    <!-- Main Frame -->
+    <rect width="210" height="180" rx="8" fill="rgba(10, 14, 23, 0.9)" stroke="rgba(255,255,255,0.08)" stroke-width="1.5" />
+    <!-- Top Bar -->
+    <rect width="210" height="25" rx="8" fill="rgba(20, 27, 45, 0.9)" />
+    <!-- Gutter dots -->
+    <circle cx="15" cy="12" r="3" fill="#ef4444" />
+    <circle cx="27" cy="12" r="3" fill="#f59e0b" />
+    <circle cx="39" cy="12" r="3" fill="#10b981" />
+    
+    <!-- Code Lines Mockup -->
+    <text x="15" y="45" fill="#6b7280" font-family="'JetBrains Mono', monospace" font-size="9">1</text>
+    <text x="15" y="65" fill="#6b7280" font-family="'JetBrains Mono', monospace" font-size="9">2</text>
+    <text x="15" y="85" fill="#6b7280" font-family="'JetBrains Mono', monospace" font-size="9">3</text>
+    <text x="15" y="105" fill="#6b7280" font-family="'JetBrains Mono', monospace" font-size="9">4</text>
+    <text x="15" y="125" fill="#6b7280" font-family="'JetBrains Mono', monospace" font-size="9">5</text>
+    <text x="15" y="145" fill="#6b7280" font-family="'JetBrains Mono', monospace" font-size="9">6</text>
+    
+    <text x="35" y="45" fill="#3b82f6" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="bold">contract</text>
+    <text x="85" y="45" fill="#60efff" font-family="'JetBrains Mono', monospace" font-size="9">Storage {</text>
+    
+    <text x="50" y="65" fill="#3b82f6" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="bold">uint256</text>
+    <text x="95" y="65" fill="#ffffff" font-family="'JetBrains Mono', monospace" font-size="9">stored;</text>
+
+    <text x="50" y="85" fill="#10b981" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="bold">function</text>
+    <text x="105" y="85" fill="#ffffff" font-family="'JetBrains Mono', monospace" font-size="9">store(</text>
+    <text x="140" y="85" fill="#3b82f6" font-family="'JetBrains Mono', monospace" font-size="9">uint</text>
+    <text x="165" y="85" fill="#ffffff" font-family="'JetBrains Mono', monospace" font-size="9">x)</text>
+
+    <text x="65" y="105" fill="#ffffff" font-family="'JetBrains Mono', monospace" font-size="9">stored = x;</text>
+    
+    <text x="50" y="125" fill="#6b7280" font-family="'JetBrains Mono', monospace" font-size="9">...</text>
+    <text x="35" y="145" fill="#60efff" font-family="'JetBrains Mono', monospace" font-size="9">}</text>
+
+    <!-- Play/Build icon overlay in editor bottom right -->
+    <rect x="155" y="135" width="40" height="30" rx="4" fill="url(#primary-grad)" filter="url(#glow)" opacity="0.8" />
+    <polygon points="171,143 171,157 185,150" fill="#ffffff" />
+  </g>
+
+  <!-- Connective arrow in center -->
+  <g transform="translate(290, 205)">
+    <line x1="0" y1="0" x2="30" y2="0" stroke="url(#primary-grad)" stroke-width="3" stroke-dasharray="4,2" />
+    <polygon points="26,-6 38,0 26,6" fill="#00f2fe" filter="url(#glow)" />
+  </g>
+
+  <!-- Right Side: VM Execution Stack Visualizer -->
+  <g transform="translate(350, 130)">
+    <!-- Column Frame -->
+    <rect width="180" height="180" rx="8" fill="rgba(20, 27, 45, 0.4)" stroke="rgba(255,255,255,0.06)" stroke-width="1.5" />
+    
+    <!-- Stack Header Title -->
+    <rect width="180" height="25" rx="8" fill="rgba(30, 41, 67, 0.5)" />
+    <text x="90" y="16" fill="#9ca3af" font-family="'Outfit', sans-serif" font-size="10" font-weight="600" text-anchor="middle">EVM EXECUTION STACK</text>
+    
+    <!-- Stack Cells (Top down values) -->
+    <!-- Cell 0 (Top) -->
+    <rect x="15" y="40" width="150" height="25" rx="4" fill="url(#stack-node-grad)" stroke="rgba(167, 139, 250, 0.4)" stroke-width="1" />
+    <text x="25" y="56" fill="#c084fc" font-family="'JetBrains Mono', monospace" font-size="9">SSTORE [0x00]</text>
+    <text x="155" y="56" fill="#6b7280" font-family="'JetBrains Mono', monospace" font-size="8" text-anchor="end">Stack[2]</text>
+
+    <!-- Cell 1 -->
+    <rect x="15" y="70" width="150" height="25" rx="4" fill="url(#stack-node-grad)" stroke="rgba(167, 139, 250, 0.3)" stroke-width="1" />
+    <text x="25" y="86" fill="#c084fc" font-family="'JetBrains Mono', monospace" font-size="9">PUSH1 0x00</text>
+    <text x="155" y="86" fill="#6b7280" font-family="'JetBrains Mono', monospace" font-size="8" text-anchor="end">Stack[1]</text>
+
+    <!-- Cell 2 -->
+    <rect x="15" y="100" width="150" height="25" rx="4" fill="url(#stack-node-grad)" stroke="rgba(167, 139, 250, 0.2)" stroke-width="1" />
+    <text x="25" y="116" fill="#c084fc" font-family="'JetBrains Mono', monospace" font-size="9">PUSH1 0x64</text>
+    <text x="155" y="116" fill="#6b7280" font-family="'JetBrains Mono', monospace" font-size="8" text-anchor="end">Stack[0]</text>
+
+    <!-- Virtual storage slots log preview -->
+    <rect x="15" y="135" width="150" height="35" rx="4" fill="rgba(10, 14, 23, 0.8)" stroke="rgba(16, 185, 129, 0.2)" stroke-width="1" />
+    <text x="25" y="148" fill="#6b7280" font-family="'Outfit', sans-serif" font-size="8" font-weight="bold">STORAGE STORAGE</text>
+    <text x="25" y="161" fill="#10b981" font-family="'JetBrains Mono', monospace" font-size="9">Slot 0x00 &rarr; 100 (0x64)</text>
+  </g>
+</svg>
