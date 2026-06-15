@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eco Habit Tracker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="terminal-badge">[ ECO HABIT TRACKER ]</div>
+
+<div class="app-grid">
+
+  <!-- ─── QUICK-LOG RIBBON ─── -->
+  <div class="ribbon">
+    <button class="quick-btn" data-action="recycle">DIVERT RECYCLABLE WASTE</button>
+    <button class="quick-btn" data-action="water">MINIMIZE SHOWER RUN</button>
+    <button class="quick-btn" data-action="carbon">ZERO-EMISSION COMMUTE</button>
+    <button class="quick-btn" data-action="reuse">UTILIZE REUSABLE CONTAINERS</button>
+  </div>
+
+  <!-- ─── LEFT: CHECKLIST ─── -->
+  <div class="panel checklist-panel">
+    <div class="panel-header">DAILY RITUALS CHECKLIST</div>
+    <div id="checklistBody"></div>
+    <div class="ctrl-divider"></div>
+    <div class="ctrl-note" id="todayLabel">TODAY: --</div>
+  </div>
+
+  <!-- ─── CENTER: CANVAS ─── -->
+  <div class="panel canvas-panel">
+    <div class="panel-header">RADIAL CONSERVATION METRICS</div>
+    <div class="canvas-wrap">
+      <canvas id="ecoCanvas"></canvas>
+    </div>
+  </div>
+
+  <!-- ─── RIGHT: TELEMETRY ─── -->
+  <div class="panel telemetry-panel">
+    <div class="panel-header">BEHAVIORAL STATUS TELEMETRY</div>
+    <div class="tele-row"><span class="tele-label">ECO STREAK</span><span id="tStreak" class="tele-val">0 days</span></div>
+    <div class="tele-row"><span class="tele-label">PLASTIC DIVERTED</span><span id="tPlastic" class="tele-val">0 kg</span></div>
+    <div class="tele-row"><span class="tele-label">WATER PRESERVED</span><span id="tWater" class="tele-val">0 L</span></div>
+    <div class="tele-row"><span class="tele-label">CO2 SKIPPED</span><span id="tCO2" class="tele-val">0 kg</span></div>
+    <div class="tele-row"><span class="tele-label">ECO POINTS</span><span id="tPoints" class="tele-val">0</span></div>
+    <div class="tele-row"><span class="tele-label">INTEGRITY TIER</span><span id="tBadge" class="tele-badge standby">STANDBY</span></div>
+  </div>
+
+  <!-- ─── ADMIN FOOTER ─── -->
+  <div class="admin-footer">
+    <button id="btnCompute" class="admin-btn compute">EXECUTE SYSTEMIC IMPACT RECALCULATION</button>
+    <button id="btnStreak" class="admin-btn streak">SIMULATE 7-DAY STREAK BOOST</button>
+    <button id="btnPurge" class="admin-btn purge">PURGE OPERATIONAL HISTORY</button>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
