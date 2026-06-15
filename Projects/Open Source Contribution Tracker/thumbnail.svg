@@ -1,0 +1,202 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 300" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070a13"/>
+      <stop offset="50%" stop-color="#0e1324"/>
+      <stop offset="100%" stop-color="#04060c"/>
+    </linearGradient>
+    
+    <!-- Heatmap Level Gradients -->
+    <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+
+    <!-- Green Level Gradients for Heatmap -->
+    <linearGradient id="greenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+    
+    <!-- Pink Review Gradient -->
+    <linearGradient id="pinkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ec4899"/>
+      <stop offset="100%" stop-color="#db2777"/>
+    </linearGradient>
+
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="500" height="300" rx="20" fill="url(#bgGrad)"/>
+  
+  <!-- Subtle Coding Grid -->
+  <path d="M 0,50 L 500,50 M 0,100 L 500,100 M 0,150 L 500,150 M 0,200 L 500,200 M 0,250 L 500,250" stroke="rgba(255,255,255,0.015)" stroke-width="1"/>
+  <path d="M 50,0 L 50,300 M 100,0 L 100,300 M 150,0 L 150,300 M 200,0 L 200,300 M 250,0 L 250,300 M 300,0 L 300,300 M 350,0 L 350,300 M 400,0 L 400,300 M 450,0 L 450,300" stroke="rgba(255,255,255,0.015)" stroke-width="1"/>
+  
+  <!-- Sidebar simulator (compact) -->
+  <rect x="0" y="0" width="70" height="300" rx="20" fill="rgba(11, 15, 27, 0.5)" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+  
+  <!-- Mini Git Graph Mock in Sidebar -->
+  <g transform="translate(35, 40)">
+    <circle cx="0" cy="0" r="10" fill="url(#primaryGrad)"/>
+    <path d="M -4,-4 L 4,4 M -4,4 L 4,-4" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+  </g>
+  
+  <circle cx="35" cy="95" r="4" fill="#a855f7"/>
+  <circle cx="35" cy="130" r="4" fill="rgba(255,255,255,0.2)"/>
+  <circle cx="35" cy="165" r="4" fill="rgba(255,255,255,0.2)"/>
+  <circle cx="35" cy="200" r="4" fill="rgba(255,255,255,0.2)"/>
+  
+  <!-- Main Header Info -->
+  <text x="90" y="42" font-family="'Outfit', sans-serif" font-weight="800" font-size="20" fill="#ffffff">OS Tracker</text>
+  <text x="90" y="58" font-family="'Plus Jakarta Sans', sans-serif" font-weight="500" font-size="10" fill="#64748b">Open source contribution telemetry</text>
+  
+  <!-- Top Streak Widget -->
+  <rect x="360" y="22" width="115" height="38" rx="8" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.04)"/>
+  <text x="375" y="45" font-family="'Outfit', sans-serif" font-weight="700" font-size="12" fill="#eab308">🔥</text>
+  <text x="392" y="34" font-family="'Plus Jakarta Sans', sans-serif" font-weight="600" font-size="8" fill="#64748b">STREAK</text>
+  <text x="392" y="48" font-family="'Outfit', sans-serif" font-weight="800" font-size="11" fill="#f97316">18 Days</text>
+  
+  <!-- Central Component: GitHub-Style Heatmap Grid Mockup -->
+  <g transform="translate(90, 80)">
+    <rect width="255" height="195" rx="14" fill="rgba(17, 24, 39, 0.4)" stroke="rgba(255,255,255,0.05)" stroke-width="1.5" filter="url(#shadow)"/>
+    
+    <text x="16" y="24" font-family="'Outfit', sans-serif" font-weight="700" font-size="12" fill="#ffffff">Activity Heatmap</text>
+    
+    <!-- Heatmap Grid Cells (14 col x 7 row mockup) -->
+    <g transform="translate(16, 38)">
+      <!-- Row 0 -->
+      <rect x="0" y="0" width="12" height="12" rx="2.5" fill="#1e293b"/>
+      <rect x="16" y="0" width="12" height="12" rx="2.5" fill="#065f46"/>
+      <rect x="32" y="0" width="12" height="12" rx="2.5" fill="#10b981"/>
+      <rect x="48" y="0" width="12" height="12" rx="2.5" fill="#1e293b"/>
+      <rect x="64" y="0" width="12" height="12" rx="2.5" fill="#047857"/>
+      <rect x="80" y="0" width="12" height="12" rx="2.5" fill="#1e293b"/>
+      <rect x="96" y="0" width="12" height="12" rx="2.5" fill="#10b981"/>
+      <rect x="112" y="0" width="12" height="12" rx="2.5" fill="#047857"/>
+      <rect x="128" y="0" width="12" height="12" rx="2.5" fill="#1e293b"/>
+      <rect x="144" y="0" width="12" height="12" rx="2.5" fill="#1e293b"/>
+      <rect x="160" y="0" width="12" height="12" rx="2.5" fill="#34d399"/>
+      <rect x="176" y="0" width="12" height="12" rx="2.5" fill="#10b981"/>
+      <rect x="192" y="0" width="12" height="12" rx="2.5" fill="#1e293b"/>
+      <rect x="208" y="0" width="12" height="12" rx="2.5" fill="#065f46"/>
+
+      <!-- Row 1 -->
+      <rect x="0" y="16" width="12" height="12" rx="2.5" fill="#047857"/>
+      <rect x="16" y="16" width="12" height="12" rx="2.5" fill="#1e293b"/>
+      <rect x="32" y="16" width="12" height="12" rx="2.5" fill="#1e293b"/>
+      <rect x="48" y="16" width="12" height="12" rx="2.5" fill="#065f46"/>
+      <rect x="64" y="16" width="12" height="12" rx="2.5" fill="#34d399"/>
+      <rect x="80" y="16" width="12" height="12" rx="2.5" fill="#10b981"/>
+      <rect x="96" y="16" width="12" height="12" rx="2.5" fill="#1e293b"/>
+      <rect x="112" y="16" width="12" height="12" rx="2.5" fill="#1e293b"/>
+      <rect x="128" y="16" width="12" height="12" rx="2.5" fill="#10b981"/>
+      <rect x="144" y="16" width="12" height="12" rx="2.5" fill="#065f46"/>
+      <rect x="160" y="16" width="12" height="12" rx="2.5" fill="#1e293b"/>
+      <rect x="176" y="16" width="12" height="12" rx="2.5" fill="#047857"/>
+      <rect x="192" y="16" width="12" height="12" rx="2.5" fill="#34d399"/>
+      <rect x="208" y="16" width="12" height="12" rx="2.5" fill="#1e293b"/>
+
+      <!-- Row 2 -->
+      <rect x="0" y="32" width="12" height="12" rx="2.5" fill="#10b981"/>
+      <rect x="16" y="32" width="12" height="12" rx="2.5" fill="#34d399"/>
+      <rect x="32" y="32" width="12" height="12" rx="2.5" fill="#065f46"/>
+      <rect x="48" y="32" width="12" height="12" rx="2.5" fill="#1e293b"/>
+      <rect x="64" y="32" width="12" height="12" rx="2.5" fill="#1e293b"/>
+      <rect x="80" y="32" width="12" height="12" rx="2.5" fill="#047857"/>
+      <rect x="96" y="32" width="12" height="12" rx="2.5" fill="#10b981"/>
+      <rect x="112" y="32" width="12" height="12" rx="2.5" fill="#1e293b"/>
+      <rect x="128" y="32" width="12" height="12" rx="2.5" fill="#065f46"/>
+      <rect x="144" y="32" width="12" height="12" rx="2.5" fill="#1e293b"/>
+      <rect x="160" y="32" width="12" height="12" rx="2.5" fill="#10b981"/>
+      <rect x="176" y="32" width="12" height="12" rx="2.5" fill="#1e293b"/>
+      <rect x="192" y="32" width="12" height="12" rx="2.5" fill="#047857"/>
+      <rect x="208" y="32" width="12" height="12" rx="2.5" fill="#34d399"/>
+
+      <!-- Row 3 -->
+      <rect x="0" y="48" width="12" height="12" rx="2.5" fill="#1e293b"/>
+      <rect x="16" y="48" width="12" height="12" rx="2.5" fill="#10b981"/>
+      <rect x="32" y="48" width="12" height="12" rx="2.5" fill="#1e293b"/>
+      <rect x="48" y="48" width="12" height="12" rx="2.5" fill="#34d399"/>
+      <rect x="64" y="48" width="12" height="12" rx="2.5" fill="#065f46"/>
+      <rect x="80" y="48" width="12" height="12" rx="2.5" fill="#1e293b"/>
+      <rect x="96" y="48" width="12" height="12" rx="2.5" fill="#047857"/>
+      <rect x="112" y="48" width="12" height="12" rx="2.5" fill="#10b981"/>
+      <rect x="128" y="48" width="12" height="12" rx="2.5" fill="#1e293b"/>
+      <rect x="144" y="48" width="12" height="12" rx="2.5" fill="#047857"/>
+      <rect x="160" y="48" width="12" height="12" rx="2.5" fill="#1e293b"/>
+      <rect x="176" y="48" width="12" height="12" rx="2.5" fill="#1e293b"/>
+      <rect x="192" y="48" width="12" height="12" rx="2.5" fill="#065f46"/>
+      <rect x="208" y="48" width="12" height="12" rx="2.5" fill="#10b981"/>
+
+      <!-- Row 4 -->
+      <rect x="0" y="64" width="12" height="12" rx="2.5" fill="#065f46"/>
+      <rect x="16" y="64" width="12" height="12" rx="2.5" fill="#1e293b"/>
+      <rect x="32" y="64" width="12" height="12" rx="2.5" fill="#10b981"/>
+      <rect x="48" y="64" width="12" height="12" rx="2.5" fill="#1e293b"/>
+      <rect x="64" y="64" width="12" height="12" rx="2.5" fill="#34d399"/>
+      <rect x="80" y="64" width="12" height="12" rx="2.5" fill="#047857"/>
+      <rect x="96" y="64" width="12" height="12" rx="2.5" fill="#1e293b"/>
+      <rect x="112" y="64" width="12" height="12" rx="2.5" fill="#065f46"/>
+      <rect x="128" y="64" width="12" height="12" rx="2.5" fill="#10b981"/>
+      <rect x="144" y="64" width="12" height="12" rx="2.5" fill="#1e293b"/>
+      <rect x="160" y="64" width="12" height="12" rx="2.5" fill="#047857"/>
+      <rect x="176" y="64" width="12" height="12" rx="2.5" fill="#34d399"/>
+      <rect x="192" y="64" width="12" height="12" rx="2.5" fill="#1e293b"/>
+      <rect x="208" y="64" width="12" height="12" rx="2.5" fill="#1e293b"/>
+    </g>
+
+    <!-- Ledger mock values -->
+    <rect x="16" y="130" width="222" height="48" rx="8" fill="rgba(255,255,255,0.015)" stroke="rgba(255,255,255,0.04)"/>
+    <g transform="translate(24, 136)">
+      <circle cx="10" cy="18" r="8" fill="url(#primaryGrad)"/>
+      <text x="10" y="21" font-family="'Outfit', sans-serif" font-weight="900" font-size="8" fill="#ffffff" text-anchor="middle">PR</text>
+      
+      <text x="26" y="14" font-family="'Outfit', sans-serif" font-weight="700" font-size="8.5" fill="#ffffff">Merged: Add parsing engines</text>
+      <text x="26" y="24" font-family="'Plus Jakarta Sans', sans-serif" font-size="6.5" fill="#64748b">nodejs/node • Today • +150 XP</text>
+      
+      <rect x="180" y="10" width="34" height="14" rx="3.5" fill="rgba(16, 185, 129, 0.1)"/>
+      <text x="197" y="20" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="6.5" fill="#34d399" text-anchor="middle">Merged</text>
+    </g>
+  </g>
+  
+  <!-- Right Dashboard Metrics Panel -->
+  <g transform="translate(360, 80)">
+    <rect width="115" height="195" rx="14" fill="rgba(17, 24, 39, 0.4)" stroke="rgba(255,255,255,0.05)" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="14" y="24" font-family="'Outfit', sans-serif" font-weight="700" font-size="11" fill="#ffffff">Developer Stats</text>
+    
+    <!-- Level Circular Progress -->
+    <g transform="translate(58, 70)">
+      <circle cx="0" cy="0" r="28" fill="none" stroke="rgba(255,255,255,0.02)" stroke-width="5"/>
+      <circle cx="0" cy="0" r="28" fill="none" stroke="url(#greenGrad)" stroke-width="5" stroke-dasharray="130, 46" stroke-linecap="round" transform="rotate(-90)"/>
+      <text x="0" y="4" font-family="'Outfit', sans-serif" font-weight="800" font-size="12" fill="#ffffff" text-anchor="middle">Lvl 4</text>
+    </g>
+    
+    <!-- XP Label -->
+    <text x="58" y="115" font-family="'Plus Jakarta Sans', sans-serif" font-weight="600" font-size="8" fill="#64748b" text-anchor="middle">2,850 TOTAL XP</text>
+    
+    <!-- Badges Row -->
+    <g transform="translate(14, 134)">
+      <text x="0" y="10" font-family="'Outfit', sans-serif" font-weight="700" font-size="8" fill="#64748b">ACHIEVEMENTS</text>
+      
+      <!-- Badges Icons Grid -->
+      <g transform="translate(0, 18)">
+        <rect x="0" y="0" width="20" height="20" rx="4.5" fill="rgba(168, 85, 247, 0.12)" stroke="rgba(168, 85, 247, 0.25)"/>
+        <text x="10" y="13" font-family="'Outfit', sans-serif" font-size="9" text-anchor="middle">🏆</text>
+        
+        <rect x="23" y="0" width="20" height="20" rx="4.5" fill="rgba(59, 130, 246, 0.12)" stroke="rgba(59, 130, 246, 0.25)"/>
+        <text x="33" y="13" font-family="'Outfit', sans-serif" font-size="9" text-anchor="middle">🚀</text>
+        
+        <rect x="46" y="0" width="20" height="20" rx="4.5" fill="rgba(234, 179, 8, 0.12)" stroke="rgba(234, 179, 8, 0.25)"/>
+        <text x="56" y="13" font-family="'Outfit', sans-serif" font-size="9" text-anchor="middle">👑</text>
+        
+        <rect x="69" y="0" width="20" height="20" rx="4.5" fill="rgba(236, 72, 153, 0.12)" stroke="rgba(236, 72, 153, 0.25)"/>
+        <text x="79" y="13" font-family="'Outfit', sans-serif" font-size="9" text-anchor="middle">🛡️</text>
+      </g>
+    </g>
+  </g>
+</svg>
