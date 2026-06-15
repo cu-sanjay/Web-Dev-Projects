@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Applicant Tracking System</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">
+        <i class="ph-fill ph-briefcase text-primary"></i> <span>HireTrack</span>
+      </div>
+
+      <nav class="sidebar-menu">
+        <button class="nav-btn active" data-target="pipeline"><i class="ph ph-kanban"></i> Candidate Pipeline</button>
+        <button class="nav-btn" data-target="jobs"><i class="ph ph-suitcase-simple"></i> Job Postings</button>
+        <button class="nav-btn" data-target="interviews"><i class="ph ph-calendar"></i> Interviews</button>
+      </nav>
+
+      <div class="user-profile">
+        <img src="https://ui-avatars.com/api/?name=HR+Admin&background=2563eb&color=fff" alt="User">
+        <div>
+          <div class="user-name">HR Admin</div>
+          <div class="user-status">Recruitment Lead</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      
+      <!-- Topbar -->
+      <header class="topbar flex-between">
+        <div class="search-box">
+          <i class="ph ph-magnifying-glass"></i>
+          <input type="text" placeholder="Search candidates, jobs, or emails...">
+        </div>
+        <button class="primary-btn"><i class="ph ph-plus"></i> Add Candidate</button>
+      </header>
+
+      <div class="scroll-area">
+        
+        <!-- Pipeline View -->
+        <section id="pipeline" class="view active">
+          <div class="page-heading flex-between mb-3">
+            <div>
+              <h1>Candidate Pipeline</h1>
+              <p class="text-muted">Track applicants across active job postings.</p>
+            </div>
+            <select class="custom-select">
+              <option>Frontend Developer</option>
+              <option>Product Manager</option>
+              <option>UX Designer</option>
+            </select>
+          </div>
+
+          <div class="kanban-board" id="kanban-board">
+            <!-- Applied Column -->
+            <div class="kanban-col">
+              <div class="col-header border-blue">
+                <h3>New Applied <span class="badge">3</span></h3>
+              </div>
+              <div class="col-body" id="col-applied">
+                <!-- JS Injected -->
+              </div>
+            </div>
+
+            <!-- Interviewing Column -->
+            <div class="kanban-col">
+              <div class="col-header border-orange">
+                <h3>Interviewing <span class="badge">2</span></h3>
+              </div>
+              <div class="col-body" id="col-interview">
+                <!-- JS Injected -->
+              </div>
+            </div>
+
+            <!-- Offered Column -->
+            <div class="kanban-col">
+              <div class="col-header border-green">
+                <h3>Offered <span class="badge">1</span></h3>
+              </div>
+              <div class="col-body" id="col-offered">
+                <!-- JS Injected -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Jobs View -->
+        <section id="jobs" class="view hidden">
+          <div class="page-heading flex-between mb-3">
+            <div>
+              <h1>Job Postings</h1>
+              <p class="text-muted">Manage active listings and departmental needs.</p>
+            </div>
+            <button class="primary-btn"><i class="ph ph-plus"></i> New Job</button>
+          </div>
+
+          <div class="jobs-grid" id="jobs-grid">
+             <!-- JS Injected -->
+          </div>
+        </section>
+
+        <!-- Interviews View -->
+        <section id="interviews" class="view hidden">
+          <div class="page-heading mb-3">
+            <h1>Upcoming Interviews</h1>
+            <p class="text-muted">Your schedule for the next 7 days.</p>
+          </div>
+
+          <div class="panel">
+            <div class="panel-body p-0">
+              <table class="custom-table">
+                <thead>
+                  <tr><th>Candidate</th><th>Role</th><th>Interviewer</th><th>Date & Time</th><th>Status</th></tr>
+                </thead>
+                <tbody id="interviews-tbody">
+                  <!-- JS Injected -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
