@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs><linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0b1220"/><stop offset="100%" stop-color="#0f172a"/></linearGradient><linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#818cf8"/></linearGradient></defs>
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <text x="60" y="50" font-family="ui-monospace,monospace" font-size="22" font-weight="800" fill="#f8fafc" letter-spacing="1">GLOBAL INTERNET CABLE MAP</text>
+  <text x="60" y="72" font-family="ui-monospace,monospace" font-size="12" fill="#64748b">Undersea Cable Infrastructure Explorer</text>
+  <text x="1080" y="72" font-family="ui-monospace,monospace" font-size="11" fill="#64748b"><tspan fill="#38bdf8" font-weight="700">10</tspan> cables · <tspan fill="#38bdf8" font-weight="700">48</tspan> landing points</text>
+  <rect x="60" y="95" width="240" height="50" rx="8" fill="#111827" stroke="#334155" stroke-width="1"/><circle cx="82" cy="120" r="6" fill="none" stroke="#64748b" stroke-width="1.5"/><line x1="86" y1="124" x2="92" y2="130" stroke="#64748b" stroke-width="1.5"/><text x="100" y="124" font-family="ui-monospace,monospace" font-size="12" fill="#64748b">Search cables or countries...</text>
+  <rect x="60" y="155" width="240" height="510" rx="10" fill="#111827" stroke="#334155" stroke-width="1"/>
+  <g transform="translate(75,170)">
+    <rect x="0" y="0" width="210" height="36" rx="6" fill="rgba(56,189,248,.06)" stroke="rgba(56,189,248,.2)" stroke-width="1"/><text x="12" y="23" font-family="ui-monospace,monospace" font-size="11" font-weight="600" fill="#38bdf8">SEA-ME-WE 5</text><text x="200" y="23" font-family="ui-monospace,monospace" font-size="8" fill="#64748b" text-anchor="end">20,000km</text>
+    <rect x="0" y="42" width="210" height="36" rx="6" fill="rgba(34,197,94,.06)" stroke="rgba(34,197,94,.2)" stroke-width="1"/><text x="12" y="65" font-family="ui-monospace,monospace" font-size="11" font-weight="600" fill="#22c55e">MARS</text><text x="200" y="65" font-family="ui-monospace,monospace" font-size="8" fill="#64748b" text-anchor="end">9,800km</text>
+    <rect x="0" y="84" width="210" height="36" rx="6" fill="rgba(167,139,250,.06)" stroke="rgba(167,139,250,.2)" stroke-width="1"/><text x="12" y="107" font-family="ui-monospace,monospace" font-size="11" font-weight="600" fill="#a78bfa">EA-1</text><text x="200" y="107" font-family="ui-monospace,monospace" font-size="8" fill="#64748b" text-anchor="end">8,700km</text>
+    <text x="0" y="140" font-family="ui-monospace,monospace" font-size="11" fill="#64748b">SEA-ME-WE 4</text><text x="200" y="140" font-family="ui-monospace,monospace" font-size="8" fill="#64748b" text-anchor="end">18,800km</text>
+    <text x="0" y="162" font-family="ui-monospace,monospace" font-size="11" fill="#64748b">Tata TGN</text><text x="200" y="162" font-family="ui-monospace,monospace" font-size="8" fill="#64748b" text-anchor="end">31,000km</text>
+    <text x="0" y="184" font-family="ui-monospace,monospace" font-size="11" fill="#64748b">Hibernia Express</text><text x="200" y="184" font-family="ui-monospace,monospace" font-size="8" fill="#64748b" text-anchor="end">4,600km</text>
+    <text x="0" y="206" font-family="ui-monospace,monospace" font-size="11" fill="#64748b">Southern Cross</text><text x="200" y="206" font-family="ui-monospace,monospace" font-size="8" fill="#64748b" text-anchor="end">30,500km</text>
+    <text x="0" y="228" font-family="ui-monospace,monospace" font-size="11" fill="#64748b">FLAG Atlantic-1</text><text x="200" y="228" font-family="ui-monospace,monospace" font-size="8" fill="#64748b" text-anchor="end">15,000km</text>
+    <text x="0" y="250" font-family="ui-monospace,monospace" font-size="11" fill="#64748b">Japan-US Cable</text><text x="200" y="250" font-family="ui-monospace,monospace" font-size="8" fill="#64748b" text-anchor="end">21,000km</text>
+    <text x="0" y="272" font-family="ui-monospace,monospace" font-size="11" fill="#64748b">Asia-America Gateway</text><text x="200" y="272" font-family="ui-monospace,monospace" font-size="8" fill="#64748b" text-anchor="end">20,000km</text>
+  </g>
+  <rect x="330" y="95" width="890" height="485" rx="10" fill="#111827" stroke="#334155" stroke-width="1"/>
+  <text x="360" y="125" font-family="ui-monospace,monospace" font-size="13" font-weight="700" fill="#f8fafc">World Submarine Cable Map</text>
+  <svg x="340" y="140" width="870" height="420">
+    <rect x="0" y="0" width="870" height="420" fill="#0a0f1a" rx="6"/>
+    <line x1="430" y1="0" x2="430" y2="420" stroke="#1f2937" stroke-width=".5" stroke-dasharray="4,4"/>
+    <line x1="0" y1="210" x2="870" y2="210" stroke="#1f2937" stroke-width=".5" stroke-dasharray="4,4"/>
+    <line x1="435" y1="50" x2="800" y2="200" stroke="#38bdf8" stroke-width="1.5" opacity=".4"/><line x1="800" y1="200" x2="780" y2="260" stroke="#38bdf8" stroke-width="1.5" opacity=".4"/><line x1="780" y1="260" x2="720" y2="280" stroke="#38bdf8" stroke-width="1.5" opacity=".4"/>
+    <line x1="480" y1="120" x2="520" y2="120" stroke="#22c55e" stroke-width="1.5" opacity=".5"/><line x1="520" y1="120" x2="600" y2="80" stroke="#22c55e" stroke-width="1.5" opacity=".5"/>
+    <line x1="360" y1="250" x2="450" y2="220" stroke="#a78bfa" stroke-width="1.5" opacity=".4"/><line x1="450" y1="220" x2="500" y2="250" stroke="#a78bfa" stroke-width="1.5" opacity=".4"/>
+    <line x1="300" y1="80" x2="350" y2="60" stroke="#f59e0b" stroke-width="1" opacity=".3"/><line x1="350" y1="60" x2="700" y2="120" stroke="#f59e0b" stroke-width="1" opacity=".3"/><line x1="700" y1="120" x2="780" y2="250" stroke="#f59e0b" stroke-width="1" opacity=".3"/><line x1="780" y1="250" x2="760" y2="300" stroke="#f59e0b" stroke-width="1" opacity=".3"/>
+    <circle cx="780" cy="290" r="4" fill="#38bdf8" opacity=".8"/><circle cx="720" cy="315" r="4" fill="#38bdf8" opacity=".8"/><circle cx="690" cy="270" r="4" fill="#38bdf8" opacity=".8"/><circle cx="650" cy="260" r="4" fill="#38bdf8" opacity=".8"/>
+    <circle cx="600" cy="250" r="4" fill="#38bdf8" opacity=".8"/><circle cx="560" cy="240" r="4" fill="#38bdf8" opacity=".8"/><circle cx="520" cy="235" r="4" fill="#38bdf8" opacity=".8"/><circle cx="480" cy="230" r="4" fill="#38bdf8" opacity=".8"/>
+    <circle cx="450" cy="235" r="4" fill="#38bdf8" opacity=".8"/><circle cx="350" cy="260" r="4" fill="#38bdf8" opacity=".8"/><circle cx="300" cy="240" r="4" fill="#38bdf8" opacity=".8"/><circle cx="280" cy="250" r="4" fill="#38bdf8" opacity=".8"/>
+    <circle cx="760" cy="300" r="4" fill="#22c55e" opacity=".8"/><circle cx="720" cy="320" r="3" fill="#38bdf8" opacity=".6"/>
+    <text x="784" y="294" font-family="ui-monospace,monospace" font-size="5" fill="#64748b">Singapore</text><text x="610" y="254" font-family="ui-monospace,monospace" font-size="5" fill="#64748b">India</text><text x="460" y="239" font-family="ui-monospace,monospace" font-size="5" fill="#64748b">Egypt</text><text x="354" y="264" font-family="ui-monospace,monospace" font-size="5" fill="#64748b">UK</text>
+  </svg>
+  <rect x="330" y="595" width="890" height="70" rx="8" fill="#1f2937" stroke="#334155" stroke-width="1"/>
+  <text x="360" y="620" font-family="ui-monospace,monospace" font-size="12" font-weight="600" fill="#f8fafc">SEA-ME-WE 5</text>
+  <text x="360" y="640" font-family="ui-monospace,monospace" font-size="10" fill="#cbd5e1">Length: 20,000 km · Capacity: 24 Tbps · Active (2016)</text>
+  <text x="360" y="655" font-family="ui-monospace,monospace" font-size="9" fill="#64748b">Landings: Singapore · Malaysia · Indonesia · Myanmar · Bangladesh · Sri Lanka · Pakistan · UAE · Saudi Arabia · Egypt · Turkey · Italy · France</text>
+  <rect x="0" y="718" width="1280" height="2" fill="url(#accent)" opacity=".4"/>
+</svg>
