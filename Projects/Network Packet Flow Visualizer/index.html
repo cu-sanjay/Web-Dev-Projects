@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Network Packet Flow Visualizer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app-container">
+
+  <!-- ─── TITLE BAR ─── -->
+  <div class="title-bar">
+    <span class="title-label">NETWORK PACKET FLOW VISUALIZER</span>
+    <span class="title-version">v2.4.1 — [ DISTRIBUTED SYSTEMS SURVEILLANCE COCKPIT ]</span>
+  </div>
+
+  <!-- ─── PRESET RIBBON ─── -->
+  <div class="preset-ribbon">
+    <button class="preset-btn" data-preset="GET" id="presetGET">
+      <span class="preset-icon">↗</span>
+      <span class="preset-text">EXECUTE STANDARD HTTP GET REQUEST</span>
+    </button>
+    <button class="preset-btn" data-preset="DB" id="presetDB">
+      <span class="preset-icon">⤵</span>
+      <span class="preset-text">DEPLOY COMPLEX DATABASE TRANSACTION SYNC</span>
+    </button>
+    <button class="preset-btn" data-preset="OAUTH" id="presetOAUTH">
+      <span class="preset-icon">◎</span>
+      <span class="preset-text">SIMULATE SECURE OAUTH AUTHENTICATION SWEEP</span>
+    </button>
+  </div>
+
+  <!-- ─── MAIN GRID ─── -->
+  <div class="main-grid">
+
+    <!-- ─── LEFT: PARAMETER INTAKE PANEL ─── -->
+    <div class="param-panel">
+      <div class="panel-header">SYSTEMIC PARAMETER INTAKE</div>
+
+      <div class="param-group">
+        <div class="param-label-row">
+          <span class="param-label">PACKET PROPAGATION VELOCITY</span>
+          <span class="param-value" id="velValue">5</span>
+        </div>
+        <input type="range" class="param-slider" id="velocitySlider" min="1" max="10" value="5" step="0.5">
+        <div class="param-range-labels"><span>1 &nbsp; (LOW)</span><span>10 (HIGH)</span></div>
+      </div>
+
+      <div class="param-group">
+        <div class="param-label-row">
+          <span class="param-label">GLOBAL CONGESTION LOAD VOLUME</span>
+          <span class="param-value" id="congValue">30</span>
+        </div>
+        <input type="range" class="param-slider" id="congestionSlider" min="0" max="100" value="30" step="5">
+        <div class="param-range-labels"><span>0 (IDLE)</span><span>100 (GRIDLOCK)</span></div>
+      </div>
+
+      <div class="param-group">
+        <div class="param-label-row">
+          <span class="param-label">DROPPED PACKET FAILURE RATE</span>
+          <span class="param-value" id="dropValue">5</span>
+        </div>
+        <input type="range" class="param-slider" id="dropRateSlider" min="0" max="50" value="5" step="1">
+        <div class="param-range-labels"><span>0% (STABLE)</span><span>50% (UNRELIABLE)</span></div>
+      </div>
+
+      <div class="param-group">
+        <div class="param-label-row">
+          <span class="param-label">TRANSMISSION PROTOCOL SCHEME</span>
+        </div>
+        <select class="param-select" id="protocolSelect">
+          <option value="TCP">TCP — TRANSMISSION CONTROL PROTOCOL</option>
+          <option value="UDP">UDP — USER DATAGRAM PROTOCOL</option>
+          <option value="ICMP">ICMP — INTERNET CONTROL MESSAGE PROTOCOL</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- ─── CENTER: CANVAS + LOG ─── -->
+    <div class="center-panel">
+
+      <div class="canvas-container">
+        <canvas id="topologyCanvas"></canvas>
+      </div>
+
+      <div class="log-container">
+        <div class="log-header">
+          <span>LIVE NETWORK DIAGNOSTICS OUTPUT LOGS</span>
+          <span class="log-status" id="logStatus">STANDBY</span>
+        </div>
+        <div class="log-content" id="logContent">
+          <div class="log-msg log-placeholder">[ SYSTEM ] — Visualizer channels initialized. Awaiting transmission指令.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ─── RIGHT: TELEMETRY DASHBOARD ─── -->
+    <div class="telemetry-panel">
+      <div class="panel-header">INFRASTRUCTURE TELEMETRY DASHBOARD</div>
+
+      <div class="tele-card">
+        <div class="tele-card-label">CURRENT HOP SEQUENCE</div>
+        <div class="tele-card-value" id="tHop">--</div>
+      </div>
+
+      <div class="tele-card">
+        <div class="tele-card-label">ROUND TRIP LATENCY</div>
+        <div class="tele-card-value" id="tLatency">-- <span class="tele-unit">ms</span></div>
+      </div>
+
+      <div class="tele-card">
+        <div class="tele-card-label">TOTAL PACKETS TRANSMITTED</div>
+        <div class="tele-card-value" id="tPackets">0</div>
+      </div>
+
+      <div class="tele-card">
+        <div class="tele-card-label">ACTIVE PACKET STATUS</div>
+        <div class="tele-card-badge" id="tBadge">STANDBY</div>
+      </div>
+
+      <div class="tele-card">
+        <div class="tele-card-label">STRUCTURAL CONNECTION HEALTH</div>
+        <div class="tele-card-badge" id="tHealth">STABLE</div>
+      </div>
+
+      <div class="tele-card">
+        <div class="tele-card-label">PROTOCOL ACTIVE</div>
+        <div class="tele-card-value" id="tProtocol">TCP</div>
+      </div>
+
+      <div class="tele-card">
+        <div class="tele-card-label">DROPPED PACKETS</div>
+        <div class="tele-card-value tele-danger" id="tDropped">0</div>
+      </div>
+
+      <div class="tele-card">
+        <div class="tele-card-label">COMPLETED CIRCUITS</div>
+        <div class="tele-card-value tele-success" id="tCompleted">0</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ─── ADMIN FOOTER ─── -->
+  <div class="admin-footer">
+    <button class="admin-btn dispatch" id="btnDispatch">
+      ⚡ INITIATE DATA PAYLOAD DISPATCH ASYNC
+    </button>
+    <button class="admin-btn breakdown" id="btnBreakdown">
+      ⚠ SIMULATE RANDOM LINK BREAKDOWN DROP
+    </button>
+    <button class="admin-btn flush" id="btnFlush">
+      ✦ FLUSH VISUALIZER CHANNELS &amp; RE-ZERO MATRICES
+    </button>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "title": "Network Packet Flow Visualizer",
+  "description": "A premium dark-laboratory telemetry dashboard animating network packet flows across a 4-node topology (Client → Router → Server → Database) using native HTML5 Canvas with LERP-driven particle kinematics. Features 3 preset transmission profiles, real-time stochastic packet drop simulation, link breakdown with auto-recovery, typewriter log output, and localStorage-persisted telemetry.",
+  "entry": "index.html",
+  "tags": [
+    "network",
+    "packet",
+    "visualizer",
+    "canvas",
+    "animation",
+    "telemetry"
+  ],
+  "author": {
+    "name": "Girish Madarkar",
+    "github": "Girish0902"
+  }
+}
