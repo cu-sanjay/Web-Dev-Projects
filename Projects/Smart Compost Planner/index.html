@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Compost · Planner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="top-bar">
+    <div class="top-brand">
+      <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="#00e676" stroke-width="1.5">
+        <path d="M12 2L2 7l10 5 10-5-10-5z" stroke="#00e676"/>
+        <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="#00e676" stroke-opacity="0.5"/>
+        <circle cx="12" cy="12" r="2" fill="#00e676"/>
+        <path d="M2 7l10 5 10-5M2 12l10 5 10-5" stroke="#33691e" stroke-width="0.5" stroke-opacity="0.3"/>
+      </svg>
+      <div>
+        <h1 class="top-title">Smart Compost · Planner</h1>
+        <span class="top-sub">biochemical conversion terminal v1.0</span>
+      </div>
+      <span class="top-badge" id="topBadge">AEROBIC MONITOR</span>
+    </div>
+    <div class="top-metrics" id="topMetrics">
+      <span class="metric-chip" id="chipTotal">ITEMS <strong id="totalItems">0</strong></span>
+      <span class="metric-chip accent" id="chipMass">MASS <strong id="totalMass">0</strong> g</span>
+      <span class="metric-chip" id="chipCN">C:N <strong id="cnVal">--</strong></span>
+    </div>
+  </header>
+
+  <main class="workspace">
+
+    <!-- INGESTION DECK -->
+    <section class="ingestion-deck">
+      <div class="deck-row">
+        <div class="field-group">
+          <label class="f-label">Category Item</label>
+          <select class="f-select" id="matSelect">
+            <option value="fruit">Fruit / Veg Scraps</option>
+            <option value="coffee">Coffee Grounds</option>
+            <option value="leaves">Dry Leaves</option>
+            <option value="cardboard">Cardboard Shavings</option>
+            <option value="straw">Spent Straw</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label class="f-label">Mass Weight (g)</label>
+          <input type="number" class="f-input" id="massInput" value="500" min="1" step="50">
+        </div>
+        <button class="f-btn" id="btnAdd">+ Add to Recipe</button>
+      </div>
+      <div class="deck-alert" id="alertBanner" style="display:none"></div>
+    </section>
+
+    <!-- MAIN GRID -->
+    <div class="main-grid">
+
+      <!-- LEFT: RECIPE TABLE -->
+      <section class="recipe-section">
+        <div class="panel-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="10" height="10"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          <span>Active Recipe Ledger</span>
+          <span class="panel-hint" id="recipeHint">0 ITEMS</span>
+        </div>
+        <div class="table-wrap">
+          <table class="recipe-table" id="recipeTable">
+            <thead><tr><th>Material</th><th>Type</th><th>Mass (g)</th><th>C (g)</th><th>N (g)</th><th></th></tr></thead>
+            <tbody id="recipeBody"></tbody>
+          </table>
+          <div class="table-empty" id="tableEmpty">No materials in recipe. Add items above.</div>
+        </div>
+        <div class="table-footer">
+          <span class="tf-item">Totals: <strong id="tfCarbon">0</strong> g C · <strong id="tfNitrogen">0</strong> g N</span>
+          <span class="tf-item">Ratio: <strong id="tfRatio">--</strong>:1</span>
+        </div>
+      </section>
+
+      <!-- RIGHT: CANVAS ANALYTICS -->
+      <section class="analytics-section">
+        <div class="panel-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="10" height="10"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          <span>Biochemical Analytics</span>
+          <span class="panel-hint">LIVE</span>
+        </div>
+        <div class="canvas-stack">
+          <div class="canvas-slide"><canvas id="gaugeCanvas"></canvas></div>
+          <div class="canvas-slide mini"><canvas id="barCanvas"></canvas></div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- DASHBOARD CARDS -->
+    <section class="dashboard-row" id="dashRow">
+      <div class="dash-card" id="dashRatio">
+        <div class="dash-lbl">Mixture C:N Ratio</div>
+        <div class="dash-val" id="dashRatioVal">--:1</div>
+      </div>
+      <div class="dash-card" id="dashTime">
+        <div class="dash-lbl">Decomposition Time</div>
+        <div class="dash-val" id="dashTimeVal">--</div>
+        <div class="dash-sub">weeks</div>
+      </div>
+      <div class="dash-card" id="dashGrade">
+        <div class="dash-lbl">Humus Quality Grade</div>
+        <div class="dash-val" id="dashGradeVal">--</div>
+      </div>
+      <div class="dash-card" id="dashMethane">
+        <div class="dash-lbl">Methane Diversion</div>
+        <div class="dash-val" id="dashMethaneVal">--</div>
+        <div class="dash-sub">lbs CO₂-eq / yr</div>
+      </div>
+      <div class="dash-card" id="dashStatusCard">
+        <div class="dash-lbl">System Status</div>
+        <div class="dash-val small" id="dashStatusVal">WAITING</div>
+      </div>
+    </section>
+
+    <!-- ACTION FOOTER -->
+    <footer class="action-bar">
+      <button class="foot-btn foot-play" id="btnRoadmap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        Generate Composting Roadmap
+      </button>
+      <button class="foot-btn foot-preset" id="btnPreset">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        Inject Optimal Baseline Preset
+      </button>
+      <button class="foot-btn foot-critical" id="btnPurge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6"/><path d="M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+        Purge Material Matrix Ledger
+      </button>
+    </footer>
+
+  </main>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

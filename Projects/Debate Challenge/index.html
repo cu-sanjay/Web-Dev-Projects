@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debate Arena — Rhetorical Combat</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="arena-container">
+        <div id="start-overlay" class="overlay">
+            <h1 style="font-family: 'Space Grotesk'; font-size: 3rem; margin: 0; color: var(--accent);">DEBATE ARENA</h1>
+            <p style="color: var(--text-dim); margin: 1rem 0 2rem;">Destroy your opponent with pure logic and reasoning.</p>
+            <button class="btn-attack" onclick="startGame()">Enter Arena</button>
+        </div>
+
+        <main class="battle-view">
+            <div class="health-grid">
+                <div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 4px;">
+                        <span>YOU (DEBATER)</span>
+                        <span id="user-hp-val">100</span>
+                    </div>
+                    <div class="health-bar-container"><div id="user-bar" class="health-fill user-hp"></div></div>
+                </div>
+                <div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 4px;">
+                        <span>THE COUNTER-LOGIC</span>
+                        <span id="opp-hp-val">100</span>
+                    </div>
+                    <div class="health-bar-container"><div id="opp-bar" class="health-fill opp-hp"></div></div>
+                </div>
+            </div>
+
+            <div class="topic-card">
+                <div style="font-size: 0.7rem; text-transform: uppercase; color: var(--text-dim); letter-spacing: 2px; margin-bottom: 8px;">Active Topic</div>
+                <h2 id="topic-display">Social media does more harm than good for teenagers.</h2>
+            </div>
+
+            <div class="input-box">
+                <div class="controls">
+                    <div class="side-toggle">
+                        <button id="pro-btn" class="side-btn active" onclick="setSide('PRO')">AFFIRMATIVE</button>
+                        <button id="con-btn" class="side-btn" onclick="setSide('CON')">NEGATIVE</button>
+                    </div>
+                    <span id="char-count" style="font-size: 0.8rem; color: var(--text-dim);">Min 50 chars</span>
+                </div>
+                <textarea id="argument-input" placeholder="Type your opening statement here... use logical connectors like 'however', 'because', or 'consequently' for more power."></textarea>
+                <button class="btn-attack" id="attack-btn" onclick="executeAttack()">Deploy Argument</button>
+            </div>
+        </main>
+
+        <aside class="sidebar">
+            <div style="font-weight: 800; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Battle Log</div>
+            <div class="battle-log" id="battle-log">
+                <div class="log-entry">Waiting for opening statement...</div>
+            </div>
+        </aside>
+    </div>
+<script src="script.js"></script>
+</body>
+</html>

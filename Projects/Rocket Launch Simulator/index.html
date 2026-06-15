@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rocket Launch Simulator & Visualizer</title>
+  <meta name="description" content="An interactive real-time 2D rocket flight dynamics simulator modeling multi-stage ascent, gravity turns, and orbital insertion physics.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- TOP HEADER -->
+    <header class="app-header">
+      <div class="brand">
+        <div class="brand-logo">
+          <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L2 22h20L12 2z" stroke-linejoin="round"></path>
+            <path d="M12 2v20"></path>
+            <path d="M8 14h8"></path>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>KSC LAUNCH DECK</h1>
+          <h2>2D Orbital Ascent Simulator</h2>
+        </div>
+      </div>
+
+      <!-- Telemetry HUD -->
+      <div class="telemetry-hud" aria-label="Flight Telemetry">
+        <div class="hud-item">
+          <span class="hud-label">Altitude</span>
+          <span class="hud-value" id="hud-altitude">0.00 km</span>
+        </div>
+        <div class="hud-item">
+          <span class="hud-label">Velocity</span>
+          <span class="hud-value" id="hud-velocity">0.00 km/s</span>
+        </div>
+        <div class="hud-item">
+          <span class="hud-label">Downrange</span>
+          <span class="hud-value" id="hud-downrange">0.00 km</span>
+        </div>
+        <div class="hud-item">
+          <span class="hud-label">G-Force</span>
+          <span class="hud-value" id="hud-gforce">1.00 G</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="main-layout">
+      <!-- LEFT SIDEBAR: Flight controls and rocket configuration -->
+      <aside class="sidebar left-sidebar" aria-label="Flight Controls and Config">
+        <div class="panel-section">
+          <h3><span class="sec-num">01</span> Flight Deck controls</h3>
+          <div class="control-group">
+            <div class="control-header">
+              <label for="input-throttle">Thrust Throttle:</label>
+              <span id="val-throttle" class="control-value">100%</span>
+            </div>
+            <input type="range" id="input-throttle" min="0" max="100" step="5" value="100">
+            <div class="range-labels"><span>0% (Cutoff)</span><span>100% (Max)</span></div>
+          </div>
+
+          <div class="control-group">
+            <div class="control-header">
+              <label for="input-steering">Steering Pitch Angle:</label>
+              <span id="val-steering" class="control-value">90° (Vertical)</span>
+            </div>
+            <input type="range" id="input-steering" min="0" max="90" step="1" value="90">
+            <div class="range-labels"><span>0° (Horizontal)</span><span>90° (Vertical)</span></div>
+          </div>
+
+          <div class="launch-actions-grid">
+            <button id="btn-ignition" class="btn btn-ignition" title="Start countdown and ignite first stage booster">
+              🔥 IGNITION / LAUNCH
+            </button>
+            <button id="btn-separate" class="btn btn-separate hidden" title="Separate empty stage booster and ignite next stage">
+              🚀 STAGE SEPARATION
+            </button>
+            <button id="btn-abort" class="btn btn-abort" title="Trigger immediate flight termination destruct system">
+              💥 FLIGHT TERMINATION (ABORT)
+            </button>
+          </div>
+        </div>
+
+        <div class="panel-section">
+          <h3><span class="sec-num">02</span> Rocket Stage Configurator</h3>
+          
+          <div class="stage-config-row">
+            <div class="control-group half">
+              <label for="input-s1-fuel">Stage 1 Propellant:</label>
+              <input type="number" id="input-s1-fuel" min="5000" max="100000" step="5000" value="40000">
+              <span class="input-helper">kg (5k - 100k)</span>
+            </div>
+            <div class="control-group half">
+              <label for="input-s1-dry">Stage 1 Dry Mass:</label>
+              <input type="number" id="input-s1-dry" min="1000" max="20000" step="1000" value="5000">
+              <span class="input-helper">kg (1k - 20k)</span>
+            </div>
+          </div>
+
+          <div class="stage-config-row">
+            <div class="control-group half">
+              <label for="input-s2-fuel">Stage 2 Propellant:</label>
+              <input type="number" id="input-s2-fuel" min="2000" max="40000" step="2000" value="12000">
+              <span class="input-helper">kg (2k - 40k)</span>
+            </div>
+            <div class="control-group half">
+              <label for="input-s2-dry">Stage 2 Dry Mass:</label>
+              <input type="number" id="input-s2-dry" min="500" max="10000" step="500" value="1500">
+              <span class="input-helper">kg (500 - 10k)</span>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label for="select-payload">Mission Payload (Cargo):</label>
+            <select id="select-payload">
+              <option value="weather" selected>Weather Satellite (Dry: 1,500 kg)</option>
+              <option value="lunar">Lunar Lander (Dry: 4,000 kg)</option>
+              <option value="telescope">Space Telescope (Dry: 6,000 kg)</option>
+            </select>
+          </div>
+        </div>
+      </aside>
+
+      <!-- CENTER PANEL: Dynamic visual canvas -->
+      <main class="canvas-workspace">
+        <div class="canvas-container" id="canvas-container">
+          <canvas id="sim-canvas"></canvas>
+
+          <!-- Floating badge for engine status -->
+          <div class="canvas-floating-badge top-left">
+            <span class="badge-dot pulse" id="status-dot"></span>
+            <span class="badge-text" id="sim-status-text">Flight Deck: PRE-FLIGHT</span>
+          </div>
+
+          <!-- Altitude warning indicator -->
+          <div class="canvas-floating-badge top-right hidden" id="maxq-badge">
+            <span class="badge-text text-danger">⚠️ DYNAMIC PRESSURE PEAK (MAX-Q)</span>
+          </div>
+
+          <!-- Bottom controls help -->
+          <div class="canvas-floating-badge bottom-left">
+            <span>🚀 Steer towards 0° (Horizontal) as altitude increases to achieve orbit (Tsiolkovsky turn).</span>
+          </div>
+
+          <!-- Floating HUD readout -->
+          <div class="flight-hud-panel" id="flight-hud">
+            <div class="hud-grid">
+              <div class="hud-cell">
+                <span class="hud-lbl">Dynamic Pressure (q)</span>
+                <span class="hud-val" id="hud-val-q">0.00 kPa</span>
+              </div>
+              <div class="hud-cell">
+                <span class="hud-lbl">Acceleration</span>
+                <span class="hud-val" id="hud-val-acc">0.00 m/s²</span>
+              </div>
+              <div class="hud-cell">
+                <span class="hud-lbl">Stage 1 Fuel</span>
+                <div class="progress-bar-container">
+                  <div class="progress-bar s1" id="hud-val-s1-fuel">100%</div>
+                </div>
+              </div>
+              <div class="hud-cell">
+                <span class="hud-lbl">Stage 2 Fuel</span>
+                <div class="progress-bar-container">
+                  <div class="progress-bar s2" id="hud-val-s2-fuel">100%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- RIGHT SIDEBAR: Telemetry charts and presets -->
+      <aside class="sidebar right-sidebar" aria-label="Visualizations and Presets">
+        <div class="panel-section">
+          <h3><span class="sec-num">03</span> Mission Presets</h3>
+          <div class="preset-column">
+            <button id="btn-preset-leo" class="btn btn-preset" title="Launch weather satellite into circular orbit (160km)">
+              LEO Satellite Orbit Insertion
+            </button>
+            <button id="btn-preset-suborbital" class="btn btn-preset" title="Perform a suborbital booster separation test hop">
+              Suborbital Booster Hopper Test
+            </button>
+            <button id="btn-preset-heavy" class="btn btn-preset" title="Inject heavy Lunar lander cargo into orbital trajectory">
+              Heavy Cargo Lunar Launcher
+            </button>
+          </div>
+        </div>
+
+        <div class="panel-section flex-grow">
+          <h3><span class="sec-num">04</span> Telemetry Analytics</h3>
+          
+          <div class="chart-wrapper">
+            <span class="chart-label">Ascent Trajectory Profile (Altitude vs Downrange)</span>
+            <canvas id="chart-trajectory" height="110"></canvas>
+          </div>
+
+          <div class="chart-wrapper">
+            <span class="chart-label">Flight Velocity profile (Speed vs Time)</span>
+            <canvas id="chart-velocity" height="110"></canvas>
+          </div>
+        </div>
+
+        <div class="panel-section">
+          <h3><span class="sec-num">05</span> Simulation Warp</h3>
+          <div class="warp-controls-grid">
+            <button id="btn-pause-play" class="btn btn-action play" title="Pause or play physics integration">
+              <span id="play-pause-icon">⏸️</span> <span id="play-pause-text">Pause physics</span>
+            </button>
+            <div class="warp-speed-select">
+              <label for="select-warp">Time Warp:</label>
+              <select id="select-warp">
+                <option value="1">1x (Real-time)</option>
+                <option value="2">2x (Speed Up)</option>
+                <option value="4">4x (Time Warp)</option>
+              </select>
+            </div>
+            <button id="btn-reset-flight" class="btn btn-action reset" title="Erase flight coordinates and return to launcher">
+              🔄 Reset Launch
+            </button>
+          </div>
+        </div>
+
+        <div class="panel-section" style="height: 160px; min-height: 160px;">
+          <h3><span class="sec-num">06</span> Mission Control Logs</h3>
+          <div class="console-box" id="console-logs" aria-live="polite">
+            <div class="log-line text-info">&gt; Flight sequence deck online. Ready for launch.</div>
+            <div class="log-line text-info">&gt; Gravity turn guidelines: pitch to 45° at 30km altitude.</div>
+            <div class="log-line text-warning">&gt; Push "IGNITION / LAUNCH" to start liftoff sequence.</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

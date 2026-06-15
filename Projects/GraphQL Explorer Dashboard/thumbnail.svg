@@ -1,0 +1,154 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080a11" />
+      <stop offset="100%" stop-color="#0e1225" />
+    </linearGradient>
+
+    <!-- Accent / Purple Gradient -->
+    <linearGradient id="accent-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7" />
+      <stop offset="100%" stop-color="#7c3aed" />
+    </linearGradient>
+
+    <!-- Blue Variable Gradient -->
+    <linearGradient id="blue-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#2563eb" />
+    </linearGradient>
+
+    <!-- Glow Filter -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="320" height="200" rx="16" fill="url(#bg-grad)" />
+  <rect width="320" height="200" rx="16" fill="none" stroke="rgba(255, 255, 255, 0.05)" stroke-width="2" />
+
+  <!-- Ambient Glow Orbs -->
+  <circle cx="280" cy="40" r="50" fill="#8b5cf6" opacity="0.12" filter="url(#glow)" />
+  <circle cx="45" cy="160" r="40" fill="#ec4899" opacity="0.08" filter="url(#glow)" />
+
+  <!-- Layout: GraphQL IDE Columns Mock -->
+  
+  <!-- Left Side: Schema Explorer representation -->
+  <g transform="translate(18, 30)">
+    <rect width="78" height="116" rx="6" fill="rgba(255, 255, 255, 0.015)" stroke="rgba(255,255,255,0.04)" stroke-width="1" />
+    
+    <!-- Header title -->
+    <text x="8" y="14" font-family="'Outfit', sans-serif" font-size="7" font-weight="700" fill="#94a3b8">SCHEMA DOCS</text>
+    <line x1="8" y1="20" x2="70" y2="20" stroke="rgba(255,255,255,0.06)" stroke-width="1" />
+    
+    <!-- Type: Query -->
+    <g transform="translate(8, 28)">
+      <path d="M0, 3 L4, 7 L0, 11" fill="none" stroke="#a855f7" stroke-width="1.2" stroke-linecap="round" />
+      <text x="8" y="9" font-family="'SFMono-Regular', Consolas, monospace" font-size="7" font-weight="700" fill="#a855f7">Query</text>
+    </g>
+    
+    <!-- Field: users -->
+    <g transform="translate(18, 43)">
+      <text x="0" y="8" font-family="'SFMono-Regular', Consolas, monospace" font-size="6.5" font-weight="600" fill="#f97316">users</text>
+      <text x="24" y="8" font-family="'Inter', sans-serif" font-size="5.5" fill="#a855f7">:[User!]</text>
+    </g>
+
+    <!-- Type: User -->
+    <g transform="translate(8, 58)">
+      <path d="M0, 3 L4, 7 L0, 11" fill="none" stroke="#a855f7" stroke-width="1.2" stroke-linecap="round" />
+      <text x="8" y="9" font-family="'SFMono-Regular', Consolas, monospace" font-size="7" font-weight="700" fill="#a855f7">User</text>
+    </g>
+    
+    <!-- User fields -->
+    <g transform="translate(18, 73)">
+      <text x="0" y="8" font-family="'SFMono-Regular', Consolas, monospace" font-size="6" fill="#f97316">name</text>
+      <text x="22" y="8" font-family="'Inter', sans-serif" font-size="5" fill="#3b82f6">:String!</text>
+    </g>
+    <g transform="translate(18, 85)">
+      <text x="0" y="8" font-family="'SFMono-Regular', Consolas, monospace" font-size="6" fill="#f97316">company</text>
+      <text x="32" y="8" font-family="'Inter', sans-serif" font-size="5" fill="#a855f7">:Company!</text>
+    </g>
+  </g>
+
+  <!-- Center: Query Editor Workspace -->
+  <g transform="translate(104, 30)">
+    <rect width="112" height="116" rx="6" fill="rgba(255, 255, 255, 0.025)" stroke="rgba(255,255,255,0.06)" stroke-width="1" />
+    
+    <!-- Toolbar helper buttons representation -->
+    <rect x="6" y="6" width="22" height="8" rx="2" fill="rgba(255,255,255,0.05)" />
+    <text x="17" y="12" font-family="'SFMono-Regular', Consolas, monospace" font-size="5" font-weight="600" fill="#94a3b8" text-anchor="middle">query</text>
+    
+    <rect x="32" y="6" width="16" height="8" rx="2" fill="rgba(255,255,255,0.05)" />
+    <text x="40" y="12" font-family="'SFMono-Regular', Consolas, monospace" font-size="5" font-weight="600" fill="#94a3b8" text-anchor="middle">vars</text>
+    
+    <line x1="6" y1="18" x2="106" y2="18" stroke="rgba(255, 255, 255, 0.06)" stroke-width="1" />
+
+    <!-- Query content representation -->
+    <g transform="translate(8, 25)">
+      <!-- Line 1: query GetUsers { -->
+      <text x="0" y="8" font-family="'SFMono-Regular', Consolas, monospace" font-size="6.5" font-weight="600" fill="#a855f7">query <tspan fill="#fff">GetUsers</tspan> {</text>
+      
+      <!-- Line 2:   users { -->
+      <text x="8" y="20" font-family="'SFMono-Regular', Consolas, monospace" font-size="6.5" font-weight="600" fill="#f97316">users <tspan fill="#fff">{</tspan></text>
+      
+      <!-- Line 3:     id -->
+      <text x="16" y="32" font-family="'SFMono-Regular', Consolas, monospace" font-size="6.5" font-weight="600" fill="#f97316">id</text>
+      
+      <!-- Line 4:     name -->
+      <text x="16" y="44" font-family="'SFMono-Regular', Consolas, monospace" font-size="6.5" font-weight="600" fill="#f97316">name</text>
+      
+      <!-- Line 5:     company { name } -->
+      <text x="16" y="56" font-family="'SFMono-Regular', Consolas, monospace" font-size="6.5" font-weight="600" fill="#f97316">company <tspan fill="#fff">{</tspan> name <tspan fill="#fff">}</tspan></text>
+
+      <!-- Line 6:   } -->
+      <text x="8" y="68" font-family="'SFMono-Regular', Consolas, monospace" font-size="6.5" font-weight="600" fill="#fff">}</text>
+
+      <!-- Line 7: } -->
+      <text x="0" y="80" font-family="'SFMono-Regular', Consolas, monospace" font-size="6.5" font-weight="600" fill="#fff">}</text>
+    </g>
+
+    <!-- Run Play Button connector -->
+    <circle cx="106" cy="12" r="6" fill="url(#accent-grad)" filter="url(#glow)" />
+    <polygon points="104,9 104,15 109,12" fill="#fff" />
+  </g>
+
+  <!-- Right: Result Window panel representation -->
+  <g transform="translate(224, 30)">
+    <rect width="78" height="116" rx="6" fill="rgba(10, 12, 26, 0.8)" stroke="rgba(255,255,255,0.06)" stroke-width="1" />
+    
+    <!-- Status LED indicator dot -->
+    <circle cx="8" cy="8" r="2.5" fill="#10b981" filter="url(#glow)" />
+    <text x="14" y="10.5" font-family="'Inter', sans-serif" font-size="5" font-weight="700" fill="#10b981">SUCCESS</text>
+    <text x="70" y="10.5" font-family="'Inter', sans-serif" font-size="4.5" font-weight="500" fill="#4b5563" text-anchor="end">4 ms</text>
+    <line x1="6" y1="16" x2="72" y2="16" stroke="rgba(255, 255, 255, 0.06)" stroke-width="0.75" />
+
+    <!-- Mock JSON payload output -->
+    <g transform="translate(6, 20)">
+      <text x="0" y="8" font-family="'SFMono-Regular', Consolas, monospace" font-size="5.5" font-weight="600" fill="#fff">{</text>
+      <text x="6" y="17" font-family="'SFMono-Regular', Consolas, monospace" font-size="5.5" font-weight="600" fill="#fff">"data": {</text>
+      <text x="12" y="26" font-family="'SFMono-Regular', Consolas, monospace" font-size="5.5" font-weight="600" fill="#fff">"users": [</text>
+      
+      <!-- item 1 -->
+      <text x="18" y="35" font-family="'SFMono-Regular', Consolas, monospace" font-size="5.5" font-weight="600" fill="#fff">{</text>
+      <text x="24" y="44" font-family="'SFMono-Regular', Consolas, monospace" font-size="5.5" font-weight="600" fill="#fff">"id": <tspan fill="#38bdf8">"1"</tspan>,</text>
+      <text x="24" y="53" font-family="'SFMono-Regular', Consolas, monospace" font-size="5.5" font-weight="600" fill="#fff">"name": <tspan fill="#38bdf8">"Alice"</tspan></text>
+      <text x="18" y="62" font-family="'SFMono-Regular', Consolas, monospace" font-size="5.5" font-weight="600" fill="#fff">}</tspan></text>
+
+      <text x="12" y="71" font-family="'SFMono-Regular', Consolas, monospace" font-size="5.5" font-weight="600" fill="#fff">]</tspan></text>
+      <text x="6" y="80" font-family="'SFMono-Regular', Consolas, monospace" font-size="5.5" font-weight="600" fill="#fff">}</text>
+      <text x="0" y="89" font-family="'SFMono-Regular', Consolas, monospace" font-size="5.5" font-weight="600" fill="#fff">}</text>
+    </g>
+  </g>
+
+  <!-- Title Logo / Brand Area -->
+  <g transform="translate(160, 172)">
+    <text font-family="'Outfit', sans-serif" font-size="14.5" font-weight="800" text-anchor="middle" fill="#ffffff" letter-spacing="-0.2">
+      Graph<tspan fill="#8b5cf6">Explorer</tspan>
+    </text>
+    <text y="12" font-family="'Inter', sans-serif" font-size="7" font-weight="500" text-anchor="middle" fill="#94a3b8" letter-spacing="0.2">
+      GraphQL IDE &amp; Schema Sandbox
+    </text>
+  </g>
+</svg>

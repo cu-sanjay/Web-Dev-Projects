@@ -1,0 +1,318 @@
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body {
+  background: #070a13;
+  color: #f8fafc;
+  font-family: ui-monospace, Consolas, monospace;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#app {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  width: 100%;
+  max-width: 1200px;
+  height: 780px;
+  background: #070a13;
+  border: 1px solid #1f2937;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.03);
+}
+
+/* ============ PANELS ============ */
+
+.panel {
+  background: #111827;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #1f2937;
+  overflow-y: auto;
+}
+
+.panel-header {
+  padding: 16px 18px;
+  border-bottom: 1px solid #1f2937;
+  flex-shrink: 0;
+}
+
+.brand {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #f8fafc;
+}
+
+.brand-sub {
+  font-size: 10px;
+  color: #94a3b8;
+  margin-top: 2px;
+  letter-spacing: 0.5px;
+}
+
+/* ============ TELEMETRY ============ */
+
+.telemetry-deck {
+  padding: 14px;
+  flex-shrink: 0;
+}
+
+.telem-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  background: rgba(15,23,42,0.4);
+  border-radius: 6px;
+  border: 1px solid #1f2937;
+  margin-bottom: 6px;
+}
+
+.telem-label {
+  font-size: 10px;
+  color: #64748b;
+}
+
+.telem-value {
+  font-size: 13px;
+  color: #f8fafc;
+  font-weight: 700;
+}
+
+/* ============ ACTION BUTTONS ============ */
+
+.action-buttons {
+  padding: 14px;
+  flex-shrink: 0;
+}
+
+.action-btn {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-transform: uppercase;
+}
+
+.action-btn:active {
+  transform: scale(0.97);
+}
+
+.action-btn.primary {
+  background: #3b82f6;
+  color: #fff;
+  border-color: #3b82f6;
+}
+
+.action-btn.primary:hover {
+  background: #2563eb;
+  box-shadow: 0 0 16px rgba(59,130,246,0.3);
+}
+
+.action-btn.primary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* ============ DIAGNOSTICS ============ */
+
+.diagnostics-bar {
+  padding: 10px 14px;
+  border-top: 1px solid #1f2937;
+  margin-top: auto;
+  flex-shrink: 0;
+}
+
+.diag-status {
+  font-size: 9px;
+  color: #3b82f6;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.diag-status.idle {
+  color: #3b82f6;
+}
+
+.diag-status.memorize {
+  color: #f59e0b;
+}
+
+.diag-status.play {
+  color: #10b981;
+}
+
+.diag-status.mismatch {
+  color: #ef4444;
+}
+
+.diag-status.victory {
+  color: #10b981;
+}
+
+/* ============ VIEWPORT ============ */
+
+.viewport {
+  display: flex;
+  flex-direction: column;
+  background: #070a13;
+  overflow: hidden;
+}
+
+.viewport-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 18px;
+  border-bottom: 1px solid #1f2937;
+  font-size: 10px;
+  min-height: 38px;
+  background: #0a0e1a;
+  flex-shrink: 0;
+}
+
+.sim-source {
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.grid-size {
+  color: #64748b;
+  font-size: 9px;
+}
+
+/* ============ GRID STAGE ============ */
+
+.grid-stage {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  width: 520px;
+  max-width: 100%;
+  perspective: 1000px;
+}
+
+/* ============ 3D CARD ============ */
+
+.card {
+  aspect-ratio: 1;
+  cursor: pointer;
+  position: relative;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card.matched {
+  cursor: default;
+}
+
+.card-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255,255,255,0.04);
+}
+
+.card-back {
+  background: #111827;
+  border-color: #1f2937;
+  overflow: hidden;
+}
+
+.card-back-pattern {
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(45deg, #1a1f32 25%, transparent 25%),
+    linear-gradient(-45deg, #1a1f32 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #1a1f32 75%),
+    linear-gradient(-45deg, transparent 75%, #1a1f32 75%);
+  background-size: 16px 16px;
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+  opacity: 0.5;
+  border-radius: 10px;
+}
+
+.card-front {
+  transform: rotateY(180deg);
+  border: 2px solid rgba(255,255,255,0.06);
+}
+
+.card.shake .card-inner {
+  animation: cardShake 0.4s ease;
+}
+
+@keyframes cardShake {
+  0%, 100% { transform: rotateY(180deg) translateX(0); }
+  20% { transform: rotateY(180deg) translateX(-4px); }
+  40% { transform: rotateY(180deg) translateX(4px); }
+  60% { transform: rotateY(180deg) translateX(-3px); }
+  80% { transform: rotateY(180deg) translateX(3px); }
+}
+
+.card-grid.victory-glow {
+  filter: drop-shadow(0 0 30px rgba(16,185,129,0.2));
+}
+
+/* ============ SCROLLBAR ============ */
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1f2937;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2d3748;
+}

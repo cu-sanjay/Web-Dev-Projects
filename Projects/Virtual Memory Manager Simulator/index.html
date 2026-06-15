@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Virtual Memory Manager Simulator - Interactive Learning Lab</title>
+  <meta name="description" content="An interactive simulator for Virtual Memory Management. Visualize virtual-to-physical address translation, Translation Lookaside Buffer (TLB) hits/misses, page tables, RAM frames, page faults, and swap disk evictions.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-logo">
+        <a href="../../" class="back-link" title="Back to Showcase">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        </a>
+        <div class="logo-text">
+          <h1>Virtual Memory <span class="accent-text">Manager</span></h1>
+          <p class="subtitle">Operating Systems &amp; Architecture Interactive Learning Lab</p>
+        </div>
+      </div>
+      
+      <div class="header-presets">
+        <div class="control-group">
+          <label for="address-stream-preset">Load Reference Stream Preset:</label>
+          <select id="address-stream-preset" class="custom-select">
+            <option value="custom">Custom Address Input Mode</option>
+            <option value="tlb-demo" selected>TLB Temporal Locality (High Hits)</option>
+            <option value="page-fault-demo">Page Faults &amp; Evictions (RAM Thrashing)</option>
+            <option value="writeback-demo">Dirty Page Swaps (Write-Back Demo)</option>
+            <option value="lru-fifo-demo">LRU vs FIFO Comparison Stream</option>
+          </select>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Dashboard Grid -->
+    <main class="dashboard-grid">
+      
+      <!-- Left Column: Controls, Active Translation, Statistics -->
+      <section class="left-column">
+        
+        <!-- Address Input Card (Active Translation Console) -->
+        <div class="card interactive-card">
+          <h2 class="card-title">Memory Reference Input</h2>
+          <div class="address-input-deck">
+            <div class="input-field-group">
+              <label for="address-input">Virtual Address (Hex/Bin/Dec)</label>
+              <div class="input-with-button">
+                <input type="text" id="address-input" placeholder="e.g. 0x3F or 00111111" value="0x3F" spellcheck="false">
+                <button id="btn-random-address" class="btn btn-secondary" title="Generate Random 8-bit Address">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path></svg>
+                </button>
+              </div>
+            </div>
+            
+            <div class="input-field-group">
+              <label for="access-mode">Access Type</label>
+              <select id="access-mode" class="custom-select-small">
+                <option value="read" selected>READ Memory</option>
+                <option value="write">WRITE (Modify) Memory</option>
+              </select>
+            </div>
+            
+            <div class="submit-action-group">
+              <button id="btn-submit-translation" class="btn btn-primary">Translate &amp; Access</button>
+            </div>
+          </div>
+          
+          <div class="stream-control-card mt-16">
+            <div class="card-subtitle-custom">Address Reference Stream Track:</div>
+            <textarea id="stream-input" placeholder="Write page access sequence like: 0x20, 0x40, 0x24, 0x80, 0x28, 0xBF..." spellcheck="false">0x20, 0x24, 0x28, 0x40, 0x44, 0x20, 0x80, 0xA0, 0x40</textarea>
+            
+            <div class="stream-buttons mt-12">
+              <button id="btn-load-stream" class="btn btn-secondary flex-1">Load Stream</button>
+              <span class="stream-indicator" id="stream-index-label">Index: 0/9</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Simulator Timeline Playback Card -->
+        <div class="card playback-card">
+          <h2 class="card-title">Simulator Control Deck</h2>
+          
+          <div class="playback-controls">
+            <button id="btn-prev-step" class="btn btn-control" title="Step backward one translation">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="19 20 9 12 19 4 19 20"></polygon><line x1="5" y1="19" x2="5" y2="5"></line></svg>
+            </button>
+            
+            <button id="btn-toggle-play" class="btn btn-primary btn-control-main" title="Run simulator stream automatically">
+              <svg id="play-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              <svg id="pause-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+              <span>Run Stream</span>
+            </button>
+            
+            <button id="btn-next-step" class="btn btn-control" title="Step forward one translation">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="5" x2="19" y2="19"></line></svg>
+            </button>
+
+            <button id="btn-reset" class="btn btn-secondary btn-control" title="Reset simulator to original state">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path></svg>
+            </button>
+          </div>
+
+          <div class="slider-speed-bar mt-16">
+            <span id="speed-value">Interval: 1.5s</span>
+            <input type="range" id="sim-speed" min="300" max="4000" step="100" value="1500">
+          </div>
+        </div>
+
+        <!-- Hardware Design Config Card -->
+        <div class="card hardware-card">
+          <h2 class="card-title">Hardware Memory Architect</h2>
+          
+          <div class="hardware-grid">
+            <div class="config-item">
+              <label for="tlb-entries">TLB Entries Cache Size</label>
+              <select id="tlb-entries" class="custom-select-small">
+                <option value="2">2 Entries (Extremely Cache Constrained)</option>
+                <option value="4" selected>4 Entries (Standard Default)</option>
+                <option value="8">8 Entries (Full Page Mapping)</option>
+              </select>
+            </div>
+
+            <div class="config-item">
+              <label for="replacement-policy">Page Replacement Policy</label>
+              <select id="replacement-policy" class="custom-select-small">
+                <option value="lru" selected>LRU (Least Recently Used)</option>
+                <option value="fifo">FIFO (First-In, First-Out)</option>
+                <option value="clock">Clock (Second Chance Bit)</option>
+                <option value="optimal">Optimal (Future Stream Oracle)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Statistics Panel -->
+        <div class="stats-panel-card card cyan-gradient">
+          <h3 class="card-title-small">Simulator Performance Metrics</h3>
+          <div class="stats-grid-horizontal">
+            <div class="stat-box">
+              <span class="stat-label">Memory Accesses</span>
+              <span id="stat-accesses" class="stat-num">0</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">TLB Hits</span>
+              <span id="stat-tlb-hits" class="stat-num text-purple">0</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">TLB Hit Rate</span>
+              <span id="stat-tlb-rate" class="stat-num text-cyan">0.0%</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">Page Faults</span>
+              <span id="stat-faults" class="stat-num text-danger">0</span>
+            </div>
+          </div>
+        </div>
+
+      </section>
+      
+      <!-- Right Column: Visual translation flow and memory tables -->
+      <section class="right-column">
+        
+        <!-- Live Translation Flow diagram -->
+        <div class="card diagram-card">
+          <h2 class="card-title">Live Address Translation Flow</h2>
+          
+          <!-- Flowchart Visual Node Stack -->
+          <div class="address-flow-visualizer">
+            
+            <div class="flow-address-bar" id="flow-addr-box">
+              <div class="flow-section-label">Input Virtual Address</div>
+              <div class="address-split-view">
+                <div class="split-part vpn-box" id="flow-vpn-val">
+                  <span class="split-hex">--</span>
+                  <span class="split-bin">VPN: --</span>
+                </div>
+                <div class="split-part offset-box" id="flow-offset-val">
+                  <span class="split-hex">--</span>
+                  <span class="split-bin">Offset: --</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="flow-arrow" id="arrow-to-tlb">&darr;</div>
+
+            <!-- TLB Stage -->
+            <div class="flow-node block-tlb active-idle" id="flow-node-tlb">
+              <div class="flow-node-header">
+                <span>1. TLB Search Cache Lookup</span>
+                <span class="badge" id="flow-tlb-badge">Idle</span>
+              </div>
+              <div class="flow-node-body">
+                <p id="flow-tlb-desc">Searching VPN cache entries...</p>
+              </div>
+            </div>
+
+            <div class="flow-dual-arrow" id="flow-tlb-branches">
+              <div class="left-branch-arrow hidden" id="branch-hit-arrow">
+                <span>&swarr; Hit</span>
+              </div>
+              <div class="right-branch-arrow hidden" id="branch-miss-arrow">
+                <span>Miss &searr;</span>
+              </div>
+            </div>
+
+            <!-- Double-path middle blocks -->
+            <div class="flow-paths-grid">
+              
+              <!-- Left: TLB Hit (Instant translation) -->
+              <div class="flow-node block-hit hidden" id="flow-node-hit">
+                <div class="flow-node-header">TLB Hit Match</div>
+                <div class="flow-node-body">
+                  <p id="flow-hit-desc">PFN retrieved directly from fast TLB registry.</p>
+                </div>
+              </div>
+
+              <!-- Right: TLB Miss -> Check Page Table -->
+              <div class="flow-node block-pt hidden" id="flow-node-pt">
+                <div class="flow-node-header">2. Page Table Search</div>
+                <div class="flow-node-body">
+                  <p id="flow-pt-desc">VPN not in TLB. Accessing Page Table...</p>
+                  <div class="badge-mini hidden" id="flow-pt-badge">Page Fault</div>
+                </div>
+              </div>
+              
+            </div>
+
+            <div class="flow-arrow hidden" id="arrow-from-pt">&darr;</div>
+
+            <!-- Bottom: Eviction/Memory Access stage -->
+            <div class="flow-node block-ram active-idle hidden" id="flow-node-ram">
+              <div class="flow-node-header">
+                <span>3. Memory Access Frame Resolution</span>
+                <span class="badge" id="flow-ram-badge">Ready</span>
+              </div>
+              <div class="flow-node-body">
+                <p id="flow-ram-desc">Locating data page frame in Physical RAM.</p>
+              </div>
+            </div>
+
+            <div class="flow-arrow" id="arrow-to-phys">&darr;</div>
+
+            <!-- Final translation result block -->
+            <div class="flow-result-bar" id="flow-phys-addr-box">
+              <div class="flow-section-label">Final Physical Address (PFN + Offset)</div>
+              <div class="phys-result-display">
+                <div class="phys-box-item" id="phys-pfn-display">
+                  <span class="phys-title">Physical Frame (PFN)</span>
+                  <span class="phys-num">--</span>
+                </div>
+                <div class="phys-box-item" id="phys-offset-display">
+                  <span class="phys-title">Offset Byte</span>
+                  <span class="phys-num">--</span>
+                </div>
+                <div class="phys-box-item highlight-cyan" id="phys-full-display">
+                  <span class="phys-title">Full Physical Address</span>
+                  <span class="phys-num">--</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- TLB Cache entries table -->
+        <div class="card grid-card">
+          <h2 class="card-title">Translation Lookaside Buffer (TLB)</h2>
+          <div class="table-container">
+            <table class="custom-table" id="tlb-table">
+              <thead>
+                <tr>
+                  <th>Index</th>
+                  <th>VPN (Page)</th>
+                  <th>PFN (Frame)</th>
+                  <th>Valid</th>
+                  <th>Dirty</th>
+                  <th>Age / Ref bit</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Populated dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Page Table Card -->
+        <div class="card grid-card">
+          <h2 class="card-title">Process Page Table</h2>
+          <div class="table-container-scroll">
+            <table class="custom-table" id="page-table">
+              <thead>
+                <tr>
+                  <th>VPN</th>
+                  <th>PFN</th>
+                  <th>Valid</th>
+                  <th>Dirty</th>
+                  <th>Reference</th>
+                  <th>Access Permission</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Populated dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- RAM Frames & Swap Space Dashboard Grid -->
+        <div class="memory-architectures-dual-grid">
+          
+          <!-- Physical RAM Frames -->
+          <div class="card memory-arch-card">
+            <h2 class="card-title">Physical RAM (Frame Blocks)</h2>
+            <div class="ram-blocks-container" id="ram-container">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+
+          <!-- Swap Storage (Disk) -->
+          <div class="card memory-arch-card">
+            <h2 class="card-title">Swap Disk Storage</h2>
+            <div class="disk-blocks-container" id="disk-container">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Telemetry Logs Console -->
+        <div class="card log-card">
+          <div class="log-header">
+            <h3 class="card-title">Virtual Memory Telemetry logs</h3>
+            <button id="btn-clear-logs" class="btn btn-small">Clear Logs</button>
+          </div>
+          <div id="log-console" class="console">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- Educational Bottom Section -->
+    <section class="theory-section card">
+      <h3 class="section-title">Virtual Memory Architectures &amp; Core Mechanics</h3>
+      <div class="theory-grid">
+        
+        <div class="theory-card">
+          <h4>Address Translation Math</h4>
+          <p>
+            Virtual Memory divides a process's addresses into uniform blocks called <strong>Pages</strong>, while Physical Memory (RAM) is split into matching blocks called <strong>Frames</strong>.
+          </p>
+          <ul>
+            <li>An 8-bit Virtual Address yields a 256-byte space.</li>
+            <li>With 32-byte pages, we calculate the bits: $32 = 2^5$, which means **5 bits are used for the Offset**.</li>
+            <li>The remaining $8 - 5 = 3$ bits represent the **Virtual Page Number (VPN)**, allowing for $2^3 = 8$ pages (Page 0 to Page 7).</li>
+            <li>The translation translates VPN &rarr; PFN, leaving the Offset unchanged: $\text{Physical Address} = (\text{PFN} \times \text{PageSize}) + \text{Offset}$.</li>
+          </ul>
+        </div>
+
+        <div class="theory-card">
+          <h4>Understanding TLB Mechanics</h4>
+          <p>
+            The **Translation Lookaside Buffer (TLB)** is a small, fast hardware cache inside the CPU's memory management unit (MMU).
+          </p>
+          <ul>
+            <li><strong>TLB Hit:</strong> The VPN lookup finds an entry in the TLB. Translation happens in less than a cycle, bypassing the page table lookup.</li>
+            <li><strong>TLB Miss:</strong> The VPN lookup is not cached. The CPU must traverse the multi-step Page Table in RAM, taking tens of cycles. The translation is then loaded into the TLB for future access.</li>
+            <li>If the TLB is full, an existing entry must be evicted using cache replacement rules (LRU, FIFO, Clock).</li>
+          </ul>
+        </div>
+
+        <div class="theory-card">
+          <h4>Page Faults &amp; Eviction Flags</h4>
+          <p>
+            A **Page Fault** occurs when the virtual page accessed has its **Valid bit set to 0**, meaning the page resides on secondary disk storage, not in RAM.
+          </p>
+          <ul>
+            <li><strong>Page Fetch:</strong> The OS pauses execution, reads the page from the Swap Disk, and loads it into an empty RAM Frame.</li>
+            <li><strong>Page Eviction:</strong> If all RAM frames are occupied, a victim page is evicted using the selected replacement policy.</li>
+            <li><strong>Dirty Write-back:</strong> If the evicted page has its **Dirty bit set to 1** (meaning it was modified in RAM), it must be written back to the Swap Disk. If it is clean (Dirty = 0), the space can be overwritten immediately.</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- Simulation JavaScript Logic -->
+  <script src="script.js"></script>
+</body>
+</html>

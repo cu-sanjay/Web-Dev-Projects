@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team Collaboration Board</title>
+  <!-- Google Fonts: Outfit (headings) and Inter (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="glow-bg"></div>
+
+  <!-- HEADER -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="logo">
+        <i class="fa-solid fa-people-group glow-icon"></i>
+        <h1>Collab<span>Board</span></h1>
+        <span class="badge">Team Hub</span>
+      </div>
+      
+      <div class="global-progress-wrapper">
+        <div class="progress-lbl-row">
+          <span>Global Project Progress</span>
+          <strong id="lbl-global-progress-pct">0% Complete</strong>
+        </div>
+        <div class="progress-bar-container">
+          <div class="progress-bar-fill" id="global-progress-fill" style="width: 0%"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="main-container">
+    
+    <!-- LEFT COLUMN: SEARCH, FILTERS & MEMBER DIRECTORY -->
+    <aside class="sidebar-column" aria-label="Filters and team registry directory">
+      
+      <!-- Search & Filters -->
+      <section class="section-card">
+        <div class="card-header-row">
+          <h3><i class="fa-solid fa-filter"></i> Board Filters</h3>
+        </div>
+
+        <div class="form-group">
+          <div class="search-input-wrapper">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="txt-search" placeholder="Search tasks...">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="sel-priority-filter">Filter Priority</label>
+          <select id="sel-priority-filter">
+            <option value="All">All Priorities</option>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="sel-assignee-filter">Filter Assignee</label>
+          <select id="sel-assignee-filter">
+            <option value="All">All Members</option>
+            <!-- Dynamically populated assignees -->
+          </select>
+        </div>
+      </section>
+
+      <!-- Members Directory Registry -->
+      <section class="section-card">
+        <div class="card-header-row">
+          <h3><i class="fa-solid fa-address-book"></i> Team Registry</h3>
+        </div>
+
+        <div class="member-add-form">
+          <div class="form-group">
+            <label for="txt-member-name">Member Name</label>
+            <input type="text" id="txt-member-name" placeholder="e.g. Alice Smith..." autocomplete="off">
+          </div>
+          <button id="btn-add-member" class="btn btn-secondary btn-sm"><i class="fa-solid fa-user-plus"></i> Register Member</button>
+        </div>
+
+        <div class="registered-members-section">
+          <h5>Members Directory</h5>
+          <ul class="members-ul" id="members-list">
+            <!-- Dynamically populated list of members -->
+          </ul>
+        </div>
+      </section>
+
+      <button id="btn-reset-workspace" class="footer-btn"><i class="fa-solid fa-trash-can"></i> Reset Board Workspace</button>
+    </aside>
+
+    <!-- CENTER COLUMN: KANBAN WORKSPACE BOARD -->
+    <section class="kanban-column" aria-label="Kanban task pipeline columns">
+      <div class="kanban-actions-row">
+        <h2>Collaboration Pipeline</h2>
+        <button id="btn-add-task" class="btn btn-primary btn-sm">
+          <i class="fa-solid fa-circle-plus"></i> Create Task Card
+        </button>
+      </div>
+
+      <!-- Kanban Lanes Grid -->
+      <div class="kanban-board-grid">
+        
+        <!-- Backlog Column -->
+        <div class="kanban-lane-col">
+          <div class="lane-header backlog-header">
+            <span>Backlog</span>
+            <span class="lane-count" id="count-backlog">0</span>
+          </div>
+          <div class="lane-cards-wrapper" id="col-backlog">
+            <!-- Dynamic Backlog cards -->
+          </div>
+        </div>
+
+        <!-- In Progress Column -->
+        <div class="kanban-lane-col">
+          <div class="lane-header progress-header">
+            <span>In Progress</span>
+            <span class="lane-count" id="count-progress">0</span>
+          </div>
+          <div class="lane-cards-wrapper" id="col-progress">
+            <!-- Dynamic In Progress cards -->
+          </div>
+        </div>
+
+        <!-- In Review Column -->
+        <div class="kanban-lane-col">
+          <div class="lane-header review-header">
+            <span>In Review</span>
+            <span class="lane-count" id="count-review">0</span>
+          </div>
+          <div class="lane-cards-wrapper" id="col-review">
+            <!-- Dynamic In Review cards -->
+          </div>
+        </div>
+
+        <!-- Done Column -->
+        <div class="kanban-lane-col">
+          <div class="lane-header done-header">
+            <span>Done</span>
+            <span class="lane-count" id="count-done">0</span>
+          </div>
+          <div class="lane-cards-wrapper" id="col-done">
+            <!-- Dynamic Done cards -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- RIGHT COLUMN: TASK DETAILS INSPECTOR -->
+    <section class="inspector-column" aria-label="Task specifications inspector editor">
+      
+      <!-- Welcome card display if no task card selected -->
+      <div id="inspector-empty" class="inspector-welcome-card">
+        <div class="pulse-icon">
+          <i class="fa-solid fa-clipboard-list"></i>
+        </div>
+        <h4>Task Inspector</h4>
+        <p>Select any task card from the boards to view description logs, complete subtasks, modify assignees, or remove cards.</p>
+      </div>
+
+      <!-- Active inspector detail editor form -->
+      <div id="inspector-active" class="inspector-workspace hidden">
+        
+        <section class="section-card inspector-card">
+          <div class="card-header-row">
+            <h3><i class="fa-solid fa-edit"></i> Task Editor</h3>
+          </div>
+
+          <div class="form-group">
+            <label for="task-title">Task Title</label>
+            <input type="text" id="task-title">
+          </div>
+
+          <div class="form-group">
+            <label for="task-description">Task Description</label>
+            <textarea id="task-description" placeholder="Provide background context, specifications, or key guidelines..."></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label for="sel-task-priority">Priority</label>
+              <select id="sel-task-priority">
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+              </select>
+            </div>
+            <div class="form-group flex-1">
+              <label for="sel-task-status">Status Lane</label>
+              <select id="sel-task-status">
+                <option value="Backlog">Backlog</option>
+                <option value="In Progress">In Progress</option>
+                <option value="In Review">In Review</option>
+                <option value="Done">Done</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label for="task-date">Due Date</label>
+              <input type="date" id="task-date">
+            </div>
+            <div class="form-group flex-1">
+              <label for="sel-task-assignee">Assigned Member</label>
+              <select id="sel-task-assignee">
+                <option value="Unassigned">Unassigned</option>
+                <!-- Dynamically populated list of members -->
+              </select>
+            </div>
+          </div>
+
+          <!-- Subtasks Checklist section -->
+          <div class="subtasks-section">
+            <h5>Milestone Checklist</h5>
+            <ul class="subtasks-ul" id="subtasks-list">
+              <!-- Dynamically populated checklist items -->
+            </ul>
+
+            <div class="add-subtask-row">
+              <input type="text" id="txt-new-subtask" placeholder="Add sub-task..." autocomplete="off">
+              <button id="btn-add-subtask" class="btn btn-secondary btn-sm"><i class="fa-solid fa-plus"></i></button>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="inspector-actions">
+            <button id="btn-delete-task" class="btn btn-danger btn-sm" title="Delete Task Card"><i class="fa-solid fa-trash-can"></i> Delete Task</button>
+            <button id="btn-save-task" class="btn btn-primary btn-sm" title="Save changes"><i class="fa-solid fa-floppy-disk"></i> Save changes</button>
+          </div>
+
+        </section>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="app-footer">
+    <div class="footer-container">
+      <p>&copy; 2026 CollabBoard Hub. Built for the <a href="https://github.com/cu-sanjay/Web-Dev-Projects" target="_blank" rel="noopener noreferrer">Web Dev Projects</a> repository showcase.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

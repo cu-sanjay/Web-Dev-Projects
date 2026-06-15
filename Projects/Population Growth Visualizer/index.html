@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Population Growth · Visualizer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="top-bar">
+    <div class="top-brand">
+      <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="1.5">
+        <path d="M12 2v20M2 12h20M5 5l14 14M5 19L19 5"/>
+        <circle cx="12" cy="6" r="2" fill="#00e5ff"/>
+        <circle cx="6" cy="12" r="2" fill="#00e5ff"/>
+        <circle cx="18" cy="12" r="2" fill="#00e5ff"/>
+        <circle cx="12" cy="18" r="2" fill="#00e5ff"/>
+      </svg>
+      <div>
+        <h1 class="top-title">Population Growth · Visualizer</h1>
+        <span class="top-sub">demographic forecasting engine v1.0</span>
+      </div>
+      <span class="top-badge" id="topBadge">STANDBY</span>
+    </div>
+    <div class="top-metrics">
+      <span class="metric-chip" id="chipYear">YEAR <strong id="yearVal">0</strong></span>
+      <span class="metric-chip accent" id="chipPop">POP <strong id="popVal">--</strong></span>
+      <span class="metric-chip" id="chipStrain">STRAIN <strong id="strainVal">--</strong>%</span>
+    </div>
+  </header>
+
+  <main class="workspace">
+
+    <!-- MODEL SELECTOR -->
+    <section class="model-row">
+      <button class="model-btn active" data-model="exponential">&#x2191; Exponential Growth</button>
+      <button class="model-btn" data-model="logistic">&#x222B; Logistic Expansion</button>
+      <button class="model-btn" data-model="malthusian">&#x2622; Malthusian Model</button>
+    </section>
+
+    <div class="main-grid">
+
+      <!-- SLIDERS -->
+      <aside class="ctrl-panel">
+        <div class="panel-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="10" height="10"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 12h6"/></svg>
+          <span>Variable Intake</span>
+        </div>
+        <div class="ctrl-body">
+          <div class="ctrl-group">
+            <label class="ctrl-label">Initial Pop (P<sub>0</sub>) <span class="ctrl-val" id="valP0">100</span></label>
+            <input type="range" class="ctrl-slider" id="slP0" min="10" max="500" value="100" step="5">
+          </div>
+          <div class="ctrl-group">
+            <label class="ctrl-label">Birth Rate <span class="ctrl-val" id="valBirth">2.5</span>%</label>
+            <input type="range" class="ctrl-slider" id="slBirth" min="0.5" max="8" value="2.5" step="0.1">
+          </div>
+          <div class="ctrl-group">
+            <label class="ctrl-label">Death Rate <span class="ctrl-val" id="valDeath">1.0</span>%</label>
+            <input type="range" class="ctrl-slider" id="slDeath" min="0.1" max="5" value="1.0" step="0.1">
+          </div>
+          <div class="ctrl-group">
+            <label class="ctrl-label">Carrying Capacity <span class="ctrl-val" id="valK">1000</span></label>
+            <input type="range" class="ctrl-slider" id="slK" min="200" max="5000" value="1000" step="50">
+          </div>
+          <div class="ctrl-group">
+            <label class="ctrl-label">Time Horizon <span class="ctrl-val" id="valYears">200</span> yr</label>
+            <input type="range" class="ctrl-slider" id="slYears" min="20" max="500" value="200" step="10">
+          </div>
+        </div>
+      </aside>
+
+      <!-- CENTER -->
+      <section class="center-col">
+        <div class="canvas-chart">
+          <div class="panel-header">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="10" height="10"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            <span>Population Growth Chart</span>
+            <span class="panel-hint" id="chartHint">--</span>
+          </div>
+          <div class="canvas-wrap">
+            <canvas id="chartCanvas"></canvas>
+          </div>
+        </div>
+        <div class="canvas-particles">
+          <div class="panel-header">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="10" height="10"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg>
+            <span>Macro Agent Crowd Grid</span>
+            <span class="panel-hint" id="crowdHint">0 agents</span>
+          </div>
+          <div class="canvas-wrap small">
+            <canvas id="particleCanvas"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <!-- TELEMETRY -->
+      <aside class="tele-panel">
+        <div class="panel-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="10" height="10"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          <span>Systemic Impact</span>
+        </div>
+        <div class="tele-body" id="teleBody">
+          <div class="tele-row"><span class="tele-label">Doubling Time</span><span class="tele-val" id="teleDouble">--</span></div>
+          <div class="tele-row"><span class="tele-label">Peak Population</span><span class="tele-val" id="telePeak">--</span></div>
+          <div class="tele-row highlight"><span class="tele-label">Strain Factor</span><span class="tele-val neon" id="teleStrain">--</span></div>
+          <div class="tele-row"><span class="tele-label">Final Year Pop</span><span class="tele-val" id="teleFinal">--</span></div>
+          <div class="tele-badge" id="teleBadge">STANDBY</div>
+        </div>
+      </aside>
+
+    </div>
+
+    <!-- ACTIONS -->
+    <footer class="action-bar">
+      <button class="foot-btn foot-run" id="btnRun">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        Initiate Generational Run
+      </button>
+      <button class="foot-btn foot-preset" id="btnEvent">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        Inject Pandemic Event
+      </button>
+      <button class="foot-btn foot-reset" id="btnFlush">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6"/><path d="M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+        Purge Dataset &amp; Re-Zero
+      </button>
+    </footer>
+
+  </main>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

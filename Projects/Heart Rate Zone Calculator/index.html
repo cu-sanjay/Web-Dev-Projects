@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heart Rate · Zone Calculator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="top-bar">
+    <div class="top-brand">
+      <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="1.5">
+        <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+      </svg>
+      <div>
+        <h1 class="top-title">Heart Rate · Zone Calculator</h1>
+        <span class="top-sub">karvonen biometric engine v1.0</span>
+      </div>
+      <span class="top-badge" id="topBadge">STANDBY</span>
+    </div>
+    <div class="top-metrics">
+      <span class="metric-chip" id="chipZone">ZONE <strong id="zoneVal">--</strong></span>
+      <span class="metric-chip accent" id="chipBpm">TARGET <strong id="bpmVal">--</strong> bpm</span>
+      <span class="metric-chip" id="chipHrr">HRR <strong id="hrrVal">--</strong> bpm</span>
+    </div>
+  </header>
+
+  <main class="workspace">
+
+    <!-- PRESETS -->
+    <section class="preset-row">
+      <button class="preset-btn" data-preset="elite">&#x2605; Elite Marathoner Profile</button>
+      <button class="preset-btn" data-preset="sedentary">&#x25CB; Sedentary Recovery Routine</button>
+      <button class="preset-btn" data-preset="hiit">&#x26A1; HIIT Conditioning Baseline</button>
+    </section>
+
+    <div class="main-grid">
+
+      <!-- LEFT: INPUTS -->
+      <aside class="ctrl-panel">
+        <div class="panel-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="10" height="10"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 12h6"/></svg>
+          <span>Cardiovascular Parameters</span>
+        </div>
+        <div class="ctrl-body">
+          <div class="ctrl-group">
+            <label class="ctrl-label">Age</label>
+            <input type="number" class="ctrl-input" id="inputAge" value="30" min="1" max="100" step="1">
+          </div>
+          <div class="ctrl-group">
+            <label class="ctrl-label">Resting HR (HR<sub>rest</sub>)</label>
+            <input type="number" class="ctrl-input" id="inputRest" value="65" min="30" max="220" step="1">
+          </div>
+          <div class="ctrl-group">
+            <label class="ctrl-label">Intensity <span class="ctrl-val" id="valIntensity">70</span> %</label>
+            <input type="range" class="ctrl-slider" id="sliderIntensity" min="50" max="100" value="70" step="0.5">
+          </div>
+          <div class="ctrl-group" id="zonePreview"></div>
+        </div>
+      </aside>
+
+      <!-- CENTER: CANVAS + ZONE CARDS -->
+      <section class="center-col">
+        <div class="canvas-section">
+          <div class="panel-header">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="10" height="10"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 12h18"/></svg>
+            <span>5-Tier Cardiac Zone Spectrum</span>
+          </div>
+          <div class="canvas-wrap">
+            <canvas id="zoneCanvas"></canvas>
+          </div>
+        </div>
+
+        <!-- ZONE CARDS -->
+        <div class="zone-cards" id="zoneCards"></div>
+      </section>
+
+      <!-- RIGHT: TELEMETRY -->
+      <aside class="tele-panel">
+        <div class="panel-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="10" height="10"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          <span>Telemetry Results</span>
+        </div>
+        <div class="tele-body" id="teleBody">
+          <div class="tele-row"><span class="tele-label">HR<sub>max</sub></span><span class="tele-val" id="teleHrmax">--</span></div>
+          <div class="tele-row"><span class="tele-label">HR<sub>rest</sub></span><span class="tele-val" id="teleHrrest">--</span></div>
+          <div class="tele-row"><span class="tele-label">HRR</span><span class="tele-val" id="teleHrr">--</span></div>
+          <div class="tele-row highlight"><span class="tele-label">Target BPM</span><span class="tele-val neon" id="teleTarget">--</span></div>
+          <div class="tele-row"><span class="tele-label">Intensity</span><span class="tele-val" id="teleIntensity">--</span></div>
+          <div class="tele-row"><span class="tele-label">Zone</span><span class="tele-val" id="teleZone">--</span></div>
+          <div class="tele-row"><span class="tele-label">Classification</span><span class="tele-val" id="teleClass">--</span></div>
+          <div class="tele-badge" id="teleBadge">STANDBY</div>
+        </div>
+      </aside>
+
+    </div>
+
+    <!-- ACTIONS -->
+    <footer class="action-bar">
+      <button class="foot-btn foot-run" id="btnCompute">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><polyline points="20 6 9 17 4 12"/></svg>
+        Compute Cardiovascular Metrics
+      </button>
+      <button class="foot-btn foot-preset" id="btnStress">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        Inject Anaerobic Stress Test Values
+      </button>
+      <button class="foot-btn foot-reset" id="btnFlush">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6"/><path d="M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+        Flush Biometric Cache
+      </button>
+    </footer>
+
+  </main>
+
+  <div class="toast-container" id="toastContainer"></div>
+  <div class="alert-banner" id="alertBanner"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>College Life Simulator & Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Include Phosphor Icons for modern sleek icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+
+  <!-- Auth Screen (Login / Register) -->
+  <div id="auth-screen" class="auth-container">
+    <div class="auth-card">
+      <div class="auth-header">
+        <h1>🎓 College Life</h1>
+        <p>Your student portal & simulator</p>
+      </div>
+
+      <!-- Login Form -->
+      <form id="login-form" class="auth-form">
+        <h2>Welcome Back</h2>
+        <div class="form-group">
+          <label for="login-email">Email / Student ID</label>
+          <input type="text" id="login-email" required>
+        </div>
+        <div class="form-group">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" required>
+        </div>
+        <button type="submit" class="btn primary-btn auth-btn">Login</button>
+        <p class="auth-switch">New student? <a href="#" id="go-to-register">Register here</a></p>
+      </form>
+
+      <!-- Register Form -->
+      <form id="register-form" class="auth-form hidden">
+        <h2>Join Campus</h2>
+        <div class="form-group">
+          <label for="reg-name">Full Name</label>
+          <input type="text" id="reg-name" required>
+        </div>
+        <div class="form-group">
+          <label for="reg-email">Email</label>
+          <input type="email" id="reg-email" required>
+        </div>
+        <div class="form-group">
+          <label for="reg-password">Password</label>
+          <input type="password" id="reg-password" required>
+        </div>
+        <button type="submit" class="btn primary-btn auth-btn">Register</button>
+        <p class="auth-switch">Already enrolled? <a href="#" id="go-to-login">Login here</a></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Main App Application -->
+  <div id="app-screen" class="app-container hidden">
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+      <div class="sidebar-header">
+        <i class="ph ph-graduation-cap"></i>
+        <span>CollegeLife</span>
+      </div>
+      <ul class="nav-links">
+        <li class="active" data-target="dashboard-section">
+          <i class="ph ph-squares-four"></i> Dashboard
+        </li>
+        <li data-target="game-section">
+          <i class="ph ph-game-controller"></i> Simulator Game
+        </li>
+        <li data-target="profile-section">
+          <i class="ph ph-user"></i> Profile
+        </li>
+      </ul>
+      <div class="sidebar-footer">
+        <button id="logout-btn" class="btn logout-btn">
+          <i class="ph ph-sign-out"></i> Logout
+        </button>
+      </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="content-area">
+      
+      <!-- Top Navbar (Mobile menu toggle + User info) -->
+      <header class="topbar">
+        <button id="mobile-menu-btn" class="mobile-menu-btn"><i class="ph ph-list"></i></button>
+        <div class="user-info">
+          <span id="topbar-user-name">Student</span>
+          <img src="https://ui-avatars.com/api/?name=Student&background=random" id="topbar-avatar" alt="Avatar">
+        </div>
+      </header>
+
+      <!-- Sections Container -->
+      <div class="sections-container">
+
+        <!-- 1. Dashboard Section -->
+        <section id="dashboard-section" class="app-section active-section">
+          <div class="section-header">
+            <h2>Campus Dashboard</h2>
+            <p>Welcome to your personal college hub.</p>
+          </div>
+
+          <div class="dashboard-grid">
+            <!-- Academic Updates -->
+            <div class="dash-card col-span-2">
+              <div class="card-header">
+                <h3><i class="ph ph-books"></i> Academic Updates</h3>
+              </div>
+              <div class="card-body">
+                <ul class="dash-list">
+                  <li><strong>Data Structures:</strong> Midterm grades posted (Avg: 78%)</li>
+                  <li><strong>Web Dev 101:</strong> Final Project due next Friday</li>
+                  <li><strong>Calculus:</strong> Tomorrow's lecture moved to Room 402</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Attendance & Performance -->
+            <div class="dash-card">
+              <div class="card-header">
+                <h3><i class="ph ph-chart-bar"></i> Performance</h3>
+              </div>
+              <div class="card-body perf-body">
+                <div class="perf-metric">
+                  <span class="metric-val">3.8</span>
+                  <span class="metric-label">Current GPA</span>
+                </div>
+                <div class="perf-metric">
+                  <span class="metric-val">92%</span>
+                  <span class="metric-label">Attendance</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Upcoming Events & Schedules -->
+            <div class="dash-card col-span-2">
+              <div class="card-header">
+                <h3><i class="ph ph-calendar-event"></i> Upcoming Events</h3>
+              </div>
+              <div class="card-body">
+                <div class="event-item">
+                  <div class="event-date">
+                    <span class="e-mon">OCT</span>
+                    <span class="e-day">15</span>
+                  </div>
+                  <div class="event-info">
+                    <h4>Tech Career Fair</h4>
+                    <p>Main Hall • 10:00 AM - 4:00 PM</p>
+                  </div>
+                </div>
+                <div class="event-item">
+                  <div class="event-date">
+                    <span class="e-mon">OCT</span>
+                    <span class="e-day">18</span>
+                  </div>
+                  <div class="event-info">
+                    <h4>Guest Lecture: AI in 2026</h4>
+                    <p>Auditorium A • 2:00 PM</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Announcements -->
+            <div class="dash-card">
+              <div class="card-header">
+                <h3><i class="ph ph-megaphone"></i> Announcements</h3>
+              </div>
+              <div class="card-body">
+                <div class="announcement">
+                  <span class="badge info">Notice</span>
+                  <p>Library hours extended during finals week.</p>
+                </div>
+                <div class="announcement">
+                  <span class="badge alert">Important</span>
+                  <p>Register for Spring semester by Nov 1st.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Club Activities -->
+            <div class="dash-card col-span-3">
+              <div class="card-header">
+                <h3><i class="ph ph-users-three"></i> Club Activities</h3>
+              </div>
+              <div class="card-body row-flex">
+                <div class="club-widget">
+                  <h4>Coding Club</h4>
+                  <p>Next meetup: Thursday @ 5 PM. Topic: React Hooks.</p>
+                </div>
+                <div class="club-widget">
+                  <h4>Debate Society</h4>
+                  <p>Tryouts this weekend at the Student Union.</p>
+                </div>
+                <div class="club-widget">
+                  <h4>Photography Club</h4>
+                  <p>Photo walk scheduled for Saturday morning.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- 2. Game Section -->
+        <section id="game-section" class="app-section">
+          <div class="section-header">
+            <h2>Simulator Game</h2>
+            <p>Can you survive a semester?</p>
+          </div>
+
+          <div class="game-container">
+            <div class="stats-panel">
+              <div class="stat">
+                <span class="stat-label">📚 Academics</span>
+                <div class="progress-bar-bg">
+                  <div id="bar-academics" class="progress-bar fill-academics"></div>
+                </div>
+              </div>
+              <div class="stat">
+                <span class="stat-label">🎉 Social</span>
+                <div class="progress-bar-bg">
+                  <div id="bar-social" class="progress-bar fill-social"></div>
+                </div>
+              </div>
+              <div class="stat">
+                <span class="stat-label">❤️ Health</span>
+                <div class="progress-bar-bg">
+                  <div id="bar-health" class="progress-bar fill-health"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="main-screen">
+              <div class="week-indicator">Week <span id="week-display">1</span> / 15</div>
+              
+              <div id="event-box" class="event-box">
+                <h2 id="event-title">Welcome to College!</h2>
+                <p id="event-desc">It's your first day. How do you want to kick off the semester?</p>
+              </div>
+
+              <div id="choices-box" class="choices-box">
+                <!-- Buttons injected by JS -->
+              </div>
+            </div>
+
+            <div id="game-over-screen" class="modal hidden">
+              <div class="modal-content">
+                <h2 id="end-title">Game Over</h2>
+                <p id="end-message">You failed out of college.</p>
+                <button id="restart-btn" class="btn primary-btn">Play Again</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. Profile Section -->
+        <section id="profile-section" class="app-section">
+          <div class="section-header">
+            <h2>User Profile</h2>
+            <p>Manage your account settings</p>
+          </div>
+          
+          <div class="profile-card">
+            <div class="profile-header">
+              <img src="https://ui-avatars.com/api/?name=Student&background=random&size=128" id="profile-avatar" alt="Profile">
+              <div class="profile-title">
+                <h3 id="profile-name">Student Name</h3>
+                <p id="profile-email">student@college.edu</p>
+                <span class="badge success">Active Student</span>
+              </div>
+            </div>
+            
+            <div class="profile-details">
+              <div class="detail-group">
+                <label>Major</label>
+                <p>Computer Science</p>
+              </div>
+              <div class="detail-group">
+                <label>Year</label>
+                <p>Sophomore</p>
+              </div>
+              <div class="detail-group">
+                <label>Student ID</label>
+                <p>#CS-99482</p>
+              </div>
+            </div>
+
+            <div class="profile-actions">
+              <button class="btn outline-btn" onclick="alert('Settings modal would open here.')">Edit Profile</button>
+              <button class="btn outline-btn" onclick="alert('Change password modal would open here.')">Change Password</button>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

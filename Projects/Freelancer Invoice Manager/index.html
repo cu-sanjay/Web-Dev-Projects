@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Freelancer Invoice Manager - Financial Dashboard & Builder</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Root Layout Container -->
+  <div class="app-container">
+    <!-- Sidebar Navigation -->
+    <aside class="app-sidebar">
+      <div class="sidebar-header">
+        <div class="logo-container">
+          <svg class="logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="1" x2="12" y2="23"></line>
+            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+          </svg>
+          <span class="logo-text">FlowInvoice</span>
+        </div>
+        <p class="sidebar-subtext">Freelancer Suite</p>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button class="nav-btn active" data-target="dashboard-section">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="9"></rect>
+            <rect x="14" y="3" width="7" height="5"></rect>
+            <rect x="14" y="12" width="7" height="9"></rect>
+            <rect x="3" y="16" width="7" height="5"></rect>
+          </svg>
+          <span>Dashboard</span>
+        </button>
+        <button class="nav-btn" data-target="invoices-section">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+          <span>Invoices</span>
+        </button>
+        <button class="nav-btn" data-target="clients-section">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+          <span>Clients</span>
+        </button>
+        <button class="nav-btn" data-target="settings-section">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+          <span>Settings</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button id="themeToggleBtn" class="theme-toggle-btn" aria-label="Toggle Theme">
+          <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <span id="themeToggleText">Light Mode</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Workspace -->
+    <main class="app-main">
+      <!-- DASHBOARD TAB -->
+      <section id="dashboard-section" class="tab-content active">
+        <div class="section-header">
+          <div>
+            <h1>Financial Dashboard</h1>
+            <p class="section-subtitle">Real-time overview of your freelance earnings and invoices</p>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-primary btn-create-invoice">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              New Invoice
+            </button>
+          </div>
+        </div>
+
+        <!-- KPI Cards Grid -->
+        <div class="kpi-grid">
+          <div class="kpi-card info">
+            <div class="kpi-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="1" x2="12" y2="23"></line>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+            </div>
+            <div class="kpi-info">
+              <span class="kpi-label">Total Invoiced</span>
+              <h3 id="statTotalInvoiced" class="kpi-value">$0.00</h3>
+            </div>
+          </div>
+
+          <div class="kpi-card success">
+            <div class="kpi-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+            </div>
+            <div class="kpi-info">
+              <span class="kpi-label">Total Paid</span>
+              <h3 id="statTotalPaid" class="kpi-value">$0.00</h3>
+            </div>
+          </div>
+
+          <div class="kpi-card warning">
+            <div class="kpi-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+            </div>
+            <div class="kpi-info">
+              <span class="kpi-label">Outstanding Balance</span>
+              <h3 id="statOutstanding" class="kpi-value">$0.00</h3>
+            </div>
+          </div>
+
+          <div class="kpi-card danger">
+            <div class="kpi-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                <line x1="12" y1="9" x2="12" y2="13"></line>
+                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+              </svg>
+            </div>
+            <div class="kpi-info">
+              <span class="kpi-label">Overdue Invoices</span>
+              <h3 id="statOverdue" class="kpi-value">$0.00</h3>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dashboard Analytics & Alerts Row -->
+        <div class="dashboard-row">
+          <!-- Earnings Chart Card -->
+          <div class="panel-card chart-panel">
+            <div class="panel-header">
+              <h2>Earnings History</h2>
+              <span class="panel-tag">Monthly breakdown</span>
+            </div>
+            <div class="panel-body chart-body">
+              <div id="dashboardChartContainer" class="svg-chart-container">
+                <!-- SVG dynamically populated by script.js -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Pending Alerts Card -->
+          <div class="panel-card alerts-panel">
+            <div class="panel-header">
+              <h2>Action Items</h2>
+              <span class="badge badge-pulse" id="alertCountBadge">0 alerts</span>
+            </div>
+            <div class="panel-body">
+              <ul class="alert-list" id="actionItemsList">
+                <li class="alert-item empty-state">No immediate action items found. Everything looks stable!</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Invoices Dashboard Panel -->
+        <div class="panel-card recent-invoices-panel">
+          <div class="panel-header">
+            <h2>Recent Invoices</h2>
+            <button class="btn btn-secondary btn-sm" id="viewAllInvoicesBtn">View All Invoices</button>
+          </div>
+          <div class="panel-body table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Invoice ID</th>
+                  <th>Client</th>
+                  <th>Issue Date</th>
+                  <th>Due Date</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                  <th class="text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="recentInvoicesTableBody">
+                <!-- Populated by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- INVOICES TAB -->
+      <section id="invoices-section" class="tab-content">
+        <div class="section-header">
+          <div>
+            <h1>Invoices</h1>
+            <p class="section-subtitle">Track, filter, and manage your custom invoice cycles</p>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-primary btn-create-invoice">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              New Invoice
+            </button>
+          </div>
+        </div>
+
+        <!-- Filters & Search Toolbar -->
+        <div class="toolbar-card">
+          <div class="search-box">
+            <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" id="invoiceSearchInput" placeholder="Search by Invoice ID or Client...">
+          </div>
+          <div class="filter-group">
+            <select id="invoiceFilterStatus">
+              <option value="all">All Statuses</option>
+              <option value="draft">Draft</option>
+              <option value="sent">Sent</option>
+              <option value="paid">Paid</option>
+              <option value="overdue">Overdue</option>
+            </select>
+            <select id="invoiceFilterClient">
+              <option value="all">All Clients</option>
+              <!-- Populated dynamically -->
+            </select>
+            <select id="invoiceSortOrder">
+              <option value="date-desc">Newest First</option>
+              <option value="date-asc">Oldest First</option>
+              <option value="amount-desc">Highest Amount</option>
+              <option value="amount-asc">Lowest Amount</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Invoices List Table -->
+        <div class="panel-card">
+          <div class="panel-body table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Invoice ID</th>
+                  <th>Client</th>
+                  <th>Issue Date</th>
+                  <th>Due Date</th>
+                  <th>Amount</th>
+                  <th>Paid To Date</th>
+                  <th>Status</th>
+                  <th class="text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="invoicesTableBody">
+                <!-- Populated by JS -->
+              </tbody>
+            </table>
+            <div id="invoicesEmptyState" class="empty-state-container hidden">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+              </svg>
+              <h3>No Invoices Found</h3>
+              <p>Try resetting filters or create a brand new client invoice to get started.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CLIENTS TAB -->
+      <section id="clients-section" class="tab-content">
+        <div class="section-header">
+          <div>
+            <h1>Client Profiles</h1>
+            <p class="section-subtitle">Manage directory data, payment terms, and currencies</p>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-primary" id="addNewClientBtn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="17" y1="11" x2="23" y2="11"></line></svg>
+              Add Client
+            </button>
+          </div>
+        </div>
+
+        <!-- Client Listing Grid -->
+        <div class="clients-grid" id="clientsGrid">
+          <!-- Populated by JS -->
+        </div>
+
+        <div id="clientsEmptyState" class="empty-state-container hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+          <h3>No Clients Registered</h3>
+          <p>Create client records to immediately customize invoice calculations.</p>
+        </div>
+      </section>
+
+      <!-- SETTINGS & WORKSPACE TAB -->
+      <section id="settings-section" class="tab-content">
+        <div class="section-header">
+          <div>
+            <h1>Settings & Workspace</h1>
+            <p class="section-subtitle">Configure billing profiles, default rules, and backups</p>
+          </div>
+        </div>
+
+        <div class="settings-grid">
+          <!-- Profile Card -->
+          <div class="panel-card">
+            <div class="panel-header">
+              <h2>My Business Profile</h2>
+            </div>
+            <div class="panel-body">
+              <form id="businessProfileForm" class="settings-form">
+                <div class="form-row">
+                  <div class="form-group col-6">
+                    <label for="settingsBizName">Business/Freelancer Name</label>
+                    <input type="text" id="settingsBizName" required placeholder="John Doe Designs">
+                  </div>
+                  <div class="form-group col-6">
+                    <label for="settingsBizEmail">Business Email</label>
+                    <input type="email" id="settingsBizEmail" required placeholder="john@doe.com">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="settingsBizAddress">Business Address</label>
+                  <textarea id="settingsBizAddress" rows="3" placeholder="123 Creative Suite, Suite A&#10;San Francisco, CA 94103"></textarea>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-6">
+                    <label for="settingsBizPhone">Phone Number</label>
+                    <input type="text" id="settingsBizPhone" placeholder="+1 (555) 019-2834">
+                  </div>
+                  <div class="form-group col-6">
+                    <label for="settingsBizWebsite">Website URL</label>
+                    <input type="url" id="settingsBizWebsite" placeholder="https://johndoe.design">
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Save Business Details</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Configuration & Portability Panel -->
+          <div class="settings-sidebar">
+            <div class="panel-card">
+              <div class="panel-header">
+                <h2>Workspace Configuration</h2>
+              </div>
+              <div class="panel-body">
+                <div class="form-group">
+                  <label for="settingsDefaultCurrency">Default Workspace Currency</label>
+                  <select id="settingsDefaultCurrency">
+                    <option value="USD">USD ($)</option>
+                    <option value="EUR">EUR (€)</option>
+                    <option value="GBP">GBP (£)</option>
+                    <option value="CAD">CAD (C$)</option>
+                    <option value="AUD">AUD (A$)</option>
+                    <option value="INR">INR (₹)</option>
+                    <option value="JPY">JPY (¥)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="settingsDefaultTax">Default Tax Rate (%)</label>
+                  <input type="number" id="settingsDefaultTax" min="0" max="100" step="0.1" value="0">
+                </div>
+                <div class="form-group">
+                  <label for="settingsDefaultTerms">Default Payment Terms (Days)</label>
+                  <input type="number" id="settingsDefaultTerms" min="0" value="30">
+                </div>
+                <button id="saveWorkspaceConfigBtn" class="btn btn-secondary btn-full">Save Defaults</button>
+              </div>
+            </div>
+
+            <!-- Portability -->
+            <div class="panel-card">
+              <div class="panel-header">
+                <h2>Data Portability & Database</h2>
+              </div>
+              <div class="panel-body">
+                <p class="settings-help-text">Export all invoice transactions, clients and settings to a JSON file or restore from a previous backup.</p>
+                <div class="settings-portability-actions">
+                  <button id="exportBackupBtn" class="btn btn-secondary btn-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                    Export JSON Database
+                  </button>
+                  
+                  <label for="importBackupInput" class="btn btn-secondary btn-full file-upload-label">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                    Import JSON Database
+                  </label>
+                  <input type="file" id="importBackupInput" class="hidden-file-input" accept=".json">
+                  
+                  <button id="resetDatabaseBtn" class="btn btn-danger-outline btn-full">
+                    Reset Workspace to Default
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- FULLSCREEN DUAL-PANE INVOICE BUILDER & PREVIEW -->
+  <div id="invoiceBuilderOverlay" class="builder-overlay hidden">
+    <header class="builder-header">
+      <div class="builder-header-left">
+        <button id="closeBuilderBtn" class="btn-icon" aria-label="Close Invoice Builder">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+        <div>
+          <h2 id="builderTitle">New Invoice</h2>
+          <p id="builderSubTitle">Draft details and check formatting</p>
+        </div>
+      </div>
+      <div class="builder-header-right">
+        <!-- Status Indicator in Edit Mode -->
+        <div class="builder-status-selector">
+          <label for="builderInvoiceStatus">Status</label>
+          <select id="builderInvoiceStatus">
+            <option value="draft">Draft</option>
+            <option value="sent">Sent</option>
+            <option value="paid">Paid</option>
+          </select>
+        </div>
+        
+        <button id="printInvoiceBtn" class="btn btn-secondary">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+          Print / PDF
+        </button>
+        <button id="saveInvoiceBtn" class="btn btn-primary">Save Invoice</button>
+      </div>
+    </header>
+
+    <div class="builder-body-container">
+      <!-- Left Column: Input Form -->
+      <section class="builder-editor-pane">
+        <form id="invoiceEditForm">
+          <!-- Meta Fields Card -->
+          <div class="editor-section-card">
+            <h3>Basic Parameters</h3>
+            <div class="form-row">
+              <div class="form-group col-6">
+                <label for="builderInvoiceId">Invoice Reference #</label>
+                <input type="text" id="builderInvoiceId" required placeholder="INV-2026-001">
+              </div>
+              <div class="form-group col-6">
+                <label for="builderClientSelect">Target Client</label>
+                <select id="builderClientSelect" required>
+                  <!-- Populated dynamically -->
+                </select>
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group col-4">
+                <label for="builderIssueDate">Issue Date</label>
+                <input type="date" id="builderIssueDate" required>
+              </div>
+              <div class="form-group col-4">
+                <label for="builderDueDate">Due Date</label>
+                <input type="date" id="builderDueDate" required>
+              </div>
+              <div class="form-group col-4">
+                <label for="builderPaymentTerms">Terms (Days)</label>
+                <input type="number" id="builderPaymentTerms" min="0" placeholder="30">
+              </div>
+            </div>
+          </div>
+
+          <!-- Line Items Section Card -->
+          <div class="editor-section-card">
+            <div class="section-card-header">
+              <h3>Line Items</h3>
+              <button type="button" id="addNewLineItemBtn" class="btn btn-secondary btn-sm">
+                + Add Item
+              </button>
+            </div>
+
+            <div class="line-items-container">
+              <div class="line-items-table-header">
+                <div class="col-desc">Description</div>
+                <div class="col-type">Type</div>
+                <div class="col-rate">Rate / Price</div>
+                <div class="col-qty">Qty / Hrs</div>
+                <div class="col-tax">Tax (%)</div>
+                <div class="col-total">Total</div>
+                <div class="col-action"></div>
+              </div>
+              <div id="lineItemsList" class="line-items-list-body">
+                <!-- Javascript builds item rows here -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Financial Modifiers (Discounts / Shipping / Notes) -->
+          <div class="editor-section-card">
+            <h3>Adjustments & Extra Details</h3>
+            <div class="form-row">
+              <div class="form-group col-6">
+                <label for="builderDiscount">Discount Amount / Percentage</label>
+                <div class="input-with-select">
+                  <input type="number" id="builderDiscount" min="0" step="0.01" value="0">
+                  <select id="builderDiscountType">
+                    <option value="fixed">Fixed</option>
+                    <option value="percent">% Percent</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group col-6">
+                <label for="builderTaxOption">Apply Extra Global Tax (%)</label>
+                <input type="number" id="builderTaxOption" min="0" max="100" step="0.1" value="0">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="builderNotes">Invoice Terms / Payment Notes / Bank Details</label>
+              <textarea id="builderNotes" rows="3" placeholder="Thank you for your business! Please wire payment to bank account..."></textarea>
+            </div>
+          </div>
+        </form>
+      </section>
+
+      <!-- Right Column: High-Fidelity Print Preview -->
+      <section class="builder-preview-pane">
+        <div class="preview-toolbar">
+          <span>LIVE PRINT PREVIEW SHEET</span>
+          <div class="preview-theme-selector">
+            <label>Template Palette:</label>
+            <button class="preview-theme-swatch blue active" data-color="blue" title="Professional Slate Blue"></button>
+            <button class="preview-theme-swatch teal" data-color="teal" title="Modern Teal"></button>
+            <button class="preview-theme-swatch emerald" data-color="emerald" title="Eco Emerald"></button>
+            <button class="preview-theme-swatch purple" data-color="purple" title="Creative Purple"></button>
+            <button class="preview-theme-swatch carbon" data-color="carbon" title="Minimal Charcoal"></button>
+          </div>
+        </div>
+        
+        <!-- Printable Invoice Container -->
+        <div class="invoice-print-wrapper">
+          <div id="invoicePrintSheet" class="invoice-print-sheet print-theme-blue">
+            <!-- Header Section -->
+            <div class="invoice-sheet-header">
+              <div class="company-branding">
+                <div class="company-logo-avatar" id="sheetCompanyLogo">
+                  <!-- JS inserts company initial or icon -->
+                  FI
+                </div>
+                <div>
+                  <h1 id="sheetCompanyName" class="company-name-text">My Business Name</h1>
+                  <p id="sheetCompanyDetails" class="company-details-text">123 Street, City, Country</p>
+                </div>
+              </div>
+              
+              <div class="invoice-meta-block">
+                <h2 class="invoice-heading-text">INVOICE</h2>
+                <div class="meta-row">
+                  <span class="meta-label">Reference:</span>
+                  <span class="meta-val" id="sheetInvoiceId">#INV-001</span>
+                </div>
+                <div class="meta-row">
+                  <span class="meta-label">Date:</span>
+                  <span class="meta-val" id="sheetIssueDate">June 15, 2026</span>
+                </div>
+                <div class="meta-row">
+                  <span class="meta-label">Due Date:</span>
+                  <span class="meta-val" id="sheetDueDate">July 15, 2026</span>
+                </div>
+                <div class="meta-row">
+                  <span class="meta-label">Payment Terms:</span>
+                  <span class="meta-val" id="sheetTerms">Net 30</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Client Billing Row -->
+            <div class="invoice-sheet-billing">
+              <div class="bill-to-section">
+                <h4 class="sheet-title-text">BILL TO</h4>
+                <h3 id="sheetClientName">Client Corporate LLC</h3>
+                <p id="sheetClientAddress">456 Client Avenue, City, Postcode</p>
+                <p id="sheetClientEmail">billing@client.com</p>
+              </div>
+              
+              <div class="invoice-status-sticker-container">
+                <div id="sheetStatusBadge" class="sheet-status-badge">DRAFT</div>
+              </div>
+            </div>
+
+            <!-- Line Items Table -->
+            <table class="sheet-items-table">
+              <thead>
+                <tr>
+                  <th class="col-index">#</th>
+                  <th class="col-desc text-left">Description</th>
+                  <th class="col-rate text-right">Unit Price</th>
+                  <th class="col-qty text-right">Quantity</th>
+                  <th class="col-total text-right">Amount</th>
+                </tr>
+              </thead>
+              <tbody id="sheetItemsBody">
+                <!-- Populated dynamically -->
+              </tbody>
+            </table>
+
+            <!-- Financial Totals -->
+            <div class="invoice-sheet-summary">
+              <div class="summary-notes">
+                <h4 class="sheet-title-text">NOTES & PAYMENT DIRECTIONS</h4>
+                <p id="sheetNotes">No special invoice terms included.</p>
+              </div>
+              
+              <div class="summary-breakdown">
+                <div class="breakdown-row">
+                  <span>Subtotal:</span>
+                  <span id="sheetSubtotal">$0.00</span>
+                </div>
+                <div id="sheetDiscountRow" class="breakdown-row discount hidden">
+                  <span>Discount:</span>
+                  <span id="sheetDiscount">-$0.00</span>
+                </div>
+                <div class="breakdown-row">
+                  <span>Tax:</span>
+                  <span id="sheetTax">$0.00</span>
+                </div>
+                <div class="breakdown-row total-row">
+                  <span>Total Amount Due:</span>
+                  <span id="sheetGrandTotal" class="total-due-text">$0.00</span>
+                </div>
+                <div id="sheetPaidRow" class="breakdown-row paid hidden">
+                  <span>Amount Paid:</span>
+                  <span id="sheetAmountPaid">$0.00</span>
+                </div>
+                <div id="sheetBalanceRow" class="breakdown-row balance hidden">
+                  <span>Balance Due:</span>
+                  <span id="sheetBalance">$0.00</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Invoice Footer -->
+            <div class="invoice-sheet-footer">
+              <p>Thank you for your business! If you have questions about this invoice, contact us.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- ADD / EDIT CLIENT MODAL -->
+  <div id="clientModal" class="modal-backdrop hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 id="clientModalTitle">Add Client</h2>
+        <button id="closeClientModalBtn" class="btn-icon" aria-label="Close client modal">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="clientForm">
+          <input type="hidden" id="clientModalIndex" value="">
+          <div class="form-group">
+            <label for="clientNameInput">Client Company / Full Name</label>
+            <input type="text" id="clientNameInput" required placeholder="Acme International LLC">
+          </div>
+          <div class="form-group">
+            <label for="clientEmailInput">Billing Email Address</label>
+            <input type="email" id="clientEmailInput" required placeholder="billing@acme.com">
+          </div>
+          <div class="form-group">
+            <label for="clientAddressInput">Billing Postal Address</label>
+            <textarea id="clientAddressInput" rows="3" placeholder="456 Enterprise Way, Building B&#10;New York, NY 10001"></textarea>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-6">
+              <label for="clientCurrencyInput">Default Currency</label>
+              <select id="clientCurrencyInput">
+                <option value="USD">USD ($)</option>
+                <option value="EUR">EUR (€)</option>
+                <option value="GBP">GBP (£)</option>
+                <option value="CAD">CAD (C$)</option>
+                <option value="AUD">AUD (A$)</option>
+                <option value="INR">INR (₹)</option>
+                <option value="JPY">JPY (¥)</option>
+              </select>
+            </div>
+            <div class="form-group col-6">
+              <label for="clientTermsInput">Default Net Terms (Days)</label>
+              <input type="number" id="clientTermsInput" min="0" placeholder="30">
+            </div>
+          </div>
+          <div class="modal-footer-actions">
+            <button type="button" id="cancelClientBtn" class="btn btn-secondary">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Client Details</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAYMENT LOG MODAL -->
+  <div id="paymentModal" class="modal-backdrop hidden">
+    <div class="modal-card modal-sm">
+      <div class="modal-header">
+        <h2>Record Payment</h2>
+        <button id="closePaymentModalBtn" class="btn-icon" aria-label="Close modal">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="paymentForm">
+          <input type="hidden" id="paymentInvoiceId" value="">
+          
+          <div class="payment-modal-info">
+            <div>
+              <span class="info-label">Invoice Balance:</span>
+              <span class="info-val outstanding" id="paymentModalBalance">$0.00</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="paymentAmountInput">Payment Amount</label>
+            <input type="number" id="paymentAmountInput" min="0.01" step="0.01" required>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group col-6">
+              <label for="paymentDateInput">Payment Date</label>
+              <input type="date" id="paymentDateInput" required>
+            </div>
+            <div class="form-group col-6">
+              <label for="paymentMethodInput">Method</label>
+              <select id="paymentMethodInput">
+                <option value="bank-transfer">Bank Transfer</option>
+                <option value="card">Credit Card</option>
+                <option value="paypal">PayPal</option>
+                <option value="cash">Cash / Check</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="modal-footer-actions">
+            <button type="button" id="cancelPaymentBtn" class="btn btn-secondary">Cancel</button>
+            <button type="submit" class="btn btn-success">Log Payment</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

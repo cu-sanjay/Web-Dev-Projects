@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#05070f"/>
+      <stop offset="100%" stop-color="#0e1324"/>
+    </linearGradient>
+
+    <!-- Folder/File Node Gradients -->
+    <linearGradient id="folderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+    <linearGradient id="fileGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#ef4444"/>
+    </linearGradient>
+    <linearGradient id="terminalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#6366f1"/>
+    </linearGradient>
+
+    <!-- Filters for Glow -->
+    <filter id="glowCyan" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <filter id="glowPurple" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="url(#bgGrad)"/>
+  
+  <!-- Subtle decorative data stream grid -->
+  <g opacity="0.03" stroke="#ffffff" stroke-width="1">
+    <line x1="0" y1="50" x2="800" y2="50"/>
+    <line x1="0" y1="100" x2="800" y2="100"/>
+    <line x1="0" y1="150" x2="800" y2="150"/>
+    <line x1="0" y1="200" x2="800" y2="200"/>
+    <line x1="0" y1="250" x2="800" y2="250"/>
+    <line x1="0" y1="300" x2="800" y2="300"/>
+    <line x1="0" y1="350" x2="800" y2="350"/>
+    <line x1="0" y1="400" x2="800" y2="400"/>
+    <line x1="0" y1="450" x2="800" y2="450"/>
+    <line x1="50" y1="0" x2="50" y2="500"/>
+    <line x1="100" y1="0" x2="100" y2="500"/>
+    <line x1="150" y1="0" x2="150" y2="500"/>
+    <line x1="200" y1="0" x2="200" y2="500"/>
+    <line x1="250" y1="0" x2="250" y2="500"/>
+    <line x1="300" y1="0" x2="300" y2="500"/>
+    <line x1="350" y1="0" x2="350" y2="500"/>
+    <line x1="400" y1="0" x2="400" y2="500"/>
+    <line x1="450" y1="0" x2="450" y2="500"/>
+    <line x1="500" y1="0" x2="500" y2="500"/>
+    <line x1="550" y1="0" x2="550" y2="500"/>
+    <line x1="600" y1="0" x2="600" y2="500"/>
+    <line x1="650" y1="0" x2="650" y2="500"/>
+    <line x1="700" y1="0" x2="700" y2="500"/>
+    <line x1="750" y1="0" x2="750" y2="500"/>
+  </g>
+
+  <!-- Title & Subtitle -->
+  <text x="40" y="70" font-family="'Outfit', 'Inter', sans-serif" font-size="28" font-weight="800" fill="#ffffff">
+    FILE SYSTEM <tspan fill="#06b6d4">EXPLORER</tspan>
+  </text>
+  <text x="40" y="100" font-family="'Inter', sans-serif" font-size="14" font-weight="500" fill="#94a3b8" letter-spacing="1">
+    HIERARCHICAL VIRTUAL STORAGE LAB
+  </text>
+
+  <!-- Connection Directory Tree Paths -->
+  <g stroke="#6366f1" stroke-width="2.5" stroke-dasharray="4 3" opacity="0.6">
+    <!-- Main root trunk to branches -->
+    <path d="M 220,180 H 420"/>
+    <path d="M 220,180 V 380 H 300"/>
+    <path d="M 420,180 V 280 H 500"/>
+    <path d="M 420,180 V 380 H 500"/>
+  </g>
+
+  <!-- 1. ROOT Node (Folder) -->
+  <g transform="translate(160, 145)" filter="url(#glowCyan)">
+    <!-- Folder Icon Body -->
+    <path d="M10,25 C10,15 20,15 25,15 H45 C50,15 55,20 60,25 H90 C95,25 100,30 100,35 V80 C100,85 95,90 90,90 H10 C5,90 0,85 0,80 V25 C0,20 5,25 10,25 Z" fill="url(#folderGrad)"/>
+    <text x="50" y="55" font-family="'Outfit', sans-serif" font-size="16" font-weight="700" fill="#ffffff" text-anchor="middle">/</text>
+    <text x="50" y="108" font-family="'Inter', sans-serif" font-size="11" font-weight="600" fill="#94a3b8" text-anchor="middle">root</text>
+  </g>
+
+  <!-- 2. Nested Node A (Folder) -->
+  <g transform="translate(360, 145)">
+    <path d="M10,25 C10,15 20,15 25,15 H45 C50,15 55,20 60,25 H90 C95,25 100,30 100,35 V80 C100,85 95,90 90,90 H10 C5,90 0,85 0,80 V25 C0,20 5,25 10,25 Z" fill="url(#folderGrad)"/>
+    <text x="50" y="55" font-family="'Outfit', sans-serif" font-size="13" font-weight="700" fill="#ffffff" text-anchor="middle">usr</text>
+    <text x="50" y="108" font-family="'Inter', sans-serif" font-size="11" font-weight="600" fill="#94a3b8" text-anchor="middle">/usr</text>
+  </g>
+
+  <!-- 3. Sub-Node B (Folder) -->
+  <g transform="translate(250, 345)">
+    <path d="M10,25 C10,15 20,15 25,15 H45 C50,15 55,20 60,25 H90 C95,25 100,30 100,35 V80 C100,85 95,90 90,90 H10 C5,90 0,85 0,80 V25 C0,20 5,25 10,25 Z" fill="url(#folderGrad)"/>
+    <text x="50" y="55" font-family="'Outfit', sans-serif" font-size="13" font-weight="700" fill="#ffffff" text-anchor="middle">bin</text>
+    <text x="50" y="108" font-family="'Inter', sans-serif" font-size="11" font-weight="600" fill="#94a3b8" text-anchor="middle">/bin</text>
+  </g>
+
+  <!-- 4. Sub-Node C (File) -->
+  <g transform="translate(460, 235)">
+    <!-- File outline -->
+    <path d="M 0,0 L 50,0 L 70,20 L 70,85 C 70,89 66,93 62,93 L 8,93 C 4,93 0,89 0,85 Z" fill="url(#fileGrad)"/>
+    <!-- Folded corner -->
+    <path d="M 50,0 L 50,15 C 50,18 52,20 55,20 L 70,20 Z" fill="#ffffff" fill-opacity="0.3"/>
+    <!-- Content lines -->
+    <line x1="15" y1="40" x2="55" y2="40" stroke="#ffffff" stroke-width="2"/>
+    <line x1="15" y1="55" x2="45" y2="55" stroke="#ffffff" stroke-width="2"/>
+    <line x1="15" y1="70" x2="35" y2="70" stroke="#ffffff" stroke-width="2"/>
+    <text x="35" y="110" font-family="'Inter', sans-serif" font-size="11" font-weight="600" fill="#94a3b8" text-anchor="middle">Welcome.txt</text>
+  </g>
+
+  <!-- 5. Sub-Node D (File - Code) -->
+  <g transform="translate(460, 335)">
+    <path d="M 0,0 L 50,0 L 70,20 L 70,85 C 70,89 66,93 62,93 L 8,93 C 4,93 0,89 0,85 Z" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+    <path d="M 50,0 L 50,15 C 50,18 52,20 55,20 L 70,20 Z" fill="#3b82f6" fill-opacity="0.3"/>
+    <text x="35" y="55" font-family="'Fira Code', monospace" font-size="14" font-weight="700" fill="#3b82f6" text-anchor="middle">&lt;/&gt;</text>
+    <text x="35" y="110" font-family="'Inter', sans-serif" font-size="11" font-weight="600" fill="#94a3b8" text-anchor="middle">script.js</text>
+  </g>
+
+  <!-- Virtual Terminal Console Frame -->
+  <g transform="translate(565, 140)" filter="url(#glowPurple)">
+    <rect width="200" height="295" rx="12" fill="#0b0f19" stroke="url(#terminalGrad)" stroke-width="2"/>
+    <!-- Terminal Header Bar -->
+    <rect width="200" height="28" rx="12" fill="#1e293b"/>
+    <rect y="16" width="200" height="12" fill="#1e293b"/>
+    <!-- Circles buttons -->
+    <circle cx="15" cy="14" r="4" fill="#ef4444"/>
+    <circle cx="27" cy="14" r="4" fill="#f59e0b"/>
+    <circle cx="39" cy="14" r="4" fill="#10b981"/>
+    <text x="200" y="18" font-family="'Fira Code', monospace" font-size="10" fill="#94a3b8" text-anchor="end" dx="-10">sh</text>
+    
+    <!-- Console prompt text -->
+    <text x="15" y="55" font-family="'Fira Code', monospace" font-size="10" fill="#6366f1">vfs:/$ pwd</text>
+    <text x="15" y="70" font-family="'Fira Code', monospace" font-size="10" fill="#ffffff">/</text>
+    
+    <text x="15" y="95" font-family="'Fira Code', monospace" font-size="10" fill="#6366f1">vfs:/$ ls</text>
+    <text x="15" y="110" font-family="'Fira Code', monospace" font-size="10" fill="#3b82f6">usr/  bin/  etc/</text>
+    
+    <text x="15" y="135" font-family="'Fira Code', monospace" font-size="10" fill="#6366f1">vfs:/$ cd usr</text>
+    
+    <text x="15" y="160" font-family="'Fira Code', monospace" font-size="10" fill="#6366f1">vfs:/usr$ ls</text>
+    <text x="15" y="175" font-family="'Fira Code', monospace" font-size="10" fill="#f59e0b">Welcome.txt</text>
+    <text x="15" y="190" font-family="'Fira Code', monospace" font-size="10" fill="#3b82f6">script.js</text>
+
+    <text x="15" y="215" font-family="'Fira Code', monospace" font-size="10" fill="#6366f1">vfs:/usr$ cat Welcome.txt</text>
+    <text x="15" y="230" font-family="'Fira Code', monospace" font-size="9" fill="#94a3b8">Welcome to OS VFS Lab!</text>
+
+    <!-- Cursor prompt -->
+    <text x="15" y="260" font-family="'Fira Code', monospace" font-size="10" fill="#6366f1">vfs:/usr$ <tspan fill="#ffffff" font-weight="900" opacity="0.8">_</tspan></text>
+  </g>
+</svg>

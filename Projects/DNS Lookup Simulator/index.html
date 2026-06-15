@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DNS Lookup Simulator - Hierarchical Nameserver Visualizer</title>
+  <meta name="description" content="An interactive simulator for the Domain Name System (DNS). Visualizes recursive vs iterative queries, nameserver zones lookup, cache layers (Browser, OS, Resolver), and live TTL countdowns.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-logo">
+        <a href="../../" class="back-link" title="Back to Showcase">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        </a>
+        <div class="logo-text">
+          <h1>DNS Lookup <span class="accent-text">Simulator</span></h1>
+          <p class="subtitle">Computer Networks &amp; Distributed Systems Learning Lab</p>
+        </div>
+      </div>
+      
+      <div class="header-presets">
+        <div class="control-group">
+          <label for="domain-preset">Quick Query Presets:</label>
+          <select id="domain-preset" class="custom-select">
+            <option value="google.com">A Record: google.com</option>
+            <option value="google.com-ipv6">AAAA Record: google.com</option>
+            <option value="mail.yahoo.co.uk">MX Record: mail.yahoo.co.uk</option>
+            <option value="blog.github.io">CNAME Record: blog.github.io</option>
+            <option value="wikipedia.org">TXT Record: wikipedia.org</option>
+          </select>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Dashboard Workspace -->
+    <main class="dashboard-grid">
+      
+      <!-- Left Column: Query Configurator & Stats -->
+      <section class="left-column">
+        
+        <!-- Query Deck Card -->
+        <div class="card query-card">
+          <h2 class="card-title">DNS Query Configurator</h2>
+          
+          <div class="query-form-group">
+            <div class="input-field-group">
+              <label for="query-domain">Domain Name to Resolve</label>
+              <input type="text" id="query-domain" placeholder="e.g. google.com" value="google.com" spellcheck="false" autocomplete="off">
+            </div>
+
+            <div class="field-row mt-12">
+              <div class="input-field-group flex-1">
+                <label for="query-type">Record Type</label>
+                <select id="query-type" class="custom-select-small">
+                  <option value="A" selected>A (IPv4)</option>
+                  <option value="AAAA">AAAA (IPv6)</option>
+                  <option value="CNAME">CNAME (Alias)</option>
+                  <option value="MX">MX (Mail Server)</option>
+                  <option value="TXT">TXT (Verification)</option>
+                </select>
+              </div>
+
+              <div class="input-field-group flex-1">
+                <label for="query-mode">Query Mode</label>
+                <select id="query-mode" class="custom-select-small">
+                  <option value="recursive" selected>Recursive (Local Resolver handles it)</option>
+                  <option value="iterative">Iterative (Resolver pulls referrals)</option>
+                </select>
+              </div>
+            </div>
+            
+            <button id="btn-resolve-dns" class="btn btn-primary mt-16 w-full">Resolve DNS Request</button>
+          </div>
+        </div>
+
+        <!-- Simulation Controls Card -->
+        <div class="card timeline-card">
+          <h2 class="card-title">Simulation Control Deck</h2>
+          
+          <div class="timeline-controls">
+            <button id="btn-prev-step" class="btn btn-control" title="Step backward one event" disabled>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="19 20 9 12 19 4 19 20"></polygon><line x1="5" y1="19" x2="5" y2="5"></line></svg>
+            </button>
+            
+            <button id="btn-toggle-play" class="btn btn-primary btn-control-main" title="Run simulator timeline automatically">
+              <svg id="play-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              <svg id="pause-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+              <span>Run Steps</span>
+            </button>
+            
+            <button id="btn-next-step" class="btn btn-control" title="Step forward one event">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="5" x2="19" y2="19"></line></svg>
+            </button>
+
+            <button id="btn-reset" class="btn btn-secondary btn-control" title="Reset current query context">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path></svg>
+            </button>
+          </div>
+
+          <div class="slider-speed-bar mt-12">
+            <span id="speed-value">Speed: 1.5s</span>
+            <input type="range" id="sim-speed" min="400" max="4000" step="100" value="1500">
+          </div>
+        </div>
+
+        <!-- Query Performance Stats Card -->
+        <div class="card stats-card cyan-gradient">
+          <h2 class="card-title-small">Query Resolution Analytics</h2>
+          <div class="stats-grid-horizontal">
+            <div class="stat-box">
+              <span class="stat-label">Hops Count</span>
+              <span id="stat-hops" class="stat-num">0</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">Cache State</span>
+              <span id="stat-cache-hit" class="stat-num text-cyan">MISS</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">Resolution Latency</span>
+              <span id="stat-latency" class="stat-num text-purple">0 ms</span>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Center Column: Topology Map & Dynamic Cache Grids -->
+      <section class="center-column">
+        
+        <!-- Hierarchical Tree Map Panel -->
+        <div class="card map-card">
+          <h2 class="card-title">Nameserver Hierarchy Map</h2>
+          
+          <div class="tree-map-container" id="dns-map">
+            <!-- SVG connection lines -->
+            <svg class="map-connection-lines-svg" id="lines-svg">
+              <!-- Rendered dynamically or styled globally -->
+            </svg>
+
+            <!-- Topology Tree Nodes -->
+            <!-- Client Layer -->
+            <div class="map-node node-device" id="node-client" style="left: 40px; top: 180px;">
+              <div class="node-icon">💻</div>
+              <div class="node-label">Client</div>
+              <div class="node-ip">192.168.1.100</div>
+            </div>
+
+            <!-- Resolver -->
+            <div class="map-node node-device" id="node-resolver" style="left: 200px; top: 180px;">
+              <div class="node-icon">🎛️</div>
+              <div class="node-label">ISP Resolver</div>
+              <div class="node-ip">8.8.8.8</div>
+            </div>
+
+            <!-- Root Server -->
+            <div class="map-node node-device" id="node-root" style="left: 450px; top: 50px;">
+              <div class="node-icon">🌍</div>
+              <div class="node-label">Root (.)</div>
+              <div class="node-ip">198.41.0.4</div>
+            </div>
+
+            <!-- TLD Server -->
+            <div class="map-node node-device" id="node-tld" style="left: 560px; top: 180px;">
+              <div class="node-icon">🧬</div>
+              <div class="node-label" id="tld-label">TLD Server</div>
+              <div class="node-ip" id="tld-ip">192.5.6.30</div>
+            </div>
+
+            <!-- Authoritative Server -->
+            <div class="map-node node-device" id="node-auth" style="left: 450px; top: 310px;">
+              <div class="node-icon">🏢</div>
+              <div class="node-label" id="auth-label">Auth Server</div>
+              <div class="node-ip" id="auth-ip">--</div>
+            </div>
+
+            <!-- Traveling Query Packet -->
+            <div class="anim-packet hidden" id="dns-packet">
+              <span class="packet-txt">Query</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Caching Layers Card -->
+        <div class="card cache-card">
+          <h2 class="card-title">Dynamic Local DNS Cache Records</h2>
+          <p class="alert-info-message">
+            Visualizes client-side caching. TTL countdowns decrement in real-time. Entries are evicted when TTL reaches 0.
+          </p>
+
+          <div class="cache-tabs-wrapper">
+            <div class="cache-tab-buttons">
+              <button class="cache-tab-btn active" data-cache="cache-browser">Browser Cache</button>
+              <button class="cache-tab-btn" data-cache="cache-os">OS System Cache</button>
+              <button class="cache-tab-btn" data-cache="cache-resolver">ISP Resolver Cache</button>
+            </div>
+
+            <div class="cache-tab-content active" id="cache-browser">
+              <div class="table-container">
+                <table class="custom-table" id="table-cache-browser">
+                  <thead>
+                    <tr>
+                      <th>Domain Host</th>
+                      <th>Type</th>
+                      <th>Value (Target IP / Alias)</th>
+                      <th>TTL (s)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Populated dynamically -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="cache-tab-content" id="cache-os">
+              <div class="table-container">
+                <table class="custom-table" id="table-cache-os">
+                  <thead>
+                    <tr>
+                      <th>Domain Host</th>
+                      <th>Type</th>
+                      <th>Value (Target IP)</th>
+                      <th>TTL (s)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Populated dynamically -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="cache-tab-content" id="cache-resolver">
+              <div class="table-container">
+                <table class="custom-table" id="table-cache-resolver">
+                  <thead>
+                    <tr>
+                      <th>Domain Host</th>
+                      <th>Type</th>
+                      <th>Value (Target IP / Referral)</th>
+                      <th>TTL (s)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Populated dynamically -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Right Column: Database Zones & Logs -->
+      <section class="right-column">
+        
+        <!-- Zone Database Tables Card -->
+        <div class="card database-card">
+          <h2 class="card-title">Nameserver Zone Databases</h2>
+          
+          <div class="db-tabs-wrapper">
+            <div class="db-tab-buttons">
+              <button class="db-tab-btn active" data-db="db-root">Root (.)</button>
+              <button class="db-tab-btn" data-db="db-tld">TLD Servers</button>
+              <button class="db-tab-btn" data-db="db-auth">Auth Zones</button>
+            </div>
+
+            <!-- Root Zone -->
+            <div class="db-tab-content active" id="db-root">
+              <div class="table-container-scroll">
+                <table class="custom-table" id="table-db-root">
+                  <thead>
+                    <tr>
+                      <th>Record Name</th>
+                      <th>Type</th>
+                      <th>Value</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Populated dynamically -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- TLD Zone -->
+            <div class="db-tab-content" id="db-tld">
+              <div class="table-container-scroll">
+                <table class="custom-table" id="table-db-tld">
+                  <thead>
+                    <tr>
+                      <th>Record Name</th>
+                      <th>Type</th>
+                      <th>Value</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Populated dynamically -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Authoritative Zone -->
+            <div class="db-tab-content" id="db-auth">
+              <div class="table-container-scroll">
+                <table class="custom-table" id="table-db-auth">
+                  <thead>
+                    <tr>
+                      <th>Record Name</th>
+                      <th>Type</th>
+                      <th>Value</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Populated dynamically -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Telemetry log card -->
+        <div class="card log-card">
+          <div class="log-header">
+            <h3 class="card-title">DNS Resolution Telemetry logs</h3>
+            <button id="btn-clear-logs" class="btn btn-small">Clear Logs</button>
+          </div>
+          <div id="log-console" class="console">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- Educational Bottom Section -->
+    <section class="theory-section card">
+      <h3 class="section-title">Educational Resources: How DNS Resolves Domains</h3>
+      <div class="theory-grid">
+        
+        <div class="theory-card">
+          <h4>The Nameserver Hierarchy</h4>
+          <p>
+            DNS does not store all records in a single database. Instead, it is distributed globally in a tree structure:
+          </p>
+          <ul>
+            <li><strong>Root Server (`.`)</strong>: The top of the tree. There are 13 logical root server addresses globally. They know the addresses of Top-Level Domain (TLD) servers.</li>
+            <li><strong>TLD Server</strong>: Manages specific suffixes like `.com`, `.org`, or country codes like `.uk`. They point to the Authoritative server of the requested domain.</li>
+            <li><strong>Authoritative Server</strong>: The final destination. Configured by the domain owner, it houses the actual A, AAAA, MX, or CNAME mappings.</li>
+          </ul>
+        </div>
+
+        <div class="theory-card">
+          <h4>Recursive vs. Iterative Queries</h4>
+          <p>
+            Computers query the DNS hierarchy in two distinct patterns depending on client configurations:
+          </p>
+          <ul>
+            <li><strong>Recursive Query</strong>: The client requests that the Local Resolver handle the entire lookup. The resolver must recursively query nameservers on the internet and return only the final answer.</li>
+            <li><strong>Iterative Query</strong>: Nameservers do not perform lookups themselves. Instead, they reply with a **Referral** (e.g. "I don't know the IP of google.com, but TLD `.com` resides at `192.5.6.30`, ask them"). The resolver must perform each subsequent query step-by-step.</li>
+          </ul>
+        </div>
+
+        <div class="theory-card">
+          <h4>Caching &amp; TTL (Time To Live)</h4>
+          <p>
+            To avoid overloading the network with lookups, resolved records are cached locally:
+          </p>
+          <ul>
+            <li><strong>TTL (Time-To-Live)</strong>: A lifespan count in seconds set by the Authoritative nameserver. It dictates how long a local cache is allowed to keep the record before it becomes stale and must be fetched again.</li>
+            <li><strong>Multi-Level Cache</strong>: Checks happen in sequence: Browser Cache &rarr; OS Hosts Cache &rarr; Local ISP Resolver Cache. Only on a complete cache miss does a query go out to the root nameservers.</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- Simulation JavaScript Logic Script -->
+  <script src="script.js"></script>
+</body>
+</html>

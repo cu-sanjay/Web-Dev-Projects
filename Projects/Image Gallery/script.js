@@ -1,4 +1,23 @@
 /* ==========================================================================
+   Toast Notification System
+   ========================================================================== */
+
+function showToast(message, type) {
+  type = type || 'error';
+  const container = document.getElementById('toastContainer');
+  if (!container) return;
+  const el = document.createElement('div');
+  el.className = 'toast toast--' + type;
+  el.textContent = message;
+  container.appendChild(el);
+  setTimeout(function () { el.classList.add('toast--out'); setTimeout(function () { el.remove(); }, 300); }, 4000);
+}
+
+function showError(message) {
+  showToast(message, 'error');
+}
+
+/* ==========================================================================
    IndexedDB Core Logic
    ========================================================================== */
 
@@ -257,47 +276,47 @@ function createPlaceholderImage(type) {
  * Pre-seeds default canvas art if IndexedDB is empty.
  */
 async function seedDefaultImages() {
-  const images = await getAllImages();
+  try {
+    var images = await getAllImages();
+  } catch (err) {
+    showError('Failed to read database during seeding: ' + (err.message || 'unknown error'));
+    return;
+  }
   if (images.length === 0) {
-    const natureBlob = await createPlaceholderImage('nature');
-    const archBlob = await createPlaceholderImage('architecture');
-    const techBlob = await createPlaceholderImage('tech');
+    var natureBlob, archBlob, techBlob;
+    try {
+      natureBlob = await createPlaceholderImage('nature');
+      archBlob = await createPlaceholderImage('architecture');
+      techBlob = await createPlaceholderImage('tech');
+    } catch (err) {
+      showError('Failed to generate placeholder images: ' + (err.message || 'unknown error'));
+      return;
+    }
 
-    await addImage({
-      name: 'Cosmic Nebula.jpg',
-      blob: natureBlob,
-      type: 'image/jpeg',
-      size: natureBlob.size,
-      width: 800,
-      height: 600,
-      category: 'Nature',
-      isFavorite: true,
-      addedAt: new Date().getTime()
-    });
+    var seedEntries = [
+      { name: 'Cosmic Nebula.jpg', blob: natureBlob, category: 'Nature', isFavorite: true, offset: 0 },
+      { name: 'Pastel Architecture.jpg', blob: archBlob, category: 'Architecture', isFavorite: false, offset: 10000 },
+      { name: 'Cybernetic Grid.jpg', blob: techBlob, category: 'Tech', isFavorite: false, offset: 20000 }
+    ];
 
-    await addImage({
-      name: 'Pastel Architecture.jpg',
-      blob: archBlob,
-      type: 'image/jpeg',
-      size: archBlob.size,
-      width: 800,
-      height: 600,
-      category: 'Architecture',
-      isFavorite: false,
-      addedAt: new Date().getTime() - 10000
-    });
-
-    await addImage({
-      name: 'Cybernetic Grid.jpg',
-      blob: techBlob,
-      type: 'image/jpeg',
-      size: techBlob.size,
-      width: 800,
-      height: 600,
-      category: 'Tech',
-      isFavorite: false,
-      addedAt: new Date().getTime() - 20000
-    });
+    for (var i = 0; i < seedEntries.length; i++) {
+      var entry = seedEntries[i];
+      try {
+        await addImage({
+          name: entry.name,
+          blob: entry.blob,
+          type: 'image/jpeg',
+          size: entry.blob.size,
+          width: 800,
+          height: 600,
+          category: entry.category,
+          isFavorite: entry.isFavorite,
+          addedAt: new Date().getTime() - entry.offset
+        });
+      } catch (err) {
+        showError('Failed to seed "' + entry.name + '": ' + (err.message || 'database error'));
+      }
+    }
   }
 }
 
@@ -535,7 +554,12 @@ function renderGallery() {
       e.stopPropagation();
       const id = parseInt(favBtn.getAttribute('data-id'));
       const nextState = !image.isFavorite;
-      await toggleFavoriteInDB(id, nextState);
+      try {
+        await toggleFavoriteInDB(id, nextState);
+      } catch (err) {
+        showError('Failed to update favorite: ' + (err.message || 'database error'));
+        return;
+      }
       
       // Update local array
       image.isFavorite = nextState;
@@ -550,7 +574,12 @@ function renderGallery() {
       e.stopPropagation();
       if (confirm(`Are you sure you want to delete "${image.name}"?`)) {
         const id = parseInt(trashBtn.getAttribute('data-id'));
-        await deleteImageFromDB(id);
+        try {
+          await deleteImageFromDB(id);
+        } catch (err) {
+          showError('Failed to delete image: ' + (err.message || 'database error'));
+          return;
+        }
         
         // Remove from list
         allImagesList = allImagesList.filter(img => img.id !== id);
@@ -574,7 +603,12 @@ function renderGallery() {
  */
 async function loadAndRefreshGallery() {
   cleanObjectUrlsCache();
-  allImagesList = await getAllImages();
+  try {
+    allImagesList = await getAllImages();
+  } catch (err) {
+    showError('Failed to load images from database: ' + (err.message || 'unknown error'));
+    allImagesList = [];
+  }
   renderGallery();
 }
 
@@ -638,11 +672,14 @@ async function handleFiles(files) {
       addedAt: new Date().getTime()
     };
 
-    await addImage(newImageRecord);
+    try {
+      await addImage(newImageRecord);
+    } catch (err) {
+      showError('Failed to save "' + file.name + '": ' + (err.message || 'database error'));
+    }
 
-    // Simulate progress bar smooth updates
-    const percent = Math.round(((i + 1) / validImages.length) * 100);
-    progressBar.style.width = `${percent}%`;
+    var percent = Math.round(((i + 1) / validImages.length) * 100);
+    progressBar.style.width = percent + '%';
   }
 
   // Brief delay to allow progress bar visual feedback
@@ -828,7 +865,12 @@ lightboxFav.addEventListener('click', async () => {
   const image = filteredImagesList[state.lightboxIndex];
   const nextState = !image.isFavorite;
 
-  await toggleFavoriteInDB(image.id, nextState);
+  try {
+    await toggleFavoriteInDB(image.id, nextState);
+  } catch (err) {
+    showError('Failed to update favorite: ' + (err.message || 'database error'));
+    return;
+  }
   image.isFavorite = nextState;
   
   updateLightboxFavBtn(nextState);
@@ -842,7 +884,12 @@ lightboxDelete.addEventListener('click', async () => {
 
   if (confirm(`Are you sure you want to delete "${image.name}"?`)) {
     const id = image.id;
-    await deleteImageFromDB(id);
+    try {
+      await deleteImageFromDB(id);
+    } catch (err) {
+      showError('Failed to delete image: ' + (err.message || 'database error'));
+      return;
+    }
     
     // Revoke URL
     if (objectUrlsCache.has(id)) {

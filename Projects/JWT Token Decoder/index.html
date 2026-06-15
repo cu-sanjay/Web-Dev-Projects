@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JWT Token Decoder</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="terminal-badge">[ JWT TOKEN DECODER — CRYPTOGRAPHIC IDENTITY COCKPIT ]</div>
+
+<div class="app-grid">
+
+  <!-- ─── TOKEN PRESET BAR ─── -->
+  <div class="preset-bar">
+    <button id="presetValid" class="preset-btn">LOAD VALID ADMIN AUTHENTICATION TOKEN</button>
+    <button id="presetExpired" class="preset-btn">LOAD EXPIRED SESSION CONTEXT CLAIM</button>
+    <button id="presetMalformed" class="preset-btn">LOAD MALFORMED ANATOMY STRUCTURE</button>
+  </div>
+
+  <!-- ─── LEFT: ENCODED INPUT ─── -->
+  <div class="panel input-panel">
+    <div class="panel-header">INPUT ENCODED JWT STREAM</div>
+    <textarea id="jwtInput" spellcheck="false" placeholder="Paste encoded JWT token here..."></textarea>
+  </div>
+
+  <!-- ─── RIGHT: DECODED SEGMENTS ─── -->
+  <div class="segments-panel">
+    <div class="panel seg-header">
+      <div class="panel-header seg-label header-label">HEADER — ALGORITHM &amp; TYPE</div>
+      <pre id="headerView" class="seg-view">&lt;awaiting token&gt;</pre>
+    </div>
+    <div class="panel seg-payload">
+      <div class="panel-header seg-label payload-label">PAYLOAD — CLAIMS &amp; DATA</div>
+      <pre id="payloadView" class="seg-view">&lt;awaiting token&gt;</pre>
+    </div>
+    <div class="panel seg-signature">
+      <div class="panel-header seg-label signature-label">SIGNATURE — VERIFICATION HASH</div>
+      <pre id="signatureView" class="seg-view">&lt;awaiting token&gt;</pre>
+    </div>
+  </div>
+
+  <!-- ─── TELEMETRY ─── -->
+  <div class="panel telemetry-panel">
+    <div class="panel-header">CRYPTOGRAPHIC TELEMETRY DASHBOARD</div>
+    <div class="tele-row"><span class="tele-label">ALGORITHM</span><span id="tAlg" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">VALIDITY STATE</span><span id="tValidity" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">COUNTDOWN TIMER</span><span id="tCountdown" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">CLAIMS WEIGHT</span><span id="tClaims" class="tele-val">--</span></div>
+    <div class="ctrl-divider"></div>
+    <div class="tele-row" style="grid-column:1/-1;"><span id="tBadge" class="tele-badge standby">STANDBY</span></div>
+    <div class="ctrl-divider"></div>
+    <div id="errorDetail" class="error-detail"></div>
+  </div>
+
+  <!-- ─── ADMIN FOOTER ─── -->
+  <div class="admin-footer">
+    <button id="btnExecute" class="admin-btn execute">EXECUTE TOKEN DECOMPOSITION</button>
+    <button id="btnValidate" class="admin-btn validate">VALIDATE ACTIVE CLAIM CONSTRAINTS</button>
+    <button id="btnFlush" class="admin-btn flush">FLUSH TOKEN BUFFERS &amp; RE-ZERO MATRICES</button>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

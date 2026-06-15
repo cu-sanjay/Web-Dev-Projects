@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mission Control Dashboard</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="terminal-badge">[ MISSION CONTROL DASHBOARD ]</div>
+
+<div class="app-grid">
+
+  <!-- ─── PHASE TIMELINE ─── -->
+  <div class="timeline">
+    <span class="phase-node active" data-phase="prelaunch">PRE-LAUNCH</span>
+    <span class="phase-conn"></span>
+    <span class="phase-node" data-phase="ascent">ATMOSPHERIC ASCENT</span>
+    <span class="phase-conn"></span>
+    <span class="phase-node" data-phase="maxq">MAX-Q STRUCTURAL</span>
+    <span class="phase-conn"></span>
+    <span class="phase-node" data-phase="orbit">ORBITAL INSERTION</span>
+  </div>
+
+  <!-- ─── LEFT: PARAM CORE ─── -->
+  <div class="panel param-panel">
+    <div class="panel-header">PARAMETER CORE CONTROLLER</div>
+
+    <label class="ctrl-label">FUEL INTAKE VOLUME %</label>
+    <div class="slider-wrap"><input type="range" id="fuelSlider" min="0" max="100" value="85"><span id="fuelVal" class="slider-num">85%</span></div>
+
+    <label class="ctrl-label">MAIN ENGINE THRUST [kN]</label>
+    <div class="slider-wrap"><input type="range" id="thrustSlider" min="0" max="5000" value="3200"><span id="thrustVal" class="slider-num">3200 kN</span></div>
+
+    <label class="ctrl-label">ASCENT TRAJECTORY PITCH [°]</label>
+    <div class="slider-wrap"><input type="range" id="pitchSlider" min="0" max="90" value="45"><span id="pitchVal" class="slider-num">45°</span></div>
+
+    <label class="ctrl-label">TRANSPONDER PING INTERVAL</label>
+    <div class="slider-wrap"><input type="range" id="pingSlider" min="1" max="60" value="10"><span id="pingVal" class="slider-num">10s</span></div>
+  </div>
+
+  <!-- ─── CENTER TOP: RADAR ─── -->
+  <div class="panel radar-panel">
+    <div class="panel-header">TACTICAL RADAR SWEEP — POLAR COORDINATE GRID</div>
+    <div class="canvas-wrap"><canvas id="radarCanvas"></canvas></div>
+  </div>
+
+  <!-- ─── CENTER BOTTOM: LOG ─── -->
+  <div class="panel log-panel">
+    <div class="panel-header">LIVE OPERATIONAL LOG</div>
+    <div class="log-scroll" id="logContainer"><div class="log-empty">STANDBY — AWAITING LAUNCH SEQUENCE</div></div>
+  </div>
+
+  <!-- ─── RIGHT: TELEMETRY ─── -->
+  <div class="panel telemetry-panel">
+    <div class="panel-header">SYSTEMIC DIAGNOSTICS TELEMETRY</div>
+    <div class="tele-row"><span class="tele-label">VELOCITY</span><span id="tVelocity" class="tele-val">0 km/s</span></div>
+    <div class="tele-row"><span class="tele-label">ALTITUDE</span><span id="tAltitude" class="tele-val">0 km</span></div>
+    <div class="tele-row"><span class="tele-label">CORE TEMP</span><span id="tTemp" class="tele-val">-- °C</span></div>
+    <div class="tele-row"><span class="tele-label">ESCAPE VELOCITY</span><span id="tEscape" class="tele-val">-- km/s</span></div>
+    <div class="tele-row"><span class="tele-label">SAFETY STATUS</span><span id="tBadge" class="tele-badge standby">STANDBY</span></div>
+    <div class="ctrl-divider"></div>
+    <div class="panel-header" style="margin-top:0.6vmin">SUBSYSTEM HEALTH</div>
+    <div id="subsystemContainer"></div>
+  </div>
+
+  <!-- ─── ADMIN FOOTER ─── -->
+  <div class="admin-footer">
+    <button id="btnIgnite" class="admin-btn ignite">INITIATE MAIN STAGE IGNITION</button>
+    <button id="btnInject" class="admin-btn inject">INJECT SUBSYSTEM FAILURE ALERT</button>
+    <button id="btnPurge" class="admin-btn purge">PURGE OPERATIONAL MATRIX</button>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

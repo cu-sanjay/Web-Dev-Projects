@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CPU Pipeline Simulator - MIPS 5-Stage Visualizer</title>
+  <meta name="description" content="An interactive simulator for MIPS 5-stage CPU pipelining. Visualize clock cycles, instruction overlapping, data hazards (RAW), control hazards, forwarding, and flushes.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-logo">
+        <a href="../../" class="back-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        </a>
+        <div class="logo-text">
+          <h1>CPU Pipeline <span class="accent-text">Simulator</span></h1>
+          <p class="subtitle">Operating Systems &amp; Computer Architecture Learning Lab</p>
+        </div>
+      </div>
+      
+      <div class="header-presets">
+        <div class="control-group">
+          <label for="assembly-preset">Load MIPS Assembly Preset:</label>
+          <select id="assembly-preset" class="custom-select">
+            <option value="clean">Clean Pipeline (No Hazards)</option>
+            <option value="data-hazard" selected>Data Hazard (RAW Dependency)</option>
+            <option value="load-use">Load-Use Hazard (Requires Stall)</option>
+            <option value="control-hazard">Control Hazard (Branch Flushes)</option>
+          </select>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Dashboard Grid -->
+    <main class="dashboard-grid">
+      
+      <!-- Left Column: Code Editor & Registers -->
+      <section class="left-column">
+        
+        <!-- Code Editor Card -->
+        <div class="card code-card">
+          <h2 class="card-title">MIPS Assembly Editor</h2>
+          <textarea id="assembly-code" spellcheck="false" placeholder="Write MIPS assembly instructions here..."></textarea>
+          
+          <div class="editor-buttons mt-12">
+            <button id="btn-load-code" class="btn btn-secondary flex-1">Load Program</button>
+            <button id="btn-clear-code" class="btn btn-secondary">Clear</button>
+          </div>
+        </div>
+
+        <!-- Simulator Configuration Card -->
+        <div class="card config-card">
+          <h2 class="card-title">Hardware Architecture Config</h2>
+          
+          <div class="config-grid">
+            <div class="config-item">
+              <label for="forwarding-unit">Forwarding Unit</label>
+              <select id="forwarding-unit" class="custom-select-small">
+                <option value="on" selected>Forwarding ON (Bypass Paths)</option>
+                <option value="off">Forwarding OFF (Stall Hazard)</option>
+              </select>
+            </div>
+
+            <div class="config-item">
+              <label for="branch-prediction">Branch Handling</label>
+              <select id="branch-prediction" class="custom-select-small">
+                <option value="not-taken" selected>Predict Not-Taken (Flush on Taken)</option>
+                <option value="stall">Stall until Branch Resolved</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="timeline-controls mt-16">
+            <div class="control-buttons">
+              <button id="btn-prev-step" class="btn btn-control" title="Step backward one cycle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="19 20 9 12 19 4 19 20"></polygon><line x1="5" y1="19" x2="5" y2="5"></line></svg>
+              </button>
+              
+              <button id="btn-toggle-play" class="btn btn-primary btn-control-main" title="Run simulator clock automatically">
+                <svg id="play-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                <svg id="pause-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+                <span>Run Clock</span>
+              </button>
+              
+              <button id="btn-next-step" class="btn btn-control" title="Step forward one cycle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="5" x2="19" y2="19"></line></svg>
+              </button>
+
+              <button id="btn-reset" class="btn btn-secondary btn-control" title="Reset execution to beginning">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path></svg>
+              </button>
+            </div>
+
+            <div class="control-slider">
+              <span id="speed-value">Cycle: 1.0s</span>
+              <input type="range" id="sim-speed" min="200" max="3000" step="100" value="1000">
+            </div>
+          </div>
+        </div>
+
+        <!-- Register File Values Card -->
+        <div class="card register-card">
+          <h2 class="card-title">Register File (R0 - R7)</h2>
+          <div class="register-grid" id="register-grid">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+
+        <!-- Data Memory Values Card -->
+        <div class="card memory-card">
+          <h2 class="card-title">Data Memory Blocks</h2>
+          <div class="memory-grid" id="memory-grid">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Right Column: Pipeline Stages & Space-Time Grid -->
+      <section class="right-column">
+        
+        <!-- Live Cycle Stats Panel -->
+        <div id="stats-panel" class="stats-panel-card card cyan-gradient">
+          <div class="stats-grid-horizontal">
+            <div class="stat-box">
+              <span class="stat-label">Clock Cycle</span>
+              <span id="stat-cycle" class="stat-num">0</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">Instructions Run</span>
+              <span id="stat-completed" class="stat-num">0</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">Stall Cycles</span>
+              <span id="stat-stalls" class="stat-num text-danger">0</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">CPI Metric</span>
+              <span id="stat-cpi" class="stat-num text-cyan">0.00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- MIPS 5-Stage Visualizer Diagram -->
+        <div class="card pipeline-card">
+          <h2 class="card-title">MIPS 5-Stage CPU Pipelines</h2>
+          
+          <div class="pipeline-diagram">
+            <!-- IF -->
+            <div class="stage-node block-if" id="stage-if">
+              <div class="node-header">IF <span class="node-state-label">Fetch</span></div>
+              <div class="node-body">
+                <span class="node-instr" id="stage-if-instr">--</span>
+                <span class="node-desc" id="stage-if-desc">Program Counter PC: 0</span>
+              </div>
+            </div>
+
+            <div class="stage-arrow">&darr;</div>
+
+            <!-- ID -->
+            <div class="stage-node block-id" id="stage-id">
+              <div class="node-header">ID <span class="node-state-label">Decode</span></div>
+              <div class="node-body">
+                <span class="node-instr" id="stage-id-instr">--</span>
+                <span class="node-desc" id="stage-id-desc">Read register values</span>
+              </div>
+            </div>
+
+            <div class="stage-arrow">&darr;</div>
+
+            <!-- EX -->
+            <div class="stage-node block-ex" id="stage-ex">
+              <div class="node-header">EX <span class="node-state-label">ALU Execute</span></div>
+              <div class="node-body">
+                <span class="node-instr" id="stage-ex-instr">--</span>
+                <span class="node-desc" id="stage-ex-desc">ALU Operations</span>
+              </div>
+              <div class="forwarding-indicator hidden" id="fwd-ex-lbl">Forwarding Bypass Active</div>
+            </div>
+
+            <div class="stage-arrow">&darr;</div>
+
+            <!-- MEM -->
+            <div class="stage-node block-mem" id="stage-mem">
+              <div class="node-header">MEM <span class="node-state-label">RAM Access</span></div>
+              <div class="node-body">
+                <span class="node-instr" id="stage-mem-instr">--</span>
+                <span class="node-desc" id="stage-mem-desc">Memory Read / Write</span>
+              </div>
+            </div>
+
+            <div class="stage-arrow">&darr;</div>
+
+            <!-- WB -->
+            <div class="stage-node block-wb" id="stage-wb">
+              <div class="node-header">WB <span class="node-state-label">Write Back</span></div>
+              <div class="node-body">
+                <span class="node-instr" id="stage-wb-instr">--</span>
+                <span class="node-desc" id="stage-wb-desc">Write register target</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Space-Time Grid Diagram Card -->
+        <div class="card space-time-card">
+          <h2 class="card-title">Pipeline Space-Time Diagram</h2>
+          <p class="alert-info-message">
+            Shows instruction pipeline stages mapped across clock cycles (C1, C2...). Stalls (ST) and Flushes (FL) are highlighted in red.
+          </p>
+          <div class="table-container">
+            <table id="space-time-table" class="custom-table">
+              <thead>
+                <!-- Populated dynamically -->
+              </thead>
+              <tbody>
+                <!-- Populated dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Telemetry Logs Console -->
+        <div class="card log-card">
+          <div class="log-header">
+            <h3 class="card-title">Clock Pipeline Trace Logs</h3>
+            <button id="btn-clear-logs" class="btn btn-small">Clear Log</button>
+          </div>
+          <div id="log-console" class="console">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Bottom Section: Theory & Education -->
+    <section class="theory-section card">
+      <h3 class="section-title">Educational Resources & Theory</h3>
+      
+      <div class="theory-grid">
+        <div class="theory-card">
+          <h4>The 5 Pipelined Stages</h4>
+          <p>
+            Pipelining breaks the execution of processor instructions into sequential, overlapping steps:
+          </p>
+          <ul>
+            <li><strong>IF (Instruction Fetch):</strong> Retrieves the instruction opcode from memory at address Program Counter (PC), then updates PC + 4.</li>
+            <li><strong>ID (Instruction Decode):</strong> Reads source registers ($Rs$, $Rt$) from the Register File and decodes control bits.</li>
+            <li><strong>EX (Execute):</strong> ALU performs computations: add, subtract, logic gates, or compute effective addresses.</li>
+            <li><strong>MEM (Memory Access):</strong> Load Word (`LW`) reads data from RAM; Store Word (`SW`) writes data to RAM.</li>
+            <li><strong>WB (Write Back):</strong> Writes ALU results or loaded memory words back to the target register ($Rd$ or $Rt$).</li>
+          </ul>
+        </div>
+
+        <div class="theory-card">
+          <h4>Data Hazards &amp; Forwarding</h4>
+          <p>
+            A **Data Hazard** occurs when an instruction reads a register whose value is computed by a preceding instruction that is still in the pipeline.
+          </p>
+          <ul>
+            <li><strong>RAW (Read After Write):</strong> Instruction I2 reads $R_x$ before I1 has written to it in stage WB.</li>
+            <li><strong>Stalling:</strong> Inserting **bubbles** (NOPs) in stage ID/EX to delay I2 until I1 completes WB.</li>
+            <li><strong>Forwarding (Bypass):</strong> Optimizes performance by passing ALU inputs directly from EX/MEM or MEM/WB pipeline registers to EX stage inputs, eliminating stalls for standard arithmetic dependencies.</li>
+            <li><strong>Load-Use Stall:</strong> When `LW` loads $R_1$, followed immediately by an instruction reading $R_1$, the data is not available until MEM stage. A **1-cycle stall** is mandatory even with forwarding.</li>
+          </ul>
+        </div>
+
+        <div class="theory-card">
+          <h4>Control Hazards &amp; Flushes</h4>
+          <p>
+            A **Control Hazard** arises from conditional branch instructions (`BEQ`). The target address or branching choice is not resolved until the ID/EX stages:
+          </p>
+          <ul>
+            <li><strong>Predict Not Taken:</strong> The pipeline continues fetching sequential instructions ($PC+4$). If the branch is taken, the incorrectly fetched instructions are **flushed** (overwritten with NOPs/bubbles) in the IF/ID stages.</li>
+            <li><strong>Stalling:</strong> Stalls fetching any instruction in IF stage until the branch outcome resolves in the ID stage.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Main JavaScript File -->
+  <script src="script.js"></script>
+</body>
+</html>

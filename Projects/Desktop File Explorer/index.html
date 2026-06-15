@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Desktop File Explorer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="terminal-badge">[ DESKTOP FILE EXPLORER ]</div>
+
+<div class="app-grid">
+
+  <!-- ─── NAV RIBBON ─── -->
+  <div class="nav-ribbon">
+    <button id="btnNewFolder" class="nav-btn">NEW FOLDER</button>
+    <button id="btnNewFile" class="nav-btn">NEW FILE [js/cpp]</button>
+    <button id="btnUp" class="nav-btn">UP ONE TIER</button>
+    <div class="breadcrumb" id="breadcrumb">root</div>
+  </div>
+
+  <!-- ─── LEFT: SIDEBAR ─── -->
+  <div class="panel sidebar-panel">
+    <div class="panel-header">DIRECTORY TREE</div>
+    <div class="tree-scroll" id="treeContainer"></div>
+  </div>
+
+  <!-- ─── CENTER: EXPLORER GRID ─── -->
+  <div class="panel explorer-panel">
+    <div class="panel-header">
+      <span>FILE EXPLORER</span>
+      <span id="itemCount" class="result-count">0 items</span>
+    </div>
+    <div class="item-grid" id="itemGrid"></div>
+  </div>
+
+  <!-- ─── RIGHT: TELEMETRY ─── -->
+  <div class="panel telemetry-panel">
+    <div class="panel-header">ASSET TELEMETRY METRICS</div>
+    <div id="inspectorContent" class="inspector-empty">SELECT A FILE OR FOLDER<br>TO INSPECT METADATA</div>
+  </div>
+
+  <!-- ─── ADMIN FOOTER ─── -->
+  <div class="admin-footer">
+    <button id="btnReconstruct" class="admin-btn reconstruct">RECONSTRUCT DIRECTORY MATRIX BASELINE</button>
+    <button id="btnSync" class="admin-btn sync">SIMULATE CLOUD SYNC PIPELINE UPLOAD</button>
+    <button id="btnPurge" class="admin-btn purge">PURGE VIRTUAL VOLUME SYSTEM MEMORY</button>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

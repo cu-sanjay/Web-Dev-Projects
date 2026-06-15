@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heat Transfer Simulator & Visualizer</title>
+  <meta name="description" content="An interactive real-time 2D heat transfer simulator using implicit finite difference equations, featuring multiple materials and isotherms.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- TOP HEADER -->
+    <header class="app-header">
+      <div class="brand">
+        <div class="brand-logo">
+          <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" stroke-linecap="round"></path>
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" stroke-dasharray="3 3"></path>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>THERMAL PHYSICS LAB</h1>
+          <h2>Implicit Heat Equation Simulator</h2>
+        </div>
+      </div>
+
+      <!-- Telemetry HUD -->
+      <div class="telemetry-hud" aria-label="Engine Telemetry">
+        <div class="hud-item">
+          <span class="hud-label">Peak Temp</span>
+          <span class="hud-value" id="hud-peak-temp">25.0 °C</span>
+        </div>
+        <div class="hud-item">
+          <span class="hud-label">Avg Temp</span>
+          <span class="hud-value" id="hud-avg-temp">25.0 °C</span>
+        </div>
+        <div class="hud-item">
+          <span class="hud-label">Active Sources</span>
+          <span class="hud-value" id="hud-source-count">0</span>
+        </div>
+        <div class="hud-item">
+          <span class="hud-label">Engine FPS</span>
+          <span class="hud-value" id="hud-fps">60.0</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="main-layout">
+      <!-- LEFT SIDEBAR: Material Brushes & Sensor Board -->
+      <aside class="sidebar left-sidebar" aria-label="Materials and Probes">
+        <div class="panel-section">
+          <h3><span class="sec-num">01</span> Material & Node Brush</h3>
+          <div class="material-brush-grid">
+            <button class="btn btn-brush mat active" data-brush="copper" title="High thermal conductivity metal bar">
+              <span class="brush-swatch copper"></span> Copper
+            </button>
+            <button class="btn btn-brush mat" data-brush="iron" title="Medium thermal conductivity metal bar">
+              <span class="brush-swatch iron"></span> Iron
+            </button>
+            <button class="btn btn-brush mat" data-brush="glass" title="Sluggish thermal conductor">
+              <span class="brush-swatch glass"></span> Glass
+            </button>
+            <button class="btn btn-brush mat" data-brush="wood" title="Highly effective insulator">
+              <span class="brush-swatch wood"></span> Wood
+            </button>
+            <button class="btn btn-brush node hot" data-brush="hot" title="Fixed high temperature source node">
+              🔥 Heater Node
+            </button>
+            <button class="btn btn-brush node cold" data-brush="cold" title="Fixed low temperature cooling sink node">
+              ❄️ Cooler Node
+            </button>
+            <button class="btn btn-brush erase" data-brush="air" title="Erase materials back to ambient air gap">
+              🧽 Air (Eraser)
+            </button>
+          </div>
+        </div>
+
+        <div class="panel-section">
+          <h3><span class="sec-num">02</span> Brush Options</h3>
+          <div class="control-group">
+            <div class="control-header">
+              <label for="input-brush-size">Brush Radius:</label>
+              <span id="val-brush-size" class="control-value">2 cells</span>
+            </div>
+            <input type="range" id="input-brush-size" min="1" max="6" step="1" value="2">
+            <div class="range-labels"><span>Fine (1)</span><span>Wide (6)</span></div>
+          </div>
+
+          <div class="control-group" id="group-target-temp">
+            <div class="control-header">
+              <label for="input-target-temp">Node Target Temp:</label>
+              <span id="val-target-temp" class="control-value">100 °C</span>
+            </div>
+            <input type="range" id="input-target-temp" min="-100" max="500" step="5" value="100">
+            <div class="range-labels"><span>Cold (-100°C)</span><span>Hot (500°C)</span></div>
+          </div>
+        </div>
+
+        <div class="panel-section flex-grow">
+          <h3><span class="sec-num">03</span> Active Probe Reading</h3>
+          <div id="probe-placeholder" class="editor-placeholder-msg hidden">
+            Deselected. Move cursor on canvas to inspect values.
+          </div>
+          <div id="probe-stats" class="probe-stats-container">
+            <div class="probe-row-val">
+              <span class="probe-lbl">Inspected Coordinate:</span>
+              <span class="probe-val" id="probe-val-coords">(x: 0, y: 0)</span>
+            </div>
+            <div class="probe-row-val">
+              <span class="probe-lbl">Material:</span>
+              <span class="probe-val" id="probe-val-mat">Air Gap</span>
+            </div>
+            <div class="probe-row-val">
+              <span class="probe-lbl">Temperature:</span>
+              <span class="probe-val highlight" id="probe-val-temp">25.00 °C</span>
+            </div>
+            <div class="probe-row-val">
+              <span class="probe-lbl">Thermal Conductivity:</span>
+              <span class="probe-val" id="probe-val-cond">0.02 W/(m·K)</span>
+            </div>
+            <div class="probe-row-val">
+              <span class="probe-lbl">Heat Capacity:</span>
+              <span class="probe-val" id="probe-val-cap">1.00 J/(kg·K)</span>
+            </div>
+
+            <!-- Mini thermometer chart overlay -->
+            <div class="mini-chart-wrapper">
+              <span class="chart-title">📈 Temperature History</span>
+              <canvas id="mini-temp-chart" height="60"></canvas>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- CENTER PANEL: Interactive canvas simulation -->
+      <main class="canvas-workspace">
+        <div class="canvas-container" id="canvas-container">
+          <canvas id="sim-canvas"></canvas>
+
+          <!-- Floating badge for engine status -->
+          <div class="canvas-floating-badge top-left">
+            <span class="badge-dot pulse"></span>
+            <span class="badge-text" id="sim-status-text">Heat Solver: ACTIVE</span>
+          </div>
+
+          <div class="canvas-floating-badge bottom-left">
+            <span>🖱️ Click & drag canvas to paint elements. Hover probe to inspect.</span>
+          </div>
+        </div>
+      </main>
+
+      <!-- RIGHT SIDEBAR: Constants, heatmaps, presets -->
+      <aside class="sidebar right-sidebar" aria-label="Visualizations and Controls">
+        <div class="panel-section">
+          <h3><span class="sec-num">04</span> Preset Configurations</h3>
+          <div class="preset-column">
+            <button id="btn-preset-fins" class="btn btn-preset" title="Thermal dissipation on radiator cooling fins">
+              Heat Sink Fins Preset
+            </button>
+            <button id="btn-preset-bridge" class="btn btn-preset" title="Insulation leakage via copper/iron thermal bridge">
+              Thermal Bridge Leakage
+            </button>
+            <button id="btn-preset-insulated" class="btn btn-preset" title="Concentric insulating shell layers wrapping a hot pipe">
+              Insulated Pipe Gradient
+            </button>
+          </div>
+        </div>
+
+        <div class="panel-section">
+          <h3><span class="sec-num">05</span> Rendering Options</h3>
+          <div class="control-group">
+            <label for="select-colormap">Heatmap Palette:</label>
+            <select id="select-colormap">
+              <option value="fireice" selected>Thermodynamic (Fire & Ice)</option>
+              <option value="neon">Neon Plasma Thermal</option>
+              <option value="grayscale">Monochromatic Gradient</option>
+              <option value="none">None (Hide Heatmap)</option>
+            </select>
+          </div>
+          <div class="checkbox-rack">
+            <label class="check-label">
+              <input type="checkbox" id="check-isotherms" checked>
+              <span class="custom-check"></span> Isotherms Lines
+            </label>
+            <label class="check-label">
+              <input type="checkbox" id="check-flux">
+              <span class="custom-check"></span> Heat Flux Vectors
+            </label>
+            <label class="check-label">
+              <input type="checkbox" id="check-borders" checked>
+              <span class="custom-check"></span> Materials Outline
+            </label>
+            <label class="check-label">
+              <input type="checkbox" id="check-grid">
+              <span class="custom-check"></span> Grid Nodes
+            </label>
+            <label class="check-label">
+              <input type="checkbox" id="check-boundary" checked>
+              <span class="custom-check"></span> Convection Edge
+            </label>
+          </div>
+        </div>
+
+        <div class="panel-section">
+          <h3><span class="sec-num">06</span> Thermodynamic Parameters</h3>
+          <div class="control-group">
+            <div class="control-header">
+              <label for="input-ambient">Ambient Air Temp ($T_{\text{amb}}$):</label>
+              <span id="val-ambient" class="control-value">25 °C</span>
+            </div>
+            <input type="range" id="input-ambient" min="-50" max="100" step="5" value="25">
+            <div class="range-labels"><span>Cold (-50°C)</span><span>Hot (100°C)</span></div>
+          </div>
+
+          <div class="control-group" id="group-convection">
+            <div class="control-header">
+              <label for="input-convection">Air Convection Rate:</label>
+              <span id="val-convection" class="control-value">0.05</span>
+            </div>
+            <input type="range" id="input-convection" min="0.0" max="0.3" step="0.01" value="0.05">
+            <div class="range-labels"><span>Insulated (0)</span><span>Rapid Cooling</span></div>
+          </div>
+
+          <div class="control-group">
+            <div class="control-header">
+              <label for="input-diffusivity">Global Time Step ($\Delta t$):</label>
+              <span id="val-diffusivity" class="control-value">1.5</span>
+            </div>
+            <input type="range" id="input-diffusivity" min="0.1" max="5.0" step="0.1" value="1.5">
+            <div class="range-labels"><span>Slow diffusion</span><span>Fast diffusion</span></div>
+          </div>
+        </div>
+
+        <div class="panel-section">
+          <h3><span class="sec-num">07</span> Simulator Controls</h3>
+          <div class="actions-grid">
+            <button id="btn-pause-play" class="btn btn-action play" title="Pause or Play thermodynamics calculations">
+              <span id="play-pause-icon">⏸️</span> <span id="play-pause-text">Pause Engine</span>
+            </button>
+            <button id="btn-clear-heat" class="btn btn-action clear-dye" title="Reset all grid cells to ambient temperature">
+              🧹 Ambient Temp
+            </button>
+            <button id="btn-reset-all" class="btn btn-action reset" title="Erase painted structures and restore background">
+              🔄 Clear Plate
+            </button>
+          </div>
+        </div>
+
+        <div class="panel-section flex-grow">
+          <h3><span class="sec-num">08</span> Thermodynamics Logs</h3>
+          <div class="console-box" id="console-logs" aria-live="polite">
+            <div class="log-line text-info">&gt; Implicit finite difference thermal diffusion solver loaded.</div>
+            <div class="log-line text-info">&gt; Fourier Heat Flux: q = -k∇T</div>
+            <div class="log-line text-info">&gt; Newton Convective cooling boundary: ACTIVE</div>
+            <div class="log-line text-warning">&gt; Draw materials and temperature sources on the plate canvas.</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

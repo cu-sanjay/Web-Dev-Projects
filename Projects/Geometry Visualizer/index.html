@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geometry · Visualizer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="top-bar">
+    <div class="top-brand">
+      <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="#ffb800" stroke-width="1.5">
+        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+      </svg>
+      <div>
+        <h1 class="top-title">Geometry · Visualizer</h1>
+        <span class="top-sub">spatial drafting engine v1.0</span>
+      </div>
+      <span class="top-badge" id="topBadge">STANDBY</span>
+    </div>
+    <div class="top-metrics">
+      <span class="metric-chip">SHAPE <strong id="shapeVal">--</strong></span>
+      <span class="metric-chip accent">DIMS <strong id="dimsVal">--</strong></span>
+      <span class="metric-chip">STATUS <strong id="statusVal">OK</strong></span>
+    </div>
+  </header>
+
+  <main class="workspace">
+
+    <!-- SHAPE SELECTOR -->
+    <section class="shape-row" id="shapeRow">
+      <button class="shape-btn active" data-shape="circle">&#x25CB; Planar Circle Matrix</button>
+      <button class="shape-btn" data-shape="rectangle">&#x25A1; Equilateral Rectangle Field</button>
+      <button class="shape-btn" data-shape="triangle">&#x25B3; Trigonometric Triangle Vector</button>
+      <button class="shape-btn" data-shape="sphere">&#x25C9; Spatial Sphere Core</button>
+      <button class="shape-btn" data-shape="cylinder">&#x25A7; Volumetric Cylinder Block</button>
+    </section>
+
+    <div class="main-grid">
+
+      <!-- SLIDERS -->
+      <aside class="ctrl-panel" id="ctrlPanel">
+        <div class="panel-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="10" height="10"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 12h6"/></svg>
+          <span>Dimensional Vector Intake</span>
+        </div>
+        <div class="ctrl-body" id="ctrlBody"></div>
+      </aside>
+
+      <!-- CANVAS + FORMULA -->
+      <section class="center-col">
+        <div class="canvas-section">
+          <div class="canvas-wrap">
+            <canvas id="mainCanvas"></canvas>
+          </div>
+        </div>
+        <div class="formula-section" id="formulaSection">
+          <div class="panel-header">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="10" height="10"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+            <span id="formulaTitle">Formula Syntax Blueprint</span>
+          </div>
+          <div class="formula-body" id="formulaBody">
+            <div class="formula-placeholder">Select a shape to view geometric proofs</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TELEMETRY -->
+      <aside class="tele-panel">
+        <div class="panel-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="10" height="10"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          <span>Spatial Telemetry</span>
+        </div>
+        <div class="tele-body" id="teleBody">
+          <div class="tele-row"><span class="tele-label">Perimeter / Circumference</span><span class="tele-val" id="telePerim">--</span></div>
+          <div class="tele-row"><span class="tele-label">Surface Area</span><span class="tele-val" id="teleArea">--</span></div>
+          <div class="tele-row highlight"><span class="tele-label">Volumetric Capacity</span><span class="tele-val neon" id="teleVolume">--</span></div>
+          <div class="tele-row"><span class="tele-label">Consistency Rating</span><span class="tele-val" id="teleRating">--</span></div>
+          <div class="tele-badge" id="teleBadge">STANDBY</div>
+        </div>
+      </aside>
+
+    </div>
+
+    <!-- ACTIONS -->
+    <footer class="action-bar">
+      <button class="foot-btn foot-run" id="btnExec">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><polyline points="20 6 9 17 4 12"/></svg>
+        Execute Vector Run
+      </button>
+      <button class="foot-btn foot-preset" id="btn3d">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        Deploy 3D Projection
+      </button>
+      <button class="foot-btn foot-reset" id="btnFlush">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6"/><path d="M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+        Flush Drafting Canvas
+      </button>
+    </footer>
+
+  </main>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

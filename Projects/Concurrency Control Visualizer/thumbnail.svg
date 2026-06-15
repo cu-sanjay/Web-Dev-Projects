@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="100%" height="100%">
+  <!-- Definitions of gradients and filters -->
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080a10" />
+      <stop offset="50%" stop-color="#121726" />
+      <stop offset="100%" stop-color="#05070a" />
+    </linearGradient>
+    <linearGradient id="primary-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#00f2fe" />
+    </linearGradient>
+    <linearGradient id="accent-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+    <linearGradient id="danger-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ef4444" />
+      <stop offset="100%" stop-color="#ff8a8a" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="400" fill="url(#bg-grad)" />
+
+  <!-- Background Grid lines for tech vibe -->
+  <path d="M 0,50 L 600,50 M 0,100 L 600,100 M 0,150 L 600,150 M 0,200 L 600,200 M 0,250 L 600,250 M 0,300 L 600,300 M 0,350 L 600,350" stroke="rgba(255,255,255,0.02)" stroke-width="1" />
+  <path d="M 50,0 L 50,400 M 100,0 L 100,400 M 150,0 L 150,400 M 200,0 L 200,400 M 250,0 L 250,400 M 300,0 L 300,400 M 350,0 L 350,400 M 400,0 L 400,400 M 450,0 L 450,400 M 500,0 L 500,400 M 550,0 L 550,400" stroke="rgba(255,255,255,0.02)" stroke-width="1" />
+
+  <!-- Title Text -->
+  <text x="300" y="75" fill="#ffffff" font-family="'Outfit', sans-serif" font-size="28" font-weight="800" text-anchor="middle" letter-spacing="-0.5">CONCUR<tspan fill="url(#primary-grad)">KRAFT</tspan></text>
+  <text x="300" y="100" fill="#9ca3af" font-family="'Outfit', sans-serif" font-size="14" font-weight="500" text-anchor="middle" letter-spacing="1">CONCURRENCY CONTROL VISUALIZER</text>
+
+  <!-- Left: Timeline schedule builder list mockup -->
+  <g transform="translate(60, 130)">
+    <rect width="200" height="190" rx="8" fill="rgba(10, 14, 23, 0.9)" stroke="rgba(255,255,255,0.08)" stroke-width="1.5" />
+    <!-- Header -->
+    <rect width="200" height="25" rx="8" fill="rgba(20, 27, 45, 0.9)" />
+    <text x="15" y="17" fill="#c7d2fe" font-family="'Outfit', sans-serif" font-size="10" font-weight="bold">SCHEDULE TIMELINE</text>
+    
+    <!-- Timeline cards steps -->
+    <!-- Step 1 (Completed) -->
+    <rect x="10" y="35" width="180" height="22" rx="4" fill="rgba(16, 185, 129, 0.1)" stroke="rgba(16, 185, 129, 0.2)" />
+    <text x="18" y="49" fill="#9ca3af" font-family="'Outfit', sans-serif" font-size="8">1. T1: Read(A)</text>
+    <text x="182" y="49" fill="#10b981" font-family="'Outfit', sans-serif" font-size="8" font-weight="bold" text-anchor="end">OK</text>
+
+    <!-- Step 2 (Completed) -->
+    <rect x="10" y="62" width="180" height="22" rx="4" fill="rgba(16, 185, 129, 0.1)" stroke="rgba(16, 185, 129, 0.2)" />
+    <text x="18" y="76" fill="#9ca3af" font-family="'Outfit', sans-serif" font-size="8">2. T2: Read(B)</text>
+    <text x="182" y="76" fill="#10b981" font-family="'Outfit', sans-serif" font-size="8" font-weight="bold" text-anchor="end">OK</text>
+
+    <!-- Step 3 (Blocked wait) -->
+    <rect x="10" y="89" width="180" height="22" rx="4" fill="rgba(245, 158, 11, 0.15)" stroke="#f59e0b" stroke-width="1" />
+    <text x="18" y="103" fill="#ffffff" font-family="'Outfit', sans-serif" font-size="8" font-weight="bold">3. T1: Write(B)</text>
+    <text x="182" y="103" fill="#f59e0b" font-family="'Outfit', sans-serif" font-size="8" font-weight="bold" text-anchor="end">WAIT</text>
+
+    <!-- Step 4 (Blocked wait - Deadlock active step) -->
+    <rect x="10" y="116" width="180" height="22" rx="4" fill="rgba(239, 68, 68, 0.15)" stroke="#ef4444" stroke-width="1" />
+    <text x="18" y="130" fill="#ffffff" font-family="'Outfit', sans-serif" font-size="8" font-weight="bold">4. T2: Write(A)</text>
+    <text x="182" y="130" fill="#ef4444" font-family="'Outfit', sans-serif" font-size="8" font-weight="bold" text-anchor="end">DEADLOCK</text>
+    
+    <!-- Cost stats overlay -->
+    <rect x="10" y="148" width="180" height="32" rx="4" fill="rgba(6, 8, 14, 0.9)" stroke="rgba(255,255,255,0.05)" stroke-width="1" />
+    <text x="18" y="160" fill="#6b7280" font-family="'Outfit', sans-serif" font-size="7" font-weight="bold">CONFLICT DETECTION</text>
+    <text x="18" y="172" fill="#ef4444" font-family="'JetBrains Mono', monospace" font-size="8">Cycle: T1 &lt;-&gt; T2 found!</text>
+  </g>
+
+  <!-- Connective arrow in center -->
+  <g transform="translate(280, 225)">
+    <line x1="0" y1="0" x2="30" y2="0" stroke="url(#primary-grad)" stroke-width="3" stroke-dasharray="4,2" />
+    <polygon points="26,-6 38,0 26,6" fill="#00f2fe" filter="url(#glow)" />
+  </g>
+
+  <!-- Right: Wait-For dependency graph mockup with cycle highlights -->
+  <g transform="translate(340, 130)">
+    <rect width="200" height="190" rx="8" fill="rgba(20, 27, 45, 0.4)" stroke="rgba(255,255,255,0.06)" stroke-width="1.5" />
+    
+    <!-- Title -->
+    <rect width="200" height="25" rx="8" fill="rgba(30, 41, 67, 0.5)" />
+    <text x="100" y="16" fill="#9ca3af" font-family="'Outfit', sans-serif" font-size="10" font-weight="600" text-anchor="middle">WAIT-FOR GRAPH (2PL)</text>
+
+    <!-- Nodes bubbles -->
+    <!-- Node T1 -->
+    <circle cx="50" cy="95" r="18" fill="rgba(30, 41, 67, 0.9)" stroke="#ef4444" stroke-width="2" filter="url(#glow)" />
+    <text x="50" y="99" fill="#ffffff" font-family="'Outfit', sans-serif" font-size="10" font-weight="bold" text-anchor="middle">T1</text>
+
+    <!-- Node T2 -->
+    <circle cx="150" cy="95" r="18" fill="rgba(30, 41, 67, 0.9)" stroke="#ef4444" stroke-width="2" filter="url(#glow)" />
+    <text x="150" y="99" fill="#ffffff" font-family="'Outfit', sans-serif" font-size="10" font-weight="bold" text-anchor="middle">T2</text>
+
+    <!-- Edges paths curves showing deadlock cycle loop -->
+    <!-- T1 -> T2 wait edge -->
+    <path d="M 68,85 Q 100,75 132,85" fill="none" stroke="#ef4444" stroke-width="2.5" />
+    <polygon points="126,80 134,86 125,92" fill="#ef4444" />
+
+    <!-- T2 -> T1 wait edge -->
+    <path d="M 132,105 Q 100,115 68,105" fill="none" stroke="#ef4444" stroke-width="2.5" />
+    <polygon points="74,110 66,104 75,98" fill="#ef4444" />
+
+    <!-- Lock pad details bottom visual -->
+    <rect x="25" y="145" width="150" height="30" rx="4" fill="rgba(10, 14, 23, 0.8)" stroke="rgba(245, 158, 11, 0.2)" stroke-width="1" />
+    <text x="35" y="157" fill="#6b7280" font-family="'Outfit', sans-serif" font-size="7" font-weight="bold">ACTIVE REGISTRY LOCKS</text>
+    <text x="35" y="170" fill="#f59e0b" font-family="'JetBrains Mono', monospace" font-size="8">A: X-Lock T1 | B: X-Lock T2</text>
+  </g>
+</svg>

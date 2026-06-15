@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meteor Shower · Visualizer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="top-bar">
+    <div class="top-brand">
+      <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="1.5">
+        <polyline points="18 4 12 12 14 12 10 20" stroke="#ffd600" stroke-width="1"/>
+        <circle cx="4" cy="18" r="1.5" fill="#00e5ff" stroke="none"/>
+        <circle cx="20" cy="8" r="1" fill="#00e5ff" stroke="none"/>
+        <circle cx="6" cy="4" r="0.8" fill="#00e5ff" stroke="none"/>
+        <circle cx="15" cy="20" r="0.6" fill="#00e5ff" stroke="none"/>
+      </svg>
+      <div>
+        <h1 class="top-title">Meteor Shower · Visualizer</h1>
+        <span class="top-sub">atmospheric ablation tracking terminal v1.0</span>
+      </div>
+      <span class="top-badge" id="topBadge">STANDBY</span>
+    </div>
+    <div class="top-metrics">
+      <span class="metric-chip" id="chipCount">COUNT <strong id="countVal">0</strong></span>
+      <span class="metric-chip accent" id="chipKE">KE <strong id="keVal">0</strong> GJ</span>
+      <span class="metric-chip" id="chipLum">LUM <strong id="lumVal">0</strong></span>
+    </div>
+  </header>
+
+  <main class="workspace">
+
+    <!-- STREAM SELECTOR -->
+    <div class="stream-row">
+      <span class="stream-label">Debris Stream</span>
+      <select class="stream-select" id="streamSelect">
+        <option value="perseids">Perseids (High Velocity, Electric Blue)</option>
+        <option value="leonids">Leonids (Rapid Bursts, Luminous Emerald)</option>
+        <option value="geminids">Geminids (Dense/Heavy, Golden Trails)</option>
+        <option value="custom">Custom Meteor Storm (User Bounded)</option>
+      </select>
+    </div>
+
+    <!-- MAIN GRID -->
+    <div class="main-grid">
+
+      <!-- LEFT: SLIDERS -->
+      <section class="sliders-section">
+        <div class="panel-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="10" height="10"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 9h16M9 4v16"/></svg>
+          <span>Atmosphere Config</span>
+        </div>
+        <div class="sliders-body">
+          <div class="param-row">
+            <div class="param-info">
+              <span class="p-label">Inflow Rate</span>
+              <span class="p-unit" id="unitRate">15/hr</span>
+            </div>
+            <input type="range" class="p-slider" id="sliderRate" min="5" max="80" step="1" value="15">
+          </div>
+          <div class="param-row">
+            <div class="param-info">
+              <span class="p-label">Velocity Multiplier</span>
+              <span class="p-unit" id="unitVel">1.0×</span>
+            </div>
+            <input type="range" class="p-slider" id="sliderVel" min="0.3" max="3.0" step="0.1" value="1.0">
+          </div>
+          <div class="param-row">
+            <div class="param-info">
+              <span class="p-label">Entry Angle</span>
+              <span class="p-unit" id="unitAngle">45°</span>
+            </div>
+            <input type="range" class="p-slider" id="sliderAngle" min="10" max="80" step="1" value="45">
+          </div>
+          <div class="param-row">
+            <div class="param-info">
+              <span class="p-label">Star Density</span>
+              <span class="p-unit" id="unitDensity">50%</span>
+            </div>
+            <input type="range" class="p-slider" id="sliderDensity" min="10" max="100" step="1" value="50">
+          </div>
+        </div>
+      </section>
+
+      <!-- CANVAS -->
+      <section class="canvas-section">
+        <div class="panel-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="10" height="10"><polyline points="18 2 14 12 16 12 10 22"/><circle cx="4" cy="18" r="2"/></svg>
+          <span>Night Sky Arena</span>
+          <span class="panel-hint" id="canvasHint">STANDING BY</span>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="skyCanvas"></canvas>
+        </div>
+      </section>
+
+      <!-- RIGHT: TELEMETRY -->
+      <section class="telemetry-section">
+        <div class="panel-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="10" height="10"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 8h10M7 12h6M7 16h8"/></svg>
+          <span>Live Telemetry</span>
+          <span class="panel-hint" id="telemHint">IDLE</span>
+        </div>
+        <div class="telem-body" id="telemBody">
+          <div class="tm-card"><div class="tm-lbl">Meteor Count</div><div class="tm-val" id="tmCount" style="color:#00e5ff">0</div></div>
+          <div class="tm-card"><div class="tm-lbl">Kinetic Energy</div><div class="tm-val" id="tmKE" style="color:#ffd600">0 GJ</div><div class="tm-sub">Σ ½mv²</div></div>
+          <div class="tm-card"><div class="tm-lbl">Luminous Intensity</div><div class="tm-val" id="tmLum" style="color:#00e676">0</div></div>
+          <div class="tm-card"><div class="tm-lbl">Peak Magnitude</div><div class="tm-val" id="tmPeak" style="color:#ffd600">--</div></div>
+          <div class="tm-card"><div class="tm-lbl">Stream Active</div><div class="tm-val small" id="tmStream">PERSEIDS</div></div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ACTIONS -->
+    <footer class="action-bar">
+      <button class="foot-btn foot-run" id="btnStart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        Initiate Atmospheric Inflow Run
+      </button>
+      <button class="foot-btn foot-crit" id="btnBolide">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 010 20"/></svg>
+        Trigger Random Bolide Fireball
+      </button>
+      <button class="foot-btn foot-reset" id="btnFlush">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6"/><path d="M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+        Flush Starfield Channels
+      </button>
+    </footer>
+
+  </main>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

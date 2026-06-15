@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OSI Model Interactive Explorer - Interactive Computer Networks Lab</title>
+  <meta name="description" content="Explore the 7 layers of the OSI model. Inspect PDU types, common protocols, and hardware devices, animate dynamic data encapsulation/decapsulation, and play the Layer Sandbox matching game.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-logo">
+        <a href="../../" class="back-link" title="Back to Showcase">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        </a>
+        <div class="logo-text">
+          <h1>OSI Model Interactive <span class="accent-text">Explorer</span></h1>
+          <p class="subtitle">Visualizing Encapsulation, Protocols, and Layer Responsibilities</p>
+        </div>
+      </div>
+      
+      <div class="header-presets">
+        <div class="control-group">
+          <label for="simulation-preset">Load Packet Preset:</label>
+          <select id="simulation-preset" class="custom-select">
+            <option value="http" selected>Web Page Request (HTTP GET / TCP)</option>
+            <option value="dns">Domain Lookup (DNS Query / UDP)</option>
+            <option value="ping">Network Echo (ICMP Ping)</option>
+          </select>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Workspace Dashboard Grid -->
+    <main class="dashboard-grid">
+      
+      <!-- Left Column: Layer Stack Selector & Inspector -->
+      <section class="left-column">
+        
+        <!-- Interactive 7-Layer OSI Stack -->
+        <div class="card stack-card">
+          <h2 class="card-title">Interactive OSI Stack</h2>
+          <p class="section-desc">Select a layer to inspect its functions, devices, protocols, and real-world analogy.</p>
+          
+          <div class="osi-stack-container mt-16" id="osi-stack-pillar">
+            <!-- Layers 7 down to 1 rendered dynamically -->
+          </div>
+        </div>
+
+        <!-- Layer Inspector details -->
+        <div class="card inspector-card" id="layer-inspector-panel">
+          <div class="inspector-header">
+            <span class="layer-badge" id="inspector-layer-number">Layer 7</span>
+            <h2 class="card-title" id="inspector-layer-name">Application Layer</h2>
+          </div>
+          
+          <p class="section-desc mt-12" id="inspector-layer-desc">
+            Provides network services directly to end-user applications.
+          </p>
+
+          <div class="inspector-details-grid mt-24">
+            <div class="inspector-item">
+              <div class="details-label">Protocol Data Unit (PDU)</div>
+              <div class="details-value font-mono" id="inspector-pdu">Data</div>
+            </div>
+            
+            <div class="inspector-item">
+              <div class="details-label">Operating Hardware</div>
+              <div class="details-value" id="inspector-hardware">Gateway, Firewall, Host PC</div>
+            </div>
+            
+            <div class="inspector-item w-full">
+              <div class="details-label">Key Protocols</div>
+              <div class="details-value font-mono" id="inspector-protocols">HTTP, HTTPS, DNS, FTP, SMTP, SSH</div>
+            </div>
+          </div>
+
+          <div class="inspector-bullets-section mt-20">
+            <div class="details-label">Core Functions &amp; Responsibilities</div>
+            <ul class="bullet-list" id="inspector-functions">
+              <!-- Populated dynamically -->
+            </ul>
+          </div>
+
+          <div class="inspector-analogy-box mt-20" id="inspector-analogy-container">
+            <div class="analogy-header">
+              <span>Postal Analogy</span>
+              <span class="analogy-icon">✉️</span>
+            </div>
+            <p id="inspector-analogy-text">
+              Writing the actual contents of the letter. This is where you compose the message you want to transmit.
+            </p>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Right Column: Encapsulation Simulator & Matching Game -->
+      <section class="right-column">
+        
+        <!-- Simulator Console -->
+        <div class="card simulator-card">
+          <h2 class="card-title">Data Encapsulation Simulator</h2>
+          <p class="section-desc">Animate data moving down the sender stack (encapsulation) and up the receiver stack (decapsulation).</p>
+          
+          <div class="simulator-input-row mt-12">
+            <div class="input-field-group flex-1">
+              <label for="payload-input">Message Payload</label>
+              <input type="text" id="payload-input" value="GET /index.html HTTP/1.1" placeholder="Enter custom payload..." class="custom-input">
+            </div>
+          </div>
+
+          <!-- Playback controls -->
+          <div class="timeline-controls mt-16">
+            <button id="btn-prev-step" class="btn btn-control" title="Step backward" disabled>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="19 20 9 12 19 4 19 20"></polygon><line x1="5" y1="19" x2="5" y2="5"></line></svg>
+            </button>
+            
+            <button id="btn-toggle-play" class="btn btn-primary btn-control-main" title="Run encapsulation sequence">
+              <svg id="play-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              <svg id="pause-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+              <span>Run Simulation</span>
+            </button>
+            
+            <button id="btn-next-step" class="btn btn-control" title="Step forward">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="5" x2="19" y2="19"></line></svg>
+            </button>
+
+            <button id="btn-reset" class="btn btn-secondary btn-control" title="Reset packet timeline">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path></svg>
+            </button>
+          </div>
+
+          <div class="slider-speed-bar mt-12">
+            <span id="speed-value">Speed: 1.5s</span>
+            <input type="range" id="sim-speed" min="500" max="4000" step="100" value="1500">
+          </div>
+
+          <!-- Active Simulation Step Display -->
+          <div class="simulation-status mt-16" id="simulation-status-box">
+            <div class="status-phase-badge encap" id="sim-status-badge">ENCAP: SENDER</div>
+            <div class="status-layer-name" id="sim-status-layer-info">Layer 7: Application</div>
+            <p class="status-desc" id="sim-status-description">Press Run Simulation or Step Forward to watch headers prepend.</p>
+          </div>
+
+          <!-- Dynamic Packet Header Block Visualizer -->
+          <div class="packet-block-container mt-16">
+            <div class="packet-block-label">PDU Encapsulation Structure:</div>
+            <div class="packet-visual-row" id="packet-render-row">
+              <!-- Dynamically constructed blocks representing header sizes -->
+              <div class="packet-block payload">Payload Data</div>
+            </div>
+          </div>
+
+          <!-- Live Physical Medium wire display -->
+          <div class="wire-container mt-16">
+            <div class="wire-label">Physical Transmission Medium (Layer 1):</div>
+            <div class="physical-wire" id="transmission-wire">
+              <div class="pulse-packet hidden" id="pulse-packet-icon">✉️</div>
+              <div class="bitstream" id="wire-bitstream"></div>
+            </div>
+            <div class="wire-hosts">
+              <span>Node A (Sender)</span>
+              <span>Node B (Receiver)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Layer Sandbox Matching Game -->
+        <div class="card sandbox-game-card">
+          <div class="card-header">
+            <h2 class="card-title">Layer Sandbox Quiz</h2>
+            <div class="game-score">Score: <b id="game-score-val" class="accent-text">0/0</b></div>
+          </div>
+          
+          <p class="section-desc">Assign the network protocols and hardware devices to their correct OSI layer.</p>
+
+          <div id="game-start-view" class="game-content mt-12">
+            <button id="btn-start-game" class="btn btn-primary w-full">Start Matching Game</button>
+          </div>
+
+          <div id="game-active-view" class="game-content mt-12 hidden">
+            <!-- Shuffled Match Items -->
+            <div class="game-item-display" id="game-item-card">
+              <div class="item-label">ITEM:</div>
+              <div class="item-value" id="game-item-name">Router</div>
+              <div class="item-hint" id="game-item-hint">Responsible for pathfinding &amp; IP routing</div>
+            </div>
+
+            <!-- Target Match Slots selectors -->
+            <div class="target-slots-grid mt-16" id="game-slots-container">
+              <!-- 7 buttons representing Layers -->
+            </div>
+
+            <div class="game-feedback mt-12 hidden" id="game-feedback-box">
+              <span id="game-feedback-text">Correct!</span>
+            </div>
+
+            <div class="game-actions mt-16">
+              <button id="btn-quit-game" class="btn btn-secondary btn-small">Quit Game</button>
+              <button id="btn-next-game" class="btn btn-primary btn-small hidden">Next Item</button>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- Custom script -->
+  <script src="script.js"></script>
+</body>
+</html>

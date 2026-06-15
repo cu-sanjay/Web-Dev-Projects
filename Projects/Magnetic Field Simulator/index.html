@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="An interactive magnetic field physics simulator. Place bar magnets, solenoids, and wires, trace vector fields, fire charged particles, and inspect Lorentz forces.">
+  <title>Magnetic Field Simulator - Interactive Physics Sandbox</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- Branding Header & Physics Indicators -->
+    <header class="app-header">
+      <div class="header-logo">
+        <div class="logo-icon"></div>
+        <div class="logo-text">
+          <h1>MAG<span>KRAFT</span></h1>
+          <p>Magnetic Field Simulator & Sandbox</p>
+        </div>
+      </div>
+
+      <section class="live-metrics" aria-label="Simulator Diagnostics">
+        <div class="metric-card">
+          <span class="metric-label">Active Sources</span>
+          <span class="metric-value" id="metric-sources">1</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Peak Field strength</span>
+          <span class="metric-value" id="metric-strength">150 G</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Active Particles</span>
+          <span class="metric-value" id="metric-particles">0</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Engine Rate</span>
+          <span class="metric-value" id="metric-fps">60 FPS</span>
+        </div>
+      </section>
+    </header>
+
+    <!-- Main Grid Workspace -->
+    <main class="dashboard-grid">
+      
+      <!-- Left: Source Adder, controls, and visual toggles -->
+      <aside class="sidebar-panel">
+        
+        <!-- Source Adder & Controls -->
+        <section class="control-card glass-panel" aria-labelledby="sources-title">
+          <h2 id="sources-title" class="section-title">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+            Add Magnetic Sources
+          </h2>
+          <div class="source-adder-row">
+            <select id="source-type-select" aria-label="Select source type to add">
+              <option value="bar">Bar Magnet (Dipole)</option>
+              <option value="wire">Current Wire (Biot-Savart)</option>
+              <option value="solenoid">Solenoid Coil</option>
+            </select>
+            <button class="btn btn-primary btn-sm" id="btn-add-source">Add</button>
+          </div>
+
+          <!-- Selected Source parameters controls -->
+          <div class="selected-source-params hide" id="selected-source-controls">
+            <div class="selected-source-header">
+              <h3 id="selected-source-title">Selected: Bar Magnet</h3>
+              <button class="btn-remove" id="btn-remove-source" title="Remove selected source">&times;</button>
+            </div>
+            
+            <div class="input-group">
+              <label for="slider-strength">Field Strength / Current (I)</label>
+              <input type="range" id="slider-strength" min="-100" max="100" value="50">
+              <span class="input-help">Value: <strong id="val-strength">50</strong> units</span>
+            </div>
+
+            <div class="input-group" id="angle-input-group">
+              <label for="slider-angle">Rotation Angle</label>
+              <input type="range" id="slider-angle" min="0" max="360" value="0">
+              <span class="input-help">Value: <strong id="val-angle">0</strong> &deg;</span>
+            </div>
+
+            <div class="input-group hide" id="solenoid-loops-group">
+              <label for="slider-loops">Coil Loops count</label>
+              <input type="range" id="slider-loops" min="5" max="30" value="12">
+              <span class="input-help">Value: <strong id="val-loops">12</strong> loops</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Visualization Settings -->
+        <section class="control-card glass-panel" aria-labelledby="visuals-title">
+          <h2 id="visuals-title" class="section-title">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.25z"/></svg>
+            Visualizer Settings
+          </h2>
+          <div class="checkbox-group">
+            <label class="checkbox-container">
+              <input type="checkbox" id="check-lines" checked>
+              <span class="checkmark"></span>
+              Draw Field Lines (Flux Curves)
+            </label>
+            <label class="checkbox-container">
+              <input type="checkbox" id="check-vectors" checked>
+              <span class="checkmark"></span>
+              Draw Grid Vector Arrows
+            </label>
+            <label class="checkbox-container">
+              <input type="checkbox" id="check-probe" checked>
+              <span class="checkmark"></span>
+              Enable Sensor Compass Probe
+            </label>
+          </div>
+
+          <div class="input-group" id="lines-density-group">
+            <label for="slider-density">Field Line Density</label>
+            <input type="range" id="slider-density" min="4" max="24" value="12">
+            <span class="input-help">Value: <strong id="val-density">12</strong> lines per pole</span>
+          </div>
+        </section>
+
+      </aside>
+
+      <!-- Center: HTML5 Canvas -->
+      <section class="canvas-panel">
+        <div class="canvas-wrapper">
+          <canvas id="physics-canvas" width="680" height="500" aria-label="Magnetic Field interactive sandbox canvas"></canvas>
+          
+          <!-- Float sensor probe reading HUD -->
+          <div class="probe-overlay-card hide font-mono" id="probe-hud">
+            <h4>PROBE SENSOR</h4>
+            <div>X: <span id="probe-x">0</span> px</div>
+            <div>Y: <span id="probe-y">0</span> px</div>
+            <div>Bx: <span id="probe-bx">0.00</span> G</div>
+            <div>By: <span id="probe-by">0.00</span> G</div>
+            <div>|B|: <strong id="probe-b-mag">0.00</strong> G</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right: Particle Injector & Controls -->
+      <aside class="sidebar-panel">
+        
+        <!-- Charged Particle Injector -->
+        <section class="control-card glass-panel" aria-labelledby="particle-title">
+          <h2 id="particle-title" class="section-title">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.53c-.26-.81-1-1.4-1.9-1.4h-1v-3c0-.55-.45-1-1-1h-6v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.4z"/></svg>
+            Lorentz Particle Injector
+          </h2>
+          
+          <div class="input-group">
+            <label for="particle-charge">Particle Charge Type</label>
+            <select id="particle-charge">
+              <option value="proton" selected>Proton (q = +1e)</option>
+              <option value="electron">Electron (q = -1e)</option>
+              <option value="alpha">Alpha Particle (q = +2e)</option>
+              <option value="custom">Neutral Neutron (q = 0)</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label for="slider-velocity">Initial Velocity (v0)</label>
+            <input type="range" id="slider-velocity" min="10" max="80" value="40">
+            <span class="input-help">Speed: <strong id="val-velocity">40</strong> px/s</span>
+          </div>
+
+          <div class="input-group">
+            <label for="slider-mass">Particle Mass ratio</label>
+            <input type="range" id="slider-mass" min="1" max="10" value="3">
+            <span class="input-help">Mass: <strong id="val-mass">3</strong> units</span>
+          </div>
+
+          <div class="particle-actions">
+            <button class="btn btn-primary" id="btn-inject">Inject Particle</button>
+            <button class="btn btn-secondary btn-sm" id="btn-clear-particles">Clear Trails</button>
+          </div>
+        </section>
+
+        <!-- General Physics Engine controls -->
+        <section class="control-card glass-panel" style="min-height:unset;">
+          <h2 class="section-title">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+            Engine Controls
+          </h2>
+          <div class="engine-buttons">
+            <button class="btn btn-accent pulse-effect" id="btn-pause">Pause Physics</button>
+            <button class="btn btn-secondary btn-sm" id="btn-reset">Reset Sandbox</button>
+          </div>
+        </section>
+
+      </aside>
+
+    </main>
+
+    <!-- Bottom: Formula calculations logs terminal -->
+    <footer class="app-console glass-panel">
+      <div class="console-header">
+        <div class="console-title">
+          <span class="console-dot"></span>
+          <h2>Physics Solver Calculation Logs</h2>
+        </div>
+        <button class="btn-clear-console" id="btn-clear-console">Clear Logs</button>
+      </div>
+      <div class="console-logs font-mono" id="console-logs" aria-live="polite">
+        <div class="log-entry system">[SYSTEM] Physics engines loaded. Biot-Savart calculations active.</div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

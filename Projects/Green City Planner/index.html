@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Green City · Planner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="top-bar">
+    <div class="top-brand">
+      <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="#00e676" stroke-width="1.5">
+        <path d="M12 2L2 7l10 5 10-5-10-5z" stroke="#00e676"/>
+        <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="#00e676" stroke-opacity="0.5"/>
+        <rect x="9" y="9" width="6" height="6" fill="#ffb800" stroke="none"/>
+        <path d="M12 9v-2M12 17v2M9 12H7M17 12h2" stroke="#00e676" stroke-width="0.5"/>
+      </svg>
+      <div>
+        <h1 class="top-title">Green City · Planner</h1>
+        <span class="top-sub">municipal zoning terminal v1.0</span>
+      </div>
+      <span class="top-badge" id="topBadge">PLANNING</span>
+    </div>
+    <div class="top-metrics">
+      <span class="metric-chip accent" id="chipPop">POP <strong id="popVal">0</strong></span>
+      <span class="metric-chip" id="chipRenew">RENEW <strong id="renewVal">0</strong> MW</span>
+      <span class="metric-chip" id="chipSustain">SUSTAIN <strong id="sustainVal">--</strong></span>
+    </div>
+  </header>
+
+  <main class="workspace">
+
+    <!-- MAIN GRID -->
+    <div class="main-grid">
+
+      <!-- LEFT: TOOLBOX -->
+      <section class="toolbox-section">
+        <div class="panel-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="10" height="10"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
+          <span>Zoning Toolbox</span>
+        </div>
+        <div class="toolbox-body">
+          <div class="tool-label">Select a structure, then click a grid cell:</div>
+          <div class="tool-grid" id="toolGrid">
+            <div class="tool-item" data-type="park" data-key="p">
+              <div class="tool-swatch" style="background:rgba(0,230,118,0.2);border-color:rgba(0,230,118,0.3)">🌿</div>
+              <div class="tool-name">Eco-Park</div>
+              <div class="tool-stats">+8% GC · −15 AQI</div>
+            </div>
+            <div class="tool-item" data-type="tree" data-key="t">
+              <div class="tool-swatch" style="background:rgba(0,200,83,0.2);border-color:rgba(0,200,83,0.3)">🌳</div>
+              <div class="tool-name">Urban Trees</div>
+              <div class="tool-stats">+5% GC · −8 AQI</div>
+            </div>
+            <div class="tool-item" data-type="house" data-key="h">
+              <div class="tool-swatch" style="background:rgba(255,214,0,0.2);border-color:rgba(255,214,0,0.3)">🏘️</div>
+              <div class="tool-name">Smart Housing</div>
+              <div class="tool-stats">+150 pop · +5 MW</div>
+            </div>
+            <div class="tool-item" data-type="road" data-key="r">
+              <div class="tool-swatch" style="background:rgba(0,229,255,0.2);border-color:rgba(0,229,255,0.3)">🛣️</div>
+              <div class="tool-name">Multi-Lane Road</div>
+              <div class="tool-stats">+12 AQI · −2% GC</div>
+            </div>
+            <div class="tool-item" data-type="factory" data-key="f">
+              <div class="tool-swatch" style="background:rgba(255,23,68,0.2);border-color:rgba(255,23,68,0.3)">🏭</div>
+              <div class="tool-name">Industrial Factory</div>
+              <div class="tool-stats">+500 pop · +30 AQI</div>
+            </div>
+          </div>
+          <div class="tool-clear" id="toolClear">✕ Clear selected</div>
+        </div>
+      </section>
+
+      <!-- CENTER: CANVAS GRID -->
+      <section class="grid-section">
+        <div class="panel-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="10" height="10"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+          <span>Zoning Workspace · 10×10</span>
+          <span class="panel-hint" id="gridHint">ACTIVE</span>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="cityCanvas"></canvas>
+        </div>
+        <div class="grid-coords" id="gridCoords">Hover cell to see coordinates</div>
+      </section>
+
+      <!-- RIGHT: TELEMETRY -->
+      <section class="telemetry-section">
+        <div class="panel-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="10" height="10"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 8h10M7 12h6M7 16h8"/></svg>
+          <span>Urban Telemetry</span>
+          <span class="panel-hint" id="telemHint">LIVE</span>
+        </div>
+        <div class="telem-body" id="telemBody">
+          <div class="tm-card"><div class="tm-lbl">Green Coverage</div><div class="tm-val" id="tmGreen" style="color:#00e676">0%</div></div>
+          <div class="tm-card"><div class="tm-lbl">AQI — Pollution Index</div><div class="tm-val" id="tmAQI" style="color:#00e5ff">50</div></div>
+          <div class="tm-card"><div class="tm-lbl">Renewable Energy</div><div class="tm-val" id="tmEnergy" style="color:#ffd600">0 MW</div></div>
+          <div class="tm-card"><div class="tm-lbl">Carbon Balance</div><div class="tm-val" id="tmCarbon" style="color:#00e676">NEUTRAL</div></div>
+          <div class="tm-card"><div class="tm-lbl">Total Population</div><div class="tm-val" id="tmPop" style="color:#e0e4ec">0</div></div>
+        </div>
+        <div class="alert-chip" id="alertChip" style="display:none">⚠ WARNING: URBAN INDUSTRIALIZATION OUTSTRIPPING SEQUESTRATION BOUNDS. ACID RATIO HIGH.</div>
+      </section>
+
+    </div>
+
+    <!-- ACTIONS -->
+    <footer class="action-bar">
+      <button class="foot-btn foot-run" id="btnRate">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        Calculate Strategic City Rating
+      </button>
+      <button class="foot-btn foot-preset" id="btnBlueprint">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        Pre-Build Industrial Metropolis Blueprint
+      </button>
+      <button class="foot-btn foot-reset" id="btnPurge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6"/><path d="M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+        Purge Municipal Matrix &amp; Flatten Terrain
+      </button>
+    </footer>
+
+  </main>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

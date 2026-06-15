@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GraphExplorer - Interactive GraphQL Playground & IDE</title>
+  <!-- Google Fonts: Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient background glow fields -->
+  <div class="decor-glow">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- APP HEADER -->
+    <header class="app-header bg-glass">
+      <div class="brand">
+        <div class="brand-logo">
+          <i class="fa-solid fa-circle-nodes"></i>
+        </div>
+        <div class="brand-text">
+          <h1>GraphExplorer</h1>
+          <span>GraphQL Playground IDE</span>
+        </div>
+      </div>
+
+      <!-- Header actions and inputs -->
+      <div class="header-controls">
+        <!-- Preset dropdown selector -->
+        <div class="selector-wrapper">
+          <select id="schema-preset" class="select-control">
+            <option value="users">User Directory Schema</option>
+            <option value="blog">Blog Platform Schema</option>
+            <option value="spacex">SpaceX Launches Schema</option>
+          </select>
+          <i class="fa-solid fa-chevron-down select-arrow"></i>
+        </div>
+
+        <!-- Target Endpoint URL input -->
+        <div class="url-input-wrapper">
+          <span class="url-badge" id="sandbox-badge">MOCK</span>
+          <input type="url" id="endpoint-url" value="https://api.graphexplorer.mock/graphql" placeholder="https://your-api.com/graphql">
+        </div>
+
+        <!-- Query triggers actions -->
+        <button id="run-query-btn" class="btn btn-primary" title="Execute Query (Ctrl+Enter)">
+          <i class="fa-solid fa-play"></i> <span>Execute</span>
+        </button>
+        <button id="format-query-btn" class="btn btn-secondary" title="Format Query Syntax">
+          <i class="fa-solid fa-align-left"></i> <span>Beautify</span>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button id="theme-toggle" class="btn btn-icon" aria-label="Toggle Theme">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- IDE MULTI-PANE PORTAL -->
+    <main class="ide-workspace">
+      
+      <!-- COLUMN 1: LEFT SIDEBAR (Schema Docs / History) -->
+      <aside class="sidebar-col bg-glass">
+        <!-- Tabs headers selectors -->
+        <div class="sidebar-tabs">
+          <button class="sidebar-tab active" id="tab-docs" data-tab="docs">
+            <i class="fa-solid fa-book-open"></i> Schema Docs
+          </button>
+          <button class="sidebar-tab" id="tab-history" data-tab="history">
+            <i class="fa-solid fa-clock-rotate-left"></i> History
+          </button>
+        </div>
+
+        <!-- Dynamic panel views -->
+        <div class="tab-panel-viewport">
+          
+          <!-- TAB 1: SCHEMA DOCS PANEL -->
+          <div class="panel-content" id="panel-docs">
+            <!-- Search schema field -->
+            <div class="search-box-wrapper">
+              <i class="fa-solid fa-magnifying-glass search-icon"></i>
+              <input type="search" id="schema-search" placeholder="Search fields or types..." autocomplete="off">
+            </div>
+
+            <!-- Root Types list directories -->
+            <div class="schema-tree-container" id="schema-tree-view">
+              <!-- Dynamically populated schema structure here -->
+            </div>
+          </div>
+
+          <!-- TAB 2: HISTORY LOG PANEL -->
+          <div class="panel-content hidden" id="panel-history">
+            <div class="history-header">
+              <span>Executed Logs</span>
+              <button id="clear-history-btn" class="btn btn-ghost btn-sm">Clear</button>
+            </div>
+            <div class="history-list-container" id="history-items-list">
+              <!-- History cards injected dynamically -->
+            </div>
+          </div>
+
+        </div>
+      </aside>
+
+      <!-- COLUMN 2: CENTER EDITOR (Query Editor & Variables) -->
+      <section class="editor-col bg-glass" aria-label="GraphQL Query Editor">
+        <div class="editor-header-bar">
+          <h2><i class="fa-solid fa-code"></i> Query Editor</h2>
+          
+          <!-- Suggestions toolbar helper inserts -->
+          <div class="autocomplete-toolbar">
+            <button type="button" class="toolbar-tool-btn" data-insert="query">query</button>
+            <button type="button" class="toolbar-tool-btn" data-insert="mutation">mutation</button>
+            <button type="button" class="toolbar-tool-btn" data-insert="variables">vars</button>
+            <button type="button" class="toolbar-tool-btn" data-insert="brackets">{ }</button>
+          </div>
+        </div>
+
+        <!-- Main Query Editor content viewport -->
+        <div class="query-editor-wrapper">
+          <textarea id="query-textarea" class="font-mono text-editor" placeholder="# Write your GraphQL query here...&#10;query GetUsers {&#10;  users {&#10;    id&#10;    name&#10;  }&#10;}" spellcheck="false"></textarea>
+        </div>
+
+        <!-- Variables panel drawer -->
+        <div class="variables-drawer collapsed" id="variables-drawer">
+          <button class="variables-toggle-bar" id="variables-toggle" type="button">
+            <span><i class="fa-solid fa-braces"></i> Query Variables (JSON)</span>
+            <i class="fa-solid fa-chevron-up toggle-arrow"></i>
+          </button>
+          
+          <div class="variables-editor-content">
+            <textarea id="variables-textarea" class="font-mono variables-editor" placeholder="{&#10;  &quot;limit&quot;: 5&#10;}" spellcheck="false"></textarea>
+          </div>
+        </div>
+      </section>
+
+      <!-- COLUMN 3: RIGHT RESULTS CONSOLE -->
+      <section class="result-col bg-glass" aria-label="GraphQL Output Result">
+        <div class="result-header-bar">
+          <div class="result-status-block">
+            <span class="status-led led-idle" id="status-indicator"></span>
+            <h2>Result Window</h2>
+          </div>
+          <div class="result-meta hidden" id="result-meta-tags">
+            <span class="meta-tag" id="response-duration">12 ms</span>
+          </div>
+        </div>
+
+        <!-- Output response content viewport -->
+        <div class="result-viewport-wrapper">
+          <!-- Spinner Loader -->
+          <div class="result-spinner hidden" id="result-spinner">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+            <span>Sending GraphQL POST...</span>
+          </div>
+
+          <div class="result-code-box font-mono" id="result-viewer-panel">
+            <pre id="result-json-pre">{}</pre>
+          </div>
+        </div>
+
+        <!-- Snippets Panel at the bottom of output -->
+        <div class="snippets-container">
+          <div class="snippets-header">
+            <h3>HTTP Client Snippet</h3>
+            <div class="snippets-tabs">
+              <button class="snippet-tab active" data-lang="curl">cURL</button>
+              <button class="snippet-tab" data-lang="fetch">JS Fetch</button>
+              <button class="snippet-tab" data-lang="python">Python</button>
+            </div>
+          </div>
+          <div class="snippets-content font-mono">
+            <pre id="snippet-code-pre">curl -X POST ...</pre>
+            <button class="copy-action-btn" id="copy-snippet-btn" title="Copy code snippet">
+              <i class="fa-regular fa-copy"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

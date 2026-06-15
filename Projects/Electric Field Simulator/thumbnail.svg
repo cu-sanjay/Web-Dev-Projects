@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <!-- Background Gradient -->
+    <radialGradient id="bgGrad" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#141c38" />
+      <stop offset="100%" stop-color="#050810" />
+    </radialGradient>
+
+    <!-- Cyan Glow -->
+    <filter id="glow-cyan" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Magenta Glow -->
+    <filter id="glow-magenta" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="400" height="400" fill="url(#bgGrad)" rx="12" />
+
+  <!-- Faint Dashboard Alignment Grid -->
+  <g stroke="rgba(255, 255, 255, 0.03)" stroke-width="0.75">
+    <line x1="40" y1="0" x2="40" y2="400" />
+    <line x1="80" y1="0" x2="80" y2="400" />
+    <line x1="120" y1="0" x2="120" y2="400" />
+    <line x1="160" y1="0" x2="160" y2="400" />
+    <line x1="200" y1="0" x2="200" y2="400" />
+    <line x1="240" y1="0" x2="240" y2="400" />
+    <line x1="280" y1="0" x2="280" y2="400" />
+    <line x1="320" y1="0" x2="320" y2="400" />
+    <line x1="360" y1="0" x2="360" y2="400" />
+
+    <line x1="0" y1="40" x2="400" y2="400" />
+    <line x1="0" y1="80" x2="400" y2="80" />
+    <line x1="0" y1="120" x2="400" y2="120" />
+    <line x1="0" y1="160" x2="400" y2="160" />
+    <line x1="0" y1="200" x2="400" y2="200" />
+    <line x1="0" y1="240" x2="400" y2="240" />
+    <line x1="0" y1="280" x2="400" y2="280" />
+    <line x1="0" y1="320" x2="400" y2="320" />
+    <line x1="0" y1="360" x2="400" y2="360" />
+  </g>
+
+  <!-- Equipotential Voltage Contours (Faint Circles) -->
+  <!-- Concentric around Positive Charge (130, 200) -->
+  <circle cx="130" cy="200" r="30" fill="none" stroke="rgba(0, 242, 254, 0.15)" stroke-width="1" />
+  <circle cx="130" cy="200" r="55" fill="none" stroke="rgba(0, 242, 254, 0.12)" stroke-width="1" />
+  <circle cx="130" cy="200" r="85" fill="none" stroke="rgba(0, 242, 254, 0.08)" stroke-width="1" />
+
+  <!-- Concentric around Negative Charge (270, 200) -->
+  <circle cx="270" cy="200" r="30" fill="none" stroke="rgba(255, 0, 127, 0.15)" stroke-width="1" />
+  <circle cx="270" cy="200" r="55" fill="none" stroke="rgba(255, 0, 127, 0.12)" stroke-width="1" />
+  <circle cx="270" cy="200" r="85" fill="none" stroke="rgba(255, 0, 127, 0.08)" stroke-width="1" />
+
+  <!-- Electric Field Lines (Cyan and Magenta curves) -->
+  <g fill="none" stroke-linecap="round">
+    <!-- Center connecting line -->
+    <line x1="130" y1="200" x2="270" y2="200" stroke="rgba(0, 242, 254, 0.25)" stroke-width="1.5" />
+
+    <!-- Upper curves -->
+    <path d="M 130 200 C 130 140, 270 140, 270 200" stroke="rgba(0, 242, 254, 0.25)" stroke-width="1.5" />
+    <path d="M 130 200 C 130 90, 270 90, 270 200" stroke="rgba(0, 242, 254, 0.22)" stroke-width="1.5" />
+    <path d="M 130 200 C 130 40, 270 40, 270 200" stroke="rgba(0, 242, 254, 0.16)" stroke-width="1.2" />
+
+    <!-- Lower curves -->
+    <path d="M 130 200 C 130 260, 270 260, 270 200" stroke="rgba(0, 242, 254, 0.25)" stroke-width="1.5" />
+    <path d="M 130 200 C 130 310, 270 310, 270 200" stroke="rgba(0, 242, 254, 0.22)" stroke-width="1.5" />
+    <path d="M 130 200 C 130 360, 270 360, 270 200" stroke="rgba(0, 242, 254, 0.16)" stroke-width="1.2" />
+
+    <!-- Outer lines branching away -->
+    <path d="M 130 200 C 90 170, 40 170, 10 185" stroke="rgba(0, 242, 254, 0.2)" stroke-width="1.2" />
+    <path d="M 130 200 C 90 230, 40 230, 10 215" stroke="rgba(0, 242, 254, 0.2)" stroke-width="1.2" />
+    <path d="M 270 200 C 310 170, 360 170, 390 185" stroke="rgba(255, 0, 127, 0.2)" stroke-width="1.2" />
+    <path d="M 270 200 C 310 230, 360 230, 390 215" stroke="rgba(255, 0, 127, 0.2)" stroke-width="1.2" />
+  </g>
+
+  <!-- Glowing Test Particle Trajectory Trail -->
+  <path d="M 100 80 Q 140 150, 185 140 T 260 120" fill="none" stroke="rgba(0, 242, 254, 0.6)" stroke-width="2.5" stroke-linecap="round" filter="url(#glow-cyan)" />
+  <path d="M 100 80 Q 140 150, 185 140 T 260 120" fill="none" stroke="#ffffff" stroke-width="1" stroke-linecap="round" />
+  <circle cx="260" cy="120" r="5" fill="#ffffff" filter="url(#glow-cyan)" />
+
+  <!-- Charge Elements (Point Charges) -->
+  <!-- Positive (+q) Charge -->
+  <circle cx="130" cy="200" r="20" fill="rgba(0, 242, 254, 0.25)" filter="url(#glow-cyan)" />
+  <circle cx="130" cy="200" r="12" fill="#00f2fe" />
+  <line x1="126" y1="200" x2="134" y2="200" stroke="#050810" stroke-width="2.5" stroke-linecap="round" />
+  <line x1="130" y1="196" x2="130" y2="204" stroke="#050810" stroke-width="2.5" stroke-linecap="round" />
+
+  <!-- Negative (-q) Charge -->
+  <circle cx="270" cy="200" r="20" fill="rgba(255, 0, 127, 0.25)" filter="url(#glow-magenta)" />
+  <circle cx="270" cy="200" r="12" fill="#ff007f" />
+  <line x1="266" y1="200" x2="274" y2="200" stroke="#050810" stroke-width="2.5" stroke-linecap="round" />
+
+  <!-- Outer Dashboard Decorative Bounds -->
+  <rect x="15" y="15" width="370" height="370" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1.5" rx="8" />
+
+  <!-- Logo and Text -->
+  <text x="200" y="356" text-anchor="middle" font-family="'Share Tech Mono', monospace" font-size="12" font-weight="700" fill="#00f2fe" letter-spacing="5">ELECTRIC FIELD</text>
+  <text x="200" y="371" text-anchor="middle" font-family="'Outfit', sans-serif" font-size="9" fill="#8a99ad" letter-spacing="2">LAB SIMULATOR</text>
+</svg>

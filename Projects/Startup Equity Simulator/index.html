@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Startup Equity Simulator</title>
+  <!-- Google Fonts: Outfit (headings) and Inter (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="glow-bg"></div>
+
+  <!-- HEADER -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="logo">
+        <i class="fa-solid fa-chart-pie glow-icon"></i>
+        <h1>CapTable<span>Pro</span></h1>
+        <span class="badge">Equity Simulator</span>
+      </div>
+      
+      <div class="header-stats">
+        <div class="header-stat">
+          <span class="h-label">Total Diluted Valuation</span>
+          <span id="lbl-header-valuation" class="status-indicator status-green">$0</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="main-container">
+    
+    <!-- LEFT COLUMN: INPUTS & FUNDRAISING -->
+    <aside class="sidebar-column" aria-label="Shareholder and funding inputs">
+      
+      <!-- Initial Shareholders Entry -->
+      <section class="section-card">
+        <div class="card-header-row">
+          <h3><i class="fa-solid fa-user-plus"></i> Stakeholder Entry</h3>
+        </div>
+        
+        <div class="form-group">
+          <label for="txt-holder-name">Shareholder Name</label>
+          <input type="text" id="txt-holder-name" placeholder="e.g. Founder A, Angel..." autocomplete="off">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group flex-1">
+            <label for="txt-holder-shares">Initial Shares</label>
+            <input type="number" id="txt-holder-shares" value="400000" min="1" step="1000">
+          </div>
+          <div class="form-group flex-1">
+            <label for="txt-holder-investment">Investment ($)</label>
+            <input type="number" id="txt-holder-investment" value="0" min="0" step="500">
+          </div>
+        </div>
+
+        <button id="btn-add-holder" class="btn btn-secondary btn-sm"><i class="fa-solid fa-plus"></i> Add Shareholder</button>
+      </section>
+
+      <!-- Funding Rounds Form -->
+      <section class="section-card">
+        <div class="card-header-row">
+          <h3><i class="fa-solid fa-coins"></i> Funding Rounds</h3>
+        </div>
+
+        <div class="form-group">
+          <label for="txt-round-name">Round Name</label>
+          <input type="text" id="txt-round-name" placeholder="e.g. Seed, Series A..." autocomplete="off">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group flex-1">
+            <label for="txt-round-cash">Cash Raised ($)</label>
+            <input type="number" id="txt-round-cash" value="200000" min="0" step="5000">
+          </div>
+          <div class="form-group flex-1">
+            <label for="txt-round-pre-val">Pre-Money Val ($)</label>
+            <input type="number" id="txt-round-pre-val" value="1000000" min="1000" step="10000">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="txt-round-esop">New ESOP Set-Aside (%)</label>
+          <input type="number" id="txt-round-esop" value="10" min="0" max="50" step="1">
+        </div>
+
+        <button id="btn-add-round" class="btn btn-secondary btn-sm"><i class="fa-solid fa-arrow-up-right-dots"></i> Add Funding Round</button>
+
+        <!-- List of added rounds -->
+        <div class="added-rounds-section">
+          <h5>Financing Pipeline</h5>
+          <ul class="rounds-ul" id="rounds-list">
+            <!-- Dynamically populated list of rounds -->
+          </ul>
+        </div>
+      </section>
+
+      <button id="btn-reset-workspace" class="footer-btn"><i class="fa-solid fa-trash-can"></i> Clear Table Memory</button>
+    </aside>
+
+    <!-- CENTER COLUMN: FORECAST LEDGERS & CHARTS -->
+    <section class="chart-column" aria-label="Capitalization analysis and exit projections">
+      
+      <!-- Metrics summary dashboard -->
+      <div class="metrics-grid">
+        
+        <div class="metric-card">
+          <span class="m-lbl">Diluted Valuation</span>
+          <span class="m-val" id="lbl-post-money">$0</span>
+          <span class="m-sub" id="lbl-post-money-sub">Post-Money round basis</span>
+        </div>
+
+        <div class="metric-card">
+          <span class="m-lbl">Total Shares</span>
+          <span class="m-val text-cyan" id="lbl-total-shares">0</span>
+          <span class="m-sub" id="lbl-shares-sub">Issued &amp; outstanding</span>
+        </div>
+
+        <div class="metric-card">
+          <span class="m-lbl">ESOP Pool Size</span>
+          <span class="m-val text-amber" id="lbl-esop-pct">0%</span>
+          <span class="m-sub" id="lbl-esop-sub">Employee Options pool</span>
+        </div>
+
+        <div class="metric-card">
+          <span class="m-lbl">Cumulative Dilution</span>
+          <span class="m-val text-rose" id="lbl-dilution">0%</span>
+          <span class="m-sub" id="lbl-dilution-sub">Founders dilution rate</span>
+        </div>
+
+      </div>
+
+      <!-- Graph & Exit Simulator slider wrapper -->
+      <section class="section-card chart-card">
+        <div class="card-header-row">
+          <h3><i class="fa-solid fa-scale-balanced"></i> Post-Dilution Cap Distribution</h3>
+        </div>
+
+        <div class="chart-flex-container">
+          
+          <!-- SVG Pie chart representation -->
+          <div class="pie-container">
+            <svg id="equity-pie-svg" viewBox="0 0 200 200">
+              <!-- Rendered dynamically -->
+            </svg>
+            <div id="pie-legend" class="pie-labels-legend">
+              <!-- Dynamic legends -->
+            </div>
+          </div>
+
+          <!-- Exit Simulator Slide -->
+          <div class="exit-simulator-box">
+            <h4><i class="fa-solid fa-rocket text-azure"></i> Company Exit Simulator</h4>
+            <div class="form-group slider-group">
+              <div class="slider-label-row">
+                <label for="slider-exit">Target Exit Valuation</label>
+                <span class="slider-val" id="lbl-exit-val">$50,000,000</span>
+              </div>
+              <input type="range" id="slider-exit" min="500000" max="250000000" value="50000000" step="500000">
+            </div>
+            <p class="simulator-hint">Slide values to calculate immediate cash pay-outs and shareholder cash-on-cash multiples.</p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Capitalization Table Ledgers Grid -->
+      <section class="section-card table-card">
+        <div class="card-header-row">
+          <h3><i class="fa-solid fa-table"></i> Fully Diluted Capitalization Table</h3>
+        </div>
+        <div class="table-wrapper">
+          <table class="cap-table">
+            <thead>
+              <tr>
+                <th>Shareholder</th>
+                <th>Shares</th>
+                <th>Ownership %</th>
+                <th>Investment</th>
+                <th>Exit Payout</th>
+                <th>ROI Multiple</th>
+                <th style="width: 50px;"></th>
+              </tr>
+            </thead>
+            <tbody id="cap-table-body">
+              <!-- Dynamically populated table list -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </section>
+
+    <!-- RIGHT COLUMN: SCENARIOS & ADVISORS -->
+    <aside class="sidebar-column" aria-label="Scenario vault and equity advisory feeds">
+      
+      <!-- Scenario Vault -->
+      <section class="section-card scenario-card">
+        <div class="card-header-row">
+          <h3><i class="fa-solid fa-database"></i> Cap Table Vault</h3>
+        </div>
+
+        <div class="scenario-save-form">
+          <div class="form-group">
+            <label for="txt-scenario-name">Scenario Name</label>
+            <input type="text" id="txt-scenario-name" placeholder="e.g. VC Path, Bootstrapped..." autocomplete="off">
+          </div>
+          <button id="btn-save-scenario" class="btn btn-primary btn-sm"><i class="fa-solid fa-cloud-arrow-up"></i> Save Current Cap Model</button>
+        </div>
+
+        <div class="saved-scenarios-section">
+          <h5>Saved Models</h5>
+          <ul class="scenario-ul" id="scenario-list">
+            <!-- Dynamically populated scenarios -->
+          </ul>
+        </div>
+      </section>
+
+      <!-- Advisory Recommendations Panel -->
+      <section class="section-card advisory-card">
+        <div class="card-header-row">
+          <h3><i class="fa-solid fa-shield-halved"></i> Cap Table Intelligence</h3>
+        </div>
+        <div class="advisory-feed" id="recommendations-feed">
+          <!-- Context alerts dynamically placed -->
+        </div>
+      </section>
+
+    </aside>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="app-footer">
+    <div class="footer-container">
+      <p>&copy; 2026 CapTablePro Dashboard. Built for the <a href="https://github.com/cu-sanjay/Web-Dev-Projects" target="_blank" rel="noopener noreferrer">Web Dev Projects</a> repository showcase.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

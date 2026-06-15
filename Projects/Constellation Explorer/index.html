@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Constellation · Explorer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="top-bar">
+    <div class="top-brand">
+      <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="1.5">
+        <circle cx="12" cy="8" r="1.5" fill="#ffd600" stroke="none"/>
+        <circle cx="18" cy="10" r="1" fill="#00e5ff" stroke="none"/>
+        <circle cx="6" cy="10" r="0.8" fill="#00e5ff" stroke="none"/>
+        <circle cx="9" cy="14" r="1.2" fill="#00e5ff" stroke="none"/>
+        <circle cx="15" cy="14" r="0.6" fill="#00e5ff" stroke="none"/>
+        <path d="M12 8l6 2-3 6-3-6z" stroke="#00e5ff" stroke-width="0.5" stroke-opacity="0.4"/>
+        <path d="M12 8l-6 2 3 6 3-6z" stroke="#00e5ff" stroke-width="0.5" stroke-opacity="0.4"/>
+      </svg>
+      <div>
+        <h1 class="top-title">Constellation · Explorer</h1>
+        <span class="top-sub">astronomical mapping terminal v1.0</span>
+      </div>
+      <span class="top-badge" id="topBadge">MAPPING</span>
+    </div>
+    <div class="top-metrics">
+      <span class="metric-chip" id="chipNodes">NODES <strong id="nodeCount">0</strong></span>
+      <span class="metric-chip accent" id="chipLinks">LINKS <strong id="linkCount">0</strong></span>
+      <span class="metric-chip" id="chipStatus">STATUS <strong id="statusLabel">IDLE</strong></span>
+    </div>
+  </header>
+
+  <main class="workspace">
+
+    <!-- CONSTELLATION RIBBON -->
+    <div class="const-ribbon">
+      <span class="ribbon-label">Target Constellation</span>
+      <button class="const-btn active" data-const="orion">Orion · The Hunter</button>
+      <button class="const-btn" data-const="ursa">Ursa Major · The Great Bear</button>
+      <button class="const-btn" data-const="cassiopeia">Cassiopeia · The Queen</button>
+      <button class="const-btn" data-const="taurus">Taurus · The Bull</button>
+    </div>
+
+    <!-- MAIN GRID -->
+    <div class="main-grid">
+
+      <!-- CANVAS -->
+      <section class="canvas-section">
+        <div class="panel-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="10" height="10"><circle cx="12" cy="12" r="10"/><path d="M12 2v20M2 12h20"/></svg>
+          <span>Deep-Space Star Chart</span>
+          <span class="panel-hint" id="canvasHint">ORION</span>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="starCanvas"></canvas>
+        </div>
+      </section>
+
+      <!-- RIGHT: INFO + LOG -->
+      <section class="info-section">
+        <div class="panel-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="10" height="10"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 8h10M7 12h6M7 16h8"/></svg>
+          <span>Coordinate Log &amp; Telemetry</span>
+          <span class="panel-hint" id="infoHint">IDLE</span>
+        </div>
+        <div class="info-body">
+          <div class="info-cards" id="infoCards">
+            <div class="i-card"><div class="i-lbl">Constellation</div><div class="i-val" id="iName">Orion</div></div>
+            <div class="i-card"><div class="i-lbl">Brightest Star</div><div class="i-val" id="iBrightest">--</div></div>
+            <div class="i-card"><div class="i-lbl">Avg Magnitude</div><div class="i-val" id="iMagnitude">--</div></div>
+            <div class="i-card"><div class="i-lbl">Distance</div><div class="i-val" id="iDistance">--</div></div>
+          </div>
+          <div class="i-myth" id="iMyth">Click stars to connect the constellation pattern. Connect all nodes in the correct order to verify.</div>
+          <div class="i-log" id="iLog">
+            <div class="log-label">Connection Log</div>
+            <div class="log-entries" id="logEntries">
+              <div class="log-empty">No connections yet. Click a star to begin.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ACTIONS -->
+    <footer class="action-bar">
+      <button class="foot-btn foot-run" id="btnVerify">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><polyline points="20 6 9 17 4 12"/></svg>
+        Verify Structural Vector Mapping
+      </button>
+      <button class="foot-btn foot-preset" id="btnOverlay">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><path d="M3 3h18v18H3z"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
+        Activate Guidance Outline Overlay
+      </button>
+      <button class="foot-btn foot-reset" id="btnFlush">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6"/><path d="M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+        Flush Starmap Coordinates
+      </button>
+    </footer>
+
+  </main>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

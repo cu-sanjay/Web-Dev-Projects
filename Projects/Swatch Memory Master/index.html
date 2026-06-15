@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Swatch Memory Master</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <aside class="panel left-panel">
+    <div class="panel-header">
+      <div class="brand">CHROMATIC MEMORY</div>
+      <div class="brand-sub">// Swatch Master</div>
+    </div>
+
+    <div class="telemetry-deck">
+      <div class="telem-card">
+        <span class="telem-label">Pairs Found</span>
+        <span id="telem-pairs" class="telem-value">0 / 6 FOUND</span>
+      </div>
+      <div class="telem-card">
+        <span class="telem-label">Accuracy</span>
+        <span id="telem-accuracy" class="telem-value">100%</span>
+      </div>
+      <div class="telem-card">
+        <span class="telem-label">Mistakes</span>
+        <span id="telem-mistakes" class="telem-value">0</span>
+      </div>
+    </div>
+
+    <div class="action-buttons">
+      <button id="btn-init" class="action-btn primary">INITIALIZE MEMORY MATRIX</button>
+    </div>
+
+    <div class="diagnostics-bar">
+      <span id="diag-status" class="diag-status">AWAITING INITIALIZATION</span>
+    </div>
+  </aside>
+
+  <main class="viewport">
+    <header class="viewport-header">
+      <span class="sim-source">3D SWATCH GRID ARENA</span>
+      <span class="grid-size" id="timer-display"></span>
+    </header>
+    <div class="grid-stage">
+      <div class="card-grid" id="card-grid"></div>
+    </div>
+  </main>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

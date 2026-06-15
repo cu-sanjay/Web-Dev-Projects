@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Routing Algorithm Visualizer - Comparative Network Routing Lab</title>
+  <meta name="description" content="An interactive simulator for computer network routing. Draw topologies, select sources and destinations, and compare Dijkstra's Link-State, Bellman-Ford, and Flooding protocols.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-logo">
+        <a href="../../" class="back-link" title="Back to Showcase">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        </a>
+        <div class="logo-text">
+          <h1>Routing Algorithm <span class="accent-text">Visualizer</span></h1>
+          <p class="subtitle">Computer Networks &amp; Graph Theory Interactive Learning Lab</p>
+        </div>
+      </div>
+      
+      <div class="header-presets">
+        <div class="control-group">
+          <label for="topology-preset">Select Topology Preset:</label>
+          <select id="topology-preset" class="custom-select">
+            <option value="mesh" selected>Full Mesh Network (Dijkstra Demo)</option>
+            <option value="ring">Ring Network Topology (Alternative Paths)</option>
+            <option value="star">Star / Hub-and-Spoke Topology</option>
+            <option value="line">Line / Daisy Chain Topology</option>
+          </select>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Workspace Dashboard Grid -->
+    <main class="dashboard-grid">
+      
+      <!-- Left Column: Interactive Topology Canvas & Graph Editors -->
+      <section class="left-column">
+        
+        <!-- Interactive Graph Canvas -->
+        <div class="card canvas-card">
+          <div class="canvas-header">
+            <h2 class="card-title">Interactive Topology Canvas</h2>
+            
+            <div class="canvas-modes-toolbar">
+              <button id="btn-mode-select" class="btn btn-small btn-primary" title="Select, Drag and Inspect nodes">Inspect Mode</button>
+              <button id="btn-mode-add" class="btn btn-small btn-secondary" title="Click empty space to add new router node">Add Router</button>
+              <button id="btn-mode-connect" class="btn btn-small btn-secondary" title="Click two nodes to connect them with a link">Connect Links</button>
+            </div>
+          </div>
+          
+          <div class="canvas-instructions-label">
+            <span>Mode: <b>Inspect</b>. Drag nodes to move. Click nodes to view routing table.</span>
+          </div>
+
+          <!-- Dynamic Graph Container -->
+          <div class="canvas-workspace" id="canvas-container">
+            <!-- SVG Line Connections Overlay -->
+            <svg class="network-svg-canvas" id="network-svg">
+              <!-- Rendered dynamically -->
+            </svg>
+            
+            <!-- Absolute Node Elements overlay -->
+            <div class="nodes-layer" id="nodes-layer">
+              <!-- Rendered dynamically -->
+            </div>
+
+            <!-- Traveling Packet element -->
+            <div class="anim-packet-circle hidden" id="routing-packet">
+              <span>✉️</span>
+            </div>
+          </div>
+
+          <div class="canvas-actions-row mt-12">
+            <button id="btn-clear-graph" class="btn btn-secondary btn-small">Clear Canvas</button>
+            <button id="btn-reset-preset" class="btn btn-secondary btn-small">Reset to Preset</button>
+          </div>
+        </div>
+
+        <!-- Comparative Metrics Matrix Card -->
+        <div class="card comparison-card">
+          <h2 class="card-title">Routing Algorithm Comparative Matrix</h2>
+          <p class="alert-info-message">
+            Compare path computations side-by-side. Values update dynamically after each route simulation.
+          </p>
+          
+          <div class="table-container">
+            <table class="custom-table" id="comparison-table">
+              <thead>
+                <tr>
+                  <th>Algorithm</th>
+                  <th>Shortest Path Mapped</th>
+                  <th>Hop Count</th>
+                  <th>Path Metric (Cost)</th>
+                  <th>Packet Storm Count</th>
+                  <th>Simulated Delay</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr id="row-dijkstra">
+                  <td class="hdr-label-dij">Dijkstra (SPF)</td>
+                  <td class="path-val">--</td>
+                  <td class="hop-val">0</td>
+                  <td class="cost-val">0</td>
+                  <td class="packet-val">0</td>
+                  <td class="delay-val">0 ms</td>
+                </tr>
+                <tr id="row-bellman">
+                  <td class="hdr-label-bell">Bellman-Ford</td>
+                  <td class="path-val">--</td>
+                  <td class="hop-val">0</td>
+                  <td class="cost-val">0</td>
+                  <td class="packet-val">0</td>
+                  <td class="delay-val">0 ms</td>
+                </tr>
+                <tr id="row-flooding">
+                  <td class="hdr-label-flood">Flooding (Broadcast)</td>
+                  <td class="path-val">--</td>
+                  <td class="hop-val">0</td>
+                  <td class="cost-val">0</td>
+                  <td class="packet-val">0</td>
+                  <td class="delay-val">0 ms</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Right Column: Settings, Routing table, Console Logs -->
+      <section class="right-column">
+        
+        <!-- Simulation settings card -->
+        <div class="card settings-card">
+          <h2 class="card-title">Routing Simulation Configuration</h2>
+          
+          <div class="settings-form">
+            <div class="field-row">
+              <div class="input-field-group flex-1">
+                <label for="source-node">Source Node</label>
+                <select id="source-node" class="custom-select-small">
+                  <!-- Populated dynamically -->
+                </select>
+              </div>
+
+              <div class="input-field-group flex-1">
+                <label for="dest-node">Destination Node</label>
+                <select id="dest-node" class="custom-select-small">
+                  <!-- Populated dynamically -->
+                </select>
+              </div>
+            </div>
+
+            <div class="input-field-group mt-12">
+              <label for="active-algorithm">Routing Protocol Algorithm</label>
+              <select id="active-algorithm" class="custom-select-small w-full">
+                <option value="dijkstra" selected>Dijkstra Link-State shortest path</option>
+                <option value="bellman">Bellman-Ford Distance-Vector table</option>
+                <option value="flooding">Flooding data broadcast protocol</option>
+              </select>
+            </div>
+
+            <button id="btn-calculate-path" class="btn btn-primary mt-16 w-full">Compute Route Path</button>
+          </div>
+        </div>
+
+        <!-- Timeline Stepper Card -->
+        <div class="card timeline-card">
+          <h2 class="card-title">Simulation Playback Console</h2>
+          
+          <div class="timeline-controls">
+            <button id="btn-prev-step" class="btn btn-control" title="Step backward one hop" disabled>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="19 20 9 12 19 4 19 20"></polygon><line x1="5" y1="19" x2="5" y2="5"></line></svg>
+            </button>
+            
+            <button id="btn-toggle-play" class="btn btn-primary btn-control-main" title="Run simulator timeline automatically">
+              <svg id="play-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              <svg id="pause-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+              <span>Run Route</span>
+            </button>
+            
+            <button id="btn-next-step" class="btn btn-control" title="Step forward one hop">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="5" x2="19" y2="19"></line></svg>
+            </button>
+
+            <button id="btn-reset" class="btn btn-secondary btn-control" title="Reset current packet simulation">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path></svg>
+            </button>
+          </div>
+
+          <div class="slider-speed-bar mt-12">
+            <span id="speed-value">Speed: 1.5s</span>
+            <input type="range" id="sim-speed" min="400" max="4000" step="100" value="1500">
+          </div>
+        </div>
+
+        <!-- Node Routing Table details card -->
+        <div class="card routing-table-card">
+          <h2 class="card-title" id="rt-card-title">Node A Local Routing Table</h2>
+          
+          <div class="table-container-scroll">
+            <table class="custom-table" id="node-rt-table">
+              <thead>
+                <tr>
+                  <th>Destination</th>
+                  <th>Next Hop</th>
+                  <th>Metric Cost</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Populated dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Telemetry Logs console -->
+        <div class="card log-card">
+          <div class="log-header">
+            <h3 class="card-title">Routing Telemetry Logs</h3>
+            <button id="btn-clear-logs" class="btn btn-small">Clear Logs</button>
+          </div>
+          <div id="log-console" class="console">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- Educational Bottom section -->
+    <section class="theory-section card">
+      <h3 class="section-title">Comparative Routing Theory &amp; Concepts</h3>
+      <div class="theory-grid">
+        
+        <div class="theory-card">
+          <h4>Dijkstra's Link-State (OSPF)</h4>
+          <p>
+            Dijkstra's Shortest Path First (SPF) is the core algorithm used in Link-State protocols like OSPF:
+          </p>
+          <ul>
+            <li><strong>Global Knowledge</strong>: Every node must know the complete graph topology. Nodes flood Link-State Advertisements (LSAs) containing neighbor details.</li>
+            <li><strong>SPF Tree Construction</strong>: Using Dijkstra's algorithm, each router computes a shortest-path tree with itself as the root, determining next-hop gateways.</li>
+            <li><strong>Complexity</strong>: $O(V^2)$ or $O(E + V \log V)$ with heaps. Fast convergence and loop-free paths, but memory-intensive.</li>
+          </ul>
+        </div>
+
+        <div class="theory-card">
+          <h4>Bellman-Ford Distance-Vector (RIP)</h4>
+          <p>
+            Bellman-Ford computes paths using distance vectors, forming the basis of RIP:
+          </p>
+          <ul>
+            <li><strong>Local Exchange</strong>: Routers do not know the full topology. They periodically share their local routing tables with direct neighbors only ("routing by rumor").</li>
+            <li><strong>Distance Vector Formula</strong>: Path costs update dynamically: $D_x(y) = \min_v \{ c(x,v) + D_v(y) \}$ where $v$ is a direct neighbor.</li>
+            <li><strong>Convergence Loop Risk</strong>: Slow convergence. Prone to routing loops and the **Count-to-Infinity** problem. Resolved using **Split Horizon** and **Poison Reverse** configurations.</li>
+          </ul>
+        </div>
+
+        <div class="theory-card">
+          <h4>Flooding Broadcasting</h4>
+          <p>
+            Flooding is a simple routing protocol where every incoming packet is duplicated and sent on all outgoing links:
+          </p>
+          <ul>
+            <li><strong>Loop Prevention</strong>: To avoid infinite loops, packets carry unique source sequence identifiers and decrementing **TTL (Time-To-Live)** limits. Routers discard duplicates they have already processed.</li>
+            <li><strong>High Overhead</strong>: Guaranteed to find the shortest path (minimum latency) because all paths are checked simultaneously, but creates massive traffic congestion and packet storms.</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- Simulation Logic Script -->
+  <script src="script.js"></script>
+</body>
+</html>

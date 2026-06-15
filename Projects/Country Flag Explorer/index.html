@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Country Flag Explorer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="terminal-badge">[ COUNTRY FLAG EXPLORER ]</div>
+
+<div class="app-grid">
+
+  <!-- ─── SEARCH RIBBON ─── -->
+  <div class="ribbon">
+    <div class="search-wrap">
+      <input type="text" id="searchInput" placeholder="SEARCH SOVEREIGN STATE...">
+    </div>
+    <div class="filter-wrap">
+      <select id="continentSelect">
+        <option value="all">ALL CONTINENTS</option>
+        <option value="asia">ASIA</option>
+        <option value="europe">EUROPE</option>
+        <option value="americas">AMERICAS</option>
+        <option value="africa">AFRICA</option>
+        <option value="oceania">OCEANIA</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- ─── LEFT: COUNTRY CARDS MATRIX ─── -->
+  <div class="panel matrix-panel">
+    <div class="panel-header">SOVEREIGN STATE MATRIX <span id="resultCount" class="result-count">10</span></div>
+    <div class="card-grid" id="cardGrid"></div>
+  </div>
+
+  <!-- ─── RIGHT TOP: INSPECTOR ─── -->
+  <div class="panel inspector-panel">
+    <div class="panel-header">SOVEREIGN PROFILE INSPECTOR</div>
+    <div id="inspectorContent" class="inspector-empty">CLICK A COUNTRY CARD<br>TO INSPECT PROFILE</div>
+  </div>
+
+  <!-- ─── RIGHT BOTTOM: METRICS ─── -->
+  <div class="panel metrics-panel">
+    <div class="panel-header">GLOBAL METRICS</div>
+    <div class="tele-row"><span class="tele-label">ACTIVE REGION</span><span id="mRegion" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">TOTAL POPULATION</span><span id="mPopulation" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">AVG DENSITY</span><span id="mDensity" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">LINGUISTIC INDEX</span><span id="mLinguistic" class="tele-val">--</span></div>
+  </div>
+
+  <!-- ─── ADMIN FOOTER ─── -->
+  <div class="admin-footer">
+    <button id="btnQuery" class="admin-btn query">EXECUTE GLOBAL DATABASE QUERY RUN</button>
+    <button id="btnG20" class="admin-btn g20">PRE-FILTER G20 SUPER-CLUSTER PROFILE</button>
+    <button id="btnPurge" class="admin-btn purge">PURGE SELECTION VECTORS &amp; RE-ZERO</button>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

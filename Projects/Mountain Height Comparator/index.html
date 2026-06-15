@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mountain Height Comparator</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="terminal-badge">[ MOUNTAIN HEIGHT COMPARATOR ]</div>
+
+<div class="app-grid">
+
+  <!-- ─── PEAK CHECKLIST ─── -->
+  <div class="ribbon" id="peakRibbon"></div>
+
+  <!-- ─── LEFT: REFERENCE OVERLAYS ─── -->
+  <div class="panel ref-panel">
+    <div class="panel-header">REFERENCE SCALE OVERLAYS</div>
+    <label class="ref-toggle"><input type="checkbox" id="refJet"> COMMERCIAL JET FLIGHT (10,000m)</label>
+    <label class="ref-toggle"><input type="checkbox" id="refDeath"> DEATH ZONE THRESHOLD (8,000m)</label>
+    <label class="ref-toggle"><input type="checkbox" id="refCloud"> CUMULUS CLOUD LAYER (2,500m)</label>
+  </div>
+
+  <!-- ─── CENTER: CANVAS ─── -->
+  <div class="panel canvas-panel">
+    <div class="panel-header">ELEVATION WORKSPACE</div>
+    <div class="canvas-wrap">
+      <canvas id="elevCanvas"></canvas>
+    </div>
+  </div>
+
+  <!-- ─── CENTER RIGHT: METRICS TABLE ─── -->
+  <div class="panel table-panel">
+    <div class="panel-header">COMPARATIVE METRICS</div>
+    <div class="table-scroll" id="tableContainer">
+      <div class="table-empty">SELECT PEAKS TO COMPARE</div>
+    </div>
+  </div>
+
+  <!-- ─── RIGHT: TELEMETRY ─── -->
+  <div class="panel telemetry-panel" id="telePanel">
+    <div class="panel-header">ATMOSPHERIC VITALS TELEMETRY</div>
+    <div class="inspector-empty" id="teleEmpty">CLICK A MOUNTAIN<br>TO INSPECT VITALS</div>
+    <div id="teleContent" style="display:none">
+      <div class="tele-row"><span class="tele-label">PEAK</span><span id="tName" class="tele-val">--</span></div>
+      <div class="tele-row"><span class="tele-label">ELEVATION</span><span id="tElev" class="tele-val">--</span></div>
+      <div class="tele-row"><span class="tele-label">PRESSURE</span><span id="tPressure" class="tele-val">--</span></div>
+      <div class="tele-row"><span class="tele-label">BOILING POINT</span><span id="tBoil" class="tele-val">--</span></div>
+      <div class="tele-row"><span class="tele-label">ZONE</span><span id="tBadge" class="tele-badge standby">STANDBY</span></div>
+    </div>
+  </div>
+
+  <!-- ─── ADMIN FOOTER ─── -->
+  <div class="admin-footer">
+    <button id="btnSync" class="admin-btn sync">EXECUTE TOPOGRAPHICAL SCALE SYNC</button>
+    <button id="btnBoost" class="admin-btn boost">TRIGGER TECTONIC ELEVATION BOOST</button>
+    <button id="btnFlush" class="admin-btn flush">FLUSH COMPARATIVE SELECTION VECTORS</button>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

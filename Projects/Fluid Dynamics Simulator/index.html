@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fluid Dynamics Simulator & Visualizer</title>
+  <meta name="description" content="An interactive real-time HTML5 canvas fluid dynamics simulator based on Navier-Stokes grid algorithms, featuring custom obstacles, flow emitters, and tracer particles.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- TOP HEADER -->
+    <header class="app-header">
+      <div class="brand">
+        <div class="brand-logo">
+          <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M2 12C2 12 5 7 12 7C19 7 22 12 22 12C22 12 19 17 12 17C5 17 2 12 2 12Z" stroke-dasharray="4 2"></path>
+            <circle cx="12" cy="12" r="3" fill="currentColor"></circle>
+            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22" stroke-linecap="round"></path>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>HYDRODYNAMICS LAB</h1>
+          <h2>Navier-Stokes Fluid Simulator</h2>
+        </div>
+      </div>
+
+      <!-- Telemetry HUD -->
+      <div class="telemetry-hud" aria-label="Engine Telemetry">
+        <div class="hud-item">
+          <span class="hud-label">Max Velocity</span>
+          <span class="hud-value" id="hud-peak-vel">0.0 px/f</span>
+        </div>
+        <div class="hud-item">
+          <span class="hud-label">Dye Sources</span>
+          <span class="hud-value" id="hud-emitter-count">0</span>
+        </div>
+        <div class="hud-item">
+          <span class="hud-label">Tracers Count</span>
+          <span class="hud-value" id="hud-particle-count">0</span>
+        </div>
+        <div class="hud-item">
+          <span class="hud-label">Engine FPS</span>
+          <span class="hud-value" id="hud-fps">60.0</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="main-layout">
+      <!-- LEFT SIDEBAR: Add and Edit Elements -->
+      <aside class="sidebar left-sidebar" aria-label="Emitters and Obstacles">
+        <div class="panel-section">
+          <h3><span class="sec-num">01</span> Add Fluid Emitters</h3>
+          <div class="adder-grid">
+            <button id="btn-add-faucet" class="btn btn-add faucet" title="Add Fluid Flow Emitter Faucet">
+              💧 Faucet Emitter
+            </button>
+            <button id="btn-add-dye" class="btn btn-add dye" title="Add Static Dye Reservoir Source">
+              🎨 Dye Reservoir
+            </button>
+            <button id="btn-add-drain" class="btn btn-add drain" title="Add Fluid Suction Drain">
+              🌀 Fluid Drain
+            </button>
+          </div>
+        </div>
+
+        <div class="panel-section">
+          <h3><span class="sec-num">02</span> Add Solid Obstacles</h3>
+          <div class="adder-grid">
+            <button id="btn-add-circle" class="btn btn-add obs" title="Add Circular Boundary Obstacle">
+              ⚪ Circle Obstacle
+            </button>
+            <button id="btn-add-square" class="btn btn-add obs" title="Add Square Boundary Obstacle">
+              ⬛ Square Obstacle
+            </button>
+            <button id="btn-add-airfoil" class="btn btn-add obs" title="Add Airfoil Wing profile">
+              ✈️ Wing Airfoil
+            </button>
+          </div>
+        </div>
+
+        <div class="panel-section" id="editor-section">
+          <h3><span class="sec-num">03</span> Element Editor</h3>
+          <div id="editor-placeholder" class="editor-placeholder-msg">
+            Click an obstacle or emitter on the canvas to edit its properties.
+          </div>
+          <div id="editor-controls" class="editor-controls-form hidden">
+            <div class="editor-title-row">
+              <span id="editor-element-type" class="editor-element-type">Circle Obstacle</span>
+              <button id="btn-delete-element" class="btn btn-delete" title="Delete element from grid">Delete</button>
+            </div>
+
+            <div class="control-group" id="group-size">
+              <div class="control-header">
+                <label for="input-size">Element Size / Radius:</label>
+                <span id="val-size" class="control-value">25 px</span>
+              </div>
+              <input type="range" id="input-size" min="10" max="70" step="2" value="25">
+              <div class="range-labels"><span>10px</span><span>70px</span></div>
+            </div>
+
+            <div class="control-group" id="group-strength">
+              <div class="control-header">
+                <label for="input-strength">Flow Rate / Suction:</label>
+                <span id="val-strength" class="control-value">3.0</span>
+              </div>
+              <input type="range" id="input-strength" min="-10" max="10" step="0.5" value="3.0">
+              <div class="range-labels"><span>Suction (-)</span><span>Injection (+)</span></div>
+            </div>
+
+            <div class="control-group" id="group-color">
+              <label for="input-color">Dye Fluid Color:</label>
+              <select id="input-color">
+                <option value="cyan" selected>Neon Cyan</option>
+                <option value="magenta">Glowing Magenta</option>
+                <option value="lime">Laser Lime</option>
+                <option value="orange">Fire Orange</option>
+              </select>
+            </div>
+
+            <div class="control-group" id="group-angle">
+              <div class="control-header">
+                <label for="input-angle">Obstacle Angle:</label>
+                <span id="val-angle" class="control-value">0°</span>
+              </div>
+              <input type="range" id="input-angle" min="0" max="360" step="5" value="0">
+              <div class="range-labels"><span>0°</span><span>360°</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel-section">
+          <h3><span class="sec-num">04</span> Preset Configurations</h3>
+          <div class="preset-column">
+            <button id="btn-preset-vortex" class="btn btn-preset" title="Kármán Vortex Street flow around circular obstacle">
+              Karman Vortex Street Preset
+            </button>
+            <button id="btn-preset-cavity" class="btn btn-preset" title="Enclosed fluid chamber driven by top lid shear">
+              Lid-Driven Cavity Preset
+            </button>
+            <button id="btn-preset-lift" class="btn btn-preset" title="Laminar fluid flow splitting around airfoil wing">
+              Airfoil Lift Flow Preset
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- CENTER PANEL: Canvas simulation viewport -->
+      <main class="canvas-workspace">
+        <div class="canvas-container" id="canvas-container">
+          <canvas id="sim-canvas"></canvas>
+
+          <!-- Floating badge for engine status -->
+          <div class="canvas-floating-badge top-left">
+            <span class="badge-dot pulse"></span>
+            <span class="badge-text" id="sim-status-text">Fluid Solver: ACTIVE</span>
+          </div>
+
+          <div class="canvas-floating-badge bottom-left">
+            <span>🖱️ Click & drag canvas to inject fluid waves. Drag elements to move.</span>
+          </div>
+
+          <!-- Floating Vector Probe HUD -->
+          <div class="probe-hud-panel" id="probe-hud">
+            <div class="probe-hud-header">
+              <span class="probe-hud-title">📊 FLUID VELOCITY PROBE</span>
+              <span class="probe-coord" id="probe-val-coord">(x: 0, y: 0)</span>
+            </div>
+            <div class="probe-grid">
+              <div class="probe-cell">
+                <span class="p-lbl">Velocity (V)</span>
+                <span class="p-val" id="probe-val-vel">0.00 px/f</span>
+              </div>
+              <div class="probe-cell">
+                <span class="p-lbl">Density (D)</span>
+                <span class="p-val" id="probe-val-dens">0.00 %</span>
+              </div>
+              <div class="probe-cell">
+                <span class="p-lbl">Pressure (P)</span>
+                <span class="p-val" id="probe-val-press">0.00</span>
+              </div>
+              <div class="probe-cell">
+                <span class="p-lbl">Flow Angle</span>
+                <span class="p-val" id="probe-val-angle">0°</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- RIGHT SIDEBAR: Solver settings and logger -->
+      <aside class="sidebar right-sidebar" aria-label="Visualizations and Parameters">
+        <div class="panel-section">
+          <h3><span class="sec-num">05</span> Visualization Settings</h3>
+          <div class="control-group">
+            <label for="select-heatmap">Background Heatmap:</label>
+            <select id="select-heatmap">
+              <option value="density" selected>Fluid Dye Density</option>
+              <option value="velocity">Velocity Magnitude</option>
+              <option value="pressure">Fluid Pressure field</option>
+              <option value="none">None (Black Vacuum)</option>
+            </select>
+          </div>
+          <div class="checkbox-rack">
+            <label class="check-label">
+              <input type="checkbox" id="check-vectors">
+              <span class="custom-check"></span> Flow Vectors
+            </label>
+            <label class="check-label">
+              <input type="checkbox" id="check-particles" checked>
+              <span class="custom-check"></span> Tracer Trails
+            </label>
+            <label class="check-label">
+              <input type="checkbox" id="check-grid" checked>
+              <span class="custom-check"></span> Grid Nodes
+            </label>
+            <label class="check-label">
+              <input type="checkbox" id="check-probe" checked>
+              <span class="custom-check"></span> Sensor Probe
+            </label>
+          </div>
+        </div>
+
+        <div class="panel-section">
+          <h3><span class="sec-num">06</span> Physical Parameters</h3>
+          <div class="control-group">
+            <div class="control-header">
+              <label for="input-viscosity">Fluid Viscosity ($\nu$):</label>
+              <span id="val-viscosity" class="control-value">0.0001</span>
+            </div>
+            <input type="range" id="input-viscosity" min="0.0" max="0.002" step="0.0001" value="0.0001">
+            <div class="range-labels"><span>Water (low)</span><span>Oil (high)</span></div>
+          </div>
+
+          <div class="control-group">
+            <div class="control-header">
+              <label for="input-diffusion">Dye Diffusion Rate:</label>
+              <span id="val-diffusion" class="control-value">0.0001</span>
+            </div>
+            <input type="range" id="input-diffusion" min="0.0" max="0.002" step="0.0001" value="0.0001">
+            <div class="range-labels"><span>Sharp (low)</span><span>Dissolving</span></div>
+          </div>
+
+          <div class="control-group">
+            <div class="control-header">
+              <label for="input-decay">Dye Evaporation/Decay:</label>
+              <span id="val-decay" class="control-value">0.005</span>
+            </div>
+            <input type="range" id="input-decay" min="0.0" max="0.03" step="0.001" value="0.005">
+            <div class="range-labels"><span>Infinite</span><span>Fast Fade</span></div>
+          </div>
+
+          <div class="control-group">
+            <div class="control-header">
+              <label for="input-solver-iter">Jacobi Solver Loops:</label>
+              <span id="val-solver-iter" class="control-value">16</span>
+            </div>
+            <input type="range" id="input-solver-iter" min="4" max="40" step="2" value="16">
+            <div class="range-labels"><span>Fast (4)</span><span>Accurate (40)</span></div>
+          </div>
+        </div>
+
+        <div class="panel-section">
+          <h3><span class="sec-num">07</span> Simulator Controls</h3>
+          <div class="actions-grid">
+            <button id="btn-pause-play" class="btn btn-action play" title="Pause or Resume physics updates">
+              <span id="play-pause-icon">⏸️</span> <span id="play-pause-text">Pause Engine</span>
+            </button>
+            <button id="btn-clear-dye" class="btn btn-action clear-dye" title="Wipe out density dye layers">
+              🧹 Clear Dye
+            </button>
+            <button id="btn-reset-all" class="btn btn-action reset" title="Wipe elements and reset sandbox">
+              🔄 Reset Sandbox
+            </button>
+          </div>
+        </div>
+
+        <div class="panel-section flex-grow">
+          <h3><span class="sec-num">08</span> Physics Console Logs</h3>
+          <div class="console-box" id="console-logs" aria-live="polite">
+            <div class="log-line text-info">&gt; Navier-Stokes fluid grid solver loaded.</div>
+            <div class="log-line text-info">&gt; Bilinear semi-lagrangian advection: ACTIVE</div>
+            <div class="log-line text-info">&gt; Incompressibility checker (∇·u = 0): ENFORCED</div>
+            <div class="log-line text-warning">&gt; Left-click drag to introduce dyes. Drag obstacles.</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

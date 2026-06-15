@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Simulate, compile, deploy, and interact with smart contracts on an interactive virtual EVM. Inspect AST mappings, state storage slots, stack execution frames, and gas costs.">
+  <title>Smart Contract Compiler & EVM Visualizer</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- Header: Dashboard branding & Account indicators -->
+    <header class="app-header">
+      <div class="header-logo">
+        <div class="logo-icon"></div>
+        <div class="logo-text">
+          <h1>VM<span>KRAFT</span></h1>
+          <p>EVM & Smart Contract Sandbox</p>
+        </div>
+      </div>
+
+      <!-- Network and account widgets -->
+      <section class="live-network-stats" aria-label="EVM Network State">
+        <div class="metric-card">
+          <span class="metric-label">Network Environment</span>
+          <div class="status-indicator">
+            <span class="status-dot green"></span>
+            <span class="metric-value font-highlight">Simulated EVM (Local)</span>
+          </div>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Simulated Account Address</span>
+          <span class="metric-value font-mono" id="account-address">0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Account Balance</span>
+          <span class="metric-value" id="account-balance">100.00 ETH</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Gas Price</span>
+          <span class="metric-value" id="gas-price">20 Gwei</span>
+        </div>
+      </section>
+    </header>
+
+    <!-- Main Workspace Grid -->
+    <main class="dashboard-grid">
+      
+      <!-- Left: Code Editor and presets -->
+      <section class="grid-column editor-column glass-panel" aria-labelledby="editor-title">
+        <div class="panel-header">
+          <h2 id="editor-title" class="section-title">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
+            Smart Contract IDE
+          </h2>
+          <div class="preset-dropdown-container">
+            <label for="template-select" class="sr-only">Choose Contract Template</label>
+            <select id="template-select">
+              <option value="storage">Simple Storage (Variables)</option>
+              <option value="token">ERC-20 Token (Balances & Maps)</option>
+              <option value="voting">Simple Ballot (Ballot Lists)</option>
+              <option value="crowdfund">Crowdfund Pool (State Machine)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- IDE Text Editor Container -->
+        <div class="code-editor-container">
+          <div class="line-numbers" id="line-numbers"></div>
+          <textarea id="solidity-editor" spellcheck="false" aria-label="Solidity Contract Editor"></textarea>
+        </div>
+
+        <div class="editor-actions">
+          <button class="btn btn-primary" id="btn-compile">Compile Contract</button>
+        </div>
+      </section>
+
+      <!-- Center: Compiled Artifacts (AST, ABI, Opcodes) -->
+      <section class="grid-column compiler-column glass-panel" aria-labelledby="compiler-title">
+        <h2 id="compiler-title" class="section-title">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.25z"/></svg>
+          Compiler Artifacts
+        </h2>
+
+        <!-- Compilation Tabs -->
+        <nav class="tabs-nav" aria-label="Compiler Artifact Selector">
+          <button class="tab-btn active" data-tab="abi">Contract ABI</button>
+          <button class="tab-btn" data-tab="ast">AST Graph</button>
+          <button class="tab-btn" data-tab="opcodes">EVM Opcodes</button>
+        </nav>
+
+        <div class="tab-content-container">
+          <!-- ABI Panel -->
+          <div class="tab-pane active" id="tab-abi">
+            <pre class="artifact-output font-mono" id="abi-output">Compile to view ABI...</pre>
+          </div>
+          <!-- AST Panel -->
+          <div class="tab-pane" id="tab-ast">
+            <div class="artifact-output tree-explorer" id="ast-output">
+              <span class="placeholder-text">Compile to explore Abstract Syntax Tree...</span>
+            </div>
+          </div>
+          <!-- Opcodes Panel -->
+          <div class="tab-pane" id="tab-opcodes">
+            <pre class="artifact-output font-mono" id="opcodes-output">Compile to inspect Bytecode & Opcodes...</pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right: Deployment Workspace & Storage Variables -->
+      <section class="grid-column workspace-column glass-panel" aria-labelledby="workspace-title">
+        <h2 id="workspace-title" class="section-title">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg>
+          EVM Deployment Workspace
+        </h2>
+
+        <!-- Deploy contract inputs -->
+        <div class="deployment-box">
+          <div class="input-group" id="constructor-inputs-container">
+            <!-- Dynamically generated constructor inputs -->
+          </div>
+          <button class="btn btn-accent pulse-effect" id="btn-deploy" disabled>Deploy Contract</button>
+        </div>
+
+        <!-- Contract Interaction Area -->
+        <div class="interaction-container">
+          <div class="deployed-header">
+            <h3>Deployed Contracts</h3>
+            <select id="deployed-contracts-select" aria-label="Select deployed contract address">
+              <option value="">No deployed contracts</option>
+            </select>
+          </div>
+
+          <!-- Dynamic Interaction Forms based on ABI -->
+          <div class="dynamic-forms-wrapper" id="interaction-forms">
+            <div class="empty-forms-message">Deploy a contract to generate call interfaces.</div>
+          </div>
+        </div>
+
+        <!-- EVM Storage Grid (Slot Mapping) -->
+        <div class="storage-slots-container">
+          <h3>EVM Storage Layout</h3>
+          <p class="input-help">Shows contract memory allocation by slots (32-byte slots).</p>
+          <div class="slots-table" id="storage-slots-table">
+            <div class="empty-mempool-message">Deploy and execute write functions to view state variables allocation.</div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Bottom: Receipt logs & EVM stack visualization -->
+    <footer class="bottom-panel-grid">
+      <!-- EVM Execution Stack visual -->
+      <section class="stack-visualizer glass-panel" aria-labelledby="stack-title">
+        <h2 id="stack-title" class="section-title">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.53c-.26-.81-1-1.4-1.9-1.4h-1v-3c0-.55-.45-1-1-1h-6v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.4z"/></svg>
+          EVM Execution Stack
+        </h2>
+        <div class="stack-list-wrapper">
+          <div class="stack-elements font-mono" id="evm-stack">
+            <div class="stack-empty">Stack Empty (Awaiting instruction execution)</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Transaction receipts and console logs -->
+      <section class="execution-console glass-panel" aria-labelledby="receipts-title">
+        <div class="console-header">
+          <div class="console-title">
+            <span class="console-dot"></span>
+            <h2 id="receipts-title">Simulated Blockchain Transaction Receipts</h2>
+          </div>
+          <button class="btn-clear font-sans" id="btn-clear-receipts">Clear Logs</button>
+        </div>
+        <div class="receipts-scroller font-mono" id="receipts-log" aria-live="polite">
+          <div class="log-entry system">[SYSTEM] EVM Simulator started. Deployer account loaded with 100 ETH.</div>
+        </div>
+      </section>
+    </footer>
+  </div>
+  
+  <script src="script.js"></script>
+</body>
+</html>

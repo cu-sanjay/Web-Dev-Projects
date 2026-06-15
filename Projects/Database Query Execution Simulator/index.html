@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="An interactive database query execution simulator. Write SQL queries, view AST parsing, step through Nested Loop Joins, Seq Scans, and Index Scans, and watch row fetches.">
+  <title>Database Query Execution Simulator - Logical SQL Playground</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- Branding Header & Metrics Widgets -->
+    <header class="app-header">
+      <div class="header-logo">
+        <div class="logo-icon"></div>
+        <div class="logo-text">
+          <h1>DB<span>KRAFT</span></h1>
+          <p>SQL Execution Plan Sandbox</p>
+        </div>
+      </div>
+
+      <section class="live-metrics" aria-label="Database Engine Health">
+        <div class="metric-card">
+          <span class="metric-label">Tables Loaded</span>
+          <span class="metric-value" id="metric-tables">3</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Total DB Rows</span>
+          <span class="metric-value" id="metric-rows">25</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Active Indexes</span>
+          <span class="metric-value" id="metric-indexes">1</span>
+        </div>
+        <div class="metric-card" id="metric-pages-card">
+          <span class="metric-label">Page Fetches (Cost)</span>
+          <span class="metric-value" id="metric-pages">0</span>
+        </div>
+      </section>
+    </header>
+
+    <!-- Main Workspace Grid -->
+    <main class="dashboard-grid">
+      
+      <!-- Left: Editor & Schema -->
+      <aside class="sidebar-panel">
+        
+        <!-- SQL Editor Panel -->
+        <section class="control-card glass-panel" aria-labelledby="editor-title">
+          <div class="panel-header">
+            <h2 id="editor-title" class="section-title">
+              <svg class="icon" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              SQL Query Editor
+            </h2>
+            <select id="query-select" aria-label="SQL Template presets">
+              <option value="select_all">1. Simple SELECT * FROM users</option>
+              <option value="select_filter">2. Filter by Age (WHERE age > 25)</option>
+              <option value="index_filter" selected>3. Index Query (WHERE id = 3)</option>
+              <option value="join_loop">4. Join Users & Orders (JOIN)</option>
+              <option value="create_index">5. Optimize: CREATE INDEX ON users</option>
+            </select>
+          </div>
+
+          <div class="editor-wrapper">
+            <textarea id="sql-editor" spellcheck="false" aria-label="SQL command input console"></textarea>
+          </div>
+
+          <div class="execution-controls">
+            <button class="btn btn-primary" id="btn-run">Run Query</button>
+            <button class="btn btn-accent pulse-effect" id="btn-step">Step Exec</button>
+            <button class="btn btn-secondary btn-sm" id="btn-reset">Reset</button>
+          </div>
+        </section>
+
+        <!-- Schema Explorer Panel -->
+        <section class="control-card glass-panel" aria-labelledby="schema-title">
+          <h2 id="schema-title" class="section-title">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.25z"/></svg>
+            Schema Tables
+          </h2>
+          <div class="schema-list" id="schema-list">
+            <!-- Schema items injected dynamically -->
+          </div>
+        </section>
+      </aside>
+
+      <!-- Center: Execution Plan Tree & Cost Analysis -->
+      <section class="plan-panel glass-panel" aria-labelledby="plan-title">
+        <h2 id="plan-title" class="section-title">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+          Logical Execution Plan
+        </h2>
+        
+        <!-- Step execution navigation indicator -->
+        <div class="step-progress-bar hide" id="step-progress-display">
+          <span>Active Step: <strong id="current-step-name">None</strong></span>
+          <div class="dots-row" id="step-dots-container"></div>
+        </div>
+
+        <div class="plan-scroller" id="plan-tree-container">
+          <!-- Logical execution tree nodes visual injected here -->
+          <div class="placeholder-text">Run or step a query to compile the execution planner tree.</div>
+        </div>
+
+        <!-- Cost optimizer dashboard -->
+        <div class="optimizer-box" id="optimizer-box">
+          <h3>Query Cost Comparison</h3>
+          <div class="optimizer-grid">
+            <div class="cost-stat">
+              <span class="cost-label">Seq Scan Cost</span>
+              <span class="cost-value font-mono" id="cost-seq">15.00 units</span>
+            </div>
+            <div class="cost-stat highlight">
+              <span class="cost-label">Index Scan Cost</span>
+              <span class="cost-value font-mono" id="cost-index">2.50 units</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right: Database Tables Grid Viewers (Flashing row scans) & Results -->
+      <section class="data-panel glass-panel" aria-labelledby="data-title">
+        <h2 id="data-title" class="section-title">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg>
+          Data & Output Viewer
+        </h2>
+
+        <!-- Data Tabs selector -->
+        <nav class="tabs-nav" aria-label="Tab panels toggle navigation">
+          <button class="tab-btn active" data-tab="active-table">Live Table Data</button>
+          <button class="tab-btn" data-tab="query-result">Query Results</button>
+        </nav>
+
+        <div class="tab-content-container">
+          
+          <!-- Live Table Data (Allows selecting active table to watch scans) -->
+          <div class="tab-pane active" id="tab-active-table">
+            <div class="table-selector-row">
+              <label for="table-viewer-select">Select Table to view:</label>
+              <select id="table-viewer-select">
+                <option value="users">users</option>
+                <option value="orders">orders</option>
+                <option value="products">products</option>
+              </select>
+            </div>
+            <div class="grid-scroller" id="active-table-data-scroller">
+              <!-- Live Database tables -->
+            </div>
+          </div>
+
+          <!-- Query Results table -->
+          <div class="tab-pane" id="tab-query-result">
+            <div class="grid-scroller" id="query-result-scroller">
+              <div class="placeholder-text">Query results will display here.</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Execution log events console -->
+    <footer class="app-console glass-panel">
+      <div class="console-header">
+        <div class="console-title">
+          <span class="console-dot"></span>
+          <h2>SQL Engine Diagnostic Logs</h2>
+        </div>
+        <button class="btn-clear font-sans" id="btn-clear-console">Clear Diagnostics</button>
+      </div>
+      <div class="console-logs font-mono" id="console-logs" aria-live="polite">
+        <!-- Log logs dynamically in colors -->
+      </div>
+    </footer>
+  </div>
+
+  <!-- Javascript Logic -->
+  <script src="script.js"></script>
+</body>
+</html>

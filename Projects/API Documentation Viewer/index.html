@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>APIDoc - Interactive API Documentation Viewer</title>
+  <!-- Google Fonts: Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- js-yaml library for YAML parsing support -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient background glow elements -->
+  <div class="decor-glow">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- TOP HEADER -->
+    <header class="app-header bg-glass">
+      <div class="brand">
+        <div class="brand-logo">
+          <i class="fa-solid fa-book-bookmark"></i>
+        </div>
+        <div class="brand-text">
+          <h1>APIDoc</h1>
+          <span>Interactive Documentation Hub</span>
+        </div>
+      </div>
+
+      <div class="header-controls">
+        <!-- Built-in Presets -->
+        <div class="preset-selector-wrapper">
+          <select id="preset-selector" class="select-control">
+            <option value="petstore">Swagger Petstore API (Preset)</option>
+            <option value="ecommerce">E-Commerce Shop API (Preset)</option>
+            <option value="tasks">Auth &amp; Tasks Manager (Preset)</option>
+          </select>
+          <i class="fa-solid fa-chevron-down select-arrow"></i>
+        </div>
+
+        <!-- Custom Upload Trigger -->
+        <button id="upload-trigger" class="btn btn-secondary">
+          <i class="fa-solid fa-file-import"></i> <span>Upload Spec</span>
+        </button>
+        <input type="file" id="spec-file-input" accept=".json,.yaml,.yml" class="hidden-input">
+
+        <!-- Theme Toggle -->
+        <button id="theme-toggle" class="btn btn-icon" aria-label="Toggle Theme">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- MAIN DASHBOARD PORTAL (Three columns) -->
+    <main class="docs-portal">
+      
+      <!-- COLUMN 1: SIDEBAR NAVIGATION & CONFIGS -->
+      <aside class="sidebar-col bg-glass">
+        <!-- Search bar -->
+        <div class="search-box-wrapper">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input type="search" id="endpoint-search" placeholder="Filter endpoints..." autocomplete="off">
+        </div>
+
+        <!-- Security Configuration Module -->
+        <div class="sidebar-section">
+          <button class="section-toggle" id="auth-section-toggle">
+            <span><i class="fa-solid fa-shield-halved"></i> Global Authorization</span>
+            <i class="fa-solid fa-chevron-down section-arrow"></i>
+          </button>
+          
+          <div class="section-content hidden-height" id="auth-section-content">
+            <div class="auth-group">
+              <label for="auth-type-select" class="form-label">Auth Scheme</label>
+              <div class="select-wrapper-sm">
+                <select id="auth-type-select" class="select-control-sm">
+                  <option value="none">None</option>
+                  <option value="bearer">Bearer Token</option>
+                  <option value="apikey">API Key (Header)</option>
+                  <option value="basic">Basic Auth</option>
+                </select>
+                <i class="fa-solid fa-chevron-down select-arrow-sm"></i>
+              </div>
+            </div>
+
+            <!-- Token / Key configurations form -->
+            <div id="auth-scheme-fields">
+              <!-- Dynamically loaded fields depending on auth type -->
+            </div>
+            
+            <button id="save-auth-btn" class="btn btn-primary btn-sm btn-full-width">
+              Apply Auth Settings
+            </button>
+          </div>
+        </div>
+
+        <!-- Tag grouped navigation directory list -->
+        <div class="directory-list-container">
+          <h3 class="directory-title">API Reference</h3>
+          <div id="api-navigation-list" class="nav-links">
+            <!-- Nav endpoints generated here -->
+          </div>
+        </div>
+      </aside>
+
+      <!-- COLUMN 2: ENDPOINT DOCUMENTATION -->
+      <section class="docs-col bg-glass" aria-label="Documentation Details">
+        <div class="doc-viewport" id="doc-details-pane">
+          <!-- Documentation content gets loaded dynamically -->
+          <div class="empty-state-intro">
+            <i class="fa-solid fa-circle-nodes"></i>
+            <h2>APIDoc Specification Viewer</h2>
+            <p>Select an endpoint from the left sidebar index to inspect details, path parameters, query requirements, and response schemas.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- COLUMN 3: INTERACTIVE TRY-IT-OUT CONSOLE -->
+      <section class="console-col bg-glass" aria-label="Try It Out Console">
+        <div class="console-header">
+          <h2><i class="fa-solid fa-terminal"></i> Try It Out</h2>
+          <div class="sandbox-switcher">
+            <button class="switcher-btn active" id="sandbox-mock" data-mode="mock">Mock</button>
+            <button class="switcher-btn" id="sandbox-live" data-mode="live">Live</button>
+          </div>
+        </div>
+
+        <div class="console-body">
+          <form id="try-it-form" autocomplete="off">
+            <!-- Dynamic parameters form (query, path, header params inputs) -->
+            <div class="console-section" id="console-params-section">
+              <h3>Request Parameters</h3>
+              <div id="dynamic-params-fields" class="params-inputs-grid">
+                <div class="console-info-message">No query or path parameters for this endpoint.</div>
+              </div>
+            </div>
+
+            <!-- Request Body editor -->
+            <div class="console-section" id="console-body-section">
+              <h3>Request Body (JSON)</h3>
+              <div class="code-editor-wrapper">
+                <div class="editor-header">
+                  <span>body.json</span>
+                  <button type="button" class="editor-action-btn" id="format-body-btn" title="Format JSON">
+                    <i class="fa-solid fa-code"></i>
+                  </button>
+                </div>
+                <textarea id="request-body-editor" rows="6" class="editor-content font-mono" placeholder="{}"></textarea>
+              </div>
+            </div>
+
+            <!-- Language Code Snippets Section -->
+            <div class="console-section">
+              <div class="snippet-header">
+                <h3>Code Snippet</h3>
+                <div class="snippet-tabs">
+                  <button type="button" class="snippet-tab active" data-lang="curl">cURL</button>
+                  <button type="button" class="snippet-tab" data-lang="fetch">JS Fetch</button>
+                  <button type="button" class="snippet-tab" data-lang="python">Python</button>
+                  <button type="button" class="snippet-tab" data-lang="go">Go</button>
+                </div>
+              </div>
+              <div class="code-box-wrapper">
+                <pre class="code-content font-mono" id="snippet-output">curl -X GET "http://localhost/..."</pre>
+                <button type="button" class="copy-snippet-btn" id="copy-snippet-btn" title="Copy code">
+                  <i class="fa-regular fa-copy"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Submit actions -->
+            <div class="console-actions">
+              <button type="submit" class="btn btn-primary btn-full-width" id="send-request-btn">
+                <i class="fa-solid fa-paper-plane"></i> Send Request
+              </button>
+            </div>
+          </form>
+
+          <!-- Response inspection block -->
+          <div class="console-section" id="response-block">
+            <div class="response-header-line">
+              <h3>Response</h3>
+              <div class="response-meta hidden" id="response-meta-tags">
+                <span class="status-pill status-success" id="response-status">200 OK</span>
+                <span class="meta-tag" id="response-time">12 ms</span>
+              </div>
+            </div>
+
+            <!-- Loading Spinner -->
+            <div class="console-spinner hidden" id="response-spinner">
+              <i class="fa-solid fa-circle-notch fa-spin"></i>
+              <span>Sending HTTP request...</span>
+            </div>
+
+            <!-- Response content output -->
+            <div class="response-viewport hidden" id="response-viewport">
+              <div class="tabs-container">
+                <div class="response-tabs">
+                  <button type="button" class="response-tab active" id="tab-resp-body" data-tab="resp-body">Response Body</button>
+                  <button type="button" class="response-tab" id="tab-resp-headers" data-tab="resp-headers">Headers</button>
+                </div>
+                <button type="button" class="copy-resp-btn" id="copy-response-btn" title="Copy response">
+                  <i class="fa-regular fa-copy"></i>
+                </button>
+              </div>
+              
+              <div id="response-body-panel" class="response-content font-mono">
+                <pre id="response-body-pre">{}</pre>
+              </div>
+              <div id="response-headers-panel" class="response-content font-mono hidden">
+                <pre id="response-headers-pre">content-type: application/json</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

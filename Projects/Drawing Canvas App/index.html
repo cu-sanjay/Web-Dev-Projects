@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Drawing Canvas App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <h1>🎨 Drawing Canvas App</h1>
+
+    <div class="toolbar">
+      <label>Brush Size: <input type="range" id="brushSize" min="1" max="50" value="5"></label>
+      <input type="color" id="colorPicker" value="#000000">
+      <button onclick="setEraser()">🧽 Eraser</button>
+      <button onclick="clearCanvas()">🗑️ Clear</button>
+      <button onclick="downloadCanvas()">💾 Download PNG</button>
+    </div>
+
+    <canvas id="canvas" width="800" height="500"></canvas>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

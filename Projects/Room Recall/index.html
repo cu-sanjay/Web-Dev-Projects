@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Recall — Memory Reconstruction</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="glass-card">
+            <div id="start-screen" class="overlay">
+                <h1>Room Recall</h1>
+                <p style="color: var(--text-dim); margin-bottom: 30px;">Observe the environment. Reconstruct the details.</p>
+                <button class="primary-btn" onclick="startObservation()">Initialize Scan</button>
+            </div>
+
+            <div id="result-screen" class="overlay hidden">
+                <h1 id="result-title">Scan Complete</h1>
+                <p id="result-text" style="color: var(--text-dim); margin-bottom: 30px;"></p>
+                <button class="primary-btn" onclick="location.reload()">Re-Initialize</button>
+            </div>
+
+            <div class="phase-indicator" id="phase-label">Standby</div>
+            
+            <div class="image-viewport">
+                <div id="scan-line" class="hidden"></div>
+                <!-- Image shows a yellow chair and 2 books on a desk -->
+                <img id="room-img" src="https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?w=800&q=80" alt="Observation Room">
+                <div id="timer-bar" class="timer-bar" style="width: 0%;"></div>
+            </div>
+
+            <div id="question-area" class="question-area hidden">
+                <div class="question-text" id="q-text">Loading Interrogation...</div>
+                <div class="options-grid" id="options"></div>
+            </div>
+        </div>
+    </div>
+<script src="script.js"></script>
+</body>
+</html>

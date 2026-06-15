@@ -1,0 +1,144 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070913"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+
+    <!-- Node Gradients -->
+    <linearGradient id="tlbGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#6366f1"/>
+    </linearGradient>
+
+    <linearGradient id="ptGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+
+    <linearGradient id="ramGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+
+    <!-- Glow Filters -->
+    <filter id="glowPurple" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <filter id="glowCyan" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <filter id="glowGreen" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="url(#bgGrad)"/>
+  
+  <!-- Subtle decorative grid -->
+  <g opacity="0.05">
+    <path d="M 0,50 L 800,50 M 0,100 L 800,100 M 0,150 L 800,150 M 0,200 L 800,200 M 0,250 L 800,250 M 0,300 L 800,300 M 0,350 L 800,350 M 0,400 L 800,400 M 0,450 L 800,450" stroke="#ffffff" stroke-width="1"/>
+    <path d="M 50,0 L 50,500 M 100,0 L 100,500 M 150,0 L 150,500 M 200,0 L 200,500 M 250,0 L 250,500 M 300,0 L 300,500 M 350,0 L 350,500 M 400,0 L 400,500 M 450,0 L 450,500 M 500,0 L 500,500 M 550,0 L 550,500 M 600,0 L 600,500 M 650,0 L 650,500 M 700,0 L 700,500 M 750,0 L 750,500" stroke="#ffffff" stroke-width="1"/>
+  </g>
+
+  <!-- Title & Subtitle -->
+  <text x="40" y="70" font-family="'Outfit', 'Inter', sans-serif" font-size="28" font-weight="800" fill="#ffffff">
+    VIRTUAL MEMORY <tspan fill="#06b6d4">MANAGER</tspan>
+  </text>
+  <text x="40" y="100" font-family="'Inter', sans-serif" font-size="14" font-weight="500" fill="#94a3b8" letter-spacing="1">
+    ADDRESS TRANSLATION &amp; CACHE SIMULATOR
+  </text>
+
+  <!-- 1. Virtual Address Block -->
+  <g transform="translate(60, 200)">
+    <rect width="200" height="70" rx="10" fill="#1e293b" stroke="url(#accentGrad)" stroke-width="2" filter="url(#glowCyan)"/>
+    <line x1="120" y1="0" x2="120" y2="70" stroke="url(#accentGrad)" stroke-width="1.5" stroke-dasharray="4 2"/>
+    <text x="60" y="32" font-family="'Fira Code', monospace" font-size="16" font-weight="700" fill="#06b6d4" text-anchor="middle">VPN</text>
+    <text x="60" y="52" font-family="'Fira Code', monospace" font-size="11" fill="#94a3b8" text-anchor="middle">3-Bits (Page)</text>
+    <text x="160" y="32" font-family="'Fira Code', monospace" font-size="16" font-weight="700" fill="#3b82f6" text-anchor="middle">OFFSET</text>
+    <text x="160" y="52" font-family="'Fira Code', monospace" font-size="11" fill="#94a3b8" text-anchor="middle">5-Bits</text>
+    <text x="100" y="-12" font-family="'Inter', sans-serif" font-size="12" font-weight="700" fill="#94a3b8" text-anchor="middle" letter-spacing="1">8-BIT VIRTUAL ADDRESS</text>
+  </g>
+
+  <!-- TLB Lookup Path -->
+  <path d="M 270,235 L 360,235" fill="none" stroke="#06b6d4" stroke-width="3" marker-end="url(#arrow)"/>
+  
+  <!-- 2. TLB Block -->
+  <g transform="translate(380, 150)">
+    <rect width="180" height="170" rx="12" fill="url(#tlbGrad)" opacity="0.9" filter="url(#glowPurple)"/>
+    <rect width="180" height="170" rx="12" fill="none" stroke="#a78bfa" stroke-width="1.5"/>
+    <text x="90" y="30" font-family="'Outfit', sans-serif" font-size="16" font-weight="700" fill="#ffffff" text-anchor="middle">TLB CACHE</text>
+    
+    <!-- Mini Row entries -->
+    <rect x="15" y="48" width="150" height="25" rx="4" fill="#070913" fill-opacity="0.4"/>
+    <text x="25" y="65" font-family="'Fira Code', monospace" font-size="10" font-weight="bold" fill="#a78bfa">Page 1 → Frame 2</text>
+    <circle cx="150" cy="61" r="4" fill="#10b981"/>
+
+    <rect x="15" y="80" width="150" height="25" rx="4" fill="#070913" fill-opacity="0.4"/>
+    <text x="25" y="97" font-family="'Fira Code', monospace" font-size="10" font-weight="bold" fill="#a78bfa">Page 3 → Frame 0</text>
+    <circle cx="150" cy="93" r="4" fill="#10b981"/>
+
+    <rect x="15" y="112" width="150" height="25" rx="4" fill="#070913" fill-opacity="0.4"/>
+    <text x="25" y="129" font-family="'Fira Code', monospace" font-size="10" font-weight="bold" fill="#a78bfa">Page 0 → Frame 1</text>
+    <circle cx="150" cy="125" r="4" fill="#10b981"/>
+
+    <!-- TLB Hit badge -->
+    <rect x="55" y="145" width="70" height="18" rx="9" fill="#10b981"/>
+    <text x="90" y="158" font-family="'Inter', sans-serif" font-size="9" font-weight="800" fill="#070913" text-anchor="middle">TLB HIT PATH</text>
+  </g>
+
+  <!-- PT / Miss Path -->
+  <path d="M 470,330 L 470,380" fill="none" stroke="#f59e0b" stroke-width="2.5" stroke-dasharray="5 3"/>
+  <text x="480" y="360" font-family="'Inter', sans-serif" font-size="10" font-weight="700" fill="#f59e0b">TLB MISS</text>
+
+  <!-- 3. Page Table Block -->
+  <g transform="translate(380, 395)">
+    <rect width="180" height="85" rx="10" fill="#1e293b" stroke="url(#ptGrad)" stroke-width="2"/>
+    <text x="90" y="25" font-family="'Outfit', sans-serif" font-size="13" font-weight="700" fill="#f59e0b" text-anchor="middle">PAGE TABLE</text>
+    <text x="20" y="50" font-family="'Fira Code', monospace" font-size="10" fill="#94a3b8">Page 0: Frame 1 (V)</text>
+    <text x="20" y="68" font-family="'Fira Code', monospace" font-size="10" fill="#94a3b8">Page 2: Frame - (I) Page Fault</text>
+  </g>
+
+  <!-- Translation outputs -->
+  <path d="M 570,235 L 630,235" fill="none" stroke="#10b981" stroke-width="3"/>
+  <path d="M 570,437 Q 635,437 635,275" fill="none" stroke="#f59e0b" stroke-width="2" stroke-dasharray="3 3"/>
+
+  <!-- 4. Physical RAM Frame Block -->
+  <g transform="translate(640, 185)">
+    <rect width="120" height="200" rx="12" fill="url(#ramGrad)" opacity="0.9" filter="url(#glowGreen)"/>
+    <rect width="120" height="200" rx="12" fill="none" stroke="#6ee7b7" stroke-width="1.5"/>
+    <text x="60" y="30" font-family="'Outfit', sans-serif" font-size="15" font-weight="800" fill="#ffffff" text-anchor="middle">PHYSICAL RAM</text>
+    
+    <!-- Frames -->
+    <rect x="10" y="48" width="100" height="30" rx="4" fill="#070913" fill-opacity="0.3"/>
+    <text x="60" y="67" font-family="'Fira Code', monospace" font-size="11" font-weight="bold" fill="#6ee7b7" text-anchor="middle">Frame 0 [P3]</text>
+
+    <rect x="10" y="84" width="100" height="30" rx="4" fill="#070913" fill-opacity="0.3"/>
+    <text x="60" y="103" font-family="'Fira Code', monospace" font-size="11" font-weight="bold" fill="#6ee7b7" text-anchor="middle">Frame 1 [P0]</text>
+
+    <rect x="10" y="120" width="100" height="30" rx="4" fill="#070913" fill-opacity="0.3"/>
+    <text x="60" y="139" font-family="'Fira Code', monospace" font-size="11" font-weight="bold" fill="#6ee7b7" text-anchor="middle">Frame 2 [P1]</text>
+
+    <rect x="10" y="156" width="100" height="30" rx="4" fill="#070913" fill-opacity="0.3"/>
+    <text x="60" y="175" font-family="'Fira Code', monospace" font-size="11" fill="#94a3b8" text-anchor="middle">[ Empty Frame ]</text>
+  </g>
+
+  <!-- Arrow marker definition -->
+  <svg>
+    <defs>
+      <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#06b6d4"/>
+      </marker>
+    </defs>
+  </svg>
+</svg>

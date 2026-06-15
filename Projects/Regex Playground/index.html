@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Regex Playground</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="terminal-badge">[ REGEX PLAYGROUND — PATTERN INFORMATICS DESK ]</div>
+
+<div class="app-grid">
+
+  <!-- ─── PATTERN INPUT DECK ─── -->
+  <div class="pattern-deck">
+    <div class="pattern-row">
+      <span class="delim-literal">/</span>
+      <input type="text" id="patternInput" class="pattern-field" placeholder="Enter pattern expression \d+\.\d+">
+      <span class="delim-literal">/</span>
+      <div class="flag-toggles">
+        <button class="flag-btn" data-flag="g">Global <span class="flag-key">[g]</span></button>
+        <button class="flag-btn" data-flag="i">Case-Insensitive <span class="flag-key">[i]</span></button>
+        <button class="flag-btn" data-flag="m">Multi-Line <span class="flag-key">[m]</span></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── LEFT: TEST STRING ─── -->
+  <div class="panel input-panel">
+    <div class="panel-header">TEST STRING VECTOR FEED</div>
+    <textarea id="testInput" spellcheck="false">Contact support@example.com on 2026-01-15.
+Reach out to john.doe@company.org before 2026-03-22.
+Server logs: 192.168.1.1 at 2026-05-10T14:30:00Z.
+Fallback: admin@test.io on 2025-12-01.</textarea>
+  </div>
+
+  <!-- ─── RIGHT: HIGHLIGHTED OUTPUT ─── -->
+  <div class="panel output-panel">
+    <div class="panel-header">HIGHLIGHTED MATCH OUTPUT VIEWPORT</div>
+    <div class="output-scroll" id="outputContainer">
+      <div class="output-empty">INPUT PATTERN &amp; STRING TO GENERATE HIGHLIGHTS</div>
+    </div>
+  </div>
+
+  <!-- ─── TELEMETRY DASHBOARD ─── -->
+  <div class="panel telemetry-panel">
+    <div class="panel-header">PARSING TELEMETRY DASHBOARD</div>
+    <div class="tele-row"><span class="tele-label">EVALUATION STATE</span><span id="tState" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">MATCH COUNT</span><span id="tMatches" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">CAPTURE GROUPS</span><span id="tGroups" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">PROCESS SPEED</span><span id="tSpeed" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">ACTIVE FLAGS</span><span id="tFlags" class="tele-val">--</span></div>
+    <div class="ctrl-divider"></div>
+    <div class="tele-row" style="grid-column:1/-1;"><span id="tBadge" class="tele-badge standby">STANDBY</span></div>
+    <div class="ctrl-divider"></div>
+    <div id="errorDetail" class="error-detail"></div>
+  </div>
+
+  <!-- ─── ADMIN FOOTER ─── -->
+  <div class="admin-footer">
+    <button id="btnExecute" class="admin-btn execute">EXECUTE GLOBAL PATTERN CHECK</button>
+    <button id="btnInject" class="admin-btn inject">INJECT COMPLEX SAMPLE DATA MATRIX</button>
+    <button id="btnFlush" class="admin-btn flush">FLUSH PLAYGROUND CHANNELS</button>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTTP Request Response Visualizer - Interactive Computer Networks Lab</title>
+  <meta name="description" content="Explore HTTP transaction lifecycles. Build custom requests with methods, headers, and body payloads, run packet wire animations, inspect raw headers with tooltips, and play the HTTP quiz game.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-logo">
+        <a href="../../" class="back-link" title="Back to Showcase">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        </a>
+        <div class="logo-text">
+          <h1>HTTP Request &amp; <span class="accent-text">Response</span> Visualizer</h1>
+          <p class="subtitle">Interactive Web Protocol Playground &amp; Raw Header Inspector</p>
+        </div>
+      </div>
+      
+      <!-- Preset Scenarios -->
+      <div class="header-presets">
+        <div class="control-group">
+          <label for="request-preset">Load Request Preset:</label>
+          <select id="request-preset" class="custom-select">
+            <option value="get-html" selected>Get Home Page (GET /index.html)</option>
+            <option value="get-api">Fetch Users API (GET /api/users)</option>
+            <option value="post-login">Post User Login (POST /login)</option>
+            <option value="get-secure">Secure Admin Console (GET /admin/secure)</option>
+            <option value="get-error">Nonexistent Resource (GET /missing)</option>
+          </select>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Workspace Dashboard Grid -->
+    <main class="dashboard-grid">
+      
+      <!-- Left Column: Request Constructor & Live Viewport -->
+      <section class="left-column">
+        
+        <!-- HTTP Request Constructor Card -->
+        <div class="card constructor-card">
+          <h2 class="card-title">HTTP Request Constructor</h2>
+          <p class="section-desc">Customize HTTP method, path, headers, and body payloads to transmit to the mock server.</p>
+          
+          <div class="constructor-fields-grid mt-12">
+            <div class="input-field-group flex-1">
+              <label for="req-method">Method</label>
+              <select id="req-method" class="custom-select-small">
+                <option value="GET" selected>GET</option>
+                <option value="POST">POST</option>
+                <option value="PUT">PUT</option>
+                <option value="DELETE">DELETE</option>
+                <option value="HEAD">HEAD</option>
+              </select>
+            </div>
+
+            <div class="input-field-group flex-2">
+              <label for="req-path">Target Path</label>
+              <select id="req-path" class="custom-select-small">
+                <option value="/" selected>/ (Home Page)</option>
+                <option value="/index.html">/index.html</option>
+                <option value="/api/users">/api/users (JSON API)</option>
+                <option value="/login">/login (Session Cookie Setup)</option>
+                <option value="/admin/secure">/admin/secure (Authorized Session)</option>
+                <option value="/missing">/missing (404 Not Found)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Headers Grid Editor -->
+          <div class="headers-editor-section mt-16">
+            <div class="headers-header">
+              <label>HTTP Headers</label>
+              <div class="header-presets-btns">
+                <button type="button" id="btn-add-json-header" class="btn btn-tiny">Add Content-Type</button>
+                <button type="button" id="btn-add-auth-header" class="btn btn-tiny">Add Authorization</button>
+              </div>
+            </div>
+            
+            <div class="headers-editor-rows mt-6" id="req-headers-container">
+              <!-- Dynamically populated rows -->
+            </div>
+            
+            <button type="button" id="btn-add-header-row" class="btn btn-secondary btn-small mt-8">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              Add Custom Header
+            </button>
+          </div>
+
+          <!-- Collapsible Payload Request Body -->
+          <div class="request-body-section mt-16 hidden" id="req-body-panel">
+            <label for="req-body-input" class="details-label">Request Body Payload</label>
+            <textarea id="req-body-input" class="custom-textarea mt-6 font-mono" placeholder='{\n  "username": "admin",\n  "password": "password123"\n}'></textarea>
+          </div>
+
+          <button id="btn-send-request" class="btn btn-primary w-full mt-16">Send HTTP Request</button>
+        </div>
+
+        <!-- Live Browser Viewport Mock Frame -->
+        <div class="card viewport-card">
+          <h2 class="card-title">Live Browser Viewport</h2>
+          <p class="section-desc">Visualizes how a client web browser renders the returning HTTP payload payload.</p>
+          
+          <div class="browser-mockup-frame mt-12">
+            <!-- Mock Address Bar -->
+            <div class="browser-address-bar">
+              <div class="window-dot red"></div>
+              <div class="window-dot yellow"></div>
+              <div class="window-dot green"></div>
+              
+              <div class="url-input-container">
+                <span class="lock-icon" id="url-lock-icon">🔓</span>
+                <span class="url-protocol">http://</span>
+                <span class="url-host">localhost:8080</span>
+                <span class="url-path" id="url-bar-path">/index.html</span>
+              </div>
+
+              <div class="status-indicator-badge" id="browser-status-badge">200 OK</div>
+            </div>
+
+            <!-- Cookie alerts row -->
+            <div class="cookie-notification-banner hidden" id="cookie-banner-box">
+              <span>🍪 Server set cookie session: <b class="font-mono" id="cookie-banner-val">session_id=...</b></span>
+              <button id="btn-dismiss-cookie" class="btn btn-tiny">Acknowledge</button>
+            </div>
+
+            <!-- Viewport Client Rendering Window -->
+            <div class="browser-render-area" id="browser-viewport-display">
+              <!-- Loaded dynamically (mock landing page or formatted JSON tree) -->
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Right Column: Wire Canvas, Inspector, Quiz -->
+      <section class="right-column">
+        
+        <!-- Live Topology Canvas -->
+        <div class="card canvas-card">
+          <h2 class="card-title">Live Topology Canvas</h2>
+          
+          <div class="connection-canvas mt-12" id="topology-wire-container">
+            <!-- Client Node -->
+            <div class="node-box browser">
+              <div class="node-icon">💻</div>
+              <div class="node-label">Web Browser</div>
+            </div>
+
+            <!-- Network Wire -->
+            <div class="transmission-wire" id="network-cable-wire">
+              <div class="cable-line"></div>
+              
+              <!-- Segment packet -->
+              <div class="http-packet hidden" id="traveling-packet">
+                <span id="packet-label">GET</span>
+                <span id="packet-arrow">&rarr;</span>
+              </div>
+            </div>
+
+            <!-- Server Node -->
+            <div class="node-box server">
+              <div class="node-icon">🖥️</div>
+              <div class="node-label">Web Server</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Raw HTTP Headers Inspector -->
+        <div class="card raw-inspector-card">
+          <div class="inspector-tabs">
+            <button id="tab-btn-request" class="tab-button active">Raw HTTP Request</button>
+            <button id="tab-btn-response" class="tab-button">Raw HTTP Response</button>
+          </div>
+
+          <div class="raw-console-wrapper mt-12">
+            <div class="console" id="raw-console-display">
+              <!-- Highlighted lines with hover tags populated by JS -->
+            </div>
+          </div>
+          
+          <!-- Hover interactive explanation card -->
+          <div class="header-explanation-box mt-12" id="explanation-tooltip-box">
+            <div class="explanation-title" id="tooltip-title">Header Inspector</div>
+            <p class="explanation-desc" id="tooltip-desc">Hover over any raw header line in the code console above to display its TCP/HTTP specifications.</p>
+          </div>
+        </div>
+
+        <!-- Educational Training Quiz Card -->
+        <div class="card quiz-card">
+          <div class="card-header">
+            <h2 class="card-title">HTTP Protocol Quiz</h2>
+            <div class="quiz-score">Score: <b id="quiz-score-val" class="accent-text">0/0</b></div>
+          </div>
+          
+          <div id="quiz-start-view" class="quiz-content">
+            <p class="section-desc">Practice matching server status codes (1xx-5xx), header operations, and idempotency methods.</p>
+            <button id="btn-start-quiz" class="btn btn-primary w-full mt-16">Launch HTTP Quiz</button>
+          </div>
+
+          <div id="quiz-active-view" class="quiz-content hidden">
+            <div class="quiz-question-box" id="quiz-question-text">
+              <!-- Quiz loaded dynamically -->
+            </div>
+            
+            <div class="quiz-options-grid mt-16" id="quiz-options-container">
+              <!-- Choices buttons -->
+            </div>
+
+            <div class="quiz-feedback mt-16 hidden" id="quiz-feedback-box">
+              <span id="quiz-feedback-text">Correct!</span>
+            </div>
+
+            <div class="quiz-actions mt-16">
+              <button id="btn-quit-quiz" class="btn btn-secondary btn-small">Quit</button>
+              <button id="btn-next-quiz" class="btn btn-primary btn-small hidden">Next Question</button>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- Bottom Educational details card -->
+    <section class="theory-section card">
+      <h3 class="section-title">HTTP Transaction Lifecycle Concepts</h3>
+      <div class="theory-grid">
+        
+        <div class="theory-card">
+          <h4>Request Methods</h4>
+          <p>
+            HTTP defines a set of request methods to indicate the desired action to be performed on a given resource:
+          </p>
+          <ul>
+            <li><strong>GET</strong>: Retrieves data from a resource. It is <strong>safe</strong> and <strong>idempotent</strong> (subsequent requests return the identical result without side effects).</li>
+            <li><strong>POST</strong>: Submits entity payloads to the specified resource, often causing state changes or side effects on the server.</li>
+            <li><strong>PUT</strong>: Replaces all current representations of the target resource with the request payload.</li>
+            <li><strong>DELETE</strong>: Deletes the specified resource.</li>
+          </ul>
+        </div>
+
+        <div class="theory-card">
+          <h4>Status Code Classifications</h4>
+          <p>
+            Server responses carry a 3-digit integer status code categorizing transaction results:
+          </p>
+          <ul>
+            <li><strong>1xx (Informational)</strong>: Request received, continuing process.</li>
+            <li><strong>2xx (Successful)</strong>: Action received, understood, and accepted (e.g. <code>200 OK</code>, <code>201 Created</code>).</li>
+            <li><strong>3xx (Redirection)</strong>: Further action needed to complete request (e.g. <code>301 Moved Permanently</code>).</li>
+            <li><strong>4xx (Client Error)</strong>: Request contains bad syntax or cannot be fulfilled (e.g. <code>400 Bad Request</code>, <code>401 Unauthorized</code>, <code>404 Not Found</code>).</li>
+            <li><strong>5xx (Server Error)</strong>: Server failed to fulfill an otherwise valid request (e.g. <code>500 Internal Server Error</code>).</li>
+          </ul>
+        </div>
+
+        <div class="theory-card">
+          <h4>HTTP Headers Functionality</h4>
+          <p>
+            Headers pass additional metadata parameters between client and server:
+          </p>
+          <ul>
+            <li><strong>Host</strong>: Specifies the domain name of the server (mandatory in HTTP/1.1).</li>
+            <li><strong>User-Agent</strong>: Identifies the client software application version (browser details).</li>
+            <li><strong>Authorization</strong>: Carries credentials (e.g. <code>Bearer token</code>) to authenticate the client.</li>
+            <li><strong>Set-Cookie</strong>: Server response header containing cookies to store in client local memory, establishing stateful sessions.</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Custom Scripts -->
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ocean Currents Simulator — Global Marine Circulation Intelligence Platform</title>
+  <meta name="description" content="Explore major global ocean currents through animated flow systems, climate impact modeling, and interactive oceanographic controls.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="app" class="app">
+    <aside class="panel panel--left" aria-label="Ocean Control Center">
+      <header class="panel-header">
+        <h1 class="logo">
+          <span class="logo-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#7dd3fc" stroke-width="1.5">
+              <path d="M2 12C2 6.5 6.5 2 12 2s10 4.5 10 10-4.5 10-10 10S2 17.5 2 12z"/>
+              <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              <path d="M8 12c0 4 2 8 4 8s4-4 4-8-2-8-4-8-4 4-4 8z"/>
+            </svg>
+          </span>
+          <span class="logo-text">Ocean Currents Simulator</span>
+        </h1>
+        <p class="panel-subtitle">Global Marine Circulation Intelligence Platform</p>
+      </header>
+
+      <div class="search-module">
+        <div class="search-wrapper">
+          <svg class="search-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#64748b" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+          </svg>
+          <input type="search" id="searchInput" class="search-input" placeholder="Search currents, basins, regions..." aria-label="Search ocean currents" autocomplete="off">
+        </div>
+      </div>
+
+      <section class="currents-section" aria-label="Ocean current selection">
+        <h2 class="section-label">Ocean Currents</h2>
+        <div class="current-group">
+          <h3 class="current-group-label">Atlantic Ocean</h3>
+          <div class="current-list" id="listAtlantic" role="group" aria-label="Atlantic Ocean currents"></div>
+        </div>
+        <div class="current-group">
+          <h3 class="current-group-label">Pacific Ocean</h3>
+          <div class="current-list" id="listPacific" role="group" aria-label="Pacific Ocean currents"></div>
+        </div>
+        <div class="current-group">
+          <h3 class="current-group-label">Indian Ocean</h3>
+          <div class="current-list" id="listIndian" role="group" aria-label="Indian Ocean currents"></div>
+        </div>
+        <div class="current-group">
+          <h3 class="current-group-label">Polar Regions</h3>
+          <div class="current-list" id="listPolar" role="group" aria-label="Polar currents"></div>
+        </div>
+      </section>
+
+      <section class="controls-section" aria-label="Simulation controls">
+        <h2 class="section-label">Simulation Controls</h2>
+
+        <div class="control-row">
+          <label class="control-label" for="speedSlider">Current Speed</label>
+          <div class="slider-wrapper">
+            <input type="range" id="speedSlider" class="slider" min="0" max="100" value="50" aria-label="Current speed">
+            <span class="slider-value" id="speedValue">50%</span>
+          </div>
+        </div>
+
+        <div class="control-row">
+          <label class="control-label" for="tempSlider">Water Temperature</label>
+          <div class="slider-wrapper">
+            <input type="range" id="tempSlider" class="slider" min="-2" max="32" value="15" step="0.5" aria-label="Water temperature in Celsius">
+            <span class="slider-value" id="tempValue">15.0°C</span>
+          </div>
+        </div>
+
+        <div class="control-row">
+          <label class="control-label" for="flowSlider">Flow Intensity</label>
+          <div class="slider-wrapper">
+            <input type="range" id="flowSlider" class="slider" min="0" max="100" value="50" aria-label="Flow intensity">
+            <span class="slider-value" id="flowValue">50%</span>
+          </div>
+        </div>
+
+        <div class="control-row">
+          <label class="control-label" for="animSlider">Animation Speed</label>
+          <div class="slider-wrapper">
+            <input type="range" id="animSlider" class="slider" min="1" max="10" value="5" step="1" aria-label="Animation speed">
+            <span class="slider-value" id="animValue">5x</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="climate-section" aria-label="Climate impact controls">
+        <h2 class="section-label">Climate Effects</h2>
+        <div class="toggle-grid">
+          <label class="toggle-row">
+            <input type="checkbox" id="toggleTemp" checked aria-label="Toggle temperature influence">
+            <span class="toggle-track"><span class="toggle-thumb"></span></span>
+            <span class="toggle-label">Temperature</span>
+          </label>
+          <label class="toggle-row">
+            <input type="checkbox" id="toggleRain" checked aria-label="Toggle rainfall influence">
+            <span class="toggle-track"><span class="toggle-thumb"></span></span>
+            <span class="toggle-label">Rainfall</span>
+          </label>
+          <label class="toggle-row">
+            <input type="checkbox" id="toggleStorm" checked aria-label="Toggle storm formation">
+            <span class="toggle-track"><span class="toggle-thumb"></span></span>
+            <span class="toggle-label">Storm Formation</span>
+          </label>
+          <label class="toggle-row">
+            <input type="checkbox" id="toggleBio" checked aria-label="Toggle marine biodiversity">
+            <span class="toggle-track"><span class="toggle-thumb"></span></span>
+            <span class="toggle-label">Biodiversity</span>
+          </label>
+        </div>
+      </section>
+
+      <section class="sim-status" aria-label="Simulation status">
+        <h2 class="section-label">Simulation Status</h2>
+        <div class="status-grid">
+          <div class="status-item">
+            <span class="status-value" id="statusName">—</span>
+            <span class="status-label">Active Current</span>
+          </div>
+          <div class="status-item">
+            <span class="status-value" id="statusSpeed">—</span>
+            <span class="status-label">Speed</span>
+          </div>
+          <div class="status-item">
+            <span class="status-value" id="statusTemp">—</span>
+            <span class="status-label">Temperature</span>
+          </div>
+          <div class="status-item">
+            <span class="status-value" id="statusClimate">—</span>
+            <span class="status-label">Climate Influence</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="activity-section" aria-label="Simulation activity feed">
+        <h2 class="section-label">Activity Feed</h2>
+        <div class="activity-feed" id="activityFeed" role="log" aria-live="polite" aria-relevant="additions">
+          <p class="activity-empty">Select a current to begin simulation.</p>
+        </div>
+      </section>
+    </aside>
+
+    <main class="panel panel--right" aria-label="Ocean Simulation Workspace">
+      <div class="map-header" id="mapHeader">
+        <div class="map-header-info">
+          <span class="map-header-label">Selected Current</span>
+          <span class="map-header-value" id="activeCurrent">—</span>
+        </div>
+        <div class="map-header-info">
+          <span class="map-header-label">Ocean Basin</span>
+          <span class="map-header-value" id="activeBasin">—</span>
+        </div>
+        <div class="map-header-info">
+          <span class="map-header-label">Temperature</span>
+          <span class="map-header-value" id="activeTemp">—</span>
+        </div>
+        <div class="map-header-info">
+          <span class="map-header-label">Velocity</span>
+          <span class="map-header-value mono" id="activeVelocity">—</span>
+        </div>
+      </div>
+
+      <div class="map-workspace" id="mapWorkspace">
+        <div class="map-container" id="mapContainer">
+          <svg class="world-map" id="worldMap" viewBox="0 0 800 400" aria-label="Interactive ocean map showing global currents" role="application">
+            <defs>
+              <filter id="currentGlow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              <filter id="continentShadow"><feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#000" flood-opacity="0.4"/></filter>
+              <radialGradient id="particleGlow"><stop offset="0%" stop-color="#7dd3fc" stop-opacity="0.6"/><stop offset="100%" stop-color="#7dd3fc" stop-opacity="0"/></radialGradient>
+            </defs>
+
+            <rect x="0" y="0" width="800" height="400" fill="#04111f"/>
+
+            <g class="map-grid" stroke="#1e293b" stroke-width="0.5" fill="none" opacity="0.35">
+              <line x1="0" y1="50" x2="800" y2="50"/><line x1="0" y1="100" x2="800" y2="100"/>
+              <line x1="0" y1="150" x2="800" y2="150"/><line x1="0" y1="200" x2="800" y2="200"/>
+              <line x1="0" y1="250" x2="800" y2="250"/><line x1="0" y1="300" x2="800" y2="300"/>
+              <line x1="0" y1="350" x2="800" y2="350"/>
+              <line x1="100" y1="0" x2="100" y2="400"/><line x1="200" y1="0" x2="200" y2="400"/>
+              <line x1="300" y1="0" x2="300" y2="400"/><line x1="400" y1="0" x2="400" y2="400"/>
+              <line x1="500" y1="0" x2="500" y2="400"/><line x1="600" y1="0" x2="600" y2="400"/>
+              <line x1="700" y1="0" x2="700" y2="400"/>
+            </g>
+
+            <g class="continents" filter="url(#continentShadow)">
+              <path class="continent" d="M 85 40 L 115 35 L 155 38 L 180 45 L 195 55 L 200 70 L 195 85 L 185 95 L 190 110 L 195 125 L 190 140 L 180 148 L 170 155 L 155 158 L 140 155 L 130 160 L 120 155 L 110 145 L 100 140 L 90 130 L 82 115 L 78 100 L 75 80 L 78 60 Z" fill="#0c1a30" stroke="#1a3050" stroke-width="0.7"/>
+              <path class="continent" d="M 195 20 L 215 18 L 235 22 L 240 35 L 235 50 L 220 55 L 205 52 L 195 42 Z" fill="#0c1a30" stroke="#1a3050" stroke-width="0.7"/>
+              <path class="continent" d="M 170 165 L 185 162 L 200 168 L 212 178 L 220 195 L 225 215 L 228 235 L 225 255 L 218 270 L 208 285 L 195 295 L 185 300 L 178 295 L 172 280 L 168 260 L 165 240 L 163 220 L 162 200 L 165 185 Z" fill="#0c1a30" stroke="#1a3050" stroke-width="0.7"/>
+              <path class="continent" d="M 355 40 L 370 35 L 385 32 L 400 35 L 415 40 L 425 48 L 430 58 L 435 68 L 432 78 L 425 88 L 415 95 L 405 100 L 395 102 L 385 100 L 375 95 L 365 88 L 358 78 L 352 65 L 350 52 Z" fill="#0c1a30" stroke="#1a3050" stroke-width="0.7"/>
+              <path class="continent" d="M 365 105 L 380 100 L 395 98 L 410 100 L 425 105 L 435 115 L 440 130 L 442 150 L 440 170 L 435 190 L 425 210 L 412 225 L 398 235 L 385 240 L 375 235 L 368 220 L 362 200 L 358 180 L 355 155 L 355 135 L 358 118 Z" fill="#0c1a30" stroke="#1a3050" stroke-width="0.7"/>
+              <path class="continent" d="M 415 35 L 440 30 L 470 28 L 500 30 L 530 35 L 560 40 L 590 48 L 615 55 L 635 65 L 648 78 L 655 95 L 652 110 L 645 125 L 635 135 L 620 140 L 600 142 L 580 140 L 560 135 L 540 130 L 520 128 L 500 125 L 480 120 L 460 115 L 445 105 L 432 95 L 425 80 L 418 65 L 415 50 Z" fill="#0c1a30" stroke="#1a3050" stroke-width="0.7"/>
+              <path class="continent" d="M 450 120 L 465 118 L 478 125 L 485 140 L 480 158 L 470 168 L 458 165 L 450 152 L 445 138 Z" fill="#0c1a30" stroke="#1a3050" stroke-width="0.7"/>
+              <path class="continent" d="M 510 140 L 530 138 L 550 142 L 565 150 L 570 160 L 560 168 L 545 170 L 530 165 L 518 158 L 512 148 Z" fill="#0c1a30" stroke="#1a3050" stroke-width="0.7"/>
+              <path class="continent" d="M 540 172 L 555 170 L 570 175 L 580 182 L 575 190 L 560 192 L 548 185 L 540 178 Z" fill="#0c1a30" stroke="#1a3050" stroke-width="0.7"/>
+              <path class="continent" d="M 640 230 L 660 225 L 680 228 L 695 235 L 705 248 L 708 265 L 700 278 L 688 288 L 672 292 L 658 290 L 648 282 L 640 270 L 635 255 Z" fill="#0c1a30" stroke="#1a3050" stroke-width="0.7"/>
+              <path class="continent" d="M 60 370 L 120 365 L 200 362 L 300 360 L 400 358 L 500 360 L 600 362 L 680 365 L 740 370 L 750 380 L 740 390 L 680 395 L 600 398 L 500 400 L 400 400 L 300 398 L 200 395 L 120 390 L 60 385 Z" fill="#0c1a30" stroke="#1a3050" stroke-width="0.7"/>
+              <path class="continent" d="M 628 62 L 638 58 L 645 65 L 648 78 L 642 88 L 635 85 L 628 75 Z" fill="#0c1a30" stroke="#1a3050" stroke-width="0.7"/>
+              <path class="continent" d="M 350 42 L 358 38 L 362 45 L 360 55 L 354 58 L 348 52 Z" fill="#0c1a30" stroke="#1a3050" stroke-width="0.7"/>
+              <path class="continent" d="M 447 192 L 455 188 L 460 198 L 458 212 L 452 220 L 445 215 L 442 205 Z" fill="#0c1a30" stroke="#1a3050" stroke-width="0.7"/>
+            </g>
+
+            <ellipse cx="400" cy="15" rx="180" ry="15" fill="#0a2040" opacity="0.2"/>
+
+            <!-- Current paths and particles rendered by JS -->
+            <g id="currentsGroup" aria-label="Ocean current paths"></g>
+            <g id="particlesGroup" aria-label="Flow particles"></g>
+            <g id="arrowsGroup" aria-label="Current direction arrows"></g>
+          </svg>
+
+          <div class="map-controls">
+            <button class="map-control-btn" id="resetViewBtn" aria-label="Reset map view" title="Reset View">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>
+            </button>
+            <button class="map-control-btn" id="zoomInBtn" aria-label="Zoom in" title="Zoom In">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
+            </button>
+            <button class="map-control-btn" id="zoomOutBtn" aria-label="Zoom out" title="Zoom Out">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg>
+            </button>
+            <button class="map-control-btn" id="exportBtn" aria-label="Export simulation data as JSON" title="Export Data">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5M12 15V3"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="map-legend">
+          <span class="legend-item"><span class="legend-line" style="background:#f97316"></span>Warm Current</span>
+          <span class="legend-item"><span class="legend-line" style="background:#38bdf8"></span>Cool Current</span>
+          <span class="legend-item"><span class="legend-line" style="background:#ef4444"></span>Hot Current</span>
+          <span class="legend-item"><span class="legend-line" style="background:#2563eb"></span>Cold Current</span>
+        </div>
+      </div>
+
+      <!-- Climate info card -->
+      <div class="info-card-overlay" id="infoCardOverlay" hidden aria-hidden="true">
+        <div class="info-card" id="infoCard" role="dialog" aria-modal="true" aria-labelledby="infoCardTitle">
+          <button class="info-card-close" id="infoCardClose" aria-label="Close climate panel">&times;</button>
+          <div class="info-card-body">
+            <div class="info-card-header">
+              <div>
+                <h2 class="info-card-title" id="infoCardTitle"></h2>
+                <span class="info-card-type-badge" id="infoCardType"></span>
+              </div>
+              <span class="info-card-ocean" id="infoCardOcean"></span>
+            </div>
+
+            <p class="info-card-desc" id="infoCardDesc"></p>
+
+            <div class="climate-effects">
+              <div class="climate-col">
+                <h3 class="climate-col-title">Temperature Influence</h3>
+                <ul class="climate-list" id="infoTempEffects"></ul>
+              </div>
+              <div class="climate-col">
+                <h3 class="climate-col-title">Rainfall Effects</h3>
+                <ul class="climate-list" id="infoRainEffects"></ul>
+              </div>
+              <div class="climate-col">
+                <h3 class="climate-col-title">Storm Formation</h3>
+                <ul class="climate-list" id="infoStormEffects"></ul>
+              </div>
+              <div class="climate-col">
+                <h3 class="climate-col-title">Biodiversity Impact</h3>
+                <ul class="climate-list" id="infoBioEffects"></ul>
+              </div>
+            </div>
+
+            <div class="info-card-stats">
+              <div class="info-card-stat">
+                <span class="stat-label">Current Length</span>
+                <span class="stat-value mono" id="infoLength"></span>
+              </div>
+              <div class="info-card-stat">
+                <span class="stat-label">Avg. Speed</span>
+                <span class="stat-value mono" id="infoAvgSpeed"></span>
+              </div>
+              <div class="info-card-stat">
+                <span class="stat-label">Temp Range</span>
+                <span class="stat-value mono" id="infoTempRange"></span>
+              </div>
+              <div class="info-card-stat">
+                <span class="stat-label">Depth Influence</span>
+                <span class="stat-value mono" id="infoDepth"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <nav class="action-bar" aria-label="Quick actions">
+    <button class="action-bar-btn" id="quizBtn" aria-label="Start oceanography quiz" title="Quiz">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <span>Quiz</span>
+    </button>
+    <button class="action-bar-btn" id="compareBasinBtn" aria-label="Compare ocean basins" title="Compare">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M8 3H3v5M3 16v5h5M21 16v5h-5"/></svg>
+      <span>Compare</span>
+    </button>
+    <button class="action-bar-btn" id="heatmapBtn" aria-label="Toggle speed heatmap overlay" title="Heatmap">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M12 2v20M2 12h20"/></svg>
+      <span>Heatmap</span>
+    </button>
+    <button class="action-bar-btn" id="randomFactBtn" aria-label="Show random ocean fact" title="Fact">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+      <span>Fact</span>
+    </button>
+  </nav>
+
+  <!-- Quiz Modal -->
+  <div class="modal-overlay" id="quizModal" hidden aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="quizModalTitle">
+      <div class="modal-header">
+        <h2 id="quizModalTitle">Oceanography Quiz</h2>
+        <button class="modal-close" id="quizModalClose" aria-label="Close quiz">&times;</button>
+      </div>
+      <div class="modal-body" id="quizModalBody"></div>
+    </div>
+  </div>
+
+  <!-- Compare Modal -->
+  <div class="modal-overlay" id="compareModal" hidden aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="compareModalTitle">
+      <div class="modal-header">
+        <h2 id="compareModalTitle">Ocean Basin Comparison</h2>
+        <button class="modal-close" id="compareModalClose" aria-label="Close comparison">&times;</button>
+      </div>
+      <div class="modal-body" id="compareModalBody"></div>
+    </div>
+  </div>
+
+  <!-- History Modal -->
+  <div class="modal-overlay" id="historyModal" hidden aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="historyModalTitle">
+      <div class="modal-header">
+        <h2 id="historyModalTitle">Simulation History</h2>
+        <button class="modal-close" id="historyModalClose" aria-label="Close history">&times;</button>
+      </div>
+      <div class="modal-body" id="historyModalBody"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Traffic Intersection Controller</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="terminal-badge">[ TRAFFIC INTERSECTION CONTROLLER ]</div>
+
+<div class="app-grid">
+
+  <!-- ─── MODE RIBBON ─── -->
+  <div class="ribbon">
+    <button class="mode-btn active" data-mode="auto">AUTOMATED FINITE STATE TIMER</button>
+    <button class="mode-btn" data-mode="manual">DIRECT MANUAL OVERRIDE CONTROL</button>
+  </div>
+
+  <!-- ─── LEFT: PARAMETER INTAKE ─── -->
+  <div class="panel param-panel">
+    <div class="panel-header">PARAMETER INTAKE CONSOLE</div>
+
+    <label class="ctrl-label">VEHICLE SPAWN RATE</label>
+    <div class="slider-wrap">
+      <input type="range" id="spawnSlider" min="1" max="20" value="6">
+      <span id="spawnVal" class="slider-num">6</span>
+    </div>
+
+    <label class="ctrl-label">SPEED LIMIT VECTOR</label>
+    <div class="slider-wrap">
+      <input type="range" id="speedSlider" min="1" max="6" value="3">
+      <span id="speedVal" class="slider-num">3</span>
+    </div>
+
+    <label class="ctrl-label">GREEN PHASE [SECS]</label>
+    <div class="slider-wrap">
+      <input type="range" id="greenSlider" min="3" max="20" value="10">
+      <span id="greenVal" class="slider-num">10</span>
+    </div>
+
+    <label class="ctrl-label">YELLOW BUFFER [SECS]</label>
+    <div class="slider-wrap">
+      <input type="range" id="yellowSlider" min="1" max="8" value="3">
+      <span id="yellowVal" class="slider-num">3</span>
+    </div>
+  </div>
+
+  <!-- ─── CENTER: CANVAS ─── -->
+  <div class="panel canvas-panel">
+    <div class="panel-header">4-WAY CROSS INTERSECTION VIEWPORT</div>
+    <div class="canvas-wrap">
+      <canvas id="trafficCanvas"></canvas>
+    </div>
+  </div>
+
+  <!-- ─── CENTER RIGHT: INCIDENT LOG ─── -->
+  <div class="panel log-panel">
+    <div class="panel-header">INCIDENT TRACKING LOG</div>
+    <div class="log-scroll" id="logContainer">
+      <div class="log-empty">STANDBY — NO INCIDENTS</div>
+    </div>
+  </div>
+
+  <!-- ─── RIGHT: TELEMETRY ─── -->
+  <div class="panel telemetry-panel">
+    <div class="panel-header">SYSTEM TELEMETRY DASHBOARD</div>
+    <div class="tele-row"><span class="tele-label">VEHICLES DISPATCHED</span><span id="teleDispatched" class="tele-val">0</span></div>
+    <div class="tele-row"><span class="tele-label">ACTIVE VEHICLES</span><span id="teleActive" class="tele-val">0</span></div>
+    <div class="tele-row"><span class="tele-label">CONGESTION RATING</span><span id="teleCongestion" class="tele-val">0%</span></div>
+    <div class="tele-row"><span class="tele-label">AVG INTERSECTIONAL DELAY</span><span id="teleDelay" class="tele-val">0ms</span></div>
+    <div class="tele-row"><span class="tele-label">LIGHT STATE</span><span id="teleLight" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">THROUGHPUT</span><span id="teleBadge" class="tele-badge standby">STANDBY</span></div>
+  </div>
+
+  <!-- ─── ADMIN FOOTER ─── -->
+  <div class="admin-footer">
+    <button id="btnSurge" class="admin-btn surge">TRIGGER RUSH HOUR SURGE SPRINT</button>
+    <button id="btnManualSwitch" class="admin-btn switch">MANUAL SWITCH ACTIVE LIGHT PHASE</button>
+    <button id="btnFlush" class="admin-btn flush">FLUSH TRAFFIC LANES &amp; RE-ZERO</button>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

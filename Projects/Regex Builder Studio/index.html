@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regex Builder Studio & Tester</title>
+  <!-- Google Fonts: Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Decorative Glow backgrounds -->
+  <div class="decor-glow">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+  </div>
+
+  <div class="studio-layout">
+    <!-- APP HEADER -->
+    <header class="app-header bg-glass">
+      <div class="brand">
+        <div class="brand-logo">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+        </div>
+        <div class="brand-text">
+          <h1>RegBuilder</h1>
+          <span>Visual Regex Constructor & Explainer</span>
+        </div>
+      </div>
+
+      <!-- Presets Selector -->
+      <div class="preset-controls">
+        <label for="select-preset">Presets:</label>
+        <div class="select-wrapper">
+          <select id="select-preset">
+            <option value="custom">Custom Regex Pattern...</option>
+            <option value="email-validator">Email Address Validator</option>
+            <option value="phone-us">US Phone Number Converter</option>
+            <option value="ip-address">IPv4 Address Matcher</option>
+            <option value="date-iso">ISO Date (YYYY-MM-DD) Filter</option>
+          </select>
+          <i class="fa-solid fa-chevron-down select-arrow"></i>
+        </div>
+      </div>
+
+      <!-- Flags checkboxes -->
+      <div class="flags-container">
+        <span class="flags-label">Flags:</span>
+        <label class="flag-checkbox" title="Global match (find all matches)">
+          <input type="checkbox" id="flag-g" checked> g
+        </label>
+        <label class="flag-checkbox" title="Ignore case (case-insensitive)">
+          <input type="checkbox" id="flag-i"> i
+        </label>
+        <label class="flag-checkbox" title="Multiline matching">
+          <input type="checkbox" id="flag-m"> m
+        </label>
+        <label class="flag-checkbox" title="Dot matches newline (dotAll)">
+          <input type="checkbox" id="flag-s"> s
+        </label>
+      </div>
+    </header>
+
+    <!-- MAIN GRID CONTAINER -->
+    <main class="grid-container">
+
+      <!-- COLUMN 1: SIDEBAR TOOLS (Cheatsheets & Code Gen) -->
+      <aside class="sidebar bg-glass">
+        <!-- Tab triggers for sidebar sections -->
+        <div class="sidebar-tabs">
+          <button class="sidebar-tab active" data-side-tab="cheatsheet">
+            <i class="fa-solid fa-circle-question"></i> Cheat Sheet
+          </button>
+          <button class="sidebar-tab" data-side-tab="codegen">
+            <i class="fa-solid fa-code"></i> Code Generator
+          </button>
+        </div>
+
+        <div class="sidebar-body">
+          <!-- TAB PANE: REGEX CHEATSHEET -->
+          <div class="sidebar-pane active" id="pane-cheatsheet">
+            <div class="cheatsheet-list">
+              <div class="cheatsheet-group">
+                <h4>Character Classes</h4>
+                <div class="cheatsheet-item" data-token="\d"><span>\d</span> Digit (0-9)</div>
+                <div class="cheatsheet-item" data-token="\w"><span>\w</span> Word character (a-z, A-Z, 0-9, _)</div>
+                <div class="cheatsheet-item" data-token="\s"><span>\s</span> Whitespace space character</div>
+                <div class="cheatsheet-item" data-token="."><span>.</span> Any character except newline</div>
+                <div class="cheatsheet-item" data-token="[a-z]"><span>[a-z]</span> Custom range match</div>
+              </div>
+              <div class="cheatsheet-group">
+                <h4>Anchors & Boundaries</h4>
+                <div class="cheatsheet-item" data-token="^"><span>^</span> Start of line boundary</div>
+                <div class="cheatsheet-item" data-token="$"><span>$</span> End of line boundary</div>
+                <div class="cheatsheet-item" data-token="\b"><span>\b</span> Word boundary anchor</div>
+              </div>
+              <div class="cheatsheet-group">
+                <h4>Quantifiers (Multipliers)</h4>
+                <div class="cheatsheet-item" data-token="+"><span>+</span> One or more occurrences</div>
+                <div class="cheatsheet-item" data-token="*"><span>*</span> Zero or more occurrences</div>
+                <div class="cheatsheet-item" data-token="?"><span>?</span> Optional (0 or 1 time)</div>
+                <div class="cheatsheet-item" data-token="{3}"><span>{n}</span> Exactly n occurrences</div>
+                <div class="cheatsheet-item" data-token="{2,4}"><span>{min,max}</span> Range occurrences</div>
+              </div>
+              <div class="cheatsheet-group">
+                <h4>Groups & Assertions</h4>
+                <div class="cheatsheet-item" data-token="(...)"><span>(...)</span> Capture Group</div>
+                <div class="cheatsheet-item" data-token="(?:...)"><span>(?:...)</span> Non-capturing group</div>
+                <div class="cheatsheet-item" data-token="(?=...)"><span>(?=...)</span> Positive Lookahead</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB PANE: LANGUAGE CODE GENERATOR -->
+          <div class="sidebar-pane" id="pane-codegen">
+            <div class="codegen-wrapper">
+              <div class="lang-selector">
+                <button class="lang-tab active" data-lang="js">JavaScript</button>
+                <button class="lang-tab" data-lang="python">Python</button>
+                <button class="lang-tab" data-lang="go">Go</button>
+                <button class="lang-tab" data-lang="php">PHP</button>
+              </div>
+              <div class="code-view-container">
+                <pre><code id="code-snippet-body"></code></pre>
+              </div>
+              <button id="btn-copy-code" class="btn btn-primary btn-sm"><i class="fa-solid fa-copy"></i> Copy Snippet</button>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- COLUMN 2: REGEX VISUAL BUILDER & EXPLAINER -->
+      <section class="pane-card bg-glass" aria-labelledby="header-builder-pane">
+        <div class="pane-header">
+          <h2 id="header-builder-pane"><i class="fa-solid fa-cubes text-accent"></i> Visual Constructor</h2>
+          <button id="btn-clear-blocks" class="btn btn-secondary btn-sm" title="Clear all builder blocks"><i class="fa-solid fa-rotate-right"></i> Reset</button>
+        </div>
+
+        <div class="builder-scroll-area">
+          <!-- Quick add block controls -->
+          <div class="quick-add-controls">
+            <span class="control-label">Add Block:</span>
+            <div class="controls-grid">
+              <button class="btn-block-add" data-block-type="literal"><i class="fa-solid fa-quote-left"></i> Text</button>
+              <button class="btn-block-add" data-block-type="digit"><span>\d</span> Digit</button>
+              <button class="btn-block-add" data-block-type="word"><span>\w</span> Word</button>
+              <button class="btn-block-add" data-block-type="space"><span>\s</span> Space</button>
+              <button class="btn-block-add" data-block-type="any"><span>.</span> Any</button>
+              <button class="btn-block-add" data-block-type="range"><span>[ ]</span> Range</button>
+            </div>
+          </div>
+
+          <!-- Active Blocks list -->
+          <div class="builder-blocks-list" id="blocks-container">
+            <!-- Dynamically generated visual blocks -->
+          </div>
+
+          <!-- Interactive Explainer Tree -->
+          <div class="explainer-section">
+            <h3><i class="fa-solid fa-bars-staggered"></i> Regex Explainer</h3>
+            <div class="explainer-list" id="explainer-container">
+              <!-- Explanations populated dynamically -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- COLUMN 3: PATTERNS & TESTING PLAYGROUND -->
+      <section class="pane-card bg-glass" aria-labelledby="header-playground-pane">
+        
+        <!-- Top compiled regex output panel -->
+        <div class="regex-output-bar border-glass">
+          <div class="regex-title">Compiled Pattern:</div>
+          <div class="regex-string-wrapper">
+            <span class="regex-slash">/</span>
+            <input type="text" id="regex-pattern-input" placeholder="^([a-zA-Z]+)$" autocomplete="off">
+            <span class="regex-slash">/</span>
+            <span class="regex-flags" id="regex-flags-display">g</span>
+          </div>
+          <button id="btn-copy-pattern" class="btn btn-icon text-accent" title="Copy raw regex pattern"><i class="fa-solid fa-copy"></i></button>
+        </div>
+
+        <!-- Testing playground scrollable body -->
+        <div class="playground-body">
+          <h2 id="header-playground-pane" class="playground-label"><i class="fa-solid fa-flask text-success"></i> Testing Playground</h2>
+          
+          <!-- Transparent textarea overlay matches highlighters -->
+          <div class="playground-textarea-wrapper">
+            <!-- Backdrop layer containing marked matching spans -->
+            <div class="backdrop-highlighter" id="playground-backdrop"></div>
+            <!-- Interactive inputs layer -->
+            <textarea id="playground-textarea" placeholder="Type or paste your test strings here to verify matching ranges..." autocomplete="off"></textarea>
+          </div>
+
+          <!-- Live Replace Toolbar -->
+          <div class="replace-toolbar border-glass">
+            <div class="replace-inputs">
+              <i class="fa-solid fa-code-compare replace-icon"></i>
+              <input type="text" id="replace-string-input" placeholder="Replace with..." autocomplete="off">
+            </div>
+            <div class="replace-result" id="replace-result-box">
+              <!-- Result string shown here -->
+            </div>
+          </div>
+
+          <!-- Sticky Matches Count Inspector -->
+          <div class="inspector-card border-glass">
+            <div class="inspector-header">
+              <h3><i class="fa-solid fa-magnifying-glass"></i> Match Inspector</h3>
+              <span class="badge-success-count" id="match-count-badge">0 Matches</span>
+            </div>
+            <div class="inspector-body" id="match-inspector-list">
+              <!-- Dynamically populated list of match indices and group values -->
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

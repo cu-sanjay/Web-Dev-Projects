@@ -1,0 +1,52 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <rect width="128" height="128" rx="16" fill="#070a13"/>
+  <rect x="8" y="8" width="112" height="112" rx="10" fill="none" stroke="#1f2937" stroke-width="1.5"/>
+
+  <!-- 4x4 matrix grid icon -->
+  <g transform="translate(16, 16)">
+    <!-- Anchor -->
+    <rect x="0" y="0" width="22" height="22" rx="3" fill="#111827" stroke="#1f2937" stroke-width="1"/>
+    <text x="11" y="14" fill="#94a3b8" font-size="6" font-family="monospace" text-anchor="middle">vs</text>
+
+    <!-- Column headers - BG swatches -->
+    <rect x="24" y="0" width="22" height="22" rx="3" fill="#1e293b" stroke="#1f2937" stroke-width="1"/>
+    <rect x="48" y="0" width="22" height="22" rx="3" fill="#3b82f6" stroke="#1f2937" stroke-width="1"/>
+    <rect x="72" y="0" width="22" height="22" rx="3" fill="#f8fafc" stroke="#1f2937" stroke-width="1"/>
+    <rect x="96" y="0" width="22" height="22" rx="3" fill="#ef4444" stroke="#1f2937" stroke-width="1"/>
+
+    <!-- Row labels - FG swatches -->
+    <rect x="0" y="24" width="22" height="22" rx="3" fill="#1e293b" stroke="#1f2937" stroke-width="1"/>
+    <rect x="0" y="48" width="22" height="22" rx="3" fill="#3b82f6" stroke="#1f2937" stroke-width="1"/>
+    <rect x="0" y="72" width="22" height="22" rx="3" fill="#f8fafc" stroke="#1f2937" stroke-width="1"/>
+    <rect x="0" y="96" width="22" height="22" rx="3" fill="#ef4444" stroke="#1f2937" stroke-width="1"/>
+
+    <!-- Intersection cells - 4x4 grid -->
+    <rect x="24" y="24" width="22" height="22" rx="3" fill="#1e293b" stroke="#1f2937" stroke-width="1"/>
+    <rect x="48" y="24" width="22" height="22" rx="3" fill="#1e293b" stroke="#1f2937" stroke-width="1"/>
+    <rect x="72" y="24" width="22" height="22" rx="3" fill="#1e293b" stroke="#1f2937" stroke-width="1"/>
+    <rect x="96" y="24" width="22" height="22" rx="3" fill="#1e293b" stroke="#1f2937" stroke-width="1"/>
+
+    <rect x="24" y="48" width="22" height="22" rx="3" fill="#3b82f6" stroke="#1f2937" stroke-width="1"/>
+    <rect x="48" y="48" width="22" height="22" rx="3" fill="#3b82f6" stroke="#1f2937" stroke-width="1"/>
+    <rect x="72" y="48" width="22" height="22" rx="3" fill="#3b82f6" stroke="#1f2937" stroke-width="1"/>
+    <rect x="96" y="48" width="22" height="22" rx="3" fill="#3b82f6" stroke="#1f2937" stroke-width="1"/>
+
+    <rect x="24" y="72" width="22" height="22" rx="3" fill="#f8fafc" stroke="#1f2937" stroke-width="1"/>
+    <rect x="48" y="72" width="22" height="22" rx="3" fill="#f8fafc" stroke="#1f2937" stroke-width="1"/>
+    <rect x="72" y="72" width="22" height="22" rx="3" fill="#f8fafc" stroke="#1f2937" stroke-width="1"/>
+    <rect x="96" y="72" width="22" height="22" rx="3" fill="#f8fafc" stroke="#1f2937" stroke-width="1"/>
+
+    <rect x="24" y="96" width="22" height="22" rx="3" fill="#ef4444" stroke="#1f2937" stroke-width="1"/>
+    <rect x="48" y="96" width="22" height="22" rx="3" fill="#ef4444" stroke="#1f2937" stroke-width="1"/>
+    <rect x="72" y="96" width="22" height="22" rx="3" fill="#ef4444" stroke="#1f2937" stroke-width="1"/>
+    <rect x="96" y="96" width="22" height="22" rx="3" fill="#ef4444" stroke="#1f2937" stroke-width="1"/>
+
+    <!-- Checkmark overlay on some cells for pass indicator -->
+    <text x="35" y="40" fill="#10b981" font-size="8" font-family="monospace" text-anchor="middle">✓</text>
+    <text x="59" y="40" fill="#ef4444" font-size="8" font-family="monospace" text-anchor="middle">✗</text>
+    <text x="107" y="64" fill="#10b981" font-size="8" font-family="monospace" text-anchor="middle">✓</text>
+    <text x="83" y="88" fill="#ef4444" font-size="8" font-family="monospace" text-anchor="middle">✗</text>
+  </g>
+
+  <text x="64" y="124" fill="#94a3b8" font-size="6" font-family="monospace" text-anchor="middle" letter-spacing="0.5">PALETTE CONTRAST MATRIX</text>
+</svg>

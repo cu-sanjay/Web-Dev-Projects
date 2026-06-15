@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Science Sort — Master the Elements</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="glass-card">
+            <div id="game-overlay" class="overlay">
+                <h1>Science Sort</h1>
+                <p style="margin-bottom: 30px; opacity: 0.6;">Categorize the fact into the correct discipline.</p>
+                <button class="btn-start" onclick="startGame()">Start Research</button>
+            </div>
+
+            <div class="stats">
+                <span>Level: <span id="level-val">1</span></span>
+                <span>Score: <span id="score-val">0</span></span>
+            </div>
+
+            <div class="fact-container" id="fact-display">
+                <!-- Fact goes here -->
+            </div>
+
+            <div class="options-stack">
+                <button class="opt-btn physics-btn" onclick="checkAnswer('Physics', this)">⚛️ Physics</button>
+                <button class="opt-btn chemistry-btn" onclick="checkAnswer('Chemistry', this)">🧪 Chemistry</button>
+                <button class="opt-btn biology-btn" onclick="checkAnswer('Biology', this)">🧬 Biology</button>
+            </div>
+        </div>
+    </div>
+<script src="script.js"></script>
+</body>
+</html>

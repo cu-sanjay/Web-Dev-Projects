@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Public Transport Planner</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="header">
+      <h1>🚇 TransitConnect</h1>
+      <p>Your smart city routing and transport planner.</p>
+    </header>
+
+    <main class="main-content">
+      <div class="left-col">
+        
+        <!-- Search Section -->
+        <section class="card search-section">
+          <h2>Plan Your Journey</h2>
+          <form id="route-form">
+            <div class="form-group">
+              <label for="origin">Starting Point</label>
+              <select id="origin" required>
+                <option value="" disabled selected>Select station</option>
+                <option value="Central Station">Central Station</option>
+                <option value="North Park">North Park</option>
+                <option value="East Side Mall">East Side Mall</option>
+                <option value="University Campus">University Campus</option>
+                <option value="Airport Terminal">Airport Terminal</option>
+                <option value="Downtown Hub">Downtown Hub</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="destination">Destination</label>
+              <select id="destination" required>
+                <option value="" disabled selected>Select station</option>
+                <option value="Central Station">Central Station</option>
+                <option value="North Park">North Park</option>
+                <option value="East Side Mall">East Side Mall</option>
+                <option value="University Campus">University Campus</option>
+                <option value="Airport Terminal">Airport Terminal</option>
+                <option value="Downtown Hub">Downtown Hub</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="departure-time">Departure Time</label>
+              <input type="time" id="departure-time" required>
+            </div>
+
+            <button type="submit" class="btn primary-btn" id="search-btn">Find Routes</button>
+          </form>
+        </section>
+
+      </div>
+
+      <div class="right-col">
+        
+        <!-- Map Placeholder -->
+        <section class="card map-section">
+          <div class="map-placeholder">
+            <span class="map-icon">🗺️</span>
+            <p>Interactive Map Area</p>
+            <small>(API Integration Ready)</small>
+          </div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="card results-section">
+          <h2>Available Routes</h2>
+          <div id="results-list" class="results-list">
+            <div class="empty-state">Select an origin and destination to see routes.</div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>REST API Testing Studio</title>
+  <!-- Google Fonts: Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- App Background Deco -->
+  <div class="decor-glow">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+  </div>
+
+  <div class="studio-layout">
+    <!-- SIDEBAR PANEL -->
+    <aside class="sidebar-container bg-glass">
+      <div class="brand-header">
+        <div class="brand-logo">
+          <i class="fa-solid fa-network-wired"></i>
+        </div>
+        <div class="brand-title">
+          <h2>API Studio</h2>
+          <span>HTTP client simulator</span>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs (History vs Collections vs Database) -->
+      <div class="sidebar-tabs">
+        <button class="side-tab active" data-tab="history">
+          <i class="fa-solid fa-clock-rotate-left"></i> History
+        </button>
+        <button class="side-tab" data-tab="collections">
+          <i class="fa-solid fa-folder-open"></i> Collections
+        </button>
+        <button class="side-tab" data-tab="database">
+          <i class="fa-solid fa-server"></i> Sandbox DB
+        </button>
+      </div>
+
+      <div class="sidebar-panes">
+        <!-- History Pane -->
+        <div class="sidebar-pane active" id="pane-history">
+          <div class="pane-action-row">
+            <h3>Request Logs</h3>
+            <button id="btn-clear-history" class="btn-text" title="Clear all request logs">Clear</button>
+          </div>
+          <div class="history-list" id="history-container">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+
+        <!-- Collections Pane -->
+        <div class="sidebar-pane" id="pane-collections">
+          <div class="pane-action-row">
+            <h3>My Collections</h3>
+            <button id="btn-new-collection" class="btn-icon-add" title="Create New Folder"><i class="fa-solid fa-folder-plus"></i></button>
+          </div>
+          <div class="collections-tree" id="collections-container">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+
+        <!-- Local Mock DB Manager Pane -->
+        <div class="sidebar-pane" id="pane-database">
+          <div class="pane-header-with-desc">
+            <h3>Local Mock Server DB</h3>
+            <p>Captures requests matching <code>https://api.mockbin/v1/*</code> to run client-side requests offline without CORS blocks.</p>
+          </div>
+          
+          <div class="database-tables-viewer">
+            <div class="db-table-card">
+              <div class="table-header">
+                <span>/users table</span>
+                <span class="badge" id="db-count-users">0 records</span>
+              </div>
+            </div>
+            <div class="db-table-card">
+              <div class="table-header">
+                <span>/todos table</span>
+                <span class="badge" id="db-count-todos">0 records</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="db-action-row">
+            <button id="btn-reset-db" class="btn btn-secondary btn-sm btn-full"><i class="fa-solid fa-rotate"></i> Reset Mock Database</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Server Status Info -->
+      <div class="sidebar-footer-status">
+        <span class="status-dot online"></span>
+        <span>Mock Engine Active (Offline Sandbox)</span>
+      </div>
+    </aside>
+
+    <!-- MAIN API WORKSPACE -->
+    <main class="workspace-container">
+      
+      <!-- TOP CONTROL ADDRESS BAR -->
+      <section class="section-card request-bar-card bg-glass" aria-label="URL Request Sender">
+        <div class="request-bar-wrapper">
+          <div class="method-select-wrapper">
+            <select id="request-method" class="method-dropdown">
+              <option value="GET">GET</option>
+              <option value="POST">POST</option>
+              <option value="PUT">PUT</option>
+              <option value="DELETE">DELETE</option>
+              <option value="PATCH">PATCH</option>
+            </select>
+            <i class="fa-solid fa-chevron-down select-arrow"></i>
+          </div>
+          
+          <div class="url-input-wrapper">
+            <input type="text" id="request-url" placeholder="Enter request URL endpoint (e.g., https://api.mockbin/v1/users)..." autocomplete="off" value="https://api.mockbin/v1/users">
+            <select id="preset-endpoints" class="presets-select" title="Preset API endpoints">
+              <option value="" disabled selected>Presets</option>
+              <option value="https://api.mockbin/v1/users">GET /users (Mock DB)</option>
+              <option value="https://api.mockbin/v1/todos">GET /todos (Mock DB)</option>
+              <option value="https://jsonplaceholder.typicode.com/posts/1">GET /posts/1 (Public HTTP)</option>
+            </select>
+          </div>
+
+          <button id="btn-send-request" class="btn btn-primary btn-send">
+            <span>Send</span>
+            <i class="fa-solid fa-paper-plane"></i>
+          </button>
+        </div>
+      </section>
+
+      <!-- MIDDLE SPLIT AREA: REQUEST SETTINGS (LEFT) VS RESPONSE INSPECT (RIGHT) -->
+      <div class="builder-split-grid">
+        
+        <!-- REQUEST CONFIGURATION CARD -->
+        <section class="section-card builder-card bg-glass" aria-labelledby="heading-request-builder">
+          <div class="builder-header">
+            <h2 id="heading-request-builder"><i class="fa-solid fa-sliders"></i> Request Parameters</h2>
+            <button id="btn-save-request" class="btn btn-secondary btn-sm" title="Save this request state to folder collections">
+              <i class="fa-solid fa-floppy-disk"></i> Save Request
+            </button>
+          </div>
+
+          <!-- Configuration Sub Tabs -->
+          <div class="builder-tabs">
+            <button class="config-tab active" data-tab="query">Query Params</button>
+            <button class="config-tab" data-tab="headers">Headers</button>
+            <button class="config-tab" data-tab="auth">Authentication</button>
+            <button class="config-tab" data-tab="body">Request Body</button>
+          </div>
+
+          <div class="builder-panes">
+            <!-- Tab 1: Query Params Builder -->
+            <div class="config-pane active" id="pane-config-query">
+              <p class="config-desc">URL parameters appended to address line query string:</p>
+              <div class="params-editor-grid" id="query-params-grid">
+                <!-- Dynamically populated key-value rows -->
+              </div>
+              <button id="btn-add-query" class="btn btn-secondary btn-sm mt-12"><i class="fa-solid fa-plus"></i> Add Param Row</button>
+            </div>
+
+            <!-- Tab 2: Headers Builder -->
+            <div class="config-pane" id="pane-config-headers">
+              <p class="config-desc">HTTP custom request header values sent to server:</p>
+              <div class="params-editor-grid" id="headers-params-grid">
+                <!-- Dynamically populated key-value rows -->
+              </div>
+              <button id="btn-add-header" class="btn btn-secondary btn-sm mt-12"><i class="fa-solid fa-plus"></i> Add Header Row</button>
+            </div>
+
+            <!-- Tab 3: Authentication Type Selector -->
+            <div class="config-pane" id="pane-config-auth">
+              <p class="config-desc">Inject authentication keys directly into request headers:</p>
+              <div class="auth-config-form">
+                <div class="form-row">
+                  <label for="auth-type">Auth Mode:</label>
+                  <select id="auth-type" class="form-select">
+                    <option value="none">No Auth Credentials</option>
+                    <option value="bearer">Bearer Token</option>
+                    <option value="basic">Basic Password Auth</option>
+                    <option value="apikey">Custom API Key</option>
+                  </select>
+                </div>
+                
+                <!-- Bearer Options -->
+                <div class="auth-fields-block hidden" id="auth-block-bearer">
+                  <div class="form-row">
+                    <label for="auth-bearer-token">Token value:</label>
+                    <input type="text" id="auth-bearer-token" placeholder="eyJhbGciOi..." class="form-input">
+                  </div>
+                </div>
+
+                <!-- Basic Auth Options -->
+                <div class="auth-fields-block hidden" id="auth-block-basic">
+                  <div class="form-row">
+                    <label for="auth-basic-username">Username:</label>
+                    <input type="text" id="auth-basic-username" placeholder="admin" class="form-input">
+                  </div>
+                  <div class="form-row mt-8">
+                    <label for="auth-basic-password">Password:</label>
+                    <input type="password" id="auth-basic-password" placeholder="••••••••" class="form-input">
+                  </div>
+                </div>
+
+                <!-- Custom API Key Options -->
+                <div class="auth-fields-block hidden" id="auth-block-apikey">
+                  <div class="form-row">
+                    <label for="auth-api-key-name">Header Key Name:</label>
+                    <input type="text" id="auth-api-key-name" placeholder="X-API-Key" class="form-input">
+                  </div>
+                  <div class="form-row mt-8">
+                    <label for="auth-api-key-value">Key Token Value:</label>
+                    <input type="text" id="auth-api-key-value" placeholder="api_key_abc123" class="form-input">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab 4: JSON Request Body -->
+            <div class="config-pane" id="pane-config-body">
+              <div class="body-header-controls">
+                <p class="config-desc">JSON request payload body sent on POST/PUT requests:</p>
+                <button id="btn-format-json-body" class="btn btn-secondary btn-sm" title="Clean JSON structure spacing"><i class="fa-solid fa-code"></i> Format JSON</button>
+              </div>
+              <textarea id="request-body-area" class="code-textarea" placeholder='{\n  "key": "value"\n}'></textarea>
+            </div>
+          </div>
+        </section>
+
+        <!-- RESPONSE INSPECTOR CARD -->
+        <section class="section-card response-card bg-glass" aria-labelledby="heading-response-inspector">
+          <div class="response-header">
+            <h2 id="heading-response-inspector"><i class="fa-solid fa-code"></i> Response Inspector</h2>
+            
+            <!-- Response Stats bar widget -->
+            <div class="response-stats-bar hidden" id="response-stats-bar">
+              <span id="resp-status-badge" class="badge-status status-success">200 OK</span>
+              <span id="resp-time-badge" class="badge-stat"><i class="fa-solid fa-stopwatch"></i> 120 ms</span>
+              <span id="resp-size-badge" class="badge-stat"><i class="fa-solid fa-file-code"></i> 1.45 KB</span>
+            </div>
+          </div>
+
+          <div class="response-tab-row">
+            <button class="resp-tab active" data-tab="body">Response Body</button>
+            <button class="resp-tab" data-tab="headers">Response Headers</button>
+          </div>
+
+          <div class="response-body-workspace">
+            <!-- Empty state loader / instruction -->
+            <div class="workspace-empty-state" id="response-blank-state">
+              <i class="fa-solid fa-radar fa-spin-slow"></i>
+              <h3>Ready for Send</h3>
+              <p>Configure HTTP method settings, URL address triggers, and click Send to inspect responses details.</p>
+            </div>
+
+            <!-- Sending loading spinner -->
+            <div class="workspace-empty-state hidden" id="response-loading-state">
+              <i class="fa-solid fa-circle-notch fa-spin text-accent"></i>
+              <h3>Request Transmitting...</h3>
+              <p>Establishing client connections and querying database records.</p>
+            </div>
+
+            <!-- Active Response Pane -->
+            <div class="active-response-pane hidden" id="response-active-pane">
+              <!-- Body view pretty print -->
+              <div class="response-sub-pane active" id="resp-pane-body">
+                <pre class="pretty-print-code"><code id="response-body-pre"></code></pre>
+              </div>
+              
+              <!-- Headers view -->
+              <div class="response-sub-pane" id="resp-pane-headers">
+                <div class="response-headers-list" id="response-headers-container">
+                  <!-- Dynamically populated key-value rows -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ==================== COLLECTION SAVE MODAL DIALOG ==================== -->
+  <div class="modal-overlay hidden" id="save-request-modal">
+    <div class="modal-card bg-glass">
+      <div class="modal-header">
+        <h3>Save Request to Collection</h3>
+        <button id="btn-close-save-modal" class="btn-icon"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="save-request-name">Request Name <span class="required">*</span></label>
+          <input type="text" id="save-request-name" placeholder="e.g. GET List Users..." class="form-input">
+        </div>
+        <div class="form-group">
+          <label for="save-request-collection">Target Collection Folder <span class="required">*</span></label>
+          <select id="save-request-collection" class="form-select">
+            <!-- Dynamic list of collections -->
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-cancel-save" class="btn btn-secondary">Cancel</button>
+        <button id="btn-confirm-save" class="btn btn-primary">Save to Collection</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== NEW COLLECTION DIRECTORY MODAL DIALOG ==================== -->
+  <div class="modal-overlay hidden" id="collection-creation-modal">
+    <div class="modal-card bg-glass">
+      <div class="modal-header">
+        <h3>Create New Collection Folder</h3>
+        <button id="btn-close-col-modal" class="btn-icon"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="new-col-name">Collection Name <span class="required">*</span></label>
+          <input type="text" id="new-col-name" placeholder="e.g. User Auth Routes..." class="form-input">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-cancel-col" class="btn btn-secondary">Cancel</button>
+        <button id="btn-save-col" class="btn btn-primary">Create Folder</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <rect width="128" height="128" rx="16" fill="#070a13"/>
+  <rect x="8" y="8" width="112" height="112" rx="10" fill="none" stroke="#1f2937" stroke-width="1.5"/>
+
+  <!-- 3x2 card grid (simplified 4x3) -->
+  <g transform="translate(16, 20)">
+    <!-- Row 1 -->
+    <rect x="0" y="0" width="28" height="36" rx="4" fill="#1e293b" stroke="#1f2937" stroke-width="1"/>
+    <rect x="32" y="0" width="28" height="36" rx="4" fill="#1e293b" stroke="#1f2937" stroke-width="1"/>
+    <rect x="64" y="0" width="28" height="36" rx="4" fill="#1e293b" stroke="#1f2937" stroke-width="1"/>
+
+    <!-- Row 2 -->
+    <rect x="0" y="40" width="28" height="36" rx="4" fill="#f43f5e" stroke="#f43f5e" stroke-width="1"/>
+    <rect x="32" y="40" width="28" height="36" rx="4" fill="#1e293b" stroke="#1f2937" stroke-width="1"/>
+    <rect x="64" y="40" width="28" height="36" rx="4" fill="#14b8a6" stroke="#14b8a6" stroke-width="1"/>
+
+    <!-- Grid pattern on face-down cards -->
+    <g opacity="0.3">
+      <line x1="4" y1="6" x2="24" y2="6" stroke="#334155" stroke-width="0.5"/>
+      <line x1="4" y1="10" x2="24" y2="10" stroke="#334155" stroke-width="0.5"/>
+      <line x1="4" y1="14" x2="24" y2="14" stroke="#334155" stroke-width="0.5"/>
+      <line x1="4" y1="18" x2="24" y2="18" stroke="#334155" stroke-width="0.5"/>
+      <line x1="4" y1="22" x2="24" y2="22" stroke="#334155" stroke-width="0.5"/>
+      <line x1="4" y1="26" x2="24" y2="26" stroke="#334155" stroke-width="0.5"/>
+      <line x1="4" y1="30" x2="24" y2="30" stroke="#334155" stroke-width="0.5"/>
+      <line x1="36" y1="6" x2="56" y2="6" stroke="#334155" stroke-width="0.5"/>
+      <line x1="36" y1="10" x2="56" y2="10" stroke="#334155" stroke-width="0.5"/>
+      <line x1="36" y1="14" x2="56" y2="14" stroke="#334155" stroke-width="0.5"/>
+      <line x1="36" y1="18" x2="56" y2="18" stroke="#334155" stroke-width="0.5"/>
+      <line x1="36" y1="22" x2="56" y2="22" stroke="#334155" stroke-width="0.5"/>
+      <line x1="36" y1="26" x2="56" y2="26" stroke="#334155" stroke-width="0.5"/>
+      <line x1="36" y1="30" x2="56" y2="30" stroke="#334155" stroke-width="0.5"/>
+      <line x1="68" y1="46" x2="88" y2="46" stroke="#334155" stroke-width="0.5"/>
+      <line x1="68" y1="50" x2="88" y2="50" stroke="#334155" stroke-width="0.5"/>
+      <line x1="68" y1="54" x2="88" y2="54" stroke="#334155" stroke-width="0.5"/>
+      <line x1="68" y1="58" x2="88" y2="58" stroke="#334155" stroke-width="0.5"/>
+      <line x1="68" y1="62" x2="88" y2="62" stroke="#334155" stroke-width="0.5"/>
+      <line x1="68" y1="66" x2="88" y2="66" stroke="#334155" stroke-width="0.5"/>
+      <line x1="68" y1="70" x2="88" y2="70" stroke="#334155" stroke-width="0.5"/>
+    </g>
+
+    <!-- Flip arrow on one card -->
+    <path d="M 14 18 Q 14 8 28 8" fill="none" stroke="#3b82f6" stroke-width="1.2" stroke-linecap="round"/>
+    <polyline points="24,4 28,8 24,12" fill="none" stroke="#3b82f6" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Bottom label -->
+  <text x="64" y="118" fill="#94a3b8" font-size="7" font-family="monospace" text-anchor="middle" letter-spacing="0.5">CHROMATIC MEMORY</text>
+</svg>

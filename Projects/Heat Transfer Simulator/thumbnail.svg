@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <!-- Background Gradient -->
+    <radialGradient id="bgGrad" cx="50%" cy="50%" r="75%">
+      <stop offset="0%" stop-color="#12182c" />
+      <stop offset="100%" stop-color="#04060a" />
+    </radialGradient>
+
+    <!-- Hot Base Gradient -->
+    <linearGradient id="baseGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff3300" />
+      <stop offset="50%" stop-color="#ff7700" />
+      <stop offset="100%" stop-color="#ff3300" />
+    </linearGradient>
+
+    <!-- Cooling Fin Vertical Gradient -->
+    <linearGradient id="finGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#00bfff" />   <!-- Ice Blue (top) -->
+      <stop offset="35%" stop-color="#10b981" />  <!-- Lime Green -->
+      <stop offset="70%" stop-color="#ff7700" />  <!-- Orange -->
+      <stop offset="100%" stop-color="#ff3300" /> <!-- Hot Red (bottom) -->
+    </linearGradient>
+
+    <!-- Glow Filter -->
+    <filter id="glow-thermal" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="400" height="400" fill="url(#bgGrad)" rx="12" />
+
+  <!-- Alignment Grid -->
+  <g stroke="rgba(255, 255, 255, 0.02)" stroke-width="0.75">
+    <line x1="40" y1="0" x2="40" y2="400" />
+    <line x1="80" y1="0" x2="80" y2="400" />
+    <line x1="120" y1="0" x2="120" y2="400" />
+    <line x1="160" y1="0" x2="160" y2="400" />
+    <line x1="200" y1="0" x2="200" y2="400" />
+    <line x1="240" y1="0" x2="240" y2="400" />
+    <line x1="280" y1="0" x2="280" y2="400" />
+    <line x1="320" y1="0" x2="320" y2="400" />
+    <line x1="360" y1="0" x2="360" y2="400" />
+
+    <line x1="0" y1="40" x2="400" y2="40" />
+    <line x1="0" y1="80" x2="400" y2="80" />
+    <line x1="0" y1="120" x2="400" y2="120" />
+    <line x1="0" y1="160" x2="400" y2="160" />
+    <line x1="0" y1="200" x2="400" y2="200" />
+    <line x1="0" y1="240" x2="400" y2="240" />
+    <line x1="0" y1="280" x2="400" y2="280" />
+    <line x1="0" y1="320" x2="400" y2="320" />
+    <line x1="0" y1="360" x2="400" y2="360" />
+  </g>
+
+  <!-- Heat Sink Structure (Base and Vertical Fins) -->
+  <!-- Vertical Fins -->
+  <rect x="75" y="80" width="30" height="200" fill="url(#finGrad)" rx="2" />
+  <rect x="185" y="80" width="30" height="200" fill="url(#finGrad)" rx="2" />
+  <rect x="295" y="80" width="30" height="200" fill="url(#finGrad)" rx="2" />
+
+  <!-- Horizontal Heater Base -->
+  <rect x="40" y="270" width="320" height="35" fill="url(#baseGrad)" rx="4" filter="url(#glow-thermal)" opacity="0.85" />
+  <rect x="40" y="270" width="320" height="35" fill="url(#baseGrad)" rx="4" />
+
+  <!-- Isothermal Contours (Lines across Fins and Base) -->
+  <g stroke="rgba(255,255,255,0.22)" stroke-width="1" fill="none">
+    <!-- Fin 1 Isotherms -->
+    <line x1="75" y1="120" x2="105" y2="120" stroke="#00bfff" />
+    <line x1="75" y1="170" x2="105" y2="170" stroke="#10b981" />
+    <line x1="75" y1="220" x2="105" y2="220" stroke="#ff7700" />
+
+    <!-- Fin 2 Isotherms -->
+    <line x1="185" y1="120" x2="215" y2="120" stroke="#00bfff" />
+    <line x1="185" y1="170" x2="215" y2="170" stroke="#10b981" />
+    <line x1="185" y1="220" x2="215" y2="220" stroke="#ff7700" />
+
+    <!-- Fin 3 Isotherms -->
+    <line x1="295" y1="120" x2="325" y2="120" stroke="#00bfff" />
+    <line x1="295" y1="170" x2="325" y2="170" stroke="#10b981" />
+    <line x1="295" y1="220" x2="325" y2="220" stroke="#ff7700" />
+
+    <!-- Base wavy contours -->
+    <path d="M 40 280 C 120 275, 280 275, 360 280" stroke="rgba(255,255,255,0.3)" />
+    <path d="M 40 292 C 120 287, 280 287, 360 292" stroke="rgba(255,255,255,0.3)" />
+  </g>
+
+  <!-- Heat Flux Vectors (Fourier Heat Flow arrows pointing up and radiating out) -->
+  <g stroke="rgba(255, 255, 255, 0.45)" stroke-width="1.2" fill="rgba(255,255,255,0.45)">
+    <!-- Upward flow vectors in Fins -->
+    <!-- Fin 1 -->
+    <path d="M 90 250 L 90 230 M 90 230 L 87 235 M 90 230 L 93 235" />
+    <path d="M 90 200 L 90 180 M 90 180 L 87 185 M 90 180 L 93 185" stroke="rgba(255,255,255,0.3)" fill="rgba(255,255,255,0.3)" />
+    <path d="M 90 150 L 90 130 M 90 130 L 87 135 M 90 130 L 93 135" stroke="rgba(255,255,255,0.2)" fill="rgba(255,255,255,0.2)" />
+
+    <!-- Fin 2 -->
+    <path d="M 200 250 L 200 230 M 200 230 L 197 235 M 200 230 L 203 235" />
+    <path d="M 200 200 L 200 180 M 200 180 L 197 185 M 200 180 L 203 185" stroke="rgba(255,255,255,0.3)" fill="rgba(255,255,255,0.3)" />
+    <path d="M 200 150 L 200 130 M 200 130 L 197 135 M 200 130 L 203 135" stroke="rgba(255,255,255,0.2)" fill="rgba(255,255,255,0.2)" />
+
+    <!-- Fin 3 -->
+    <path d="M 310 250 L 310 230 M 310 230 L 307 235 M 310 230 L 313 235" />
+    <path d="M 310 200 L 310 180 M 310 180 L 307 185 M 310 180 L 313 185" stroke="rgba(255,255,255,0.3)" fill="rgba(255,255,255,0.3)" />
+    <path d="M 310 150 L 310 130 M 310 130 L 307 135 M 310 130 L 313 135" stroke="rgba(255,255,255,0.2)" fill="rgba(255,255,255,0.2)" />
+
+    <!-- Convective dissipation out of Fin sides -->
+    <!-- Fin 1 sides -->
+    <path d="M 70 180 L 60 180 M 60 180 L 64 177 M 60 180 L 64 183" stroke="rgba(0,191,255,0.3)" fill="rgba(0,191,255,0.3)" />
+    <path d="M 110 180 L 120 180 M 120 180 L 116 177 M 120 180 L 116 183" stroke="rgba(0,191,255,0.3)" fill="rgba(0,191,255,0.3)" />
+    <!-- Fin 2 sides -->
+    <path d="M 180 180 L 170 180 M 170 180 L 174 177 M 170 180 L 174 183" stroke="rgba(0,191,255,0.3)" fill="rgba(0,191,255,0.3)" />
+    <path d="M 220 180 L 230 180 M 230 180 L 226 177 M 230 180 L 226 183" stroke="rgba(0,191,255,0.3)" fill="rgba(0,191,255,0.3)" />
+  </g>
+
+  <!-- Interactive Thermometer Probe cursor -->
+  <g transform="translate(200, 170)">
+    <!-- Faint outer ring -->
+    <circle cx="0" cy="0" r="14" fill="none" stroke="rgba(255, 119, 0, 0.4)" stroke-width="1.2" stroke-dasharray="3 2" />
+    <!-- Center target crosshair -->
+    <circle cx="0" cy="0" r="8" fill="none" stroke="#ff7700" stroke-width="1.5" />
+    <line x1="-12" y1="0" x2="12" y2="0" stroke="#ff7700" stroke-width="1.5" />
+    <line x1="0" y1="-12" x2="0" y2="12" stroke="#ff7700" stroke-width="1.5" />
+    <circle cx="0" cy="0" r="1.5" fill="#ff7700" />
+    <!-- Floating label -->
+    <text x="16" y="3" font-family="'Share Tech Mono', monospace" font-size="8" fill="#ff7700" font-weight="700">60.2°C</text>
+  </g>
+
+  <!-- Outer Dashboard border -->
+  <rect x="15" y="15" width="370" height="370" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1.5" rx="8" />
+
+  <!-- Typography Labels -->
+  <text x="200" y="356" text-anchor="middle" font-family="'Share Tech Mono', monospace" font-size="12" font-weight="700" fill="#ff7700" letter-spacing="5">HEAT TRANSFER</text>
+  <text x="200" y="371" text-anchor="middle" font-family="'Outfit', sans-serif" font-size="9" fill="#64748b" letter-spacing="2">THERMAL LAB SIMULATOR</text>
+</svg>

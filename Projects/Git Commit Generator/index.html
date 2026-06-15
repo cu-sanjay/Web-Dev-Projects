@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Git Commit Generator & Conventional Commits Tool</title>
+  <!-- Google Fonts: Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Background Ambient Glows -->
+  <div class="decor-glow">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+  </div>
+
+  <div class="app-layout">
+    <!-- APP HEADER -->
+    <header class="app-header bg-glass">
+      <div class="brand">
+        <div class="brand-logo">
+          <i class="fa-solid fa-code-commit"></i>
+        </div>
+        <div class="brand-text">
+          <h1>GitCommit</h1>
+          <span>Conventional Commits Generator</span>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="theme-toggle" class="btn btn-secondary-icon" aria-label="Toggle Theme">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <a href="https://www.conventionalcommits.org/" target="_blank" rel="noopener" class="btn btn-secondary">
+          <i class="fa-solid fa-book-open-reader"></i>
+          <span>Spec</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- MAIN DASHBOARD -->
+    <main class="grid-container">
+      
+      <!-- LEFT PANEL: COMMIT FORM BUILDER -->
+      <section class="pane-card bg-glass" aria-labelledby="form-title">
+        <div class="pane-header">
+          <h2 id="form-title"><i class="fa-solid fa-sliders"></i> Commit Parameters</h2>
+          <button id="reset-btn" class="btn btn-ghost btn-sm" type="button">
+            <i class="fa-solid fa-arrow-rotate-left"></i> Reset
+          </button>
+        </div>
+
+        <!-- Preset Buttons for Quick Testing -->
+        <div class="form-group">
+          <label class="form-label">Presets</label>
+          <div class="presets-row">
+            <button type="button" class="btn-preset active" data-preset="feat-ui">
+              <span class="preset-badge type-feat">feat</span> ui-theme
+            </button>
+            <button type="button" class="btn-preset" data-preset="fix-auth">
+              <span class="preset-badge type-fix">fix</span> auth-leak
+            </button>
+            <button type="button" class="btn-preset" data-preset="docs-readme">
+              <span class="preset-badge type-docs">docs</span> readme
+            </button>
+            <button type="button" class="btn-preset" data-preset="perf-query">
+              <span class="preset-badge type-perf">perf</span> db-join
+            </button>
+          </div>
+        </div>
+
+        <form id="commit-form" class="builder-form" autocomplete="off">
+          <!-- Type and Scope Row -->
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label for="commit-type" class="form-label">Type <span class="required">*</span></label>
+              <div class="custom-select-wrapper">
+                <select id="commit-type" required>
+                  <option value="feat" selected>feat (new feature)</option>
+                  <option value="fix">fix (bug fix)</option>
+                  <option value="docs">docs (documentation changes)</option>
+                  <option value="style">style (formatting, missing semi-colons)</option>
+                  <option value="refactor">refactor (code restructuring)</option>
+                  <option value="perf">perf (performance improvements)</option>
+                  <option value="test">test (adding/correcting tests)</option>
+                  <option value="build">build (build system/external dependencies)</option>
+                  <option value="ci">ci (CI config files and scripts)</option>
+                  <option value="chore">chore (maintenance tasks)</option>
+                  <option value="revert">revert (reverts a previous commit)</option>
+                </select>
+                <i class="fa-solid fa-chevron-down select-arrow"></i>
+              </div>
+            </div>
+
+            <div class="form-group flex-1">
+              <label for="commit-scope" class="form-label">Scope <span class="label-hint">(optional)</span></label>
+              <input type="text" id="commit-scope" placeholder="e.g. ui, parser, auth" maxlength="30">
+            </div>
+          </div>
+
+          <!-- Subject Description -->
+          <div class="form-group">
+            <div class="label-wrapper">
+              <label for="commit-subject" class="form-label">Subject Description <span class="required">*</span></label>
+              <span class="char-counter" id="subject-counter">0 / 50</span>
+            </div>
+            <input type="text" id="commit-subject" placeholder="e.g. add dark mode toggle option" required>
+            <span class="field-hint">A short description starting with a lowercase letter and no trailing period.</span>
+          </div>
+
+          <!-- Options Toggles -->
+          <div class="form-group">
+            <div class="toggles-wrapper">
+              <label class="toggle-control">
+                <input type="checkbox" id="commit-breaking">
+                <span class="toggle-slider"></span>
+                <span class="toggle-label"><i class="fa-solid fa-triangle-exclamation warning-color"></i> Breaking Change</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Breaking Description (hidden until checked) -->
+          <div class="form-group hidden-transition" id="breaking-group">
+            <label for="breaking-desc" class="form-label">Breaking Change Description <span class="required">*</span></label>
+            <textarea id="breaking-desc" rows="2" placeholder="e.g. rename config file keys to lowercase (API response structures are altered)"></textarea>
+          </div>
+
+          <!-- Body Description -->
+          <div class="form-group">
+            <label for="commit-body" class="form-label">Body <span class="label-hint">(optional)</span></label>
+            <textarea id="commit-body" rows="3" placeholder="Provide detailed contextual information. Separate from subject with a blank line."></textarea>
+          </div>
+
+          <!-- Footer Tracking Issues -->
+          <div class="form-group">
+            <label for="commit-footer" class="form-label">Footer References <span class="label-hint">(optional)</span></label>
+            <input type="text" id="commit-footer" placeholder="e.g. Closes #123, Resolves #45">
+          </div>
+
+          <!-- Actions -->
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary flex-1">
+              <i class="fa-solid fa-circle-plus"></i> Commit to History
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- RIGHT PANEL: PREVIEW, VALIDATION & GRAPH LOG -->
+      <div class="pane-column">
+        
+        <!-- CARD 1: LIVE CODE PREVIEW -->
+        <section class="pane-card bg-glass font-monospace-panel" aria-labelledby="preview-title-header">
+          <div class="pane-header">
+            <h2 id="preview-title-header"><i class="fa-solid fa-code"></i> Live Output</h2>
+            <div class="tab-selectors">
+              <button class="tab-btn active" id="tab-raw" data-tab="raw">Raw Message</button>
+              <button class="tab-btn" id="tab-shell" data-tab="shell">Shell Command</button>
+            </div>
+          </div>
+
+          <div class="preview-box">
+            <div class="code-header">
+              <div class="dot-buttons">
+                <span class="dot-btn red"></span>
+                <span class="dot-btn yellow"></span>
+                <span class="dot-btn green"></span>
+              </div>
+              <span class="code-title" id="code-panel-title">commit.txt</span>
+            </div>
+            <pre class="code-content" id="output-preview">feat(ui): add dark mode toggle option</pre>
+          </div>
+
+          <div class="copy-actions-row">
+            <button class="btn btn-secondary flex-1" id="copy-btn" type="button">
+              <i class="fa-regular fa-copy"></i> <span id="copy-btn-text">Copy to Clipboard</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- CARD 2: REAL-TIME RULES VALIDATOR -->
+        <section class="pane-card bg-glass" aria-labelledby="validator-title">
+          <div class="pane-header">
+            <h2 id="validator-title"><i class="fa-solid fa-clipboard-check"></i> Rules Validator</h2>
+            <span class="health-status badge-success" id="overall-health">Passed</span>
+          </div>
+
+          <ul class="checklist-items">
+            <li class="checklist-item done" id="rule-type">
+              <span class="check-icon"><i class="fa-solid fa-circle-check"></i></span>
+              <span class="rule-label">Commit type selected</span>
+            </li>
+            <li class="checklist-item done" id="rule-subject-len">
+              <span class="check-icon"><i class="fa-solid fa-circle-check"></i></span>
+              <span class="rule-label">Subject length under 50 characters (recommended)</span>
+            </li>
+            <li class="checklist-item done" id="rule-subject-max">
+              <span class="check-icon"><i class="fa-solid fa-circle-check"></i></span>
+              <span class="rule-label">Subject length under 72 characters (hard limit)</span>
+            </li>
+            <li class="checklist-item done" id="rule-lowercase">
+              <span class="check-icon"><i class="fa-solid fa-circle-check"></i></span>
+              <span class="rule-label">Subject starts with lowercase letter</span>
+            </li>
+            <li class="checklist-item done" id="rule-period">
+              <span class="check-icon"><i class="fa-solid fa-circle-check"></i></span>
+              <span class="rule-label">No trailing period in subject description</span>
+            </li>
+            <li class="checklist-item done" id="rule-body-spacing">
+              <span class="check-icon"><i class="fa-solid fa-circle-check"></i></span>
+              <span class="rule-label">Blank line separating subject and body (if present)</span>
+            </li>
+          </ul>
+        </section>
+
+        <!-- CARD 3: INTERACTIVE LOCAL GIT LOG SIMULATOR -->
+        <section class="pane-card bg-glass" aria-labelledby="history-title">
+          <div class="pane-header">
+            <h2 id="history-title"><i class="fa-solid fa-network-wired"></i> Local Git History</h2>
+            <span class="badge-count" id="commit-count">3 commits</span>
+          </div>
+
+          <div class="git-history-container">
+            <!-- Simulated Branch Line Graph -->
+            <div class="git-timeline" id="git-timeline">
+              <!-- Timeline nodes will be dynamically injected here -->
+            </div>
+          </div>
+        </section>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

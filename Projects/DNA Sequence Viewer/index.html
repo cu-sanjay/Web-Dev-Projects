@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DNA Sequence · Viewer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="top-bar">
+    <div class="top-brand">
+      <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="#33cc66" stroke-width="1.5">
+        <path d="M4 4c4 4 4 12 0 16M20 4c-4 4-4 12 0 16M8 8h8M8 12h8M8 16h8"/>
+      </svg>
+      <div>
+        <h1 class="top-title">DNA Sequence · Viewer</h1>
+        <span class="top-sub">genetic informatics terminal v1.0</span>
+      </div>
+      <span class="top-badge" id="topBadge">STANDBY</span>
+    </div>
+    <div class="top-metrics">
+      <span class="metric-chip" id="chipLen">LENGTH <strong id="lenVal">0</strong> bp</span>
+      <span class="metric-chip accent">GC <strong id="gcVal">--</strong>%</span>
+      <span class="metric-chip">ORF <strong id="orfVal">--</strong></span>
+    </div>
+  </header>
+
+  <main class="workspace">
+
+    <!-- PRESETS -->
+    <section class="preset-row">
+      <button class="preset-btn" data-preset="insulin">&#x2605; Human Insulin Exon</button>
+      <button class="preset-btn" data-preset="phage">&#x25CB; Bacteriophage Vector</button>
+      <button class="preset-btn" data-preset="crispr">&#x2697; CRISPR Target Space</button>
+    </section>
+
+    <div class="main-grid">
+
+      <!-- LEFT: INPUT -->
+      <aside class="ctrl-panel">
+        <div class="panel-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="10" height="10"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 12h6"/></svg>
+          <span>Sequence Intake</span>
+        </div>
+        <div class="ctrl-body">
+          <label class="ctrl-label">FASTA Sequence (A/T/C/G)</label>
+          <textarea class="ctrl-textarea" id="seqInput" rows="6" placeholder="Paste raw DNA sequence...&#10;ATCGATCGATCG..."></textarea>
+          <div class="ctrl-group">
+            <label class="ctrl-label">Helix Rotation <span class="ctrl-val" id="valSpeed">60</span> rpm</label>
+            <input type="range" class="ctrl-slider" id="sliderSpeed" min="10" max="200" value="60" step="5">
+          </div>
+          <button class="ctrl-btn" id="btnAnalyze">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="8" height="8"><polyline points="20 6 9 17 4 12"/></svg>
+            Execute Strand Analysis
+          </button>
+        </div>
+      </aside>
+
+      <!-- CENTER -->
+      <section class="center-col">
+        <div class="canvas-section">
+          <div class="canvas-wrap">
+            <canvas id="helixCanvas"></canvas>
+          </div>
+        </div>
+        <div class="grid-section">
+          <div class="panel-header">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="10" height="10"><rect x="3" y="3" width="18" height="18" rx="1"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/></svg>
+            <span>Oligonucleotide Grid</span>
+            <span class="panel-hint"><span id="gridCount">0</span> bases</span>
+          </div>
+          <div class="grid-wrap">
+            <div class="base-grid" id="baseGrid"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT: TELEMETRY -->
+      <aside class="tele-panel">
+        <div class="panel-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="10" height="10"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          <span>Base Metrics</span>
+        </div>
+        <div class="tele-body" id="teleBody">
+          <div class="tele-row"><span class="tele-label">Base Pairs</span><span class="tele-val" id="teleLen">0</span></div>
+          <div class="tele-row"><span class="tele-label">GC Content</span><span class="tele-val" id="teleGc">--</span></div>
+          <div class="tele-group">
+            <div class="tele-base base-a"><span class="tele-label2">A</span><span class="tele-val2" id="teleA">0</span></div>
+            <div class="tele-base base-t"><span class="tele-label2">T</span><span class="tele-val2" id="teleT">0</span></div>
+            <div class="tele-base base-c"><span class="tele-label2">C</span><span class="tele-val2" id="teleC">0</span></div>
+            <div class="tele-base base-g"><span class="tele-label2">G</span><span class="tele-val2" id="teleG">0</span></div>
+          </div>
+          <div class="tele-section">
+            <div class="tele-section-title">mRNA Transcript</div>
+            <div class="tele-mrna" id="teleMrna">--</div>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+
+    <!-- ACTIONS -->
+    <footer class="action-bar">
+      <button class="foot-btn foot-run" id="btnTranscribe">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><path d="M4 4c4 4 4 12 0 16M20 4c-4 4-4 12 0 16"/></svg>
+        Initiate Transcription
+      </button>
+      <button class="foot-btn foot-preset" id="btnOrf">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><path d="M7 21h10"/><rect x="4" y="3" width="16" height="14" rx="2"/></svg>
+        Validate ORF Boundaries
+      </button>
+      <button class="foot-btn foot-reset" id="btnFlush">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6"/><path d="M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+        Flush Sequence &amp; Purge
+      </button>
+    </footer>
+
+  </main>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

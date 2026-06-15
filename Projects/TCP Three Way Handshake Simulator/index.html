@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TCP Three-Way Handshake Simulator - Interactive Networking Lab</title>
+  <meta name="description" content="Visualizes TCP connection establishment and termination processes. Configure custom client/server ISNs, inspect segment headers (Seq, Ack, flags), trigger packet losses, and trace state machines.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-logo">
+        <a href="../../" class="back-link" title="Back to Showcase">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        </a>
+        <div class="logo-text">
+          <h1>TCP Three-Way <span class="accent-text">Handshake</span> Simulator</h1>
+          <p class="subtitle">Interactive Connection Establishment, Teardown &amp; Retransmission Lab</p>
+        </div>
+      </div>
+      
+      <!-- Preset Configurations -->
+      <div class="header-presets">
+        <div class="control-group">
+          <label for="simulation-preset">Handshake Scenario:</label>
+          <select id="simulation-preset" class="custom-select">
+            <option value="standard" selected>Standard Establishment (3-Way)</option>
+            <option value="lossy">Lossy Network (Retransmission Demo)</option>
+            <option value="teardown">Connection Teardown (4-Way FIN)</option>
+            <option value="simultaneous">Simultaneous Open (SYN Collision)</option>
+          </select>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Workspace Dashboard Grid -->
+    <main class="dashboard-grid">
+      
+      <!-- Left Column: Settings, Topology Canvas, Inspector -->
+      <section class="left-column">
+        
+        <!-- Connection Settings Card -->
+        <div class="card settings-card">
+          <h2 class="card-title">Socket Configurations</h2>
+          
+          <div class="settings-form mt-12">
+            <div class="field-row">
+              <div class="input-field-group flex-1">
+                <label for="client-isn">Client Initial Seq (ISN)</label>
+                <input type="number" id="client-isn" value="1000" min="0" max="100000" class="custom-input">
+              </div>
+
+              <div class="input-field-group flex-1">
+                <label for="server-isn">Server Initial Seq (ISN)</label>
+                <input type="number" id="server-isn" value="5000" min="0" max="100000" class="custom-input">
+              </div>
+            </div>
+
+            <div class="field-row mt-12">
+              <div class="checkbox-field-group flex-1">
+                <input type="checkbox" id="toggle-packet-loss" class="custom-checkbox">
+                <label for="toggle-packet-loss">Simulate Packet Loss (Drops segment)</label>
+              </div>
+              
+              <div class="checkbox-field-group flex-1">
+                <input type="checkbox" id="toggle-sim-open" class="custom-checkbox">
+                <label for="toggle-sim-open">Simultaneous Open (Both send SYN)</label>
+              </div>
+            </div>
+
+            <div class="action-buttons-row mt-16">
+              <button id="btn-init-handshake" class="btn btn-primary flex-1">Initiate Handshake</button>
+              <button id="btn-init-teardown" class="btn btn-secondary flex-1" disabled>Teardown Connection</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Connection Canvas: Live Node Topology -->
+        <div class="card canvas-card">
+          <h2 class="card-title">Live Topology Canvas</h2>
+          
+          <div class="connection-canvas mt-16" id="connection-wire-workspace">
+            
+            <!-- Client Node Console -->
+            <div class="node-terminal-box client" id="node-client">
+              <div class="terminal-header">
+                <span class="dot-led" id="client-led"></span>
+                <span class="terminal-title">TCP Client Socket</span>
+              </div>
+              <div class="terminal-state-badge" id="client-state">CLOSED</div>
+              
+              <div class="terminal-tcb-metrics mt-12">
+                <div class="tcb-row"><span>Local Port:</span><b class="font-mono">51234</b></div>
+                <div class="tcb-row"><span>SND.NXT (Seq):</span><b class="font-mono" id="client-snd-nxt">--</b></div>
+                <div class="tcb-row"><span>RCV.NXT (Ack):</span><b class="font-mono" id="client-rcv-nxt">--</b></div>
+              </div>
+              
+              <!-- Retransmission timer notification -->
+              <div class="retransmission-timer hidden" id="client-rto-box">
+                <span>RTO Timer:</span>
+                <span id="client-rto-val" class="font-mono accent-text">4.0s</span>
+              </div>
+            </div>
+
+            <!-- Central Transmission Path Wire -->
+            <div class="transmission-path" id="transmission-link-wire">
+              <div class="wire-connector"></div>
+              
+              <!-- Traveling Packet element -->
+              <div class="segment-packet hidden" id="traveling-segment">
+                <span class="segment-flag-label" id="packet-flags-short">SYN</span>
+                <span class="segment-arrow-dir" id="packet-arrow-dir">&rarr;</span>
+              </div>
+            </div>
+
+            <!-- Server Node Console -->
+            <div class="node-terminal-box server" id="node-server">
+              <div class="terminal-header">
+                <span class="dot-led" id="server-led"></span>
+                <span class="terminal-title">TCP Server Socket</span>
+              </div>
+              <div class="terminal-state-badge" id="server-state">LISTEN</div>
+              
+              <div class="terminal-tcb-metrics mt-12">
+                <div class="tcb-row"><span>Listen Port:</span><b class="font-mono">80</b></div>
+                <div class="tcb-row"><span>SND.NXT (Seq):</span><b class="font-mono" id="server-snd-nxt">--</b></div>
+                <div class="tcb-row"><span>RCV.NXT (Ack):</span><b class="font-mono" id="server-rcv-nxt">--</b></div>
+              </div>
+
+              <!-- Retransmission timer notification -->
+              <div class="retransmission-timer hidden" id="server-rto-box">
+                <span>RTO Timer:</span>
+                <span id="server-rto-val" class="font-mono accent-text">4.0s</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- TCP Segment Header Details Inspector -->
+        <div class="card inspector-card" id="segment-inspector-panel">
+          <h2 class="card-title">TCP Header Segment Inspector</h2>
+          <p class="section-desc">Details of the active TCP segment currently traversing the network link.</p>
+          
+          <div class="inspector-segment-visual mt-12">
+            <table class="tcp-header-table">
+              <thead>
+                <tr>
+                  <th colspan="2">Source Port: <span id="hdr-src-port" class="accent-text font-mono">--</span></th>
+                  <th colspan="2">Destination Port: <span id="hdr-dst-port" class="accent-text font-mono">--</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td colspan="4" class="hdr-val-cell">Sequence Number (Seq): <b id="hdr-seq-val" class="font-mono">--</b></td>
+                </tr>
+                <tr>
+                  <td colspan="4" class="hdr-val-cell">Acknowledgment Number (Ack): <b id="hdr-ack-val" class="font-mono">--</b></td>
+                </tr>
+                <tr>
+                  <td class="flag-bit-cell" id="flag-urg">URG: 0</td>
+                  <td class="flag-bit-cell" id="flag-ack">ACK: 0</td>
+                  <td class="flag-bit-cell" id="flag-psh">PSH: 0</td>
+                  <td class="flag-bit-cell" id="flag-rst">RST: 0</td>
+                </tr>
+                <tr>
+                  <td class="flag-bit-cell" id="flag-syn">SYN: 0</td>
+                  <td class="flag-bit-cell" id="flag-fin">FIN: 0</td>
+                  <td colspan="2">Window Size: <b id="hdr-win-val" class="font-mono">1024</b></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Right Column: Timeline Controls, Telemetry Logs, Quiz -->
+      <section class="right-column">
+        
+        <!-- Timeline Controls Card -->
+        <div class="card timeline-card">
+          <h2 class="card-title">Handshake Playback Console</h2>
+          
+          <div class="timeline-controls mt-12">
+            <button id="btn-prev-step" class="btn btn-control" title="Step backward" disabled>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="19 20 9 12 19 4 19 20"></polygon><line x1="5" y1="19" x2="5" y2="5"></line></svg>
+            </button>
+            
+            <button id="btn-toggle-play" class="btn btn-primary btn-control-main" title="Run automatically">
+              <svg id="play-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              <svg id="pause-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+              <span>Run Stepper</span>
+            </button>
+            
+            <button id="btn-next-step" class="btn btn-control" title="Step forward">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="5" x2="19" y2="19"></line></svg>
+            </button>
+
+            <button id="btn-reset" class="btn btn-secondary btn-control" title="Reset current simulation">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path></svg>
+            </button>
+          </div>
+
+          <div class="slider-speed-bar mt-12">
+            <span id="speed-value">Speed: 1.5s</span>
+            <input type="range" id="sim-speed" min="500" max="4000" step="100" value="1500">
+          </div>
+        </div>
+
+        <!-- Telemetry Logs card -->
+        <div class="card log-card">
+          <div class="log-header">
+            <h3 class="card-title">TCP Stack Telemetry Logs</h3>
+            <button id="btn-clear-logs" class="btn btn-small btn-secondary">Clear</button>
+          </div>
+          <div id="log-console" class="console">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+
+        <!-- Handshake Quiz card -->
+        <div class="card quiz-card">
+          <div class="card-header">
+            <h2 class="card-title">Sequence Math Quiz</h2>
+            <div class="quiz-score">Score: <b id="quiz-score-val" class="accent-text">0/0</b></div>
+          </div>
+          
+          <div id="quiz-start-view" class="quiz-content">
+            <p class="section-desc">Practice calculating sequence numbers and acknowledgment responses for TCP segment headers.</p>
+            <button id="btn-start-quiz" class="btn btn-primary w-full mt-16">Start Calculations Quiz</button>
+          </div>
+
+          <div id="quiz-active-view" class="quiz-content hidden">
+            <div class="quiz-question-box font-mono" id="quiz-question-text">
+              <!-- Loaded dynamically -->
+            </div>
+            
+            <div class="quiz-options-grid mt-16" id="quiz-options-container">
+              <!-- Choice buttons -->
+            </div>
+
+            <div class="quiz-feedback mt-16 hidden" id="quiz-feedback-box">
+              <span id="quiz-feedback-text">Correct!</span>
+            </div>
+
+            <div class="quiz-actions mt-16">
+              <button id="btn-quit-quiz" class="btn btn-secondary btn-small">Quit</button>
+              <button id="btn-next-quiz" class="btn btn-primary btn-small hidden">Next Question</button>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- Bottom Educational details card -->
+    <section class="theory-section card">
+      <h3 class="section-title">TCP Connection Management Details</h3>
+      <div class="theory-grid">
+        
+        <div class="theory-card">
+          <h4>Three-Way Handshake (Establishment)</h4>
+          <p>
+            To establish a reliable connection over IP, TCP uses a three-way handshake to synchronize Sequence Numbers and allocate buffer resources:
+          </p>
+          <ul>
+            <li><strong>1. SYN</strong>: The Client sends a segment with flag <code>SYN=1, ACK=0</code> and its Initial Sequence Number ($Seq = X$). Sockets moves to <code>SYN-SENT</code>.</li>
+            <li><strong>2. SYN-ACK</strong>: The Server replies with <code>SYN=1, ACK=1</code>, its own Initial Sequence Number ($Seq = Y$), and sets $Ack = X + 1$ to acknowledge the Client's SYN segment. State becomes <code>SYN-RECEIVED</code>.</li>
+            <li><strong>3. ACK</strong>: The Client replies with <code>SYN=0, ACK=1</code>, setting $Seq = X + 1$ and $Ack = Y + 1$ to acknowledge the Server's SYN-ACK. Sockets transition to <code>ESTABLISHED</code> on both sides.</li>
+          </ul>
+        </div>
+
+        <div class="theory-card">
+          <h4>Four-Way Handshake (Teardown)</h4>
+          <p>
+            Because TCP connections are full-duplex (allowing data to flow in both directions independently), closing a connection requires a four-way handshake to shut down both halves:
+          </p>
+          <ul>
+            <li><strong>1. FIN</strong>: Active close node sends <code>FIN=1</code> (e.g. $Seq = U$), moving to <code>FIN-WAIT-1</code> state.</li>
+            <li><strong>2. ACK</strong>: Receiver replies with <code>ACK=1</code> ($Ack = U + 1$), transitioning to <code>CLOSE-WAIT</code>. Active close node enters <code>FIN-WAIT-2</code>.</li>
+            <li><strong>3. FIN</strong>: Once the receiver completes its own final data writes, it sends its own <code>FIN=1</code> (e.g. $Seq = W$), moving to <code>LAST-ACK</code>.</li>
+            <li><strong>4. ACK</strong>: Active close node replies with <code>ACK=1</code> ($Ack = W + 1$) and enters <code>TIME-WAIT</code> for a duration of $2 \times \text{MSL}$ (Maximum Segment Lifetime) before closing completely.</li>
+          </ul>
+        </div>
+
+        <div class="theory-card">
+          <h4>Timers &amp; Retransmission (RTO)</h4>
+          <p>
+            To guarantee delivery over unreliable links, TCP utilizes timers and acknowledgment validation:
+          </p>
+          <ul>
+            <li><strong>Sequence Bookkeeping</strong>: In TCP, sequence numbers count *data bytes*, not packets. However, control flags (like <code>SYN</code> and <code>FIN</code>) consume exactly 1 sequence number logically. Acknowledge segment numbers always declare the *next byte expected*.</li>
+            <li><strong>Retransmission Timeout (RTO)</strong>: When a node sends a segment, it launches a timer. If it does not receive an acknowledgment before the timer reaches 0, it assumes packet loss and automatically retransmits the segment.</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Simulation Logic Script -->
+  <script src="script.js"></script>
+</body>
+</html>

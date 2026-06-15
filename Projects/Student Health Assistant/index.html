@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Health Assistant</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+
+  <div class="app-container">
+    <header class="main-header">
+      <div class="header-content">
+        <h1><i class="ph ph-heartbeat"></i> Student Health Assistant</h1>
+        <p>Your comprehensive campus wellness & medical hub</p>
+      </div>
+    </header>
+
+    <main class="dashboard">
+      
+      <!-- Left Column: Wellness Tracking & Tips -->
+      <div class="column">
+        
+        <!-- Daily Health Tip -->
+        <section class="card tip-card">
+          <div class="card-header">
+            <h2><i class="ph ph-lightbulb"></i> Daily Wellness Tip</h2>
+          </div>
+          <div class="card-body">
+            <p id="daily-tip" class="tip-text">Loading tip...</p>
+            <button id="new-tip-btn" class="btn outline-btn btn-small mt-3">Next Tip</button>
+          </div>
+        </section>
+
+        <!-- Wellness Tracker -->
+        <section class="card tracker-card">
+          <div class="card-header">
+            <h2><i class="ph ph-activity"></i> Daily Tracker</h2>
+          </div>
+          <div class="card-body">
+            <form id="tracker-form">
+              <div class="form-group">
+                <label for="water-intake">Water Intake (Glasses)</label>
+                <div class="input-with-icon">
+                  <i class="ph ph-drop text-blue"></i>
+                  <input type="number" id="water-intake" min="0" max="20" placeholder="e.g. 8" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="sleep-hours">Sleep (Hours)</label>
+                <div class="input-with-icon">
+                  <i class="ph ph-moon text-purple"></i>
+                  <input type="number" id="sleep-hours" min="0" max="24" step="0.5" placeholder="e.g. 7.5" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="exercise-mins">Exercise (Minutes)</label>
+                <div class="input-with-icon">
+                  <i class="ph ph-person-simple-run text-green"></i>
+                  <input type="number" id="exercise-mins" min="0" max="300" placeholder="e.g. 45" required>
+                </div>
+              </div>
+              <button type="submit" class="btn primary-btn w-100">Log Daily Stats</button>
+            </form>
+
+            <div id="tracker-summary" class="summary-box hidden mt-4">
+              <h3>Today's Summary</h3>
+              <ul id="summary-list"></ul>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- Right Column: Appointments & Emergencies -->
+      <div class="column">
+        
+        <!-- Appointment Booking -->
+        <section class="card appointment-card">
+          <div class="card-header">
+            <h2><i class="ph ph-calendar-plus"></i> Book Clinic Appointment</h2>
+          </div>
+          <div class="card-body">
+            <form id="appointment-form">
+              <div class="form-group">
+                <label for="doc-select">Select Doctor / Service</label>
+                <select id="doc-select" required>
+                  <option value="" disabled selected>Choose a service</option>
+                  <option value="General Physician">General Physician</option>
+                  <option value="Mental Health Counselor">Mental Health Counselor</option>
+                  <option value="Physiotherapist">Physiotherapist</option>
+                  <option value="Nutritionist">Nutritionist</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="apt-date">Date</label>
+                <input type="date" id="apt-date" required>
+              </div>
+              <div class="form-group">
+                <label for="apt-time">Time Slot</label>
+                <select id="apt-time" required>
+                  <option value="09:00 AM">09:00 AM</option>
+                  <option value="10:30 AM">10:30 AM</option>
+                  <option value="01:00 PM">01:00 PM</option>
+                  <option value="03:00 PM">03:00 PM</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="apt-reason">Reason for Visit</label>
+                <textarea id="apt-reason" rows="2" placeholder="Briefly describe your symptoms" required></textarea>
+              </div>
+              <button type="submit" class="btn primary-btn w-100">Confirm Booking</button>
+            </form>
+          </div>
+        </section>
+
+        <!-- Upcoming Appointments -->
+        <section class="card upcoming-card">
+          <div class="card-header">
+            <h2><i class="ph ph-calendar-check"></i> Upcoming Appointments</h2>
+          </div>
+          <div class="card-body">
+            <div id="appointments-list" class="list-container">
+              <div class="empty-state">No upcoming appointments.</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Emergency Contacts -->
+        <section class="card emergency-card">
+          <div class="card-header bg-danger text-white">
+            <h2 class="text-white"><i class="ph ph-warning-circle"></i> Emergency Contacts</h2>
+          </div>
+          <div class="card-body">
+            <ul class="contact-list">
+              <li>
+                <div class="contact-info">
+                  <strong>Campus Security</strong>
+                  <span>24/7 Patrol & Escort</span>
+                </div>
+                <a href="tel:5550199" class="btn outline-btn btn-small call-btn"><i class="ph ph-phone"></i> Call</a>
+              </li>
+              <li>
+                <div class="contact-info">
+                  <strong>Medical Emergency</strong>
+                  <span>Ambulance / Hospital</span>
+                </div>
+                <a href="tel:911" class="btn outline-btn btn-small call-btn"><i class="ph ph-phone"></i> Call</a>
+              </li>
+              <li>
+                <div class="contact-info">
+                  <strong>Mental Health Hotline</strong>
+                  <span>Confidential Support</span>
+                </div>
+                <a href="tel:5550188" class="btn outline-btn btn-small call-btn"><i class="ph ph-phone"></i> Call</a>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+      </div>
+
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,232 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #05060b;
+  color: rgba(255,255,255,0.75);
+  font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
+  min-height: 100vh;
+  padding: 2vmin;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.terminal-badge {
+  font-size: clamp(9px,1.6vmin,18px);
+  letter-spacing: 3px;
+  padding: 0.6em 1.8em;
+  border: 1px solid rgba(0,229,255,0.25);
+  background: rgba(0,229,255,0.04);
+  color: #00e5ff;
+  text-align: center;
+  margin-bottom: 2vmin;
+  text-shadow: 0 0 10px rgba(0,229,255,0.3);
+}
+
+.app-grid {
+  width: 100%;
+  max-width: 1480px;
+  display: grid;
+  grid-template-columns: 180fr 1fr 200fr;
+  grid-template-rows: auto auto auto auto;
+  gap: 1.2vmin;
+}
+
+/* ─── RIBBON ─── */
+.ribbon {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 0.6vmin;
+}
+.mode-btn {
+  flex: 1;
+  padding: 0.6em 0.4em;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.3);
+  font: 600 clamp(7px,0.8vmin,10px) 'JetBrains Mono',monospace;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.mode-btn:hover { border-color: rgba(0,229,255,0.3); color: rgba(255,255,255,0.6); }
+.mode-btn.active { background: rgba(0,229,255,0.06); border-color: #00e5ff; color: #00e5ff; box-shadow: 0 0 12px rgba(0,229,255,0.08); }
+
+/* ─── PANELS ─── */
+.panel {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.05);
+  padding: 1.4vmin;
+  transition: border-color 0.5s;
+}
+.panel.congested { border-color: rgba(255,20,68,0.3); box-shadow: 0 0 20px rgba(255,20,68,0.05); }
+.panel-header {
+  font-size: clamp(6px,0.75vmin,10px);
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.15);
+  margin-bottom: 1vmin;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  padding-bottom: 0.5vmin;
+}
+
+/* ─── PARAM PANEL ─── */
+.param-panel { grid-column: 1; grid-row: 2; }
+.ctrl-label {
+  display: block;
+  font-size: clamp(6px,0.7vmin,9px);
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 1.5px;
+  margin: 0.8vmin 0 0.4vmin;
+}
+.slider-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.6vmin;
+}
+.slider-wrap input[type=range] {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 2px;
+  background: rgba(0,229,255,0.2);
+  outline: none;
+  border-radius: 1px;
+}
+.slider-wrap input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  background: #00e5ff;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 6px rgba(0,229,255,0.4);
+}
+.slider-wrap input[type=range]::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  background: #00e5ff;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+}
+.slider-num {
+  font-size: clamp(8px,0.9vmin,12px);
+  color: #ffc800;
+  min-width: 2.5em;
+  text-align: right;
+}
+
+/* ─── CANVAS ─── */
+.canvas-panel { grid-column: 2 / 4; grid-row: 2 / 4; display: flex; flex-direction: column; }
+.canvas-wrap {
+  flex: 1;
+  position: relative;
+  min-height: 300px;
+}
+#trafficCanvas {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: rgba(0,0,0,0.2);
+}
+
+/* ─── LOG ─── */
+.log-panel { grid-column: 1; grid-row: 3; }
+.log-scroll {
+  max-height: 200px;
+  overflow-y: auto;
+  font-size: clamp(5px,0.6vmin,8px);
+}
+.log-scroll::-webkit-scrollbar { width: 2px; }
+.log-scroll::-webkit-scrollbar-thumb { background: rgba(0,229,255,0.15); }
+.log-empty { color: rgba(255,255,255,0.06); text-align: center; padding: 1em 0; letter-spacing: 2px; }
+.log-entry {
+  padding: 0.25em 0;
+  border-bottom: 1px solid rgba(255,255,255,0.02);
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 0.5px;
+}
+.log-entry .ts { color: rgba(255,255,255,0.1); }
+.log-entry.critical { color: #ff1744; }
+.log-entry.critical .ts { color: rgba(255,20,68,0.3); }
+
+/* ─── TELEMETRY ─── */
+.telemetry-panel { grid-column: 4; grid-row: 2; }
+.tele-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.35em 0;
+  border-bottom: 1px solid rgba(255,255,255,0.02);
+}
+.tele-label {
+  font-size: clamp(6px,0.65vmin,8px);
+  color: rgba(255,255,255,0.15);
+  letter-spacing: 1px;
+}
+.tele-val {
+  font-size: clamp(9px,1vmin,14px);
+  color: #00e5ff;
+  font-weight: 600;
+}
+.tele-badge {
+  font-size: clamp(6px,0.7vmin,9px);
+  padding: 0.2em 0.5em;
+  letter-spacing: 2px;
+}
+.tele-badge.standby { color: rgba(255,255,255,0.15); background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); }
+.tele-badge.flow { color: #00e676; background: rgba(0,230,118,0.06); border: 1px solid rgba(0,230,118,0.2); }
+.tele-badge.moderate { color: #ffc800; background: rgba(255,200,0,0.06); border: 1px solid rgba(255,200,0,0.15); }
+.tele-badge.critical { color: #ff1744; background: rgba(255,20,68,0.08); border: 1px solid rgba(255,20,68,0.25); animation: pulse 1s ease-in-out infinite; }
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 4px rgba(255,20,68,0.1); }
+  50% { box-shadow: 0 0 14px rgba(255,20,68,0.2); }
+}
+
+/* ─── ADMIN FOOTER ─── */
+.admin-footer {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 0.6vmin;
+  flex-wrap: wrap;
+}
+.admin-btn {
+  flex: 1;
+  min-width: 160px;
+  padding: 0.7em 0.5em;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.35);
+  font: 600 clamp(7px,0.8vmin,10px) 'JetBrains Mono',monospace;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.admin-btn:hover { color: rgba(255,255,255,0.6); }
+.admin-btn.surge:hover { border-color: #ff8800; color: #ff8800; }
+.admin-btn.switch:hover { border-color: #00e5ff; color: #00e5ff; }
+.admin-btn.flush:hover { border-color: #ff1744; color: #ff1744; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  .app-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+  }
+  .param-panel { grid-column: 1; grid-row: auto; }
+  .canvas-panel { grid-column: 1 / -1; grid-row: auto; }
+  .log-panel { grid-column: 1; grid-row: auto; }
+  .telemetry-panel { grid-column: 2; grid-row: auto; }
+}
+@media (max-width: 540px) {
+  .app-grid { grid-template-columns: 1fr; }
+  .param-panel, .canvas-panel, .log-panel, .telemetry-panel { grid-column: 1; }
+}

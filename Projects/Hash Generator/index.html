@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hash Generator</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="terminal-badge">[ HASH GENERATOR — CRYPTOGRAPHIC OPERATIONS CONSOLE ]</div>
+
+<div class="app-grid">
+
+  <!-- ─── PRESET BAR ─── -->
+  <div class="preset-bar">
+    <button id="presetDb" class="preset-btn">SECURE DATABASE CREDENTIAL STRING</button>
+    <button id="presetApi" class="preset-btn">API AUTHENTICATION SIGNATURE VECTOR</button>
+    <button id="presetSys" class="preset-btn">SYSTEM ARCHITECTURE PAYLOAD TEMPLATE</button>
+  </div>
+
+  <!-- ─── LEFT: INPUT ─── -->
+  <div class="panel input-panel">
+    <div class="panel-header">INPUT MESSAGE VECTOR FEED</div>
+    <textarea id="msgInput" spellcheck="false" placeholder="Enter message to hash...">The quick brown fox jumps over the lazy dog</textarea>
+    <div class="latency-row">
+      <span class="latency-label">PROCESSING LATENCY</span>
+      <input type="range" id="latencySlider" class="latency-slider" min="0" max="500" value="50" step="10">
+      <span id="latencyVal" class="latency-val">50ms</span>
+    </div>
+  </div>
+
+  <!-- ─── CENTER: HASH OUTPUTS ─── -->
+  <div class="center-stack">
+
+    <div class="panel hash-row">
+      <div class="panel-header hash-label md5-label">MD5 — 128-BIT DIGEST</div>
+      <div class="hash-output">
+        <span id="md5Output" class="hash-text">&lt;awaiting input&gt;</span>
+        <button class="copy-btn" data-target="md5Output">COPY</button>
+      </div>
+    </div>
+
+    <div class="panel hash-row">
+      <div class="panel-header hash-label sha1-label">SHA-1 — 160-BIT DIGEST</div>
+      <div class="hash-output">
+        <span id="sha1Output" class="hash-text">&lt;awaiting input&gt;</span>
+        <button class="copy-btn" data-target="sha1Output">COPY</button>
+      </div>
+    </div>
+
+    <div class="panel hash-row">
+      <div class="panel-header hash-label sha256-label">SHA-256 — 256-BIT DIGEST</div>
+      <div class="hash-output">
+        <span id="sha256Output" class="hash-text">&lt;awaiting input&gt;</span>
+        <button class="copy-btn" data-target="sha256Output">COPY</button>
+      </div>
+    </div>
+
+    <!-- ─── AVALANCHE DISPLAY ─── -->
+    <div class="panel avalanche-panel">
+      <div class="panel-header">BIT-MUTATION INSPECTOR DISPLAY</div>
+      <div id="avalancheDisplay" class="avalanche-display">
+        <div class="avalanche-row"><span class="avl-label">PREVIOUS DIGEST</span><span id="avlPrev" class="avl-val">--</span></div>
+        <div class="avalanche-row"><span class="avl-label">CURRENT DIGEST</span><span id="avlCurr" class="avl-val">--</span></div>
+        <div class="avalanche-row"><span class="avl-label">BIT DIFFERENCE</span><span id="avlDiff" class="avl-val">--</span></div>
+        <div class="avl-bar-track"><div id="avlBar" class="avl-bar" style="width:0%"></div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ─── TELEMETRY ─── -->
+  <div class="panel telemetry-panel">
+    <div class="panel-header">CRYPTOGRAPHIC TELEMETRY DASHBOARD</div>
+    <div class="tele-row"><span class="tele-label">CHAR LENGTH</span><span id="tChars" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">MESSAGE WEIGHT</span><span id="tBytes" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">HEX WIDTH</span><span id="tWidth" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">AVALANCHE SHIFT</span><span id="tAvalanche" class="tele-val">--</span></div>
+    <div class="ctrl-divider"></div>
+    <div class="tele-row" style="grid-column:1/-1;"><span id="tBadge" class="tele-badge standby">STANDBY</span></div>
+    <div class="ctrl-divider"></div>
+    <div id="errorDetail" class="error-detail"></div>
+  </div>
+
+  <!-- ─── ADMIN FOOTER ─── -->
+  <div class="admin-footer">
+    <button id="btnExecute" class="admin-btn execute">EXECUTE ASYNCHRONOUS CHECKSUM COMPUTATIONS</button>
+    <button id="btnAvalanche" class="admin-btn avalanche">VERIFY AVALANCHE DISPERSION MATRIX</button>
+    <button id="btnFlush" class="admin-btn flush">FLUSH CRYPTOGRAPHIC CHANNELS</button>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

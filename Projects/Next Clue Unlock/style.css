@@ -1,0 +1,139 @@
+  @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap');
+
+        :root {
+            --bg: #ffefcd;
+            --card: #ffffff;
+            --primary: #ff6b6b;
+            --secondary: #4ecdc4;
+            --accent: #ffe66d;
+            --text: #2f2f2f;
+            --border: #2f2f2f;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Fredoka', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .game-card {
+            background: var(--card);
+            border: 4px solid var(--border);
+            border-radius: 40px;
+            padding: 40px;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 12px 12px 0px var(--border);
+            text-align: center;
+            position: relative;
+            transform: rotate(-1deg);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin: 0 0 20px;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .progress-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .dot {
+            width: 20px;
+            height: 20px;
+            border: 3px solid var(--border);
+            border-radius: 50%;
+            background: white;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .dot.active {
+            background: var(--accent);
+            transform: scale(1.3);
+        }
+
+        .dot.done {
+            background: var(--secondary);
+        }
+
+        .clue-box {
+            background: #f8f9fa;
+            border: 3px solid var(--border);
+            border-radius: 25px;
+            padding: 25px;
+            margin-bottom: 30px;
+            font-size: 1.3rem;
+            line-height: 1.4;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 6px 6px 0px rgba(0,0,0,0.05);
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        input {
+            padding: 15px 20px;
+            border: 4px solid var(--border);
+            border-radius: 20px;
+            font-family: inherit;
+            font-size: 1.2rem;
+            text-align: center;
+            outline: none;
+            transition: transform 0.2s;
+        }
+
+        input:focus {
+            transform: scale(1.02);
+            background: var(--accent);
+        }
+
+        .btn-unlock {
+            background: var(--primary);
+            color: white;
+            border: 4px solid var(--border);
+            padding: 15px;
+            border-radius: 20px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 6px 6px 0px var(--border);
+            transition: all 0.1s;
+        }
+
+        .btn-unlock:active {
+            transform: translate(4px, 4px);
+            box-shadow: 2px 2px 0px var(--border);
+        }
+
+        .feedback {
+            margin-top: 20px;
+            font-weight: bold;
+            min-height: 24px;
+        }
+
+        .hidden { display: none !important; }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0) rotate(-1deg); }
+            50% { transform: translateY(-10px) rotate(1deg); }
+        }
+
+        .won { animation: bounce 0.5s infinite; }

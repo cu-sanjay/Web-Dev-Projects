@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Electric Field Simulator & Visualizer</title>
+  <meta name="description" content="An interactive HTML5 canvas physics sandbox visualizing electric fields, field lines, voltage contours, and charged particle trajectories.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- TOP HEADER -->
+    <header class="app-header">
+      <div class="brand">
+        <div class="brand-logo">
+          <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10" stroke-dasharray="4 2"></circle>
+            <circle cx="12" cy="12" r="3" fill="currentColor"></circle>
+            <line x1="12" y1="2" x2="12" y2="6"></line>
+            <line x1="12" y1="18" x2="12" y2="22"></line>
+            <line x1="2" y1="12" x2="6" y2="12"></line>
+            <line x1="18" y1="12" x2="22" y2="12"></line>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>ELECTROSTATICS LAB</h1>
+          <h2>Electric Field & Potential Simulator</h2>
+        </div>
+      </div>
+
+      <!-- Telemetry HUD -->
+      <div class="telemetry-hud" aria-label="Simulation Telemetry">
+        <div class="hud-item">
+          <span class="hud-label">Peak E-Field</span>
+          <span class="hud-value" id="hud-peak-field">0.0 V/m</span>
+        </div>
+        <div class="hud-item">
+          <span class="hud-label">Active Charges</span>
+          <span class="hud-value" id="hud-charge-count">0</span>
+        </div>
+        <div class="hud-item">
+          <span class="hud-label">Active Particles</span>
+          <span class="hud-value" id="hud-particle-count">0</span>
+        </div>
+        <div class="hud-item">
+          <span class="hud-label">Engine FPS</span>
+          <span class="hud-value" id="hud-fps">60.0</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="main-layout">
+      <!-- LEFT SIDEBAR: Controls & Settings -->
+      <aside class="sidebar left-sidebar" aria-label="Controls and Settings">
+        <div class="panel-section">
+          <h3><span class="sec-num">01</span> Add Charge Sources</h3>
+          <div class="source-adder-grid">
+            <button id="btn-add-pos" class="btn btn-add pos" title="Add Positive Point Charge (+1.0 nC)">
+              <span class="icon">+q</span> + Point Charge
+            </button>
+            <button id="btn-add-neg" class="btn btn-add neg" title="Add Negative Point Charge (-1.0 nC)">
+              <span class="icon">-q</span> - Point Charge
+            </button>
+            <button id="btn-add-line" class="btn btn-add line" title="Add Charged Line Segment">
+              <span class="icon">| | |</span> Line Charge
+            </button>
+            <button id="btn-add-plates" class="btn btn-add plates" title="Add Parallel Plate Capacitor">
+              <span class="icon">=</span> Parallel Plates
+            </button>
+          </div>
+        </div>
+
+        <div class="panel-section" id="editor-section">
+          <h3><span class="sec-num">02</span> Element Editor</h3>
+          <div id="editor-placeholder" class="editor-placeholder-msg">
+            Select or drag a charge on the canvas to edit its parameters.
+          </div>
+          <div id="editor-controls" class="editor-controls-form hidden">
+            <div class="editor-title-row">
+              <span id="editor-element-type" class="editor-element-type">Point Charge</span>
+              <button id="btn-delete-element" class="btn btn-delete" title="Remove element from canvas">Delete</button>
+            </div>
+
+            <div class="control-group">
+              <div class="control-header">
+                <label for="input-charge">Charge Value ($q$):</label>
+                <span id="val-charge" class="control-value">1.0 nC</span>
+              </div>
+              <input type="range" id="input-charge" min="-10" max="10" step="0.5" value="1">
+              <div class="range-labels"><span>-10 nC</span><span>10 nC</span></div>
+            </div>
+
+            <div class="control-group" id="group-length">
+              <div class="control-header">
+                <label for="input-length">Length ($L$):</label>
+                <span id="val-length" class="control-value">150 px</span>
+              </div>
+              <input type="range" id="input-length" min="50" max="400" step="10" value="150">
+              <div class="range-labels"><span>50px</span><span>400px</span></div>
+            </div>
+
+            <div class="control-group" id="group-spacing">
+              <div class="control-header">
+                <label for="input-spacing">Plate Spacing ($d$):</label>
+                <span id="val-spacing" class="control-value">80 px</span>
+              </div>
+              <input type="range" id="input-spacing" min="30" max="200" step="5" value="80">
+              <div class="range-labels"><span>30px</span><span>200px</span></div>
+            </div>
+
+            <div class="control-group" id="group-angle">
+              <div class="control-header">
+                <label for="input-angle">Rotation angle ($\theta$):</label>
+                <span id="val-angle" class="control-value">0°</span>
+              </div>
+              <input type="range" id="input-angle" min="0" max="360" step="5" value="0">
+              <div class="range-labels"><span>0°</span><span>360°</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel-section">
+          <h3><span class="sec-num">03</span> Rendering Options</h3>
+          <div class="checkbox-rack">
+            <label class="check-label">
+              <input type="checkbox" id="check-heatmap" checked>
+              <span class="custom-check"></span> Potential Heatmap
+            </label>
+            <label class="check-label">
+              <input type="checkbox" id="check-vectors" checked>
+              <span class="custom-check"></span> Field Vector Grid
+            </label>
+            <label class="check-label">
+              <input type="checkbox" id="check-fieldlines" checked>
+              <span class="custom-check"></span> Electric Field Lines
+            </label>
+            <label class="check-label">
+              <input type="checkbox" id="check-contours" checked>
+              <span class="custom-check"></span> Equipotential Contours
+            </label>
+            <label class="check-label">
+              <input type="checkbox" id="check-probe" checked>
+              <span class="custom-check"></span> Active Sensor Probe
+            </label>
+            <label class="check-label">
+              <input type="checkbox" id="check-grid" checked>
+              <span class="custom-check"></span> Alignment Grid
+            </label>
+          </div>
+        </div>
+      </aside>
+
+      <!-- CENTER PANEL: Interactive Canvas Workspace -->
+      <main class="canvas-workspace">
+        <div class="canvas-container" id="canvas-container">
+          <canvas id="sim-canvas"></canvas>
+
+          <!-- Floating HUD/Readouts on Canvas -->
+          <div class="canvas-floating-badge top-left">
+            <span class="badge-dot pulse"></span>
+            <span class="badge-text" id="sim-status-text">Physics Engine: ACTIVE</span>
+          </div>
+
+          <!-- Drag instructions -->
+          <div class="canvas-floating-badge bottom-left">
+            <span>🖱️ Left-click canvas to deselect. Drag charges to relocate.</span>
+          </div>
+
+          <!-- Floating Sensor Probe HUD Panel -->
+          <div class="probe-hud-panel" id="probe-hud">
+            <div class="probe-hud-header">
+              <span class="probe-hud-title">🔍 SENSOR PROBE</span>
+              <span class="probe-coord" id="probe-val-coord">(x: 0, y: 0)</span>
+            </div>
+            <div class="probe-grid">
+              <div class="probe-cell">
+                <span class="p-lbl">Voltage (V)</span>
+                <span class="p-val" id="probe-val-v">0.0 V</span>
+              </div>
+              <div class="probe-cell">
+                <span class="p-lbl">E-Field (E)</span>
+                <span class="p-val" id="probe-val-e">0.0 V/m</span>
+              </div>
+              <div class="probe-cell">
+                <span class="p-lbl">E_x component</span>
+                <span class="p-val" id="probe-val-ex">0.0 V/m</span>
+              </div>
+              <div class="probe-cell">
+                <span class="p-lbl">E_y component</span>
+                <span class="p-val" id="probe-val-ey">0.0 V/m</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- RIGHT SIDEBAR: Particle Injector & Consoles -->
+      <aside class="sidebar right-sidebar" aria-label="Controls and Particle Injector">
+        <div class="panel-section">
+          <h3><span class="sec-num">04</span> Preset Configurations</h3>
+          <div class="preset-row">
+            <button id="btn-preset-dipole" class="btn btn-preset" title="Load Electric Dipole">Dipole</button>
+            <button id="btn-preset-capacitor" class="btn btn-preset" title="Load Parallel Plate Capacitor">Capacitor</button>
+            <button id="btn-preset-quadrupole" class="btn btn-preset" title="Load Electric Quadrupole">Quadrupole</button>
+          </div>
+        </div>
+
+        <div class="panel-section">
+          <h3><span class="sec-num">05</span> Charged Particle Injector</h3>
+          <div class="particle-injector-form">
+            <div class="injector-row">
+              <div class="control-group half">
+                <label for="input-part-charge">Charge ($q_p$):</label>
+                <select id="input-part-charge">
+                  <option value="1.0" selected>Proton (+1.0)</option>
+                  <option value="-1.0">Electron (-1.0)</option>
+                  <option value="2.0">Alpha Particle (+2.0)</option>
+                  <option value="0.0">Neutron (0.0)</option>
+                  <option value="custom">Custom Value</option>
+                </select>
+              </div>
+              <div class="control-group half" id="group-custom-part-charge">
+                <label for="input-part-charge-val">Value (e):</label>
+                <input type="number" id="input-part-charge-val" min="-10" max="10" step="0.5" value="1.0">
+              </div>
+            </div>
+
+            <div class="injector-row">
+              <div class="control-group half">
+                <label for="input-part-mass">Mass ($m$):</label>
+                <input type="number" id="input-part-mass" min="1" max="1000" value="10">
+                <div class="input-helper">A.m.u. (1 - 1000)</div>
+              </div>
+              <div class="control-group half">
+                <label for="input-part-speed">Velocity ($v_0$):</label>
+                <input type="range" id="input-part-speed" min="0" max="8" step="0.5" value="3">
+                <span id="val-part-speed" class="control-value-inline">3.0 px/frame</span>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label for="input-part-angle">Launch Angle ($\phi$):</label>
+              <input type="range" id="input-part-angle" min="0" max="360" value="45">
+              <div class="range-labels">
+                <span>0° (Right)</span>
+                <span>180° (Left)</span>
+                <span>360°</span>
+              </div>
+              <span id="val-part-angle" class="control-value-inline" style="float: right; margin-top:-18px;">45°</span>
+            </div>
+
+            <button id="btn-inject-particle" class="btn btn-inject" title="Launch particle from the injector cursor">
+              🚀 Inject Test Particle
+            </button>
+          </div>
+        </div>
+
+        <div class="panel-section">
+          <h3><span class="sec-num">06</span> Simulator Controls</h3>
+          <div class="sim-actions-grid">
+            <button id="btn-pause-play" class="btn btn-action play" title="Pause or Play Physics Simulation">
+              <span id="play-pause-icon">⏸️</span> <span id="play-pause-text">Pause Engine</span>
+            </button>
+            <button id="btn-clear-trails" class="btn btn-action clear-trails" title="Clear particle trajectory trails">
+              🧹 Clear Trails
+            </button>
+            <button id="btn-reset-all" class="btn btn-action reset" title="Clear all charges and reset simulation">
+              🔄 Clear Canvas
+            </button>
+          </div>
+        </div>
+
+        <div class="panel-section flex-grow">
+          <h3><span class="sec-num">07</span> Electrostatics Console</h3>
+          <div class="console-box" id="console-logs" aria-live="polite">
+            <div class="log-line text-info">&gt; Physics engine initialized.</div>
+            <div class="log-line text-info">&gt; Summing Electric Potentials V(r) = ∑ kq/r</div>
+            <div class="log-line text-info">&gt; Coulomb Force vector: F = qE</div>
+            <div class="log-line text-warning">&gt; Click canvas to move the Injector Probe.</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

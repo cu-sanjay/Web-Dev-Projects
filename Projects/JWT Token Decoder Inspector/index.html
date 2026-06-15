@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JWT Token Decoder & Inspector</title>
+  <!-- Google Fonts: Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- App Background Glow Effects -->
+  <div class="decor-glow">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+  </div>
+
+  <div class="jwt-layout">
+    <!-- SIDEBAR PANEL -->
+    <aside class="sidebar-container bg-glass">
+      <div class="brand-header">
+        <div class="brand-logo">
+          <i class="fa-solid fa-key"></i>
+        </div>
+        <div class="brand-title">
+          <h2>JWTAlign</h2>
+          <span>Token Workspace</span>
+        </div>
+      </div>
+
+      <!-- presets selectors -->
+      <div class="sidebar-section">
+        <label for="select-preset-token">Preset Token Templates:</label>
+        <div class="select-wrapper">
+          <select id="select-preset-token" class="presets-select">
+            <option value="" disabled selected>Choose a sample token...</option>
+            <option value="hs256-valid">HS256 - Active Token (Valid Secret)</option>
+            <option value="hs256-expired">HS256 - Expired Token</option>
+            <option value="invalid-structure">Malformed Token (Structure Error)</option>
+          </select>
+          <i class="fa-solid fa-chevron-down select-arrow"></i>
+        </div>
+      </div>
+
+      <!-- History of Decoded Tokens -->
+      <div class="sidebar-section flex-grow flex-column overflow-hidden mt-16">
+        <div class="section-header">
+          <h3>Recent Tokens History</h3>
+          <button id="btn-clear-history" class="btn-text">Clear</button>
+        </div>
+        <div class="history-list" id="history-container">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+
+      <!-- Keys/Secret Vault -->
+      <div class="sidebar-section mt-16">
+        <div class="section-header">
+          <h3>Secrets Keychain Vault</h3>
+          <button id="btn-save-secret" class="btn-text" title="Save current secret to key vault"><i class="fa-solid fa-circle-plus"></i> Add Key</button>
+        </div>
+        <div class="secrets-list" id="secrets-container">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN API WORKSPACE -->
+    <main class="workspace-container">
+      <!-- TOP NAVIGATION BAR MODE SWITCH -->
+      <header class="app-header bg-glass">
+        <div class="tab-modes">
+          <button class="mode-tab active" data-mode="decoder">
+            <i class="fa-solid fa-eye"></i> Token Decoder
+          </button>
+          <button class="mode-tab" data-mode="encoder">
+            <i class="fa-solid fa-screwdriver-wrench"></i> Token Builder (Encoder)
+          </button>
+        </div>
+        
+        <div class="header-actions">
+          <button id="btn-reset-workspace" class="btn btn-secondary btn-sm" title="Reset all workspace values to default">
+            <i class="fa-solid fa-arrow-rotate-left"></i> Reset Board
+          </button>
+        </div>
+      </header>
+
+      <!-- ==================== TOKEN DECODER MODE VIEW ==================== -->
+      <div class="mode-workspace active" id="workspace-decoder">
+        <div class="split-viewport">
+          
+          <!-- LEFT COLUMN: ENCODED INPUT AREA -->
+          <section class="section-card input-card bg-glass" aria-labelledby="heading-encoded-token">
+            <div class="card-header">
+              <h2 id="heading-encoded-token"><i class="fa-solid fa-lock"></i> Encoded Token</h2>
+              <span id="badge-token-structure" class="badge badge-neutral">No Token</span>
+            </div>
+            
+            <textarea id="encoded-token-textarea" placeholder="Paste your encoded JWT string here (header.payload.signature)..."></textarea>
+
+            <!-- Signature Verification Panel -->
+            <div class="signature-verify-box bg-glass">
+              <div class="verify-header">
+                <h3>Signature Verification (HS256 Only)</h3>
+                <span id="badge-signature-status" class="badge-signature sig-unverified">Signature Unverified</span>
+              </div>
+              
+              <div class="verify-form">
+                <div class="form-row">
+                  <label for="verification-secret-key">Secret Key / HMAC Verification Key:</label>
+                  <div class="secret-input-wrapper">
+                    <input type="password" id="verification-secret-key" placeholder="Enter key/secret to verify signature..." class="form-input">
+                    <button id="btn-toggle-secret-visibility" class="btn-icon" title="Toggle secret visibility"><i class="fa-solid fa-eye-slash"></i></button>
+                  </div>
+                </div>
+                
+                <div class="form-row checkbox-row mt-8">
+                  <input type="checkbox" id="secret-base64-encoded" class="form-checkbox">
+                  <label for="secret-base64-encoded">Secret is Base64 encoded</label>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- RIGHT COLUMN: DECODED SEGMENTS & CLAIMS TIMELINE -->
+          <div class="decoded-columns-stack">
+            <!-- HEADER SEGMENT -->
+            <section class="section-card decoded-card border-header bg-glass" aria-labelledby="heading-header-segment">
+              <div class="card-header">
+                <h2 id="heading-header-segment"><span class="bullet bullet-header"></span> Header: Metadata</h2>
+                <span class="badge-segment badge-header-text">Segment 1</span>
+              </div>
+              <pre class="pretty-print-code"><code id="decoded-header-code"></code></pre>
+            </section>
+
+            <!-- PAYLOAD SEGMENT -->
+            <section class="section-card decoded-card border-payload bg-glass" aria-labelledby="heading-payload-segment">
+              <div class="card-header">
+                <h2 id="heading-payload-segment"><span class="bullet bullet-payload"></span> Payload: Claims / Claims</h2>
+                <span class="badge-segment badge-payload-text">Segment 2</span>
+              </div>
+              <pre class="pretty-print-code"><code id="decoded-payload-code"></code></pre>
+            </section>
+
+            <!-- CLAIMS TIMELINE & DATES INSPECTOR -->
+            <section class="section-card timeline-card bg-glass" aria-labelledby="heading-claims-timeline">
+              <div class="card-header">
+                <h2 id="heading-claims-timeline"><i class="fa-solid fa-timeline"></i> Claims Timeline Inspector</h2>
+              </div>
+              
+              <div class="timeline-empty-state" id="timeline-empty-state">
+                <i class="fa-solid fa-clock-rotate-left blank-icon"></i>
+                <p>Provide a valid encoded token to inspect its issued and expiration date claims timelines.</p>
+              </div>
+
+              <div class="timeline-active-state hidden" id="timeline-active-state">
+                <div class="timeline-item" id="timeline-iss-row">
+                  <div class="timeline-marker color-purple"><i class="fa-solid fa-building"></i></div>
+                  <div class="timeline-content">
+                    <h4>Issuer Claim (iss)</h4>
+                    <p id="timeline-iss-val">Not Present</p>
+                  </div>
+                </div>
+
+                <div class="timeline-item" id="timeline-sub-row">
+                  <div class="timeline-marker color-blue"><i class="fa-solid fa-user"></i></div>
+                  <div class="timeline-content">
+                    <h4>Subject Claim (sub)</h4>
+                    <p id="timeline-sub-val">Not Present</p>
+                  </div>
+                </div>
+
+                <div class="timeline-item" id="timeline-iat-row">
+                  <div class="timeline-marker color-teal"><i class="fa-solid fa-calendar-plus"></i></div>
+                  <div class="timeline-content">
+                    <h4>Issued At Claim (iat)</h4>
+                    <p id="timeline-iat-val">Not Present</p>
+                  </div>
+                </div>
+
+                <div class="timeline-item" id="timeline-exp-row">
+                  <div class="timeline-marker" id="timeline-exp-marker"><i class="fa-solid fa-calendar-minus"></i></div>
+                  <div class="timeline-content">
+                    <div class="exp-title-row">
+                      <h4>Expiration Claim (exp)</h4>
+                      <span id="badge-expiry-countdown" class="badge badge-expired">Expired</span>
+                    </div>
+                    <p id="timeline-exp-val">Not Present</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ==================== TOKEN BUILDER MODE VIEW ==================== -->
+      <div class="mode-workspace" id="workspace-encoder">
+        <div class="split-viewport">
+          
+          <!-- LEFT COLUMN: BUILDER CONFIGURATOR -->
+          <div class="decoded-columns-stack">
+            <!-- Header editor -->
+            <section class="section-card decoded-card border-header bg-glass" aria-labelledby="heading-edit-header">
+              <div class="card-header">
+                <h2 id="heading-edit-header"><span class="bullet bullet-header"></span> Edit Header JSON</h2>
+                <button id="btn-format-builder-header" class="btn btn-secondary btn-sm"><i class="fa-solid fa-code"></i> Format</button>
+              </div>
+              <textarea id="builder-header-textarea" class="code-textarea" placeholder="Header JSON..."></textarea>
+            </section>
+
+            <!-- Payload editor -->
+            <section class="section-card decoded-card border-payload bg-glass" aria-labelledby="heading-edit-payload">
+              <div class="card-header">
+                <h2 id="heading-edit-payload"><span class="bullet bullet-payload"></span> Edit Payload JSON</h2>
+                <button id="btn-format-builder-payload" class="btn btn-secondary btn-sm"><i class="fa-solid fa-code"></i> Format</button>
+              </div>
+              <textarea id="builder-payload-textarea" class="code-textarea" placeholder="Payload JSON..."></textarea>
+            </section>
+
+            <!-- Secret key configurator -->
+            <section class="section-card bg-glass" aria-labelledby="heading-builder-secret">
+              <h2 id="heading-builder-secret" class="section-title"><i class="fa-solid fa-signature"></i> Signature HMAC Secret</h2>
+              <div class="verify-form mt-12">
+                <div class="form-row">
+                  <label for="builder-secret-key">Secret Key (HS256 Encryption):</label>
+                  <input type="text" id="builder-secret-key" placeholder="Enter key/secret to sign generated JWT..." class="form-input">
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <!-- RIGHT COLUMN: ENCODED GENERATED OUTPUT -->
+          <section class="section-card input-card bg-glass" aria-labelledby="heading-generated-token">
+            <div class="card-header">
+              <h2 id="heading-generated-token"><i class="fa-solid fa-circle-check text-success"></i> Generated Encoded Token</h2>
+              <button id="btn-copy-generated-token" class="btn btn-primary btn-sm"><i class="fa-solid fa-copy"></i> Copy Token</button>
+            </div>
+            
+            <textarea id="generated-token-textarea" class="generated-token-display" readonly placeholder="Encoded JWT string will appear here..."></textarea>
+            
+            <div class="builder-status-panel">
+              <p class="status-tip"><i class="fa-solid fa-info-circle text-info"></i> The output updates in real-time as you edit the JSON payloads or signature key details on the left.</p>
+            </div>
+          </section>
+
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ==================== KEY VAULT ADDITION MODAL DIALOG ==================== -->
+  <div class="modal-overlay hidden" id="save-secret-modal">
+    <div class="modal-card bg-glass">
+      <div class="modal-header">
+        <h3>Save Secret to Keychain</h3>
+        <button id="btn-close-secret-modal" class="btn-icon"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="save-secret-name">Secret / Key Label <span class="required">*</span></label>
+          <input type="text" id="save-secret-name" placeholder="e.g. User API Staging Key..." class="form-input">
+        </div>
+        <div class="form-group">
+          <label for="save-secret-value">Secret Value / Passphrase <span class="required">*</span></label>
+          <input type="text" id="save-secret-value" placeholder="Enter secret key string..." class="form-input">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-cancel-secret" class="btn btn-secondary">Cancel</button>
+        <button id="btn-confirm-secret" class="btn btn-primary">Save Key</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

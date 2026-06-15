@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File System Explorer Simulator - Virtual Hierarchical OS Storage Lab</title>
+  <meta name="description" content="An interactive simulator demonstrating hierarchical operating systems storage. Browse virtual paths via GUI grid layout or run shell command prompt scripts in the virtual terminal.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-logo">
+        <a href="../../" class="back-link" title="Back to Showcase">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        </a>
+        <div class="logo-text">
+          <h1>File System <span class="accent-text">Explorer</span> Simulator</h1>
+          <p class="subtitle">Operating Systems Interactive Directory &amp; Shell Learning Lab</p>
+        </div>
+      </div>
+      
+      <div class="header-presets">
+        <button id="btn-reset-fs" class="btn btn-secondary btn-control-header" title="Reset storage back to original template">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path></svg>
+          <span>Reset File System</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Workspace Dashboard Grid -->
+    <main class="dashboard-grid">
+      
+      <!-- Left Column: Directory Tree & Storage Bar -->
+      <section class="left-column card">
+        <h2 class="card-title">Virtual Directory Tree</h2>
+        
+        <!-- Search bar -->
+        <div class="search-bar-container">
+          <input type="text" id="global-search" placeholder="Search files globally..." spellcheck="false">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="search-icon"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </div>
+
+        <!-- Directory tree container -->
+        <div class="directory-tree-wrapper" id="tree-container">
+          <!-- Populated dynamically -->
+        </div>
+
+        <!-- Disk usage metric -->
+        <div class="disk-usage-container mt-16">
+          <div class="disk-label-row">
+            <span>Virtual Inode Storage Usage:</span>
+            <span id="disk-bytes-label">0 / 64 KB</span>
+          </div>
+          <div class="disk-progress-bar">
+            <div class="disk-progress-fill" id="disk-progress-fill" style="width: 0%"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Center Column: GUI Explorer Workspace -->
+      <section class="center-column card">
+        <h2 class="card-title-hidden">GUI Workspace</h2>
+        
+        <!-- Navigation Breadcrumbs path bar -->
+        <div class="gui-navigation-bar">
+          <div class="nav-history-buttons">
+            <button id="btn-nav-back" class="btn-nav-circle" title="Back" disabled>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <button id="btn-nav-forward" class="btn-nav-circle" title="Forward" disabled>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
+          
+          <div class="breadcrumbs-path" id="breadcrumbs-bar">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+
+        <!-- GUI Toolbar actions -->
+        <div class="gui-toolbar">
+          <div class="toolbar-group">
+            <button id="btn-new-folder" class="btn btn-small btn-primary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path><line x1="12" y1="11" x2="12" y2="17"></line><line x1="9" y1="14" x2="15" y2="14"></line></svg>
+              <span>New Folder</span>
+            </button>
+            
+            <button id="btn-new-file" class="btn btn-small btn-primary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>
+              <span>New File</span>
+            </button>
+          </div>
+
+          <div class="toolbar-group">
+            <button id="btn-rename-node" class="btn btn-small btn-secondary" disabled>
+              <span>Rename</span>
+            </button>
+            <button id="btn-delete-node" class="btn btn-small btn-secondary btn-danger-action" disabled>
+              <span>Delete</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Files Workspace Grid -->
+        <div class="explorer-grid-container" id="explorer-grid">
+          <!-- Populated dynamically -->
+        </div>
+      </section>
+
+      <!-- Right Column: Metadata Card & Virtual Terminal CLI -->
+      <section class="right-column">
+        
+        <!-- File Inode Details Panel -->
+        <div class="card details-card">
+          <h2 class="card-title">Inode Metadata Detail</h2>
+          
+          <div class="inode-details-wrapper" id="metadata-details">
+            <!-- Populated dynamically -->
+            <p class="select-hint">Select a file or folder to view its OS metadata descriptors.</p>
+          </div>
+        </div>
+
+        <!-- CLI Terminal Card -->
+        <div class="card terminal-card">
+          <div class="terminal-header">
+            <h2 class="card-title">Virtual UNIX Terminal</h2>
+            <button id="btn-clear-terminal" class="btn btn-small">Clear</button>
+          </div>
+          <div class="terminal-body" id="terminal-body-log">
+            <div class="cli-row system-output">
+              Welcome to the Virtual File System Shell CLI.<br>
+              Type 'help' to see all available commands.
+            </div>
+            <!-- Dynamic command rows -->
+          </div>
+          <div class="terminal-prompt-row">
+            <span class="cli-prompt" id="cli-prompt-label">vfs:/$</span>
+            <input type="text" id="terminal-input" placeholder="Type a command..." spellcheck="false" autocomplete="off">
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- Modal File Editor -->
+    <div class="modal-backdrop hidden" id="editor-modal">
+      <div class="editor-modal-content card">
+        <div class="modal-header">
+          <h3 class="modal-title" id="editor-file-title">Editing Welcome.txt</h3>
+          <button id="btn-modal-close" class="btn-close-modal">&times;</button>
+        </div>
+        
+        <div class="modal-body">
+          <textarea id="editor-text-area" spellcheck="false" placeholder="Write text file contents..."></textarea>
+        </div>
+
+        <div class="modal-footer">
+          <span class="editor-file-size-indicator" id="editor-size-label">0 bytes</span>
+          <div class="footer-buttons">
+            <button id="btn-modal-cancel" class="btn btn-secondary">Cancel</button>
+            <button id="btn-modal-save" class="btn btn-primary">Save Changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Educational Resource Footer -->
+    <section class="theory-section card">
+      <h3 class="section-title">File System Architecture &amp; Core Mechanics</h3>
+      <div class="theory-grid">
+        
+        <div class="theory-card">
+          <h4>Directory Structures &amp; Navigation</h4>
+          <p>
+            Operating systems organize storage files into structured recursive trees. 
+          </p>
+          <ul>
+            <li><strong>Root Node (`/`)</strong>: The absolute start of a partition's directory structure.</li>
+            <li><strong>Directory Entries</strong>: Folders are special files containing lists of mappings matching sub-files to their respective **inodes**.</li>
+            <li><strong>Path Resolution</strong>: To access `/home/user/document.txt`, the OS translates each sub-path from left to right. If any step is missing or has incorrect permissions, path resolution fails.</li>
+          </ul>
+        </div>
+
+        <div class="theory-card">
+          <h4>OS Inodes &amp; File Control Blocks (FCB)</h4>
+          <p>
+            An **inode** (index node) is a data structure on disk that describes a file system object (file or directory).
+          </p>
+          <ul>
+            <li>Inodes do **NOT** store the filename. Filenames are stored inside directories mapped to inode index pointers.</li>
+            <li>Inodes contain essential metadata: object type (file/folder), file size in bytes, device identifier, access permissions (read/write/execute), and timestamps.</li>
+            <li>In a real partition, inodes also contain data block pointers locating where the raw data blocks are on the physical drive.</li>
+          </ul>
+        </div>
+
+        <div class="theory-card">
+          <h4>Storage Allocation Methods</h4>
+          <p>
+            The Operating System allocates physical disk blocks to files in three major ways:
+          </p>
+          <ul>
+            <li><strong>Contiguous Allocation</strong>: Each file occupies a set of consecutive blocks on disk. Fast sequential access, but prone to external fragmentation.</li>
+            <li><strong>Linked Allocation</strong>: Files are stored as linked lists of blocks scattered across the disk. Solves fragmentation but random access is slow.</li>
+            <li><strong>Indexed Allocation</strong>: Consolidates all block pointers into a single block called the **Index Block** (linked to the Inode). Perfect for fast random access and indexing, but wastes block space for tiny files.</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- Simulation Logic Script -->
+  <script src="script.js"></script>
+</body>
+</html>

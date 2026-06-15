@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <!-- Background -->
+  <rect width="400" height="300" fill="#04060f"/>
+  
+  <!-- Server / Client Nodes -->
+  <!-- Client (Left) -->
+  <rect x="40" y="80" width="80" height="140" rx="10" fill="rgba(59, 130, 246, 0.08)" stroke="#3b82f6" stroke-width="2"/>
+  <circle cx="80" cy="120" r="16" fill="rgba(59, 130, 246, 0.2)" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="80" y="123" font-family="'Outfit', sans-serif" font-size="10" font-weight="bold" fill="#3b82f6" text-anchor="middle">CLIENT</text>
+  <text x="80" y="175" font-family="'Outfit', sans-serif" font-size="8" fill="#94a3b8" text-anchor="middle">Seq = X</text>
+  
+  <!-- Server (Right) -->
+  <rect x="280" y="80" width="80" height="140" rx="10" fill="rgba(236, 72, 153, 0.08)" stroke="#ec4899" stroke-width="2"/>
+  <circle cx="320" cy="120" r="16" fill="rgba(236, 72, 153, 0.2)" stroke="#ec4899" stroke-width="1.5"/>
+  <text x="320" y="123" font-family="'Outfit', sans-serif" font-size="10" font-weight="bold" fill="#ec4899" text-anchor="middle">SERVER</text>
+  <text x="320" y="175" font-family="'Outfit', sans-serif" font-size="8" fill="#94a3b8" text-anchor="middle">Seq = Y</text>
+
+  <!-- Handshake Arrows -->
+  <g fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <!-- SYN (Top) -->
+    <path d="M140,110 L260,135" stroke="#3b82f6"/>
+    <polyline points="252,135 260,135 256,128" fill="#3b82f6" stroke="#3b82f6" stroke-width="1"/>
+    <text x="200" y="105" font-family="'Outfit', sans-serif" font-size="9" font-weight="bold" fill="#3b82f6" text-anchor="middle">1. SYN [Seq=X]</text>
+
+    <!-- SYN-ACK (Middle) -->
+    <path d="M260,155 L140,180" stroke="#8b5cf6"/>
+    <polyline points="148,180 140,180 144,173" fill="#8b5cf6" stroke="#8b5cf6" stroke-width="1"/>
+    <text x="200" y="150" font-family="'Outfit', sans-serif" font-size="9" font-weight="bold" fill="#8b5cf6" text-anchor="middle">2. SYN-ACK [Seq=Y, Ack=X+1]</text>
+
+    <!-- ACK (Bottom) -->
+    <path d="M140,200 L260,225" stroke="#06b6d4"/>
+    <polyline points="252,225 260,225 256,218" fill="#06b6d4" stroke="#06b6d4" stroke-width="1"/>
+    <text x="200" y="195" font-family="'Outfit', sans-serif" font-size="9" font-weight="bold" fill="#06b6d4" text-anchor="middle">3. ACK [Seq=X+1, Ack=Y+1]</text>
+  </g>
+  
+  <text x="200" y="40" font-family="'Outfit', sans-serif" font-size="16" font-weight="800" fill="#f3f4f6" text-anchor="middle" letter-spacing="0.5">TCP HANDSHAKE LAB</text>
+</svg>

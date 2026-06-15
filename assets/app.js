@@ -888,4 +888,4 @@ search.addEventListener("input", (e) => {
   render();
 });
 
-boot();
+boot().catch(function (e) { console.warn("boot failed", e); });

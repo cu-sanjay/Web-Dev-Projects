@@ -1,0 +1,146 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#090d16" />
+      <stop offset="100%" stop-color="#111827" />
+    </linearGradient>
+
+    <!-- Header Gradient -->
+    <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#0ea5e9" />
+    </linearGradient>
+
+    <!-- Glowing line filters -->
+    <filter id="glow-line" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="320" height="200" rx="12" fill="url(#bg-grad)" />
+  <rect width="318" height="198" x="1" y="1" rx="11" fill="none" stroke="#1f2937" stroke-width="2" />
+
+  <!-- Grid overlay -->
+  <g opacity="0.05">
+    <path d="M0,40 H320 M0,80 H320 M0,120 H320 M0,160 H320" stroke="#ffffff" stroke-width="1"/>
+    <path d="M64,0 V200 M128,0 V200 M192,0 V200 M256,0 V200" stroke="#ffffff" stroke-width="1"/>
+  </g>
+
+  <!-- Header -->
+  <g transform="translate(15, 12)">
+    <!-- Speedometer Gauge Icon -->
+    <path d="M1,6 A5,5 0 0,1 11,6 A5,5 0 0,1 9,9.5 M6,6 L8,3" stroke="#0ea5e9" stroke-width="1.5" stroke-linecap="round" fill="none" transform="scale(0.8) translate(0, 1)" />
+    <!-- Logo Text -->
+    <text x="18" y="9" font-family="'Outfit', sans-serif" font-weight="800" font-size="10" fill="url(#logo-grad)">KPISync<tspan font-weight="400" fill="#9ca3af">Pro</tspan></text>
+    <!-- Badge -->
+    <rect x="80" y="1" width="30" height="9" rx="3" fill="#1f2937" stroke="#374151" stroke-width="0.5" />
+    <text x="95" y="7" font-family="'Inter', sans-serif" font-weight="600" font-size="5" fill="#9ca3af" text-anchor="middle" letter-spacing="0.5">METRICS</text>
+  </g>
+
+  <!-- ARR health status -->
+  <g transform="translate(245, 12)">
+    <rect x="0" y="0" width="60" height="10" rx="3" fill="rgba(16, 185, 129, 0.1)" stroke="rgba(16, 185, 129, 0.2)" stroke-width="0.5" />
+    <circle cx="5" cy="5" r="2.5" fill="#10b981" />
+    <text x="11" y="7.2" font-family="'Inter', sans-serif" font-weight="700" font-size="5.5" fill="#10b981" letter-spacing="0.2">$600,000 ARR</text>
+  </g>
+
+  <!-- Metrics row summary -->
+  <g transform="translate(15, 30)">
+    <!-- Metric 1: LTV:CAC -->
+    <rect x="0" y="0" width="68" height="28" rx="5" fill="#111827" stroke="#374151" stroke-width="0.5" />
+    <text x="6" y="8" font-family="'Inter', sans-serif" font-weight="500" font-size="5" fill="#9ca3af" letter-spacing="0.2">LTV : CAC RATIO</text>
+    <text x="6" y="21" font-family="'Outfit', sans-serif" font-weight="800" font-size="11" fill="#10b981">3.3x</text>
+
+    <!-- Metric 2: Lifetime Value -->
+    <rect x="74" y="0" width="68" height="28" rx="5" fill="#111827" stroke="#374151" stroke-width="0.5" />
+    <text x="80" y="8" font-family="'Inter', sans-serif" font-weight="500" font-size="5" fill="#9ca3af" letter-spacing="0.2">LIFETIME VALUE</text>
+    <text x="80" y="21" font-family="'Outfit', sans-serif" font-weight="800" font-size="11" fill="#22d3ee">$2,000</text>
+
+    <!-- Metric 3: CAC Payback -->
+    <rect x="148" y="0" width="68" height="28" rx="5" fill="#111827" stroke="#374151" stroke-width="0.5" />
+    <text x="154" y="8" font-family="'Inter', sans-serif" font-weight="500" font-size="5" fill="#9ca3af" letter-spacing="0.2">CAC PAYBACK</text>
+    <text x="154" y="21" font-family="'Outfit', sans-serif" font-weight="800" font-size="11" fill="#fde047">6.0 mo</text>
+
+    <!-- Metric 4: Churn -->
+    <rect x="220" y="0" width="70" height="28" rx="5" fill="#111827" stroke="#374151" stroke-width="0.5" />
+    <text x="226" y="8" font-family="'Inter', sans-serif" font-weight="500" font-size="5" fill="#9ca3af" letter-spacing="0.2">MONTHLY CHURN</text>
+    <text x="226" y="21" font-family="'Outfit', sans-serif" font-weight="800" font-size="11" fill="#fca5a5">5.0%</text>
+  </g>
+
+  <!-- Center Workspace (Dual-Axis Chart) -->
+  <g transform="translate(15, 68)">
+    <rect width="200" height="116" rx="6" fill="#111827" stroke="rgba(255,255,255,0.02)" stroke-width="1" />
+    <text x="8" y="12" font-family="'Outfit', sans-serif" font-weight="700" font-size="7" fill="#ffffff">MRR &amp; Customers Growth</text>
+    
+    <!-- Legend -->
+    <line x1="130" y1="10" x2="140" y2="10" stroke="#0ea5e9" stroke-width="1.5" />
+    <text x="144" y="12" font-family="'Inter', sans-serif" font-size="4.5" fill="#9ca3af">MRR</text>
+    <rect x="166" y="7" width="5" height="5" rx="1" fill="rgba(16, 185, 129, 0.2)" stroke="#10b981" stroke-width="0.5" />
+    <text x="174" y="12" font-family="'Inter', sans-serif" font-size="4.5" fill="#9ca3af">Users</text>
+
+    <!-- Grid lines -->
+    <g stroke="rgba(255,255,255,0.03)" stroke-width="0.5">
+      <line x1="15" y1="35" x2="185" y2="35" />
+      <line x1="15" y1="55" x2="185" y2="55" />
+      <line x1="15" y1="75" x2="185" y2="75" />
+      <line x1="15" y1="95" x2="185" y2="95" />
+    </g>
+
+    <!-- Axes borders -->
+    <line x1="15" y1="105" x2="185" y2="105" stroke="#374151" stroke-width="0.8" />
+    <line x1="15" y1="20" x2="15" y2="105" stroke="#374151" stroke-width="0.8" />
+    <line x1="185" y1="20" x2="185" y2="105" stroke="#374151" stroke-width="0.8" />
+
+    <!-- Customers Bars (Right axis) -->
+    <g fill="rgba(16, 185, 129, 0.15)" stroke="#10b981" stroke-width="0.5">
+      <rect x="25" y="85" width="6" height="20" rx="1" />
+      <rect x="53" y="80" width="6" height="25" rx="1" />
+      <rect x="81" y="72" width="6" height="33" rx="1" />
+      <rect x="109" y="65" width="6" height="40" rx="1" />
+      <rect x="137" y="55" width="6" height="50" rx="1" />
+      <rect x="165" y="45" width="6" height="60" rx="1" />
+    </g>
+
+    <!-- MRR Line (Left axis - Glowing cyan) -->
+    <path d="M 15 90 L 43 82 L 71 73 L 99 62 L 127 50 L 155 38 L 183 25" fill="none" stroke="#0ea5e9" stroke-width="2" filter="url(#glow-line)" stroke-linecap="round" />
+
+    <!-- Hover details dots -->
+    <circle cx="155" cy="38" r="2.5" fill="#0ea5e9" stroke="#ffffff" stroke-width="0.8" />
+    
+    <!-- Timeline X-axis markings -->
+    <text x="15" y="112" font-family="'Inter', sans-serif" font-size="4" fill="#4b5563" text-anchor="middle">Base</text>
+    <text x="71" y="112" font-family="'Inter', sans-serif" font-size="4" fill="#4b5563" text-anchor="middle">Month 4</text>
+    <text x="127" y="112" font-family="'Inter', sans-serif" font-size="4" fill="#4b5563" text-anchor="middle">Month 8</text>
+    <text x="183" y="112" font-family="'Inter', sans-serif" font-size="4" fill="#4b5563" text-anchor="middle">Month 12</text>
+  </g>
+
+  <!-- Right side scenario vault -->
+  <g transform="translate(225, 68)">
+    <rect width="80" height="116" rx="6" fill="#111827" stroke="rgba(255,255,255,0.02)" stroke-width="1" />
+    <text x="8" y="12" font-family="'Outfit', sans-serif" font-weight="700" font-size="7" fill="#ffffff">KPI Vault</text>
+    
+    <g transform="translate(6, 20)">
+      <rect width="68" height="18" rx="3" fill="rgba(16, 185, 129, 0.05)" stroke="#10b981" stroke-width="0.5" />
+      <text x="6" y="11" font-family="'Inter', sans-serif" font-weight="700" font-size="5" fill="#6ee7b7">★ SaaS Baseline</text>
+      
+      <g transform="translate(0, 23)">
+        <rect width="68" height="18" rx="3" fill="rgba(255,255,255,0.02)" stroke="#374151" stroke-width="0.5" />
+        <text x="6" y="11" font-family="'Inter', sans-serif" font-weight="500" font-size="5" fill="#9ca3af">Product-Led</text>
+      </g>
+
+      <g transform="translate(0, 46)">
+        <rect width="68" height="18" rx="3" fill="rgba(255,255,255,0.02)" stroke="#374151" stroke-width="0.5" />
+        <text x="6" y="11" font-family="'Inter', sans-serif" font-weight="500" font-size="5" fill="#9ca3af">Enterprise</text>
+      </g>
+    </g>
+
+    <!-- Advisory quick footer tip -->
+    <g transform="translate(6, 95)">
+      <rect width="68" height="15" rx="3" fill="rgba(14, 165, 233, 0.05)" />
+      <text x="6" y="9" font-family="'Inter', sans-serif" font-weight="600" font-size="4.5" fill="#0ea5e9">💡 CAC Payback ok.</text>
+    </g>
+  </g>
+</svg>
