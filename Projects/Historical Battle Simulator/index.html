@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Historical Battle Simulator</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="app-container">
+  <header><div class="brand"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg><div><h1>HISTORICAL BATTLE SIMULATOR</h1><p>Army Placement · Terrain Effects · Battle Outcomes</p></div></div></header>
+  <div class="main-layout">
+    <aside class="army-panel">
+      <h3>Army A</h3>
+      <div class="army-stats"><label>Infantry</label><input type="range" id="a-inf" min="0" max="100" value="50"><span id="a-inf-v">500</span></div>
+      <div class="army-stats"><label>Cavalry</label><input type="range" id="a-cav" min="0" max="100" value="30"><span id="a-cav-v">300</span></div>
+      <div class="army-stats"><label>Archers</label><input type="range" id="a-arch" min="0" max="100" value="20"><span id="a-arch-v">200</span></div>
+      <hr class="divider">
+      <h3>Army B</h3>
+      <div class="army-stats"><label>Infantry</label><input type="range" id="b-inf" min="0" max="100" value="40"><span id="b-inf-v">400</span></div>
+      <div class="army-stats"><label>Cavalry</label><input type="range" id="b-cav" min="0" max="100" value="40"><span id="b-cav-v">400</span></div>
+      <div class="army-stats"><label>Archers</label><input type="range" id="b-arch" min="0" max="100" value="20"><span id="b-arch-v">200</span></div>
+      <hr class="divider">
+      <h3>Terrain</h3>
+      <select id="terrain" class="terrain-select"><option value="plains">🌾 Plains</option><option value="forest">🌲 Forest</option><option value="hills">⛰️ Hills</option><option value="river">🌊 River Crossing</option><option value="siege">🏰 Siege</option></select>
+      <button id="btn-battle" class="btn btn-primary">⚔️ Simulate Battle</button>
+    </aside>
+    <main class="battle-area">
+      <div class="battlefield" id="battlefield">
+        <canvas id="battle-canvas" width="800" height="400"></canvas>
+        <div class="army-labels"><span class="army-a-label" id="army-a-label">Army A: 1000</span><span class="army-vs">VS</span><span class="army-b-label" id="army-b-label">Army B: 1000</span></div>
+      </div>
+      <div class="outcome-section" id="outcome-section">
+        <div class="outcome-card" id="outcome-card"><h3 id="outcome-title">Ready</h3><p id="outcome-text">Configure armies and terrain, then simulate.</p><div class="casualties"><span id="cas-a">0</span><span class="cas-divider">—</span><span id="cas-b">0</span></div></div>
+      </div>
+    </main>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
