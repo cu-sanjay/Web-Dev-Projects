@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Micro-Investment Simulator</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+
+  <!-- Sidebar Navigation -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="logo-box">
+        <i class="ph-fill ph-chart-line-up"></i>
+      </div>
+      <h2>MicroInvest</h2>
+    </div>
+    
+    <nav class="sidebar-menu">
+      <ul>
+        <li class="active" data-tab="dashboard">
+          <i class="ph ph-squares-four"></i> Dashboard
+        </li>
+        <li data-tab="portfolio">
+          <i class="ph ph-pie-chart"></i> Portfolio Setup
+        </li>
+        <li data-tab="forecast">
+          <i class="ph ph-trend-up"></i> Growth Forecast
+        </li>
+        <li data-tab="roundups">
+          <i class="ph ph-coins"></i> Round-Up Sim
+        </li>
+      </ul>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-profile">
+        <img src="https://ui-avatars.com/api/?name=Vishwa+Mistry&background=10b981&color=fff" alt="User Avatar" class="avatar">
+        <div class="user-info">
+          <strong>Vishwa Mistry</strong>
+          <span>Pro Investor</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content Wrapper -->
+  <main class="main-content">
+    
+    <!-- Top Header -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <button id="mobile-menu-btn" class="icon-btn"><i class="ph ph-list"></i></button>
+        <div class="search-input">
+          <i class="ph ph-magnifying-glass"></i>
+          <input type="text" placeholder="Search assets, history...">
+        </div>
+      </div>
+      <div class="topbar-right">
+        <button class="icon-btn notification-btn"><i class="ph ph-bell"></i><span class="badge">2</span></button>
+        <button class="btn primary-btn"><i class="ph ph-plus"></i> Deposit Funds</button>
+      </div>
+    </header>
+
+    <!-- Scrollable Body Area -->
+    <div class="body-area">
+      
+      <!-- ================= DASHBOARD TAB ================= -->
+      <section id="dashboard" class="tab-content active">
+        
+        <div class="welcome-card">
+          <div class="welcome-text">
+            <h1>Simulated Portfolio Overview</h1>
+            <p>Your micro-investments are growing steadily. You are up 14.2% this year!</p>
+          </div>
+          <button class="btn secondary-btn" onclick="document.querySelector('[data-tab=\\'forecast\\']').click()"><i class="ph ph-chart-bar"></i> View Forecasts</button>
+        </div>
+
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-icon bg-green-light text-green"><i class="ph-fill ph-wallet"></i></div>
+            <div class="metric-data">
+              <h3>Total Balance</h3>
+              <h2>$8,450.25</h2>
+            </div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon bg-blue-light text-blue"><i class="ph-fill ph-trend-up"></i></div>
+            <div class="metric-data">
+              <h3>All-Time Return</h3>
+              <h2>+$1,204.50 <span class="trend up"><i class="ph ph-arrow-up"></i> 14.2%</span></h2>
+            </div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon bg-purple-light text-purple"><i class="ph-fill ph-piggy-bank"></i></div>
+            <div class="metric-data">
+              <h3>Monthly Deposit</h3>
+              <h2>$250.00</h2>
+            </div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon bg-orange-light text-orange"><i class="ph-fill ph-coins"></i></div>
+            <div class="metric-data">
+              <h3>Round-ups (YTD)</h3>
+              <h2>$312.40</h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="split-layout">
+          <!-- Allocation Preview -->
+          <div class="panel">
+            <div class="panel-header flex-between">
+              <h3>Asset Allocation</h3>
+              <button class="text-btn" onclick="document.querySelector('[data-tab=\\'portfolio\\']').click()">Edit</button>
+            </div>
+            <div class="panel-body flex-center column">
+              <div class="radial-chart">
+                <i class="ph-fill ph-pie-chart text-green" style="font-size: 6rem; opacity: 0.9"></i>
+              </div>
+              <div class="legend-box mt-3">
+                <div class="legend-item"><span class="dot bg-green"></span> S&P 500 ETF (60%)</div>
+                <div class="legend-item"><span class="dot bg-blue"></span> Tech Stocks (20%)</div>
+                <div class="legend-item"><span class="dot bg-orange"></span> Crypto (10%)</div>
+                <div class="legend-item"><span class="dot bg-purple"></span> Bonds (10%)</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Activity Preview -->
+          <div class="panel col-span-2">
+            <div class="panel-header">
+              <h3>Recent Activity</h3>
+            </div>
+            <div class="panel-body p-0">
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Asset</th>
+                    <th>Date</th>
+                    <th>Amount</th>
+                  </tr>
+                </thead>
+                <tbody id="recent-activity-tbody">
+                  <!-- Injected via JavaScript -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ================= PORTFOLIO SETUP TAB ================= -->
+      <section id="portfolio" class="tab-content hidden">
+        <div class="page-heading">
+          <h1>Portfolio Setup</h1>
+          <p class="text-muted">Distribute your automated investments across different asset classes.</p>
+        </div>
+
+        <div class="panel">
+          <div class="panel-body">
+            <div class="allocation-sliders" id="allocation-sliders">
+              <!-- Injected via JavaScript -->
+            </div>
+            <div class="mt-3 flex-between" style="border-top: 1px solid var(--border); padding-top: 1rem;">
+              <strong>Total Allocation: <span id="total-alloc">100%</span></strong>
+              <button class="btn primary-btn">Save Configuration</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= FORECAST TAB ================= -->
+      <section id="forecast" class="tab-content hidden">
+        <div class="page-heading">
+          <h1>Growth Forecast</h1>
+          <p class="text-muted">Simulate the power of compound interest over time.</p>
+        </div>
+
+        <div class="split-layout">
+          <div class="panel">
+            <div class="panel-header"><h3>Calculator Inputs</h3></div>
+            <div class="panel-body flex-column gap-1">
+              <div class="input-group">
+                <label>Initial Investment ($)</label>
+                <input type="number" id="calc-initial" value="1000" class="form-input">
+              </div>
+              <div class="input-group mt-2">
+                <label>Monthly Contribution ($)</label>
+                <input type="number" id="calc-monthly" value="250" class="form-input">
+              </div>
+              <div class="input-group mt-2">
+                <label>Expected Annual Return (%)</label>
+                <input type="number" id="calc-rate" value="8" class="form-input">
+              </div>
+              <div class="input-group mt-2">
+                <label>Years to Grow</label>
+                <input type="number" id="calc-years" value="20" class="form-input">
+              </div>
+              <button class="btn primary-btn mt-3" style="width: 100%" onclick="calculateForecast()">Simulate Growth</button>
+            </div>
+          </div>
+          <div class="panel col-span-2">
+            <div class="panel-header"><h3>Projected Value</h3></div>
+            <div class="panel-body flex-center column" style="height: 100%; min-height: 300px;">
+              <h1 id="forecast-result" style="font-size: 3rem; color: var(--green);">$153,238.40</h1>
+              <p class="text-muted mt-2" id="forecast-breakdown">Total Contributions: $61,000 | Interest Earned: $92,238</p>
+              <div class="mt-3 flex-center" style="width: 100%; height: 100px; background: var(--bg-page); border-radius: 8px; border: 1px dashed var(--border);">
+                 <i class="ph ph-chart-line-up text-muted" style="font-size: 2rem; margin-right: 0.5rem;"></i>
+                 <span class="text-muted">Chart visualization area</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= ROUND-UPS TAB ================= -->
+      <section id="roundups" class="tab-content hidden">
+        <div class="page-heading flex-between">
+          <div>
+            <h1>Round-Up Simulator</h1>
+            <p class="text-muted">See how investing spare change from daily purchases adds up.</p>
+          </div>
+          <div class="toggle-switch">
+             <label class="switch">
+              <input type="checkbox" checked>
+              <span class="slider round"></span>
+            </label>
+            <span style="margin-left: 10px; font-weight: 500;">Auto-Invest Active</span>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-body p-0">
+             <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Purchase</th>
+                    <th>Cost</th>
+                    <th>Round-Up</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="roundup-tbody">
+                  <!-- Injected via JavaScript -->
+                </tbody>
+              </table>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
