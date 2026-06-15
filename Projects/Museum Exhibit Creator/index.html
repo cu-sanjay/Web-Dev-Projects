@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Museum Exhibit Creator</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="app-container">
+  <header><div class="brand"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2"><rect x="2" y="14" width="20" height="8" rx="2"/><rect x="4" y="14" width="4" height="8"/><rect x="16" y="14" width="4" height="8"/><path d="M8 14V8a4 4 0 0 1 8 0v6"/></svg><div><h1>MUSEUM EXHIBIT CREATOR</h1><p>Virtual Exhibits · Artifact Cards · Curate History</p></div></div></header>
+  <div class="main-layout">
+    <aside class="curator-panel">
+      <h3>Exhibit Name</h3>
+      <input type="text" id="exhibit-name" class="input" value="Ancient Wonders">
+      <h3>Theme</h3>
+      <select id="exhibit-theme" class="theme-select"><option value="egypt">🏺 Ancient Egypt</option><option value="greece" selected>🏛️ Classical Greece</option><option value="rome">⚔️ Roman Empire</option><option value="china">🏯 Imperial China</option></select>
+      <h3>Artifacts</h3>
+      <div class="artifact-list" id="artifact-list">
+        <button class="artifact-btn" data-art="vase">🏺 Greek Vase</button>
+        <button class="artifact-btn" data-art="statue">🗿 Marble Statue</button>
+        <button class="artifact-btn" data-art="coin">🪙 Ancient Coin</button>
+        <button class="artifact-btn" data-art="scroll">📜 Papyrus Scroll</button>
+        <button class="artifact-btn" data-art="armor">⚔️ Bronze Armor</button>
+        <button class="artifact-btn" data-art="jewelry">💍 Gold Jewelry</button>
+      </div>
+      <button id="btn-create" class="btn btn-primary">Create Exhibit ✨</button>
+    </aside>
+    <main class="exhibit-area">
+      <div class="exhibit-header"><h2 id="exhibit-title">Ancient Wonders</h2><span id="exhibit-theme-label">🏛️ Classical Greece</span><span id="artifact-count">0 artifacts</span></div>
+      <div class="exhibit-grid" id="exhibit-grid">
+        <div class="exhibit-slot" data-idx="0"><div class="slot-inner empty"><span class="slot-icon">➕</span><span>Add Artifact</span></div></div>
+        <div class="exhibit-slot" data-idx="1"><div class="slot-inner empty"><span class="slot-icon">➕</span><span>Add Artifact</span></div></div>
+        <div class="exhibit-slot" data-idx="2"><div class="slot-inner empty"><span class="slot-icon">➕</span><span>Add Artifact</span></div></div>
+        <div class="exhibit-slot" data-idx="3"><div class="slot-inner empty"><span class="slot-icon">➕</span><span>Add Artifact</span></div></div>
+      </div>
+      <div class="exhibit-desc" id="exhibit-desc">
+        <p>Click artifacts from the sidebar to add them to your exhibit. Each artifact includes a description and historical period. Arrange up to 4 artifacts and publish your virtual exhibit.</p>
+      </div>
+    </main>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
