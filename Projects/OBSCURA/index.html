@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obscura — Shadow Match</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="fog-container">
+        <div class="fog-layer"></div>
+    </div>
+
+    <div class="container">
+        <div id="start-screen" class="overlay">
+            <h1>OBSCURA</h1>
+            <p style="color: var(--accent); margin-bottom: 2rem;">Match the objects with their drifting shadows.</p>
+            <button class="primary-btn" onclick="startGame()">Initiate</button>
+        </div>
+
+        <div id="win-screen" class="overlay hidden">
+            <h2 style="font-size: 2.5rem; letter-spacing: 4px;">RECONSTRUCTED</h2>
+            <p id="final-stats" style="color: var(--accent); margin-bottom: 2rem;"></p>
+            <button class="primary-btn" onclick="nextLevel()">Next Sector</button>
+        </div>
+
+        <div class="stats">
+            <div>Level: <span id="level-val">1</span></div>
+            <div>Score: <span id="score-val">0</span></div>
+        </div>
+
+        <div class="game-grid">
+            <div class="column" id="objects-col"></div>
+            <div class="column" id="shadows-col"></div>
+        </div>
+
+        <button class="btn-hint" onclick="useHint()">Request Signal (Hint)</button>
+    </div>
+<script src="script.js"></script>
+</body>
+</html>
