@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Volcano Activity Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="main-header">
+      <div class="brand"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><path d="M12 2L4 22h16L12 2z"/><path d="M12 8v6"/><circle cx="12" cy="18" r="1" fill="#f97316"/></svg>
+        <div><h1>VOLCANO ACTIVITY TRACKER</h1><p>Global Volcanic Activity Monitoring</p></div>
+      </div>
+      <div class="filter-bar">
+        <select id="risk-filter" aria-label="Filter by risk level"><option value="all">All Risk Levels</option><option value="Low">Low</option><option value="Moderate">Moderate</option><option value="High">High</option><option value="Critical">Critical</option></select>
+        <select id="region-filter" aria-label="Filter by region"><option value="all">All Regions</option></select>
+      </div>
+    </header>
+    <div class="main-layout">
+      <div class="volcano-list" id="volcano-list"></div>
+      <main class="detail-area" id="detail-area">
+        <div class="welcome"><h2>🌋 Volcano Activity Tracker</h2><p>Select a volcano from the list to view details, eruption history, and risk assessment.</p></div>
+      </main>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
