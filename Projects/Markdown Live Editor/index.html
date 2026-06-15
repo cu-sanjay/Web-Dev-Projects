@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Markdown Live Editor</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="terminal-badge">[ MARKDOWN LIVE EDITOR — TEXT COMPILATION SUITE ]</div>
+
+<div class="app-grid">
+
+  <!-- ─── TOOLBAR ─── -->
+  <div class="toolbar">
+    <button id="btnHeading" class="tool-btn">INJECT HEADING SHORTHAND</button>
+    <button id="btnBold" class="tool-btn">INJECT BOLD CODE TOKEN</button>
+    <button id="btnCode" class="tool-btn">INJECT CODEBLOCK MARKER</button>
+    <select id="exportSelect" class="export-select">
+      <option value="">EXPORT FILE AS...</option>
+      <option value="md">Export as .md</option>
+      <option value="html">Export as .html</option>
+    </select>
+  </div>
+
+  <!-- ─── LEFT: RAW INPUT ─── -->
+  <div class="panel input-panel">
+    <div class="panel-header">RAW MARKDOWN INPUT STREAM</div>
+    <textarea id="mdInput" spellcheck="false"># Welcome to Markdown Live Editor
+
+This is a **live preview** environment built with *pure JavaScript*.
+
+## Features
+
+- Real-time **regex** parsing engine
+- No external libraries required
+- Export as `.md` or `.html`
+
+## Code Example
+
+Here's a sample code block:
+
+`const greeting = "Hello, World!";`
+
+> This is a blockquote for testing purposes.</textarea>
+  </div>
+
+  <!-- ─── RIGHT: PREVIEW ─── -->
+  <div class="panel preview-panel">
+    <div class="panel-header">LIVE HTML COMPILED PREVIEW VIEWPORT</div>
+    <div class="preview-scroll" id="previewContainer">
+      <div class="preview-content" id="previewContent"></div>
+    </div>
+  </div>
+
+  <!-- ─── TELEMETRY ─── -->
+  <div class="panel telemetry-panel">
+    <div class="panel-header">ENGINEERING TELEMETRY DASHBOARD</div>
+    <div class="tele-row"><span class="tele-label">CHAR LENGTH</span><span id="tChars" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">WORD COUNT</span><span id="tWords" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">PARAGRAPHS</span><span id="tParas" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">READ TIME</span><span id="tReadTime" class="tele-val">--</span></div>
+    <div class="ctrl-divider"></div>
+    <div class="tele-row" style="grid-column:1/-1;"><span id="tBadge" class="tele-badge standby">STANDBY</span></div>
+    <div class="ctrl-divider"></div>
+    <div id="errorDetail" class="error-detail"></div>
+  </div>
+
+  <!-- ─── ADMIN FOOTER ─── -->
+  <div class="admin-footer">
+    <button id="btnExecute" class="admin-btn execute">EXECUTE GLOBAL TOKEN CHECK</button>
+    <button id="btnInject" class="admin-btn inject">INJECT COMPLEX BLUEPRINT TEMPLATE</button>
+    <button id="btnFlush" class="admin-btn flush">FLUSH LAYOUT CHANNELS &amp; RE-ZERO MATRICES</button>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
