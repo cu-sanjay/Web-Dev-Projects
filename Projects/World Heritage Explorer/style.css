@@ -1,0 +1,41 @@
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0b1220;--surface:#111827;--secondary:#1f2937;--border:#334155;--primary:#f8fafc;--secondary-text:#cbd5e1;--muted:#64748b;--accent:#38bdf8;--radius:10px;--transition:all 0.3s cubic-bezier(0.16,1,0.3,1);--font-code:ui-monospace,Consolas,monospace;--font-ui:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+html{font-size:14px}
+body{font-family:var(--font-ui);background:var(--bg);color:var(--primary);min-height:100vh}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important}}
+.app-container{max-width:1400px;margin:0 auto;padding:16px 20px;display:flex;flex-direction:column;gap:16px;min-height:100vh}
+.main-header{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px}
+.brand-text h1{font-size:15px;font-weight:700;letter-spacing:.8px}
+.brand-text p{font-size:10px;color:var(--muted);margin-top:2px}
+.search-bar{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px 14px;min-width:280px}
+.search-bar:focus-within{border-color:var(--accent);box-shadow:0 0 0 2px rgba(56,189,248,.15)}
+.search-bar input{background:0 0;border:none;outline:0;color:var(--primary);font-size:13px;width:100%;font-family:var(--font-ui)}
+.search-bar input::placeholder{color:var(--muted)}
+.main-layout{display:grid;grid-template-columns:220px 1fr;gap:16px;flex:1;min-height:0}
+@media(max-width:800px){.main-layout{grid-template-columns:1fr}}
+.side-panel{display:flex;flex-direction:column;gap:12px}
+.filter-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px}
+.filter-section h3{font-size:11px;font-weight:600;color:var(--secondary-text);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.filter-list{display:flex;flex-direction:column;gap:3px}
+.filter-btn{padding:6px 10px;border:1px solid transparent;border-radius:5px;font-size:11px;cursor:pointer;background:0 0;color:var(--muted);text-align:left;transition:var(--transition);font-family:var(--font-ui)}
+.filter-btn:hover{color:var(--secondary-text);background:var(--secondary)}
+.filter-btn.active{background:rgba(56,189,248,.08);color:var(--accent);border-color:rgba(56,189,248,.2)}
+.filter-btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.stats-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;display:flex;gap:12px}
+.stat{flex:1;text-align:center}
+.stat-value{display:block;font-size:20px;font-weight:700;font-family:var(--font-code);color:var(--accent)}
+.stat-label{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
+.content{overflow-y:auto;padding-right:4px}
+.content::-webkit-scrollbar{width:5px}
+.content::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+.sites-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+.site-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;transition:var(--transition);cursor:pointer}
+.site-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 4px 20px rgba(56,189,248,.1)}
+.site-icon{font-size:32px;margin-bottom:6px}
+.site-name{font-size:13px;font-weight:600;margin-bottom:4px}
+.site-country{font-size:10px;color:var(--muted);font-family:var(--font-code);margin-bottom:6px}
+.site-type{display:inline-block;padding:2px 8px;border-radius:10px;font-size:9px;font-weight:600;background:rgba(56,189,248,.08);color:var(--accent);border:1px solid rgba(56,189,248,.15);margin-bottom:6px}
+.site-desc{font-size:11px;color:var(--secondary-text);line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.site-year{font-size:10px;color:var(--muted);margin-top:6px;font-family:var(--font-code)}
+@media(max-width:800px){.main-header{flex-direction:column;align-items:stretch}.search-bar{min-width:unset}}

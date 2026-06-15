@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>World Heritage Explorer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container" role="application" aria-label="World Heritage Explorer">
+    <header class="main-header">
+      <div class="brand">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10A15.3 15.3 0 0112 2z"/></svg>
+        <div class="brand-text">
+          <h1>WORLD HERITAGE EXPLORER</h1>
+          <p>Discover UNESCO World Heritage Sites</p>
+        </div>
+      </div>
+      <div class="search-bar">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="search-input" placeholder="Search sites or countries..." aria-label="Search heritage sites">
+      </div>
+    </header>
+
+    <div class="main-layout">
+      <aside class="side-panel">
+        <div class="filter-section">
+          <h3>Region</h3>
+          <div class="filter-list" id="region-filters">
+            <button class="filter-btn active" data-region="all">All Regions</button>
+          </div>
+        </div>
+        <div class="filter-section">
+          <h3>Type</h3>
+          <div class="filter-list" id="type-filters">
+            <button class="filter-btn active" data-type="all">All Types</button>
+          </div>
+        </div>
+        <div class="stats-card">
+          <div class="stat"><span class="stat-value" id="total-sites">0</span><span class="stat-label">Sites</span></div>
+          <div class="stat"><span class="stat-value" id="total-countries">0</span><span class="stat-label">Countries</span></div>
+        </div>
+      </aside>
+
+      <main class="content">
+        <div class="sites-grid" id="sites-grid"></div>
+      </main>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
