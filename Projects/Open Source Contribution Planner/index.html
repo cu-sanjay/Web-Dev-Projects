@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Open Source Contribution Planner</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="app-container">
+  <header><div class="brand"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg><div><h1>OPEN SOURCE CONTRIBUTION PLANNER</h1><p>Find · Track · Contribute to Open Source</p></div></div></header>
+  <div class="main-layout">
+    <aside class="config-panel">
+      <div class="form-group"><label>Your Skills</label>
+        <div class="skill-list" id="skill-list">
+          <button class="skill-btn active" data-skill="javascript">JavaScript</button>
+          <button class="skill-btn" data-skill="python">Python</button>
+          <button class="skill-btn" data-skill="java">Java</button>
+          <button class="skill-btn" data-skill="rust">Rust</button>
+          <button class="skill-btn" data-skill="go">Go</button>
+          <button class="skill-btn" data-skill="typescript">TypeScript</button>
+          <button class="skill-btn" data-skill="cpp">C++</button>
+        </div></div>
+      <div class="form-group"><label>Experience</label><select id="exp-level"><option value="beginner">Beginner</option><option value="intermediate" selected>Intermediate</option><option value="advanced">Advanced</option></select></div>
+      <div class="form-group"><label>Hours/Week</label><input type="range" id="hours" min="1" max="20" value="5"><span id="hours-value">5 hrs</span></div>
+      <button id="btn-plan" class="btn btn-primary">Generate Plan ▸</button>
+    </aside>
+    <main class="plan-area">
+      <div class="plan-header"><h2>Your Contribution Plan</h2><span id="plan-level">Intermediate</span></div>
+      <div class="repos-section"><h3>Recommended Repositories</h3>
+        <div class="repo-list" id="repo-list">
+          <div class="repo-card"><div class="repo-header"><span class="repo-name">first-contributions</span><span class="repo-badge good-first">good first issue</span></div><div class="repo-desc">Help beginners make their first open source contribution</div><div class="repo-meta"><span>⭐ 45k</span><span>📂 JavaScript</span><span>👥 beginner-friendly</span></div></div>
+          <div class="repo-card"><div class="repo-header"><span class="repo-name">freeCodeCamp</span><span class="repo-badge">help wanted</span></div><div class="repo-desc">Open source codebase and curriculum for freeCodeCamp</div><div class="repo-meta"><span>⭐ 400k</span><span>📂 JavaScript/TS</span><span>👥 large community</span></div></div>
+          <div class="repo-card"><div class="repo-header"><span class="repo-name">VS Code</span><span class="repo-badge">up-for-grabs</span></div><div class="repo-desc">Visual Studio Code source code</div><div class="repo-meta"><span>⭐ 160k</span><span>📂 TypeScript</span><span>👥 microsoft</span></div></div>
+        </div></div>
+      <div class="roadmap-section"><h3>30-Day Roadmap</h3>
+        <div class="roadmap" id="roadmap">
+          <div class="roadmap-item done"><div class="rm-week">Week 1</div><div class="rm-task">Setup: GitHub profile, clone repos, read CONTRIBUTING.md</div></div>
+          <div class="roadmap-item active"><div class="rm-week">Week 2</div><div class="rm-task">Find and fix a "good first issue" — focus on documentation or a simple bug</div></div>
+          <div class="roadmap-item"><div class="rm-week">Week 3</div><div class="rm-task">Submit a PR with a code change — add a test or fix a small feature</div></div>
+          <div class="roadmap-item"><div class="rm-week">Week 4</div><div class="rm-task">Engage with community: review PRs, comment on issues, join discussions</div></div>
+        </div></div>
+      <div class="stats-bar"><div><span>Repos Found</span><strong id="repo-count">12</strong></div><div><span>Good First Issues</span><strong id="gfi-count">34</strong></div><div><span>Hours Budget</span><strong id="hours-budget">20</strong></div></div>
+    </main>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
