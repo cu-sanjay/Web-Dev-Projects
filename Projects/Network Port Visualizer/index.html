@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Network Port Visualizer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="terminal-badge">[ NETWORK PORT VISUALIZER — TRANSPORT-LAYER COMMAND DECK ]</div>
+
+<div class="app-grid">
+
+  <!-- ─── PORT SHORTCUT RIBBON ─── -->
+  <div class="shortcut-ribbon">
+    <button class="port-btn" data-port="80">HTTP [80]</button>
+    <button class="port-btn" data-port="443">HTTPS [443]</button>
+    <button class="port-btn" data-port="22">SSH [22]</button>
+    <button class="port-btn" data-port="21">FTP [21]</button>
+    <button class="port-btn" data-port="53">DNS [53]</button>
+    <button class="port-btn" data-port="3306">MySQL [3306]</button>
+    <button class="port-btn" data-port="5432">PostgreSQL [5432]</button>
+    <button class="port-btn" data-port="8080">HTTP-ALT [8080]</button>
+  </div>
+
+  <!-- ─── LEFT: PORT INTAKE ─── -->
+  <div class="panel intake-panel">
+    <div class="panel-header">PORT INTAKE CONSOLE</div>
+    <div class="intake-row">
+      <span class="intake-label">PORT NUMBER</span>
+      <input type="number" id="portNumber" class="intake-field" min="0" max="65535" value="443">
+      <input type="range" id="portRange" class="intake-range" min="0" max="65535" value="443">
+    </div>
+    <div class="intake-row">
+      <span class="intake-label">TRANSPORT</span>
+      <select id="transportSelect" class="intake-select">
+        <option value="TCP">TCP</option>
+        <option value="UDP">UDP</option>
+      </select>
+    </div>
+    <div class="intake-row">
+      <span class="intake-label">FIREWALL RULE</span>
+      <div class="fw-toggle" id="fwToggle">
+        <span class="fw-option fw-allow active" data-fw="allow">ALLOW</span>
+        <span class="fw-option fw-block" data-fw="block">BLOCK</span>
+      </div>
+    </div>
+    <div id="portInfoBox" class="port-info-box">
+      <div class="port-info-label">PORT REGISTRY — <span id="portName">HTTPS</span></div>
+      <div class="port-info-detail" id="portDesc">HyperText Transfer Protocol Secure — encrypted web traffic over TLS</div>
+    </div>
+  </div>
+
+  <!-- ─── CENTER: CANVAS + LOG ─── -->
+  <div class="center-stack">
+    <div class="panel canvas-panel">
+      <div class="panel-header">CONNECTION TOPOLOGY — LIVE PACKET VISUALIZER</div>
+      <canvas id="packetCanvas" class="packet-canvas"></canvas>
+    </div>
+    <div class="panel log-panel">
+      <div class="panel-header">LIVE HANDSHAKE LOG OUTPUT CONSOLE</div>
+      <div id="logConsole" class="log-console">
+        <div class="log-line dim">[IDLE] Awaiting connection parameters...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── TELEMETRY ─── -->
+  <div class="panel telemetry-panel">
+    <div class="panel-header">SOCKET TELEMETRY DASHBOARD</div>
+    <div class="tele-row"><span class="tele-label">PORT CLASS</span><span id="tClass" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">PROTOCOL ALIAS</span><span id="tAlias" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">VULNERABILITY</span><span id="tVuln" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">ENCRYPTION</span><span id="tEncrypt" class="tele-val">--</span></div>
+    <div class="ctrl-divider"></div>
+    <div class="tele-row" style="grid-column:1/-1;"><span id="tBadge" class="tele-badge standby">STANDBY</span></div>
+    <div class="ctrl-divider"></div>
+    <div id="errorDetail" class="error-detail"></div>
+  </div>
+
+  <!-- ─── ADMIN FOOTER ─── -->
+  <div class="admin-footer">
+    <button id="btnConnect" class="admin-btn connect">EXECUTE SOCKET CONNECTION HANDSHAKE</button>
+    <button id="btnScan" class="admin-btn scan">INJECT RANDOM MALICIOUS PACKET SCAN</button>
+    <button id="btnFlush" class="admin-btn flush">FLUSH OPERATIONAL PORT CACHE</button>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
