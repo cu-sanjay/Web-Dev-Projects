@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs><linearGradient id="g" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#0b1220"/><stop offset="100%" stop-color="#0a1020"/></linearGradient></defs>
+  <rect width="1280" height="720" fill="url(#g)"/>
+  <!-- world outline -->
+  <path d="M200 250 Q250 150 350 130 Q450 120 500 170 Q550 200 600 150 Q680 110 720 200 Q750 250 700 330 Q650 390 600 410 Q500 430 400 410 Q300 390 250 350 Q200 310 200 250 Z" fill="none" stroke="#1a2a30" stroke-width="2"/>
+  <!-- silk road path -->
+  <path d="M220 270 Q300 230 380 210 Q460 190 520 220 Q580 250 640 210 Q700 180 740 230" fill="none" stroke="#eab308" stroke-width="3" stroke-dasharray="8 4"/>
+  <circle cx="220" cy="270" r="6" fill="#ef4444"/><text x="205" y="260" font-family="monospace" font-size="10" fill="#64748b">Chang'an</text>
+  <circle cx="380" cy="210" r="6" fill="#ef4444"/><text x="375" y="200" font-family="monospace" font-size="10" fill="#64748b">Samarkand</text>
+  <circle cx="640" cy="210" r="6" fill="#ef4444"/><text x="635" y="200" font-family="monospace" font-size="10" fill="#64748b">Constantinople</text>
+  <circle cx="740" cy="230" r="6" fill="#ef4444"/><text x="740" y="220" font-family="monospace" font-size="10" fill="#64748b">Rome</text>
+  <!-- info panel -->
+  <rect x="200" y="460" width="880" height="100" rx="8" fill="#111827" stroke="#334155" stroke-width="1.5"/>
+  <text x="240" y="490" font-family="ui-monospace,monospace" font-size="16" font-weight="700" fill="#eab308">Silk Road</text>
+  <text x="240" y="515" font-family="monospace" font-size="11" fill="#64748b">Connected China to the Mediterranean, facilitating trade of silk, spices, and ideas.</text>
+  <text x="240" y="540" font-family="monospace" font-size="10" fill="#64748b">6,400 km · 130 BCE - 1453 CE · Silk, Spices, Paper</text>
+  <text x="640" y="100" text-anchor="middle" font-family="ui-monospace,monospace" font-size="26" font-weight="800" fill="#f8fafc" letter-spacing="1">ANCIENT TRADE ROUTE EXPLORER</text>
+  <text x="640" y="125" text-anchor="middle" font-family="ui-monospace,monospace" font-size="13" fill="#64748b">Silk Road · Spice Route · Interactive Map</text>
+</svg>
