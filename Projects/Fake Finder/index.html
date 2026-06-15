@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake Finder — Juicy Trivia</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="glass-card">
+            <div id="game-overlay" class="overlay">
+                <h1>Fake Finder</h1>
+                <p style="margin-bottom: 30px; opacity: 0.7;">Identify the lie among the truths.</p>
+                <button class="btn-main" onclick="startGame()">Start Search</button>
+            </div>
+
+            <div class="stats">
+                <span>Round: <span id="round-val">1</span>/5</span>
+                <span>Score: <span id="score-val">0</span></span>
+            </div>
+
+            <div class="prompt">One of these is a total lie...</div>
+            
+            <div id="fact-container" class="fact-list"></div>
+        </div>
+    </div>
+<script src="script.js"></script>
+</body>
+</html>
