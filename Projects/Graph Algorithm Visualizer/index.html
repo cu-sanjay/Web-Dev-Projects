@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Graph Lab // Network Topology Visualizer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Sidebar Controls -->
+    <aside id="sidebar">
+      <div class="brand">
+        <svg class="brand-icon" viewBox="0 0 32 32" width="32" height="32">
+          <circle cx="8" cy="8" r="3" fill="var(--primary)" />
+          <circle cx="24" cy="8" r="3" fill="var(--primary)" />
+          <circle cx="16" cy="24" r="3" fill="var(--secondary)" />
+          <line x1="8" y1="8" x2="16" y2="24" stroke="var(--border)" stroke-width="1.5" />
+          <line x1="24" y1="8" x2="16" y2="24" stroke="var(--border)" stroke-width="1.5" />
+          <line x1="8" y1="8" x2="24" y2="8" stroke="var(--border)" stroke-dasharray="2" stroke-width="1" />
+        </svg>
+        <div class="brand-text">
+          <span class="brand-name">GRAPH LAB</span>
+          <span class="brand-sub">// Topology Visualizer</span>
+        </div>
+      </div>
+
+      <!-- Section: Presets & Settings -->
+      <div class="panel-section">
+        <div class="section-title">Graph Configurations</div>
+        <div class="settings-group">
+          <label class="input-label">Graph Seed Presets</label>
+          <select id="preset-select" class="form-control">
+            <option value="weighted-mesh">Cyclic Weighted Grid</option>
+            <option value="binary-tree">Binary Tree Hierarchy</option>
+            <option value="complete-graph">Complete Graph (K5)</option>
+            <option value="cyclic-cycle">Simple Unweighted Cycle</option>
+            <option value="empty">Empty Canvas</option>
+          </select>
+          <button id="btn-seed" class="btn btn-secondary btn-full margin-top-sm">Load Preset</button>
+        </div>
+        <div class="settings-group toggle-group">
+          <span class="input-label">Graph Topology Mode</span>
+          <div class="topology-toggle">
+            <button id="btn-topology-undirected" class="btn btn-secondary active">Undirected</button>
+            <button id="btn-topology-directed" class="btn btn-secondary">Directed</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: Interactive Elements Deletions -->
+      <div class="panel-section">
+        <div class="section-title">Canvas Interaction Tools</div>
+        <div class="tool-palette">
+          <button id="btn-tool-draw" class="btn btn-secondary active btn-full">
+            ✏️ Node &amp; Edge Builder
+          </button>
+          <button id="btn-tool-delete" class="btn btn-secondary btn-full">
+            🗑️ Element Eraser Mode
+          </button>
+          <div class="instruction-text">
+            Double-click empty canvas to add a Node. Click Node A, then click Node B to draw an Edge. Drag nodes to move them.
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: Algorithm Configuration -->
+      <div class="panel-section">
+        <div class="section-title">Algorithm Laboratory</div>
+        <div class="algo-selection">
+          <label class="input-label">Select Algorithm</label>
+          <select id="algo-select" class="form-control">
+            <option value="dijkstra">Dijkstra's Shortest Path</option>
+            <option value="prim">Prim's Minimum Spanning Tree</option>
+            <option value="bfs">Breadth-First Search (BFS)</option>
+            <option value="dfs">Depth-First Search (DFS)</option>
+          </select>
+        </div>
+        
+        <div id="algo-params" class="algo-params">
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label class="input-label">Start Node</label>
+              <select id="start-node-select" class="form-control">
+                <option value="">Choose Node</option>
+              </select>
+            </div>
+            <div class="form-group flex-1" id="target-node-group">
+              <label class="input-label">Target Node</label>
+              <select id="target-node-select" class="form-control">
+                <option value="">Choose Node</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: Traversal Playback Controls -->
+      <div class="panel-section">
+        <div class="section-title">Playback Controller</div>
+        <div class="playback-controls">
+          <button id="btn-play" class="btn btn-success play-btn">
+            <span class="btn-icon">▶</span> Play
+          </button>
+          <button id="btn-step" class="btn btn-secondary">Step ⏭</button>
+          <button id="btn-reset-anim" class="btn btn-secondary">Reset</button>
+        </div>
+        <div class="slider-group">
+          <span class="slider-label">Speed</span>
+          <input type="range" id="speed-slider" min="200" max="2500" value="800" step="100">
+          <span id="speed-val">800ms</span>
+        </div>
+      </div>
+
+      <!-- Footer Buttons -->
+      <div class="sidebar-footer">
+        <button id="btn-theme-toggle" class="btn btn-secondary btn-half">🌓 Theme</button>
+        <button id="btn-matrix-toggle" class="btn btn-secondary btn-half">📊 Matrix</button>
+        <button id="btn-clear-graph" class="btn btn-danger btn-full">🗑️ Clear Graph</button>
+      </div>
+    </aside>
+
+    <!-- Main Workspace -->
+    <main id="workspace">
+      <!-- Telemetry Header Bar -->
+      <header class="telemetry-bar">
+        <div class="metric-card">
+          <span class="metric-label">Nodes</span>
+          <span class="metric-value" id="val-nodes">0</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Edges</span>
+          <span class="metric-value" id="val-edges">0</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Active Queue/Frontier</span>
+          <span class="metric-value" id="val-frontier">-</span>
+        </div>
+        <div class="metric-card" id="metric-path-cost-card">
+          <span class="metric-label" id="path-cost-label">Path Cost</span>
+          <span class="metric-value" id="val-path-cost">-</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Engine Status</span>
+          <span class="metric-value status-badge empty" id="val-status">IDLE</span>
+        </div>
+      </header>
+
+      <!-- SVG Drawing Canvas -->
+      <div class="canvas-container">
+        <div class="canvas-toolbar">
+          <span class="canvas-title">Interactive Topological Network Canvas</span>
+          <div class="canvas-actions">
+            <button id="btn-zoom-in" class="btn-tool" title="Zoom In">➕</button>
+            <button id="btn-zoom-out" class="btn-tool" title="Zoom Out">➖</button>
+            <button id="btn-zoom-reset" class="btn-tool" title="Fit Grid">🎯</button>
+          </div>
+        </div>
+
+        <div class="svg-wrapper" id="svg-wrapper">
+          <svg id="graph-svg" width="100%" height="100%">
+            <defs>
+              <!-- Arrowhead definition for directed graph links -->
+              <marker id="arrow" viewBox="0 0 10 10" refX="21" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="var(--node-stroke)" />
+              </marker>
+              <marker id="arrow-checking" viewBox="0 0 10 10" refX="21" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="var(--info)" />
+              </marker>
+              <marker id="arrow-active" viewBox="0 0 10 10" refX="21" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="var(--accent)" />
+              </marker>
+              <marker id="arrow-highlight" viewBox="0 0 10 10" refX="21" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="var(--primary)" />
+              </marker>
+
+              <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="4" result="blur" />
+                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+              </filter>
+            </defs>
+            <!-- SVG Pan/Zoom transform group -->
+            <g id="svg-pan-group">
+              <g id="edges-group"></g>
+              <g id="nodes-group"></g>
+            </g>
+          </svg>
+
+          <!-- Drawer Panel: Adjacency Matrix -->
+          <div id="matrix-drawer" class="matrix-card hidden">
+            <div class="matrix-header">
+              <span class="matrix-title">Adjacency Matrix</span>
+              <button id="btn-close-matrix" class="btn-close">×</button>
+            </div>
+            <div class="matrix-body" id="matrix-body-container">
+              <!-- Matrix Table rendered dynamically -->
+              <table id="adjacency-matrix-table"></table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Execution Panel: Log + Pseudocode -->
+      <footer class="execution-panel">
+        <div class="log-panel">
+          <div class="panel-header">
+            <span class="panel-title">Trace Action Logs</span>
+            <span id="log-counter" class="badge">0 entries</span>
+          </div>
+          <div class="log-table-container">
+            <table id="log-table">
+              <thead>
+                <tr>
+                  <th width="80">Step</th>
+                  <th width="120">Operation</th>
+                  <th>Action Log Description</th>
+                  <th width="120">Active Queue</th>
+                </tr>
+              </thead>
+              <tbody id="log-body">
+                <tr>
+                  <td colspan="4" class="empty-log">Awaiting operation parameters...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="code-panel">
+          <div class="panel-header">
+            <span class="panel-title">Algorithmic Pseudocode</span>
+            <span id="code-algo-title" class="badge">None</span>
+          </div>
+          <div class="code-container">
+            <pre><code id="pseudocode-display">// Select an algorithm or start a playback simulation to see code step tracking.</code></pre>
+          </div>
+        </div>
+      </footer>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
