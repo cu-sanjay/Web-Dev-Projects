@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Research & Innovation Portal</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo-icon"><i class="ph-fill ph-flask"></i></div>
+      <h2>Resnova</h2>
+    </div>
+    
+    <nav class="sidebar-nav">
+      <ul>
+        <li class="active" data-tab="dashboard">
+          <i class="ph ph-squares-four"></i> Dashboard
+        </li>
+        <li data-tab="projects">
+          <i class="ph ph-microscope"></i> Projects
+        </li>
+        <li data-tab="publications">
+          <i class="ph ph-books"></i> Publications
+        </li>
+        <li data-tab="funding">
+          <i class="ph ph-currency-dollar"></i> Funding
+        </li>
+      </ul>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-card">
+        <img src="https://ui-avatars.com/api/?name=Dr.+Alan+Turing&background=0284c7&color=fff" alt="User">
+        <div class="user-details">
+          <strong>Dr. Alan Turing</strong>
+          <span>Principal Investigator</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Workspace -->
+  <main class="main-workspace">
+    
+    <!-- Top Navigation -->
+    <header class="top-nav">
+      <div class="nav-left">
+        <button id="mobile-toggle" class="icon-btn"><i class="ph ph-list"></i></button>
+        <div class="search-box">
+          <i class="ph ph-magnifying-glass"></i>
+          <input type="text" placeholder="Search papers, authors, grants...">
+        </div>
+      </div>
+      <div class="nav-right">
+        <button class="icon-btn notification"><i class="ph ph-bell"></i><span class="badge">4</span></button>
+        <button class="btn primary-btn"><i class="ph ph-plus"></i> New Project</button>
+      </div>
+    </header>
+
+    <div class="content-scroll">
+      
+      <!-- ================= DASHBOARD TAB ================= -->
+      <section id="dashboard" class="tab-pane active">
+        
+        <div class="hero-banner">
+          <div class="hero-text">
+            <h1>Welcome back, Dr. Turing</h1>
+            <p>Your team has submitted 2 papers for peer review this month. You have 3 grant deadlines approaching.</p>
+          </div>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-icon bg-blue-light text-blue"><i class="ph-fill ph-microscope"></i></div>
+            <div class="stat-info">
+              <h3>Active Projects</h3>
+              <h2>8</h2>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon bg-green-light text-green"><i class="ph-fill ph-file-text"></i></div>
+            <div class="stat-info">
+              <h3>Publications</h3>
+              <h2>42</h2>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon bg-purple-light text-purple"><i class="ph-fill ph-users-three"></i></div>
+            <div class="stat-info">
+              <h3>Collaborators</h3>
+              <h2>15</h2>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon bg-orange-light text-orange"><i class="ph-fill ph-bank"></i></div>
+            <div class="stat-info">
+              <h3>Active Grants</h3>
+              <h2>$1.2M</h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-layout">
+          <!-- Recent Activity -->
+          <div class="card col-span-2">
+            <div class="card-header flex-between">
+              <h3>Recent Project Activity</h3>
+              <button class="text-btn" onclick="document.querySelector('[data-tab=\\'projects\\']').click()">View All</button>
+            </div>
+            <div class="card-body p-0">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Project Name</th>
+                    <th>Status</th>
+                    <th>Last Updated</th>
+                    <th>Phase</th>
+                  </tr>
+                </thead>
+                <tbody id="recent-projects-tbody">
+                  <!-- JS Injected -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Quick Action / Alerts -->
+          <div class="card">
+            <div class="card-header">
+              <h3>Action Items</h3>
+            </div>
+            <div class="card-body">
+              <ul class="action-list">
+                <li class="action-item alert-high">
+                  <div class="action-icon"><i class="ph ph-warning-circle"></i></div>
+                  <div class="action-desc">
+                    <h4>Grant Proposal Due</h4>
+                    <p>NSF Quantum Initiative (2 days left)</p>
+                  </div>
+                </li>
+                <li class="action-item">
+                  <div class="action-icon"><i class="ph ph-file-pdf"></i></div>
+                  <div class="action-desc">
+                    <h4>Review Required</h4>
+                    <p>"Neural Networks in Oncology" by Dr. Smith</p>
+                  </div>
+                </li>
+                <li class="action-item">
+                  <div class="action-icon"><i class="ph ph-check-circle text-green"></i></div>
+                  <div class="action-desc">
+                    <h4>Approval Received</h4>
+                    <p>Ethics board approved Protocol #4912</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ================= PROJECTS TAB ================= -->
+      <section id="projects" class="tab-pane hidden">
+        <div class="page-title flex-between">
+          <div>
+            <h1>Research Projects</h1>
+            <p class="text-muted">Manage your laboratory's ongoing and completed research studies.</p>
+          </div>
+          <div class="filters">
+            <select class="select-box">
+              <option>All Departments</option>
+              <option>Computer Science</option>
+              <option>Bioinformatics</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="project-grid" id="project-grid">
+          <!-- JS Injected -->
+        </div>
+      </section>
+
+      <!-- ================= PUBLICATIONS TAB ================= -->
+      <section id="publications" class="tab-pane hidden">
+        <div class="page-title flex-between">
+          <div>
+            <h1>Publications Archive</h1>
+            <p class="text-muted">Explore published papers, pre-prints, and peer reviews.</p>
+          </div>
+          <button class="btn primary-btn"><i class="ph ph-upload-simple"></i> Submit Paper</button>
+        </div>
+
+        <div class="card">
+          <div class="card-body p-0">
+             <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Title</th>
+                    <th>Authors</th>
+                    <th>Journal/Conference</th>
+                    <th>Year</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="publications-tbody">
+                  <!-- JS Injected -->
+                </tbody>
+              </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= FUNDING TAB ================= -->
+      <section id="funding" class="tab-pane hidden">
+        <div class="page-title">
+          <h1>Grants & Funding</h1>
+          <p class="text-muted">Track application statuses, active grants, and budgets.</p>
+        </div>
+
+        <div class="grid-layout">
+          <div class="card col-span-2">
+            <div class="card-header">
+              <h3>Active Grants</h3>
+            </div>
+            <div class="card-body">
+              <div class="grant-list" id="grant-list">
+                <!-- JS Injected -->
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h3>Funding Distribution</h3>
+            </div>
+            <div class="card-body flex-center column">
+              <div class="pie-chart-mock">
+                <i class="ph ph-chart-pie-slice text-blue" style="font-size: 8rem; opacity: 0.8"></i>
+              </div>
+              <ul class="chart-legend mt-4">
+                <li><span class="dot bg-blue"></span> Equipment (45%)</li>
+                <li><span class="dot bg-purple"></span> Personnel (35%)</li>
+                <li><span class="dot bg-green"></span> Travel (15%)</li>
+                <li><span class="dot bg-orange"></span> Supplies (5%)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
