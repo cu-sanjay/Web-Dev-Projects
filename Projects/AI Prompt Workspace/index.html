@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Prompt Workspace</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="terminal-badge">[ AI PROMPT WORKSPACE — ENGINEERING WORKSTATION ]</div>
+
+<div class="app-grid">
+
+  <!-- ─── SEARCH & WORKSPACE TOOLBAR ─── -->
+  <div class="toolbar">
+    <div class="toolbar-row">
+      <input type="text" id="searchInput" class="search-field" placeholder="Search prompts...">
+      <select id="categorySelect" class="category-select">
+        <option value="all">ALL CATEGORIES</option>
+        <option value="development">DEVELOPMENT</option>
+        <option value="architecture">SYSTEM ARCHITECTURE</option>
+        <option value="ui-ux">UI/UX DESIGN</option>
+        <option value="data-science">DATA SCIENCE</option>
+      </select>
+      <button id="btnNewPrompt" class="tool-btn">NEW PROMPT CARD</button>
+    </div>
+  </div>
+
+  <!-- ─── LEFT: PROMPT CARDS GRID ─── -->
+  <div class="cards-panel">
+    <div class="panel-header">PROMPT LIBRARY — <span id="resultCount">0</span> RESULTS</div>
+    <div class="cards-grid" id="cardsGrid"></div>
+  </div>
+
+  <!-- ─── RIGHT: INSPECTOR ─── -->
+  <div class="panel inspector-panel">
+    <div class="panel-header">PROMPT INSPECTOR SLATE</div>
+    <div id="inspectorContent" class="inspector-content">
+      <div class="inspector-empty">SELECT A PROMPT TO INSPECT</div>
+    </div>
+  </div>
+
+  <!-- ─── TELEMETRY ─── -->
+  <div class="panel telemetry-panel">
+    <div class="panel-header">ENGINEERING TELEMETRY DASHBOARD</div>
+    <div class="tele-row"><span class="tele-label">TOKEN FOOTPRINT</span><span id="tTokens" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">CHAR METRICS</span><span id="tChars" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">STARRED TOTAL</span><span id="tStarred" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">CATEGORY</span><span id="tCategory" class="tele-val">--</span></div>
+    <div class="ctrl-divider"></div>
+    <div class="tele-row" style="grid-column:1/-1;"><span id="tBadge" class="tele-badge standby">STANDBY</span></div>
+    <div class="ctrl-divider"></div>
+    <div id="errorDetail" class="error-detail"></div>
+  </div>
+
+  <!-- ─── ADMIN FOOTER ─── -->
+  <div class="admin-footer">
+    <button id="btnAnalyze" class="admin-btn analyze">EXECUTE TOKEN VOLUME ANALYSIS</button>
+    <button id="btnTemplate" class="admin-btn template">INJECT COMPLEX OPTIMIZATION TEMPLATE</button>
+    <button id="btnFlush" class="admin-btn flush">FLUSH PROMPT CACHE &amp; RE-ZERO MATRICES</button>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
