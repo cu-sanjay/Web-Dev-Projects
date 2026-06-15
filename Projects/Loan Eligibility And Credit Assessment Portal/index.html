@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loan Eligibility Portal</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <nav class="global-nav">
+    <div class="brand">
+      <i class="ph-fill ph-bank text-primary"></i> <span>TrustBank</span>
+    </div>
+    
+    <div class="nav-links">
+      <button class="nav-tab active" data-tab="dashboard">My Dashboard</button>
+      <button class="nav-tab" data-tab="apply">Apply for Loan</button>
+      <button class="nav-tab" data-tab="officer" style="display: none;" id="officer-tab-btn">Officer Portal</button>
+    </div>
+
+    <div class="nav-actions">
+      <!-- Role Switcher -->
+      <div class="role-selector">
+        <select id="role-select">
+          <option value="applicant">Applicant</option>
+          <option value="officer">Loan Officer</option>
+        </select>
+      </div>
+
+      <button class="icon-btn"><i class="ph ph-bell"></i></button>
+      <img src="https://ui-avatars.com/api/?name=Loan+Applicant&background=6366f1&color=fff" alt="Avatar" id="user-avatar" class="avatar">
+    </div>
+  </nav>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav">
+    <button class="nav-tab active" data-tab="dashboard"><i class="ph ph-squares-four"></i></button>
+    <button class="nav-tab" data-tab="apply"><i class="ph ph-file-text"></i></button>
+    <button class="nav-tab" data-tab="officer" id="mobile-officer-tab-btn" style="display: none;"><i class="ph ph-shield-check"></i></button>
+  </div>
+
+  <main class="main-content">
+    
+    <!-- ================= DASHBOARD TAB (APPLICANT) ================= -->
+    <section id="dashboard" class="tab-content active">
+      <div class="page-heading">
+        <h1>Welcome Back, Applicant</h1>
+        <p class="text-muted">Review your credit standing and track your active applications.</p>
+      </div>
+
+      <div class="split-layout mt-3">
+        <!-- Credit Score Panel -->
+        <div class="panel">
+          <div class="panel-header">
+            <h3>Your Credit Score</h3>
+          </div>
+          <div class="panel-body flex-column flex-center text-center">
+            <div class="credit-score-circle mb-2">
+              <div class="score-val text-primary font-bold" style="font-size: 2.5rem;">742</div>
+              <div class="text-muted">Good</div>
+            </div>
+            <p class="text-muted" style="font-size: 0.9rem;">Your score is above average. You are highly likely to be approved for standard personal and auto loans.</p>
+            <button class="btn outline-btn mt-2" style="width:100%">View Full Report</button>
+          </div>
+        </div>
+
+        <!-- Active Applications -->
+        <div class="panel col-span-2">
+          <div class="panel-header flex-between">
+            <h3>Active Loan Applications</h3>
+            <button class="btn primary-btn btn-sm" onclick="document.querySelector('[data-tab=\'apply\']').click()">New Application</button>
+          </div>
+          <div class="panel-body p-0">
+            <table class="custom-table">
+              <thead>
+                <tr><th>Application ID</th><th>Loan Type</th><th>Amount</th><th>Submitted</th><th>Status</th></tr>
+              </thead>
+              <tbody id="applicant-apps-tbody">
+                <!-- Injected via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= APPLY TAB (APPLICANT) ================= -->
+    <section id="apply" class="tab-content hidden">
+      <div class="page-heading">
+        <h1>Check Loan Eligibility</h1>
+        <p class="text-muted">Fill out the secure form below to check your eligibility without affecting your credit score.</p>
+      </div>
+
+      <div class="split-layout mt-3">
+        <div class="panel col-span-2">
+          <div class="panel-header">
+            <h3>Eligibility Application</h3>
+          </div>
+          <div class="panel-body">
+            <form class="report-form" onsubmit="event.preventDefault(); alert('Application Submitted to Loan Officers!');">
+              <div class="split-layout" style="gap:1rem;">
+                <div class="form-group">
+                  <label>Loan Type</label>
+                  <select class="form-input">
+                    <option>Personal Loan</option>
+                    <option>Auto Loan</option>
+                    <option>Mortgage</option>
+                    <option>Business Loan</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Requested Amount ($)</label>
+                  <input type="number" class="form-input" placeholder="e.g. 15000">
+                </div>
+              </div>
+
+              <div class="split-layout" style="gap:1rem;">
+                <div class="form-group">
+                  <label>Annual Income ($)</label>
+                  <input type="number" class="form-input" placeholder="e.g. 75000">
+                </div>
+                <div class="form-group">
+                  <label>Employment Status</label>
+                  <select class="form-input">
+                    <option>Full-time Employed</option>
+                    <option>Self-employed</option>
+                    <option>Part-time</option>
+                    <option>Unemployed</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Purpose of Loan</label>
+                <textarea class="form-input" rows="3" placeholder="Briefly describe why you need this loan..."></textarea>
+              </div>
+              <button class="btn primary-btn" type="submit" style="width: 100%;">Check Eligibility & Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= LOAN OFFICER PORTAL ================= -->
+    <section id="officer" class="tab-content hidden">
+      <div class="page-heading flex-between">
+        <div>
+          <h1>Officer Portal</h1>
+          <p class="text-muted">Assess credit risks and manage incoming loan applications.</p>
+        </div>
+        <button class="btn outline-btn"><i class="ph ph-file-pdf"></i> Download Daily Report</button>
+      </div>
+
+      <div class="metrics-grid mt-2">
+        <div class="metric-card">
+          <div class="metric-icon bg-orange-light text-orange"><i class="ph-fill ph-clock"></i></div>
+          <div class="metric-data"><h3>Pending Review</h3><h2>18</h2></div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon bg-green-light text-green"><i class="ph-fill ph-check-circle"></i></div>
+          <div class="metric-data"><h3>Approved Today</h3><h2>45</h2></div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon bg-blue-light text-blue"><i class="ph-fill ph-bank"></i></div>
+          <div class="metric-data"><h3>Capital Disbursed</h3><h2>$1.2M</h2></div>
+        </div>
+      </div>
+
+      <div class="split-layout mt-3">
+        <div class="panel col-span-2">
+          <div class="panel-header">
+            <h3>Application Assessment Queue</h3>
+          </div>
+          <div class="panel-body p-0">
+            <table class="custom-table">
+              <thead>
+                <tr><th>App ID</th><th>Applicant</th><th>Credit Score</th><th>Type</th><th>Amount</th><th>Status</th><th>Action</th></tr>
+              </thead>
+              <tbody id="officer-queue-tbody">
+                 <!-- Injected via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
