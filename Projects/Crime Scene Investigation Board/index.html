@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Crime Scene Investigation Board</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="app-container">
+  <header><div class="brand"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="12" r="3"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/></svg><div><h1>CRIME SCENE INVESTIGATION BOARD</h1><p>Pin Evidence · Connect Suspects · Reconstruct Timeline</p></div></div><div class="header-actions"><button id="btn-reset" class="btn">Clear Board</button></div></header>
+  <div class="main-layout">
+    <aside class="tools-panel">
+      <h3>Evidence</h3>
+      <div class="evidence-list" id="evidence-list">
+        <div class="ev-item" draggable="true" data-ev="fingerprint">🖐️ Fingerprint</div>
+        <div class="ev-item" draggable="true" data-ev="footprint">👣 Footprint</div>
+        <div class="ev-item" draggable="true" data-ev="dna">🧬 DNA Sample</div>
+        <div class="ev-item" draggable="true" data-ev="weapon">🔪 Weapon</div>
+        <div class="ev-item" draggable="true" data-ev="letter">📝 Letter</div>
+        <div class="ev-item" draggable="true" data-ev="photo">📸 Photo</div>
+      </div>
+      <h3>Suspects</h3>
+      <div class="suspect-list" id="suspect-list">
+        <div class="sus-item" draggable="true" data-sus="john">👤 John Doe</div>
+        <div class="sus-item" draggable="true" data-sus="jane">👩 Jane Smith</div>
+        <div class="sus-item" draggable="true" data-sus="bob">👨 Bob Wilson</div>
+      </div>
+      <h3>Timeline</h3>
+      <div class="timeline-input"><input type="text" id="tl-input" placeholder="Add event..."><button id="btn-add-tl" class="btn btn-sm">+</button></div>
+      <div class="tl-list" id="tl-list">
+        <div class="tl-item">10:00 PM — Victim last seen</div>
+        <div class="tl-item">11:15 PM — Neighbor heard noise</div>
+        <div class="tl-item">12:00 AM — Police arrived</div>
+      </div>
+    </aside>
+    <main class="board-area">
+      <div class="board" id="board">
+        <svg id="board-svg" width="100%" height="100%"></svg>
+        <div class="board-instructions" id="board-instructions">Drag evidence and suspects onto the board. Click to select, right-click to remove.</div>
+      </div>
+    </main>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
