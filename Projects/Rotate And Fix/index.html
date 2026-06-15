@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rotate & Fix — Prism Logic</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <div id="start-screen" class="overlay">
+            <h1>Rotate & Fix</h1>
+            <p style="color: var(--text-dim); margin-bottom: 2rem;">Restore the prism by rotating the segments.</p>
+            <div style="margin-bottom: 2rem;">
+                <button class="btn btn-diff active" onclick="setDifficulty(3, this)">Easy</button>
+                <button class="btn btn-diff" onclick="setDifficulty(4, this)">Medium</button>
+                <button class="btn btn-diff" onclick="setDifficulty(5, this)">Hard</button>
+            </div>
+            <button class="btn" onclick="startGame()">Initiate</button>
+        </div>
+
+        <div id="win-screen" class="overlay hidden">
+            <h1 style="color: var(--accent);">Prism Restored</h1>
+            <p id="final-stats" style="color: var(--text-dim); margin-bottom: 2rem;"></p>
+            <button class="btn" onclick="location.reload()">Reset Map</button>
+        </div>
+
+        <div class="stats">
+            <div class="stat-item">
+                <span class="stat-label">Time</span>
+                <span id="timer-val" class="stat-val">00:00</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Moves</span>
+                <span id="moves-val" class="stat-val">0</span>
+            </div>
+        </div>
+
+        <div id="game-board" class="board"></div>
+
+        <button class="btn btn-diff" onclick="location.reload()" style="opacity: 0.5;">Abandon Mission</button>
+    </div>
+<script src="script.js"></script>
+</body>
+</html>
