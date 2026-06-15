@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs><linearGradient id="g" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#0b1220"/><stop offset="100%" stop-color="#1a1010"/></linearGradient></defs>
+  <rect width="1280" height="720" fill="url(#g)"/>
+  <!-- timeline line -->
+  <line x1="100" y1="200" x2="1180" y2="200" stroke="#334155" stroke-width="4"/>
+  <line x1="100" y1="200" x2="1000" y2="200" stroke="#f97316" stroke-width="4"/>
+  <!-- events -->
+  <circle cx="180" cy="200" r="10" fill="#3b82f6" stroke="#0b1220" stroke-width="3"/>
+  <text x="180" y="175" text-anchor="middle" font-family="monospace" font-size="10" fill="#3b82f6">1368</text>
+  <text x="180" y="230" text-anchor="middle" font-family="monospace" font-size="10" fill="#cbd5e1">Zhu Yuanzhang</text>
+  <circle cx="400" cy="200" r="10" fill="#22c55e" stroke="#0b1220" stroke-width="3"/>
+  <text x="400" y="175" text-anchor="middle" font-family="monospace" font-size="10" fill="#22c55e">1405</text>
+  <text x="400" y="230" text-anchor="middle" font-family="monospace" font-size="10" fill="#cbd5e1">Zheng He voyages</text>
+  <circle cx="650" cy="200" r="10" fill="#ef4444" stroke="#0b1220" stroke-width="3"/>
+  <text x="650" y="175" text-anchor="middle" font-family="monospace" font-size="10" fill="#ef4444">1449</text>
+  <text x="650" y="230" text-anchor="middle" font-family="monospace" font-size="10" fill="#cbd5e1">Tumu Crisis</text>
+  <circle cx="900" cy="200" r="10" fill="#64748b" stroke="#0b1220" stroke-width="3"/>
+  <text x="900" y="175" text-anchor="middle" font-family="monospace" font-size="10" fill="#64748b">1644</text>
+  <text x="900" y="230" text-anchor="middle" font-family="monospace" font-size="10" fill="#cbd5e1">Ming falls</text>
+  <!-- dynasty panel -->
+  <rect x="200" y="300" width="880" height="100" rx="8" fill="#111827" stroke="#334155" stroke-width="1.5"/>
+  <text x="240" y="335" font-family="ui-monospace,monospace" font-size="18" font-weight="700" fill="#f97316">Ming Dynasty</text>
+  <text x="240" y="365" font-family="monospace" font-size="11" fill="#64748b">1368 — 1644 · The Ming ruled China for 276 years, known for maritime exploration,</text>
+  <text x="240" y="385" font-family="monospace" font-size="11" fill="#64748b">construction of the Forbidden City, and porcelain.</text>
+  <text x="640" y="100" text-anchor="middle" font-family="ui-monospace,monospace" font-size="26" font-weight="800" fill="#f8fafc" letter-spacing="1">DYNASTY TIMELINE BUILDER</text>
+  <text x="640" y="125" text-anchor="middle" font-family="ui-monospace,monospace" font-size="13" fill="#64748b">Kings · Wars · Historical Events</text>
+</svg>
