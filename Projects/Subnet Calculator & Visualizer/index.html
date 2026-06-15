@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subnet Calculator &amp; Visualizer - Interactive Network Subnetting Lab</title>
+  <meta name="description" content="A comprehensive tool for calculating and visualizing IPv4 address subnets. Design custom FLSM/VLSM configurations, explore color-coded 32-bit binary charts, check visual address maps, and test networking skills in Quiz Mode.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-logo">
+        <a href="../../" class="back-link" title="Back to Showcase">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        </a>
+        <div class="logo-text">
+          <h1>Subnet Calculator &amp; <span class="accent-text">Visualizer</span></h1>
+          <p class="subtitle">Interactive Classless Inter-Domain Routing (CIDR) &amp; VLSM Planner</p>
+        </div>
+      </div>
+      
+      <!-- Preset Selectors -->
+      <div class="header-presets">
+        <div class="control-group">
+          <label for="ip-preset">Quick Base Network IP:</label>
+          <select id="ip-preset" class="custom-select">
+            <option value="192.168.1.0/24" selected>Home LAN (192.168.1.0/24 - Class C)</option>
+            <option value="172.16.0.0/16">Corporate LAN (172.16.0.0/16 - Class B)</option>
+            <option value="10.0.0.0/8">Enterprise Backbone (10.0.0.0/8 - Class A)</option>
+            <option value="192.0.2.0/24">Documentation Block (192.0.2.0/24 - TEST-NET-1)</option>
+          </select>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Workspace Dashboard Grid -->
+    <main class="dashboard-grid">
+      
+      <!-- Left Column: Single Calculator & Binary Bits / Map -->
+      <section class="left-column">
+        
+        <!-- IP Calculator Form & Metrics Grid -->
+        <div class="card ip-calc-card">
+          <div class="card-header">
+            <h2 class="card-title">Base CIDR Calculator</h2>
+            <span class="badge" id="badge-ip-class">Class C</span>
+          </div>
+          
+          <div class="calculator-inputs mt-12">
+            <div class="input-field-group flex-2">
+              <label for="input-ip">IPv4 Base Address</label>
+              <input type="text" id="input-ip" value="192.168.1.0" placeholder="e.g. 192.168.1.0" class="custom-input">
+              <span class="input-error-hint hidden" id="ip-error-msg">Invalid IPv4 address format.</span>
+            </div>
+            
+            <div class="input-field-group flex-1">
+              <label for="select-cidr">CIDR Prefix</label>
+              <select id="select-cidr" class="custom-select-small">
+                <!-- Javascript will populate /0 to /32 -->
+              </select>
+            </div>
+          </div>
+          
+          <!-- Slider for prefix modification -->
+          <div class="slider-control-bar mt-16">
+            <div class="slider-labels">
+              <span>Mask Slider:</span>
+              <span id="label-slider-cidr" class="accent-text font-bold">/24</span>
+            </div>
+            <input type="range" id="slider-cidr" min="0" max="32" value="24" class="w-full">
+          </div>
+
+          <!-- Calculated Metrics Display Grid -->
+          <div class="metrics-grid mt-24">
+            <div class="metric-item">
+              <div class="metric-label">Network Address</div>
+              <div class="metric-value font-mono" id="metric-network">192.168.1.0</div>
+            </div>
+            
+            <div class="metric-item">
+              <div class="metric-label">Subnet Mask</div>
+              <div class="metric-value font-mono" id="metric-mask">255.255.255.0</div>
+            </div>
+            
+            <div class="metric-item">
+              <div class="metric-label">First Usable Host</div>
+              <div class="metric-value font-mono" id="metric-first-host">192.168.1.1</div>
+            </div>
+            
+            <div class="metric-item">
+              <div class="metric-label">Last Usable Host</div>
+              <div class="metric-value font-mono" id="metric-last-host">192.168.1.254</div>
+            </div>
+            
+            <div class="metric-item">
+              <div class="metric-label">Broadcast Address</div>
+              <div class="metric-value font-mono" id="metric-broadcast">192.168.1.255</div>
+            </div>
+            
+            <div class="metric-item">
+              <div class="metric-label">Usable Host Count</div>
+              <div class="metric-value font-mono highlight-purple" id="metric-hosts">254</div>
+            </div>
+            
+            <div class="metric-item">
+              <div class="metric-label">Total IP Range Size</div>
+              <div class="metric-value font-mono" id="metric-total-ips">256</div>
+            </div>
+            
+            <div class="metric-item">
+              <div class="metric-label">IP Address Scope</div>
+              <div class="metric-value" id="metric-scope">Private (RFC 1918)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Binary Bit-Borrowing Visualizer Card -->
+        <div class="card binary-card">
+          <div class="card-header">
+            <h2 class="card-title">32-Bit Binary Bit-Borrowing Representation</h2>
+            <div class="bit-legend">
+              <span class="legend-item"><span class="dot net"></span>Network</span>
+              <span class="legend-item"><span class="dot sub"></span>Subnet (Borrowed)</span>
+              <span class="legend-item"><span class="dot host"></span>Host</span>
+            </div>
+          </div>
+          
+          <p class="section-desc">
+            Visualizes how network boundaries shift. The default subnet boundary is determined by IP Class. Borrowing host bits splits the network into smaller subnets.
+          </p>
+
+          <div class="binary-display-container mt-16" id="binary-bit-container">
+            <!-- Populated dynamically: 4 octets of 8 bits -->
+          </div>
+          
+          <div class="binary-values-table-container mt-16">
+            <table class="binary-table">
+              <tbody>
+                <tr>
+                  <th>Address Binary:</th>
+                  <td id="bin-val-ip" class="font-mono text-cyan">11000000.10101000.00000001.00000000</td>
+                </tr>
+                <tr>
+                  <th>Netmask Binary:</th>
+                  <td id="bin-val-mask" class="font-mono text-purple">11111111.11111111.11111111.00000000</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Address Space Subdivision Map Card -->
+        <div class="card map-card">
+          <div class="card-header">
+            <h2 class="card-title">Interactive Address Space Visual Map</h2>
+            <span class="hint-text" id="map-scale-label">Total Block: /24 (256 IPs)</span>
+          </div>
+          <p class="section-desc">
+            Represents how the major network block is partitioned. FLSM and VLSM allocations render proportional boxes inside this address space canvas.
+          </p>
+          
+          <div class="address-map-workspace mt-16" id="address-map-container">
+            <!-- Nested block grids rendered here -->
+            <div class="empty-map-msg" id="map-placeholder">
+              Define Subnets in the right-hand planner to visualize allocations.
+            </div>
+          </div>
+        </div>
+
+      </section>
+      
+      <!-- Right Column: Subnet Planner & Quiz -->
+      <section class="right-column">
+        
+        <!-- Planner Configuration Card -->
+        <div class="card planner-card">
+          <h2 class="card-title">Subnet Planner Workspace</h2>
+          
+          <!-- FLSM / VLSM Tab Selectors -->
+          <div class="tabs-toolbar mt-12">
+            <button id="tab-btn-vlsm" class="tab-button active">VLSM Calculator</button>
+            <button id="tab-btn-flsm" class="tab-button">FLSM Splitter</button>
+          </div>
+
+          <!-- VLSM Configuration View -->
+          <div id="planner-vlsm-view" class="planner-tab-content">
+            <p class="tab-desc">
+              Define subnets with custom host sizes. The algorithm allocates IPs starting with the largest subnet to maximize efficiency.
+            </p>
+            
+            <form id="vlsm-form" class="planner-form mt-12">
+              <div class="subnet-list" id="vlsm-subnets-container">
+                <!-- Populated dynamically with rows -->
+              </div>
+              
+              <div class="planner-actions mt-12">
+                <button type="button" id="btn-add-vlsm-row" class="btn btn-secondary btn-small">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                  Add Subnet Row
+                </button>
+                <button type="button" id="btn-reset-vlsm" class="btn btn-secondary btn-small">Reset List</button>
+              </div>
+              
+              <button type="button" id="btn-solve-vlsm" class="btn btn-primary w-full mt-16">Generate Optimal VLSM Plan</button>
+            </form>
+          </div>
+
+          <!-- FLSM Configuration View -->
+          <div id="planner-flsm-view" class="planner-tab-content hidden">
+            <p class="tab-desc">
+              Split the base IP block into equal subnets by choosing the number of subnets or size of each.
+            </p>
+            
+            <div class="planner-form mt-12">
+              <div class="input-field-group">
+                <label for="flsm-split-type">Split Criterion</label>
+                <select id="flsm-split-type" class="custom-select-small">
+                  <option value="subnets" selected>Number of Subnets</option>
+                  <option value="hosts">Hosts per Subnet</option>
+                </select>
+              </div>
+              
+              <div class="input-field-group mt-12">
+                <label id="label-flsm-split-val" for="flsm-split-value">Target Count (Subnets)</label>
+                <select id="flsm-split-value" class="custom-select-small">
+                  <!-- Populated by JS based on base CIDR -->
+                </select>
+              </div>
+              
+              <button type="button" id="btn-solve-flsm" class="btn btn-primary w-full mt-20">Generate FLSM Split</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Allocations Table Panel -->
+        <div class="card allocations-card hidden" id="allocations-panel">
+          <div class="card-header">
+            <h2 class="card-title">Generated Allocations Plan</h2>
+            <button id="btn-clear-allocations" class="btn btn-small btn-secondary">Clear Plan</button>
+          </div>
+          
+          <div class="allocations-efficiency mt-12" id="allocation-stats">
+            <!-- Dynamic stats for efficiency and wasted IPs -->
+          </div>
+
+          <div class="table-container-scroll mt-12">
+            <table class="custom-table" id="table-allocations">
+              <thead>
+                <tr>
+                  <th>Subnet Name</th>
+                  <th>Network Address</th>
+                  <th>IP Usable Range</th>
+                  <th>Broadcast</th>
+                  <th>CIDR</th>
+                  <th>Req/Size</th>
+                  <th>Waste</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Populated dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Practice & Quiz Mode Card -->
+        <div class="card quiz-card">
+          <div class="card-header">
+            <h2 class="card-title">Educational Subnetting Quiz</h2>
+            <div class="quiz-score">Score: <b id="quiz-score-val" class="accent-text">0/0</b></div>
+          </div>
+          
+          <div id="quiz-start-view" class="quiz-content">
+            <p class="tab-desc">
+              Test your subnetting skills. Practice questions cover network IDs, broadcast ranges, and host capacities.
+            </p>
+            <button id="btn-start-quiz" class="btn btn-primary w-full mt-16">Launch Practice Mode</button>
+          </div>
+
+          <div id="quiz-active-view" class="quiz-content hidden">
+            <div class="quiz-question-box" id="quiz-question-text">
+              <!-- Question loaded here -->
+            </div>
+            
+            <div class="quiz-options-grid mt-16" id="quiz-options-container">
+              <!-- Dynamic multiple choice buttons -->
+            </div>
+
+            <div class="quiz-feedback mt-16 hidden" id="quiz-feedback-box">
+              <span id="quiz-feedback-text">Correct!</span>
+            </div>
+            
+            <div class="quiz-actions-row mt-16">
+              <button id="btn-quit-quiz" class="btn btn-secondary btn-small">Quit</button>
+              <button id="btn-next-quiz" class="btn btn-primary btn-small hidden">Next Question</button>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- Bottom Educational Theory Guide Section -->
+    <section class="theory-section card">
+      <h3 class="section-title">IPv4 Subnetting &amp; CIDR Foundations</h3>
+      
+      <div class="theory-grid">
+        <div class="theory-card">
+          <h4>Understanding Subnets</h4>
+          <p>
+            An IPv4 address is a 32-bit number, usually written in dotted-decimal format (four 8-bit octets). Subnetting divides the address space into two sections:
+          </p>
+          <ul>
+            <li><strong>Network Prefix</strong>: Bits used to identify the specific network domain.</li>
+            <li><strong>Host Identifier</strong>: Bits used to address individual interface cards within that network.</li>
+            <li><strong>Subnet Masks</strong>: Binary filters where <code>1</code>s specify network bits and <code>0</code>s represent host bits.</li>
+          </ul>
+        </div>
+        
+        <div class="theory-card">
+          <h4>Classless Routing (CIDR)</h4>
+          <p>
+            Classless Inter-Domain Routing (CIDR) replaced the older classful (Class A, B, C) system. It uses a variable prefix syntax (e.g. <code>/24</code>), allowing networks to be sized exactly to requirements:
+          </p>
+          <ul>
+            <li><strong>Address Borrowing</strong>: Borrowing host bits and treating them as network bits allows a large block to be divided into multiple smaller subnets.</li>
+            <li><strong>Network Boundaries</strong>: The Network ID is the first address in the block (all host bits <code>0</code>). The Broadcast ID is the final address (all host bits <code>1</code>). These two addresses cannot be allocated to hosts.</li>
+          </ul>
+        </div>
+
+        <div class="theory-card">
+          <h4>VLSM Optimization (Greedy Heuristic)</h4>
+          <p>
+            Variable-Length Subnet Masking (VLSM) allows using different masks for different subnets. It optimizes address utilization:
+          </p>
+          <ul>
+            <li><strong>Greedy Allocation</strong>: To prevent overlaps, subnets must be allocated descending by size (largest host request first).</li>
+            <li><strong>Alignment Rule</strong>: A subnet block of size $S$ (rounded up to the nearest power of 2, including Network &amp; Broadcast overhead) must start at a network address that is a multiple of $S$. Failing to follow this boundary rule creates routing table overlaps.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Custom Scripts -->
+  <script src="script.js"></script>
+</body>
+</html>
