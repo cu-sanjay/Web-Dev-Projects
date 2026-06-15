@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Snippet Manager & Sandbox</title>
+  <!-- Google Fonts: Outfit and Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons for Dashboard aesthetics -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-background"></div>
+  
+  <!-- HEADER -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="logo">
+        <i class="fa-solid fa-code-compare glow-icon"></i>
+        <h1>Snippet<span>Vault</span></h1>
+        <span class="badge">IDE Sandbox</span>
+      </div>
+
+      <div class="stats-indicators">
+        <div class="stat-badge"><i class="fa-solid fa-code"></i> Snippets: <span id="stat-total-count">0</span></div>
+        <div class="stat-badge"><i class="fa-solid fa-star text-warning"></i> Stars: <span id="stat-star-count">0</span></div>
+      </div>
+      
+      <div class="top-controls">
+        <button id="btn-new-snippet" class="btn btn-primary btn-sm" title="Create a blank snippet">
+          <i class="fa-solid fa-plus"></i> New Snippet
+        </button>
+        <button id="btn-export-library" class="btn btn-secondary btn-sm" title="Save backup JSON file">
+          <i class="fa-solid fa-download"></i> Export JSON
+        </button>
+        <label for="input-import-file" class="btn btn-secondary btn-sm" style="margin-bottom:0; cursor:pointer;" title="Load backup JSON file">
+          <i class="fa-solid fa-upload"></i> Import JSON
+          <input type="file" id="input-import-file" accept=".json" style="display:none;">
+        </label>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN WINDOW -->
+  <main class="main-container">
+    
+    <!-- LEFT SIDEBAR: SNIPPET LIST -->
+    <aside class="sidebar sidebar-left" aria-labelledby="sidebar-heading">
+      <div class="sidebar-header">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <h2 id="sidebar-heading">Search Library</h2>
+      </div>
+
+      <!-- Search & Filters -->
+      <div class="search-filters-group">
+        <div class="search-input-wrapper">
+          <input type="text" id="input-search" placeholder="Search title, tags..." autocomplete="off">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        </div>
+        <div class="filter-actions-row">
+          <button id="btn-filter-fav" class="filter-toggle-btn" title="Show only starred snippets">
+            <i class="fa-solid fa-star"></i> Favorites Only
+          </button>
+          <button id="btn-clear-filters" class="btn-icon hidden" title="Clear all active filters"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+      </div>
+
+      <!-- Categories Navigation -->
+      <div class="categories-nav">
+        <h3>Categories</h3>
+        <ul id="categories-list">
+          <li class="active" data-cat="all"><i class="fa-solid fa-border-all"></i> All Categories</li>
+          <li data-cat="frontend"><i class="fa-solid fa-laptop-code"></i> Frontend Web</li>
+          <li data-cat="backend"><i class="fa-solid fa-gears"></i> Backend Scripts</li>
+          <li data-cat="data"><i class="fa-solid fa-database"></i> Databases & Data</li>
+          <li data-cat="utilities"><i class="fa-solid fa-screwdriver-wrench"></i> Utilities</li>
+        </ul>
+      </div>
+
+      <!-- Snippet Cards List -->
+      <div class="snippets-cards-container">
+        <h3>Snippets List</h3>
+        <div id="snippets-list" class="snippets-list">
+          <!-- Dynamic snippet items injected here -->
+          <div class="empty-list-msg">No snippets saved</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- CENTER WORKSPACE: IDE EDITOR -->
+    <section class="editor-workspace-panel" aria-labelledby="editor-title-text">
+      <!-- Title & Configs Header -->
+      <div class="editor-config-header">
+        <div class="title-row">
+          <input type="text" id="snippet-title" placeholder="Snippet Title..." aria-label="Snippet Title">
+          <button id="btn-toggle-favorite" class="btn-icon fav-btn" title="Toggle Star bookmark"><i class="fa-regular fa-star"></i></button>
+        </div>
+        
+        <div class="configs-row">
+          <div class="select-wrapper">
+            <label for="select-language" class="sr-only">Language</label>
+            <select id="select-language">
+              <option value="html">HTML5 (Web Sandbox)</option>
+              <option value="javascript">JavaScript (Web Sandbox)</option>
+              <option value="css">CSS3 Styling</option>
+              <option value="python">Python 3 (Mock Compile)</option>
+              <option value="sql">SQL Query (Mock Compile)</option>
+              <option value="cpp">C++ Main (Mock Compile)</option>
+              <option value="go">Go Server (Mock Compile)</option>
+            </select>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+
+          <div class="select-wrapper">
+            <label for="select-category" class="sr-only">Category</label>
+            <select id="select-category">
+              <option value="frontend">Category: Frontend Web</option>
+              <option value="backend">Category: Backend Scripts</option>
+              <option value="data">Category: Databases & Data</option>
+              <option value="utilities">Category: Utilities</option>
+            </select>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+
+          <input type="text" id="snippet-tags" placeholder="Tags (comma separated)..." aria-label="Snippet Tags">
+        </div>
+        <input type="text" id="snippet-desc" placeholder="Add short description here..." aria-label="Snippet Description" class="desc-input-text">
+      </div>
+
+      <!-- CODE EDITOR BOX -->
+      <div class="editor-box">
+        <div class="editor-action-bar">
+          <span class="file-tab-label"><i class="fa-solid fa-file-code"></i> <span id="tab-filename">main.js</span></span>
+          <div class="actions">
+            <button id="btn-copy-code" class="btn btn-secondary btn-sm" title="Copy code to clipboard"><i class="fa-solid fa-copy"></i> Copy</button>
+            <button id="btn-run-code" class="btn btn-primary btn-sm" title="Execute script sandbox"><i class="fa-solid fa-play"></i> Run Code</button>
+          </div>
+        </div>
+        
+        <div class="editor-container">
+          <div class="line-numbers" id="editor-line-numbers">
+            <!-- Dynamic numbers -->
+          </div>
+          <textarea id="editor-textarea" spellcheck="false" autocomplete="off" placeholder="// Write or paste snippet code here..." aria-label="Code Editor Textarea"></textarea>
+        </div>
+      </div>
+
+      <!-- RUNNER CONSOLE PANELS (SPLIT PREVIEW / TERMINAL) -->
+      <div class="runner-panel">
+        <div class="runner-tabs-nav">
+          <button class="tab-btn active" data-runner-tab="preview" id="tab-btn-preview">Live Sandbox View</button>
+          <button class="tab-btn" data-runner-tab="terminal" id="tab-btn-terminal">Terminal Output Console</button>
+        </div>
+
+        <div class="runner-panes-wrapper">
+          <!-- Sandbox Pane -->
+          <div id="runner-pane-preview" class="runner-pane active">
+            <iframe id="sandbox-iframe" class="sandbox-iframe" title="Iframe Live Execution Sandbox" sandbox="allow-scripts"></iframe>
+            <div id="sandbox-idle-msg" class="sandbox-idle">
+              <i class="fa-solid fa-circle-play"></i>
+              <p>Type Web code (HTML, CSS, JS) and click <strong>Run Code</strong> to render interactive output in this viewport.</p>
+            </div>
+          </div>
+
+          <!-- Console terminal Pane -->
+          <div id="runner-pane-terminal" class="runner-pane">
+            <div class="terminal-stdout" id="terminal-stdout">
+              <div class="terminal-line text-muted">Console output logs screen.</div>
+              <div class="terminal-line text-muted">Run Python, SQL, C++, Go snippets to verify results.</div>
+              <br>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT SIDEBAR: TAGS CLOUD & BACKUPS -->
+    <aside class="sidebar sidebar-right" aria-labelledby="right-sidebar-heading">
+      <div class="sidebar-header">
+        <i class="fa-solid fa-tags"></i>
+        <h2 id="right-sidebar-heading">Tags Catalog</h2>
+      </div>
+      
+      <p class="section-help-text">Click tags below to filter matching snippets library.</p>
+      <div class="tag-cloud" id="tag-cloud">
+        <!-- Tags cloud -->
+        <span class="text-muted" style="font-size:0.8rem; font-style:italic;">No tags indexed</span>
+      </div>
+
+      <div class="danger-zone-section">
+        <h3>Settings</h3>
+        <button id="btn-save-snippet" class="btn btn-secondary btn-sm btn-full" style="margin-bottom: 8px;" title="Store updates to snippet card">
+          <i class="fa-solid fa-floppy-disk"></i> Save Current Snippet
+        </button>
+        <button id="btn-delete-snippet" class="btn btn-secondary btn-sm btn-full text-error" style="margin-bottom: 8px;" title="Remove snippet card">
+          <i class="fa-solid fa-trash-can"></i> Delete Current Snippet
+        </button>
+        <button id="btn-clear-vault" class="btn btn-secondary btn-sm btn-full text-error" title="Delete all database contents">
+          <i class="fa-solid fa-trash-arrow-up"></i> Wipe Snippet Library
+        </button>
+      </div>
+    </aside>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="app-footer">
+    <div class="footer-container">
+      <p>&copy; 2026 SnippetVault Studio. Designed client-side for sandbox playground testing.</p>
+      <div class="footer-links">
+        <button id="btn-reset-storage" class="footer-btn"><i class="fa-solid fa-trash-can"></i> Reset Vault Data</button>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
