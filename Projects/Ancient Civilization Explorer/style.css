@@ -1,0 +1,47 @@
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0b1220;--surface:#111827;--secondary:#1f2937;--border:#334155;--primary:#f8fafc;--sec:#cbd5e1;--muted:#64748b;--accent:#38bdf8;--radius:10px;--transition:all .3s cubic-bezier(.16,1,.3,1);--font-code:ui-monospace,Consolas,monospace;--font-ui:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+html{font-size:14px}
+body{font-family:var(--font-ui);background:var(--bg);color:var(--primary);height:100vh;overflow:hidden}
+.app-container{max-width:1500px;margin:0 auto;display:flex;flex-direction:column;height:100vh;padding:16px 20px;gap:12px}
+.main-header{flex-shrink:0}
+.brand{display:flex;align-items:center;gap:10px}
+.brand h1{font-size:15px;font-weight:700;letter-spacing:.8px}
+.brand p{font-size:10px;color:var(--muted);margin-top:2px}
+.main-layout{display:grid;grid-template-columns:280px 1fr;gap:14px;flex:1;min-height:0}
+@media(max-width:800px){.main-layout{grid-template-columns:1fr}}
+.side-panel{display:flex;flex-direction:column;gap:10px;overflow:hidden}
+.civ-list{display:flex;flex-direction:column;gap:4px;flex-shrink:0}
+.civ-btn{display:flex;align-items:center;gap:10px;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);color:var(--sec);font-size:12px;font-weight:600;cursor:pointer;transition:var(--transition);font-family:var(--font-ui);text-align:left}
+.civ-btn:hover{background:var(--secondary);border-color:var(--border-light)}
+.civ-btn.active{background:rgba(56,189,248,.06);border-color:rgba(56,189,248,.2);color:var(--accent)}
+.civ-btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.civ-icon{font-size:20px}
+.timeline{flex:1;overflow-y:auto;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;min-height:0}
+.timeline::-webkit-scrollbar{width:4px}
+.timeline::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+.tl-title{font-size:11px;font-weight:600;color:var(--sec);margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px}
+.tl-item{position:relative;padding:0 0 12px 20px;border-left:2px solid var(--border);margin-left:4px}
+.tl-item:last-child{border-color:transparent;padding-bottom:0}
+.tl-year{font-size:10px;font-weight:700;font-family:var(--font-code);color:var(--accent)}
+.tl-desc{font-size:10px;color:var(--muted);margin-top:2px;line-height:1.4}
+.tl-dot{position:absolute;left:-5px;top:2px;width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.content{overflow-y:auto;padding-right:6px}
+.content::-webkit-scrollbar{width:5px}
+.content::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+.welcome{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--muted);gap:8px}
+.welcome h2{font-size:20px;color:var(--sec)}
+.welcome p{font-size:13px}
+.civ-detail{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px}
+.cd-header{display:flex;gap:16px;align-items:flex-start;margin-bottom:20px}
+.cd-icon{font-size:48px}
+.cd-title h2{font-size:22px;font-weight:700}
+.cd-title p{font-size:11px;color:var(--muted);margin-top:4px;font-family:var(--font-code)}
+.cd-section{margin-bottom:18px}
+.cd-section h3{font-size:12px;font-weight:600;color:var(--sec);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:4px}
+.cd-section p{font-size:12px;color:var(--sec);line-height:1.7}
+.cd-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}
+.cd-stat{background:var(--secondary);border:1px solid var(--border);border-radius:6px;padding:10px;text-align:center}
+.cd-stat-val{display:block;font-size:18px;font-weight:700;font-family:var(--font-code);color:var(--accent)}
+.cd-stat-label{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.3px;margin-top:2px}
+.cd-achievement{display:flex;align-items:flex-start;gap:8px;padding:6px 0;font-size:12px;color:var(--sec)}
+.cd-achievement .a-icon{flex-shrink:0}
