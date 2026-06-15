@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JSON Formatter Validator</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="terminal-badge">[ JSON FORMATTER &amp; VALIDATOR ]</div>
+
+<div class="app-grid">
+
+  <!-- ─── TOOLBAR ─── -->
+  <div class="toolbar">
+    <button id="btnBeautify2" class="tool-btn">BEAUTIFY [2-SPACE]</button>
+    <button id="btnBeautify4" class="tool-btn">BEAUTIFY [4-SPACE]</button>
+    <button id="btnMinify" class="tool-btn">MINIFY PAYLOAD</button>
+    <button id="btnCopy" class="tool-btn">COPY TO CLIPBOARD</button>
+  </div>
+
+  <!-- ─── LEFT: INPUT ─── -->
+  <div class="panel input-panel">
+    <div class="panel-header">INPUT SOURCE VECTOR STREAM</div>
+    <textarea id="jsonInput" spellcheck="false">{
+  "name": "Mission Control",
+  "version": "2.0",
+  "modules": [
+    { "id": "propellant", "status": "nominal" },
+    { "id": "thermal", "status": "nominal" }
+  ],
+  "metadata": {
+    "author": "Girish",
+    "year": 2026,
+    "tags": ["space", "telemetry", "json"]
+  }
+}</textarea>
+  </div>
+
+  <!-- ─── RIGHT: OUTPUT ─── -->
+  <div class="panel output-panel">
+    <div class="panel-header">FORMATTED OUTPUT MATRIX</div>
+    <div class="output-scroll" id="outputContainer">
+      <div class="output-empty">PROCESS INPUT TO GENERATE OUTPUT</div>
+    </div>
+  </div>
+
+  <!-- ─── RIGHT: TELEMETRY ─── -->
+  <div class="panel telemetry-panel">
+    <div class="panel-header">PARSING TELEMETRY DASHBOARD</div>
+    <div class="tele-row"><span class="tele-label">SYNTAX STATE</span><span id="tState" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">BYTE SIZE</span><span id="tBytes" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">KEY-VALUE PAIRS</span><span id="tKeys" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">TREE DEPTH</span><span id="tDepth" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">COMPILATION</span><span id="tBadge" class="tele-badge standby">STANDBY</span></div>
+    <div class="ctrl-divider"></div>
+    <div id="errorDetail" class="error-detail"></div>
+  </div>
+
+  <!-- ─── ADMIN FOOTER ─── -->
+  <div class="admin-footer">
+    <button id="btnValidate" class="admin-btn validate">EXECUTE GLOBAL STRUCTURAL CHECK</button>
+    <button id="btnInject" class="admin-btn inject">INJECT BROKEN DATA TEMPLATE</button>
+    <button id="btnFlush" class="admin-btn flush">FLUSH EDITOR CHANNELS</button>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
