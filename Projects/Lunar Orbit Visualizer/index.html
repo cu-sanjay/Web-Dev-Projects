@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lunar Orbit Visualizer - Phases &amp; Libration Sandbox</title>
+  <meta name="description" content="Interactive sandbox simulating the Moon's elliptical orbit, lunar phases, tidal locking, orbital precession, and librational wobbling.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- TOP HEADER -->
+    <header class="app-header">
+      <div class="brand">
+        <div class="brand-logo">
+          <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5" fill="#38bdf8" fill-opacity="0.25" stroke="#38bdf8"></circle>
+            <circle cx="12" cy="12" r="1.5" fill="#ffffff"></circle>
+            <!-- Moon path -->
+            <path d="M 6 12 A 6 6 0 0 1 18 12" fill="none" stroke="#e2e8f0" stroke-dasharray="2 2"></path>
+            <circle cx="6" cy="12" r="1.8" fill="#e2e8f0"></circle>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>LUNAR OBSERVATOR</h1>
+          <h2>Elliptical Orbit &amp; Libration Engine</h2>
+        </div>
+      </div>
+
+      <!-- Quick Metrics HUD -->
+      <div class="quick-hud" aria-label="Global Lunar Stats">
+        <div class="hud-stat">
+          <span class="hud-lbl">Lunar Phase</span>
+          <span class="hud-val" id="hud-lunar-phase">New Moon</span>
+        </div>
+        <div class="hud-stat">
+          <span class="hud-lbl">Current Distance</span>
+          <span class="hud-val" id="hud-lunar-distance">384,400 km</span>
+        </div>
+        <div class="hud-stat">
+          <span class="hud-lbl">Orbit Speed</span>
+          <span class="hud-val" id="hud-lunar-speed">1.02 km/s</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="main-layout">
+      <!-- LEFT SIDEBAR: Orbit Geometry Configs -->
+      <aside class="sidebar left-sidebar" aria-label="Lunar Orbit Settings">
+        <div class="panel-section">
+          <h3><span class="sec-num">01</span> Lunar Orbit Shape</h3>
+          
+          <div class="control-group">
+            <div class="control-header">
+              <label for="input-eccentricity">Eccentricity (e):</label>
+              <input type="number" id="num-eccentricity" min="0.0" max="0.4" value="0.0549" step="0.01">
+            </div>
+            <input type="range" id="input-eccentricity" min="0" max="0.4" value="0.0549" step="0.005">
+            <div class="range-labels"><span>0.0 (Circular)</span><span>0.055 (Real)</span><span>0.4 (High Ellipse)</span></div>
+          </div>
+
+          <div class="control-group">
+            <div class="control-header">
+              <label for="input-inclination">Orbital Inclination Tilt (°):</label>
+              <input type="number" id="num-inclination" min="0.0" max="10.0" value="5.14" step="0.1">
+            </div>
+            <input type="range" id="input-inclination" min="0" max="10" value="5.14" step="0.1">
+            <div class="range-labels"><span>0° (Coplanar)</span><span>5.14° (Real)</span><span>10°</span></div>
+          </div>
+
+          <div class="control-group">
+            <div class="control-header">
+              <label for="input-precession">Apsides Precession Speed:</label>
+              <input type="number" id="num-precession" min="0.0" max="5.0" value="1.0" step="0.1">
+            </div>
+            <input type="range" id="input-precession" min="0" max="5" value="1.0" step="0.1">
+            <div class="range-labels"><span>0.0 (Stationary)</span><span>1.0 (Normal)</span><span>5.0 (Fast)</span></div>
+          </div>
+        </div>
+
+        <div class="panel-section">
+          <h3><span class="sec-num">02</span> Solar Illumination</h3>
+          
+          <div class="control-group">
+            <div class="control-header">
+              <label for="input-sun-angle">Sun Ray Direction Angle (°):</label>
+              <input type="number" id="num-sun-angle" min="0" max="360" value="180" step="1">
+            </div>
+            <input type="range" id="input-sun-angle" min="0" max="360" value="180" step="1">
+            <div class="range-labels"><span>0° (Right)</span><span>180° (Left - Conjunction)</span><span>360°</span></div>
+          </div>
+        </div>
+
+        <div class="panel-section">
+          <h3><span class="sec-num">03</span> Observational Toggles</h3>
+          <div class="toggle-list">
+            <label class="toggle-control">
+              <input type="checkbox" id="chk-show-apsides" checked>
+              <span class="toggle-slider"></span>
+              Show Line of Apsides
+            </label>
+            <label class="toggle-control">
+              <input type="checkbox" id="chk-show-tidal-grid" checked>
+              <span class="toggle-slider"></span>
+              Show Lunar Coordinate Grid
+            </label>
+            <label class="toggle-control">
+              <input type="checkbox" id="chk-highlight-libration" checked>
+              <span class="toggle-slider"></span>
+              Highlight Libration vectors
+            </label>
+            <label class="toggle-control">
+              <input type="checkbox" id="chk-show-ray-lines" checked>
+              <span class="toggle-slider"></span>
+              Show Sun Ray vectors
+            </label>
+          </div>
+        </div>
+      </aside>
+
+      <!-- CENTER DISPLAY: Split Viewports -->
+      <main class="canvas-workspace">
+        <div class="dual-canvas-grid">
+          <!-- Pane 1: Orbit View -->
+          <div class="canvas-box" id="orbit-viewport">
+            <div class="canvas-header">
+              <span>ORBITAL TRAJECTORY VIEW (NOT TO SCALE - APSIDES LINE HIGHLIGHTED)</span>
+            </div>
+            <div class="canvas-wrapper">
+              <canvas id="orbit-canvas"></canvas>
+            </div>
+            <div class="canvas-badge bottom-left">
+              <span>Drag scrubber below or click Earth to reset view offsets</span>
+            </div>
+          </div>
+
+          <!-- Pane 2: Moon Face Observer View -->
+          <div class="canvas-box" id="moon-viewport">
+            <div class="canvas-header">
+              <span>EARTH STATION OBSERVER VIEW (LIBRATION WOBBLING AMPLIFIED)</span>
+            </div>
+            <div class="canvas-wrapper">
+              <canvas id="moon-canvas"></canvas>
+              
+              <!-- Floating Phase Badge -->
+              <div id="phase-badge" class="phase-badge">
+                NEW MOON
+              </div>
+            </div>
+            <div class="canvas-badge bottom-right">
+              <span>Grid wobbles visually showing libration in longitude and latitude</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scrubber Timeline -->
+        <div class="timeline-bar">
+          <div class="timeline-header">
+            <span>Conjunction Orbital Scrubber (Path Progress %)</span>
+            <span id="label-time-scrub" class="font-mono">Orbit: 0% (Perigee)</span>
+          </div>
+          <input type="range" id="input-time-scrub" min="0" max="100" value="0" step="0.5">
+        </div>
+      </main>
+
+      <!-- RIGHT SIDEBAR: Presets & Telemetry -->
+      <aside class="sidebar right-sidebar" aria-label="Presets and Lunar Dossier">
+        <div class="panel-section">
+          <h3><span class="sec-num">04</span> Orbit Presets</h3>
+          <div class="presets-grid">
+            <button id="btn-preset-real" class="btn btn-preset" title="Moon average eccentricity and incline configurations">
+              Real Lunar Orbit
+            </button>
+            <button id="btn-preset-circular" class="btn btn-preset" title="Perfect circular orbit. No velocity changes or libration">
+              Circular Orbit
+            </button>
+            <button id="btn-preset-eccentric" class="btn btn-preset" title="High eccentricity orbit demonstrating extreme libration swing">
+              Highly Elliptical
+            </button>
+            <button id="btn-preset-precession" class="btn btn-preset" title="Accelerated apsides precession loop">
+              Precession Loop
+            </button>
+          </div>
+        </div>
+
+        <!-- Telemetry Details -->
+        <div class="panel-section flex-grow">
+          <h3><span class="sec-num">05</span> Observer Station Dossier</h3>
+          <div class="telemetry-box" id="lunar-details">
+            <div class="tel-row">
+              <span class="tel-lbl">Earth-Moon Distance</span>
+              <span class="tel-val text-primary" id="tel-distance">-</span>
+            </div>
+            <div class="tel-row">
+              <span class="tel-lbl">Current Orbit Velocity</span>
+              <span class="tel-val" id="tel-speed">-</span>
+            </div>
+            <div class="tel-row">
+              <span class="tel-lbl">Illumination Obscuration</span>
+              <span class="tel-val" id="tel-obscuration">-</span>
+            </div>
+            <div class="tel-row">
+              <span class="tel-lbl">Libration in Longitude</span>
+              <span class="tel-val" id="tel-lib-long">-</span>
+            </div>
+            <div class="tel-row">
+              <span class="tel-lbl">Libration in Latitude</span>
+              <span class="tel-val" id="tel-lib-lat">-</span>
+            </div>
+            <div class="tel-row">
+              <span class="tel-lbl">Sidereal Orbital Period</span>
+              <span class="tel-val" id="tel-period">-</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Clock Warp -->
+        <div class="panel-section">
+          <h3><span class="sec-num">06</span> Simulator Clock</h3>
+          <div class="warp-controls">
+            <button id="btn-pause-play" class="btn btn-control active" title="Pause or Resume orbital progress">
+              <span id="lbl-pause-icon">⏸️</span> <span id="lbl-pause-text">Pause</span>
+            </button>
+            <div class="select-warp-group">
+              <label for="select-warp">Orbit Speed Warp:</label>
+              <select id="select-warp">
+                <option value="1">1% path/sec</option>
+                <option value="4" selected>4% path/sec</option>
+                <option value="10">10% path/sec (Fast)</option>
+                <option value="25">25% path/sec (Scrub)</option>
+              </select>
+            </div>
+            <button id="btn-reset" class="btn btn-control reset" title="Reset orbital coordinates and return to perigee">
+              🔄 Reset
+            </button>
+          </div>
+        </div>
+
+        <!-- observatory scrolling console logs -->
+        <div class="panel-section" style="height: 140px; min-height: 140px;">
+          <h3><span class="sec-num">07</span> Observatory Console Logs</h3>
+          <div class="console-box" id="console-logs" aria-live="polite">
+            <div class="log-line text-info">&gt; Lunar Observatory Station online. Tracking lunar cycles.</div>
+            <div class="log-line text-info">&gt; Systems nominal. Select an orbit preset to begin.</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
