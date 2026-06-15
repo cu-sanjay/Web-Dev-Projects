@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SQL Query Learning Sandbox</title>
+  <!-- Google Fonts: Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Decorative background glow spheres -->
+  <div class="decor-glow">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+  </div>
+
+  <div class="sandbox-layout">
+    <!-- APP HEADER -->
+    <header class="app-header bg-glass">
+      <div class="brand">
+        <div class="brand-logo">
+          <i class="fa-solid fa-database"></i>
+        </div>
+        <div class="brand-text">
+          <h1>SQLearn</h1>
+          <span>SQL Query Learning Sandbox</span>
+        </div>
+      </div>
+
+      <!-- Progression Gauge indicator -->
+      <div class="progress-container">
+        <div class="progress-bar-wrapper">
+          <div class="progress-bar-fill" id="progress-fill" style="width: 0%;"></div>
+        </div>
+        <span class="progress-status" id="progress-status-text">0 / 6 Completed</span>
+      </div>
+    </header>
+
+    <!-- MAIN GRID CONTAINER -->
+    <main class="grid-container">
+
+      <!-- COLUMN 1: LESSONS & SCHEMAS (LEFT) -->
+      <section class="pane-card bg-glass" aria-labelledby="header-lessons-pane">
+        <div class="pane-header-tabs">
+          <div class="tab-triggers">
+            <button class="tab-trigger active" data-left-tab="lessons" id="header-lessons-pane">
+              <i class="fa-solid fa-graduation-cap"></i> Lessons
+            </button>
+            <button class="tab-trigger" data-left-tab="schema">
+              <i class="fa-solid fa-diagram-project"></i> Schema Visualizer
+            </button>
+          </div>
+        </div>
+
+        <div class="pane-body overflow-y">
+          <!-- TAB PANE: LESSON CURRICULUM -->
+          <div class="left-pane-view active" id="pane-lessons">
+            <!-- Lessons progress checkpoints list -->
+            <div class="lesson-checkpoints-list" id="lesson-checkpoints">
+              <!-- Rendered dynamically -->
+            </div>
+
+            <!-- Active Lesson Details -->
+            <div class="active-lesson-box" id="active-lesson-details">
+              <h3 id="lesson-title">Lesson Title</h3>
+              <p id="lesson-concept" class="lesson-concept-text">Lesson explanation text...</p>
+              
+              <div class="target-objective-card">
+                <h4><i class="fa-solid fa-bullseye text-accent"></i> Target Objective:</h4>
+                <p id="lesson-objective">Goal details...</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB PANE: DATABASE SCHEMA VISUALIZER -->
+          <div class="left-pane-view" id="pane-schema">
+            <div class="schema-layout">
+              <!-- Students Table Schema -->
+              <div class="schema-table-card border-glass">
+                <div class="schema-table-header">students</div>
+                <div class="schema-columns-list">
+                  <div class="schema-col-item"><span class="col-name">id</span> <span class="col-badge key-pk">PK</span> <span class="col-type">INTEGER</span></div>
+                  <div class="schema-col-item"><span class="col-name">name</span> <span class="col-type">VARCHAR</span></div>
+                  <div class="schema-col-item"><span class="col-name">age</span> <span class="col-type">INTEGER</span></div>
+                  <div class="schema-col-item"><span class="col-name">grade</span> <span class="col-type">VARCHAR</span></div>
+                </div>
+              </div>
+
+              <!-- Courses Table Schema -->
+              <div class="schema-table-card border-glass">
+                <div class="schema-table-header">courses</div>
+                <div class="schema-columns-list">
+                  <div class="schema-col-item"><span class="col-name">course_id</span> <span class="col-badge key-pk">PK</span> <span class="col-type">INTEGER</span></div>
+                  <div class="schema-col-item"><span class="col-name">title</span> <span class="col-type">VARCHAR</span></div>
+                  <div class="schema-col-item"><span class="col-name">instructor</span> <span class="col-type">VARCHAR</span></div>
+                </div>
+              </div>
+
+              <!-- Enrollments Table Schema -->
+              <div class="schema-table-card border-glass">
+                <div class="schema-table-header">enrollments</div>
+                <div class="schema-columns-list">
+                  <div class="schema-col-item"><span class="col-name">student_id</span> <span class="col-badge key-fk">FK</span> <span class="col-type">INTEGER</span></div>
+                  <div class="schema-col-item"><span class="col-name">course_id</span> <span class="col-badge key-fk">FK</span> <span class="col-type">INTEGER</span></div>
+                  <div class="schema-col-item"><span class="col-name">score</span> <span class="col-type">INTEGER</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- COLUMN 2: SQL QUERY WORKSPACE (CENTER) -->
+      <section class="pane-card bg-glass" aria-labelledby="header-editor-pane">
+        <div class="pane-header">
+          <h2 id="header-editor-pane"><i class="fa-solid fa-keyboard text-accent"></i> Query Editor</h2>
+          <div class="editor-actions-top">
+            <button id="btn-reset-code" class="btn btn-secondary btn-sm"><i class="fa-solid fa-rotate-left"></i> Reset</button>
+            <button id="btn-run-query" class="btn btn-primary btn-sm"><i class="fa-solid fa-play"></i> Run Query</button>
+          </div>
+        </div>
+
+        <!-- Query autocomplete toolbars -->
+        <div class="editor-quick-toolbar border-glass">
+          <span class="toolbar-label">Keywords:</span>
+          <div class="keyword-buttons-list">
+            <button class="btn-keyword" data-keyword="SELECT ">SELECT</button>
+            <button class="btn-keyword" data-keyword="FROM ">FROM</button>
+            <button class="btn-keyword" data-keyword="WHERE ">WHERE</button>
+            <button class="btn-keyword" data-keyword="ORDER BY ">ORDER BY</button>
+            <button class="btn-keyword" data-keyword="GROUP BY ">GROUP BY</button>
+            <button class="btn-keyword" data-keyword="JOIN ">JOIN</button>
+            <button class="btn-keyword" data-keyword="ON ">ON</button>
+          </div>
+        </div>
+
+        <!-- Textarea workspace editor -->
+        <div class="textarea-container">
+          <textarea id="sql-editor-textarea" placeholder="SELECT * FROM students;" autocomplete="off" spellcheck="false"></textarea>
+        </div>
+
+        <!-- Raw database datasets tables inspector -->
+        <div class="db-tables-inspector border-glass">
+          <div class="inspector-header">
+            <h4><i class="fa-solid fa-table-list"></i> Raw Table Inspector</h4>
+            <div class="inspector-tabs">
+              <button class="inspector-tab active" data-table="students">students</button>
+              <button class="inspector-tab" data-table="courses">courses</button>
+              <button class="inspector-tab" data-table="enrollments">enrollments</button>
+            </div>
+          </div>
+          <div class="inspector-body" id="raw-table-data-box">
+            <!-- Dynamically populated table list content -->
+          </div>
+        </div>
+      </section>
+
+      <!-- COLUMN 3: RESULTS & VALIDATION (RIGHT) -->
+      <section class="pane-card bg-glass" aria-labelledby="header-results-pane">
+        <div class="pane-header-tabs">
+          <div class="tab-triggers">
+            <button class="tab-trigger active" data-right-tab="actual" id="header-results-pane">
+              <i class="fa-solid fa-table"></i> Your Output
+            </button>
+            <button class="tab-trigger" data-right-tab="expected">
+              <i class="fa-solid fa-circle-check"></i> Target Output
+            </button>
+          </div>
+        </div>
+
+        <!-- Status Result diagnostics indicator card -->
+        <div class="status-report-bar border-glass" id="result-status-panel">
+          <!-- Populated dynamically: pass alert / warning diagnostic cards -->
+        </div>
+
+        <div class="pane-body overflow-y">
+          <!-- TAB PANE: USER ACTUAL OUTPUT TABLE -->
+          <div class="right-pane-view active" id="pane-actual-output">
+            <div class="table-container" id="actual-table-container">
+              <div class="empty-results-state">
+                <i class="fa-solid fa-terminal"></i>
+                <p>Run your SQL query to see table output records.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB PANE: LESSON TARGET OUTPUT TABLE -->
+          <div class="right-pane-view" id="pane-expected-output">
+            <div class="table-container" id="expected-table-container">
+              <!-- Target table structure -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- App Script -->
+  <script src="script.js"></script>
+</body>
+</html>
