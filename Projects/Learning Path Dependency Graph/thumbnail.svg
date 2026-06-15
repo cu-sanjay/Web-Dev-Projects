@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0b1220"/><stop offset="100%" stop-color="#0f172a"/></linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#818cf8"/></linearGradient>
+    <linearGradient id="green" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#22c55e"/><stop offset="100%" stop-color="#16a34a"/></linearGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.3"/></filter>
+    <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#475569"/></marker>
+    <marker id="arr-green" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#22c55e"/></marker>
+  </defs>
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <text x="60" y="50" font-family="ui-monospace,monospace" font-size="22" font-weight="800" fill="#f8fafc" letter-spacing="1.5">LEARNING PATH</text>
+  <text x="60" y="72" font-family="ui-monospace,monospace" font-size="12" fill="#64748b">Dependency Graph &amp; Progress Tracker</text>
+
+  <!-- Left sidebar -->
+  <rect x="60" y="95" width="280" height="570" rx="10" fill="#111827" stroke="#334155" stroke-width="1" filter="url(#shadow)"/>
+
+  <!-- Progress -->
+  <text x="85" y="135" font-family="ui-monospace,monospace" font-size="11" fill="#64748b" letter-spacing="0.5" text-transform="uppercase">Overall Progress</text>
+  <text x="290" y="135" font-family="ui-monospace,monospace" font-size="20" font-weight="700" fill="#38bdf8" text-anchor="end">25%</text>
+  <rect x="85" y="145" width="230" height="6" rx="3" fill="#1f2937"/>
+  <rect x="85" y="145" width="58" height="6" rx="3" fill="url(#accent)"/>
+  <text x="85" y="168" font-family="ui-monospace,monospace" font-size="11" fill="#64748b">3 / 12 topics completed</text>
+
+  <!-- Legend -->
+  <text x="85" y="205" font-family="ui-monospace,monospace" font-size="11" font-weight="600" fill="#cbd5e1">Legend</text>
+  <circle cx="95" cy="225" r="6" fill="#22c55e"/><text x="110" y="229" font-family="ui-monospace,monospace" font-size="11" fill="#cbd5e1">Completed</text>
+  <circle cx="95" cy="245" r="6" fill="#38bdf8"/><text x="110" y="249" font-family="ui-monospace,monospace" font-size="11" fill="#cbd5e1">Available</text>
+  <circle cx="95" cy="265" r="6" fill="#334155" stroke="#475569" stroke-width="1"/><text x="110" y="269" font-family="ui-monospace,monospace" font-size="11" fill="#cbd5e1">Locked</text>
+  <circle cx="95" cy="285" r="6" fill="#f59e0b"/><text x="110" y="289" font-family="ui-monospace,monospace" font-size="11" fill="#cbd5e1">In Progress</text>
+
+  <!-- Detail card -->
+  <rect x="80" y="315" width="240" height="200" rx="8" fill="#1f2937" stroke="#334155" stroke-width="1"/>
+  <text x="96" y="340" font-family="ui-monospace,monospace" font-size="14" font-weight="600" fill="#f8fafc">🟢 Node.js</text>
+  <text x="96" y="362" font-family="ui-monospace,monospace" font-size="10" fill="#cbd5e1" line-height="1.4">Server-side JavaScript: modules,</text>
+  <text x="96" y="378" font-family="ui-monospace,monospace" font-size="10" fill="#cbd5e1">file system, Express, and REST</text>
+  <text x="96" y="394" font-family="ui-monospace,monospace" font-size="10" fill="#cbd5e1">APIs.</text>
+  <text x="96" y="414" font-family="ui-monospace,monospace" font-size="9" fill="#64748b">Tier 3 · 2 prerequisites</text>
+  <text x="96" y="432" font-family="ui-monospace,monospace" font-size="10" fill="#cbd5e1">Prerequisites:</text>
+  <rect x="96" y="440" height="22" rx="4" fill="rgba(34,197,94,0.1)" stroke="rgba(34,197,94,0.2)" stroke-width="1" width="80"/>
+  <text x="104" y="455" font-family="ui-monospace,monospace" font-size="9" fill="#22c55e">✓ JavaScript</text>
+  <rect x="184" y="440" height="22" rx="4" fill="rgba(34,197,94,0.1)" stroke="rgba(34,197,94,0.2)" stroke-width="1" width="60"/>
+  <text x="192" y="455" font-family="ui-monospace,monospace" font-size="9" fill="#22c55e">✓ Git</text>
+
+  <rect x="80" y="530" width="240" height="34" rx="6" fill="url(#accent)"/>
+  <text x="200" y="551" text-anchor="middle" font-family="ui-monospace,monospace" font-size="11" font-weight="600" fill="#fff">✓ Mark Complete</text>
+
+  <!-- Main graph area -->
+  <rect x="370" y="95" width="850" height="570" rx="10" fill="#111827" stroke="#334155" stroke-width="1" filter="url(#shadow)"/>
+
+  <text x="400" y="130" font-family="ui-monospace,monospace" font-size="16" font-weight="700" fill="#f8fafc">Dependency Graph</text>
+  <text x="850" y="130" font-family="ui-monospace,monospace" font-size="10" fill="#64748b">Click a topic to view details</text>
+
+  <!-- Connector lines -->
+  <line x1="470" y1="210" x2="470" y2="280" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="620" y1="210" x2="620" y2="280" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="400" y1="280" x2="400" y2="360" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="620" y1="280" x2="540" y2="360" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="620" y1="280" x2="700" y2="360" stroke="#22c55e" stroke-width="2.5" marker-end="url(#arr-green)"/>
+  <line x1="540" y1="360" x2="540" y2="440" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="700" y1="360" x2="620" y2="440" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="540" y1="440" x2="540" y2="510" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="620" y1="440" x2="540" y2="510" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="700" y1="440" x2="540" y2="510" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- Tier 1 -->
+  <rect x="420" y="165" width="100" height="45" rx="8" fill="rgba(34,197,94,0.08)" stroke="#22c55e" stroke-width="2"/>
+  <text x="470" y="183" text-anchor="middle" font-family="ui-monospace,monospace" font-size="16">🌐</text>
+  <text x="470" y="199" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" font-weight="600" fill="#f8fafc">HTML</text>
+
+  <rect x="570" y="165" width="100" height="45" rx="8" fill="rgba(34,197,94,0.08)" stroke="#22c55e" stroke-width="2"/>
+  <text x="620" y="183" text-anchor="middle" font-family="ui-monospace,monospace" font-size="16">🎨</text>
+  <text x="620" y="199" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" font-weight="600" fill="#f8fafc">CSS</text>
+
+  <rect x="720" y="165" width="100" height="45" rx="8" fill="rgba(34,197,94,0.08)" stroke="#22c55e" stroke-width="2"/>
+  <text x="770" y="183" text-anchor="middle" font-family="ui-monospace,monospace" font-size="16">📦</text>
+  <text x="770" y="199" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" font-weight="600" fill="#f8fafc">Git Basics</text>
+
+  <!-- Tier labels -->
+  <text x="400" y="160" font-family="ui-monospace,monospace" font-size="8" fill="#64748b">Tier 1</text>
+  <text x="400" y="250" font-family="ui-monospace,monospace" font-size="8" fill="#64748b">Tier 2</text>
+  <text x="400" y="340" font-family="ui-monospace,monospace" font-size="8" fill="#64748b">Tier 3</text>
+  <text x="400" y="420" font-family="ui-monospace,monospace" font-size="8" fill="#64748b">Tier 4</text>
+  <text x="400" y="500" font-family="ui-monospace,monospace" font-size="8" fill="#64748b">Tier 5</text>
+
+  <!-- Tier 2 -->
+  <rect x="570" y="250" width="100" height="45" rx="8" fill="rgba(56,189,248,0.06)" stroke="#38bdf8" stroke-width="2"/>
+  <text x="620" y="268" text-anchor="middle" font-family="ui-monospace,monospace" font-size="16">⚡</text>
+  <text x="620" y="284" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" font-weight="600" fill="#f8fafc">JavaScript</text>
+
+  <!-- Tier 3 -->
+  <rect x="350" y="335" width="100" height="45" rx="8" fill="#1f2937" stroke="#334155" stroke-width="2" opacity="0.6"/>
+  <text x="400" y="353" text-anchor="middle" font-family="ui-monospace,monospace" font-size="16">🖥️</text>
+  <text x="400" y="369" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" font-weight="600" fill="#64748b">DOM</text>
+
+  <rect x="490" y="335" width="100" height="45" rx="8" fill="rgba(34,197,94,0.08)" stroke="#22c55e" stroke-width="2"/>
+  <text x="540" y="353" text-anchor="middle" font-family="ui-monospace,monospace" font-size="16">🟢</text>
+  <text x="540" y="369" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" font-weight="600" fill="#f8fafc">Node.js</text>
+  <text x="540" y="375" font-family="ui-monospace,monospace" font-size="7" fill="#22c55e" text-anchor="middle">✓ Done</text>
+
+  <rect x="650" y="335" width="100" height="45" rx="8" fill="rgba(56,189,248,0.06)" stroke="#38bdf8" stroke-width="2"/>
+  <text x="700" y="353" text-anchor="middle" font-family="ui-monospace,monospace" font-size="16">⚛️</text>
+  <text x="700" y="369" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" font-weight="600" fill="#f8fafc">React</text>
+
+  <!-- Tier 4 -->
+  <rect x="490" y="415" width="100" height="45" rx="8" fill="#1f2937" stroke="#334155" stroke-width="2" opacity="0.6"/>
+  <text x="540" y="433" text-anchor="middle" font-family="ui-monospace,monospace" font-size="16">🚂</text>
+  <text x="540" y="449" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" fill="#64748b">Express</text>
+
+  <rect x="570" y="415" width="100" height="45" rx="8" fill="#1f2937" stroke="#334155" stroke-width="2" opacity="0.6"/>
+  <text x="620" y="433" text-anchor="middle" font-family="ui-monospace,monospace" font-size="16">🗄️</text>
+  <text x="620" y="449" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" fill="#64748b">Databases</text>
+
+  <rect x="650" y="415" width="100" height="45" rx="8" fill="rgba(245,158,11,0.08)" stroke="#f59e0b" stroke-width="2"/>
+  <text x="700" y="433" text-anchor="middle" font-family="ui-monospace,monospace" font-size="16">🧪</text>
+  <text x="700" y="449" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" font-weight="600" fill="#f8fafc">Testing</text>
+
+  <!-- Tier 5 -->
+  <rect x="490" y="500" width="100" height="45" rx="8" fill="#1f2937" stroke="#334155" stroke-width="2" opacity="0.6"/>
+  <text x="540" y="518" text-anchor="middle" font-family="ui-monospace,monospace" font-size="16">🏗️</text>
+  <text x="540" y="534" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" fill="#64748b">Full Stack</text>
+
+  <rect x="630" y="500" width="100" height="45" rx="8" fill="#1f2937" stroke="#334155" stroke-width="2" opacity="0.6"/>
+  <text x="680" y="518" text-anchor="middle" font-family="ui-monospace,monospace" font-size="16">🚀</text>
+  <text x="680" y="534" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" fill="#64748b">Deployment</text>
+
+  <rect x="0" y="718" width="1280" height="2" fill="url(#accent)" opacity="0.4"/>
+</svg>

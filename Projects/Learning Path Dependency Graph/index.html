@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learning Path Dependency Graph</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container" role="application" aria-label="Learning Path Dependency Graph">
+    <aside class="left-panel" role="region" aria-label="Progress overview">
+      <div class="panel-header">
+        <div class="brand">
+          <svg class="brand-icon" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <div class="brand-text">
+            <h1>LEARNING PATH</h1>
+            <p class="brand-subtitle">Dependency Graph &amp; Progress Tracker</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="progress-card">
+        <div class="pc-header">
+          <span class="pc-label">Overall Progress</span>
+          <span class="pc-pct" id="progress-pct">0%</span>
+        </div>
+        <div class="pc-bar-track">
+          <div class="pc-bar-fill" id="progress-fill" style="width:0%"></div>
+        </div>
+        <div class="pc-stats">
+          <span id="completed-count">0</span> / <span id="total-count">12</span> topics completed
+        </div>
+      </div>
+
+      <div class="legend-section">
+        <h3 class="section-title-sm">Legend</h3>
+        <div class="legend-item"><span class="legend-dot completed"></span> Completed</div>
+        <div class="legend-item"><span class="legend-dot unlocked"></span> Available</div>
+        <div class="legend-item"><span class="legend-dot locked"></span> Locked</div>
+        <div class="legend-item"><span class="legend-dot current"></span> In Progress</div>
+      </div>
+
+      <div class="detail-card" id="detail-card">
+        <div class="detail-header" id="detail-header">Select a topic</div>
+        <div class="detail-body" id="detail-body">
+          <p class="detail-placeholder">Click a node on the graph to view details and mark it as complete.</p>
+        </div>
+        <button id="btn-complete" class="btn btn-primary" disabled>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          Mark Complete
+        </button>
+      </div>
+
+      <div class="reset-section">
+        <button id="btn-reset" class="btn btn-secondary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
+          Reset Progress
+        </button>
+      </div>
+    </aside>
+
+    <main class="right-panel" role="region" aria-label="Dependency graph">
+      <div class="graph-header">
+        <h2 class="section-title">Dependency Graph</h2>
+        <div class="graph-controls">
+          <span class="graph-hint">Click a topic to view details and unlock dependent topics</span>
+        </div>
+      </div>
+
+      <div class="graph-container" id="graph-container">
+        <svg class="graph-svg" id="graph-svg" aria-hidden="true">
+          <defs>
+            <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#475569"/>
+            </marker>
+            <marker id="arrowhead-active" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#22c55e"/>
+            </marker>
+          </defs>
+        </svg>
+        <div class="node-layer" id="node-layer"></div>
+      </div>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
