@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petal Puzzle — Super Cute Learning</title>
+   <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="header">
+        <h1>Petal Puzzle 🌸</h1>
+        <p>Piece together the magic of nature!</p>
+    </div>
+
+    <div class="container">
+        <div class="puzzle-board" id="board">
+            <!-- 9 slots -->
+            <div class="slot" data-index="0"></div>
+            <div class="slot" data-index="1"></div>
+            <div class="slot" data-index="2"></div>
+            <div class="slot" data-index="3"></div>
+            <div class="slot" data-index="4"></div>
+            <div class="slot" data-index="5"></div>
+            <div class="slot" data-index="6"></div>
+            <div class="slot" data-index="7"></div>
+            <div class="slot" data-index="8"></div>
+            <img id="preview-img" src="" alt="preview">
+        </div>
+
+        <div class="pieces-tray" id="tray"></div>
+        
+        <div class="educational-fact" id="fact">
+            Look at the <b>Goal Image</b> below and match the patterns! ✨
+        </div>
+
+        <div class="goal-container">
+            <div class="reference-box">
+                <span class="goal-label">Goal Image</span>
+                <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=400&q=80" class="goal-thumbnail" alt="Goal">
+            </div>
+        </div>
+        
+        <p class="hint">Tip: Match the colors and shapes of the petals!</p>
+        <div style="display: flex; justify-content: center; flex-wrap: wrap;">
+            <button class="btn-cute btn-secondary" onmousedown="showPreview(true)" onmouseup="showPreview(false)" ontouchstart="showPreview(true)" ontouchend="showPreview(false)">👁️ Hold to Peek</button>
+            <button class="btn-cute" onclick="resetGame()">🎀 Shuffle</button>
+        </div>
+    </div>
+
+    <div class="success-overlay" id="overlay">
+        <h1 style="font-size: 4rem;">Perfect! 🌟</h1>
+        <p style="font-size: 1.5rem;">You are a puzzle master!</p>
+        <div class="educational-fact" style="max-width: 400px; margin: 20px;">
+            <strong>Did you know?</strong> Butterflies taste with their feet! They use sensors on their legs to find out if a leaf is a good place to lay eggs.
+        </div>
+        <button class="btn-cute" onclick="resetGame()">Play Again 🎀</button>
+    </div>
+<script src="script.js"></script>
+</body>
+</html>
