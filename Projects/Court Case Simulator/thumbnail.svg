@@ -1,0 +1,244 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="50%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#0b1120"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#d4a017"/>
+      <stop offset="100%" stop-color="#eab308"/>
+    </linearGradient>
+    <linearGradient id="panelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1f2937"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="dropShadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="12" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+  <rect width="1200" height="630" fill="url(#bgGrad)" opacity="0.8"/>
+
+  <!-- Subtle grid pattern -->
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.5" opacity="0.3"/>
+  </pattern>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+
+  <!-- Accent lines -->
+  <line x1="0" y1="0" x2="0" y2="630" stroke="url(#goldGrad)" stroke-width="3" opacity="0.4"/>
+  <line x1="1197" y1="0" x2="1197" y2="630" stroke="url(#goldGrad)" stroke-width="3" opacity="0.4"/>
+
+  <!-- Top accent bar -->
+  <rect x="0" y="0" width="1200" height="3" fill="url(#goldGrad)" opacity="0.6"/>
+
+  <!-- Courthouse silhouette -->
+  <g transform="translate(80, 180)" opacity="0.12">
+    <rect x="0" y="60" width="200" height="180" rx="4" fill="#f8fafc"/>
+    <rect x="20" y="80" width="160" height="160" fill="none" stroke="#f8fafc" stroke-width="1"/>
+    <rect x="50" y="100" width="100" height="60" rx="2" fill="none" stroke="#f8fafc" stroke-width="1" opacity="0.5"/>
+    <polygon points="100,0 20,60 180,60" fill="none" stroke="#f8fafc" stroke-width="2"/>
+    <rect x="85" y="180" width="30" height="60" fill="none" stroke="#f8fafc" stroke-width="1"/>
+    <rect x="20" y="200" width="60" height="1" fill="#f8fafc"/>
+    <rect x="120" y="200" width="60" height="1" fill="#f8fafc"/>
+  </g>
+
+  <!-- Left Panel -->
+  <g filter="url(#dropShadow)">
+    <rect x="30" y="30" width="280" height="570" rx="12" fill="url(#panelGrad)" stroke="#334155" stroke-width="1" opacity="0.9"/>
+    <rect x="30" y="30" width="280" height="60" rx="12" fill="#111827" stroke="#334155" stroke-width="1"/>
+    <rect x="30" y="66" width="280" height="24" fill="#111827"/>
+  </g>
+
+  <!-- Left panel header -->
+  <text x="170" y="65" text-anchor="middle" font-family="ui-monospace, monospace" font-size="14" font-weight="700" fill="#d4a017" letter-spacing="1">COURT CASE SIMULATOR</text>
+
+  <!-- Left panel case items -->
+  <rect x="50" y="100" width="240" height="28" rx="6" fill="#1f2937" stroke="#334155" stroke-width="0.5"/>
+  <text x="60" y="119" font-family="sans-serif" font-size="11" fill="#cbd5e1">Theft Investigation</text>
+  <text x="275" y="119" text-anchor="end" font-family="ui-monospace, monospace" font-size="9" fill="#d4a017">ACTIVE</text>
+
+  <rect x="50" y="136" width="240" height="28" rx="6" fill="#1f2937" stroke="#334155" stroke-width="0.5"/>
+  <text x="60" y="155" font-family="sans-serif" font-size="11" fill="#93c5fd">Cyber Fraud</text>
+  <text x="275" y="155" text-anchor="end" font-family="ui-monospace, monospace" font-size="9" fill="#3b82f6">SELECTED</text>
+
+  <rect x="50" y="172" width="240" height="28" rx="6" fill="#1f2937" stroke="#334155" stroke-width="0.5"/>
+  <text x="60" y="191" font-family="sans-serif" font-size="11" fill="#cbd5e1">Contract Dispute</text>
+  <text x="275" y="191" text-anchor="end" font-family="ui-monospace, monospace" font-size="9" fill="#64748b">PENDING</text>
+
+  <!-- Overview Card -->
+  <rect x="50" y="215" width="240" height="130" rx="8" fill="#111827" stroke="#334155" stroke-width="1" opacity="0.7"/>
+  <text x="65" y="237" font-family="sans-serif" font-size="9" font-weight="600" fill="#64748b" letter-spacing="0.8">CASE OVERVIEW</text>
+
+  <text x="65" y="260" font-family="ui-monospace, monospace" font-size="9" fill="#64748b">Case ID</text>
+  <text x="65" y="275" font-family="ui-monospace, monospace" font-size="11" font-weight="600" fill="#d4a017">CR-2026-0042</text>
+  <text x="185" y="260" font-family="ui-monospace, monospace" font-size="9" fill="#64748b">Type</text>
+  <text x="185" y="275" font-family="sans-serif" font-size="11" fill="#f8fafc">Criminal</text>
+  <text x="65" y="300" font-family="ui-monospace, monospace" font-size="9" fill="#64748b">Parties</text>
+  <text x="65" y="315" font-family="sans-serif" font-size="10" fill="#cbd5e1">State v. Derek Morrison</text>
+
+  <!-- Evidence items -->
+  <text x="65" y="365" font-family="sans-serif" font-size="9" font-weight="600" fill="#93c5fd" letter-spacing="0.8">EVIDENCE LOCKER</text>
+
+  <rect x="50" y="380" width="110" height="60" rx="6" fill="rgba(30, 41, 59, 0.6)" stroke="#334155" stroke-width="0.5"/>
+  <text x="65" y="400" font-family="sans-serif" font-size="10" fill="#f8fafc">Security</text>
+  <text x="65" y="413" font-family="sans-serif" font-size="10" fill="#f8fafc">Footage</text>
+  <text x="145" y="432" font-family="ui-monospace, monospace" font-size="8" fill="#d4a017">92%</text>
+
+  <rect x="170" y="380" width="110" height="60" rx="6" fill="rgba(30, 41, 59, 0.6)" stroke="#334155" stroke-width="0.5"/>
+  <text x="185" y="400" font-family="sans-serif" font-size="10" fill="#f8fafc">Inventory</text>
+  <text x="185" y="413" font-family="sans-serif" font-size="10" fill="#f8fafc">Logs</text>
+  <text x="265" y="432" font-family="ui-monospace, monospace" font-size="8" fill="#d4a017">88%</text>
+
+  <rect x="50" y="448" width="110" height="60" rx="6" fill="rgba(30, 41, 59, 0.6)" stroke="#334155" stroke-width="0.5"/>
+  <text x="65" y="468" font-family="sans-serif" font-size="10" fill="#f8fafc">Bank</text>
+  <text x="65" y="481" font-family="sans-serif" font-size="10" fill="#f8fafc">Statements</text>
+  <text x="145" y="500" font-family="ui-monospace, monospace" font-size="8" fill="#d4a017">72%</text>
+
+  <rect x="170" y="448" width="110" height="60" rx="6" fill="rgba(30, 41, 59, 0.6)" stroke="#334155" stroke-width="0.5"/>
+  <text x="185" y="468" font-family="sans-serif" font-size="10" fill="#f8fafc">Email</text>
+  <text x="185" y="481" font-family="sans-serif" font-size="10" fill="#f8fafc">Correspondence</text>
+  <text x="265" y="500" font-family="ui-monospace, monospace" font-size="8" fill="#d4a017">65%</text>
+
+  <!-- Progress -->
+  <text x="65" y="535" font-family="sans-serif" font-size="9" font-weight="600" fill="#93c5fd" letter-spacing="0.8">INVESTIGATION PROGRESS</text>
+
+  <rect x="50" y="550" width="240" height="4" rx="2" fill="#1f2937"/>
+  <rect x="50" y="550" width="170" height="4" rx="2" fill="#d4a017"/>
+  <text x="275" y="558" text-anchor="end" font-family="ui-monospace, monospace" font-size="8" fill="#93c5fd">3/5</text>
+
+  <rect x="50" y="568" width="240" height="4" rx="2" fill="#1f2937"/>
+  <rect x="50" y="568" width="120" height="4" rx="2" fill="#8b5cf6"/>
+  <text x="275" y="576" text-anchor="end" font-family="ui-monospace, monospace" font-size="8" fill="#93c5fd">2/3</text>
+
+  <!-- Right Panel -->
+  <g filter="url(#dropShadow)">
+    <rect x="330" y="30" width="840" height="570" rx="12" fill="#111827" stroke="#334155" stroke-width="1" opacity="0.9"/>
+  </g>
+
+  <!-- Trial Header -->
+  <rect x="330" y="30" width="840" height="56" rx="12" fill="rgba(17, 24, 39, 0.8)"/>
+  <rect x="330" y="62" width="840" height="24" fill="rgba(17, 24, 39, 0.8)"/>
+
+  <text x="360" y="62" font-family="sans-serif" font-size="16" font-weight="600" fill="#f8fafc">Theft Investigation</text>
+  <text x="360" y="78" font-family="ui-monospace, monospace" font-size="10" fill="#64748b">CR-2026-0042</text>
+
+  <rect x="560" y="46" width="90" height="24" rx="12" fill="rgba(34, 197, 94, 0.15)"/>
+  <circle cx="575" cy="58" r="3" fill="#22c55e" opacity="0.8">
+    <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <text x="585" y="63" font-family="sans-serif" font-size="11" font-weight="500" fill="#22c55e">In Session</text>
+
+  <text x="1080" y="55" text-anchor="end" font-family="sans-serif" font-size="10" fill="#64748b">CONFIDENCE</text>
+  <text x="1080" y="74" text-anchor="end" font-family="ui-monospace, monospace" font-size="18" font-weight="700" fill="#d4a017">73%</text>
+
+  <!-- Tab Bar -->
+  <rect x="350" y="94" width="240" height="32" rx="8" fill="#1f2937"/>
+  <rect x="352" y="96" width="74" height="28" rx="6" fill="rgba(212, 160, 23, 0.12)"/>
+  <text x="389" y="115" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="500" fill="#d4a017">Evidence</text>
+  <text x="439" y="115" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#64748b">Witnesses</text>
+  <text x="499" y="115" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#64748b">Arguments</text>
+  <text x="559" y="115" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#64748b">Verdict</text>
+
+  <!-- Evidence Detail Card -->
+  <rect x="350" y="136" width="800" height="170" rx="10" fill="rgba(30, 41, 59, 0.5)" stroke="#334155" stroke-width="0.5"/>
+
+  <text x="370" y="162" font-family="sans-serif" font-size="16" font-weight="600" fill="#f8fafc">Security Footage</text>
+  <text x="370" y="180" font-family="ui-monospace, monospace" font-size="10" fill="#64748b">EV-001  ·  Photo  ·  Store Security System</text>
+
+  <rect x="1040" y="146" width="95" height="22" rx="10" fill="rgba(30, 58, 95, 0.4)"/>
+  <text x="1055" y="160" font-family="ui-monospace, monospace" font-size="10" fill="#93c5fd">CRITICAL</text>
+
+  <text x="370" y="208" font-family="sans-serif" font-size="12" fill="#cbd5e1">Time-stamped CCTV footage showing the accused near the safe at 2:47 AM on</text>
+  <text x="370" y="224" font-family="sans-serif" font-size="12" fill="#cbd5e1">March 3rd and March 17th, outside of scheduled work hours.</text>
+
+  <text x="370" y="248" font-family="sans-serif" font-size="11" fill="#93c5fd">Related Witnesses: Margaret Chen, James Ruiz</text>
+
+  <!-- Evidence Stats -->
+  <rect x="370" y="260" width="110" height="34" rx="6" fill="#1f2937"/>
+  <text x="425" y="278" text-anchor="middle" font-family="ui-monospace, monospace" font-size="16" font-weight="700" fill="#d4a017">89%</text>
+  <text x="425" y="290" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#64748b">IMPACT</text>
+
+  <rect x="490" y="260" width="110" height="34" rx="6" fill="#1f2937"/>
+  <text x="545" y="278" text-anchor="middle" font-family="ui-monospace, monospace" font-size="16" font-weight="700" fill="#3b82f6">92%</text>
+  <text x="545" y="290" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#64748b">RELEVANCE</text>
+
+  <rect x="610" y="260" width="110" height="34" rx="6" fill="#1f2937"/>
+  <text x="665" y="278" text-anchor="middle" font-family="ui-monospace, monospace" font-size="16" font-weight="700" fill="#22c55e">96%</text>
+  <text x="665" y="290" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#64748b">AUTHENTICITY</text>
+
+  <!-- Witness Card -->
+  <rect x="350" y="318" width="390" height="135" rx="10" fill="rgba(30, 41, 59, 0.5)" stroke="#334155" stroke-width="0.5"/>
+  <circle cx="378" cy="344" r="16" fill="rgba(59, 130, 246, 0.15)"/>
+  <text x="378" y="349" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#93c5fd">MC</text>
+  <text x="405" y="347" font-family="sans-serif" font-size="13" font-weight="600" fill="#f8fafc">Margaret Chen</text>
+  <text x="405" y="362" font-family="sans-serif" font-size="10" fill="#64748b">Store Manager  ·  Supervisor</text>
+  <text x="710" y="347" font-family="ui-monospace, monospace" font-size="12" font-weight="600" fill="#22c55e">High (88%)</text>
+
+  <rect x="365" y="375" width="360" height="65" rx="4" fill="rgba(0,0,0,0.2)"/>
+  <rect x="365" y="375" width="3" height="65" fill="#22c55e"/>
+  <text x="378" y="394" font-family="sans-serif" font-size="11" fill="#cbd5e1">"I noticed the discrepancies in November and began tracking them.</text>
+  <text x="378" y="410" font-family="sans-serif" font-size="11" fill="#cbd5e1">Derek was the only night shift employee with safe access. The</text>
+  <text x="378" y="426" font-family="sans-serif" font-size="11" fill="#cbd5e1">timing of the shortages aligns perfectly with his night shifts."</text>
+
+  <!-- Witness Card 2 -->
+  <rect x="758" y="318" width="392" height="135" rx="10" fill="rgba(30, 41, 59, 0.5)" stroke="#334155" stroke-width="0.5"/>
+  <circle cx="786" cy="344" r="16" fill="rgba(139, 92, 246, 0.15)"/>
+  <text x="786" y="349" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#c4b5fd">JR</text>
+  <text x="813" y="347" font-family="sans-serif" font-size="13" font-weight="600" fill="#f8fafc">James Ruiz</text>
+  <text x="813" y="362" font-family="sans-serif" font-size="10" fill="#64748b">Security Guard</text>
+  <text x="1115" y="347" font-family="ui-monospace, monospace" font-size="12" font-weight="600" fill="#d4a017">Medium (75%)</text>
+
+  <rect x="773" y="375" width="360" height="65" rx="4" fill="rgba(0,0,0,0.2)"/>
+  <rect x="773" y="375" width="3" height="65" fill="#d4a017"/>
+  <text x="786" y="394" font-family="sans-serif" font-size="11" fill="#cbd5e1">"I saw Mr. Morrison enter the building after hours on several</text>
+  <text x="786" y="410" font-family="sans-serif" font-size="11" fill="#cbd5e1">occasions. He said he was catching up on paperwork. I didn't</text>
+  <text x="786" y="426" font-family="sans-serif" font-size="11" fill="#cbd5e1">think much of it at the time."</text>
+
+  <!-- Verdict Meter -->
+  <circle cx="1140" cy="430" r="45" fill="none" stroke="#1f2937" stroke-width="6"/>
+  <circle cx="1140" cy="430" r="45" fill="none" stroke="#d4a017" stroke-width="6"
+    stroke-dasharray="212" stroke-dashoffset="60" stroke-linecap="round"
+    transform="rotate(-90 1140 430)"/>
+  <text x="1140" y="438" text-anchor="middle" font-family="ui-monospace, monospace" font-size="18" font-weight="800" fill="#f8fafc">73%</text>
+  <text x="1140" y="452" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#64748b">CONFIDENCE</text>
+
+  <!-- Verdict buttons -->
+  <rect x="350" y="465" width="155" height="36" rx="8" fill="none" stroke="#ef4444" stroke-width="1.5" opacity="0.5"/>
+  <text x="427" y="488" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="600" fill="#ef4444" opacity="0.5">Guilty</text>
+
+  <rect x="515" y="465" width="155" height="36" rx="8" fill="none" stroke="#22c55e" stroke-width="1.5" opacity="0.5"/>
+  <text x="592" y="488" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="600" fill="#22c55e" opacity="0.5">Not Guilty</text>
+
+  <rect x="680" y="465" width="175" height="36" rx="8" fill="none" stroke="#d4a017" stroke-width="1.5" opacity="0.5"/>
+  <text x="767" y="488" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="600" fill="#d4a017" opacity="0.5">Settlement</text>
+
+  <!-- Judicial Summary -->
+  <rect x="350" y="512" width="800" height="75" rx="10" fill="rgba(30, 58, 95, 0.2)" stroke="rgba(212, 160, 23, 0.15)" stroke-width="0.5"/>
+
+  <text x="370" y="535" font-family="sans-serif" font-size="11" font-weight="700" fill="#d4a017">JUDICIAL OPINION</text>
+  <text x="370" y="555" font-family="sans-serif" font-size="11" fill="#cbd5e1">The preponderance of circumstantial evidence, including after-hours access logs matching theft dates,</text>
+  <text x="370" y="571" font-family="sans-serif" font-size="11" fill="#cbd5e1">unexplained cash deposits, and the accused's immediate resignation, supports a finding of guilt.</text>
+
+  <!-- Title overlay at bottom -->
+  <rect x="0" y="595" width="1200" height="35" fill="rgba(11, 17, 32, 0.85)"/>
+  <text x="600" y="616" text-anchor="middle" font-family="ui-monospace, monospace" font-size="11" font-weight="700" fill="#d4a017" letter-spacing="2">COURT CASE SIMULATOR</text>
+  <text x="600" y="627" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#64748b" letter-spacing="1">Evidence · Witnesses · Verdict</text>
+
+  <!-- Decorative gavel icon -->
+  <g transform="translate(600, 40)" opacity="0.08">
+    <rect x="-8" y="0" width="16" height="50" rx="2" fill="#f8fafc"/>
+    <rect x="-25" y="-8" width="50" height="12" rx="3" fill="#f8fafc"/>
+  </g>
+</svg>

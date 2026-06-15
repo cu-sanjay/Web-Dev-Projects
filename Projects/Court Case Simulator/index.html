@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Court Case Simulator — An interactive legal simulation platform where users review evidence, analyze witness statements, evaluate credibility, and generate verdicts through a realistic courtroom decision-making process.">
+  <meta name="theme-color" content="#0b1120">
+  <title>Court Case Simulator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#right-content">Skip to main content</a>
+
+  <main class="app-container" role="application" aria-label="Court Case Simulator">
+
+    <!-- ===== LEFT PANEL: Case Review Center ===== -->
+    <section class="left-panel" aria-label="Case Review Center">
+
+      <header class="panel-header">
+        <h1><span class="gavel-icon" aria-hidden="true">&#x2696;</span> Court Case Simulator</h1>
+        <p class="subtitle">Interactive Judicial Investigation Platform</p>
+      </header>
+
+      <div class="panel-scroll">
+
+        <!-- Case Selection -->
+        <div class="case-selector">
+          <div class="section-header">
+            <h2>Case Selection</h2>
+          </div>
+          <select id="caseSelect" aria-label="Select a legal case to investigate">
+            <option value="">— Select a Case —</option>
+            <option value="theft">Theft Investigation</option>
+            <option value="cyber">Cyber Fraud</option>
+            <option value="contract">Contract Dispute</option>
+            <option value="property">Property Conflict</option>
+            <option value="workplace">Workplace Misconduct</option>
+            <option value="custom">Custom Case Scenario</option>
+          </select>
+        </div>
+
+        <!-- Case Overview -->
+        <div class="section-header">
+          <h2>Case Overview</h2>
+        </div>
+        <div class="overview-card" id="overviewCard" role="region" aria-label="Case overview details">
+          <div class="overview-grid">
+            <div class="overview-item">
+              <span class="label">Case ID</span>
+              <span class="value mono" id="ovCaseId">—</span>
+            </div>
+            <div class="overview-item">
+              <span class="label">Case Type</span>
+              <span class="value" id="ovCaseType">—</span>
+            </div>
+            <div class="overview-item">
+              <span class="label">Date Filed</span>
+              <span class="value" id="ovDateFiled">—</span>
+            </div>
+            <div class="overview-item">
+              <span class="label">Trial Status</span>
+              <span class="value"><span class="status-badge pending" id="ovStatus">Pending</span></span>
+            </div>
+            <div class="overview-item" style="grid-column: 1 / -1;">
+              <span class="label">Parties Involved</span>
+              <span class="value" id="ovParties">—</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Evidence Review -->
+        <div class="section-header">
+          <h2>Evidence Locker</h2>
+          <span class="badge" id="evidenceCount">0/0</span>
+        </div>
+        <div class="evidence-grid" id="evidenceGrid" role="list" aria-label="Available evidence items">
+          <div class="placeholder-prompt" style="padding: 20px; grid-column: 1 / -1;">
+            <p>Select a case to view evidence</p>
+          </div>
+        </div>
+
+        <!-- Investigation Progress -->
+        <div class="section-header" style="margin-top: 8px;">
+          <h2>Investigation Progress</h2>
+        </div>
+        <div class="progress-section" role="region" aria-label="Investigation progress tracking">
+          <div class="progress-item">
+            <div class="progress-header">
+              <span class="label">Evidence Reviewed</span>
+              <span class="count" id="progEvidence">0 / 0</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill evidence" id="progEvidenceFill" style="width:0%"></div></div>
+          </div>
+          <div class="progress-item">
+            <div class="progress-header">
+              <span class="label">Witnesses Interviewed</span>
+              <span class="count" id="progWitness">0 / 0</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill witness" id="progWitnessFill" style="width:0%"></div></div>
+          </div>
+          <div class="progress-item">
+            <div class="progress-header">
+              <span class="label">Arguments Evaluated</span>
+              <span class="count" id="progArgument">0 / 0</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill argument" id="progArgumentFill" style="width:0%"></div></div>
+          </div>
+        </div>
+
+      </div><!-- /panel-scroll -->
+    </section>
+
+    <!-- ===== RIGHT PANEL: Courtroom Analysis Workspace ===== -->
+    <section class="right-panel" aria-label="Courtroom Analysis Workspace">
+
+      <header class="trial-header">
+        <div class="trial-header-left">
+          <div>
+            <div class="trial-case-name" id="trialCaseName">No Case Selected</div>
+            <div class="trial-case-id" id="trialCaseId">—</div>
+          </div>
+          <span class="session-status">
+            <span class="dot" aria-hidden="true"></span>
+            <span id="sessionStatus">Standing By</span>
+          </span>
+        </div>
+        <div class="confidence-display">
+          <span class="confidence-label">Confidence</span>
+          <span class="confidence-value" id="confidenceValue">0%</span>
+        </div>
+      </header>
+
+      <div class="right-content" id="right-content" role="tabpanel">
+
+        <!-- Placeholder -->
+        <div class="placeholder-prompt" id="placeholderPrompt">
+          <div class="icon" aria-hidden="true">&#x2696;</div>
+          <h3>Select a Case to Begin</h3>
+          <p>Choose a case from the left panel to start your judicial investigation. Review evidence, interview witnesses, analyze arguments, and deliver a verdict.</p>
+        </div>
+
+        <!-- Active case content (hidden by default) -->
+        <div id="caseContent" style="display: none;">
+
+          <!-- Tab Navigation -->
+          <nav class="tab-nav" role="tablist" aria-label="Investigation phases">
+            <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="tabEvidence" id="tabBtnEvidence" data-tab="evidence">Evidence</button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tabWitness" id="tabBtnWitness" data-tab="witness">Witnesses</button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tabArguments" id="tabBtnArguments" data-tab="arguments">Arguments</button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tabVerdict" id="tabBtnVerdict" data-tab="verdict">Verdict</button>
+          </nav>
+
+          <!-- Tab: Evidence -->
+          <div class="tab-content active" id="tabEvidence" role="tabpanel" aria-labelledby="tabBtnEvidence">
+            <div class="evidence-detail-card" id="evidenceDetail">
+              <div class="placeholder-prompt" style="padding: 30px 20px;">
+                <h3>Select Evidence</h3>
+                <p>Click on an evidence item from the left panel to examine it in detail.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab: Witnesses -->
+          <div class="tab-content" id="tabWitness" role="tabpanel" aria-labelledby="tabBtnWitness">
+            <div class="cards-grid" id="witnessList">
+              <div class="placeholder-prompt" style="padding: 30px 20px;">
+                <p>No witnesses available for this case.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab: Arguments -->
+          <div class="tab-content" id="tabArguments" role="tabpanel" aria-labelledby="tabBtnArguments">
+            <div class="cards-grid" id="argumentsList">
+              <div class="placeholder-prompt" style="padding: 30px 20px;">
+                <p>No arguments available for this case.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab: Verdict -->
+          <div class="tab-content" id="tabVerdict" role="tabpanel" aria-labelledby="tabBtnVerdict">
+            <div class="verdict-analysis">
+              <div class="verdict-meter-section">
+                <h3 style="font-size:14px; color:var(--text-heading); margin-bottom:4px;">Verdict Confidence Meter</h3>
+                <p style="font-size:12px; color:var(--text-muted); margin-bottom:20px;">Based on evidence strength, witness credibility, and arguments evaluated</p>
+                <div class="verdict-meter" id="verdictMeter">
+                  <svg viewBox="0 0 120 120">
+                    <circle class="meter-bg" cx="60" cy="60" r="52"/>
+                    <circle class="meter-fill" id="meterFill" cx="60" cy="60" r="52"
+                      stroke="var(--text-muted)"
+                      stroke-dasharray="326.73"
+                      stroke-dashoffset="326.73"/>
+                  </svg>
+                  <div class="meter-center">
+                    <span class="meter-pct" id="meterPct">0%</span>
+                    <span class="meter-label">Confidence</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="verdict-actions">
+                <button class="btn-verdict guilty" id="btnGuilty" disabled aria-label="Deliver guilty verdict">Guilty / Plaintiff Wins</button>
+                <button class="btn-verdict innocent" id="btnInnocent" disabled aria-label="Deliver not guilty verdict">Not Guilty / Defendant Wins</button>
+                <button class="btn-verdict primary" id="btnSettlement" disabled aria-label="Recommend settlement">Settlement Recommended</button>
+              </div>
+            </div>
+
+            <!-- Judicial Summary -->
+            <div class="judicial-summary" id="judicialSummary">
+              <div class="summary-title"><span aria-hidden="true">&#x2696;</span> Judicial Opinion</div>
+              <div class="summary-section">
+                <h4>Case Findings</h4>
+                <p id="summaryFindings"></p>
+              </div>
+              <div class="summary-section">
+                <h4>Key Evidence</h4>
+                <ul id="summaryEvidence"></ul>
+              </div>
+              <div class="summary-section">
+                <h4>Critical Witnesses</h4>
+                <ul id="summaryWitnesses"></ul>
+              </div>
+              <div class="summary-section">
+                <h4>Final Verdict</h4>
+                <p id="summaryVerdict"></p>
+              </div>
+            </div>
+
+            <!-- Export -->
+            <div class="report-section">
+              <button class="btn-export" id="btnExport" aria-label="Export case report as JSON">
+                <span aria-hidden="true">&#x21E9;</span> Export Case Report (JSON)
+              </button>
+            </div>
+          </div>
+
+        </div><!-- /caseContent -->
+      </div><!-- /right-content -->
+    </section>
+
+  </main>
+
+  <!-- Verdict Result Overlay -->
+  <div class="verdict-result" id="verdictOverlay" role="dialog" aria-modal="true" aria-labelledby="verdictModalTitle">
+    <div class="verdict-modal">
+      <div class="verdict-icon" id="modalIcon" aria-hidden="true">&#x2696;</div>
+      <div class="verdict-type" id="modalType">Guilty</div>
+      <div class="verdict-confidence" id="modalConfidence">Confidence: 87%</div>
+      <div class="verdict-explanation" id="modalExplanation"></div>
+      <button class="btn-close-modal" id="modalClose" autofocus>Close</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
