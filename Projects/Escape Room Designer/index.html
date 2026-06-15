@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Escape Room Designer</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="app-container">
+  <header><div class="brand"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M3 9h18"/></svg><div><h1>ESCAPE ROOM DESIGNER</h1><p>Create Puzzles · Design Rooms · Test Solutions</p></div></div></header>
+  <div class="main-layout">
+    <aside class="designer-panel">
+      <h3>Puzzle Pieces</h3>
+      <button class="puzzle-btn" data-puzzle="riddle">🧩 Riddle</button>
+      <button class="puzzle-btn" data-puzzle="lock">🔐 Number Lock</button>
+      <button class="puzzle-btn" data-puzzle="key">🗝️ Hidden Key</button>
+      <button class="puzzle-btn" data-puzzle="pattern">🔲 Pattern Match</button>
+      <button class="puzzle-btn" data-puzzle="cipher">🔡 Cipher</button>
+      <hr class="divider">
+      <h3>Room Settings</h3>
+      <div class="form-group"><label>Room Name</label><input type="text" id="room-name" class="input" value="Mystery Chamber"></div>
+      <div class="form-group"><label>Difficulty</label><select id="difficulty"><option>Easy</option><option selected>Medium</option><option>Hard</option></select></div>
+      <div class="form-group"><label>Time Limit (min)</label><input type="number" id="time-limit" class="input" value="30" min="5" max="120"></div>
+      <button id="btn-test" class="btn btn-primary">Test Solutions ▶️</button>
+      <button id="btn-export" class="btn">Export Room 📋</button>
+    </aside>
+    <main class="room-area">
+      <div class="room-header"><h2 id="room-title">Mystery Chamber</h2><span id="room-diff">Medium</span><span id="room-time">30 min</span></div>
+      <div class="puzzle-grid" id="puzzle-grid">
+        <div class="puzzle-slot" data-slot="0"><div class="slot-placeholder">+ Add Puzzle</div></div>
+        <div class="puzzle-slot" data-slot="1"><div class="slot-placeholder">+ Add Puzzle</div></div>
+        <div class="puzzle-slot" data-slot="2"><div class="slot-placeholder">+ Add Puzzle</div></div>
+        <div class="puzzle-slot" data-slot="3"><div class="slot-placeholder">+ Add Puzzle</div></div>
+      </div>
+      <div class="solution-area" id="solution-area">
+        <div class="solution-hint">Click "Test Solutions" to verify your escape room puzzles.</div>
+      </div>
+    </main>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
