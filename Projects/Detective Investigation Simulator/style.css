@@ -1,0 +1,38 @@
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0b1220;--surface:#111827;--secondary:#1f2937;--border:#334155;--primary:#f8fafc;--sec:#cbd5e1;--muted:#64748b;--accent:#3b82f6;--radius:10px;--font-ui:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+html{font-size:14px}
+body{font-family:var(--font-ui);background:var(--bg);color:var(--primary);height:100vh;overflow:hidden}
+.app-container{max-width:1500px;margin:0 auto;display:flex;flex-direction:column;height:100vh;padding:14px 18px;gap:10px}
+header{flex-shrink:0}
+.brand{display:flex;align-items:center;gap:10px}
+.brand h1{font-size:14px;font-weight:700;letter-spacing:.8px}
+.brand p{font-size:10px;color:var(--muted)}
+.main-layout{display:grid;grid-template-columns:240px 1fr;gap:12px;flex:1;min-height:0}
+@media(max-width:850px){.main-layout{grid-template-columns:1fr}}
+.case-panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;display:flex;flex-direction:column;overflow-y:auto}
+.case-panel h3{font-size:11px;font-weight:600;color:var(--sec);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+#case-name{color:var(--primary)}
+.case-status{margin-bottom:6px}
+.status-badge{padding:3px 10px;border-radius:10px;font-size:10px;font-weight:600}
+.status-badge.active{background:#3b82f640;color:#3b82f6;border:1px solid #3b82f6}
+.progress-bar{height:6px;background:var(--secondary);border-radius:3px;overflow:hidden;margin-bottom:8px}
+.progress-fill{height:100%;background:var(--accent);border-radius:3px;transition:width .5s ease}
+.clue-list{display:flex;flex-direction:column;gap:4px;margin-bottom:8px}
+.clue-item{padding:6px 8px;background:var(--secondary);border-radius:4px;font-size:11px;color:var(--sec)}
+.clue-item.found{color:var(--accent);border-left:2px solid var(--accent)}
+.suspects{display:flex;flex-direction:column;gap:4px}
+.suspect{display:flex;justify-content:space-between;padding:6px 8px;background:var(--secondary);border-radius:4px;font-size:11px}
+.suspect-name{color:var(--sec);font-weight:600}
+.suspect-clues{color:var(--muted)}
+.scene-area{display:flex;flex-direction:column;gap:8px}
+.scene-view{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;flex:1;display:flex;align-items:center;justify-content:center}
+#scene-view svg{width:100%;height:auto;max-height:100%}
+.scene-object{cursor:pointer;transition:opacity .2s}
+.scene-object:hover{opacity:.8}
+.action-area{display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:8px 12px}
+.action-log{font-size:10px;color:var(--muted);font-family:ui-monospace,monospace}
+.action-log .log-entry{padding:2px 0}
+.btn{padding:8px 16px;border:1px solid var(--border);border-radius:6px;background:var(--secondary);color:var(--sec);font-size:11px;font-weight:600;cursor:pointer;transition:all .3s;font-family:var(--font-ui);white-space:nowrap}
+.btn-danger{background:#ef4444;color:#fff;border-color:#ef4444}
+.btn-danger:hover{background:#dc2626}
+.btn:hover{background:var(--surface)}

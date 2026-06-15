@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Detective Investigation Simulator</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="app-container">
+  <header><div class="brand"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4m0 12v4M2 12h4m12 0h4"/></svg><div><h1>DETECTIVE INVESTIGATION SIMULATOR</h1><p>Solve Crimes · Gather Clues · Find the Truth</p></div></div></header>
+  <div class="main-layout">
+    <aside class="case-panel">
+      <h3>Case: <span id="case-name">The Stolen Diamond</span></h3>
+      <div class="case-status"><span class="status-badge" id="status-badge">Active</span></div>
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:20%"></div></div>
+      <h3 style="margin-top:10px">Clues Found</h3>
+      <div class="clue-list" id="clue-list"><div class="clue-item found">🔍 Security footage shows a figure at 11PM</div><div class="clue-item">❓ Fingerprints on the display case</div><div class="clue-item">❓ Torn piece of fabric</div></div>
+      <h3 style="margin-top:10px">Suspects</h3>
+      <div class="suspects" id="suspects"><div class="suspect"><div class="suspect-name">The Butler</div><div class="suspect-clues">2/3 linked</div></div><div class="suspect"><div class="suspect-name">The Heiress</div><div class="suspect-clues">1/3 linked</div></div><div class="suspect"><div class="suspect-name">The Rival</div><div class="suspect-clues">0/3 linked</div></div></div>
+    </aside>
+    <main class="scene-area">
+      <div class="scene-view" id="scene-view">
+        <svg viewBox="0 0 500 400" width="500" height="400">
+          <rect width="500" height="400" fill="#0a0f1a" rx="6"/>
+          <rect x="20" y="20" width="460" height="360" fill="none" stroke="#334155" stroke-width="1" rx="4"/>
+          <text x="250" y="45" text-anchor="middle" font-size="11" fill="#64748b" font-family="monospace">Crime Scene: <tspan id="scene-name">Grand Ballroom</tspan></text>
+          <!-- interactive objects -->
+          <g id="obj-window" class="scene-object" data-action="window"><rect x="150" y="80" width="80" height="100" rx="4" fill="#1a2040" stroke="#3b82f6" stroke-width="1.5"/><line x1="190" y1="80" x2="190" y2="180" stroke="#334155" stroke-width="1"/><line x1="150" y1="130" x2="230" y2="130" stroke="#334155" stroke-width="1"/></g>
+          <text x="190" y="210" text-anchor="middle" font-size="9" fill="#3b82f6">Window</text>
+          <g id="obj-table" class="scene-object" data-action="table"><rect x="300" y="250" width="120" height="60" rx="4" fill="#1e1a14" stroke="#f97316" stroke-width="1.5"/></g>
+          <text x="360" y="330" text-anchor="middle" font-size="9" fill="#f97316">Display Table</text>
+          <g id="obj-door" class="scene-object" data-action="door"><rect x="320" y="80" width="60" height="100" rx="4" fill="#1a1420" stroke="#22c55e" stroke-width="1.5"/><circle cx="370" cy="130" r="4" fill="#eab308"/></g>
+          <text x="350" y="200" text-anchor="middle" font-size="9" fill="#22c55e">Door</text>
+          <g id="obj-rug" class="scene-object" data-action="rug"><ellipse cx="200" cy="300" rx="80" ry="30" fill="#5a1a1a" stroke="#ef4444" stroke-width="1" opacity=".5"/></g>
+          <text x="200" y="350" text-anchor="middle" font-size="9" fill="#ef4444">Rug</text>
+        </svg>
+      </div>
+      <div class="action-area">
+        <div class="action-log" id="action-log"><div class="log-entry">Click on objects to investigate.</div></div>
+        <button id="btn-accuse" class="btn btn-danger">Accuse 🔍</button>
+        <button id="btn-reset" class="btn">New Case</button>
+      </div>
+    </main>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
