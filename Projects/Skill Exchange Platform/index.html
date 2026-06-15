@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skill Exchange Platform</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <nav class="global-nav">
+    <div class="brand">
+      <i class="ph-fill ph-handshake text-primary"></i> <span>SkillSwap</span>
+    </div>
+    <div class="nav-links">
+      <button class="nav-tab active" data-tab="dashboard">Dashboard</button>
+      <button class="nav-tab" data-tab="market">Skill Market</button>
+      <button class="nav-tab" data-tab="offerings">My Offerings</button>
+    </div>
+    <div class="nav-actions">
+      <div class="credits-badge">
+        <i class="ph-fill ph-coin text-orange"></i> <span id="user-credits">150</span> Credits
+      </div>
+      <button class="icon-btn"><i class="ph ph-bell"></i></button>
+      <img src="https://ui-avatars.com/api/?name=Vishwa+Mistry&background=6366f1&color=fff" alt="Avatar" class="avatar">
+    </div>
+  </nav>
+
+  <!-- Mobile Nav (Visible only on small screens) -->
+  <div class="mobile-nav">
+    <button class="nav-tab active" data-tab="dashboard"><i class="ph ph-squares-four"></i></button>
+    <button class="nav-tab" data-tab="market"><i class="ph ph-storefront"></i></button>
+    <button class="nav-tab" data-tab="offerings"><i class="ph ph-chalkboard-teacher"></i></button>
+  </div>
+
+  <main class="main-content">
+    
+    <!-- ================= DASHBOARD TAB ================= -->
+    <section id="dashboard" class="tab-content active">
+      <div class="welcome-banner">
+        <div>
+          <h1>Welcome, Vishwa! 👋</h1>
+          <p>Ready to share your knowledge or learn something new today?</p>
+        </div>
+        <button class="btn primary-btn" onclick="document.querySelector('[data-tab=\\'market\\']').click()">Find Skills</button>
+      </div>
+
+      <div class="split-layout mt-3">
+        <!-- Upcoming Sessions -->
+        <div class="panel col-span-2">
+          <div class="panel-header flex-between">
+            <h3>Upcoming Exchange Sessions</h3>
+          </div>
+          <div class="panel-body p-0">
+            <table class="custom-table">
+              <thead>
+                <tr><th>Partner</th><th>Skill</th><th>Role</th><th>Date & Time</th><th>Status</th></tr>
+              </thead>
+              <tbody id="upcoming-tbody">
+                <!-- Injected via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Leaderboard -->
+        <div class="panel">
+          <div class="panel-header">
+            <h3>Top Contributors</h3>
+          </div>
+          <div class="panel-body flex-column gap-1" id="leaderboard-list">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SKILL MARKET TAB ================= -->
+    <section id="market" class="tab-content hidden">
+      <div class="page-heading flex-between">
+        <div>
+          <h1>Skill Market</h1>
+          <p class="text-muted">Browse offers and requests from the community.</p>
+        </div>
+        <div class="search-box">
+          <i class="ph ph-magnifying-glass"></i>
+          <input type="text" placeholder="Search for Python, Guitar, etc...">
+        </div>
+      </div>
+
+      <div class="filter-pills mt-2 mb-3">
+        <span class="pill active">All</span>
+        <span class="pill">Programming</span>
+        <span class="pill">Design</span>
+        <span class="pill">Languages</span>
+        <span class="pill">Music</span>
+      </div>
+
+      <div class="market-grid" id="market-grid">
+        <!-- Injected via JS -->
+      </div>
+    </section>
+
+    <!-- ================= MY OFFERINGS TAB ================= -->
+    <section id="offerings" class="tab-content hidden">
+      <div class="page-heading flex-between">
+        <div>
+          <h1>My Offerings</h1>
+          <p class="text-muted">Manage the skills you are teaching.</p>
+        </div>
+        <button class="btn primary-btn"><i class="ph ph-plus"></i> Add Skill</button>
+      </div>
+
+      <div class="split-layout mt-3">
+        <!-- Active Offers -->
+        <div class="panel">
+          <div class="panel-header"><h3>Active Offers</h3></div>
+          <div class="panel-body flex-column gap-1" id="active-offers-list">
+             <!-- Injected via JS -->
+          </div>
+        </div>
+
+        <!-- Pending Requests -->
+        <div class="panel col-span-2">
+          <div class="panel-header"><h3>Pending Requests for My Skills</h3></div>
+          <div class="panel-body p-0">
+            <table class="custom-table">
+              <thead>
+                <tr><th>User</th><th>Requested Skill</th><th>Message</th><th>Action</th></tr>
+              </thead>
+              <tbody id="pending-requests-tbody">
+                 <!-- Injected via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
