@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume ATS Scanner Simulator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container" role="application" aria-label="Resume ATS Scanner Simulator">
+    <aside class="left-panel" role="region" aria-label="Input workspace">
+      <div class="panel-header">
+        <div class="brand">
+          <svg class="brand-icon" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <polyline points="14 2 14 8 20 8" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <line x1="16" y1="13" x2="8" y2="13" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round"/>
+            <line x1="16" y1="17" x2="8" y2="17" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <div class="brand-text">
+            <h1>RESUME ATS SCANNER</h1>
+            <p class="brand-subtitle">Applicant Tracking System Compatibility Simulator</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="input-sections">
+        <div class="input-group">
+          <div class="input-header">
+            <label for="resume-input" class="input-label">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              Resume
+            </label>
+            <span class="input-hint">Paste your resume text</span>
+          </div>
+          <div class="textarea-wrapper">
+            <textarea id="resume-input" class="resume-input"
+              placeholder="Paste your resume content here...&#10;&#10;John Doe&#10;john@email.com | (555) 123-4567&#10;&#10;Summary&#10;Experienced software engineer with 5+ years...&#10;&#10;Experience&#10;Senior Developer at Tech Corp (2020-Present)&#10;- Built scalable microservices...&#10;&#10;Education&#10;B.S. Computer Science, University (2016-2020)&#10;&#10;Skills&#10;JavaScript, Python, React, Node.js, AWS"
+              spellcheck="false"
+              aria-label="Resume text input"
+              tabindex="0"></textarea>
+          </div>
+          <div class="input-footer">
+            <span id="resume-stats">0 lines | 0 chars</span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <div class="input-header">
+            <label for="jd-input" class="input-label">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+              Job Description
+            </label>
+            <span class="input-hint">Paste the target job description</span>
+          </div>
+          <div class="textarea-wrapper">
+            <textarea id="jd-input" class="jd-input"
+              placeholder="Paste the job description here...&#10;&#10;We are looking for a Senior Software Engineer...&#10;&#10;Requirements:&#10;- 5+ years experience in software development&#10;- Proficiency in JavaScript, Python, React&#10;- Experience with AWS cloud services&#10;- Strong problem-solving skills"
+              spellcheck="false"
+              aria-label="Job description input"
+              tabindex="0"></textarea>
+          </div>
+          <div class="input-footer">
+            <span id="jd-stats">0 lines | 0 chars</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="controls" role="toolbar" aria-label="Analysis controls">
+        <button id="btn-analyze" class="btn btn-primary" tabindex="0">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Scan Resume
+        </button>
+        <button id="btn-sample" class="btn btn-secondary" tabindex="0">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+          Load Sample
+        </button>
+        <button id="btn-clear" class="btn btn-secondary" tabindex="0">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          Clear All
+        </button>
+      </div>
+    </aside>
+
+    <main class="right-panel" role="region" aria-label="Scan results dashboard">
+      <div class="analysis-header">
+        <div class="analysis-info">
+          <span class="analysis-status" id="analysis-status" data-status="idle">
+            <span class="status-dot"></span>
+            <span id="analysis-status-label">Awaiting Scan</span>
+          </span>
+        </div>
+        <span class="analysis-timestamp" id="analysis-timestamp" aria-label="Last scan time">--</span>
+      </div>
+
+      <div class="score-hero" role="region" aria-label="ATS compatibility score">
+        <div class="score-ring-container">
+          <svg class="score-ring" viewBox="0 0 200 200" aria-hidden="true">
+            <defs>
+              <linearGradient id="ring-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#dc2626"/>
+                <stop offset="33%" stop-color="#f59e0b"/>
+                <stop offset="66%" stop-color="#84cc16"/>
+                <stop offset="100%" stop-color="#22c55e"/>
+              </linearGradient>
+            </defs>
+            <circle cx="100" cy="100" r="85" fill="none" stroke="#1f2937" stroke-width="12"/>
+            <circle class="ring-fill" id="ring-fill" cx="100" cy="100" r="85" fill="none" stroke="url(#ring-grad)" stroke-width="12" stroke-linecap="round" stroke-dasharray="534" stroke-dashoffset="534" transform="rotate(-90 100 100)"/>
+            <text class="ring-score" id="ring-score" x="100" y="95" text-anchor="middle" font-size="52" font-weight="700" font-family="ui-monospace, monospace" fill="#f8fafc">--</text>
+            <text class="ring-label" x="100" y="120" text-anchor="middle" font-size="12" fill="#64748b" font-family="ui-monospace, monospace">ATS SCORE</text>
+          </svg>
+        </div>
+        <div class="score-details" id="score-details">
+          <div class="score-detail">
+            <span class="sd-label">Keyword Match</span>
+            <span class="sd-value" id="sd-keywords">--%</span>
+          </div>
+          <div class="score-detail">
+            <span class="sd-label">Section Completeness</span>
+            <span class="sd-value" id="sd-sections">--%</span>
+          </div>
+          <div class="score-detail">
+            <span class="sd-label">Format Quality</span>
+            <span class="sd-value" id="sd-format">--%</span>
+          </div>
+          <div class="score-detail">
+            <span class="sd-label">Experience Relevance</span>
+            <span class="sd-value" id="sd-experience">--%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="results-grid">
+        <section class="result-card" role="region" aria-label="Matching keywords">
+          <div class="card-header">
+            <h3 class="section-title">Matching Keywords</h3>
+            <span class="card-badge" id="match-count-badge">0</span>
+          </div>
+          <div class="keywords-container" id="match-container">
+            <div class="empty-state">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#334155" stroke-width="1.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              <p>Run a scan to see matching keywords</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="result-card" role="region" aria-label="Missing keywords">
+          <div class="card-header">
+            <h3 class="section-title">Missing Keywords</h3>
+            <span class="card-badge missing" id="missing-count-badge">0</span>
+          </div>
+          <div class="keywords-container" id="missing-container">
+            <div class="empty-state">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#334155" stroke-width="1.5" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              <p>Run a scan to identify missing keywords</p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <section class="result-card full-width" role="region" aria-label="Section analysis">
+        <div class="card-header">
+          <h3 class="section-title">Resume Section Analysis</h3>
+          <span class="card-badge" id="section-count-badge">0/0</span>
+        </div>
+        <div class="sections-container" id="sections-container">
+          <div class="empty-state">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#334155" stroke-width="1.5" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <p>Run a scan to analyze resume sections</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="result-card full-width" role="region" aria-label="Optimization suggestions">
+        <div class="card-header">
+          <h3 class="section-title">Optimization Suggestions</h3>
+          <span class="card-badge" id="suggestion-count-badge">0</span>
+        </div>
+        <div class="suggestions-container" id="suggestions-container">
+          <div class="empty-state">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#334155" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            <p>Run a scan to get optimization suggestions</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
