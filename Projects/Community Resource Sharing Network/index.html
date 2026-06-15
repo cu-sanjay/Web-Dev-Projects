@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Community Resource Sharing</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+
+  <!-- Dynamic Animated Background -->
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <!-- Main Glass Container -->
+  <div class="glass-container">
+    
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo-icon"><i class="ph-fill ph-infinity"></i></div>
+        <span class="gradient-text font-bold text-xl">ShareNet</span>
+      </div>
+
+      <nav class="nav-menu">
+        <a href="#" class="nav-link active" data-target="explore"><i class="ph ph-compass"></i> Explore</a>
+        <a href="#" class="nav-link" data-target="my-inventory"><i class="ph ph-package"></i> My Inventory</a>
+        <a href="#" class="nav-link" data-target="community"><i class="ph ph-users"></i> Community</a>
+        <a href="#" class="nav-link" data-target="settings"><i class="ph ph-gear-six"></i> Settings</a>
+      </nav>
+
+      <div class="user-card">
+        <img src="https://ui-avatars.com/api/?name=Vishwa+Mistry&background=c084fc&color=fff" alt="User" class="user-avatar">
+        <div class="user-info">
+          <p class="user-name">Vishwa Mistry</p>
+          <p class="user-status">Trusted Lender</p>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Content Area -->
+    <main class="content-area">
+      
+      <!-- Topbar -->
+      <header class="topbar">
+        <div class="search-glass">
+          <i class="ph ph-magnifying-glass"></i>
+          <input type="text" placeholder="Search for tools, books, electronics...">
+        </div>
+        <div class="topbar-actions">
+          <button class="glass-btn icon-btn"><i class="ph ph-bell"></i><span class="notification-dot"></span></button>
+          <button class="primary-btn"><i class="ph ph-plus"></i> Share Item</button>
+        </div>
+      </header>
+
+      <!-- Views -->
+      <div class="scroll-container">
+        
+        <!-- Explore View -->
+        <section id="explore" class="view active">
+          
+          <div class="hero-banner glass-panel">
+            <div class="hero-content">
+              <h1 class="hero-title">Borrow what you need.<br><span class="gradient-text">Share what you don't.</span></h1>
+              <p class="hero-subtitle">Connect with your local community to reduce waste and save money.</p>
+            </div>
+            <div class="hero-graphic">
+              <i class="ph-duotone ph-handshake"></i>
+            </div>
+          </div>
+
+          <div class="section-header">
+            <h2>Available Nearby</h2>
+            <div class="filter-pills">
+              <span class="pill active">All</span>
+              <span class="pill">Tools</span>
+              <span class="pill">Books</span>
+              <span class="pill">Tech</span>
+            </div>
+          </div>
+
+          <div class="resource-grid" id="resource-grid">
+            <!-- Populated via JS -->
+          </div>
+        </section>
+
+        <!-- My Inventory View -->
+        <section id="my-inventory" class="view hidden">
+          <div class="page-header">
+            <h1 class="text-2xl font-bold gradient-text">My Inventory</h1>
+            <p class="text-muted mt-1">Manage items you are lending and borrowing.</p>
+          </div>
+
+          <div class="inventory-split mt-4">
+            
+            <div class="glass-panel">
+              <h3 class="panel-title border-bottom pb-2">Items I'm Lending</h3>
+              <div class="list-container mt-3" id="lending-list">
+                <!-- JS -->
+              </div>
+            </div>
+
+            <div class="glass-panel">
+              <h3 class="panel-title border-bottom pb-2">Items I've Borrowed</h3>
+              <div class="list-container mt-3" id="borrowing-list">
+                <!-- JS -->
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Community View -->
+        <section id="community" class="view hidden">
+          <div class="page-header center-text">
+            <h1 class="text-3xl font-bold gradient-text">Top Contributors</h1>
+            <p class="text-muted mt-1">Meet the people making our neighborhood awesome.</p>
+          </div>
+          <div class="contributors-grid mt-4" id="contributors-grid">
+            <!-- JS -->
+          </div>
+        </section>
+
+        <!-- Settings View -->
+        <section id="settings" class="view hidden">
+          <div class="glass-panel max-w-md mx-auto mt-4">
+             <h2 class="font-bold text-xl mb-4">Profile Settings</h2>
+             <div class="input-group">
+               <label>Display Name</label>
+               <input type="text" class="glass-input" value="Vishwa Mistry">
+             </div>
+             <div class="input-group">
+               <label>Neighborhood</label>
+               <input type="text" class="glass-input" value="Downtown Tech District">
+             </div>
+             <div class="input-group">
+               <label>Email Notifications</label>
+               <select class="glass-input">
+                 <option>All Alerts</option>
+                 <option>Only Direct Messages</option>
+                 <option>None</option>
+               </select>
+             </div>
+             <button class="primary-btn mt-4 w-full">Save Changes</button>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
