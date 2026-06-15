@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Planetary Motion Simulator &amp; Keplerian Sandbox</title>
+  <meta name="description" content="Interactive Keplerian mechanics visualizer illustrating planetary orbits, Kepler's three laws, vector overlays, and a custom planet builder.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- TOP HEADER -->
+    <header class="app-header">
+      <div class="brand">
+        <div class="brand-logo">
+          <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3.5" fill="#ffcc00" fill-opacity="0.3" stroke="#ffcc00"></circle>
+            <ellipse cx="12" cy="12" rx="11" ry="5" stroke="#38bdf8" stroke-dasharray="2 2" transform="rotate(-15, 12, 12)"></ellipse>
+            <ellipse cx="12" cy="12" rx="8" ry="3.5" stroke="#ff007f" transform="rotate(25, 12, 12)"></ellipse>
+            <circle cx="12" cy="12" r="1" fill="#ffffff"></circle>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>ORBITAL DECK</h1>
+          <h2>Keplerian Planetary Motion Simulator</h2>
+        </div>
+      </div>
+
+      <!-- Quick Metrics HUD -->
+      <div class="quick-hud" aria-label="Global Simulator Stats">
+        <div class="hud-stat">
+          <span class="hud-lbl">Active Bodies</span>
+          <span class="hud-val" id="hud-planet-count">6</span>
+        </div>
+        <div class="hud-stat">
+          <span class="hud-lbl">Focus Target</span>
+          <span class="hud-val" id="hud-target-name">Sun</span>
+        </div>
+        <div class="hud-stat">
+          <span class="hud-lbl">Kepler Mode</span>
+          <span class="hud-val" id="hud-kepler-mode">Standard Playroom</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="main-layout">
+      <!-- LEFT SIDEBAR: Custom Planet Builder -->
+      <aside class="sidebar left-sidebar" aria-label="Custom Planet Builder">
+        <div class="panel-section">
+          <h3><span class="sec-num">01</span> Create Custom Planet</h3>
+          
+          <div class="control-group">
+            <div class="control-header">
+              <label for="input-semimajor">Semi-Major Axis (a - AU):</label>
+              <input type="number" id="num-semimajor" min="0.4" max="10.0" value="1.0" step="0.1">
+            </div>
+            <input type="range" id="input-semimajor" min="0.4" max="10.0" value="1.0" step="0.1">
+            <div class="range-labels"><span>0.4 AU (Mercury)</span><span>10.0 AU</span></div>
+          </div>
+
+          <div class="control-group">
+            <div class="control-header">
+              <label for="input-eccentricity">Eccentricity (e):</label>
+              <input type="number" id="num-eccentricity" min="0.0" max="0.6" value="0.0" step="0.01">
+            </div>
+            <input type="range" id="input-eccentricity" min="0" max="0.6" value="0.0" step="0.01">
+            <div class="range-labels"><span>0.0 (Circular)</span><span>0.6 (Elliptical)</span></div>
+          </div>
+
+          <div class="control-group">
+            <div class="control-header">
+              <label for="input-argument">Line of Apsides Tilt (°):</label>
+              <input type="number" id="num-argument" min="-180" max="180" value="0" step="5">
+            </div>
+            <input type="range" id="input-argument" min="-180" max="180" value="0" step="5">
+            <div class="range-labels"><span>-180°</span><span>0° (Horizontal)</span><span>180°</span></div>
+          </div>
+
+          <div class="control-group">
+            <label>Planet Orbit Color:</label>
+            <div class="color-palette" role="radiogroup" aria-label="Orbit colors">
+              <button class="color-swatch active" style="--swatch-color: #38bdf8;" data-color="#38bdf8" aria-label="Neon Blue"></button>
+              <button class="color-swatch" style="--swatch-color: #ff007f;" data-color="#ff007f" aria-label="Neon Fuchsia"></button>
+              <button class="color-swatch" style="--swatch-color: #10b981;" data-color="#10b981" aria-label="Neon Lime"></button>
+              <button class="color-swatch" style="--swatch-color: #ffcc00;" data-color="#ffcc00" aria-label="Neon Gold"></button>
+              <button class="color-swatch" style="--swatch-color: #a855f7;" data-color="#a855f7" aria-label="Neon Purple"></button>
+            </div>
+          </div>
+
+          <div class="action-grid">
+            <button id="btn-deploy" class="btn btn-primary">
+              🪐 Deploy Custom Planet
+            </button>
+            <button id="btn-clear-trails" class="btn btn-secondary">
+              🗑️ Clear Trails
+            </button>
+            <button id="btn-remove-custom" class="btn btn-danger">
+              ❌ Remove Selected Planet
+            </button>
+          </div>
+        </div>
+
+        <div class="panel-section">
+          <h3><span class="sec-num">02</span> Vector Overlays</h3>
+          <div class="toggle-list">
+            <label class="toggle-control">
+              <input type="checkbox" id="chk-toggle-vel" checked>
+              <span class="toggle-slider"></span>
+              Show Velocity Vector (Cyan)
+            </label>
+            <label class="toggle-control">
+              <input type="checkbox" id="chk-toggle-grav" checked>
+              <span class="toggle-slider"></span>
+              Show Gravity Vector (Fuchsia)
+            </label>
+            <label class="toggle-control">
+              <input type="checkbox" id="chk-toggle-labels">
+              <span class="toggle-slider"></span>
+              Show Orbital Labels
+            </label>
+            <label class="toggle-control">
+              <input type="checkbox" id="chk-toggle-apsides">
+              <span class="toggle-slider"></span>
+              Show Lines of Apsides
+            </label>
+          </div>
+        </div>
+      </aside>
+
+      <!-- CENTER DISPLAY: Space Workspace -->
+      <main class="canvas-workspace">
+        <div class="canvas-container" id="canvas-container">
+          <canvas id="sim-canvas"></canvas>
+
+          <!-- Status indicator top-left -->
+          <div class="canvas-badge top-left">
+            <span class="status-dot pulse" id="status-dot"></span>
+            <span id="sim-warp-status">Time Warp: 100x</span>
+          </div>
+
+          <!-- Bottom controls help -->
+          <div class="canvas-badge bottom-left">
+            <span>🖱️ Click a planet to lock camera | Scroll wheel to zoom | Drag to pan</span>
+          </div>
+
+          <div class="canvas-badge bottom-right">
+            <span>Grid scale represents Astronomical Units (1 AU &approx; 1.5e8 km)</span>
+          </div>
+        </div>
+      </main>
+
+      <!-- RIGHT SIDEBAR: Presets & Kepler Laws suite -->
+      <aside class="sidebar right-sidebar" aria-label="Presets and Kepler Suite">
+        <div class="panel-section">
+          <h3><span class="sec-num">03</span> Celestial Presets</h3>
+          <div class="presets-grid">
+            <button id="btn-preset-solar" class="btn btn-preset" title="Mercury, Venus, Earth, Mars, Jupiter, Saturn circular orbits">
+              Real Solar System
+            </button>
+            <button id="btn-preset-eccentric" class="btn btn-preset" title="Highly elliptical planetary paths to see speed fluctuations">
+              Eccentric System
+            </button>
+            <button id="btn-preset-comet" class="btn btn-preset" title="Halley-like high eccentricity orbit crossing inner planets">
+              Halley Comet Path
+            </button>
+            <button id="btn-preset-conjunction" class="btn btn-preset" title="Twin planets on orbits with slight differences in radius">
+              Conjunction Test
+            </button>
+          </div>
+        </div>
+
+        <div class="panel-section">
+          <h3><span class="sec-num">04</span> Kepler's Laws Lab</h3>
+          <div class="kepler-selector">
+            <label for="select-kepler-mode">Kepler Investigation Mode:</label>
+            <select id="select-kepler-mode">
+              <option value="none" selected>None (Standard Orbit Playroom)</option>
+              <option value="law1">1st Law: Elliptical Foci &amp; Axes</option>
+              <option value="law2">2nd Law: Equal Areas in Equal Times</option>
+              <option value="law3">3rd Law: T² / a³ Ratio Ledger</option>
+            </select>
+          </div>
+          <!-- Dynamic Helper Text depending on Kepler Mode -->
+          <div class="kepler-helper" id="kepler-helper-text">
+            Standard simulation running. Choose a Kepler mode to highlight celestial geometry.
+          </div>
+        </div>
+
+        <!-- Telemetry dossier -->
+        <div class="panel-section flex-grow">
+          <h3><span class="sec-num">05</span> Planet Dossier Telemetry</h3>
+          <div class="telemetry-box" id="telemetry-details">
+            <div class="tel-row">
+              <span class="tel-lbl">Selected Target</span>
+              <span class="tel-val text-primary" id="tel-name">Sun</span>
+            </div>
+            <div class="tel-row">
+              <span class="tel-lbl">Distance to Sun</span>
+              <span class="tel-val" id="tel-dist">-</span>
+            </div>
+            <div class="tel-row">
+              <span class="tel-lbl">Current Speed</span>
+              <span class="tel-val" id="tel-speed">-</span>
+            </div>
+            <div class="tel-row">
+              <span class="tel-lbl">Eccentricity (e)</span>
+              <span class="tel-val" id="tel-ecc">-</span>
+            </div>
+            <div class="tel-row">
+              <span class="tel-lbl">Semi-Major Axis (a)</span>
+              <span class="tel-val" id="tel-axis">-</span>
+            </div>
+            <div class="tel-row">
+              <span class="tel-lbl">Perihelion</span>
+              <span class="tel-val" id="tel-peri">-</span>
+            </div>
+            <div class="tel-row">
+              <span class="tel-lbl">Aphelion</span>
+              <span class="tel-val" id="tel-apo">-</span>
+            </div>
+            <div class="tel-row">
+              <span class="tel-lbl">Orbital Period (T)</span>
+              <span class="tel-val" id="tel-period">-</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Time warp controls -->
+        <div class="panel-section">
+          <h3><span class="sec-num">06</span> Simulator Clock</h3>
+          <div class="warp-controls">
+            <button id="btn-pause-play" class="btn btn-control active" title="Pause or Resume physics calculations">
+              <span id="lbl-pause-icon">⏸️</span> <span id="lbl-pause-text">Pause</span>
+            </button>
+            <div class="select-warp-group">
+              <label for="select-warp">Time Acceleration:</label>
+              <select id="select-warp">
+                <option value="1">1x (Real-time)</option>
+                <option value="10">10x (Normal speed)</option>
+                <option value="100" selected>100x (Fast speed)</option>
+                <option value="1000">1000x (Time Compression)</option>
+                <option value="5000">5000x (Hyper Speed)</option>
+              </select>
+            </div>
+            <button id="btn-reset" class="btn btn-control reset" title="Erase custom planets and return system to start state">
+              🔄 Reset
+            </button>
+          </div>
+        </div>
+
+        <!-- observatory scrolling console logs -->
+        <div class="panel-section" style="height: 120px; min-height: 120px;">
+          <h3><span class="sec-num">07</span> Observatory Console Logs</h3>
+          <div class="console-box" id="console-logs" aria-live="polite">
+            <div class="log-line text-info">&gt; Solar System Observatory station active.</div>
+            <div class="log-line text-info">&gt; Monitoring celestial nodes conjunctions.</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
