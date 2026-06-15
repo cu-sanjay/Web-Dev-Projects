@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Community Infrastructure Portal</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <nav class="global-nav">
+    <div class="brand">
+      <i class="ph-fill ph-buildings text-primary"></i> <span>CityFix</span>
+    </div>
+    
+    <div class="nav-links">
+      <button class="nav-tab active" data-tab="feed">Issue Feed</button>
+      <button class="nav-tab" data-tab="report">Report Issue</button>
+      <button class="nav-tab" data-tab="admin" style="display: none;" id="admin-tab-btn">Admin Dashboard</button>
+    </div>
+
+    <div class="nav-actions">
+      <!-- Role Switcher -->
+      <div class="role-selector">
+        <select id="role-select">
+          <option value="resident">Resident View</option>
+          <option value="admin">City Admin</option>
+        </select>
+      </div>
+
+      <button class="icon-btn"><i class="ph ph-bell"></i></button>
+      <img src="https://ui-avatars.com/api/?name=Local+Resident&background=3b82f6&color=fff" alt="Avatar" id="user-avatar" class="avatar">
+    </div>
+  </nav>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav">
+    <button class="nav-tab active" data-tab="feed"><i class="ph ph-list-dashes"></i></button>
+    <button class="nav-tab" data-tab="report"><i class="ph ph-plus-circle"></i></button>
+    <button class="nav-tab" data-tab="admin" id="mobile-admin-tab-btn" style="display: none;"><i class="ph ph-shield-check"></i></button>
+  </div>
+
+  <main class="main-content">
+    
+    <!-- ================= ISSUE FEED TAB (RESIDENT) ================= -->
+    <section id="feed" class="tab-content active">
+      <div class="hero-banner">
+        <div>
+          <h1>Better Infrastructure Together</h1>
+          <p>Help keep your city safe and beautiful. Track and report local issues instantly.</p>
+        </div>
+        <div class="search-box">
+          <i class="ph ph-magnifying-glass"></i>
+          <input type="text" placeholder="Search by street name, zip code, or issue type...">
+        </div>
+      </div>
+
+      <div class="section-header mt-3">
+        <h2>Reported Issues in Your Area</h2>
+        <div class="filter-pills">
+          <span class="pill active">All</span>
+          <span class="pill">Roads</span>
+          <span class="pill">Lighting</span>
+          <span class="pill">Parks</span>
+        </div>
+      </div>
+
+      <div class="issue-grid" id="issue-grid">
+        <!-- Injected via JS -->
+      </div>
+    </section>
+
+    <!-- ================= REPORT ISSUE TAB (RESIDENT) ================= -->
+    <section id="report" class="tab-content hidden">
+      <div class="page-heading">
+        <h1>Report a New Issue</h1>
+        <p class="text-muted">Provide details below so our city repair crews can locate and fix the problem.</p>
+      </div>
+
+      <div class="split-layout mt-3">
+        <div class="panel col-span-2">
+          <div class="panel-header">
+            <h3>Issue Details</h3>
+          </div>
+          <div class="panel-body">
+            <form class="report-form" onsubmit="event.preventDefault(); alert('Issue Submitted Successfully!');">
+              <div class="form-group">
+                <label>Issue Type</label>
+                <select class="form-input">
+                  <option>Pothole / Road Damage</option>
+                  <option>Broken Streetlight</option>
+                  <option>Vandalism / Graffiti</option>
+                  <option>Damaged Sidewalk</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Location (Street Address or Intersection)</label>
+                <input type="text" class="form-input" placeholder="e.g. 123 Main St">
+              </div>
+              <div class="form-group">
+                <label>Description</label>
+                <textarea class="form-input" rows="4" placeholder="Describe the severity of the issue..."></textarea>
+              </div>
+              <div class="form-group">
+                <label>Upload Photo</label>
+                <div class="upload-box flex-center">
+                  <div class="text-center text-muted">
+                    <i class="ph ph-camera" style="font-size: 2rem;"></i>
+                    <p>Click to upload an image</p>
+                  </div>
+                </div>
+              </div>
+              <button class="btn primary-btn" type="submit" style="width: 100%;">Submit Report</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CITY ADMIN DASHBOARD TAB ================= -->
+    <section id="admin" class="tab-content hidden">
+      <div class="page-heading flex-between">
+        <div>
+          <h1>City Admin Dashboard</h1>
+          <p class="text-muted">Manage active reports, assign crews, and update public statuses.</p>
+        </div>
+        <button class="btn outline-btn"><i class="ph ph-download-simple"></i> Export Log</button>
+      </div>
+
+      <div class="metrics-grid mt-2">
+        <div class="metric-card">
+          <div class="metric-icon bg-orange-light text-orange"><i class="ph-fill ph-warning-circle"></i></div>
+          <div class="metric-data"><h3>Open Tickets</h3><h2>45</h2></div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon bg-blue-light text-blue"><i class="ph-fill ph-users-three"></i></div>
+          <div class="metric-data"><h3>Active Repair Crews</h3><h2>12</h2></div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon bg-green-light text-green"><i class="ph-fill ph-check-circle"></i></div>
+          <div class="metric-data"><h3>Resolved (This Month)</h3><h2>180</h2></div>
+        </div>
+      </div>
+
+      <div class="split-layout mt-3">
+        <div class="panel col-span-2">
+          <div class="panel-header">
+            <h3>Infrastructure Reports Queue</h3>
+          </div>
+          <div class="panel-body p-0">
+            <table class="custom-table">
+              <thead>
+                <tr><th>Ticket ID</th><th>Issue Type</th><th>Location</th><th>Upvotes</th><th>Status</th><th>Action</th></tr>
+              </thead>
+              <tbody id="admin-reports-tbody">
+                 <!-- Injected via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
