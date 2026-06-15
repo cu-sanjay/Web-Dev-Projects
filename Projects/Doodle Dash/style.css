@@ -1,0 +1,153 @@
+      @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap');
+
+        :root {
+            --primary: #ff85a2;
+            --primary-hover: #ff6b8d;
+            --secondary: #7dd3fc;
+            --bg: #fff5f7;
+            --card: #ffffff;
+            --text: #5e4d52;
+            --border: #fce4ec;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Fredoka', sans-serif;
+            background: var(--bg);
+            background-image: radial-gradient(#ffcad4 0.8px, transparent 0.8px);
+            background-size: 24px 24px;
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .game-container {
+            background: var(--card);
+            width: 95%;
+            max-width: 500px;
+            padding: 30px;
+            border-radius: 40px;
+            box-shadow: 0 20px 0px #f8bbd0;
+            border: 4px solid var(--border);
+            text-align: center;
+            position: relative;
+        }
+
+        .header {
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: var(--primary);
+            margin: 0;
+            font-size: 2.5rem;
+            text-shadow: 3px 3px 0px white;
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .badge {
+            background: #fff0f3;
+            padding: 8px 16px;
+            border-radius: 20px;
+            color: var(--primary);
+            border: 2px solid var(--border);
+        }
+
+        /* Canvas Styling */
+        #canvas-wrap {
+            background: #fafafa;
+            border: 4px dashed var(--primary-light);
+            border-radius: 25px;
+            margin-bottom: 20px;
+            cursor: crosshair;
+            touch-action: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        canvas {
+            display: block;
+            background: white;
+            width: 100%;
+            height: 350px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .color-dot {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        .color-dot:hover { transform: scale(1.2); }
+        .color-dot.active { border-color: var(--text); }
+
+        /* Screens */
+        .screen { display: none; animation: fadeIn 0.4s ease; }
+        .screen.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .btn-cute {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 6px 0px #d81b60;
+            transition: all 0.1s;
+            margin: 10px 0;
+        }
+        .btn-cute:active {
+            transform: translateY(3px);
+            box-shadow: 0 3px 0px #d81b60;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            border-radius: 20px;
+            border: 3px solid var(--border);
+            font-size: 1.2rem;
+            text-align: center;
+            outline: none;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+        input:focus { border-color: var(--primary); }
+
+        .prompt-box {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 20px 0;
+            padding: 20px;
+            background: #fff9fa;
+            border-radius: 20px;
+        }
+
+        #timer-text { font-family: monospace; }

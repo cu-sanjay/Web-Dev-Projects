@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doodle Dash — Super Cute Draw & Guess</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <div class="header">
+            <h1>Doodle Dash 🎨</h1>
+        </div>
+
+        <!-- MENU SCREEN -->
+        <div id="screen-menu" class="screen active">
+            <p style="font-size: 1.2rem;">Ready for a bubbly art battle?</p>
+            <button class="btn-cute" onclick="startGame()">Start Game! 🎀</button>
+            <p style="color: var(--muted); font-size: 0.9rem;">2 Players • Pass & Play</p>
+        </div>
+
+        <!-- PRE-DRAW SCREEN -->
+        <div id="screen-pre-draw" class="screen">
+            <div class="badge">Artist: Player 1</div>
+            <p>Your secret word is:</p>
+            <div id="word-prompt" class="prompt-box">CAT</div>
+            <p style="font-size: 0.9rem; color: #9ca3af;">(Don't let the other player see!)</p>
+            <button class="btn-cute" onclick="startDrawing()">I'm Ready! 🖌️</button>
+        </div>
+
+        <!-- DRAWING SCREEN -->
+        <div id="screen-draw" class="screen">
+            <div class="stats-bar">
+                <div class="badge">Time: <span id="timer-text">60</span>s</div>
+                <div class="badge" id="drawing-word-hint">CAT</div>
+            </div>
+            <div id="canvas-wrap">
+                <canvas id="paintCanvas"></canvas>
+            </div>
+            <div class="controls">
+                <div class="color-dot active" style="background: #000;" onclick="setColor('#000', this)"></div>
+                <div class="color-dot" style="background: #ff85a2;" onclick="setColor('#ff85a2', this)"></div>
+                <div class="color-dot" style="background: #7dd3fc;" onclick="setColor('#7dd3fc', this)"></div>
+                <div class="color-dot" style="background: #fbbf24;" onclick="setColor('#fbbf24', this)"></div>
+                <button onclick="clearCanvas()" style="background:none; border:none; cursor:pointer; font-size:1.5rem;">🧼</button>
+            </div>
+            <button class="btn-cute" onclick="finishDrawing()">Done! ✨</button>
+        </div>
+
+        <!-- GUESS SCREEN -->
+        <div id="screen-guess" class="screen">
+            <div class="badge" style="margin-bottom: 15px;">Guesser: Player 2</div>
+            <div id="canvas-display-wrap" style="border: 4px solid var(--border); border-radius: 25px; margin-bottom: 20px; overflow: hidden;">
+                <img id="drawn-image-preview" style="width: 100%; display: block;">
+            </div>
+            <input type="text" id="guess-input" placeholder="Type your guess here..." onkeydown="if(event.key==='Enter') submitGuess()">
+            <button class="btn-cute" onclick="submitGuess()">Guess! 🔍</button>
+        </div>
+
+        <!-- RESULT SCREEN -->
+        <div id="screen-result" class="screen">
+            <h2 id="result-title">YAY! 🎉</h2>
+            <p id="result-text">The word was CAT.</p>
+            <div class="badge" style="margin: 20px 0; display: inline-block;">Current Score: <span id="score-val">0</span></div>
+            <br>
+            <button class="btn-cute" onclick="startGame()">Next Round 🍓</button>
+        </div>
+    </div>
+<script src="script.js"></script>
+</body>
+</html>
