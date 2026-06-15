@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>REST API Tester</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="terminal-badge">[ REST API TESTER — NETWORK PROTOCOL COMMAND COCKPIT ]</div>
+
+<div class="app-grid">
+
+  <!-- ─── ENDPOINT CONFIG BAR ─── -->
+  <div class="endpoint-bar" id="endpointBar">
+    <select id="methodSelect" class="method-select">
+      <option value="GET">GET</option>
+      <option value="POST">POST</option>
+      <option value="PUT">PUT</option>
+      <option value="DELETE">DELETE</option>
+    </select>
+    <input type="text" id="endpointInput" class="endpoint-field" placeholder="https://api.example.com/v1/resources">
+    <button id="btnSend" class="send-btn">SEND STREAM REQUEST ASYNCHRONOUS</button>
+  </div>
+
+  <!-- ─── TOP: REQUEST BODY ─── -->
+  <div class="panel request-panel" id="requestPanel">
+    <div class="panel-header">JSON REQUEST BODY DATA AREA</div>
+    <textarea id="requestBody" spellcheck="false" placeholder='{"key": "value"}'>{
+  "username": "john.doe",
+  "email": "john@example.com",
+  "role": "developer"
+}</textarea>
+    <div id="bodyStatus" class="body-status"></div>
+  </div>
+
+  <!-- ─── BOTTOM: RESPONSE ─── -->
+  <div class="panel response-panel">
+    <div class="panel-header">NETWORK RESPONSE CONSOLE</div>
+    <div class="response-split">
+      <div class="response-body">
+        <div class="resp-section-label">RESPONSE BODY</div>
+        <pre id="responseBody" class="response-pre">&lt;awaiting request&gt;</pre>
+      </div>
+      <div class="response-headers">
+        <div class="resp-section-label">RESPONSE HEADERS</div>
+        <pre id="responseHeaders" class="response-pre">&lt;awaiting request&gt;</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── TELEMETRY ─── -->
+  <div class="panel telemetry-panel">
+    <div class="panel-header">TRANSACTION TELEMETRY DASHBOARD</div>
+    <div class="tele-row"><span class="tele-label">STATUS CODE</span><span id="tStatus" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">LATENCY</span><span id="tLatency" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">PAYLOAD WEIGHT</span><span id="tWeight" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">CONTENT TYPE</span><span id="tContentType" class="tele-val">--</span></div>
+    <div class="ctrl-divider"></div>
+    <div class="tele-row" style="grid-column:1/-1;"><span id="tBadge" class="tele-badge standby">STANDBY</span></div>
+    <div class="ctrl-divider"></div>
+    <div id="errorDetail" class="error-detail"></div>
+  </div>
+
+  <!-- ─── ADMIN FOOTER ─── -->
+  <div class="admin-footer">
+    <button id="btnSimulate" class="admin-btn simulate">SIMULATE GLOBAL CONNECTION REQUEST</button>
+    <button id="btnInject" class="admin-btn inject">INJECT MOCK SUCCESS DATASET PROFILE</button>
+    <button id="btnFlush" class="admin-btn flush">FLUSH TESTING TERMINAL &amp; RE-ZERO MATRICES</button>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
