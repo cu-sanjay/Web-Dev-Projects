@@ -1,4 +1,4 @@
-# JSON Formatter & Validator
+# JSON Formatter Validator
 
 A developer IDE-style JSON parsing terminal with try/catch syntax validation, beautification (2-space / 4-space), minification, syntax-highlighted output, recursive key-depth telemetry, and broken data injection for error testing.
 
