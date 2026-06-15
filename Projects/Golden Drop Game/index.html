@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Letter Drop — The Royal Treasury</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-wrapper">
+        <div class="treasury-header">
+            <div class="stat-group">
+                <div class="stat-label">Royal Score</div>
+                <div class="stat-value" id="score">0</div>
+            </div>
+            <div class="stat-group">
+                <div class="stat-label">Vault Level</div>
+                <div class="stat-value" id="level">1</div>
+            </div>
+            <div class="stat-group">
+                <div class="stat-label">Letters</div>
+                <div class="stat-value" id="count">0/20</div>
+            </div>
+        </div>
+
+        <div id="vault">
+            <div id="start-overlay" class="overlay">
+                <h1>LETTER DROP</h1>
+                <p style="margin: 1rem 0 2rem; color: #94a3b8;">Form words to clear the vault before it overflows.</p>
+                <button class="btn-royal" onclick="startGame()">Open The Vault</button>
+            </div>
+            <div id="game-over-overlay" class="overlay hidden">
+                <h1 style="color: var(--ruby);">VAULT BREACHED</h1>
+                <p id="final-stats" style="margin: 1rem 0 2rem;"></p>
+                <button class="btn-royal" onclick="startGame()">Try Again</button>
+            </div>
+        </div>
+
+        <div class="input-bar">
+            <div id="current-word"></div>
+            <button class="btn-royal" onclick="clearSelection()">Clear</button>
+            <button class="btn-royal" style="background: var(--text); color: var(--royal-blue);" onclick="submitWord()">Submit</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
