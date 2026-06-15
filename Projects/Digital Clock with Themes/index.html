@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Digital Clock with Themes</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <h1>⏰ Digital Clock</h1>
+
+    <div class="clock">
+      <div id="time">00:00:00</div>
+      <div id="date">Monday, 01 Jan 2026</div>
+    </div>
+
+    <div class="theme-switcher">
+      <button onclick="setTheme('light')">🌞 Light</button>
+      <button onclick="setTheme('dark')">🌙 Dark</button>
+      <button onclick="setTheme('neon')">💡 Neon</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
