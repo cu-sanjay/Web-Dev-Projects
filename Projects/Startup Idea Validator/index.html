@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Startup Idea Validator</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="app-container">
+  <header><div class="brand"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg><div><h1>STARTUP IDEA VALIDATOR</h1><p>Validate Your Startup Idea in Minutes</p></div></div></header>
+  <div class="main-layout">
+    <aside class="input-panel">
+      <h3>Your Idea</h3>
+      <input type="text" id="idea-name" class="input" placeholder="Startup name..." value="EcoTrack">
+      <textarea id="idea-desc" class="input textarea" placeholder="Describe your idea..." rows="4">A mobile app that tracks personal carbon footprint and suggests eco-friendly alternatives for daily choices.</textarea>
+      <div class="form-group"><label>Industry</label><select id="industry"><option value="tech">Technology</option><option value="health">Health &amp; Wellness</option><option value="edu">Education</option><option value="fin">Finance</option><option value="env" selected>Environment</option><option value="food">Food &amp; Beverage</option></select></div>
+      <div class="form-group"><label>Target Market</label><select id="market"><option value="b2c" selected>B2C</option><option value="b2b">B2B</option><option value="both">B2B &amp; B2C</option></select></div>
+      <button id="btn-validate" class="btn btn-primary">Validate Idea ✓</button>
+    </aside>
+    <main class="results-area">
+      <div class="score-section"><div class="score-ring" id="score-ring"><svg viewBox="0 0 120 120" width="120" height="120"><circle cx="60" cy="60" r="50" fill="none" stroke="#1f2937" stroke-width="10"/><circle cx="60" cy="60" r="50" fill="none" stroke="#22c55e" stroke-width="10" stroke-dasharray="314" stroke-dashoffset="94" id="score-arc" transform="rotate(-90 60 60)"/><text x="60" y="58" text-anchor="middle" font-family="ui-monospace,monospace" font-size="28" font-weight="700" fill="#f8fafc" id="score-text">70</text><text x="60" y="75" text-anchor="middle" font-family="monospace" font-size="8" fill="#64748b">/100</text></svg></div><div class="score-label" id="score-label">Promising</div></div>
+      <div class="detail-grid" id="detail-grid">
+        <div class="detail-card"><div class="detail-header"><span class="detail-icon">📊</span><span class="detail-title">Market Size</span></div><div class="detail-bar"><div class="detail-fill" style="width:65%"></div></div><span class="detail-value">65%</span></div>
+        <div class="detail-card"><div class="detail-header"><span class="detail-icon">🔧</span><span class="detail-title">Feasibility</span></div><div class="detail-bar"><div class="detail-fill" style="width:80%"></div></div><span class="detail-value">80%</span></div>
+        <div class="detail-card"><div class="detail-header"><span class="detail-icon">💰</span><span class="detail-title">Monetization</span></div><div class="detail-bar"><div class="detail-fill" style="width:55%"></div></div><span class="detail-value">55%</span></div>
+        <div class="detail-card"><div class="detail-header"><span class="detail-icon">🚀</span><span class="detail-title">Uniqueness</span></div><div class="detail-bar"><div class="detail-fill" style="width:70%"></div></div><span class="detail-value">70%</span></div>
+        <div class="detail-card"><div class="detail-header"><span class="detail-icon">👥</span><span class="detail-title">Need</span></div><div class="detail-bar"><div class="detail-fill" style="width:75%"></div></div><span class="detail-value">75%</span></div>
+        <div class="detail-card"><div class="detail-header"><span class="detail-icon">⚡</span><span class="detail-title">Timing</span></div><div class="detail-bar"><div class="detail-fill" style="width:60%"></div></div><span class="detail-value">60%</span></div>
+      </div>
+      <div class="feedback-section"><h3>Feedback</h3><p id="feedback-text">Strong environmental focus with good market timing. Consider subscription-based monetization with freemium tier to drive adoption. Focus on gamification to improve retention.</p></div>
+    </main>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
