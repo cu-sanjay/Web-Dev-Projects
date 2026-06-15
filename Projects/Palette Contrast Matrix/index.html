@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Palette Contrast Matrix</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="app">
+  <aside id="control-deck">
+    <div class="deck-header">
+      <h1><span class="accent">CONTRAST</span> ENG //</h1>
+      <p class="subtitle">Combinatorial Matrix</p>
+    </div>
+
+    <div class="seed-deck">
+      <div class="seed-module" data-index="0">
+        <label class="seed-label">BG 01</label>
+        <div class="seed-inputs">
+          <input type="color" class="seed-picker" value="#1e293b">
+          <input type="text" class="seed-hex" value="#1e293b" maxlength="7" spellcheck="false">
+        </div>
+      </div>
+      <div class="seed-module" data-index="1">
+        <label class="seed-label">BG 02</label>
+        <div class="seed-inputs">
+          <input type="color" class="seed-picker" value="#3b82f6">
+          <input type="text" class="seed-hex" value="#3b82f6" maxlength="7" spellcheck="false">
+        </div>
+      </div>
+      <div class="seed-module" data-index="2">
+        <label class="seed-label">BG 03</label>
+        <div class="seed-inputs">
+          <input type="color" class="seed-picker" value="#f8fafc">
+          <input type="text" class="seed-hex" value="#f8fafc" maxlength="7" spellcheck="false">
+        </div>
+      </div>
+      <div class="seed-module" data-index="3">
+        <label class="seed-label">BG 04</label>
+        <div class="seed-inputs">
+          <input type="color" class="seed-picker" value="#ef4444">
+          <input type="text" class="seed-hex" value="#ef4444" maxlength="7" spellcheck="false">
+        </div>
+      </div>
+    </div>
+
+    <div class="telemetry-dash">
+      <div class="telemetry-card">
+        <span class="telemetry-label">Total Permutations</span>
+        <span class="telemetry-value" id="total-permutations">16</span>
+      </div>
+      <div class="telemetry-card">
+        <span class="telemetry-label">Accessible Pairs</span>
+        <span class="telemetry-value" id="accessible-pairs">-- / 16 PASSED</span>
+      </div>
+    </div>
+
+    <button class="action-btn" id="mutate-btn">MUTATE RANDOM SEEDS</button>
+
+    <div class="diagnostics-banner" id="diagnostics-banner">
+      <span class="diag-dot"></span>
+      <span class="diag-text" id="diag-text">AWAITING MATRIX INTERSECTION</span>
+    </div>
+  </aside>
+
+  <main id="viewport">
+    <div id="matrix-grid">
+      <div class="matrix-anchor">FG \ BG</div>
+    </div>
+  </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
