@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>System Design Interview Playground</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="app-container">
+  <header><div class="brand"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><div><h1>SYSTEM DESIGN INTERVIEW PLAYGROUND</h1><p>Design Systems · Add Components · Visualize Architecture</p></div></div></header>
+  <div class="main-layout">
+    <aside class="components-panel">
+      <h3>Components</h3>
+      <button class="comp-btn" data-comp="client">Client 📱</button>
+      <button class="comp-btn" data-comp="server">Server 🖥️</button>
+      <button class="comp-btn" data-comp="db">Database 🗄️</button>
+      <button class="comp-btn" data-comp="cache">Cache ⚡</button>
+      <button class="comp-btn" data-comp="queue">Queue 📨</button>
+      <button class="comp-btn" data-comp="cdn">CDN 🌐</button>
+      <button class="comp-btn" data-comp="lb">Load Balancer ⚖️</button>
+      <hr class="divider">
+      <h3>Presets</h3>
+      <button class="preset-btn" data-preset="chatapp">Chat App 💬</button>
+      <button class="preset-btn" data-preset="ecom">E-Commerce 🛒</button>
+      <button class="preset-btn" data-preset="video">Video Platform 🎬</button>
+      <hr class="divider">
+      <button id="btn-clear" class="btn">Clear Canvas</button>
+    </aside>
+    <main class="canvas-area">
+      <div class="canvas-toolbar"><span id="status">Click components to add them to the canvas</span><button id="btn-export" class="btn">Export 📋</button></div>
+      <div class="diagram-canvas" id="diagram-canvas">
+        <svg id="diagram-svg" viewBox="0 0 800 500" width="800" height="500">
+          <rect width="800" height="500" fill="#0a0f1a" rx="6"/>
+          <text x="400" y="250" text-anchor="middle" font-family="monospace" font-size="14" fill="#334155" id="placeholder-text">Click components to build your architecture diagram</text>
+        </svg>
+      </div>
+    </main>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
