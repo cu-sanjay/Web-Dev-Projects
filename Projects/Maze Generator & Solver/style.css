@@ -1,0 +1,233 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #05060b;
+  color: rgba(255,255,255,0.75);
+  font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
+  min-height: 100vh;
+  padding: 2vmin;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.terminal-badge {
+  font-size: clamp(9px,1.6vmin,18px);
+  letter-spacing: 3px;
+  padding: 0.6em 1.8em;
+  border: 1px solid rgba(0,229,255,0.25);
+  background: rgba(0,229,255,0.04);
+  color: #00e5ff;
+  text-align: center;
+  margin-bottom: 2vmin;
+  text-shadow: 0 0 10px rgba(0,229,255,0.3);
+}
+
+.app-grid {
+  width: 100%;
+  max-width: 1480px;
+  display: grid;
+  grid-template-columns: 180fr 1fr 200fr;
+  grid-template-rows: auto auto auto auto;
+  gap: 1.2vmin;
+}
+
+/* ─── RIBBON ─── */
+.ribbon {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 1.2vmin;
+  flex-wrap: wrap;
+}
+.ribbon-group {
+  flex: 1;
+  display: flex;
+  gap: 0.4vmin;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.ribbon-label {
+  font-size: clamp(5px,0.55vmin,7px);
+  color: rgba(255,255,255,0.15);
+  letter-spacing: 2px;
+  margin-right: 0.6vmin;
+}
+.gen-btn, .solve-btn {
+  padding: 0.5em 0.6em;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.3);
+  font: 600 clamp(6px,0.7vmin,9px) 'JetBrains Mono',monospace;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.gen-btn:hover { border-color: rgba(255,136,0,0.3); color: rgba(255,255,255,0.6); }
+.gen-btn.active { background: rgba(255,136,0,0.06); border-color: #ff8800; color: #ff8800; box-shadow: 0 0 8px rgba(255,136,0,0.08); }
+.solve-btn:hover { border-color: rgba(0,229,255,0.3); color: rgba(255,255,255,0.6); }
+.solve-btn.active { background: rgba(0,229,255,0.06); border-color: #00e5ff; color: #00e5ff; box-shadow: 0 0 8px rgba(0,229,255,0.08); }
+
+/* ─── PANELS ─── */
+.panel {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.05);
+  padding: 1.4vmin;
+}
+.panel-header {
+  font-size: clamp(6px,0.75vmin,10px);
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.15);
+  margin-bottom: 1vmin;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  padding-bottom: 0.5vmin;
+}
+
+/* ─── CONTROL DECK ─── */
+.control-deck { grid-column: 1; grid-row: 2; }
+.ctrl-label {
+  display: block;
+  font-size: clamp(6px,0.7vmin,9px);
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 1.5px;
+  margin: 0.8vmin 0 0.4vmin;
+}
+.slider-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.6vmin;
+}
+.slider-wrap input[type=range] {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 2px;
+  background: rgba(0,229,255,0.2);
+  outline: none;
+  border-radius: 1px;
+}
+.slider-wrap input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  background: #00e5ff;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 6px rgba(0,229,255,0.4);
+}
+.slider-wrap input[type=range]::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  background: #00e5ff;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+}
+#sizeVal, #speedVal {
+  font-size: clamp(8px,0.9vmin,12px);
+  color: #ffc800;
+  min-width: 4em;
+  text-align: right;
+}
+.ctrl-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.04);
+  margin: 1vmin 0;
+}
+.ctrl-btn {
+  width: 100%;
+  padding: 0.6em;
+  background: rgba(0,230,118,0.04);
+  border: 1px solid rgba(0,230,118,0.15);
+  color: #00e676;
+  font: 600 clamp(7px,0.75vmin,9px) 'JetBrains Mono',monospace;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 0.6vmin;
+}
+.ctrl-btn:hover { background: rgba(0,230,118,0.08); box-shadow: 0 0 10px rgba(0,230,118,0.05); }
+
+/* ─── CANVAS ─── */
+.canvas-panel { grid-column: 2 / 4; grid-row: 2 / 5; display: flex; flex-direction: column; }
+#mazeCanvas {
+  flex: 1;
+  width: 100%;
+  min-height: 380px;
+  display: block;
+  background: rgba(0,0,0,0.2);
+}
+
+/* ─── TELEMETRY ─── */
+.telemetry-panel { grid-column: 1; grid-row: 3; }
+.tele-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.35em 0;
+  border-bottom: 1px solid rgba(255,255,255,0.02);
+}
+.tele-label {
+  font-size: clamp(6px,0.65vmin,8px);
+  color: rgba(255,255,255,0.15);
+  letter-spacing: 1px;
+}
+.tele-val {
+  font-size: clamp(9px,0.95vmin,13px);
+  color: #00e5ff;
+  font-weight: 600;
+}
+.tele-badge {
+  font-size: clamp(6px,0.7vmin,9px);
+  padding: 0.2em 0.5em;
+  letter-spacing: 2px;
+}
+.tele-badge.standby { color: rgba(255,255,255,0.15); background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); }
+.tele-badge.generating { color: #ff8800; background: rgba(255,136,0,0.06); border: 1px solid rgba(255,136,0,0.2); animation: blink 0.5s step-end infinite; }
+.tele-badge.solving { color: #00e5ff; background: rgba(0,229,255,0.06); border: 1px solid rgba(0,229,255,0.2); animation: blink 0.5s step-end infinite; }
+.tele-badge.solved { color: #00e676; background: rgba(0,230,118,0.08); border: 1px solid rgba(0,230,118,0.3); box-shadow: 0 0 10px rgba(0,230,118,0.1); }
+.tele-badge.idle { color: rgba(255,255,255,0.15); background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); }
+
+/* ─── ADMIN FOOTER ─── */
+.admin-footer {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 0.6vmin;
+  flex-wrap: wrap;
+}
+.admin-btn {
+  flex: 1;
+  min-width: 160px;
+  padding: 0.7em 0.5em;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.35);
+  font: 600 clamp(7px,0.8vmin,10px) 'JetBrains Mono',monospace;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.admin-btn:hover { color: rgba(255,255,255,0.6); }
+.admin-btn.gen:hover { border-color: #ff8800; color: #ff8800; }
+.admin-btn.solve:hover { border-color: #00e5ff; color: #00e5ff; }
+.admin-btn.purge:hover { border-color: #ff1744; color: #ff1744; }
+.admin-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+@keyframes blink {
+  50% { opacity: 0.3; }
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 820px) {
+  .app-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+  .control-deck { grid-column: 1; }
+  .canvas-panel { grid-column: 1; }
+  .telemetry-panel { grid-column: 1; }
+}

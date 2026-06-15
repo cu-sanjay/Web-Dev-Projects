@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maze Generator &amp; Solver</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="terminal-badge">[ MAZE GENERATOR &amp; SOLVER ]</div>
+
+<div class="app-grid">
+
+  <!-- ─── ALGORITHM RIBBON ─── -->
+  <div class="ribbon">
+    <div class="ribbon-group">
+      <span class="ribbon-label">GENERATION MODE</span>
+      <button class="gen-btn active" data-gen="dfs-backtracker">RANDOMIZED DFS BACKTRACKER</button>
+      <button class="gen-btn" data-gen="binary-tree">BINARY TREE</button>
+    </div>
+    <div class="ribbon-group">
+      <span class="ribbon-label">PATHFINDING MODE</span>
+      <button class="solve-btn active" data-solve="bfs">BFS</button>
+      <button class="solve-btn" data-solve="dfs">DFS</button>
+      <button class="solve-btn" data-solve="astar">A* COST OPTIMIZATION</button>
+    </div>
+  </div>
+
+  <!-- ─── LEFT: GRID TELEMETRY CONTROLLER ─── -->
+  <div class="panel control-deck">
+    <div class="panel-header">GRID TELEMETRY CONTROLLER</div>
+
+    <label class="ctrl-label">MATRIX DENSITY</label>
+    <div class="slider-wrap">
+      <input type="range" id="sizeSlider" min="4" max="20" value="10">
+      <span id="sizeVal">21×21</span>
+    </div>
+
+    <label class="ctrl-label">ANIMATION STEP SPEED</label>
+    <div class="slider-wrap">
+      <input type="range" id="speedSlider" min="0" max="200" value="20">
+      <span id="speedVal">20ms</span>
+    </div>
+
+    <div class="ctrl-divider"></div>
+
+    <button id="btnAutoSolve" class="ctrl-btn auto">GENERATE &amp; AUTO-SOLVE</button>
+  </div>
+
+  <!-- ─── CENTER: CANVAS ─── -->
+  <div class="panel canvas-panel">
+    <div class="panel-header">LABYRINTH VIEWPORT</div>
+    <canvas id="mazeCanvas"></canvas>
+  </div>
+
+  <!-- ─── RIGHT: TELEMETRY ─── -->
+  <div class="panel telemetry-panel">
+    <div class="panel-header">OPERATIONAL STATUS TELEMETRY</div>
+    <div class="tele-row"><span class="tele-label">GRID DIMENSIONS</span><span id="teleGrid" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">TOTAL CELLS</span><span id="teleCells" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">FRONTIER EXPLORED</span><span id="teleFrontier" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">SOLVED PATH COST</span><span id="telePathCost" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">PROCESSING RUNTIME</span><span id="teleRuntime" class="tele-val">--</span></div>
+    <div class="tele-row"><span class="tele-label">ALGORITHM STATE</span><span id="teleBadge" class="tele-badge standby">STANDBY</span></div>
+  </div>
+
+  <!-- ─── ADMIN FOOTER ─── -->
+  <div class="admin-footer">
+    <button id="btnGenerate" class="admin-btn gen">GENERATE LABYRINTH MAP</button>
+    <button id="btnSolve" class="admin-btn solve">EXECUTE PATHFINDING SEARCH</button>
+    <button id="btnPurge" class="admin-btn purge">PURGE &amp; RE-ZERO MATRICES</button>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
