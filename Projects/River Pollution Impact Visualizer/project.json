@@ -1,0 +1,8 @@
+{
+  "title": "River Pollution Impact Visualizer",
+  "description": "An interactive limnology simulation visualizing real-time river pollution effects. Features a HTML5 Canvas river ecosystem with boid-behavior fish, swaying flora, and diffusing contaminant plumes (industrial, sewage, plastic). Coupled biochemical engine models DO/BOD/toxicity dynamics — fish die at DO < 4.0 mg/L, plants shrivel from toxicity. Includes spill deployment, micro-filter cleanup, and full ecosystem purge/restore. Pure vanilla JavaScript.",
+  "author": { "name": "Girish Madarkar", "github": "Girish0902" },
+  "tags": ["simulation", "canvas", "ecosystem", "pollution", "vanilla-js", "data-viz"],
+  "entry": "index.html",
+  "thumbnail": "thumbnail.svg"
+}

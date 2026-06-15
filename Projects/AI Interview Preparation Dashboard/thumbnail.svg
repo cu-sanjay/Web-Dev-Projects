@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#05070c" />
+      <stop offset="100%" stop-color="#0e131f" />
+    </linearGradient>
+    
+    <!-- Accent Violet Gradient -->
+    <linearGradient id="violet-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7c3aed" />
+      <stop offset="100%" stop-color="#c084fc" />
+    </linearGradient>
+
+    <!-- Glowing Teal Gradient -->
+    <linearGradient id="teal-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0d9488" />
+      <stop offset="100%" stop-color="#2dd4bf" />
+    </linearGradient>
+    
+    <!-- Glow Filter -->
+    <filter id="glow" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="320" height="200" rx="16" fill="url(#bg-grad)" />
+  <rect width="320" height="200" rx="16" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="2" />
+
+  <!-- Ambient Glows -->
+  <circle cx="270" cy="50" r="50" fill="#7c3aed" opacity="0.12" filter="url(#glow)" />
+  <circle cx="60" cy="150" r="60" fill="#0d9488" opacity="0.08" filter="url(#glow)" />
+
+  <!-- Simulated Chat / Interview Window -->
+  <g transform="translate(30, 35)">
+    <!-- Chat Container Card -->
+    <rect width="140" height="110" rx="10" fill="#0f172a" stroke="rgba(255,255,255,0.06)" stroke-width="1.2" />
+    
+    <!-- Title Bar -->
+    <circle cx="12" cy="12" r="3.5" fill="#ef4444" />
+    <circle cx="22" cy="12" r="3.5" fill="#f59e0b" />
+    <circle cx="32" cy="12" r="3.5" fill="#10b981" />
+    <line x1="45" y1="12" x2="125" y2="12" stroke="rgba(255,255,255,0.1)" stroke-width="2" stroke-linecap="round" />
+
+    <!-- AI Question Bubble -->
+    <rect x="10" y="26" width="95" height="26" rx="6" fill="#1e293b" />
+    <line x1="18" y1="34" x2="90" y2="34" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" />
+    <line x1="18" y1="42" x2="60" y2="42" stroke="#94a3b8" stroke-width="2.5" stroke-linecap="round" opacity="0.6" />
+    
+    <!-- User Answer Wave Bubble -->
+    <rect x="35" y="60" width="95" height="38" rx="6" fill="rgba(124, 58, 237, 0.12)" stroke="rgba(124, 58, 237, 0.3)" stroke-width="1" />
+    
+    <!-- Voice Sound Wave Visualizer inside user bubble -->
+    <g transform="translate(45, 80)">
+      <line x1="0" y1="-8" x2="0" y2="8" stroke="url(#violet-grad)" stroke-width="2" stroke-linecap="round" />
+      <line x1="6" y1="-14" x2="6" y2="14" stroke="url(#violet-grad)" stroke-width="2" stroke-linecap="round" />
+      <line x1="12" y1="-4" x2="12" y2="4" stroke="url(#violet-grad)" stroke-width="2" stroke-linecap="round" />
+      <line x1="18" y1="-18" x2="18" y2="18" stroke="url(#violet-grad)" stroke-width="2" stroke-linecap="round" filter="url(#glow)" />
+      <line x1="24" y1="-10" x2="24" y2="10" stroke="url(#violet-grad)" stroke-width="2" stroke-linecap="round" />
+      <line x1="30" y1="-15" x2="30" y2="15" stroke="url(#violet-grad)" stroke-width="2" stroke-linecap="round" />
+      <line x1="36" y1="-5" x2="36" y2="5" stroke="url(#violet-grad)" stroke-width="2" stroke-linecap="round" />
+      <line x1="42" y1="-11" x2="42" y2="11" stroke="url(#violet-grad)" stroke-width="2" stroke-linecap="round" />
+      <line x1="48" y1="-3" x2="48" y2="3" stroke="url(#violet-grad)" stroke-width="2" stroke-linecap="round" />
+    </g>
+
+    <!-- Typing cursor -->
+    <line x1="100" y1="78" x2="100" y2="84" stroke="#c084fc" stroke-width="1.5" />
+  </g>
+
+  <!-- Performance Dial Dashboard (Right) -->
+  <g transform="translate(235, 75)">
+    <!-- Dial Ring -->
+    <circle cx="0" cy="0" r="35" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="5.5" />
+    <circle cx="0" cy="0" r="35" fill="none" stroke="url(#teal-grad)" stroke-width="5.5" stroke-dasharray="220" stroke-dashoffset="35" stroke-linecap="round" filter="url(#glow)" />
+    
+    <!-- Central Plate -->
+    <circle cx="0" cy="0" r="26" fill="#0b0f19" stroke="rgba(255,255,255,0.04)" stroke-width="1" />
+    
+    <!-- Score values -->
+    <text x="0" y="4" font-family="'Outfit', 'Inter', sans-serif" font-size="16" font-weight="800" fill="#ffffff" text-anchor="middle">92%</text>
+    <text x="0" y="15" font-family="'Inter', sans-serif" font-size="5.5" font-weight="600" fill="#2dd4bf" text-anchor="middle" letter-spacing="0.5">PACE &amp; ACC</text>
+
+    <!-- Mini Microphone Badge Overlay -->
+    <g transform="translate(22, 22)">
+      <circle cx="0" cy="0" r="10" fill="#0d9488" />
+      <!-- Mic Shape -->
+      <rect x="-2.5" y="-5" width="5" height="8" rx="2.5" fill="#fff" />
+      <path d="M-4.5,-2 A4.5,4.5 0 0,0 4.5,-2" fill="none" stroke="#fff" stroke-width="1" />
+      <line x1="0" y1="3" x2="0" y2="6" stroke="#fff" stroke-width="1" />
+    </g>
+  </g>
+
+  <!-- Text Branding -->
+  <g transform="translate(160, 172)">
+    <text font-family="'Outfit', 'Inter', sans-serif" font-size="14.5" font-weight="800" text-anchor="middle" fill="#ffffff">
+      Inter<tspan fill="#7c3aed">Prep</tspan>
+    </text>
+    <text y="12" font-family="'Inter', sans-serif" font-size="7.5" font-weight="500" text-anchor="middle" fill="#94a3b8" letter-spacing="0.5">
+      AI Voice-Assisted Mock Interviewer
+    </text>
+  </g>
+</svg>

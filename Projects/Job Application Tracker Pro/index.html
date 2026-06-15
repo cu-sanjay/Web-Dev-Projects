@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Application Tracker Pro</title>
+  <!-- Google Fonts: Outfit and Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons for incubator dashboard aesthetics -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="glow-bg"></div>
+
+  <!-- HEADER -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="logo">
+        <i class="fa-solid fa-briefcase glow-icon"></i>
+        <h1>JobTrack<span>Pro</span></h1>
+        <span class="badge">Kanban Board</span>
+      </div>
+      
+      <div class="header-stats">
+        <span class="stat-badge"><i class="fa-solid fa-paper-plane text-azure"></i> Applied: <strong id="lbl-header-applied">0</strong></span>
+        <span class="stat-badge"><i class="fa-solid fa-comments text-amber"></i> Interviews: <strong id="lbl-header-interviews">0</strong></span>
+        <span class="stat-badge"><i class="fa-solid fa-crown text-emerald"></i> Offers: <strong id="lbl-header-offers">0</strong></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="main-container">
+    
+    <!-- LEFT COLUMN: SEARCH & ANALYTICS -->
+    <aside class="sidebar-column">
+      
+      <!-- Global Search -->
+      <section class="section-card search-card" aria-label="Search and filtering parameters">
+        <div class="search-input-wrapper">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="txt-search" placeholder="Search company, role, tags...">
+        </div>
+      </section>
+
+      <!-- Advanced Filters -->
+      <section class="section-card filters-card" aria-label="Advanced list filtering selectors">
+        <div class="card-header-row">
+          <h3><i class="fa-solid fa-filter"></i> Filters</h3>
+        </div>
+
+        <div class="form-group">
+          <label for="sel-location-filter">Job Location</label>
+          <select id="sel-location-filter">
+            <option value="All">All Locations</option>
+            <option value="Remote">Remote</option>
+            <option value="Hybrid">Hybrid</option>
+            <option value="Onsite">Onsite</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- Highlights Analytics -->
+      <section class="section-card highlights-card" aria-label="Pipeline metrics highlights">
+        <div class="card-header-row">
+          <h3><i class="fa-solid fa-chart-pie"></i> Pro Analytics</h3>
+        </div>
+        <div class="highlights-grid">
+          <div class="highlight-item col-span-2">
+            <span class="h-lbl">Active Offers Value</span>
+            <span class="h-val text-emerald" id="lbl-offers-value">$0/yr</span>
+          </div>
+          <div class="highlight-item">
+            <span class="h-lbl">Avg Salary</span>
+            <span class="h-val text-cyan" id="lbl-avg-salary">$0/yr</span>
+          </div>
+          <div class="highlight-item">
+            <span class="h-lbl">Interview Rate</span>
+            <span class="h-val text-amber" id="lbl-interview-rate">0%</span>
+          </div>
+        </div>
+      </section>
+
+      <button id="btn-reset-workspace" class="footer-btn"><i class="fa-solid fa-trash-can"></i> Clear Dashboard Memory</button>
+    </aside>
+
+    <!-- CENTER COLUMN: KANBAN PIPELINE BOARD -->
+    <section class="kanban-column" aria-label="Kanban board recruitment lanes">
+      <div class="kanban-actions-row">
+        <h2>Recruitment Board</h2>
+        <button id="btn-add-job" class="btn btn-primary btn-sm">
+          <i class="fa-solid fa-circle-plus"></i> Add Job Spec
+        </button>
+      </div>
+
+      <!-- Kanban Lanes Grid -->
+      <div class="kanban-board-grid">
+        
+        <!-- Wishlist -->
+        <div class="kanban-lane-col">
+          <div class="lane-header wishlist-header">
+            <span>Wishlist</span>
+            <span class="lane-count" id="count-wishlist">0</span>
+          </div>
+          <div class="lane-cards-wrapper" id="col-wishlist">
+            <!-- Dynamic Wishlist cards -->
+          </div>
+        </div>
+
+        <!-- Applied -->
+        <div class="kanban-lane-col">
+          <div class="lane-header applied-header">
+            <span>Applied</span>
+            <span class="lane-count" id="count-applied">0</span>
+          </div>
+          <div class="lane-cards-wrapper" id="col-applied">
+            <!-- Dynamic Applied cards -->
+          </div>
+        </div>
+
+        <!-- Interviewing -->
+        <div class="kanban-lane-col">
+          <div class="lane-header interviewing-header">
+            <span>Interviewing</span>
+            <span class="lane-count" id="count-interviewing">0</span>
+          </div>
+          <div class="lane-cards-wrapper" id="col-interviewing">
+            <!-- Dynamic Interviewing cards -->
+          </div>
+        </div>
+
+        <!-- Offer -->
+        <div class="kanban-lane-col">
+          <div class="lane-header offer-header">
+            <span>Offer</span>
+            <span class="lane-count" id="count-offer">0</span>
+          </div>
+          <div class="lane-cards-wrapper" id="col-offer">
+            <!-- Dynamic Offer cards -->
+          </div>
+        </div>
+
+        <!-- Rejected -->
+        <div class="kanban-lane-col">
+          <div class="lane-header rejected-header">
+            <span>Rejected</span>
+            <span class="lane-count" id="count-rejected">0</span>
+          </div>
+          <div class="lane-cards-wrapper" id="col-rejected">
+            <!-- Dynamic Rejected cards -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- RIGHT COLUMN: ACTIVE APPLICATION DETAILS INSPECTOR -->
+    <section class="inspector-column" aria-label="Job Application Details Inspector">
+      
+      <!-- Empty inspector state -->
+      <div id="inspector-empty" class="inspector-welcome-card">
+        <div class="pulse-icon">
+          <i class="fa-solid fa-clipboard-check"></i>
+        </div>
+        <h4>Application Inspector</h4>
+        <p>Select any job card from the Kanban columns to view task checklists, modify salaries, or log interview questions.</p>
+      </div>
+
+      <!-- Active inspector workspace -->
+      <div id="inspector-active" class="inspector-workspace hidden">
+        
+        <section class="section-card inspector-card" aria-label="Job details inputs">
+          <div class="card-header-row">
+            <h3><i class="fa-solid fa-edit"></i> Inspector Panel</h3>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label for="job-company">Company Name</label>
+              <input type="text" id="job-company">
+            </div>
+            <div class="form-group flex-1">
+              <label for="job-role">Role Title</label>
+              <input type="text" id="job-role">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label for="job-date">Date Applied</label>
+              <input type="date" id="job-date">
+            </div>
+            <div class="form-group flex-1">
+              <label for="sel-status">Application Status</label>
+              <select id="sel-status">
+                <option value="Wishlist">Wishlist</option>
+                <option value="Applied">Applied</option>
+                <option value="Interviewing">Interviewing</option>
+                <option value="Offer">Offer</option>
+                <option value="Rejected">Rejected</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label for="job-salary">Base Salary ($/yr)</label>
+              <input type="number" id="job-salary">
+            </div>
+            <div class="form-group flex-1">
+              <label for="sel-location">Job Location</label>
+              <select id="sel-location">
+                <option value="Remote">Remote</option>
+                <option value="Hybrid">Hybrid</option>
+                <option value="Onsite">Onsite</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="job-url">Listing URL</label>
+            <input type="text" id="job-url">
+          </div>
+
+          <!-- Milestones subtasks checkboxes -->
+          <div class="tasks-checklist-section">
+            <h5>Milestones Sub-Tasks</h5>
+            <ul class="tasks-ul" id="tasks-checklist">
+              <!-- Dynamically populated checklist items -->
+            </ul>
+            
+            <div class="add-task-row">
+              <input type="text" id="txt-new-task" placeholder="Add custom sub-task..." autocomplete="off">
+              <button id="btn-add-task" class="btn btn-secondary btn-sm"><i class="fa-solid fa-plus"></i></button>
+            </div>
+          </div>
+
+          <!-- Interview notes log -->
+          <div class="form-group">
+            <label for="job-notes">Interview Log &amp; Notes</label>
+            <textarea id="job-notes" placeholder="Write interview timeline details, interviewer names, or key questions asked..."></textarea>
+          </div>
+
+          <!-- Action buttons -->
+          <div class="inspector-actions">
+            <button id="btn-delete-job" class="btn btn-danger btn-sm" title="Delete Job Profile">
+              <i class="fa-solid fa-trash-can"></i> Delete Profile
+            </button>
+            <button id="btn-save-job" class="btn btn-primary btn-sm" title="Save Job changes">
+              <i class="fa-solid fa-floppy-disk"></i> Save changes
+            </button>
+          </div>
+        </section>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="app-footer">
+    <div class="footer-container">
+      <p>&copy; 2026 JobTrack Pro Hub. Built for the <a href="https://github.com/cu-sanjay/Web-Dev-Projects" target="_blank" rel="noopener noreferrer">Web Dev Projects</a> repository showcase.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

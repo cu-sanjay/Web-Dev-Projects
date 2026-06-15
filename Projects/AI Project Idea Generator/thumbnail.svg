@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="200" viewBox="0 0 320 200">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#04070d"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+
+    <!-- Glowing filters -->
+    <filter id="glowCyan" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <filter id="glowAmber" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <linearGradient id="cyanAmber" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0ea5e9" />
+      <stop offset="100%" stop-color="#f59e0b" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="320" height="200" fill="url(#bgGrad)" />
+
+  <!-- Background Grid lines -->
+  <g opacity="0.05" stroke="#ffffff" stroke-width="0.5">
+    <line x1="0" y1="40" x2="320" y2="40" />
+    <line x1="0" y1="80" x2="320" y2="80" />
+    <line x1="0" y1="120" x2="320" y2="120" />
+    <line x1="0" y1="160" x2="320" y2="160" />
+    <line x1="80" y1="0" x2="80" y2="200" />
+    <line x1="160" y1="0" x2="160" y2="200" />
+    <line x1="240" y1="0" x2="240" y2="200" />
+  </g>
+
+  <!-- Left: Glowing Cog/Gears Synthesizer Visual -->
+  <g transform="translate(65, 100)" opacity="0.8">
+    <!-- Big Cog -->
+    <circle cx="0" cy="0" r="30" fill="none" stroke="rgba(14, 165, 233, 0.05)" stroke-width="6" />
+    <circle cx="0" cy="0" r="30" fill="none" stroke="#0ea5e9" stroke-width="2" stroke-dasharray="14,8" filter="url(#glowCyan)" />
+    <!-- Small Cog -->
+    <g transform="translate(42, 28)">
+      <circle cx="0" cy="0" r="16" fill="none" stroke="rgba(245, 158, 11, 0.05)" stroke-width="4" />
+      <circle cx="0" cy="0" r="16" fill="none" stroke="#f59e0b" stroke-width="2" stroke-dasharray="8,6" filter="url(#glowAmber)" />
+    </g>
+    <!-- Center connecting line -->
+    <line x1="0" y1="0" x2="42" y2="28" stroke="url(#cyanAmber)" stroke-width="1.5" stroke-dasharray="4,4" />
+  </g>
+
+  <!-- Right: Project Blueprint Spec Sheet Visual Mockup -->
+  <g transform="translate(150, 48)">
+    <rect width="145" height="106" rx="8" fill="#0f172a" stroke="rgba(255, 255, 255, 0.05)" stroke-width="1.5" />
+    <!-- Title Line -->
+    <rect x="12" y="14" width="85" height="5" rx="2.5" fill="#ffffff" />
+    <!-- Tags -->
+    <rect x="12" y="24" width="30" height="4" rx="2" fill="#0ea5e9" />
+    <rect x="46" y="24" width="35" height="4" rx="2" fill="#f59e0b" />
+    
+    <!-- Code Outline / Features -->
+    <g opacity="0.4" stroke-linecap="round" stroke-width="2">
+      <!-- Bullet 1 -->
+      <circle cx="15" cy="42" r="1.5" fill="#0ea5e9" />
+      <line x1="22" y1="42" x2="125" y2="42" stroke="#94a3b8" />
+      <!-- Bullet 2 -->
+      <circle cx="15" cy="54" r="1.5" fill="#0ea5e9" />
+      <line x1="22" y1="54" x2="110" y2="54" stroke="#94a3b8" />
+      <!-- Bullet 3 -->
+      <circle cx="15" cy="66" r="1.5" fill="#0ea5e9" />
+      <line x1="22" y1="66" x2="118" y2="66" stroke="#94a3b8" />
+    </g>
+
+    <!-- Glowing Bookmark Star in Upper Right -->
+    <g transform="translate(126, 16)" filter="url(#glowAmber)">
+      <!-- Star shape path -->
+      <path d="M 0,-6 L 1.8,-1.8 L 6.2,-1.8 L 2.6,0.8 L 4,5 L 0,2.4 L -4,5 L -2.6,0.8 L -6.2,-1.8 L -1.8,-1.8 Z" fill="#f59e0b" />
+    </g>
+
+    <!-- Download Spec checkmark bar below -->
+    <g transform="translate(12, 82)">
+      <rect width="121" height="12" rx="3" fill="rgba(16, 185, 129, 0.08)" stroke="rgba(16, 185, 129, 0.2)" stroke-width="0.8" />
+      <circle cx="10" cy="6" r="2.5" fill="#10b981" />
+      <line x1="18" y1="6" x2="110" y2="6" stroke="#10b981" stroke-width="1.5" stroke-linecap="round" opacity="0.8" />
+    </g>
+  </g>
+
+  <!-- Brand Typography -->
+  <text x="160" y="24" font-family="'Outfit', 'Inter', sans-serif" font-size="13" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="1">
+    IDEA<tspan fill="#0ea5e9">SYNTH</tspan>
+  </text>
+</svg>

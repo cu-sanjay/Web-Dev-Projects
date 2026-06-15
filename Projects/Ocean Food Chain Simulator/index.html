@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ocean Food Chain · Simulator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="top-profile">
+    <div class="profile-brand">
+      <svg class="profile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M12 2C8 2 4 5 4 10c0 5 8 12 8 12s8-7 8-12c0-5-4-8-8-8z" stroke="#00e5ff"/>
+        <path d="M12 2c-2 0-4 3-4 8s4 12 4 12V2z" fill="#00e5ff22" stroke="none"/>
+        <circle cx="12" cy="10" r="2" fill="#00e676" stroke="none"/>
+      </svg>
+      <div>
+        <h1 class="profile-title">Ocean Food Chain · Simulator</h1>
+        <span class="profile-sub">Trophic Systems Laboratory · v1.0</span>
+      </div>
+      <span class="profile-badge">TROPHIC · CASCADE · BIOSPHERE</span>
+    </div>
+    <div class="profile-state">
+      <span class="state-dot" id="stateDot"></span>
+      <span class="state-label" id="stateLabel">RUNNING</span>
+    </div>
+  </header>
+
+  <main class="workspace">
+
+    <!-- TOP EXTINCTION DECK -->
+    <section class="extinction-deck">
+      <span class="deck-label">EXTINCTION TOGGLES</span>
+      <div class="ext-row">
+        <button class="ext-btn" data-tier="phytoplankton" style="--ec:#00e676">Wipe Phytoplankton</button>
+        <button class="ext-btn" data-tier="krill" style="--ec:#00e5ff">Wipe Krill</button>
+        <button class="ext-btn" data-tier="fish" style="--ec:#ffb800">Wipe Fish</button>
+        <button class="ext-btn" data-tier="sharks" style="--ec:#ff1744">Wipe Sharks</button>
+      </div>
+      <div class="ext-sliders">
+        <div class="ext-slider-group">
+          <label class="ext-label">Water Temp <span class="ext-val" id="valTemp">+18°C</span></label>
+          <input type="range" class="ext-slider" id="sliderTemp" min="0" max="35" step="0.5" value="18">
+        </div>
+        <div class="ext-slider-group">
+          <label class="ext-label">Predator Agility <span class="ext-val" id="valAgility">1.0×</span></label>
+          <input type="range" class="ext-slider" id="sliderAgility" min="0" max="3" step="0.1" value="1">
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIN GRID -->
+    <section class="main-grid">
+      <div class="arena-card">
+        <div class="card-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M2 12h20M12 2v20" stroke-width="0.5"/></svg>
+          <span>Marine Fluid Arena</span>
+          <span class="card-badge" id="popBadge">0 organisms</span>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="arenaCanvas"></canvas>
+        </div>
+      </div>
+
+      <div class="telemetry-card">
+        <div class="card-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 8h10M7 12h6M7 16h8"/></svg>
+          <span>Trophic Telemetry</span>
+          <span class="card-badge">LIVE</span>
+        </div>
+        <div class="tm-body" id="tmBody">
+          <div class="tm-item"><span class="tm-label">Phytoplankton Density</span><span class="tm-val" id="tmPhyto">—</span></div>
+          <div class="tm-item"><span class="tm-label">Krill Population</span><span class="tm-val" id="tmKrill">—</span></div>
+          <div class="tm-item"><span class="tm-label">Biomass Balance</span><span class="tm-val" id="tmBiomass">—</span></div>
+          <div class="tm-item"><span class="tm-label">Ecosystem Stability</span><span class="tm-val stability" id="tmStability">—</span></div>
+        </div>
+        <div class="tm-footer">
+          <div class="mini-gauge"><span class="mg-label">Phyto</span><div class="mg-track"><div class="mg-fill" id="mgPhyto" style="width:0%"></div></div></div>
+          <div class="mini-gauge"><span class="mg-label">Krill</span><div class="mg-track"><div class="mg-fill" id="mgKrill" style="width:0%"></div></div></div>
+          <div class="mini-gauge"><span class="mg-label">Fish</span><div class="mg-track"><div class="mg-fill" id="mgFish" style="width:0%"></div></div></div>
+          <div class="mini-gauge"><span class="mg-label">Shark</span><div class="mg-track"><div class="mg-fill" id="mgShark" style="width:0%"></div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTROLS -->
+    <footer class="control-deck">
+      <button class="ctrl-btn ctrl-amber" id="btnCascade">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M4 4v16h16M4 12h16M12 4v12"/></svg>
+        Induce Extinction Cascade Event
+      </button>
+      <button class="ctrl-btn ctrl-pink" id="btnInvasive">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M12 4v16M4 12h16"/></svg>
+        Introduce Invasive Species
+      </button>
+      <button class="ctrl-btn ctrl-danger" id="btnPurge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg>
+        Purge Trophic Matrices & Re-Seed Ocean
+      </button>
+    </footer>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

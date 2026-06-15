@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Linux Command Playground</title>
+  <!-- Google Fonts: Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Background Decorative Glowing Orbs -->
+  <div class="decor-glow">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+  </div>
+
+  <div class="playground-layout">
+    <!-- APP HEADER -->
+    <header class="app-header bg-glass">
+      <div class="brand">
+        <div class="brand-logo">
+          <i class="fa-solid fa-terminal"></i>
+        </div>
+        <div class="brand-text">
+          <h1>Linuxtry</h1>
+          <span>Linux Command Playground</span>
+        </div>
+      </div>
+
+      <!-- Progression Gauge indicator -->
+      <div class="progress-container">
+        <div class="progress-bar-wrapper">
+          <div class="progress-bar-fill" id="progress-fill" style="width: 0%;"></div>
+        </div>
+        <span class="progress-status" id="progress-status-text">0 / 6 Missions</span>
+      </div>
+    </header>
+
+    <!-- MAIN GRID CONTAINER -->
+    <main class="grid-container">
+
+      <!-- COLUMN 1: SIDEBAR (Missions & VFS Explorer) -->
+      <aside class="sidebar bg-glass">
+        <!-- Section 1: Lesson Missions -->
+        <div class="sidebar-section border-bottom overflow-y" style="max-height: 48%;">
+          <div class="section-header">
+            <h3><i class="fa-solid fa-flag text-accent"></i> Terminal Missions</h3>
+          </div>
+          <div class="missions-list" id="missions-list">
+            <!-- Dynamic missions checkpoints -->
+          </div>
+          
+          <!-- Dynamic Mission Briefing Details -->
+          <div class="mission-briefing" id="mission-briefing-box">
+            <h4 id="mission-title">Mission Title</h4>
+            <p id="mission-objective">Loading details...</p>
+          </div>
+        </div>
+
+        <!-- Section 2: VFS File Tree Explorer -->
+        <div class="sidebar-section flex-grow overflow-y">
+          <div class="section-header">
+            <h3><i class="fa-solid fa-folder-tree text-accent"></i> File Visualizer</h3>
+          </div>
+          <div class="vfs-tree-container" id="vfs-tree-root">
+            <!-- Dynamically generated nested file tree -->
+          </div>
+        </div>
+      </aside>
+
+      <!-- COLUMN 2: RETRO UNIX TERMINAL PLAYGROUND (RIGHT) -->
+      <section class="terminal-card bg-glass" id="terminal-screen" aria-labelledby="header-terminal">
+        <div class="terminal-header" id="header-terminal">
+          <div class="terminal-controls">
+            <circle cx="10" cy="10" r="3" class="ctrl-red"></circle>
+            <circle cx="18" cy="10" r="3" class="ctrl-yellow"></circle>
+            <circle cx="26" cy="10" r="3" class="ctrl-green"></circle>
+            <span>bash — user@linuxbox</span>
+          </div>
+          <button id="btn-reset-terminal" class="btn btn-secondary btn-sm" title="Recreate virtual file system"><i class="fa-solid fa-power-off"></i> Reboot</button>
+        </div>
+
+        <!-- Terminal Output Buffer & Input Prompt Line -->
+        <div class="terminal-body" id="terminal-console-buffer">
+          <!-- Text logs history -->
+          <div id="terminal-output-logs">
+            <div class="terminal-log-row text-accent">Welcome to Linuxtry Terminal Sandbox!</div>
+            <div class="terminal-log-row">Type "help" to see all available commands. Complete the missions in the left sidebar to learn basic Unix administration.</div>
+            <div class="terminal-log-row" style="margin-bottom: 12px;"></div>
+          </div>
+
+          <!-- Active Prompt Input line -->
+          <div class="terminal-prompt-line">
+            <span class="prompt-prefix">
+              <span class="prompt-user">user@linuxbox</span><span class="prompt-colon">:</span><span class="prompt-dir" id="prompt-dir-path">~</span><span class="prompt-char">$</span>
+            </span>
+            <div class="prompt-input-wrapper">
+              <input type="text" id="terminal-stdin-input" autocomplete="off" spellcheck="false" autofocus>
+              <div class="cursor-visual" id="custom-cursor"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

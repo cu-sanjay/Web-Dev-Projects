@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kubernetes Learning Dashboard & Simulator</title>
+  <!-- Google Fonts: Outfit and Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons for Dashboard aesthetics -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-background"></div>
+  
+  <!-- HEADER -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="logo">
+        <i class="fa-solid fa-cubes glow-icon"></i>
+        <h1>Kube<span>Visualizer</span></h1>
+        <span class="badge">Simulator & Lab</span>
+      </div>
+      <div class="cluster-summary">
+        <div class="summary-item">
+          <span class="lbl">API Server</span>
+          <span class="val text-success"><span class="pulse-dot"></span> Online</span>
+        </div>
+        <div class="summary-item">
+          <span class="lbl">Nodes</span>
+          <span class="val" id="summary-nodes">2/2 Ready</span>
+        </div>
+        <div class="summary-item">
+          <span class="lbl">Pods</span>
+          <span class="val text-accent" id="summary-pods">0/12</span>
+        </div>
+        <div class="summary-item">
+          <span class="lbl">Namespace</span>
+          <div class="ns-select-wrapper">
+            <select id="ns-selector" aria-label="Kubernetes Namespace Selector">
+              <option value="default">default</option>
+              <option value="kube-system">kube-system</option>
+              <option value="production">production</option>
+            </select>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="main-container">
+    
+    <!-- LEFT PANEL: LESSONS & CHALLENGES -->
+    <section class="panel panel-left" aria-labelledby="learning-heading">
+      <div class="panel-header">
+        <i class="fa-solid fa-graduation-cap"></i>
+        <h2 id="learning-heading">Labs & Tutorials</h2>
+      </div>
+      
+      <div class="tabs-nav">
+        <button class="tab-btn active" data-panel-tab="lessons" id="tab-lessons-btn">Lessons</button>
+        <button class="tab-btn" data-panel-tab="progress" id="tab-progress-btn">Badges</button>
+      </div>
+
+      <div class="tab-panes-wrapper">
+        <!-- Lessons Pane -->
+        <div id="tab-pane-lessons" class="tab-pane active">
+          <div class="accordion-lessons">
+            <!-- Dynamic Lessons will be injected here -->
+          </div>
+          
+          <!-- Active Challenge Card -->
+          <div id="active-challenge-container" class="active-challenge-card hidden">
+            <div class="challenge-title-row">
+              <h3><i class="fa-solid fa-trophy text-warning"></i> Active Challenge: <span id="challenge-name">None</span></h3>
+            </div>
+            <p id="challenge-desc" class="challenge-desc">Select a lesson above to start a lab challenge!</p>
+            
+            <div class="challenge-requirements">
+              <h4>Requirements:</h4>
+              <ul id="challenge-reqs-list">
+                <!-- Dynamic requirements list -->
+              </ul>
+            </div>
+            
+            <div class="challenge-actions">
+              <button id="btn-verify-challenge" class="btn btn-primary btn-full">
+                <i class="fa-solid fa-circle-check"></i> Verify Challenge
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Progress/Badges Pane -->
+        <div id="tab-pane-progress" class="tab-pane">
+          <div class="stats-overview">
+            <div class="stat-card">
+              <span class="stat-val" id="stats-total-progress">0%</span>
+              <span class="stat-lbl">Course Progress</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-val" id="stats-labs-completed">0/5</span>
+              <span class="stat-lbl">Labs Solved</span>
+            </div>
+          </div>
+
+          <h3 class="badge-title">Earned Badges</h3>
+          <div class="badge-grid" id="badge-collection">
+            <div class="badge-item locked" id="badge-kubelet">
+              <div class="badge-icon"><i class="fa-solid fa-seedling"></i></div>
+              <span class="badge-name">K8s Seedling</span>
+              <span class="badge-desc">Complete the Cluster Architecture Overview</span>
+            </div>
+            <div class="badge-item locked" id="badge-pod-master">
+              <div class="badge-icon"><i class="fa-solid fa-cube"></i></div>
+              <span class="badge-name">Pod Wrangler</span>
+              <span class="badge-desc">Launch and inspect your first Pod</span>
+            </div>
+            <div class="badge-item locked" id="badge-scaler">
+              <div class="badge-icon"><i class="fa-solid fa-arrows-left-right-to-line"></i></div>
+              <span class="badge-name">Scale Master</span>
+              <span class="badge-desc">Create and scale a Deployment</span>
+            </div>
+            <div class="badge-item locked" id="badge-networking">
+              <div class="badge-icon"><i class="fa-solid fa-network-wired"></i></div>
+              <span class="badge-name">Net Architect</span>
+              <span class="badge-desc">Route traffic to pods using Services</span>
+            </div>
+            <div class="badge-item locked" id="badge-prober">
+              <div class="badge-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+              <span class="badge-name">SRE Guardian</span>
+              <span class="badge-desc">Add liveness and readiness probes</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CENTER PANEL: LIVE CLUSTER MAP -->
+    <section class="panel panel-center" aria-labelledby="visualizer-heading">
+      <div class="panel-header">
+        <div class="header-left">
+          <i class="fa-solid fa-network-wired"></i>
+          <h2 id="visualizer-heading">Cluster Topology</h2>
+        </div>
+        <div class="cluster-controls">
+          <button id="btn-demo-traffic" class="btn btn-secondary btn-sm" title="Simulate client requests to services">
+            <i class="fa-solid fa-paper-plane"></i> Send Traffic
+          </button>
+          <button id="btn-reset-cluster" class="btn btn-secondary btn-sm" title="Reset cluster state">
+            <i class="fa-solid fa-rotate-left"></i> Clean Cluster
+          </button>
+        </div>
+      </div>
+
+      <!-- VISUAL CANVAS -->
+      <div class="canvas-container">
+        
+        <!-- Control Plane (Master Node) -->
+        <div class="cluster-zone control-plane-zone">
+          <div class="zone-label">Control Plane (Master Node)</div>
+          <div class="control-plane-grid">
+            <div class="k8s-component control-component clickable" data-comp="api-server" id="comp-api-server">
+              <i class="fa-solid fa-server icon"></i>
+              <span class="name">kube-apiserver</span>
+              <span class="status-indicator online"></span>
+            </div>
+            <div class="k8s-component control-component clickable" data-comp="scheduler" id="comp-scheduler">
+              <i class="fa-solid fa-calendar-days icon"></i>
+              <span class="name">kube-scheduler</span>
+              <span class="status-indicator online"></span>
+            </div>
+            <div class="k8s-component control-component clickable" data-comp="controller-manager" id="comp-controller-manager">
+              <i class="fa-solid fa-sliders icon"></i>
+              <span class="name">kube-controller-manager</span>
+              <span class="status-indicator online"></span>
+            </div>
+            <div class="k8s-component control-component clickable" data-comp="etcd" id="comp-etcd">
+              <i class="fa-solid fa-database icon"></i>
+              <span class="name">etcd</span>
+              <span class="status-indicator online"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Workers Zone -->
+        <div class="cluster-zone workers-zone">
+          <div class="zone-label">Worker Nodes</div>
+          <div class="worker-nodes-container">
+            
+            <!-- Node 1 -->
+            <div class="worker-node clickable" data-node="node-1" id="worker-node-1">
+              <div class="node-header">
+                <span class="node-name"><i class="fa-solid fa-hard-drive"></i> worker-node-1</span>
+                <span class="node-ip">10.244.0.1</span>
+              </div>
+              <div class="node-agent-row">
+                <span class="node-agent" title="Kubelet: Agent that runs on each node"><i class="fa-solid fa-microchip"></i> kubelet</span>
+                <span class="node-agent" title="Kube-Proxy: Handles networking rules"><i class="fa-solid fa-route"></i> kube-proxy</span>
+              </div>
+              <div class="pods-grid" id="pods-grid-node-1">
+                <!-- Pods injected dynamically -->
+                <div class="empty-pods-msg">No pods running</div>
+              </div>
+            </div>
+
+            <!-- Node 2 -->
+            <div class="worker-node clickable" data-node="node-2" id="worker-node-2">
+              <div class="node-header">
+                <span class="node-name"><i class="fa-solid fa-hard-drive"></i> worker-node-2</span>
+                <span class="node-ip">10.244.0.2</span>
+              </div>
+              <div class="node-agent-row">
+                <span class="node-agent" title="Kubelet"><i class="fa-solid fa-microchip"></i> kubelet</span>
+                <span class="node-agent" title="Kube-Proxy"><i class="fa-solid fa-route"></i> kube-proxy</span>
+              </div>
+              <div class="pods-grid" id="pods-grid-node-2">
+                <!-- Pods injected dynamically -->
+                <div class="empty-pods-msg">No pods running</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Virtual Services Layer (Overlay display of services routing traffic) -->
+        <div class="cluster-zone services-zone hidden" id="services-layer">
+          <div class="zone-label">Virtual Cluster Services (Kube-Proxy Routing)</div>
+          <div class="services-container" id="services-list-visual">
+            <!-- Dynamic services visual cards -->
+          </div>
+        </div>
+      </div>
+
+      <!-- INSPECTOR PANEL -->
+      <div class="inspector-card" id="resource-inspector">
+        <div class="inspector-header">
+          <div class="inspector-title">
+            <i class="fa-solid fa-magnifying-glass-chart"></i>
+            <h3>Object Inspector</h3>
+          </div>
+          <div class="inspector-actions">
+            <span class="object-badge" id="inspector-badge">No Object Selected</span>
+            <button id="btn-close-inspector" class="btn-icon" aria-label="Close Inspector"><i class="fa-solid fa-xmark"></i></button>
+          </div>
+        </div>
+        <div class="inspector-body">
+          <div id="inspector-empty-state">
+            <p class="text-muted"><i class="fa-solid fa-arrow-pointer"></i> Click any cluster element (Pod, Node, Controller, Service) to inspect its live configuration and events.</p>
+          </div>
+          <div id="inspector-content" class="hidden">
+            <div class="inspector-grid">
+              <div class="info-group">
+                <span class="lbl">Name:</span>
+                <span class="val text-highlight" id="inspect-name">-</span>
+              </div>
+              <div class="info-group">
+                <span class="lbl">Kind:</span>
+                <span class="val" id="inspect-kind">-</span>
+              </div>
+              <div class="info-group">
+                <span class="lbl">Status:</span>
+                <span class="val" id="inspect-status">-</span>
+              </div>
+              <div class="info-group">
+                <span class="lbl">IP Address:</span>
+                <span class="val" id="inspect-ip">-</span>
+              </div>
+              <div class="info-group width-full">
+                <span class="lbl">Labels:</span>
+                <div class="labels-container" id="inspect-labels">
+                  <!-- Labels badges -->
+                </div>
+              </div>
+              <div class="info-group width-full hidden" id="inspect-extra-container">
+                <span class="lbl" id="inspect-extra-label">Details:</span>
+                <span class="val block-text" id="inspect-extra-val">-</span>
+              </div>
+            </div>
+            
+            <div class="events-log-container">
+              <h4>Object Events</h4>
+              <ul class="events-list" id="inspect-events">
+                <!-- Events -->
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT PANEL: YAML EDITOR & TERMINAL -->
+    <section class="panel panel-right" aria-labelledby="editor-heading">
+      
+      <!-- TOP SECTION: YAML PLAYGROUND -->
+      <div class="yaml-editor-section">
+        <div class="panel-header">
+          <div class="header-left">
+            <i class="fa-solid fa-code"></i>
+            <h2 id="editor-heading">YAML Playground</h2>
+          </div>
+          <div class="template-selector-wrapper">
+            <select id="yaml-template-selector" aria-label="YAML Template Selector">
+              <option value="pod">Template: Pod</option>
+              <option value="deployment">Template: Deployment</option>
+              <option value="service">Template: Service</option>
+              <option value="configmap">Template: ConfigMap</option>
+            </select>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+        </div>
+
+        <div class="editor-container">
+          <div class="line-numbers" id="editor-line-numbers">
+            <!-- Generated dynamically -->
+          </div>
+          <textarea id="yaml-textarea" spellcheck="false" autocomplete="off" aria-label="YAML Manifest Editor"></textarea>
+        </div>
+
+        <div class="editor-actions-bar">
+          <div id="yaml-feedback-label" class="yaml-feedback text-success">
+            <i class="fa-solid fa-circle-check"></i> Syntax Valid
+          </div>
+          <div class="actions">
+            <button id="btn-reset-yaml" class="btn btn-secondary btn-sm" title="Reset editor to template default">Reset</button>
+            <button id="btn-apply-yaml" class="btn btn-primary btn-sm" title="Apply manifest changes to the cluster">Apply YAML</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOTTOM SECTION: INTERACTIVE TERMINAL -->
+      <div class="terminal-section">
+        <div class="panel-header">
+          <i class="fa-solid fa-terminal"></i>
+          <h2>Interactive CLI</h2>
+          <span class="kbd-badge">kubectl simulator</span>
+        </div>
+        
+        <div class="terminal-body" id="cli-screen">
+          <div class="terminal-output" id="cli-output">
+            <div class="output-line text-muted">Kubernetes Cluster Control CLI Simulator.</div>
+            <div class="output-line text-muted">Type 'help' or click on suggestions below to interact.</div>
+            <br>
+          </div>
+          <div class="terminal-input-line">
+            <span class="prompt">visitor@kube-cluster:~$</span>
+            <input type="text" id="cli-input" placeholder="kubectl get pods..." autocomplete="off" spellcheck="false" aria-label="Kubectl Command Input">
+          </div>
+        </div>
+
+        <div class="terminal-suggestions">
+          <span class="title">Quick Commands:</span>
+          <div class="suggestions-list">
+            <button class="cmd-suggest-btn" data-cmd="kubectl get nodes">kubectl get nodes</button>
+            <button class="cmd-suggest-btn" data-cmd="kubectl get pods">kubectl get pods</button>
+            <button class="cmd-suggest-btn" data-cmd="kubectl get services">kubectl get services</button>
+            <button class="cmd-suggest-btn" data-cmd="kubectl describe node worker-node-1">kubectl describe node worker-node-1</button>
+            <button class="cmd-suggest-btn" data-cmd="kubectl scale deployment web-deployment --replicas=4">kubectl scale web-deployment --replicas=4</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- APP FOOTER -->
+  <footer class="app-footer">
+    <div class="footer-container">
+      <p>&copy; 2026 Kubernetes Visual Learning Dashboard. Designed as a self-contained DevOps learning workspace.</p>
+      <div class="footer-links">
+        <button id="btn-reset-app-storage" class="footer-btn"><i class="fa-solid fa-trash-can"></i> Reset All Lab Progress</button>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

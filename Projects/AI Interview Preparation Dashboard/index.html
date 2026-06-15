@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Interview Preparation Dashboard</title>
+  <!-- Google Fonts: Outfit and Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons for Dashboard aesthetics -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-background"></div>
+
+  <div class="dashboard-wrapper">
+    <!-- SIDEBAR STATS & NAV -->
+    <aside class="dashboard-sidebar">
+      <div class="logo">
+        <i class="fa-solid fa-microphone-lines glow-icon"></i>
+        <h1>Inter<span>Prep</span></h1>
+        <span class="badge">v2.0</span>
+      </div>
+
+      <!-- Quick Telemetry -->
+      <div class="sidebar-telemetry">
+        <div class="tel-item">
+          <div class="tel-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+          <div class="tel-info">
+            <span class="tel-lbl">Practice Sessions</span>
+            <span class="tel-val" id="side-stat-sessions">0</span>
+          </div>
+        </div>
+        <div class="tel-item">
+          <div class="tel-icon text-accent"><i class="fa-solid fa-award"></i></div>
+          <div class="tel-info">
+            <span class="tel-lbl">Avg Quality Score</span>
+            <span class="tel-val" id="side-stat-score">0%</span>
+          </div>
+        </div>
+        <div class="tel-item">
+          <div class="tel-icon text-warning"><i class="fa-solid fa-fire-flame-curved"></i></div>
+          <div class="tel-info">
+            <span class="tel-lbl">Practice Streak</span>
+            <span class="tel-val" id="side-stat-streak">0 days</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation links -->
+      <nav class="sidebar-nav" aria-label="Dashboard views">
+        <button class="nav-btn active" data-view="simulator">
+          <i class="fa-solid fa-circle-play"></i> Mock Interviewer
+        </button>
+        <button class="nav-btn" data-view="star">
+          <i class="fa-solid fa-compass-drafting"></i> STAR Story Builder
+        </button>
+        <button class="nav-btn" data-view="history">
+          <i class="fa-solid fa-chart-simple"></i> Analytics & Logs
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button id="btn-reset-data" class="btn btn-secondary btn-sm btn-full">
+          <i class="fa-solid fa-trash-can"></i> Reset All Data
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN DASHBOARD CONTENT -->
+    <main class="dashboard-main">
+      <header class="main-header">
+        <div class="header-titles">
+          <h2 id="view-title">Mock Interview Simulator</h2>
+          <p id="view-desc" class="text-muted">Configure your target role and practice answering questions under stress.</p>
+        </div>
+        <div class="speech-status-banner" id="speech-support-badge">
+          <i class="fa-solid fa-circle-check text-success"></i> Speech Engines Ready
+        </div>
+      </header>
+
+      <!-- VIEW 1: MOCK INTERVIEW SIMULATOR -->
+      <section id="view-simulator" class="view-pane">
+        <div class="pane-split">
+          <!-- Config Panel (Left) -->
+          <div class="section-card config-card">
+            <h3>Configure Session</h3>
+            <p class="text-muted text-sm">Select interview parameters to generate matching questions.</p>
+            
+            <div class="form-group mt-1">
+              <label for="select-role">Target Job Domain</label>
+              <div class="select-wrapper">
+                <select id="select-role">
+                  <option value="frontend">Frontend Developer (HTML/CSS/React)</option>
+                  <option value="backend">Backend Engineer (Node.js/SQL/APIs)</option>
+                  <option value="devops">DevOps & Cloud (Docker/AWS/CI-CD)</option>
+                  <option value="product">Product Manager (Roadmaps/KPIs/Metrics)</option>
+                </select>
+                <i class="fa-solid fa-chevron-down select-arrow"></i>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="select-level">Experience Tier</label>
+              <div class="select-wrapper">
+                <select id="select-level">
+                  <option value="junior">Junior (Entry-level / Grad)</option>
+                  <option value="mid" selected>Mid-Level (2-5 years experience)</option>
+                  <option value="senior">Senior (Architect / Tech Lead)</option>
+                </select>
+                <i class="fa-solid fa-chevron-down select-arrow"></i>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="select-length">Session Length</label>
+              <div class="select-wrapper">
+                <select id="select-length">
+                  <option value="3">Quick Session (3 Questions)</option>
+                  <option value="5" selected>Standard Session (5 Questions)</option>
+                  <option value="10">Deep Session (10 Questions)</option>
+                </select>
+                <i class="fa-solid fa-chevron-down select-arrow"></i>
+              </div>
+            </div>
+
+            <div class="toggle-group-card">
+              <h4>Voice Settings</h4>
+              <div class="toggle-row">
+                <div class="toggle-desc">
+                  <span>AI Voice Reader (TTS)</span>
+                  <p class="text-muted text-xs">Speak questions automatically using local engine</p>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" id="check-tts" checked>
+                  <span class="slider round"></span>
+                </label>
+              </div>
+
+              <div class="toggle-row">
+                <div class="toggle-desc">
+                  <span>Microphone Transcriber (STT)</span>
+                  <p class="text-muted text-xs">Transcribe spoken words using WebSpeech STT</p>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" id="check-stt">
+                  <span class="slider round"></span>
+                </label>
+              </div>
+            </div>
+
+            <button id="btn-start-session" class="btn btn-primary btn-full mt-1">
+              <i class="fa-solid fa-play"></i> Begin Session
+            </button>
+          </div>
+
+          <!-- Active Workspace Panel (Right) -->
+          <div class="workspace-area">
+            <!-- Setup Guide / Demo Card -->
+            <div id="sim-setup-card" class="section-card welcome-card">
+              <div class="welcome-graphic">
+                <div class="pulse-circle"></div>
+                <i class="fa-solid fa-microphone-lines"></i>
+              </div>
+              <h3>Ready to Interview?</h3>
+              <p>Practice answering realistic technical and behavioral prompts. When voice transcription is enabled, speak clearly into your microphone, or type in the response boxes manually.</p>
+              <div class="features-check-list">
+                <div class="feat-item"><i class="fa-solid fa-check text-success"></i> Realistic time constraints</div>
+                <div class="feat-item"><i class="fa-solid fa-check text-success"></i> Comprehensive performance grades</div>
+                <div class="feat-item"><i class="fa-solid fa-check text-success"></i> Key industry keyword matching</div>
+              </div>
+            </div>
+
+            <!-- ACTIVE INTERVIEW BOARD -->
+            <div id="sim-active-card" class="section-card interview-board-card hidden">
+              <div class="board-header">
+                <div class="session-progress">
+                  Question <span id="val-curr-q">1</span> of <span id="val-total-q">5</span>
+                </div>
+                <div class="question-timer">
+                  <i class="fa-regular fa-clock"></i> <span id="val-timer">00:00</span>
+                </div>
+              </div>
+
+              <div class="question-pane">
+                <div class="ai-speech-controls">
+                  <button id="btn-speak-question" class="btn btn-secondary btn-sm" title="Replay voice audio of the question">
+                    <i class="fa-solid fa-volume-high"></i> Listen to AI
+                  </button>
+                </div>
+                <p id="lbl-question-text" class="question-text">Retrieving interview question prompt...</p>
+              </div>
+
+              <div class="response-pane">
+                <div class="label-row">
+                  <label for="txt-response">Your Response:</label>
+                  <span id="response-char-count" class="text-muted">0 characters</span>
+                </div>
+                
+                <textarea id="txt-response" placeholder="Type your detailed response here, or toggle the mic to transcribe your voice..."></textarea>
+
+                <div class="stt-status-row">
+                  <!-- Transcriber status, volume levels -->
+                  <div id="mic-status-container" class="mic-status hidden">
+                    <div class="mic-pulse-indicator"></div>
+                    <span id="lbl-mic-state">Listening to microphone...</span>
+                  </div>
+                </div>
+
+                <div class="controls-row">
+                  <button id="btn-mic-toggle" class="btn btn-secondary" title="Toggle voice-to-text recording">
+                    <i class="fa-solid fa-microphone"></i> <span>Enable Microphone</span>
+                  </button>
+                  
+                  <div class="flow-nav-buttons">
+                    <button id="btn-next-question" class="btn btn-primary">
+                      Next Question <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                    <button id="btn-finish-session" class="btn btn-danger hidden">
+                      Finish &amp; Score <i class="fa-solid fa-circle-check"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ATTEMPT SUMMARY SCORING SCREEN -->
+            <div id="sim-score-card" class="section-card evaluation-card hidden">
+              <div class="eval-header">
+                <div class="text-group">
+                  <h3>Session Evaluated!</h3>
+                  <p class="text-muted text-sm" id="lbl-eval-details">Frontend Developer - Standard Session</p>
+                </div>
+                <span class="eval-badge" id="lbl-eval-badge">Good Quality</span>
+              </div>
+
+              <div class="eval-metrics-grid">
+                <!-- Radial Overall Score -->
+                <div class="radial-score-wrapper">
+                  <svg class="radial-svg" viewBox="0 0 120 120">
+                    <circle class="radial-bg" cx="60" cy="60" r="50"></circle>
+                    <circle class="radial-progress" id="eval-radial-progress" cx="60" cy="60" r="50" style="stroke-dasharray: 314; stroke-dashoffset: 314;"></circle>
+                  </svg>
+                  <div class="radial-text">
+                    <span id="lbl-eval-score" class="score-val">0</span>
+                    <span class="score-lbl">Quality Score</span>
+                  </div>
+                </div>
+
+                <!-- Sub stats progress bars -->
+                <div class="sub-stats-panel">
+                  <div class="sub-stat-row">
+                    <div class="lbl-val">
+                      <span>Keyword Relevance</span>
+                      <span id="val-sub-relevance">0%</span>
+                    </div>
+                    <div class="progress-bar"><div class="fill" id="fill-sub-relevance"></div></div>
+                  </div>
+                  
+                  <div class="sub-stat-row">
+                    <div class="lbl-val">
+                      <span>Speech Pace / WPM</span>
+                      <span id="val-sub-pace">0 WPM (Slow)</span>
+                    </div>
+                    <div class="progress-bar"><div class="fill" id="fill-sub-pace"></div></div>
+                  </div>
+
+                  <div class="sub-stat-row">
+                    <div class="lbl-val">
+                      <span>Vocabulary Length</span>
+                      <span id="val-sub-vocab">0 words</span>
+                    </div>
+                    <div class="progress-bar"><div class="fill" id="fill-sub-vocab"></div></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="eval-details-feedback">
+                <h4>AI Diagnostic Recommendations</h4>
+                <div class="accordion-feedback">
+                  <div class="accordion-item active">
+                    <div class="accordion-trigger">
+                      <span><i class="fa-solid fa-triangle-exclamation text-warning"></i> Key Gaps Detected</span>
+                      <i class="fa-solid fa-chevron-up chevron"></i>
+                    </div>
+                    <div class="accordion-content">
+                      <p>Your answers missed core industry terms frequently associated with this level. Consider incorporating these in similar prompts:</p>
+                      <div id="eval-missing-keywords" class="tag-suggestions font-mono">
+                        <!-- Dynamic keyword tags -->
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="accordion-item">
+                    <div class="accordion-trigger">
+                      <span><i class="fa-solid fa-bullseye text-accent"></i> Core Vocabulary Analysis</span>
+                      <i class="fa-solid fa-chevron-down chevron"></i>
+                    </div>
+                    <div class="accordion-content" id="eval-vocab-text">
+                      <p>Try drafting replies containing structured outcomes. Avoid filler terms like <em>"um"</em>, <em>"like"</em>, or <em>"so"</em> to improve delivery scores.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <button id="btn-restart-simulator" class="btn btn-secondary btn-full mt-1">
+                <i class="fa-solid fa-rotate-left"></i> Run Another Session
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 2: STAR BEHAVIORAL STORY BUILDER -->
+      <section id="view-star" class="view-pane hidden">
+        <div class="pane-split">
+          <!-- STAR Form Card (Left) -->
+          <div class="section-card star-form-card">
+            <h3>Draft New Story</h3>
+            <p class="text-muted text-sm">Design behavioral answers using the structural STAR method guidelines.</p>
+            
+            <form id="star-builder-form" class="mt-1">
+              <div class="form-group">
+                <label for="star-title">Story Title <span class="required">*</span></label>
+                <input type="text" id="star-title" placeholder="e.g. Scaling User Notification System" required>
+              </div>
+
+              <div class="form-group">
+                <label for="star-category">Job Role Tag</label>
+                <div class="select-wrapper">
+                  <select id="star-category">
+                    <option value="frontend">Frontend Engineering</option>
+                    <option value="backend">Backend Systems</option>
+                    <option value="devops">DevOps &amp; Security</option>
+                    <option value="product">Product Management</option>
+                  </select>
+                  <i class="fa-solid fa-chevron-down select-arrow"></i>
+                </div>
+              </div>
+
+              <div class="form-group star-field">
+                <label for="star-situation"><strong>S</strong>ituation <span class="sub-label">(Context: What &amp; When)</span></label>
+                <textarea id="star-situation" placeholder="Describe the background context. e.g. 'In my previous intern role, we experienced a 20% slowdown on the user feed page during peak hour events...'" required></textarea>
+              </div>
+
+              <div class="form-group star-field">
+                <label for="star-task"><strong>T</strong>ask <span class="sub-label">(Challenge: What needed doing)</span></label>
+                <textarea id="star-task" placeholder="Outline the core challenge and goal. e.g. 'I was tasked with finding the query bottlenecks and optimizing UI script render paths to lower latency by 50%...'" required></textarea>
+              </div>
+
+              <div class="form-group star-field">
+                <label for="star-action"><strong>A</strong>ction <span class="sub-label">(Your direct steps: What YOU did)</span></label>
+                <textarea id="star-action" placeholder="Detail your specific contributions. e.g. 'I implemented lazy loading on the lists, structured an indexes map on Postgres fields, and refactored asynchronous API calls...'" required></textarea>
+              </div>
+
+              <div class="form-group star-field">
+                <label for="star-result"><strong>R</strong>esult <span class="sub-label">(Outcome: Metrics &amp; Impact)</span></label>
+                <textarea id="star-result" placeholder="Specify the quantifiable results. e.g. 'Successfully reduced average feed loading speed from 2.8s to 0.9s (a 3x improvement) and restored peak hour latency issues...'" required></textarea>
+              </div>
+
+              <button type="submit" id="btn-save-star" class="btn btn-primary btn-full">
+                <i class="fa-solid fa-floppy-disk"></i> Save Story
+              </button>
+            </form>
+          </div>
+
+          <!-- STAR Advisor & Saved List (Right) -->
+          <div class="workspace-area">
+            <!-- Dynamic Advice Card -->
+            <div class="section-card star-advice-card">
+              <h3>STAR Diagnostic Evaluator</h3>
+              <p class="text-muted text-sm">Live evaluation analysis of the story drafts above.</p>
+              
+              <div class="advice-metrics-box mt-1">
+                <div class="adv-row" id="adv-metric-length">
+                  <i class="fa-solid fa-circle-xmark text-danger"></i>
+                  <span>Total Story Length (<span id="star-word-count">0</span> words) - Recommend 150-400 words.</span>
+                </div>
+                <div class="adv-row" id="adv-metric-metrics">
+                  <i class="fa-solid fa-circle-xmark text-danger"></i>
+                  <span>Impact Metrics Detection (checks for numbers, percentages like '20%', '3x').</span>
+                </div>
+                <div class="adv-row" id="adv-metric-verbs">
+                  <i class="fa-solid fa-circle-xmark text-danger"></i>
+                  <span>Action Verbs (checks for words like 'Architected', 'Spearheaded', 'Optimized').</span>
+                </div>
+              </div>
+
+              <div class="advice-tips-box mt-1">
+                <h5>Pro Story Tip:</h5>
+                <p id="star-live-tip" class="text-secondary text-sm">Begin writing your Situation and Task paragraphs to receive analytical feedback.</p>
+              </div>
+            </div>
+
+            <!-- Saved Stories Section -->
+            <div class="star-stories-gallery-container mt-1">
+              <h3 class="gallery-title">Your Saved STAR Stories (<span id="saved-star-count">0</span>)</h3>
+              <div id="star-stories-grid" class="star-grid">
+                <!-- Dynamic story cards -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 3: ANALYTICS & LOGS -->
+      <section id="view-history" class="view-pane hidden">
+        <div class="section-card analytics-summary-card">
+          <h3>Performance Diagnostic Hub</h3>
+          <p class="text-muted text-sm">Consolidated feedback statistics based on all practice mock interview sessions.</p>
+
+          <div class="stats-overview-grid mt-1">
+            <div class="ov-item">
+              <span class="ov-label">Total Answers Checked</span>
+              <span class="ov-value" id="tot-answers-count">0</span>
+            </div>
+            <div class="ov-item">
+              <span class="ov-label">Top Job Domain Domain</span>
+              <span class="ov-value" id="tot-favorite-role">-</span>
+            </div>
+            <div class="ov-item">
+              <span class="ov-label">Average Response Time</span>
+              <span class="ov-value" id="tot-average-time">0s</span>
+            </div>
+            <div class="ov-item">
+              <span class="ov-label">Checklist Streak</span>
+              <span class="ov-value text-accent" id="tot-streak-val">0 days</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-card logs-card mt-2">
+          <div class="card-header">
+            <div class="header-title">
+              <i class="fa-solid fa-clock-rotate-left"></i>
+              <h3>Mock Session Attempts Registry</h3>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="logs-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Job Domain</th>
+                  <th>Tier</th>
+                  <th>Questions</th>
+                  <th>Accuracy Grade</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="logs-table-body">
+                <!-- Dynamic table entries -->
+                <tr>
+                  <td colspan="6" class="text-center text-muted text-sm py-2">No session attempts recorded yet. Begin a mock session!</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Modal for Story Details -->
+  <div id="story-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modal-story-title">Story Title</h3>
+        <button id="btn-close-modal" class="btn-icon" aria-label="Close modal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body" id="modal-story-body">
+        <!-- STAR parsed details -->
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

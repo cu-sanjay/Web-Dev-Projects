@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carbon Footprint · Forest Offset Planner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="top-profile">
+    <div class="profile-brand">
+      <svg class="profile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M12 3L3 9l9 6 9-6-9-6z" stroke="#00e676"/>
+        <path d="M3 9v6l9 6 9-6V9" stroke="#00e676" fill="none"/>
+        <path d="M12 12l-3-1.5M12 12l3-1.5" stroke="#00e676" stroke-width="1"/>
+      </svg>
+      <div>
+        <h1 class="profile-title">Carbon Footprint · Forest Offset Planner</h1>
+        <span class="profile-sub">Environmental Informatics Suite · v1.0</span>
+      </div>
+      <span class="profile-badge">EMISSIONS · OFFSET · CANOPY</span>
+    </div>
+    <div class="profile-state">
+      <span class="state-dot" id="stateDot"></span>
+      <span class="state-label" id="stateLabel">STANDBY</span>
+    </div>
+  </header>
+
+  <main class="workspace">
+
+    <!-- LEFT: Activity Console -->
+    <section class="console-panel">
+      <div class="panel-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 12h6M12 9v6"/></svg>
+        <span>Activity Parameter Console</span>
+      </div>
+
+      <div class="param-group" data-category="transport">
+        <label class="param-label">
+          <span>Transport Distance</span>
+          <span class="param-unit">km/day</span>
+        </label>
+        <div class="param-input-row">
+          <input type="range" class="param-slider" min="0" max="120" step="1" value="25" id="sliderTransport">
+          <input type="number" class="param-num" min="0" max="999" step="0.5" value="25" id="numTransport">
+        </div>
+        <span class="param-sub" id="subTransport">25 km/day · ~0.21 kg CO₂/km</span>
+      </div>
+
+      <div class="param-group" data-category="electricity">
+        <label class="param-label">
+          <span>Household Electricity</span>
+          <span class="param-unit">kWh/day</span>
+        </label>
+        <div class="param-input-row">
+          <input type="range" class="param-slider" min="0" max="60" step="0.5" value="12" id="sliderElectricity">
+          <input type="number" class="param-num" min="0" max="999" step="0.1" value="12" id="numElectricity">
+        </div>
+        <span class="param-sub" id="subElectricity">12 kWh/day · ~0.85 kg CO₂/kWh</span>
+      </div>
+
+      <div class="param-group" data-category="diet">
+        <label class="param-label">
+          <span>Dietary Carbon Density</span>
+          <span class="param-unit">scale</span>
+        </label>
+        <div class="param-input-row">
+          <input type="range" class="param-slider" min="0" max="100" step="1" value="40" id="sliderDiet">
+          <input type="number" class="param-num" min="0" max="100" step="1" value="40" id="numDiet">
+        </div>
+        <span class="param-sub" id="subDiet">40 · vegan(0) → heavy meat(100)</span>
+      </div>
+
+      <div class="param-group" data-category="aviation">
+        <label class="param-label">
+          <span>Aviation Flights</span>
+          <span class="param-unit">trips/yr</span>
+        </label>
+        <div class="param-input-row">
+          <input type="range" class="param-slider" min="0" max="50" step="1" value="3" id="sliderAviation">
+          <input type="number" class="param-num" min="0" max="999" step="1" value="3" id="numAviation">
+        </div>
+        <span class="param-sub" id="subAviation">3 trips/yr · ~510 kg CO₂/trip</span>
+      </div>
+
+      <div class="console-error" id="consoleError" role="alert">Values exceed sustainable limits. Please adjust inputs.</div>
+    </section>
+
+    <!-- CENTER: Charts + Forest -->
+    <section class="center-col">
+      <!-- Breakdown Chart -->
+      <div class="chart-card">
+        <div class="card-header">
+          <span>Annual Emissions Breakdown</span>
+          <span class="card-badge">kg CO₂/yr</span>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="chartCanvas"></canvas>
+        </div>
+      </div>
+
+      <!-- Forest Grid -->
+      <div class="forest-card">
+        <div class="card-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12"><path d="M12 3l7 10H5l7-10z" stroke="#00e676"/><path d="M12 13v7" stroke="#00e676"/><path d="M7 20h10" stroke="#00e676"/></svg>
+          <span>Virtual Afforestation Offset Lot</span>
+          <span class="card-badge" id="treeCountBadge">0 trees</span>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="forestCanvas"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT: Telemetry Dashboard -->
+    <section class="telemetry-panel">
+      <div class="panel-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        <span>Carbon Telemetry</span>
+      </div>
+
+      <div class="telemetry-body">
+        <div class="t-item t-emissions">
+          <span class="t-label">Total Annual Emissions</span>
+          <span class="t-value" id="valEmissions">—</span>
+          <span class="t-unit">kg CO₂ / yr</span>
+        </div>
+        <div class="t-item t-trees">
+          <span class="t-label">Required Mature Trees</span>
+          <span class="t-value" id="valTrees">—</span>
+          <span class="t-unit">trees @ 22 kg CO₂/tree</span>
+        </div>
+        <div class="t-item t-canopy">
+          <span class="t-label">Afforestation Canopy Area</span>
+          <span class="t-value" id="valCanopy">—</span>
+          <span class="t-unit">sq m</span>
+        </div>
+        <div class="t-item t-balance">
+          <span class="t-label">Net Carbon Balance</span>
+          <span class="t-value" id="valBalance">—</span>
+          <span class="t-unit" id="balanceUnit">—</span>
+        </div>
+      </div>
+
+      <div class="telemetry-footer">
+        <div class="gauge-wrap">
+          <span class="gauge-label">Offset Progress</span>
+          <div class="gauge-track">
+            <div class="gauge-fill" id="gaugeFill" style="width:0%"></div>
+          </div>
+          <span class="gauge-pct" id="gaugePct">0%</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- CONTROLS -->
+  <footer class="control-deck">
+    <button class="ctrl-btn ctrl-primary" id="btnCompute">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>
+      Compute Ecological Balance Sheet
+    </button>
+    <button class="ctrl-btn ctrl-amber" id="btnPreset">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M4 4h16v16H4z"/><path d="M4 9h16M9 4v16"/></svg>
+      Load High-Impact Household Preset
+    </button>
+    <button class="ctrl-btn ctrl-danger" id="btnFlush">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg>
+      Flush Workspace Arrays
+    </button>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

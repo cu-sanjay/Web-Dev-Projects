@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wildlife Migration · Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="top-profile">
+    <div class="profile-brand">
+      <svg class="profile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="12" cy="12" r="10" stroke="#00e5ff"/>
+        <circle cx="12" cy="12" r="3" fill="#00e676" stroke="none"/>
+        <path d="M12 2v5M12 17v5M2 12h5M17 12h5" stroke="#00e5ff" stroke-width="1"/>
+        <path d="M3 5l4 2-4 2M21 19l-4-2 4-2" stroke="#00e676" stroke-width="0.8"/>
+      </svg>
+      <div>
+        <h1 class="profile-title">Wildlife Migration · Tracker</h1>
+        <span class="profile-sub">GIS Geospatial Telemetry Laboratory · v1.0</span>
+      </div>
+      <span class="profile-badge">TRACK · HAZARD · LOG</span>
+    </div>
+    <div class="profile-state">
+      <span class="state-dot" id="stateDot"></span>
+      <span class="state-label" id="stateLabel">STANDBY</span>
+    </div>
+  </header>
+
+  <main class="workspace">
+
+    <!-- RIBBON CONTROLS -->
+    <section class="controls-ribbon">
+      <div class="ribbon-group">
+        <label class="ribbon-label">Target Species</label>
+        <div class="select-wrap">
+          <select id="selectSpecies">
+            <option value="monarch">Monarch Butterfly</option>
+            <option value="humpback" selected>Humpback Whale</option>
+            <option value="arcticTern">Arctic Tern</option>
+          </select>
+          <svg class="select-chevron" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+        </div>
+      </div>
+      <div class="ribbon-group">
+        <label class="ribbon-label">Climate Temp <span class="ribbon-val" id="valTemp">+1.2°C</span></label>
+        <input type="range" class="ribbon-slider" id="sliderTemp" min="-5" max="8" step="0.1" value="1.2">
+      </div>
+      <div class="ribbon-group">
+        <label class="ribbon-label">Scan Speed <span class="ribbon-val" id="valSpeed">1.0×</span></label>
+        <input type="range" class="ribbon-slider" id="sliderSpeed" min="0" max="5" step="0.1" value="1">
+      </div>
+    </section>
+
+    <!-- MAIN GRID -->
+    <section class="main-grid">
+
+      <!-- Migration Map Canvas -->
+      <div class="canvas-card map-card">
+        <div class="card-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M2 12h20M12 2v20" stroke-width="0.8"/></svg>
+          <span>Global Migration Corridors</span>
+          <span class="card-badge" id="routeBadge">HUMPBACK WHALE</span>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="mapCanvas"></canvas>
+        </div>
+      </div>
+
+      <!-- Species Info Card -->
+      <div class="info-card" id="speciesCard">
+        <div class="card-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12"><circle cx="12" cy="12" r="10"/><path d="M12 8v5M12 16v0"/></svg>
+          <span>Species Profile</span>
+          <span class="card-badge">BIO</span>
+        </div>
+        <div class="info-body" id="infoBody">
+          <div class="info-hero">
+            <div class="info-icon" id="infoIcon" style="background:#00e5ff22;border-color:#00e5ff55">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="1.5"><circle cx="12" cy="12" r="8"/><path d="M8 10l4-3 4 3v6H8v-6z"/></svg>
+            </div>
+            <div>
+              <span class="info-name" id="infoName">Humpback Whale</span>
+              <span class="info-sci" id="infoSci"><i>Megaptera novaeangliae</i></span>
+            </div>
+          </div>
+          <div class="info-detail">
+            <span class="info-detail-label">Migration Route</span>
+            <span class="info-detail-val" id="infoRoute">Alaska → Hawaii</span>
+          </div>
+          <div class="info-detail">
+            <span class="info-detail-label">Distance</span>
+            <span class="info-detail-val" id="infoDist">~5,000 km</span>
+          </div>
+          <div class="info-detail">
+            <span class="info-detail-label">Threat Level</span>
+            <span class="info-detail-val threat" id="infoThreat">MODERATE</span>
+          </div>
+          <div class="info-detail">
+            <span class="info-detail-label">Status</span>
+            <span class="info-detail-val" id="infoStatus">Migrating</span>
+          </div>
+          <div class="info-detail info-desc" id="infoDesc">
+            Annual migration from feeding grounds in Alaska to breeding waters off Hawaii. Travels ~5,000 km across the Pacific.
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ACTIVITY LOG -->
+    <section class="log-card">
+      <div class="card-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 8h10M7 12h6M7 16h8"/></svg>
+        <span>Activity Telemetry Stream</span>
+        <span class="card-badge" id="logCount">0 events</span>
+      </div>
+      <div class="log-scroll" id="logScroll"></div>
+    </section>
+
+    <!-- CONTROLS -->
+    <footer class="control-deck">
+      <button class="ctrl-btn ctrl-primary" id="btnInitiate">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z" fill="currentColor"/></svg>
+        Initiate Migration Cycle Async
+      </button>
+      <button class="ctrl-btn ctrl-amber" id="btnHazard">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><circle cx="12" cy="12" r="10"/><path d="M12 7v6M12 16v0"/></svg>
+        Inject Crosswind Weather Hazard
+      </button>
+      <button class="ctrl-btn ctrl-danger" id="btnFlush">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg>
+        Flush Vector Traces & Reset Sockets
+      </button>
+    </footer>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

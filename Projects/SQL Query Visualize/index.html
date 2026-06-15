@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive SQL Query Visualizer - Learn how SQL queries are executed step-by-step">
+    <meta name="keywords" content="SQL, Database, Query Visualization, Learning Tool">
+    <meta name="author" content="Ayush Kumar Singh">
+    <title>SQL Query Visualizer | Interactive Learning Tool</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="header-title">
+                    <span class="logo-icon">◈</span>
+                    SQL Query Visualizer
+                </h1>
+                <p class="header-subtitle">Interactive visualization of SQL query execution</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Left Panel - Query Input -->
+            <div class="panel-left">
+                <!-- Query Editor Section -->
+                <section class="card editor-section">
+                    <h2 class="card-title">Query Editor</h2>
+                    <div class="editor-controls">
+                        <select id="exampleSelect" class="select-example">
+                            <option value="">Load Example Query...</option>
+                            <option value="simple-select">Simple SELECT</option>
+                            <option value="where-filter">WHERE Filtering</option>
+                            <option value="order-by">ORDER BY Sorting</option>
+                            <option value="limit">LIMIT Query</option>
+                            <option value="group-by">GROUP BY Aggregation</option>
+                            <option value="count">COUNT Query</option>
+                            <option value="complex">Complex Query</option>
+                        </select>
+                    </div>
+                    
+                    <textarea 
+                        id="queryInput" 
+                        class="query-editor" 
+                        placeholder="Enter your SQL query here...&#10;&#10;Example:&#10;SELECT name, salary FROM users WHERE age > 25 ORDER BY salary DESC LIMIT 2;"
+                    ></textarea>
+
+                    <div class="editor-actions">
+                        <button id="visualizeBtn" class="btn btn-primary">
+                            <span class="btn-icon">▶</span>
+                            Visualize Query
+                        </button>
+                        <button id="copyBtn" class="btn btn-secondary">
+                            <span class="btn-icon">📋</span>
+                            Copy Query
+                        </button>
+                        <button id="resetBtn" class="btn btn-secondary">
+                            <span class="btn-icon">↺</span>
+                            Reset
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Statistics Section -->
+                <section class="card stats-section">
+                    <h2 class="card-title">Query Statistics</h2>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-label">Source Rows</div>
+                            <div class="stat-value" id="sourceRows">0</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Filtered</div>
+                            <div class="stat-value" id="filteredRows">0</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Returned</div>
+                            <div class="stat-value" id="returnedRows">0</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Steps</div>
+                            <div class="stat-value" id="executionSteps">0</div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Right Panel - Visualization -->
+            <div class="panel-right">
+                <!-- Execution Pipeline -->
+                <section class="card execution-section">
+                    <h2 class="card-title">Execution Pipeline</h2>
+                    <div class="execution-pipeline" id="executionPipeline">
+                        <!-- Dynamically populated -->
+                    </div>
+                </section>
+
+                <!-- Query Explanation -->
+                <section class="card explanation-section">
+                    <h2 class="card-title">Query Explanation</h2>
+                    <div class="explanation-text" id="explanationText">
+                        Enter a SQL query and click "Visualize Query" to see the explanation.
+                    </div>
+                </section>
+
+                <!-- Execution Order -->
+                <section class="card execution-order-section">
+                    <h2 class="card-title">SQL Execution Order</h2>
+                    <div class="execution-order" id="executionOrder">
+                        <!-- Dynamically populated -->
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Data Transformation Section -->
+        <section class="card data-transformation-section">
+            <h2 class="card-title">Data Transformation</h2>
+            <div class="transformation-steps" id="transformationSteps">
+                <!-- Dynamically populated -->
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>SQL Query Visualizer v1.0 | Built with Vanilla JavaScript | <a href="#" class="footer-link">Open Source</a></p>
+        </footer>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div class="loading-spinner" id="loadingSpinner">
+        <div class="spinner-circle"></div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div class="notification" id="notification">
+        <span id="notificationText"></span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

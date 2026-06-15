@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Virtual Ecosystem Simulator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="app-header">
+    <div class="header-brand">
+      <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="12" cy="8" r="4"/>
+        <path d="M4 22c0-4 3.5-7 8-7s8 3 8 7" stroke-linejoin="round"/>
+        <path d="M8 2l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="12" cy="8" r="1.5" fill="currentColor"/>
+      </svg>
+      <div>
+        <h1 class="brand-title">Virtual Ecosystem Simulator</h1>
+        <span class="brand-sub">Artificial Life Analytics Deck v1.0</span>
+      </div>
+      <span class="brand-badge">CANVAS · ES6+</span>
+    </div>
+  </header>
+
+  <main class="app-main">
+
+    <!-- Slider Drawer -->
+    <section class="slider-drawer" id="sliderDrawer">
+      <div class="slider-group">
+        <span class="slider-label">Sunlight Intensity</span>
+        <div class="slider-row">
+          <input type="range" class="slider" id="sliderSun" min="0" max="100" value="60">
+          <span class="slider-val" id="valSun">60%</span>
+        </div>
+      </div>
+      <div class="slider-group">
+        <span class="slider-label">Water Supply</span>
+        <div class="slider-row">
+          <input type="range" class="slider" id="sliderWater" min="0" max="100" value="60">
+          <span class="slider-val" id="valWater">60%</span>
+        </div>
+      </div>
+      <div class="slider-group">
+        <span class="slider-label">Mutation Rate</span>
+        <div class="slider-row">
+          <input type="range" class="slider" id="sliderMutation" min="0" max="100" value="10">
+          <span class="slider-val" id="valMutation">10%</span>
+        </div>
+      </div>
+      <div class="slider-group">
+        <span class="slider-label">Simulation Speed</span>
+        <div class="slider-row">
+          <input type="range" class="slider" id="sliderSpeed" min="1" max="10" value="5">
+          <span class="slider-val" id="valSpeed">5x</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Canvas Arena -->
+    <section class="canvas-arena">
+      <div class="canvas-card">
+        <div class="canvas-header">
+          <span class="canvas-title">Ecosystem Arena</span>
+          <span class="canvas-badge" id="tickDisplay">TICK 0</span>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="ecoCanvas"></canvas>
+        </div>
+      </div>
+      <div class="canvas-card">
+        <div class="canvas-header">
+          <span class="canvas-title">Population Trends</span>
+          <span class="canvas-badge">Live Chart</span>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="chartCanvas"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- Telemetry -->
+    <section class="telemetry-panel">
+      <div class="telemetry-grid">
+        <div class="telemetry-card">
+          <div class="t-dot" style="background:#00ff88;box-shadow:0 0 8px rgba(0,255,136,0.5)"></div>
+          <div>
+            <span class="t-label">Active Flora</span>
+            <span class="t-value" id="valFlora">0</span>
+          </div>
+        </div>
+        <div class="telemetry-card">
+          <div class="t-dot" style="background:#00d4ff;box-shadow:0 0 8px rgba(0,212,255,0.5)"></div>
+          <div>
+            <span class="t-label">Active Herbivores</span>
+            <span class="t-value" id="valHerb">0</span>
+          </div>
+        </div>
+        <div class="telemetry-card">
+          <div class="t-dot" style="background:#ff2d78;box-shadow:0 0 8px rgba(255,45,120,0.5)"></div>
+          <div>
+            <span class="t-label">Active Carnivores</span>
+            <span class="t-value" id="valCarn">0</span>
+          </div>
+        </div>
+        <div class="telemetry-card">
+          <div class="t-dot" style="background:#ffb800;box-shadow:0 0 8px rgba(255,184,0,0.5)"></div>
+          <div>
+            <span class="t-label">Stability Index</span>
+            <span class="t-value" id="valStability">—</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Controls -->
+    <section class="control-deck">
+      <button class="ctrl-btn" id="btnPause">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+        <span id="pauseLabel">Pause</span>
+      </button>
+      <button class="ctrl-btn ctrl-danger" id="btnVirus">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>
+        Inject Viral Outbreak
+      </button>
+      <button class="ctrl-btn" id="btnReseed">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M3 12a9 9 0 019-9 9 9 0 019 9 9 9 0 01-9 9"/><path d="M3 12h4l2-3 2 3 2-3 2 3 4-2"/></svg>
+        Re-Seed Ecosystem
+      </button>
+    </section>
+
+  </main>
+
+  <footer class="app-footer">
+    Virtual Ecosystem Simulator &copy; 2026 &mdash; Canvas API &mdash; Web-Dev-Projects
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

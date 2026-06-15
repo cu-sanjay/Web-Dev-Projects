@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Coding Mentor Dashboard</title>
+  <!-- Google Fonts: Inter, Outfit, and Fira Code for code editing -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="glow-bg"></div>
+
+  <!-- HEADER -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="logo">
+        <i class="fa-solid fa-brain glow-icon"></i>
+        <h1>Code<span>Mentor</span></h1>
+        <span class="badge">AI Tutor</span>
+      </div>
+      
+      <div class="header-stats">
+        <span class="stat-tag streak-tag">
+          <i class="fa-solid fa-fire text-amber"></i> Streak: <strong id="streak-days">0 Days</strong>
+        </span>
+        <span class="stat-tag level-tag">
+          <i class="fa-solid fa-circle-up text-violet"></i> Level: <strong id="user-level">1</strong>
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="main-container">
+    
+    <!-- LEFT COLUMN: USER STATS & CHALLENGES LIST -->
+    <aside class="sidebar-column">
+      
+      <!-- Profile Card -->
+      <section class="section-card user-profile-card" aria-label="User Profile Details">
+        <div class="user-avatar-row">
+          <div class="avatar-ring">
+            <i class="fa-solid fa-user-ninja"></i>
+          </div>
+          <div class="user-info">
+            <h3>Apprentice Coder</h3>
+            <p class="user-rank" id="lbl-user-rank">Rank: Begginer</p>
+          </div>
+        </div>
+        <div class="xp-bar-container">
+          <div class="xp-lbl-row">
+            <span>XP: <strong id="user-xp">0</strong> / <span id="xp-target">100</span></span>
+            <span id="xp-percentage">0%</span>
+          </div>
+          <div class="xp-progress">
+            <div id="xp-progress-fill" class="xp-progress-fill" style="width: 0%"></div>
+          </div>
+        </div>
+        <div class="achievements-badges">
+          <h4>Unlocked Badges</h4>
+          <div class="badges-grid" id="badges-container">
+            <!-- Dynamic Badges -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Challenges List -->
+      <section class="section-card challenges-card" aria-label="Coding Challenges Selector">
+        <div class="card-header-row">
+          <h3><i class="fa-solid fa-code-branch"></i> Challenges</h3>
+        </div>
+        
+        <div class="challenge-category">
+          <div class="category-header">
+            <span>Easy Challenges</span>
+            <span class="badge-count" id="easy-count">0/3</span>
+          </div>
+          <div class="challenge-list" id="easy-list">
+            <!-- Dynamic list of easy challenges -->
+          </div>
+        </div>
+
+        <div class="challenge-category">
+          <div class="category-header">
+            <span>Medium Challenges</span>
+            <span class="badge-count" id="medium-count">0/2</span>
+          </div>
+          <div class="challenge-list" id="medium-list">
+            <!-- Dynamic list of medium challenges -->
+          </div>
+        </div>
+      </section>
+
+      <button id="btn-reset-workspace" class="footer-btn"><i class="fa-solid fa-trash-can"></i> Clear Dashboard Progress</button>
+    </aside>
+
+    <!-- CENTER COLUMN: WORKSPACE IDE -->
+    <section class="ide-column" aria-label="Simulated IDE Workspace">
+      <div class="ide-container">
+        
+        <!-- Editor Header Tabs -->
+        <div class="ide-header">
+          <div class="editor-tabs">
+            <div class="tab active">
+              <i class="fa-brands fa-js text-yellow"></i>
+              <span id="active-challenge-title">Loading...</span>
+            </div>
+          </div>
+          <div class="language-indicator">
+            <span>JavaScript (ES6)</span>
+          </div>
+        </div>
+
+        <!-- Challenge Instructions Box -->
+        <div class="challenge-description" id="challenge-instructions">
+          <h4>Description</h4>
+          <p id="challenge-desc-text">Select a challenge from the list to begin coding.</p>
+          <div class="example-box" id="challenge-example-box">
+            <!-- Dynamic inputs and outputs -->
+          </div>
+        </div>
+
+        <!-- Editor Content Area -->
+        <div class="editor-body">
+          <div class="line-numbers-col" id="line-numbers">1</div>
+          <textarea id="code-editor" spellcheck="false" autocomplete="off" placeholder="// Write code here..."></textarea>
+        </div>
+
+        <!-- IDE Footer / Console Output & Actions -->
+        <div class="ide-footer">
+          <div class="controls-row">
+            <button id="btn-reset" class="btn btn-secondary" title="Reset starter code template">
+              <i class="fa-solid fa-rotate"></i> Reset Template
+            </button>
+            <div class="run-actions">
+              <button id="btn-run" class="btn btn-primary" title="Execute script tests client-side">
+                <i class="fa-solid fa-play"></i> Run Code
+              </button>
+              <button id="btn-submit" class="btn btn-success" title="Submit solution for AI review and XP">
+                <i class="fa-solid fa-circle-check"></i> Submit Solution
+              </button>
+            </div>
+          </div>
+
+          <!-- Output Console -->
+          <div class="console-box">
+            <div class="console-header">
+              <span><i class="fa-solid fa-terminal"></i> Console Output</span>
+              <button id="btn-clear-console" class="btn-clear-link">Clear</button>
+            </div>
+            <div class="console-body" id="console-output">
+              <span class="system-log">System initialized. Select a coding problem and click 'Run Code' or 'Submit Solution' to test.</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- RIGHT COLUMN: AI MENTOR FEEDBACK -->
+    <section class="section-card mentor-column" aria-label="AI Coding Mentor Workspace">
+      
+      <!-- Mentor Profile Header -->
+      <div class="mentor-header">
+        <div class="mentor-avatar">
+          <i class="fa-solid fa-robot"></i>
+          <span class="active-dot"></span>
+        </div>
+        <div class="mentor-title">
+          <h3>Sensei.ai</h3>
+          <span class="subtitle">AI Coding Mentor</span>
+        </div>
+      </div>
+
+      <!-- Tab Selectors -->
+      <div class="mentor-tabs">
+        <button class="mentor-tab-btn active" data-tab="chat" id="tab-chat-btn"><i class="fa-solid fa-comments"></i> Chat</button>
+        <button class="mentor-tab-btn" data-tab="review" id="tab-review-btn"><i class="fa-solid fa-stethoscope"></i> Review</button>
+        <button class="mentor-tab-btn" data-tab="optimized" id="tab-optimized-btn"><i class="fa-solid fa-wand-magic-sparkles"></i> Code</button>
+        <button class="mentor-tab-btn" data-tab="concepts" id="tab-concepts-btn"><i class="fa-solid fa-book-open"></i> Concepts</button>
+      </div>
+
+      <!-- Tab Content Area -->
+      <div class="mentor-tab-content">
+        
+        <!-- Chat Tab -->
+        <div class="tab-pane active" id="pane-chat">
+          <div class="chat-container">
+            <div class="chat-messages" id="chat-messages">
+              <div class="message assistant-msg">
+                <div class="msg-avatar"><i class="fa-solid fa-robot"></i></div>
+                <div class="msg-bubble">
+                  <p>Welcome, student! I am Sensei.ai, your personalized programming tutor. How can I assist you on your coding journey today?</p>
+                  <p class="suggestions-title">Ask me questions like:</p>
+                  <ul class="suggestions-list">
+                    <li><button class="chat-suggestion-btn">Explain time complexity in loops</button></li>
+                    <li><button class="chat-suggestion-btn">What is the difference between let and const?</button></li>
+                    <li><button class="chat-suggestion-btn">How do I write a recursive function?</button></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            
+            <div class="chat-input-row">
+              <input type="text" id="chat-input" placeholder="Ask Sensei a coding question..." autocomplete="off">
+              <button id="btn-send-chat" class="btn btn-violet-icon"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review Tab -->
+        <div class="tab-pane" id="pane-review">
+          <div class="review-placeholder" id="review-placeholder">
+            <i class="fa-solid fa-file-shield review-icon"></i>
+            <h4>No Review Ready</h4>
+            <p>Write your challenge solution in the IDE, then click 'Submit Solution' to generate an automated review checklist.</p>
+          </div>
+          <div class="review-details hidden" id="review-details-box">
+            <div class="review-score-row">
+              <span>Code Quality Score</span>
+              <div class="quality-badge" id="lbl-quality-score">90%</div>
+            </div>
+            <div class="review-bullets" id="review-bullets-list">
+              <!-- Bullet items dynamic -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Optimized Code Tab -->
+        <div class="tab-pane" id="pane-optimized">
+          <div class="review-placeholder" id="optimized-placeholder">
+            <i class="fa-solid fa-code-compare review-icon"></i>
+            <h4>No Solution Refactoring</h4>
+            <p>Submit a coding solution first to check the mentor's optimized refactoring suggestions and efficiency comparisons.</p>
+          </div>
+          <div class="optimized-details hidden" id="optimized-details-box">
+            <h5>Mentor's Refactored Solution:</h5>
+            <pre class="code-preview"><code id="code-mentor-optimized">// Optimized solution details will load here</code></pre>
+            
+            <div class="metrics-compare">
+              <div class="metric-block">
+                <span class="compare-lbl">Complexity</span>
+                <span class="compare-val" id="lbl-metric-complexity">O(n)</span>
+              </div>
+              <div class="metric-block">
+                <span class="compare-lbl">Space Usage</span>
+                <span class="compare-val" id="lbl-metric-space">O(1)</span>
+              </div>
+            </div>
+            <button id="btn-insert-code" class="btn btn-secondary btn-sm"><i class="fa-solid fa-file-import"></i> Copy to Editor</button>
+          </div>
+        </div>
+
+        <!-- Concepts Tab -->
+        <div class="tab-pane" id="pane-concepts">
+          <div class="review-placeholder" id="concepts-placeholder">
+            <i class="fa-solid fa-graduation-cap review-icon"></i>
+            <h4>Select Challenge</h4>
+            <p>Select a specific problem in the sidebar to review the associated CS learning topics.</p>
+          </div>
+          <div class="concepts-details hidden" id="concepts-details-box">
+            <h4 id="lbl-concept-title">Concept: Array Manipulation</h4>
+            <div class="concept-explanation" id="lbl-concept-body">
+              <!-- Dynamic markdown or HTML text explanation -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="app-footer">
+    <div class="footer-container">
+      <p>&copy; 2026 CodeMentor Dashboard. Built for the <a href="https://github.com/cu-sanjay/Web-Dev-Projects" target="_blank" rel="noopener noreferrer">Web Dev Projects</a> repository showcase.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

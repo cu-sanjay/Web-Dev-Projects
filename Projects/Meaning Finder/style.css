@@ -1,0 +1,170 @@
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,700;1,400&family=Playfair+Display:wght@700;900&display=swap');
+
+        :root {
+            --paper: #f4f1ea;
+            --ink: #2c2421;
+            --leather: #5d3a1a;
+            --gold: #d4af37;
+            --success: #2d5a27;
+            --error: #8b0000;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: #1a1412;
+            background-image: radial-gradient(#3a2a21 1px, transparent 1px);
+            background-size: 30px 30px;
+            font-family: 'Crimson Pro', serif;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .desk {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 2000px;
+        }
+
+        .book {
+            width: 90%;
+            max-width: 900px;
+            height: 600px;
+            background: var(--leather);
+            border-radius: 10px;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.8), inset 0 0 50px rgba(0,0,0,0.5);
+            padding: 15px;
+            display: flex;
+            position: relative;
+            border: 4px solid #4a2510;
+        }
+
+        .book::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: rgba(0,0,0,0.3);
+            z-index: 10;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        .page {
+            flex: 1;
+            background: var(--paper);
+            margin: 5px;
+            padding: 50px;
+            box-shadow: inset 0 0 40px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page.left {
+            border-radius: 5px 0 0 5px;
+            border-right: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .page.right {
+            border-radius: 0 5px 5px 0;
+            border-left: 1px solid rgba(255,255,255,0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--ink);
+            opacity: 0.6;
+            margin-bottom: 40px;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            padding-bottom: 10px;
+        }
+
+        .meaning-text {
+            font-size: 1.8rem;
+            line-height: 1.4;
+            color: var(--ink);
+            font-style: italic;
+            margin-top: 40px;
+        }
+
+        .input-group {
+            margin-top: 20px;
+        }
+
+        input {
+            width: 80%;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid var(--ink);
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.8rem;
+            text-align: center;
+            color: var(--ink);
+            outline: none;
+            padding: 10px;
+            margin-bottom: 30px;
+        }
+
+        button {
+            background: var(--ink);
+            color: var(--paper);
+            border: none;
+            padding: 15px 40px;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: 0.3s;
+            border: 1px solid var(--gold);
+        }
+
+        button:hover {
+            background: #40342f;
+            transform: translateY(-2px);
+        }
+
+        .stats {
+            position: absolute;
+            bottom: 30px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.5;
+        }
+
+        .feedback {
+            margin-top: 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            height: 1.5rem;
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: var(--paper);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 50px;
+            text-align: center;
+        }
+
+        .hidden { display: none !important; }

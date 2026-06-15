@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Internship Application Tracker</title>
+  <!-- Google Fonts: Outfit and Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons for developer dashboard aesthetics -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="glow-bg"></div>
+
+  <!-- HEADER -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="logo">
+        <i class="fa-solid fa-address-book glow-icon"></i>
+        <h1>Intern<span>Track</span></h1>
+        <span class="badge">Pipeline Hub</span>
+      </div>
+      
+      <div class="header-stats">
+        <span class="stat-badge"><i class="fa-solid fa-list-check text-azure"></i> Total: <strong id="lbl-header-total">0</strong></span>
+        <span class="stat-badge"><i class="fa-solid fa-hourglass-half text-amber"></i> Interviews: <strong id="lbl-header-interviews">0</strong></span>
+        <span class="stat-badge"><i class="fa-solid fa-trophy text-emerald"></i> Offers: <strong id="lbl-header-offers">0</strong></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="main-container">
+    
+    <!-- LEFT COLUMN: SEARCH & PIPELINE FUNNELS -->
+    <aside class="sidebar-column">
+      
+      <!-- Global Search -->
+      <section class="section-card search-card" aria-label="Search and filtering parameters">
+        <div class="search-input-wrapper">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="txt-search" placeholder="Search company, role...">
+        </div>
+      </section>
+
+      <!-- Funnel Conversion Metrics -->
+      <section class="section-card funnel-card" aria-label="Recruitment Pipeline Funnel conversions">
+        <div class="card-header-row">
+          <h3><i class="fa-solid fa-filter"></i> Funnel Conversion</h3>
+        </div>
+
+        <div class="funnel-metrics-container">
+          <div class="funnel-row">
+            <div class="funnel-lbl-row">
+              <span>Bookmarked</span>
+              <span id="lbl-funnel-bookmarked">0</span>
+            </div>
+            <div class="funnel-bar-bg">
+              <div id="bar-funnel-bookmarked" class="funnel-bar-fill fill-slate" style="width: 0%"></div>
+            </div>
+          </div>
+
+          <div class="funnel-row">
+            <div class="funnel-lbl-row">
+              <span>Applied</span>
+              <span id="lbl-funnel-applied">0</span>
+            </div>
+            <div class="funnel-bar-bg">
+              <div id="bar-funnel-applied" class="funnel-bar-fill fill-azure" style="width: 0%"></div>
+            </div>
+          </div>
+
+          <div class="funnel-row">
+            <div class="funnel-lbl-row">
+              <span>Interviewing</span>
+              <span id="lbl-funnel-interviewing">0</span>
+            </div>
+            <div class="funnel-bar-bg">
+              <div id="bar-funnel-interviewing" class="funnel-bar-fill fill-amber" style="width: 0%"></div>
+            </div>
+          </div>
+
+          <div class="funnel-row">
+            <div class="funnel-lbl-row">
+              <span>Offered</span>
+              <span id="lbl-funnel-offered">0</span>
+            </div>
+            <div class="funnel-bar-bg">
+              <div id="bar-funnel-offered" class="funnel-bar-fill fill-emerald" style="width: 0%"></div>
+            </div>
+          </div>
+
+          <div class="funnel-row">
+            <div class="funnel-lbl-row">
+              <span>Rejected</span>
+              <span id="lbl-funnel-rejected">0</span>
+            </div>
+            <div class="funnel-bar-bg">
+              <div id="bar-funnel-rejected" class="funnel-bar-fill fill-rose" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Highlights Card -->
+      <section class="section-card highlights-card" aria-label="Pipeline metrics highlights">
+        <div class="card-header-row">
+          <h3><i class="fa-solid fa-chart-simple"></i> Analytics</h3>
+        </div>
+        <div class="highlights-grid">
+          <div class="highlight-item">
+            <span class="h-lbl">Interview Rate</span>
+            <span class="h-val text-amber" id="lbl-interview-rate">0%</span>
+          </div>
+          <div class="highlight-item">
+            <span class="h-lbl">Avg Stipend</span>
+            <span class="h-val text-emerald" id="lbl-avg-stipend">$0/mo</span>
+          </div>
+        </div>
+      </section>
+
+      <button id="btn-reset-workspace" class="footer-btn"><i class="fa-solid fa-trash-can"></i> Clear Application Memory</button>
+    </aside>
+
+    <!-- CENTER COLUMN: INTERNSHIP APPLICATIONS CARDS LIST -->
+    <section class="applications-column" aria-label="Internship Applications Listing">
+      <div class="applications-header">
+        <div class="title-meta">
+          <h2>Recruitment Pipeline</h2>
+          <span class="results-lbl" id="applications-count">0 Applications</span>
+        </div>
+        <button id="btn-add-application" class="btn btn-primary btn-sm">
+          <i class="fa-solid fa-circle-plus"></i> New Application
+        </button>
+      </div>
+
+      <div class="applications-grid" id="applications-list">
+        <!-- Dynamic applications list load -->
+        <div class="welcome-placeholder">
+          <i class="fa-solid fa-suitcase placeholder-icon"></i>
+          <h3>Pipeline Empty</h3>
+          <p>No internship applications match your active filters or text query search.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT COLUMN: ACTIVE DETAILS INSPECTOR -->
+    <section class="inspector-column" aria-label="Application Details Inspector">
+      
+      <!-- Empty inspector state -->
+      <div id="inspector-empty" class="inspector-welcome-card">
+        <div class="pulse-icon">
+          <i class="fa-solid fa-briefcase"></i>
+        </div>
+        <h4>Application Inspector</h4>
+        <p>Select any internship card from the pipeline feed to view checklist details, update pricing statistics, or log interview summaries.</p>
+      </div>
+
+      <!-- Active inspector workspace -->
+      <div id="inspector-active" class="inspector-workspace hidden">
+        
+        <section class="section-card inspector-card" aria-label="Internship details inputs">
+          <div class="card-header-row">
+            <h3><i class="fa-solid fa-edit"></i> Inspector Board</h3>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label for="app-company">Company Name</label>
+              <input type="text" id="app-company">
+            </div>
+            <div class="form-group flex-1">
+              <label for="app-role">Role Title</label>
+              <input type="text" id="app-role">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label for="app-date">Date Applied</label>
+              <input type="date" id="app-date">
+            </div>
+            <div class="form-group flex-1">
+              <label for="sel-status">Application Status</label>
+              <select id="sel-status">
+                <option value="Bookmarked">Bookmarked</option>
+                <option value="Applied">Applied</option>
+                <option value="Interviewing">Interviewing</option>
+                <option value="Offered">Offered</option>
+                <option value="Rejected">Rejected</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label for="app-stipend">Est. Stipend ($/mo)</label>
+              <input type="number" id="app-stipend">
+            </div>
+            <div class="form-group flex-1">
+              <label for="app-url">Job Listing URL</label>
+              <input type="text" id="app-url">
+            </div>
+          </div>
+
+          <!-- Milestones subtasks checkboxes -->
+          <div class="tasks-checklist-section">
+            <h5>Milestones Sub-Tasks</h5>
+            <ul class="tasks-ul" id="tasks-checklist">
+              <!-- Dynamically populated checklist items -->
+            </ul>
+            
+            <div class="add-task-row">
+              <input type="text" id="txt-new-task" placeholder="Add custom sub-task..." autocomplete="off">
+              <button id="btn-add-task" class="btn btn-secondary btn-sm"><i class="fa-solid fa-plus"></i></button>
+            </div>
+          </div>
+
+          <!-- Interview notes log -->
+          <div class="form-group">
+            <label for="app-notes">Interview Log &amp; Notes</label>
+            <textarea id="app-notes" placeholder="Write interview timeline details, core contacts, or technical questions asked..."></textarea>
+          </div>
+
+          <!-- Action buttons -->
+          <div class="inspector-actions">
+            <button id="btn-delete-app" class="btn btn-danger btn-sm" title="Delete Application Profile">
+              <i class="fa-solid fa-trash-can"></i> Delete Profile
+            </button>
+            <button id="btn-save-app" class="btn btn-primary btn-sm" title="Save Application changes">
+              <i class="fa-solid fa-floppy-disk"></i> Save changes
+            </button>
+          </div>
+        </section>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="app-footer">
+    <div class="footer-container">
+      <p>&copy; 2026 InternTrack Dashboard. Built for the <a href="https://github.com/cu-sanjay/Web-Dev-Projects" target="_blank" rel="noopener noreferrer">Web Dev Projects</a> repository showcase.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

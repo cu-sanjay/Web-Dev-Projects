@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Cracker — Brute Force Logic</title>
+</link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="glass-card">
+            <div id="game-overlay" class="overlay">
+                <h1>Password Cracker</h1>
+                <p style="margin-bottom: 30px; opacity: 0.7;">Decrypt the sequence using provided clues.</p>
+                <button class="btn-main" onclick="startGame()">Access Terminal</button>
+            </div>
+
+            <div class="stats">
+                <span>Round: <span id="round-val">1</span>/5</span>
+                <span>Score: <span id="score-val">0</span></span>
+            </div>
+
+            <div class="hint-container" id="hint-list">
+                <!-- Hints go here -->
+            </div>
+
+            <div class="input-group">
+                <input type="text" id="user-input" placeholder="ENTER PASSWORD" autocomplete="off" onkeydown="if(event.key==='Enter') checkGuess()">
+            </div>
+
+            <button class="btn-main" onclick="checkGuess()">Crack Password</button>
+            <div id="feedback" class="feedback"></div>
+        </div>
+    </div>
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f4f7f5"/>
+      <stop offset="100%" stop-color="#e2ebd9"/>
+    </linearGradient>
+    <linearGradient id="card1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f4f7f5"/>
+    </linearGradient>
+    <linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2e7d32"/>
+      <stop offset="100%" stop-color="#81c784"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" rx="20" fill="url(#bg)"/>
+  <text x="200" y="38" text-anchor="middle" fill="#1b3a24" font-family="ui-monospace,Consolas,monospace" font-size="11" font-weight="700" letter-spacing="2">TOON-SPROUT</text>
+  <rect x="20" y="52" width="170" height="155" rx="12" fill="url(#card1)" stroke="#e2ebd9" stroke-width="1.5"/>
+  <rect x="35" y="65" width="140" height="90" rx="8" fill="#81c784" opacity="0.4"/>
+  <circle cx="105" cy="110" r="24" fill="#4caf50" opacity="0.5"/>
+  <circle cx="96" cy="103" r="4" fill="#1b3a24" opacity="0.6"/>
+  <circle cx="114" cy="103" r="4" fill="#1b3a24" opacity="0.6"/>
+  <path d="M 96 118 Q 105 125 114 118" fill="none" stroke="#1b3a24" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+  <rect x="35" y="165" width="140" height="6" rx="3" fill="#e2ebd9"/>
+  <rect x="35" y="177" width="95" height="6" rx="3" fill="#e2ebd9"/>
+  <rect x="35" y="189" width="120" height="6" rx="3" fill="#e2ebd9"/>
+  <rect x="210" y="52" width="170" height="155" rx="12" fill="url(#card1)" stroke="#e2ebd9" stroke-width="1.5"/>
+  <rect x="225" y="65" width="140" height="90" rx="8" fill="#009688" opacity="0.3"/>
+  <polygon points="295,90 312,125 278,125" fill="#009688" opacity="0.5"/>
+  <circle cx="286" cy="108" r="3" fill="#1b3a24" opacity="0.6"/>
+  <circle cx="304" cy="108" r="3" fill="#1b3a24" opacity="0.6"/>
+  <rect x="225" y="165" width="140" height="6" rx="3" fill="#e2ebd9"/>
+  <rect x="225" y="177" width="110" height="6" rx="3" fill="#e2ebd9"/>
+  <rect x="225" y="189" width="85" height="6" rx="3" fill="#e2ebd9"/>
+  <rect x="20" y="220" width="170" height="155" rx="12" fill="url(#card1)" stroke="#e2ebd9" stroke-width="1.5"/>
+  <rect x="35" y="233" width="140" height="90" rx="8" fill="#795548" opacity="0.3"/>
+  <rect x="90" y="258" width="30" height="40" rx="4" fill="#795548" opacity="0.5"/>
+  <circle cx="82" cy="278" r="3" fill="#1b3a24" opacity="0.6"/>
+  <circle cx="108" cy="278" r="3" fill="#1b3a24" opacity="0.6"/>
+  <rect x="35" y="333" width="140" height="6" rx="3" fill="#e2ebd9"/>
+  <rect x="35" y="345" width="100" height="6" rx="3" fill="#e2ebd9"/>
+  <rect x="210" y="220" width="170" height="155" rx="12" fill="url(#card1)" stroke="#e2ebd9" stroke-width="1.5"/>
+  <rect x="225" y="233" width="140" height="90" rx="8" fill="#e65100" opacity="0.25"/>
+  <path d="M 275 275 Q 295 260 315 275" fill="none" stroke="#e65100" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+  <circle cx="282" cy="268" r="3" fill="#1b3a24" opacity="0.6"/>
+  <circle cx="308" cy="268" r="3" fill="#1b3a24" opacity="0.6"/>
+  <rect x="225" y="333" width="140" height="6" rx="3" fill="#e2ebd9"/>
+  <rect x="225" y="345" width="75" height="6" rx="3" fill="#e2ebd9"/>
+  <path d="M 350 390 Q 340 355 365 340" fill="none" stroke="#2e7d32" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M 365 340 Q 378 330 374 348" fill="url(#leaf)"/>
+  <path d="M 350 390 Q 358 365 352 350" fill="none" stroke="#2e7d32" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 352 350 Q 342 340 348 356" fill="#81c784" opacity="0.7"/>
+  <path d="M 50 390 Q 55 368 70 380" fill="#81c784" opacity="0.5"/>
+  <path d="M 70 380 Q 80 372 76 386" fill="#4caf50" opacity="0.4"/>
+</svg>

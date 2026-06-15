@@ -1,0 +1,156 @@
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=JetBrains+Mono:wght@500;700&display=swap');
+
+        :root {
+            --bg: #020617;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --accent: #22d3ee;
+            --primary: #f472b6;
+            --secondary: #8b5cf6;
+            --success: #10b981;
+            --error: #f43f5e;
+            --text: #f1f5f9;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg);
+            background: radial-gradient(circle at top right, #1e1b4b 0%, #020617 100%);
+            color: var(--text);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 480px;
+            position: relative;
+        }
+
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(25px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            border-radius: 40px;
+            padding: 40px 30px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin: 0 0 10px;
+            background: linear-gradient(to bottom right, #fff, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hint-container {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 24px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border: 1px solid var(--glass-border);
+            text-align: left;
+        }
+
+        .hint-item {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            color: var(--accent);
+        }
+
+        .hint-item::before {
+            content: "◆";
+            margin-right: 12px;
+            font-size: 0.8rem;
+            color: var(--primary);
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 18px;
+            color: white;
+            font-size: 1.2rem;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            outline: none;
+            transition: all 0.3s;
+            box-sizing: border-box;
+        }
+
+        input:focus {
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 20px rgba(34, 211, 238, 0.2);
+        }
+
+        .btn-main {
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            color: white;
+            border: none;
+            padding: 18px 48px;
+            border-radius: 24px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            box-shadow: 0 10px 25px -5px rgba(139, 92, 246, 0.4);
+        }
+
+        .btn-main:hover {
+            transform: translateY(-3px);
+            filter: brightness(1.1);
+        }
+
+        .feedback {
+            margin-top: 20px;
+            font-weight: 600;
+            min-height: 24px;
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(2, 6, 23, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 10;
+            border-radius: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+        }
+
+        .hidden { display: none !important; }

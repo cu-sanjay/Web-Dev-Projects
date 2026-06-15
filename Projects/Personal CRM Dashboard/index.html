@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal CRM Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="header">
+      <h1>🤝 Personal CRM</h1>
+      <p>Keep track of your network, log interactions, and never miss a follow-up.</p>
+    </header>
+
+    <main class="main-content">
+      <div class="left-col">
+        
+        <!-- Add Contact Section -->
+        <section class="card">
+          <h2>1. Add a Contact</h2>
+          <form id="contact-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="c-name">Full Name</label>
+                <input type="text" id="c-name" required placeholder="e.g. Jane Doe">
+              </div>
+              <div class="form-group">
+                <label for="c-company">Company</label>
+                <input type="text" id="c-company" required placeholder="e.g. Acme Corp">
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label for="c-role">Role / Title</label>
+                <input type="text" id="c-role" placeholder="e.g. Software Engineer">
+              </div>
+              <div class="form-group">
+                <label for="c-email">Email Address</label>
+                <input type="email" id="c-email" placeholder="jane@example.com">
+              </div>
+            </div>
+
+            <button type="submit" class="btn primary-btn">Add Contact</button>
+          </form>
+        </section>
+
+        <!-- Contacts Directory -->
+        <section class="card">
+          <div class="section-header">
+            <h2>Your Network</h2>
+            <input type="text" id="search-contacts" placeholder="Search contacts..." class="search-input">
+          </div>
+          
+          <div id="contacts-list" class="contacts-list">
+            <div class="empty-state">No contacts added yet. Start building your network!</div>
+          </div>
+        </section>
+
+      </div>
+
+      <div class="right-col">
+        
+        <!-- Log Interaction Section -->
+        <section class="card">
+          <h2>2. Log an Interaction</h2>
+          <form id="interaction-form">
+            <div class="form-group">
+              <label for="i-contact">Select Contact</label>
+              <select id="i-contact" required>
+                <option value="" disabled selected>Select a contact first</option>
+              </select>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label for="i-type">Interaction Type</label>
+                <select id="i-type" required>
+                  <option value="Meeting">Coffee / Meeting</option>
+                  <option value="Email">Email Thread</option>
+                  <option value="Phone">Phone Call</option>
+                  <option value="Message">Direct Message</option>
+                </select>
+              </div>
+              <div class="form-group checkbox-group">
+                <input type="checkbox" id="i-followup">
+                <label for="i-followup">Requires Follow-up?</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="i-notes">Meeting Notes</label>
+              <textarea id="i-notes" rows="3" required placeholder="Discussed upcoming projects..."></textarea>
+            </div>
+
+            <button type="submit" class="btn success-btn" id="submit-interaction" disabled>Log Interaction</button>
+          </form>
+        </section>
+
+        <!-- Activity Timeline Section -->
+        <section class="card">
+          <h2>Recent Activity</h2>
+          <div id="activity-timeline" class="timeline">
+            <div class="empty-state">No interactions logged yet.</div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

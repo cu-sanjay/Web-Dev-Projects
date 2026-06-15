@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Resume Analyzer & Skill Gap Tracker</title>
+  <!-- Google Fonts: Outfit and Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons for Dashboard aesthetics -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-background"></div>
+  
+  <header class="app-header">
+    <div class="header-container">
+      <div class="logo">
+        <i class="fa-solid fa-brain-circuit glow-icon"></i>
+        <h1>Resu<span>Align</span></h1>
+        <span class="badge">AI-Powered</span>
+      </div>
+      <p class="tagline">Simulate ATS analysis, identify critical skill gaps, and build your roadmap to employment.</p>
+    </div>
+  </header>
+
+  <main class="main-container">
+    <!-- INPUT SECTION -->
+    <section class="section-card input-section" aria-labelledby="input-heading">
+      <div class="card-header">
+        <div class="header-title">
+          <i class="fa-solid fa-file-invoice"></i>
+          <h2 id="input-heading">Resume & Target</h2>
+        </div>
+        <button id="btn-load-demo" class="btn btn-secondary btn-sm" title="Load sample resume to test application">
+          <i class="fa-solid fa-magic-wand-sparkles"></i> Load Demo Resume
+        </button>
+      </div>
+
+      <div class="form-group">
+        <label for="select-role">Target Job Role <span class="required">*</span></label>
+        <div class="select-wrapper">
+          <select id="select-role" required>
+            <option value="" disabled selected>Select a job role to match against...</option>
+            <option value="frontend">Frontend Engineer (HTML, CSS, JS, React, etc.)</option>
+            <option value="backend">Backend Developer (Node.js, SQL, APIs, Docker, etc.)</option>
+            <option value="fullstack">Fullstack Engineer (React, DB, System Design, Git)</option>
+            <option value="data-science">Data Scientist (Python, ML, SQL, Pandas, stats)</option>
+            <option value="mobile-developer">Mobile App Developer (React Native, Flutter, Swift)</option>
+          </select>
+          <i class="fa-solid fa-chevron-down select-arrow"></i>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Upload Resume File <span class="sub-label">(Simulated parsing)</span></label>
+        <div id="drop-zone" class="drop-zone">
+          <i class="fa-solid fa-cloud-arrow-up drop-icon"></i>
+          <p class="drop-text">Drag & drop your resume file here or <span class="browse-link">browse</span></p>
+          <span class="file-limits">Supports .pdf, .docx, .txt (max 5MB)</span>
+          <input type="file" id="file-input" accept=".pdf,.docx,.txt" class="hidden-file-input">
+        </div>
+        <div id="file-status" class="file-status hidden">
+          <i class="fa-solid fa-circle-check text-success"></i>
+          <span id="file-name">resume.pdf</span>
+          <button id="btn-remove-file" class="btn-icon" aria-label="Remove uploaded file"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="label-row">
+          <label for="resume-text">Or Paste Resume Content <span class="required">*</span></label>
+          <span id="char-counter" class="text-muted">0 characters</span>
+        </div>
+        <textarea id="resume-text" placeholder="Paste your professional resume text here (experience, skills, achievements)..." required></textarea>
+      </div>
+
+      <button id="btn-analyze" class="btn btn-primary btn-full">
+        <i class="fa-solid fa-wand-magic-sparkles"></i> Run AI Analysis
+      </button>
+    </section>
+
+    <!-- CENTER AREA: STATE/SCANNER OR RESULTS OVERVIEW -->
+    <div class="dynamic-workspace">
+      <!-- EMPTY STATE -->
+      <section id="workspace-empty" class="section-card empty-card" aria-label="Application guide">
+        <div class="empty-state-content">
+          <div class="illustration">
+            <div class="circle-glow"></div>
+            <i class="fa-solid fa-radar fa-spin-slow"></i>
+          </div>
+          <h3>Ready for Scan</h3>
+          <p>Provide your resume content and select a target job role to generate a comprehensive ATS score, skill gap diagnostic, and interactive learning roadmap.</p>
+          <div class="quick-steps">
+            <div class="step"><span class="step-num">1</span> Choose role</div>
+            <div class="step"><span class="step-num">2</span> Enter resume</div>
+            <div class="step"><span class="step-num">3</span> Track gaps</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SCANNING LOADER -->
+      <section id="workspace-loader" class="section-card loader-card hidden" aria-label="Analyzing resume">
+        <div class="loader-content">
+          <div class="scanner-ring">
+            <div class="scanner-beam"></div>
+            <div class="scanner-percent" id="scan-percentage">0%</div>
+          </div>
+          <h3 id="scan-status-title">Parsing Document Profile...</h3>
+          <p id="scan-status-desc" class="text-muted">Extracting token sequences & headers</p>
+          <div class="scan-logs">
+            <div class="log-line active" id="log-1"><i class="fa-solid fa-check"></i> Initializing lexical scanner...</div>
+            <div class="log-line" id="log-2"><i class="fa-solid fa-circle-notch fa-spin"></i> Extracting core skill metrics...</div>
+            <div class="log-line" id="log-3"><i class="fa-solid fa-circle-notch fa-spin"></i> Aligning credentials with industry benchmarks...</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ANALYSIS RESULTS (GRID CONTAINER) -->
+      <div id="workspace-results" class="results-grid hidden">
+        <!-- SCORE DIAGNOSTICS CARD -->
+        <section class="section-card score-card" aria-labelledby="score-heading">
+          <h2 class="sr-only" id="score-heading">Match Score and Diagnostics</h2>
+          <div class="score-radial-container">
+            <svg class="radial-svg" viewBox="0 0 120 120">
+              <circle class="radial-bg" cx="60" cy="60" r="50"></circle>
+              <circle class="radial-progress" id="progress-indicator" cx="60" cy="60" r="50" style="stroke-dasharray: 314; stroke-dashoffset: 314;"></circle>
+            </svg>
+            <div class="score-overlay">
+              <span class="score-val" id="score-val">0</span>
+              <span class="score-lbl">ATS Rating</span>
+            </div>
+          </div>
+          
+          <div class="score-rating-badge" id="score-badge">Fair Match</div>
+          
+          <div class="quick-stats-grid">
+            <div class="stat-item">
+              <span class="stat-label">Keywords</span>
+              <span class="stat-value text-accent" id="stat-keywords">0/0</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Readability</span>
+              <span class="stat-value text-success" id="stat-readability">Good</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Sections</span>
+              <span class="stat-value text-info" id="stat-sections">4/5</span>
+            </div>
+          </div>
+
+          <div class="diagnostic-breakdown">
+            <h4>Diagnostic Checklist</h4>
+            <ul class="diagnostic-list">
+              <li id="diag-contact"><i class="fa-solid fa-circle-check"></i> Contact Information Detected</li>
+              <li id="diag-summary"><i class="fa-solid fa-circle-check"></i> Professional Summary</li>
+              <li id="diag-experience"><i class="fa-solid fa-circle-check"></i> Work Experience Format</li>
+              <li id="diag-formatting"><i class="fa-solid fa-circle-check"></i> Standard Fonts & Size Check</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- SKILL GAP TRACKER CARD -->
+        <section class="section-card skill-tracker-card" aria-labelledby="skills-heading">
+          <div class="card-header-tabs">
+            <h2 id="skills-heading"><i class="fa-solid fa-graduation-cap"></i> Skill Tracker</h2>
+            <div class="skills-filter-wrapper">
+              <input type="text" id="skill-search" placeholder="Filter skills..." class="search-input">
+              <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            </div>
+          </div>
+
+          <div class="tab-buttons">
+            <button class="tab-btn active" data-tab="missing">Missing Gaps (<span id="count-missing">0</span>)</button>
+            <button class="tab-btn" data-tab="matched">Matched Skills (<span id="count-matched">0</span>)</button>
+            <button class="tab-btn" data-tab="all">All Requirements (<span id="count-all">0</span>)</button>
+          </div>
+
+          <div class="tab-panes">
+            <!-- Dynamic skills content goes here -->
+            <div id="skills-list" class="skills-list-container"></div>
+          </div>
+          
+          <div class="roadmap-progress-footer">
+            <div class="progress-bar-label">
+              <span>Goal Roadmap Progress</span>
+              <span id="roadmap-percent">0%</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill" id="roadmap-progress-fill"></div>
+            </div>
+            <p class="progress-tip"><i class="fa-solid fa-lightbulb"></i> Check skills above as you learn them to update your score and fill your roadmap!</p>
+          </div>
+        </section>
+
+        <!-- OPTIMIZER RECOMMENDATIONS CARD -->
+        <section class="section-card recommendations-card" aria-labelledby="recommendations-heading">
+          <div class="card-header">
+            <div class="header-title">
+              <i class="fa-solid fa-clipboard-list"></i>
+              <h2 id="recommendations-heading">Resume Optimization Feedback</h2>
+            </div>
+            <button id="btn-export-report" class="btn btn-secondary btn-sm" title="Export this analysis report">
+              <i class="fa-solid fa-file-pdf"></i> Export Report
+            </button>
+          </div>
+
+          <div class="accordion-feedback">
+            <div class="accordion-item active">
+              <div class="accordion-trigger">
+                <span><i class="fa-solid fa-triangle-exclamation text-warning"></i> Action Verbs & Power Words</span>
+                <i class="fa-solid fa-chevron-up chevron"></i>
+              </div>
+              <div class="accordion-content">
+                <p>Enhance description bullets. Avoid passive terms. Replace words like <em>"helped"</em>, <em>"worked on"</em>, or <em>"handled"</em> with action-oriented words:</p>
+                <div class="tag-suggestions" id="suggested-verbs">
+                  <!-- Dynamic action verbs -->
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <div class="accordion-trigger">
+                <span><i class="fa-solid fa-bolt text-accent"></i> Missing Critical Industry Keywords</span>
+                <i class="fa-solid fa-chevron-down chevron"></i>
+              </div>
+              <div class="accordion-content">
+                <p>These terms appear frequently in job specs for this role. Add them in context within your experience summaries:</p>
+                <div class="tag-suggestions missing-tags" id="suggested-keywords">
+                  <!-- Dynamic missing keywords -->
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <div class="accordion-trigger">
+                <span><i class="fa-solid fa-circle-info text-info"></i> Suggested Learning Resources</span>
+                <i class="fa-solid fa-chevron-down chevron"></i>
+              </div>
+              <div class="accordion-content">
+                <p>Free tutorials and guides to quickly close your top skill gaps:</p>
+                <ul class="resources-list" id="suggested-resources">
+                  <!-- Dynamic learning links -->
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="app-footer">
+    <div class="footer-container">
+      <p>&copy; 2026 ResuAlign Dashboard. Built in Public for <a href="https://github.com/cu-sanjay/Web-Dev-Projects" target="_blank" rel="noopener noreferrer">Web Dev Projects</a>.</p>
+      <div class="footer-links">
+        <button id="btn-reset-storage" class="footer-btn"><i class="fa-solid fa-trash-can"></i> Reset Dashboard Data</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal for Report Export -->
+  <div id="export-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Resume Analysis Report</h3>
+        <button id="btn-close-modal" class="btn-icon" aria-label="Close modal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body" id="modal-report-body">
+        <!-- Dynamic report content -->
+      </div>
+      <div class="modal-footer">
+        <button id="btn-copy-report" class="btn btn-secondary"><i class="fa-solid fa-copy"></i> Copy to Clipboard</button>
+        <button id="btn-print-report" class="btn btn-primary"><i class="fa-solid fa-print"></i> Print / Save PDF</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

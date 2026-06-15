@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Startup KPI Dashboard</title>
+  <!-- Google Fonts: Outfit (headings) and Inter (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="glow-bg"></div>
+
+  <!-- HEADER -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="logo">
+        <i class="fa-solid fa-gauge-high glow-icon"></i>
+        <h1>KPISync<span>Dashboard</span></h1>
+        <span class="badge">SaaS Intelligence</span>
+      </div>
+      
+      <div class="header-stats">
+        <div class="header-stat">
+          <span class="h-label">Annual Run Rate (ARR)</span>
+          <span id="lbl-header-arr" class="status-indicator status-green">$0</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="main-container">
+    
+    <!-- LEFT COLUMN: INPUT PARAMETERS -->
+    <aside class="sidebar-column" aria-label="SaaS operational parameters entry">
+      
+      <!-- Financial Core parameters -->
+      <section class="section-card">
+        <div class="card-header-row">
+          <h3><i class="fa-solid fa-chart-line"></i> Operational Core</h3>
+        </div>
+        
+        <div class="form-group">
+          <label for="txt-mrr">Starting MRR ($)</label>
+          <input type="number" id="txt-mrr" value="50000" min="0" step="1000">
+        </div>
+
+        <div class="form-group">
+          <label for="txt-new-mrr">New MRR Added / Month ($)</label>
+          <input type="number" id="txt-new-mrr" value="8000" min="0" step="500">
+        </div>
+      </section>
+
+      <!-- Unit Economics parameters -->
+      <section class="section-card">
+        <div class="card-header-row">
+          <h3><i class="fa-solid fa-users-viewfinder"></i> Unit Economics</h3>
+        </div>
+
+        <div class="form-group">
+          <label for="txt-arpa">Average Revenue / Account (ARPA) ($/mo)</label>
+          <input type="number" id="txt-arpa" value="100" min="1" step="5">
+        </div>
+
+        <div class="form-group">
+          <label for="txt-cac">Customer Acquisition Cost (CAC) ($)</label>
+          <input type="number" id="txt-cac" value="600" min="1" step="25">
+        </div>
+      </section>
+
+      <!-- Retentions parameters -->
+      <section class="section-card">
+        <div class="card-header-row">
+          <h3><i class="fa-solid fa-arrows-spin"></i> Customer Retention</h3>
+        </div>
+
+        <div class="form-group">
+          <div class="slider-label-row">
+            <label for="slider-churn">Monthly Churn Rate (%)</label>
+            <span class="slider-val" id="lbl-churn-val">5%</span>
+          </div>
+          <input type="range" id="slider-churn" min="0" max="30" value="5" step="0.5">
+        </div>
+      </section>
+
+      <button id="btn-reset-workspace" class="footer-btn"><i class="fa-solid fa-trash-can"></i> Clear Dashboard Memory</button>
+    </aside>
+
+    <!-- CENTER COLUMN: FORECAST METRICS & GRAPH -->
+    <section class="chart-column" aria-label="SaaS analytics and projections visualizer">
+      
+      <!-- Metrics Grid -->
+      <div class="metrics-grid">
+        
+        <div class="metric-card">
+          <span class="m-lbl">LTV : CAC Ratio</span>
+          <span class="m-val" id="lbl-ltv-cac">0.0x</span>
+          <span class="m-sub" id="lbl-ltv-cac-sub">Target > 3.0x</span>
+        </div>
+
+        <div class="metric-card">
+          <span class="m-lbl">Lifetime Value (LTV)</span>
+          <span class="m-val text-cyan" id="lbl-ltv">$0</span>
+          <span class="m-sub" id="lbl-ltv-sub">Projected gross value</span>
+        </div>
+
+        <div class="metric-card">
+          <span class="m-lbl">CAC Payback Period</span>
+          <span class="m-val text-amber" id="lbl-payback">0.0 mo</span>
+          <span class="m-sub" id="lbl-payback-sub">Target &lt; 12 months</span>
+        </div>
+
+        <div class="metric-card">
+          <span class="m-lbl">Annual Recurring Revenue</span>
+          <span class="m-val text-emerald" id="lbl-arr">$0</span>
+          <span class="m-sub" id="lbl-arr-sub">MRR x 12 ARR</span>
+        </div>
+
+      </div>
+
+      <!-- Projection dual axis line-bar chart wrapper -->
+      <section class="section-card chart-card">
+        <div class="card-header-row">
+          <h3><i class="fa-solid fa-chart-area"></i> 12-Month SaaS MRR &amp; Customers Projection</h3>
+          <div class="chart-legend">
+            <span class="legend-item"><span class="legend-color-dot dot-cyan"></span> Projected MRR</span>
+            <span class="legend-item"><span class="legend-color-dot dot-emerald"></span> Total Customers</span>
+          </div>
+        </div>
+
+        <div class="chart-container" id="chart-container">
+          <svg id="growth-chart-svg" viewBox="0 0 800 320" preserveAspectRatio="xMidYMid meet">
+            <!-- Rendered dynamically -->
+          </svg>
+        </div>
+      </section>
+
+      <!-- Forecast data breakdowns table -->
+      <section class="section-card table-card">
+        <div class="card-header-row">
+          <h3><i class="fa-solid fa-table-list"></i> SaaS Monthly Growth Accountings</h3>
+        </div>
+        <div class="table-wrapper">
+          <table class="forecast-table">
+            <thead>
+              <tr>
+                <th>Month</th>
+                <th>Starting Customers</th>
+                <th>Starting MRR</th>
+                <th>New MRR Added</th>
+                <th>Churned MRR</th>
+                <th>Ending Customers</th>
+                <th>Ending MRR</th>
+              </tr>
+            </thead>
+            <tbody id="forecast-table-body">
+              <!-- Dynamically populated table list -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </section>
+
+    <!-- RIGHT COLUMN: SCENARIO VAULT & INTELLIGENCE -->
+    <aside class="sidebar-column" aria-label="Scenario vault and metrics intelligence">
+      
+      <!-- Scenario Vault -->
+      <section class="section-card scenario-card">
+        <div class="card-header-row">
+          <h3><i class="fa-solid fa-vault"></i> Snapshot Vault</h3>
+        </div>
+
+        <div class="scenario-save-form">
+          <div class="form-group">
+            <label for="txt-scenario-name">Scenario Name</label>
+            <input type="text" id="txt-scenario-name" placeholder="e.g. conservative, aggressive..." autocomplete="off">
+          </div>
+          <button id="btn-save-scenario" class="btn btn-primary btn-sm"><i class="fa-solid fa-cloud-arrow-up"></i> Save Current Model</button>
+        </div>
+
+        <div class="saved-scenarios-section">
+          <h5>Saved Snapshots</h5>
+          <ul class="scenario-ul" id="scenario-list">
+            <!-- Dynamically populated scenario items -->
+          </ul>
+        </div>
+      </section>
+
+      <!-- Advisory Panel -->
+      <section class="section-card advisory-card">
+        <div class="card-header-row">
+          <h3><i class="fa-solid fa-lightbulb"></i> SaaS Advisor</h3>
+        </div>
+        <div class="advisory-feed" id="recommendations-feed">
+          <!-- Context alerts dynamically placed -->
+        </div>
+      </section>
+
+    </aside>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="app-footer">
+    <div class="footer-container">
+      <p>&copy; 2026 KPISync SaaS Pro Hub. Built for the <a href="https://github.com/cu-sanjay/Web-Dev-Projects" target="_blank" rel="noopener noreferrer">Web Dev Projects</a> repository showcase.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

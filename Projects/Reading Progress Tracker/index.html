@@ -131,6 +131,640 @@
   </main>
 
   <div class="toast-container" id="toastContainer"></div>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reading Progress Tracker - Bookshelf & Reading Sessions</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;850&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Root Layout Container -->
+  <div class="app-container">
+    <!-- Sidebar Navigation -->
+    <aside class="app-sidebar">
+      <div class="sidebar-header">
+        <div class="logo-container">
+          <svg class="logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+          </svg>
+          <span class="logo-text">ReadFlow</span>
+        </div>
+        <p class="sidebar-subtext">Library Companion</p>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button class="nav-btn active" data-target="dashboard-section">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="9"></rect>
+            <rect x="14" y="3" width="7" height="5"></rect>
+            <rect x="14" y="12" width="7" height="9"></rect>
+            <rect x="3" y="16" width="7" height="5"></rect>
+          </svg>
+          <span>Dashboard</span>
+        </button>
+        <button class="nav-btn" data-target="library-section">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path>
+            <path d="M12 6v6l4 2"></path>
+          </svg>
+          <span>My Library</span>
+        </button>
+        <button class="nav-btn" data-target="sessions-section">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          <span>Sessions Timer</span>
+        </button>
+        <button class="nav-btn" data-target="quotes-section">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+          </svg>
+          <span>Quotes &amp; Notes</span>
+        </button>
+        <button class="nav-btn" data-target="settings-section">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+          <span>Settings</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button id="themeToggleBtn" class="theme-toggle-btn" aria-label="Toggle Theme">
+          <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <span id="themeToggleText">Light Mode</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Workspace -->
+    <main class="app-main">
+      <!-- DASHBOARD TAB -->
+      <section id="dashboard-section" class="tab-content active">
+        <div class="section-header">
+          <div>
+            <h1>Dashboard</h1>
+            <p class="section-subtitle">Your personal reading analytics &amp; overview</p>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-primary" id="dashboardQuickProgressBtn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              Quick Log Progress
+            </button>
+          </div>
+        </div>
+
+        <!-- KPI Grid -->
+        <div class="kpi-grid">
+          <div class="kpi-card info">
+            <div class="kpi-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+              </svg>
+            </div>
+            <div class="kpi-info">
+              <span class="kpi-label">Books Finished</span>
+              <h3 id="kpiFinishedBooks" class="kpi-value">0</h3>
+            </div>
+          </div>
+
+          <div class="kpi-card success">
+            <div class="kpi-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 20h9"></path>
+                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+              </svg>
+            </div>
+            <div class="kpi-info">
+              <span class="kpi-label">Total Pages Read</span>
+              <h3 id="kpiTotalPages" class="kpi-value">0</h3>
+            </div>
+          </div>
+
+          <div class="kpi-card warning">
+            <div class="kpi-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="20" x2="18" y2="10"></line>
+                <line x1="12" y1="20" x2="12" y2="4"></line>
+                <line x1="6" y1="20" x2="6" y2="14"></line>
+              </svg>
+            </div>
+            <div class="kpi-info">
+              <span class="kpi-label">Avg Speed (Pg/Hr)</span>
+              <h3 id="kpiAvgSpeed" class="kpi-value">0</h3>
+            </div>
+          </div>
+
+          <div class="kpi-card danger">
+            <div class="kpi-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path>
+              </svg>
+            </div>
+            <div class="kpi-info">
+              <span class="kpi-label">Reading Streak</span>
+              <h3 id="kpiStreak" class="kpi-value">0 days</h3>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dashboard Widgets Layout -->
+        <div class="dashboard-row">
+          <!-- Currently Reading Active Books -->
+          <div class="panel-card active-books-panel">
+            <div class="panel-header">
+              <h2>Currently Reading</h2>
+              <span class="panel-tag">Your current track</span>
+            </div>
+            <div class="panel-body flex-column gap-16" id="dashboardActiveBooksList">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+
+          <!-- Reading Target Goals widget -->
+          <div class="panel-card goal-tracker-panel">
+            <div class="panel-header">
+              <h2>Monthly Targets</h2>
+              <span class="panel-tag" id="goalPeriodHeader">June</span>
+            </div>
+            <div class="panel-body flex-column justify-center align-center">
+              <div class="radial-gauge-container">
+                <svg viewBox="0 0 100 100">
+                  <circle class="radial-gauge-bg" cx="50" cy="50" r="40"></circle>
+                  <circle id="goalGaugePath" class="radial-gauge-fill" cx="50" cy="50" r="40" stroke-dasharray="251.2" stroke-dashoffset="251.2"></circle>
+                </svg>
+                <div class="radial-gauge-label">
+                  <span id="goalGaugePct" class="pct-val">0%</span>
+                  <span class="lbl-val" id="goalGaugeRatio">0 of 0 books</span>
+                </div>
+              </div>
+              <p class="goal-help-text" id="goalMessage">Log books read this month to achieve your target!</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dynamic Reading Sessions Trends Chart -->
+        <div class="panel-card chart-panel-large">
+          <div class="panel-header">
+            <h2>Weekly Reading Activity</h2>
+            <span class="panel-tag">Pages read per day</span>
+          </div>
+          <div class="panel-body chart-body">
+            <div id="activityChartContainer" class="svg-chart-container" style="height: 200px;">
+              <!-- Dynamic line chart SVG inserted by script.js -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- MY LIBRARY TAB -->
+      <section id="library-section" class="tab-content">
+        <div class="section-header">
+          <div>
+            <h1>My Digital Bookshelf</h1>
+            <p class="section-subtitle">Catalog, update, and manage your literary collection</p>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-primary" id="addNewBookBtn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              Add Book
+            </button>
+          </div>
+        </div>
+
+        <!-- Books Filters Toolbar -->
+        <div class="toolbar-card">
+          <div class="search-box">
+            <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" id="librarySearchInput" placeholder="Search by book title, author, or genre...">
+          </div>
+          <div class="filter-group">
+            <button class="filter-pill active" data-status="all">All</button>
+            <button class="filter-pill" data-status="reading">Reading</button>
+            <button class="filter-pill" data-status="to-read">To Read</button>
+            <button class="filter-pill" data-status="completed">Completed</button>
+            <button class="filter-pill" data-status="on-hold">On Hold</button>
+          </div>
+        </div>
+
+        <!-- Library Bookshelf Grid -->
+        <div class="books-grid" id="libraryBooksGrid">
+          <!-- Populated dynamically -->
+        </div>
+
+        <div id="libraryEmptyState" class="empty-state-container hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+          </svg>
+          <h3>No Books Found</h3>
+          <p>Register a book in your library to start measuring your progress checkpoints.</p>
+        </div>
+      </section>
+
+      <!-- SESSIONS TIMER TAB -->
+      <section id="sessions-section" class="tab-content">
+        <div class="section-header">
+          <div>
+            <h1>Sessions &amp; Timer</h1>
+            <p class="section-subtitle">Focus on your reading and record log statistics</p>
+          </div>
+        </div>
+
+        <div class="sessions-layout">
+          <!-- Left side: Live Stopwatch Panel -->
+          <div class="panel-card timer-panel">
+            <div class="panel-header">
+              <h2>Focus Stopwatch</h2>
+              <span class="badge" id="timerStatusBadge">IDLE</span>
+            </div>
+            <div class="panel-body flex-column align-center justify-center gap-24">
+              <!-- Book target selection -->
+              <div class="form-group" style="width: 100%; max-width: 320px; text-align: center;">
+                <label for="timerBookSelect">TARGET BOOK FOR THIS SESSION</label>
+                <select id="timerBookSelect" class="select-center">
+                  <!-- Active reading books list -->
+                </select>
+              </div>
+
+              <!-- Digital Timer digits -->
+              <div class="timer-digits-container">
+                <span id="timerMinutes">00</span>:<span id="timerSeconds">00</span>
+              </div>
+
+              <!-- Controls -->
+              <div class="timer-controls">
+                <button id="startTimerBtn" class="btn btn-primary btn-round" aria-label="Start Timer">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                </button>
+                <button id="pauseTimerBtn" class="btn btn-secondary btn-round hidden" aria-label="Pause Timer">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+                </button>
+                <button id="stopTimerBtn" class="btn btn-danger-outline btn-round" disabled aria-label="Stop &amp; Log Session">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect></svg>
+                </button>
+              </div>
+
+              <!-- Timer advice tips -->
+              <p class="timer-notice">Log sessions to automatically compute your speed stats.</p>
+            </div>
+          </div>
+
+          <!-- Right side: History Logs List -->
+          <div class="panel-card history-panel">
+            <div class="panel-header">
+              <h2>Recent Session Logs</h2>
+            </div>
+            <div class="panel-body table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Book</th>
+                    <th>Duration</th>
+                    <th>Pages Read</th>
+                    <th>Notes</th>
+                    <th class="text-right">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="sessionsHistoryTableBody">
+                  <!-- Logs dynamic injection -->
+                </tbody>
+              </table>
+              <div id="sessionsEmptyState" class="empty-state-container hidden">
+                <p>No reading sessions logged yet. Activate the stopwatch timer to generate log data.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- QUOTES & NOTES TAB -->
+      <section id="quotes-section" class="tab-content">
+        <div class="section-header">
+          <div>
+            <h1>Quotes &amp; Notes Vault</h1>
+            <p class="section-subtitle">Search, organize, and compile literary quotes or highlights</p>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-primary" id="addNewQuoteBtn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              Add Quote
+            </button>
+          </div>
+        </div>
+
+        <!-- Toolbar Filter for quotes -->
+        <div class="toolbar-card">
+          <div class="search-box">
+            <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" id="quoteSearchInput" placeholder="Search within quote text or notes...">
+          </div>
+          <div class="filter-group">
+            <select id="quoteBookFilter">
+              <option value="all">All Books</option>
+              <!-- Filled by JS -->
+            </select>
+          </div>
+        </div>
+
+        <!-- Quotes list view -->
+        <div class="quotes-grid" id="quotesGrid">
+          <!-- Dynamically populated cards -->
+        </div>
+
+        <div id="quotesEmptyState" class="empty-state-container hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+          </svg>
+          <h3>No Quotes Saved</h3>
+          <p>Keep a database of highlight quotes and paragraphs by creating your first entry.</p>
+        </div>
+      </section>
+
+      <!-- SETTINGS TAB -->
+      <section id="settings-section" class="tab-content">
+        <div class="section-header">
+          <div>
+            <h1>Settings &amp; Preferences</h1>
+            <p class="section-subtitle">Configure monthly goals, custom targets, and database portability</p>
+          </div>
+        </div>
+
+        <div class="settings-grid">
+          <!-- Setup Targets Panel -->
+          <div class="panel-card">
+            <div class="panel-header">
+              <h2>Goals &amp; Rules</h2>
+            </div>
+            <div class="panel-body">
+              <form id="goalsConfigForm" class="settings-form">
+                <div class="form-group">
+                  <label for="settingsMonthlyGoal">Target Books Read Per Month</label>
+                  <input type="number" id="settingsMonthlyGoal" min="1" max="100" value="3" required>
+                  <p class="form-help-text" style="font-size:12px; color:var(--text-secondary); margin-top:6px;">
+                    This sets the scale for your monthly goals progress dial on the main dashboard.
+                  </p>
+                </div>
+                <button type="submit" class="btn btn-primary">Save Goals Target</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Portability and backup settings panel -->
+          <div class="panel-card">
+            <div class="panel-header">
+              <h2>Data Portability &amp; Backups</h2>
+            </div>
+            <div class="panel-body">
+              <p class="settings-help-text">Export your complete library books, logged stopwatches, and favorite quotes checklist, or restore database from backup files.</p>
+              
+              <div class="settings-portability-actions" style="margin-top: 16px;">
+                <button id="exportBackupBtn" class="btn btn-secondary btn-full">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                  Export JSON Backup
+                </button>
+                
+                <label for="importBackupInput" class="btn btn-secondary btn-full file-upload-label">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                  Import JSON Backup
+                </label>
+                <input type="file" id="importBackupInput" class="hidden-file-input" accept=".json">
+                
+                <button id="resetDatabaseBtn" class="btn btn-danger-outline btn-full" style="margin-top: 8px;">
+                  Reset Database to Seeds
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ADD / EDIT BOOK MODAL -->
+  <div id="bookModal" class="modal-backdrop hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 id="bookModalTitle">Add Book</h2>
+        <button id="closeBookModalBtn" class="btn-icon" aria-label="Close modal">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="bookForm">
+          <input type="hidden" id="bookModalIndex" value="">
+          <div class="form-group">
+            <label for="bookTitleInput">Book Title</label>
+            <input type="text" id="bookTitleInput" required placeholder="e.g. Atomic Habits">
+          </div>
+          <div class="form-row">
+            <div class="form-group col-6">
+              <label for="bookAuthorInput">Author</label>
+              <input type="text" id="bookAuthorInput" required placeholder="James Clear">
+            </div>
+            <div class="form-group col-6">
+              <label for="bookPagesInput">Total Pages</label>
+              <input type="number" id="bookPagesInput" required min="1" placeholder="320">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-6">
+              <label for="bookStatusSelect">Reading Status</label>
+              <select id="bookStatusSelect">
+                <option value="to-read">To Read</option>
+                <option value="reading">Currently Reading</option>
+                <option value="completed">Completed</option>
+                <option value="on-hold">On Hold</option>
+              </select>
+            </div>
+            <div class="form-group col-6">
+              <label for="bookGenreInput">Genre / Category</label>
+              <input type="text" id="bookGenreInput" placeholder="Self-Help, Sci-Fi...">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="bookCoverInput">Book Cover Image URL</label>
+            <input type="url" id="bookCoverInput" placeholder="https://example.com/cover.jpg (or leave blank for placeholder)">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-6">
+              <label>Theme Palette Color</label>
+              <div class="theme-picker-group">
+                <input type="radio" name="bookTheme" id="th-blue" value="blue" checked class="hidden-radio">
+                <label for="th-blue" class="theme-pill th-blue" title="Indigo Blue"></label>
+
+                <input type="radio" name="bookTheme" id="th-teal" value="teal" class="hidden-radio">
+                <label for="th-teal" class="theme-pill th-teal" title="Teal"></label>
+
+                <input type="radio" name="bookTheme" id="th-orange" value="orange" class="hidden-radio">
+                <label for="th-orange" class="theme-pill th-orange" title="Orange Orange"></label>
+
+                <input type="radio" name="bookTheme" id="th-purple" value="purple" class="hidden-radio">
+                <label for="th-purple" class="theme-pill th-purple" title="Royal Purple"></label>
+
+                <input type="radio" name="bookTheme" id="th-rose" value="rose" class="hidden-radio">
+                <label for="th-rose" class="theme-pill th-rose" title="Ruby Rose"></label>
+              </div>
+            </div>
+            <div class="form-group col-6">
+              <label for="bookRatingSelect">Personal Rating</label>
+              <select id="bookRatingSelect">
+                <option value="0">Unrated</option>
+                <option value="5">★★★★★ (5 Stars)</option>
+                <option value="4">★★★★☆ (4 Stars)</option>
+                <option value="3">★★★☆☆ (3 Stars)</option>
+                <option value="2">★★☆☆☆ (2 Stars)</option>
+                <option value="1">★☆☆☆☆ (1 Star)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="modal-footer-actions">
+            <button type="button" id="cancelBookBtn" class="btn btn-secondary">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Book</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUICK PROGRESS UPDATE MODAL -->
+  <div id="progressModal" class="modal-backdrop hidden">
+    <div class="modal-card modal-sm">
+      <div class="modal-header">
+        <h2>Update Page Log</h2>
+        <button id="closeProgressModalBtn" class="btn-icon" aria-label="Close modal">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="progressForm">
+          <input type="hidden" id="progressBookId" value="">
+          
+          <div class="progress-details-header" style="margin-bottom:16px;">
+            <h3 id="progressBookTitle" style="font-size:15px; font-weight:600;">Book Title Here</h3>
+            <p id="progressPagesTrack" style="font-size:12px; color:var(--text-secondary); margin-top:2px;">Currently on page 0 of 0</p>
+          </div>
+
+          <div class="form-group">
+            <label for="progressPageInput">Current Page Milestone</label>
+            <input type="number" id="progressPageInput" required min="0">
+          </div>
+
+          <div class="form-group">
+            <label for="progressNotesInput">Session Notes / Insights (Optional)</label>
+            <textarea id="progressNotesInput" rows="2" placeholder="e.g. Learned about habit cues and rewards..."></textarea>
+          </div>
+
+          <div class="modal-footer-actions">
+            <button type="button" id="cancelProgressBtn" class="btn btn-secondary">Cancel</button>
+            <button type="submit" class="btn btn-primary">Update Page</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD QUOTE MODAL -->
+  <div id="quoteModal" class="modal-backdrop hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2>Add Book Quote</h2>
+        <button id="closeQuoteModalBtn" class="btn-icon" aria-label="Close modal">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="quoteForm">
+          <div class="form-group">
+            <label for="quoteBookSelect">Source Book Reference</label>
+            <select id="quoteBookSelect" required>
+              <!-- Filled by JS -->
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="quoteTextInput">Quote Passage</label>
+            <textarea id="quoteTextInput" required rows="4" placeholder="&ldquo;An investment in knowledge pays the best interest.&rdquo;"></textarea>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-6">
+              <label for="quotePageInput">Citation Page #</label>
+              <input type="number" id="quotePageInput" min="1" placeholder="Page 45">
+            </div>
+            <div class="form-group col-6">
+              <label for="quoteDateInput">Captured Date</label>
+              <input type="date" id="quoteDateInput" required>
+            </div>
+          </div>
+          <div class="modal-footer-actions">
+            <button type="button" id="cancelQuoteBtn" class="btn btn-secondary">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Quote</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- FINISH STOPWATCH LOG DIALOG -->
+  <div id="sessionEndModal" class="modal-backdrop hidden">
+    <div class="modal-card modal-sm">
+      <div class="modal-header">
+        <h2>Logged Focus Session</h2>
+      </div>
+      <div class="modal-body">
+        <form id="sessionEndForm">
+          <input type="hidden" id="sessionEndBookId" value="">
+          <input type="hidden" id="sessionEndDuration" value="0">
+
+          <div class="payment-modal-info" style="margin-bottom:16px;">
+            <div>
+              <span class="info-label" id="sessionEndBookTitle">Book Title</span>
+              <span class="info-val" id="sessionEndDurationFormatted" style="color:var(--primary);">00:00 elapsed</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="sessionEndPageInput">What page did you reach?</label>
+            <input type="number" id="sessionEndPageInput" required min="0" placeholder="Enter current page number">
+            <span style="font-size:11px; color:var(--text-muted); display:block; margin-top:4px;" id="sessionEndPagesLimit">Max pages: 100</span>
+          </div>
+
+          <div class="form-group">
+            <label for="sessionEndNotesInput">Reading Thoughts / Notes</label>
+            <textarea id="sessionEndNotesInput" rows="2" placeholder="e.g. Incredible twist in this chapter..."></textarea>
+          </div>
+
+          <div class="modal-footer-actions">
+            <button type="button" id="skipSessionLogBtn" class="btn btn-secondary">Discard Log</button>
+            <button type="submit" class="btn btn-primary">Save Session</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>

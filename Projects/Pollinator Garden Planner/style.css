@@ -1,0 +1,55 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+.app-container {
+  background: #fff;
+  margin: 40px;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  text-align: center;
+  width: 900px;
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+.palette, .garden, .calendar {
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 12px;
+  background: #f9f9f9;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.plant {
+  display: inline-block;
+  margin: 10px;
+  padding: 10px;
+  background: #667eea;
+  color: white;
+  border-radius: 8px;
+  cursor: grab;
+}
+
+.garden {
+  min-height: 200px;
+  border: 2px dashed #ccc;
+}
+
+.garden .plant {
+  cursor: default;
+}
+
+.calendar ul {
+  list-style: none;
+  padding: 0;
+}

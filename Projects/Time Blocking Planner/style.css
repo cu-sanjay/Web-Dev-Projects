@@ -1,0 +1,67 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+.app-container {
+  background: #fff;
+  margin: 40px;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  text-align: center;
+  width: 700px;
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+.add-block {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.add-block input, .add-block select, .add-block button {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.add-block button {
+  background: #667eea;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.add-block button:hover {
+  background: #764ba2;
+}
+
+.schedule {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.block {
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  text-align: left;
+}
+
+.block.high { background: #ff6b6b; color: white; }
+.block.medium { background: #ffd93d; }
+.block.low { background: #6bcB77; color: white; }

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DockerSim - Interactive Docker Learning Simulator</title>
+  <!-- Google Fonts: Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient background glow spheres -->
+  <div class="decor-glow">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- APP HEADER -->
+    <header class="app-header bg-glass">
+      <div class="brand">
+        <div class="brand-logo">
+          <i class="fa-solid fa-cubes"></i>
+        </div>
+        <div class="brand-text">
+          <h1>DockerSim</h1>
+          <span>Containerization Learning Laboratory</span>
+        </div>
+      </div>
+
+      <!-- Current Lesson Status progress bar -->
+      <div class="progress-bar-container">
+        <div class="progress-info-row">
+          <span id="level-badge">Level 1: First Container</span>
+          <span id="progress-percentage">20%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progress-fill-bar" style="width: 20%;"></div>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button id="theme-toggle" class="btn btn-icon" aria-label="Toggle Theme">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- IDE DASHBOARD PORTAL -->
+    <main class="ide-workspace">
+      
+      <!-- COLUMN 1: LEFT SIDEBAR (Curriculum Guide & Dockerfile editor) -->
+      <aside class="sidebar-col bg-glass">
+        <!-- Sidebar Navigation Tabs -->
+        <div class="sidebar-tabs">
+          <button class="sidebar-tab active" id="tab-lessons" data-tab="lessons">
+            <i class="fa-solid fa-graduation-cap"></i> Lessons
+          </button>
+          <button class="sidebar-tab" id="tab-dockerfile" data-tab="dockerfile">
+            <i class="fa-solid fa-file-code"></i> Dockerfile
+          </button>
+        </div>
+
+        <div class="tab-panel-viewport">
+          
+          <!-- PANEL 1: LESSONS CURRICULUM -->
+          <div class="panel-content" id="panel-lessons">
+            <div class="lesson-navigator-row">
+              <select id="lesson-select" class="select-control">
+                <option value="1">Level 1: Hello Container</option>
+                <option value="2">Level 2: Web Server &amp; Ports</option>
+                <option value="3">Level 3: Database &amp; Envs</option>
+                <option value="4">Level 4: Volumes Storage</option>
+                <option value="5">Level 5: Build Custom Images</option>
+              </select>
+              <i class="fa-solid fa-chevron-down select-arrow"></i>
+            </div>
+
+            <!-- Active Lesson Details -->
+            <div class="lesson-details-card" id="lesson-details">
+              <!-- Loaded dynamically via script -->
+            </div>
+          </div>
+
+          <!-- PANEL 2: DOCKERFILE WORKSPACE -->
+          <div class="panel-content hidden" id="panel-dockerfile">
+            <div class="dockerfile-tools-row">
+              <span class="file-tab">Dockerfile</span>
+              <button id="build-image-btn" class="btn btn-secondary btn-sm" disabled>
+                <i class="fa-solid fa-hammer"></i> Build Image
+              </button>
+            </div>
+
+            <!-- Autocomplete instructions helpers -->
+            <div class="directive-helpers">
+              <button class="btn-directive" data-dir="FROM node:18">FROM</button>
+              <button class="btn-directive" data-dir="WORKDIR /app">WORKDIR</button>
+              <button class="btn-directive" data-dir="COPY package.json .">COPY</button>
+              <button class="btn-directive" data-dir="RUN npm install">RUN</button>
+              <button class="btn-directive" data-dir="EXPOSE 3000">EXPOSE</button>
+              <button class="btn-directive" data-dir='CMD ["node", "server.js"]'>CMD</button>
+            </div>
+
+            <div class="dockerfile-editor-wrapper">
+              <textarea id="dockerfile-textarea" class="font-mono text-editor" placeholder="# Write your Dockerfile instructions here...&#10;FROM node:18&#10;WORKDIR /app&#10;COPY package.json .&#10;RUN npm install&#10;COPY . .&#10;EXPOSE 3000&#10;CMD [&quot;node&quot;, &quot;server.js&quot;]" spellcheck="false" disabled></textarea>
+            </div>
+          </div>
+
+        </div>
+      </aside>
+
+      <!-- COLUMN 2: CENTER RETRO CLI TERMINAL -->
+      <section class="terminal-col bg-glass" aria-label="Docker CLI Terminal">
+        <div class="terminal-header-bar">
+          <div class="window-controls">
+            <span class="window-dot red"></span>
+            <span class="window-dot yellow"></span>
+            <span class="window-dot green"></span>
+          </div>
+          <span class="window-title">bash - docker cli simulator</span>
+          <button id="reset-terminal-btn" class="btn btn-ghost btn-sm" title="Clear console outputs">
+            <i class="fa-solid fa-trash-can"></i>
+          </button>
+        </div>
+
+        <!-- CLI Output logger logs -->
+        <div class="terminal-body-wrapper" id="terminal-screen">
+          <div class="terminal-log">
+            <p class="system-output">DockerSim CLI Terminal Engine initialized.</p>
+            <p class="system-output">Type <span class="highlight">help</span> or <span class="highlight">docker --help</span> to list commands.</p>
+          </div>
+          
+          <!-- Input line -->
+          <div class="terminal-input-line">
+            <span class="terminal-prompt">user@dockersim:~$</span>
+            <div class="input-caret-container">
+              <input type="text" id="terminal-input" autocomplete="off" spellcheck="false" autofocus>
+              <span class="custom-caret" id="terminal-caret">█</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- COLUMN 3: RIGHT PANEL (Host Architecture Map & Browser) -->
+      <section class="host-col bg-glass" aria-label="Virtual Host Engine Map">
+        <div class="host-header-bar">
+          <h2><i class="fa-solid fa-server"></i> Virtual Host Daemon</h2>
+          <span class="status-led active" title="Docker Daemon Active"></span>
+        </div>
+
+        <div class="host-scroll-viewport">
+          <!-- Layout Node grid: Images / Containers / Volumes -->
+          <div class="host-daemon-grid">
+            
+            <!-- SECTION 1: DOCKER IMAGES -->
+            <div class="daemon-section">
+              <h3><i class="fa-solid fa-box-archive"></i> Local Image Registry</h3>
+              <div class="image-registry-list" id="image-registry-list">
+                <!-- Images injected here -->
+              </div>
+            </div>
+
+            <!-- SECTION 2: RUNNING CONTAINERS -->
+            <div class="daemon-section">
+              <h3><i class="fa-solid fa-boxes-stacked"></i> Running Containers</h3>
+              <div class="containers-sandbox-grid" id="containers-list">
+                <!-- Containers cards injected here -->
+              </div>
+            </div>
+
+            <!-- SECTION 3: STORAGE VOLUMES -->
+            <div class="daemon-section">
+              <h3><i class="fa-solid fa-hard-drive"></i> Host Volumes</h3>
+              <div class="volumes-list" id="volumes-list">
+                <!-- Volumes folders list -->
+              </div>
+            </div>
+
+          </div>
+
+          <!-- SECTION 4: SIMULATED BROWSER PREVIEW -->
+          <div class="browser-preview-card">
+            <div class="browser-header">
+              <div class="browser-controls-circles">
+                <span class="b-dot"></span>
+                <span class="b-dot"></span>
+                <span class="b-dot"></span>
+              </div>
+              <div class="browser-address-bar-wrapper">
+                <i class="fa-solid fa-lock secure-icon"></i>
+                <input type="text" id="browser-address" value="http://localhost:8080" placeholder="http://localhost:8080" disabled>
+                <button id="browser-refresh-btn" class="browser-refresh" title="Reload web preview"><i class="fa-solid fa-arrow-rotate-right"></i></button>
+              </div>
+            </div>
+            
+            <!-- Web content rendering panel -->
+            <div class="browser-viewport" id="browser-viewport-screen">
+              <div class="browser-empty-state">
+                <i class="fa-solid fa-globe"></i>
+                <p>No active port forwarding detected. Try running a web container with port mappings (e.g. <code>docker run -d -p 8080:80 nginx</code>) to access localhost.</p>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

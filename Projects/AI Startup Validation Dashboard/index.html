@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Startup Validation Dashboard</title>
+  <!-- Google Fonts: Outfit and Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons for incubator dashboard aesthetics -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="glow-bg"></div>
+
+  <!-- HEADER -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="logo">
+        <i class="fa-solid fa-rocket glow-icon"></i>
+        <h1>Foundry<span>AI</span></h1>
+        <span class="badge">Viability Hub</span>
+      </div>
+      
+      <div class="header-stats">
+        <span class="stat-badge"><i class="fa-solid fa-gauge-high text-emerald"></i> Avg Viability: <strong id="lbl-avg-score">0%</strong></span>
+        <span class="stat-badge"><i class="fa-solid fa-folder-open text-violet"></i> Evaluated: <strong id="lbl-evaluated-count">0</strong></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN DASHBOARD AREA -->
+  <main class="main-container">
+    
+    <!-- LEFT COLUMN: HISTORY & OVERALL METRICS -->
+    <aside class="sidebar-column">
+      
+      <!-- General Performance Stats -->
+      <section class="section-card metrics-card" aria-label="Incubator Performance Indicators">
+        <div class="card-header-row">
+          <h3><i class="fa-solid fa-chart-line"></i> Incubator Stats</h3>
+        </div>
+        <div class="incubator-stats-grid">
+          <div class="stat-block">
+            <span class="stat-lbl">Average Score</span>
+            <span class="stat-val text-emerald" id="lbl-stats-avg">0%</span>
+          </div>
+          <div class="stat-block">
+            <span class="stat-lbl">Top Rated Pitch</span>
+            <span class="stat-val text-violet" id="lbl-stats-top">N/A</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Saved Evaluations History -->
+      <section class="section-card history-card" aria-label="Saved startup evaluation runs">
+        <div class="card-header-row">
+          <h3><i class="fa-solid fa-clock-rotate-left"></i> Pitches History</h3>
+        </div>
+
+        <div class="history-list-wrapper" id="history-list">
+          <!-- Dynamic history lists load -->
+          <div class="welcome-placeholder small-placeholder">
+            <i class="fa-solid fa-box-open placeholder-icon"></i>
+            <p class="text-secondary text-sm">No saved evaluations yet.</p>
+          </div>
+        </div>
+      </section>
+
+      <button id="btn-reset-workspace" class="footer-btn"><i class="fa-solid fa-trash-can"></i> Clear Incubator Memory</button>
+    </aside>
+
+    <!-- CENTER COLUMN: STARTUP PITCH CONSOLE -->
+    <section class="pitch-column" aria-label="Startup Idea Pitch Console">
+      <section class="section-card input-form-card">
+        <div class="card-header-row">
+          <h3><i class="fa-solid fa-pen-to-square"></i> Pitch Briefing</h3>
+        </div>
+
+        <div class="form-group">
+          <label for="pitch-title">Startup/Product Name</label>
+          <input type="text" id="pitch-title" placeholder="e.g. Healthflow Analytics">
+        </div>
+
+        <div class="form-group">
+          <label for="pitch-desc">Elevator Pitch &amp; Problem Solved</label>
+          <textarea id="pitch-desc" placeholder="Explain your startup core value proposition... (e.g. 'A SaaS portal for local clinics that automates appointment schedules to reduce patient wait times by 40%')"></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group flex-1">
+            <label for="pitch-audience">Target Customer Segment</label>
+            <input type="text" id="pitch-audience" placeholder="e.g. Local Private Clinics">
+          </div>
+          
+          <div class="form-group flex-1">
+            <label for="sel-pricing">Monetization Model</label>
+            <select id="sel-pricing">
+              <option value="SaaS">SaaS Subscription</option>
+              <option value="Transaction">Transactional Fee</option>
+              <option value="Freemium">Freemium Tier</option>
+              <option value="Advertising">Ad-based Model</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group flex-1">
+            <label for="pitch-budget">Monthly OpEx Budget ($)</label>
+            <input type="number" id="pitch-budget" placeholder="e.g. 1500" value="1000">
+          </div>
+          
+          <div class="form-group flex-1">
+            <label for="pitch-tam">TAM Market Size ($M)</label>
+            <input type="number" id="pitch-tam" placeholder="e.g. 250" value="150">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="pitch-competitors">Key Competitors (comma separated)</label>
+          <input type="text" id="pitch-competitors" placeholder="e.g. Zocdoc, CarePatron">
+        </div>
+
+        <button id="btn-validate" class="btn btn-primary btn-full">
+          <i class="fa-solid fa-microchip"></i> Evaluate Viability Metrics
+        </button>
+      </section>
+    </section>
+
+    <!-- RIGHT COLUMN: VALIDATION REPORT VIEWPORT -->
+    <section class="report-column" aria-label="Viability Diagnostic Report">
+      
+      <!-- Report empty placeholder -->
+      <div id="report-empty" class="report-welcome-card">
+        <div class="pulse-icon">
+          <i class="fa-solid fa-circle-nodes"></i>
+        </div>
+        <h4>Viability Diagnostic Report</h4>
+        <p>Complete the Pitch Briefing forms and trigger the validator engine to view SWOT scores, pricing sustainability curves, and founder milestones checklist guides.</p>
+      </div>
+
+      <!-- Active Report Details -->
+      <div id="report-active" class="report-workspace hidden">
+        
+        <!-- Score & SWOT Diagnostic -->
+        <section class="section-card diagnostic-card" aria-label="viability score and SWOT matrix">
+          <div class="report-header-row">
+            <div class="diagnostic-title">
+              <span id="lbl-report-pricing-badge" class="pricing-badge">SaaS</span>
+              <h3 id="lbl-report-name">Startup Name</h3>
+            </div>
+            
+            <!-- Radial SVG viability gauge -->
+            <div class="radial-score-container">
+              <svg class="radial-svg" viewBox="0 0 100 100">
+                <circle class="radial-bg" cx="50" cy="50" r="42"></circle>
+                <circle class="radial-progress" id="viability-indicator" cx="50" cy="50" r="42" style="stroke-dasharray: 263.8; stroke-dashoffset: 263.8;"></circle>
+              </svg>
+              <div class="radial-text">
+                <span id="lbl-viability-score" class="score-val">0%</span>
+                <span class="score-lbl">Viability</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- SWOT Grid Lists -->
+          <div class="swot-section">
+            <h5>SWOT Diagnostics Analysis</h5>
+            <div class="swot-grid" id="swot-bullets">
+              <!-- Dynamically populated SWOT bullet columns -->
+            </div>
+          </div>
+        </section>
+
+        <!-- Financial Sustainability Simulator -->
+        <section class="section-card financial-card" aria-label="12-Month revenue forecasting simulator">
+          <div class="card-header-row">
+            <h3><i class="fa-solid fa-calculator"></i> 12mo Revenue Projection</h3>
+          </div>
+
+          <!-- Financial parameters adjusters -->
+          <div class="financial-adjusters">
+            <div class="slider-group">
+              <div class="slider-lbl-row">
+                <label for="range-price">Pricing per User ($)</label>
+                <span id="lbl-range-price" class="slider-val text-emerald">$29</span>
+              </div>
+              <input type="range" id="range-price" min="5" max="250" value="29" class="slider-input">
+            </div>
+
+            <div class="slider-group">
+              <div class="slider-lbl-row">
+                <label for="range-users">Expected Users (Mo. 12)</label>
+                <span id="lbl-range-users" class="slider-val text-violet">250</span>
+              </div>
+              <input type="range" id="range-users" min="10" max="2500" value="250" class="slider-input">
+            </div>
+          </div>
+
+          <!-- Breakeven status -->
+          <div class="breakeven-banner">
+            <span>Estimated Profitability timeline:</span>
+            <strong id="lbl-breakeven" class="text-emerald">Month 4</strong>
+          </div>
+
+          <!-- CSS grid bars revenue chart -->
+          <div class="chart-wrapper">
+            <div class="chart-grid" id="revenue-chart">
+              <!-- Dynamically populated 12 CSS bar grids -->
+            </div>
+            <div class="chart-timeline-labels">
+              <span>Mo. 1</span>
+              <span>Mo. 4</span>
+              <span>Mo. 8</span>
+              <span>Mo. 12</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- AI Pivots and recommendations -->
+        <section class="section-card recommendations-card" aria-label="AI pivot suggestions">
+          <h5><i class="fa-solid fa-wand-magic-sparkles text-violet"></i> AI Pivot Suggestions</h5>
+          <ul class="recommendations-list" id="lbl-pivot-recommendations">
+            <!-- Dynamic pivot recommendations -->
+          </ul>
+        </section>
+
+        <!-- Validation Checklist -->
+        <section class="section-card milestones-card" aria-label="Founder milestones checklist">
+          <h5>Validation Checkpoint Checklist</h5>
+          <p class="text-muted text-xs mb-1">Checkoff milestones as you execute research validation:</p>
+          <ul class="milestones-ul" id="milestones-checklist">
+            <!-- Dynamic milestones list -->
+          </ul>
+        </section>
+
+        <!-- Actions -->
+        <div class="report-actions">
+          <button id="btn-delete-run" class="btn btn-danger btn-sm" title="Delete evaluation profile">
+            <i class="fa-solid fa-trash-can"></i> Delete Profile
+          </button>
+          <button id="btn-bookmark-run" class="btn btn-success btn-sm" title="Bookmark evaluation run">
+            <i class="fa-solid fa-bookmark"></i> Bookmark Run
+          </button>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="app-footer">
+    <div class="footer-container">
+      <p>&copy; 2026 FoundryAI Hub. Built for the <a href="https://github.com/cu-sanjay/Web-Dev-Projects" target="_blank" rel="noopener noreferrer">Web Dev Projects</a> repository showcase.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

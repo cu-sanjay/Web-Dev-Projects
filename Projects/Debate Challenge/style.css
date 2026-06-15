@@ -1,0 +1,212 @@
+ @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@700&display=swap');
+
+        :root {
+            --bg: #020617;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --user-color: #22d3ee;
+            --user-glow: rgba(34, 211, 238, 0.4);
+            --opponent-color: #f43f5e;
+            --opponent-glow: rgba(244, 63, 94, 0.4);
+            --accent: #facc15;
+            --text: #f8fafc;
+            --text-dim: #94a3b8;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg);
+            background: radial-gradient(circle at center, #1e1b4b 0%, #020617 100%);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        .arena-container {
+            width: 95%;
+            max-width: 900px;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 32px;
+            padding: 2rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 2rem;
+        }
+
+        @media (max-width: 800px) {
+            .arena-container { grid-template-columns: 1fr; }
+        }
+
+        /* Battle HUD */
+        .battle-view {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .health-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .health-bar-container {
+            height: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+        }
+
+        .health-fill {
+            height: 100%;
+            width: 100%;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .user-hp { background: var(--user-color); box-shadow: 0 0 15px var(--user-glow); }
+        .opp-hp { background: var(--opponent-color); box-shadow: 0 0 15px var(--opponent-glow); }
+
+        .topic-card {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1.5rem;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            text-align: center;
+        }
+
+        .topic-card h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            margin: 0;
+            color: var(--accent);
+        }
+
+        /* Input Area */
+        .input-box {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        textarea {
+            width: 100%;
+            height: 120px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1rem;
+            color: white;
+            font-family: inherit;
+            font-size: 1rem;
+            resize: none;
+            outline: none;
+            transition: 0.3s;
+            box-sizing: border-box;
+        }
+
+        textarea:focus {
+            border-color: var(--user-color);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-attack {
+            background: var(--user-color);
+            color: var(--bg);
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 12px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-attack:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px var(--user-glow);
+        }
+
+        /* Battle Log */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            height: 100%;
+        }
+
+        .battle-log {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            padding: 1rem;
+            font-size: 0.85rem;
+            overflow-y: auto;
+            border: 1px solid var(--glass-border);
+            max-height: 400px;
+        }
+
+        .log-entry {
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            line-height: 1.4;
+        }
+
+        .log-entry.user { color: var(--user-color); }
+        .log-entry.opp { color: var(--opponent-color); }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: var(--bg);
+            z-index: 100;
+            border-radius: 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .hidden { display: none !important; }
+
+        .side-toggle {
+            display: flex;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 4px;
+            border-radius: 10px;
+            gap: 4px;
+        }
+
+        .side-btn {
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            color: var(--text-dim);
+        }
+
+        .side-btn.active {
+            background: var(--glass-border);
+            color: white;
+        }

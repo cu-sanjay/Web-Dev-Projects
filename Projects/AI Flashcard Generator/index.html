@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Flashcard Generator</title>
+  <!-- Google Fonts: Outfit and Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons for Dashboard aesthetics -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-background"></div>
+
+  <header class="app-header">
+    <div class="header-container">
+      <div class="logo">
+        <i class="fa-solid fa-layer-group glow-icon"></i>
+        <h1>Flash<span>AI</span></h1>
+        <span class="badge">Study Deck</span>
+      </div>
+      
+      <div class="header-actions">
+        <button id="btn-open-creator" class="btn btn-secondary btn-sm" title="Add an individual card manually">
+          <i class="fa-solid fa-plus"></i> Add Card
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER GRID -->
+  <main class="main-container">
+    <!-- LEFT SIDEBAR: DECKS & STUDY STATISTICS -->
+    <aside class="sidebar-column">
+      <!-- Deck List Selector -->
+      <section class="section-card deck-card" aria-labelledby="decks-heading">
+        <div class="card-header-row">
+          <h3 id="decks-heading"><i class="fa-solid fa-folder"></i> Decks</h3>
+          <button id="btn-new-deck" class="btn-icon" title="Create a new deck category"><i class="fa-solid fa-folder-plus"></i></button>
+        </div>
+        
+        <div class="deck-list-container" id="deck-list-nav">
+          <!-- Dynamic deck selectors -->
+        </div>
+      </section>
+
+      <!-- Learning stats -->
+      <section class="section-card stats-card" aria-labelledby="stats-heading">
+        <h3 id="stats-heading"><i class="fa-solid fa-chart-pie"></i> Mastery Metrics</h3>
+        
+        <div class="radial-progress-wrapper">
+          <svg class="radial-svg" viewBox="0 0 100 100">
+            <circle class="radial-bg" cx="50" cy="50" r="44"></circle>
+            <circle class="radial-progress" id="mastery-indicator" cx="50" cy="50" r="44" style="stroke-dasharray: 276; stroke-dashoffset: 276;"></circle>
+          </svg>
+          <div class="radial-text">
+            <span id="val-mastery" class="score-val">0%</span>
+            <span class="score-lbl">Mastered</span>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-item">
+            <span class="stat-lbl">Mastered Cards</span>
+            <span class="stat-val text-success" id="val-mastered-count">0</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-lbl">Review Needed</span>
+            <span class="stat-val text-danger" id="val-review-count">0</span>
+          </div>
+        </div>
+        
+        <div class="streak-banner mt-1" id="streak-badge-container">
+          <i class="fa-solid fa-fire text-warning"></i>
+          <span>Study Streak: <strong id="val-streak">0 days</strong></span>
+        </div>
+      </section>
+    </aside>
+
+    <!-- CENTER COLUMN: 3D FLASHCARD STAGE -->
+    <section class="stage-column" aria-label="Flashcard visualizer area">
+      <div class="stage-header">
+        <h2 id="lbl-active-deck-name">Select a Deck</h2>
+        <span class="card-counter-badge" id="lbl-card-counter">0 of 0 Cards</span>
+      </div>
+
+      <!-- Linear progress bar -->
+      <div class="deck-progress-track">
+        <div class="deck-progress-fill" id="val-progress-bar"></div>
+      </div>
+
+      <!-- FLASHCARD 3D SCENE -->
+      <div class="flashcard-scene-container" id="card-arena">
+        <!-- Interactive 3D Wrapper -->
+        <div class="flashcard-3d-wrapper" id="card-wrapper" role="button" aria-expanded="false" tabindex="0" title="Click to flip card">
+          <!-- FRONT FACE -->
+          <div class="card-face card-front">
+            <div class="card-badge">Front (Question / Term)</div>
+            <div class="card-content-text">
+              <p id="lbl-front-text" class="question-text">Double click or select a deck to load flashcards.</p>
+            </div>
+            <span class="flip-tip"><i class="fa-solid fa-rotate"></i> Click card to reveal answer</span>
+          </div>
+
+          <!-- BACK FACE -->
+          <div class="card-face card-back">
+            <div class="card-badge">Back (Answer / Explanation)</div>
+            <div class="card-content-text">
+              <p id="lbl-back-text" class="answer-text">Select a deck in the left sidebar to begin.</p>
+            </div>
+            <span class="flip-back-tip"><i class="fa-solid fa-rotate"></i> Click card to return to question</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action mastery logs -->
+      <div class="mastery-buttons-row hidden" id="mastery-buttons-bar">
+        <button id="btn-mark-review" class="btn btn-secondary btn-review" title="Mark this card as needing review">
+          <i class="fa-solid fa-circle-xmark text-danger"></i> Review Needed
+        </button>
+        <button id="btn-mark-mastered" class="btn btn-secondary btn-mastered" title="Mark this card as mastered">
+          <i class="fa-solid fa-circle-check text-success"></i> Mastered
+        </button>
+      </div>
+
+      <!-- Cards deck navigations -->
+      <div class="deck-navigation-row">
+        <button id="btn-prev-card" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> Previous</button>
+        <button id="btn-shuffle-deck" class="btn btn-secondary" title="Randomize card order"><i class="fa-solid fa-shuffle"></i> Shuffle</button>
+        <button id="btn-next-card" class="btn btn-secondary">Next <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+    </section>
+
+    <!-- RIGHT COLUMN: AI FLASHCARD NOTES PARSER -->
+    <section class="section-card parser-card" aria-labelledby="parser-heading">
+      <h3 id="parser-heading"><i class="fa-solid fa-wand-magic-sparkles text-accent"></i> AI Note Parser</h3>
+      <p class="text-muted text-sm">Paste study summaries or bullet outlines. The parser scans definitions colons to spawn flashcards.</p>
+
+      <div class="form-group mt-1">
+        <button id="btn-load-demo-notes" class="btn btn-secondary btn-sm" type="button">
+          <i class="fa-solid fa-lightbulb"></i> Load Demo Notes
+        </button>
+      </div>
+
+      <div class="form-group">
+        <label for="txt-notes-input">Raw Notes Text</label>
+        <textarea id="txt-notes-input" placeholder="e.g.&#10;CSS Flexbox: Layout system aligning items in row or columns.&#10;API: Application Programming Interface linking servers.&#10;Semantic HTML - Markup elements describing content structure."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="select-target-deck">Save cards to Deck</label>
+        <div class="select-wrapper">
+          <select id="select-target-deck">
+            <!-- Dynamic dropdown choices -->
+          </select>
+          <i class="fa-solid fa-chevron-down select-arrow"></i>
+        </div>
+      </div>
+
+      <button id="btn-parse-notes" class="btn btn-primary btn-full">
+        <i class="fa-solid fa-gears"></i> Generate Cards
+      </button>
+    </section>
+  </main>
+
+  <!-- MODAL: MANUAL CARD CREATOR -->
+  <div id="creator-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Add Individual Flashcard</h3>
+        <button id="btn-close-creator" class="btn-icon" aria-label="Close modal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <form id="creator-form">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="select-creator-deck">Select Deck Category</label>
+            <div class="select-wrapper">
+              <select id="select-creator-deck" required>
+                <!-- Dynamic choices -->
+              </select>
+              <i class="fa-solid fa-chevron-down select-arrow"></i>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="txt-card-front">Front Text <span class="sub-label">(Question or Term)</span> <span class="required">*</span></label>
+            <textarea id="txt-card-front" placeholder="e.g. What is Web Accessibility (a11y)?" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="txt-card-back">Back Text <span class="sub-label">(Answer or Explanation)</span> <span class="required">*</span></label>
+            <textarea id="txt-card-back" placeholder="e.g. It refers to building sites that are readable and navigable to all users, including those using assistive technologies like screen readers." required></textarea>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" id="btn-cancel-creator" class="btn btn-secondary">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Card</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="app-footer">
+    <div class="footer-container">
+      <p>&copy; 2026 FlashAI Sandbox. Contributions for <a href="https://github.com/cu-sanjay/Web-Dev-Projects" target="_blank" rel="noopener noreferrer">Web Dev Projects</a>.</p>
+      <button id="btn-reset-storage" class="footer-btn"><i class="fa-solid fa-rotate-left"></i> Reset Study Data</button>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

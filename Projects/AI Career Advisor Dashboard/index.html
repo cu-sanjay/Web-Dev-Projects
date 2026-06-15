@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Career Advisor Dashboard</title>
+  <!-- Google Fonts: Outfit and Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons for Dashboard aesthetics -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-background"></div>
+
+  <header class="app-header">
+    <div class="header-container">
+      <div class="logo">
+        <i class="fa-solid fa-graduation-cap glow-icon"></i>
+        <h1>Path<span>Advisor</span></h1>
+        <span class="badge">AI Match</span>
+      </div>
+      
+      <div class="header-stats">
+        <span class="streak-badge"><i class="fa-solid fa-fire text-warning"></i> Study Streak: <strong id="val-streak">0 days</strong></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN DASHBOARD SPLIT -->
+  <main class="main-container">
+    <!-- LEFT COLUMN: USER PROFILE & INTERESTS -->
+    <aside class="sidebar-column">
+      <!-- Profile Assessment Card -->
+      <section class="section-card profile-card" aria-labelledby="profile-heading">
+        <div class="card-header-row">
+          <h3 id="profile-heading"><i class="fa-solid fa-sliders"></i> Skill Profile</h3>
+          <button id="btn-load-demo" class="btn btn-secondary btn-sm"><i class="fa-solid fa-wand-magic-sparkles"></i> Demo</button>
+        </div>
+
+        <!-- Sliders -->
+        <div class="form-group mt-1">
+          <div class="label-row">
+            <label for="range-tech">Programming / Tech</label>
+            <span id="lbl-val-tech" class="slider-val text-accent">50%</span>
+          </div>
+          <input type="range" id="range-tech" min="0" max="100" value="50" class="slider-input">
+        </div>
+
+        <div class="form-group">
+          <div class="label-row">
+            <label for="range-design">Design / Creative</label>
+            <span id="lbl-val-design" class="slider-val text-accent">50%</span>
+          </div>
+          <input type="range" id="range-design" min="0" max="100" value="50" class="slider-input">
+        </div>
+
+        <div class="form-group">
+          <div class="label-row">
+            <label for="range-data">Data / Analytics</label>
+            <span id="lbl-val-data" class="slider-val text-accent">50%</span>
+          </div>
+          <input type="range" id="range-data" min="0" max="100" value="50" class="slider-input">
+        </div>
+
+        <div class="form-group">
+          <div class="label-row">
+            <label for="range-strategy">Strategy / Management</label>
+            <span id="lbl-val-strategy" class="slider-val text-accent">50%</span>
+          </div>
+          <input type="range" id="range-strategy" min="0" max="100" value="50" class="slider-input">
+        </div>
+
+        <!-- Resume paste -->
+        <div class="form-group">
+          <label for="txt-bio">Paste Credentials/Resume Summary</label>
+          <textarea id="txt-bio" placeholder="Paste your background text here (e.g. 'CS junior interested in AWS deployment, SQL databases, system metrics, figma UI design')..."></textarea>
+        </div>
+
+        <button id="btn-calculate" class="btn btn-primary btn-full">
+          <i class="fa-solid fa-calculator"></i> Match Careers
+        </button>
+      </section>
+
+      <button id="btn-reset-data" class="footer-btn"><i class="fa-solid fa-trash-can"></i> Clear Advisor Memory</button>
+    </aside>
+
+    <!-- MIDDLE COLUMN: MATCHES LIST -->
+    <section class="matches-column" aria-label="Career Matches list">
+      <div class="matches-header">
+        <h2>Top Career Matches</h2>
+        <span class="results-lbl" id="lbl-matches-count">Ready to match</span>
+      </div>
+
+      <div class="matches-grid" id="matches-cards-list">
+        <!-- Placeholder welcome card -->
+        <div class="welcome-placeholder">
+          <i class="fa-solid fa-arrows-to-eye placeholder-icon"></i>
+          <h3>Ready for Assessment</h3>
+          <p>Adjust your skill configuration sliders and enter your background credentials, then trigger matching loops to view calculated career tracks.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT COLUMN: TARGET ROADMAP DETAILS Drawer -->
+    <section class="section-card details-card" aria-label="Target roadmap details panel">
+      <!-- Guide view before select card -->
+      <div id="details-empty" class="details-welcome-card">
+        <div class="pulse-icon">
+          <i class="fa-solid fa-route"></i>
+        </div>
+        <h4>Career Roadmaps Details</h4>
+        <p>Choose any career card from the matches list to view standard milestones checkpoints, job growth diagnostics, and checklists persisted in local memory.</p>
+      </div>
+
+      <!-- Active Career details viewport -->
+      <div id="details-active" class="details-workspace hidden">
+        <div class="details-header">
+          <div class="title-category">
+            <span class="cat-badge" id="lbl-details-category">Engineering</span>
+            <h3 id="lbl-details-name">Solutions Architect</h3>
+          </div>
+          <div class="details-progress-circle">
+            <svg class="radial-svg" viewBox="0 0 100 100">
+              <circle class="radial-bg" cx="50" cy="50" r="44"></circle>
+              <circle class="radial-progress" id="roadmap-indicator" cx="50" cy="50" r="44" style="stroke-dasharray: 276; stroke-dashoffset: 276;"></circle>
+            </svg>
+            <div class="radial-text">
+              <span id="lbl-details-roadmap-percent" class="score-val">0%</span>
+              <span class="score-lbl">Roadmap</span>
+            </div>
+          </div>
+        </div>
+
+        <p id="lbl-details-desc" class="text-secondary text-sm">Target description details...</p>
+
+        <!-- Market telemetry stats -->
+        <div class="market-telemetry-section">
+          <h5>Market Telemetry</h5>
+          <div class="market-stats-grid">
+            <div class="mstat-item">
+              <span class="mstat-lbl">YoY Growth</span>
+              <span class="mstat-val text-success" id="lbl-details-growth">+0%</span>
+            </div>
+            <div class="mstat-item">
+              <span class="mstat-lbl">Median Salary</span>
+              <span class="mstat-val text-accent" id="lbl-details-salary">$0/yr</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Milestones list -->
+        <div class="milestones-checklist-section">
+          <h5>Required Milestones &amp; Credentials</h5>
+          <p class="text-muted text-xs mb-1">Check certifications/skills you have completed to update roadmap progression:</p>
+          <ul class="milestone-list" id="details-checklist">
+            <!-- Dynamic checklist items -->
+          </ul>
+        </div>
+
+        <!-- Learning guides links -->
+        <div class="details-resources-section">
+          <h5>Recommended Resource Guide</h5>
+          <div id="details-resource-box">
+            <!-- Dynamic resource links -->
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <div class="footer-container">
+      <p>&copy; 2026 PathAdvisor Hub. Built for the <a href="https://github.com/cu-sanjay/Web-Dev-Projects" target="_blank" rel="noopener noreferrer">Web Dev Projects</a> repository showcase.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

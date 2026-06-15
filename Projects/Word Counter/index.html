@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Word Counter | Real-time text analysis</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="counter-app">
+    <div class="counter-card">
+      <div class="card-header">
+        <h1>📝 Word Counter</h1>
+        <p class="tagline">Type or paste your text — get instant stats</p>
+      </div>
+
+      <div class="textarea-container">
+        <textarea id="textInput" placeholder="Write or paste your content here... (e.g., essays, notes, social posts)" rows="6" autofocus></textarea>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value" id="wordCount">0</div>
+          <div class="stat-label">Words</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="charCount">0</div>
+          <div class="stat-label">Characters (with spaces)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="charNoSpaceCount">0</div>
+          <div class="stat-label">Characters (no spaces)</div>
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <button id="clearBtn" class="btn btn-secondary">🗑️ Clear text</button>
+        <button id="copyBtn" class="btn btn-outline">📋 Copy text</button>
+      </div>
+      <div class="footnote">
+        <span>⚡ Updates as you type · pure vanilla JS</span>
+      </div>
+    </div>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

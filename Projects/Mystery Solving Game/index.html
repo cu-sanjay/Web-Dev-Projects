@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mystery Manor: The Stolen Star</title>
+ <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <header>
+            <h1>The Case of the Stolen Star</h1>
+            <p id="game-status" style="color: var(--text-dim); font-size: 0.9rem;">Investigate the Museum of Wonders.</p>
+        </header>
+
+        <div class="navigation">
+            <button class="nav-btn active" onclick="switchTab('crime-scene')">Crime Scene</button>
+            <button class="nav-btn" onclick="switchTab('hallway')">Hallway</button>
+            <button class="nav-btn" onclick="switchTab('interviews')">Interview Room</button>
+            <button class="nav-btn" onclick="switchTab('deduction')">Deduction</button>
+        </div>
+
+        <main class="main-view">
+            <!-- Crime Scene Tab -->
+            <div id="crime-scene" class="scene-card tab-content">
+                <p>The "Midnight Star" diamond is missing from the pedestal. The glass was cut with precision. Shards are scattered on the floor.</p>
+                <div id="clue-fiber" class="clue-spot" onclick="collectClue('fiber', 'Blue Silk Fiber', 'A tiny blue thread found caught on the pedestal glass.')">Inspect Pedestal</div>
+                <div id="clue-footprint" class="clue-spot" onclick="collectClue('footprint', 'Size 10 Print', 'A faint muddy print near the vent. Looks like a professional work boot.')">Check Floor</div>
+            </div>
+
+            <!-- Hallway Tab -->
+            <div id="hallway" class="scene-card tab-content hidden">
+                <p>A long corridor lined with lockers. Security cameras are mounted at both ends.</p>
+                <div id="clue-log" class="clue-spot" onclick="collectClue('log', 'Security Log', 'Access log shows a maintenance override at 2:05 AM using Keycard #42.')">Check Terminal</div>
+                <div id="clue-receipt" class="clue-spot" onclick="collectClue('receipt', 'Coffee Receipt', 'Found in a bin. Dated last night, 1:50 AM, for a double espresso.')">Search Trash</div>
+            </div>
+
+            <!-- Interviews Tab -->
+            <div id="interviews" class="scene-card tab-content hidden">
+                <p>Question the staff present during the night shift.</p>
+                <button class="suspect-btn" onclick="interview('Arthur', 'The Guard', 'I was at my post. I wear a blue uniform, but I never left the main desk. I use Keycard #12.')">
+                    <strong>Arthur (Guard):</strong> "I was at my post all night."
+                </button>
+                <button class="suspect-btn" onclick="interview('Marla', 'The Janitor', 'I was cleaning the vents in the East Wing. I wear standard brown overalls. I lost my Keycard #42 yesterday.')">
+                    <strong>Marla (Janitor):</strong> "I was in the East Wing."
+                </button>
+                <button class="suspect-btn" onclick="interview('Viktor', 'The Technician', 'I came in late to fix a coffee machine. I don\'t have a keycard, someone must have let me in.')">
+                    <strong>Viktor (Technician):</strong> "I just fix the machines."
+                </button>
+            </div>
+
+            <!-- Deduction Tab -->
+            <div id="deduction" class="scene-card tab-content hidden">
+                <h3>Final Accusation</h3>
+                <p style="margin-bottom: 20px;">Review your case file. Who stole the Star?</p>
+                <div class="accusation-grid">
+                    <button class="accuse-btn" onclick="accuse('Arthur')">ACCUSE ARTHUR</button>
+                    <button class="accuse-btn" onclick="accuse('Marla')">ACCUSE MARLA</button>
+                    <button class="accuse-btn" onclick="accuse('Viktor')">ACCUSE VIKTOR</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Evidence Summary -->
+        <div class="case-file">
+            <div class="file-section">
+                <h3>Collected Clues</h3>
+                <div id="clue-list">Searching for evidence...</div>
+            </div>
+            <div class="file-section">
+                <h3>Suspect Statements</h3>
+                <div id="interview-list">No testimonies yet...</div>
+            </div>
+        </div>
+    </div>
+<script src="script.js"></script>
+</body>
+</html>

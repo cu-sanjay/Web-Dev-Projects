@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Deep Work Productivity Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <h1>📊 Deep Work Productivity Dashboard</h1>
+
+    <div class="controls">
+      <button onclick="startSession()">▶️ Start Focus Session</button>
+      <button onclick="endSession()">⏹️ End Session</button>
+      <button onclick="logDistraction()">⚠️ Log Distraction</button>
+    </div>
+
+    <div class="metrics">
+      <p id="totalHours">Deep Work Hours: 0</p>
+      <p id="sessions">Sessions Completed: 0</p>
+      <p id="distractions">Distractions Logged: 0</p>
+    </div>
+
+    <canvas id="chart" width="400" height="200"></canvas>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

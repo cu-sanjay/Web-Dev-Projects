@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Time Blocking Planner</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <h1>📅 Time Blocking Planner</h1>
+
+    <div class="add-block">
+      <input type="text" id="taskInput" placeholder="Task name">
+      <input type="time" id="startTime">
+      <input type="time" id="endTime">
+      <select id="priority">
+        <option value="High">High</option>
+        <option value="Medium">Medium</option>
+        <option value="Low">Low</option>
+      </select>
+      <button onclick="addBlock()">➕ Add Block</button>
+    </div>
+
+    <div id="schedule" class="schedule"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

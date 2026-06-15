@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Session Manager - Pomodoro Timer & Flashcards</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;850&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Root Layout Container -->
+  <div class="app-container">
+    <!-- Sidebar Navigation -->
+    <aside class="app-sidebar">
+      <div class="sidebar-header">
+        <div class="logo-container">
+          <svg class="logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          <span class="logo-text">FocusFlow</span>
+        </div>
+        <p class="sidebar-subtext">Study Companion</p>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button class="nav-btn active" data-target="dashboard-section">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="9"></rect>
+            <rect x="14" y="3" width="7" height="5"></rect>
+            <rect x="14" y="12" width="7" height="9"></rect>
+            <rect x="3" y="16" width="7" height="5"></rect>
+          </svg>
+          <span>Dashboard</span>
+        </button>
+        <button class="nav-btn" data-target="timer-section">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polygon points="10 8 16 12 10 16 10 8"></polygon>
+          </svg>
+          <span>Pomodoro Clock</span>
+        </button>
+        <button class="nav-btn" data-target="decks-section">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+          </svg>
+          <span>Study Decks</span>
+        </button>
+        <button class="nav-btn" data-target="flashcards-section">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="9" y1="9" x2="15" y2="9"></line>
+            <line x1="9" y1="13" x2="15" y2="13"></line>
+          </svg>
+          <span>Flashcards</span>
+        </button>
+        <button class="nav-btn" data-target="settings-section">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+          <span>Settings</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button id="themeToggleBtn" class="theme-toggle-btn" aria-label="Toggle Theme">
+          <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <span id="themeToggleText">Light Mode</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Workspace -->
+    <main class="app-main">
+      <!-- DASHBOARD TAB -->
+      <section id="dashboard-section" class="tab-content active">
+        <div class="section-header">
+          <div>
+            <h1>Dashboard</h1>
+            <p class="section-subtitle">Overview of focus durations and curriculum milestones</p>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-primary" id="dashboardStartFocusBtn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8"></polygon></svg>
+              Start Focus Session
+            </button>
+          </div>
+        </div>
+
+        <!-- KPI Grid -->
+        <div class="kpi-grid">
+          <div class="kpi-card info">
+            <div class="kpi-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+            </div>
+            <div class="kpi-info">
+              <span class="kpi-label">Focus Minutes</span>
+              <h3 id="kpiFocusMinutes" class="kpi-value">0</h3>
+            </div>
+          </div>
+
+          <div class="kpi-card success">
+            <div class="kpi-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+            </div>
+            <div class="kpi-info">
+              <span class="kpi-label">Sessions Completed</span>
+              <h3 id="kpiTotalSessions" class="kpi-value">0</h3>
+            </div>
+          </div>
+
+          <div class="kpi-card warning">
+            <div class="kpi-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path>
+              </svg>
+            </div>
+            <div class="kpi-info">
+              <span class="kpi-label">Study Streak</span>
+              <h3 id="kpiStreak" class="kpi-value">0 days</h3>
+            </div>
+          </div>
+
+          <div class="kpi-card danger">
+            <div class="kpi-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="9" y1="9" x2="15" y2="9"></line>
+                <line x1="9" y1="13" x2="15" y2="13"></line>
+              </svg>
+            </div>
+            <div class="kpi-info">
+              <span class="kpi-label">Cards Reviewed</span>
+              <h3 id="kpiCardsReviewed" class="kpi-value">0</h3>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dashboard Row -->
+        <div class="dashboard-row">
+          <!-- Active subjects progress checklist -->
+          <div class="panel-card active-subjects-panel">
+            <div class="panel-header">
+              <h2>Study Decks Progress</h2>
+              <span class="panel-tag">Topic checklist status</span>
+            </div>
+            <div class="panel-body flex-column gap-16" id="dashboardDecksList">
+              <!-- Injected by JS -->
+            </div>
+          </div>
+
+          <!-- Weekly focus minutes goal tracker -->
+          <div class="panel-card goal-tracker-panel">
+            <div class="panel-header">
+              <h2>Weekly Goals Progress</h2>
+              <span class="panel-tag" id="weeklyGoalHeader">Target: 120 mins</span>
+            </div>
+            <div class="panel-body flex-column justify-center align-center">
+              <div class="radial-gauge-container">
+                <svg viewBox="0 0 100 100">
+                  <circle class="radial-gauge-bg" cx="50" cy="50" r="40"></circle>
+                  <circle id="goalGaugePath" class="radial-gauge-fill" cx="50" cy="50" r="40" stroke-dasharray="251.2" stroke-dashoffset="251.2"></circle>
+                </svg>
+                <div class="radial-gauge-label">
+                  <span id="goalGaugePct" class="pct-val">0%</span>
+                  <span class="lbl-val" id="goalGaugeRatio">0 of 120 mins</span>
+                </div>
+              </div>
+              <p class="goal-help-text" id="goalMessage">Log pomodoro focus sessions to complete this week's goals!</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Weekly Focus Minutes distribution line chart -->
+        <div class="panel-card chart-panel-large">
+          <div class="panel-header">
+            <h2>Weekly Focus Distribution</h2>
+            <span class="panel-tag">Daily minutes completed</span>
+          </div>
+          <div class="panel-body chart-body">
+            <div id="focusChartContainer" class="svg-chart-container" style="height: 180px;">
+              <!-- Line chart SVG dynamically inserted -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- POMODORO TIMER TAB -->
+      <section id="timer-section" class="tab-content">
+        <div class="section-header">
+          <div>
+            <h1>Pomodoro Focus Station</h1>
+            <p class="section-subtitle">Set focus boundaries, adjust tasks, and toggle background ambient tracks</p>
+          </div>
+        </div>
+
+        <div class="timer-workspace-layout">
+          <!-- Left: Big Clock dial with details -->
+          <div class="panel-card main-clock-card">
+            <div class="panel-header">
+              <div class="clock-mode-selectors">
+                <button class="clock-mode-btn active" data-mode="focus">Focus (25m)</button>
+                <button class="clock-mode-btn" data-mode="short-break">Short Break (5m)</button>
+                <button class="clock-mode-btn" data-mode="long-break">Long Break (15m)</button>
+              </div>
+            </div>
+            <div class="panel-body flex-column align-center justify-center gap-24">
+              <!-- Task selection -->
+              <div class="form-group" style="width:100%; max-width:360px; text-align:center;">
+                <label for="timerTaskSelect">Active Topic Task Target</label>
+                <select id="timerTaskSelect" class="select-center">
+                  <!-- Active task selector -->
+                </select>
+              </div>
+
+              <!-- Oversized Clock digits -->
+              <div class="clock-display-wrapper">
+                <div class="clock-progress-ring">
+                  <svg viewBox="0 0 200 200">
+                    <circle cx="100" cy="100" r="90" class="ring-bg"></circle>
+                    <circle cx="100" cy="100" r="90" class="ring-fill" id="timerProgressRing" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
+                  </svg>
+                </div>
+                <div class="clock-time-digits">
+                  <span id="clockMinutes">25</span>:<span id="clockSeconds">00</span>
+                </div>
+              </div>
+
+              <!-- Controls -->
+              <div class="clock-controls-row">
+                <button id="clockStartBtn" class="btn btn-primary btn-round" aria-label="Start Pomodoro">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                </button>
+                <button id="clockPauseBtn" class="btn btn-secondary btn-round hidden" aria-label="Pause Pomodoro">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+                </button>
+                <button id="clockResetBtn" class="btn btn-danger-outline btn-round" disabled aria-label="Reset Timer">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Focus ambient audio controls & recent log sessions history list -->
+          <div class="timer-sidebar-layout">
+            <!-- Focus Ambient audio controls -->
+            <div class="panel-card audio-generator-card">
+              <div class="panel-header">
+                <h2>Synthetic Ambient Audio</h2>
+                <span class="badge badge-pulse hidden" id="audioStatusBadge">PLAYING</span>
+              </div>
+              <div class="panel-body flex-column gap-16">
+                <p class="audio-help-text" style="font-size:12.5px; color:var(--text-secondary); line-height:1.4;">
+                  Synthesize offline focus block frequencies. Plays looping noise models generated on-the-fly.
+                </p>
+                <div class="form-group" style="margin-bottom:8px;">
+                  <label for="focusAudioSelect">Background Noise Model</label>
+                  <select id="focusAudioSelect">
+                    <option value="none">Muted / Quiet Mode</option>
+                    <option value="white">White Noise (Balanced spectrum)</option>
+                    <option value="pink">Pink Noise (Deep waterfall rumble)</option>
+                    <option value="brown">Brown Noise (Heavy sea waves rumble)</option>
+                  </select>
+                </div>
+                <div class="form-group" style="margin-bottom:0;">
+                  <label for="focusAudioVolume" style="display:flex; justify-content:space-between;">
+                    <span>Output Volume</span>
+                    <span id="audioVolumeText">60%</span>
+                  </label>
+                  <input type="range" id="focusAudioVolume" min="0" max="100" value="60">
+                </div>
+              </div>
+            </div>
+
+            <!-- Focus history panel -->
+            <div class="panel-card session-history-card">
+              <div class="panel-header">
+                <h2>Recent Focus Logs</h2>
+              </div>
+              <div class="panel-body table-responsive" style="padding:0; max-height:220px; overflow-y:auto;">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Task</th>
+                      <th>Duration</th>
+                      <th class="text-right">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="timerHistoryTableBody">
+                    <!-- Logs list -->
+                  </tbody>
+                </table>
+                <div id="timerHistoryEmptyState" class="empty-state-container hidden" style="padding:24px 16px;">
+                  <p>No study sessions recorded this week.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STUDY DECKS TAB -->
+      <section id="decks-section" class="tab-content">
+        <div class="section-header">
+          <div>
+            <h1>Study Decks</h1>
+            <p class="section-subtitle">Manage curriculum subjects, track task list items, and count pomodoros</p>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-primary" id="addNewSubjectBtn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              New Subject Deck
+            </button>
+          </div>
+        </div>
+
+        <div class="decks-grid" id="decksGridContainer">
+          <!-- Injected dynamically by JS -->
+        </div>
+
+        <div id="decksEmptyState" class="empty-state-container hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+          </svg>
+          <h3>No Curriculum Subjects</h3>
+          <p>Register a subject deck and log curriculum targets (e.g. Mathematics, Algorithms) to catalog tasks.</p>
+        </div>
+      </section>
+
+      <!-- FLASHCARDS TAB -->
+      <section id="flashcards-section" class="tab-content">
+        <div class="section-header">
+          <div>
+            <h1>Active Recall Flashcards</h1>
+            <p class="section-subtitle">Review core curriculum key terms and assess confidence ratings</p>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-primary" id="addNewCardBtn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              Add Flashcard
+            </button>
+          </div>
+        </div>
+
+        <!-- Select subject decks filters -->
+        <div class="toolbar-card">
+          <div class="project-selector-wrapper">
+            <label for="flashcardDeckSelect">Select Deck Subject:</label>
+            <select id="flashcardDeckSelect" class="select-center">
+              <!-- Injected by JS -->
+            </select>
+          </div>
+          <div class="header-actions">
+            <span class="panel-tag" id="flashcardProgressCounter">0 of 0 reviewed</span>
+          </div>
+        </div>
+
+        <div class="flashcards-layout-wrapper" id="flashcardsInteractiveArea">
+          <!-- 3D Flipping flashcard element -->
+          <div class="flashcard-card-scene" id="flashcardScene">
+            <div class="flashcard-card" id="flashcardSelectorElement">
+              <!-- Front Side of Flashcard -->
+              <div class="flashcard-face flashcard-front">
+                <div class="card-face-header">QUESTION PASSAGE</div>
+                <div class="card-face-body">
+                  <p id="cardFrontText">Flashcard text prompt appears here.</p>
+                </div>
+                <div class="card-face-footer">Tap Card or Press Flip Button to Reveal Answer</div>
+              </div>
+
+              <!-- Back Side of Flashcard -->
+              <div class="flashcard-face flashcard-back">
+                <div class="card-face-header">ANSWER KEY</div>
+                <div class="card-face-body">
+                  <p id="cardBackText">Recall answer details appear here.</p>
+                </div>
+                <div class="card-face-footer">Rate recall confidence to update card scores</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Controls Row -->
+          <div class="flashcard-controls-row">
+            <button id="cardPrevBtn" class="btn btn-secondary">← Previous</button>
+            <button id="cardFlipBtn" class="btn btn-primary">Flip Card</button>
+            <button id="cardNextBtn" class="btn btn-secondary">Next →</button>
+          </div>
+
+          <!-- Recall Efficacy confidence selectors -->
+          <div class="flashcard-confidence-row hidden" id="cardConfidenceSelector">
+            <span>Rate your recall memory:</span>
+            <div class="confidence-actions-group">
+              <button class="btn btn-danger-outline btn-sm" id="confRedoBtn">Forgot (Redo)</button>
+              <button class="btn btn-secondary btn-sm" id="confHardBtn">Hard (Review Soon)</button>
+              <button class="btn btn-success btn-sm" id="confEasyBtn">Got It! (Easy)</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="flashcardsEmptyState" class="empty-state-container hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="9" y1="9" x2="15" y2="9"></line>
+            <line x1="9" y1="13" x2="15" y2="13"></line>
+          </svg>
+          <h3>No Flashcards Created</h3>
+          <p>Configure curriculum terms and questions by logging cards inside this subject deck.</p>
+        </div>
+      </section>
+
+      <!-- SETTINGS TAB -->
+      <section id="settings-section" class="tab-content">
+        <div class="section-header">
+          <div>
+            <h1>Settings &amp; Workspace Config</h1>
+            <p class="section-subtitle">Save target goals and manage database backups</p>
+          </div>
+        </div>
+
+        <div class="settings-grid">
+          <!-- Target configuration settings -->
+          <div class="panel-card">
+            <div class="panel-header">
+              <h2>Study Targets</h2>
+            </div>
+            <div class="panel-body">
+              <form id="goalsConfigForm" class="settings-form">
+                <div class="form-group">
+                  <label for="settingsWeeklyMinutesGoal">Target Study Duration Per Week (Minutes)</label>
+                  <input type="number" id="settingsWeeklyMinutesGoal" min="1" max="10000" value="120" required>
+                  <p class="form-help-text" style="font-size:12.5px; color:var(--text-secondary); margin-top:6px;">
+                    This sets the scale for the weekly target goals dial on the main dashboard.
+                  </p>
+                </div>
+                <button type="submit" class="btn btn-primary">Save Targets</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Portability actions -->
+          <div class="panel-card">
+            <div class="panel-header">
+              <h2>Workspace Backups &amp; Database</h2>
+            </div>
+            <div class="panel-body">
+              <p class="settings-help-text">Download your complete FocusFlow database, containing study subjects, checklist tasks, flashcards database, and pomodoro history logs.</p>
+              
+              <div class="settings-portability-actions" style="margin-top: 16px;">
+                <button id="exportBackupBtn" class="btn btn-secondary btn-full">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                  Export Workspace Backup
+                </button>
+                
+                <label for="importBackupInput" class="btn btn-secondary btn-full file-upload-label">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                  Import Workspace Backup
+                </label>
+                <input type="file" id="importBackupInput" class="hidden-file-input" accept=".json">
+                
+                <button id="resetDatabaseBtn" class="btn btn-danger-outline btn-full" style="margin-top: 8px;">
+                  Reset Database to Seeds
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ADD SUBJECT MODAL -->
+  <div id="subjectModal" class="modal-backdrop hidden">
+    <div class="modal-card modal-sm">
+      <div class="modal-header">
+        <h2>Add Subject Deck</h2>
+        <button id="closeSubjectModalBtn" class="btn-icon" aria-label="Close modal">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="subjectForm">
+          <div class="form-group">
+            <label for="subjectTitleInput">Subject Name</label>
+            <input type="text" id="subjectTitleInput" required placeholder="e.g. Operating Systems">
+          </div>
+          <div class="form-group">
+            <label for="subjectDescInput">Description / Details</label>
+            <input type="text" id="subjectDescInput" placeholder="Memory paging, process scheduling...">
+          </div>
+          
+          <div class="form-group">
+            <label>Accent Color Theme</label>
+            <div class="theme-picker-group">
+              <input type="radio" name="subjTheme" id="th-blue" value="blue" checked class="hidden-radio">
+              <label for="th-blue" class="theme-pill th-blue" title="Cobalt Blue"></label>
+
+              <input type="radio" name="subjTheme" id="th-teal" value="teal" class="hidden-radio">
+              <label for="th-teal" class="theme-pill th-teal" title="Teal Green"></label>
+
+              <input type="radio" name="subjTheme" id="th-orange" value="orange" class="hidden-radio">
+              <label for="th-orange" class="theme-pill th-orange" title="Amber Orange"></label>
+
+              <input type="radio" name="subjTheme" id="th-purple" value="purple" class="hidden-radio">
+              <label for="th-purple" class="theme-pill th-purple" title="Royal Purple"></label>
+
+              <input type="radio" name="subjTheme" id="th-rose" value="rose" class="hidden-radio">
+              <label for="th-rose" class="theme-pill th-rose" title="Ruby Rose"></label>
+            </div>
+          </div>
+
+          <div class="modal-footer-actions">
+            <button type="button" id="cancelSubjectBtn" class="btn btn-secondary">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Deck</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD TASK TO SUBJECT MODAL -->
+  <div id="deckTaskModal" class="modal-backdrop hidden">
+    <div class="modal-card modal-sm">
+      <div class="modal-header">
+        <h2>Add Deck Task</h2>
+        <button id="closeDeckTaskModalBtn" class="btn-icon" aria-label="Close modal">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="deckTaskForm">
+          <input type="hidden" id="deckTaskSubjectId" value="">
+          
+          <div class="form-group">
+            <label for="deckTaskTitleInput">Task description</label>
+            <input type="text" id="deckTaskTitleInput" required placeholder="e.g. Read chapter on virtualization">
+          </div>
+
+          <div class="form-group">
+            <label for="deckTaskPomosInput">Estimated Pomodoros (Focus blocks)</label>
+            <input type="number" id="deckTaskPomosInput" min="1" max="20" value="2" required>
+          </div>
+
+          <div class="modal-footer-actions">
+            <button type="button" id="cancelDeckTaskBtn" class="btn btn-secondary">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Task</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD FLASHCARD MODAL -->
+  <div id="flashcardModal" class="modal-backdrop hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2>Add Flashcard Card</h2>
+        <button id="closeFlashcardModalBtn" class="btn-icon" aria-label="Close modal">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="flashcardForm">
+          <div class="form-group">
+            <label for="flashcardModalDeckSelect">Subject Deck</label>
+            <select id="flashcardModalDeckSelect" required>
+              <!-- Populated by JS -->
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="flashcardQuestionInput">Question / Prompt (Front Side)</label>
+            <textarea id="flashcardQuestionInput" required rows="3" placeholder="e.g. What is process thrashing in memory management?"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="flashcardAnswerInput">Answer / Key Details (Back Side)</label>
+            <textarea id="flashcardAnswerInput" required rows="4" placeholder="e.g. Occurs when a virtual memory system spends more time writing pages in and out of disk swaps than executing instructions."></textarea>
+          </div>
+
+          <div class="modal-footer-actions">
+            <button type="button" id="cancelFlashcardBtn" class="btn btn-secondary">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Flashcard</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIMER FINISHED LOG POPUP MODAL -->
+  <div id="sessionLogModal" class="modal-backdrop hidden">
+    <div class="modal-card modal-sm">
+      <div class="modal-header">
+        <h2>Focus Block Complete!</h2>
+      </div>
+      <div class="modal-body">
+        <form id="sessionLogForm">
+          <input type="hidden" id="logSessionTaskId" value="">
+          <input type="hidden" id="logSessionDuration" value="0">
+          
+          <div class="payment-modal-info" style="margin-bottom:16px;">
+            <div>
+              <span class="info-label" id="logSessionTaskTitle">Focused Reading Session</span>
+              <span class="info-val" id="logSessionDurationFormatted" style="color:var(--primary);">25:00 completed</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="logSessionEfficacySelect">Study Efficacy (Confidence Index)</label>
+            <select id="logSessionEfficacySelect">
+              <option value="5">★★★★★ (Highly Productive)</option>
+              <option value="4" selected>★★★★☆ (Focused Study)</option>
+              <option value="3">★★★☆☆ (Moderately distracted)</option>
+              <option value="2">★★☆☆☆ (High distraction)</option>
+              <option value="1">★☆☆☆☆ (Failed focus session)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="logSessionNotes">Session Notes / Discoveries</label>
+            <textarea id="logSessionNotes" rows="2" placeholder="Write key terms learned or problems resolved..."></textarea>
+          </div>
+
+          <div class="modal-footer-actions">
+            <button type="button" id="skipSessionLogBtn" class="btn btn-secondary">Discard Log</button>
+            <button type="submit" class="btn btn-primary">Save focus Log</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

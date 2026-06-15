@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clue Chain — The Bright Mystery</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-card" id="card">
+        <h1>Clue Chain</h1>
+        
+        <div class="progress-dots" id="dots"></div>
+
+        <div class="clue-box" id="clue-display">
+            Loading the first link...
+        </div>
+
+        <div class="input-group" id="controls">
+            <input type="text" id="answer-input" placeholder="Type answer here..." autocomplete="off">
+            <button class="btn-unlock" onclick="checkAnswer()">Unlock Next Clue</button>
+        </div>
+
+        <div id="feedback" class="feedback"></div>
+    </div>
+<script src="script.js"></script>
+</body>
+</html>

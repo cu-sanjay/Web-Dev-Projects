@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Goal Achievement Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <h1>🎯 Goal Achievement Tracker</h1>
+
+    <div class="add-goal">
+      <input type="text" id="goalInput" placeholder="Enter your goal">
+      <input type="number" id="milestonesInput" placeholder="Milestones count" min="1">
+      <button onclick="addGoal()">➕ Add Goal</button>
+    </div>
+
+    <div id="goalsList" class="goals-list"></div>
+
+    <canvas id="progressChart" width="400" height="200"></canvas>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

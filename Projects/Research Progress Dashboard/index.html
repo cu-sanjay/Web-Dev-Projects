@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Research Progress Dashboard - Academic Bibliography & Planner</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;850&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Root Layout Container -->
+  <div class="app-container">
+    <!-- Sidebar Navigation -->
+    <aside class="app-sidebar">
+      <div class="sidebar-header">
+        <div class="logo-container">
+          <svg class="logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="6" y1="3" x2="6" y2="15"></line>
+            <circle cx="18" cy="6" r="3"></circle>
+            <circle cx="6" cy="18" r="3"></circle>
+            <path d="M18 9a9 9 0 0 1-9 9"></path>
+          </svg>
+          <span class="logo-text">ScholarFlow</span>
+        </div>
+        <p class="sidebar-subtext">Research companion</p>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button class="nav-btn active" data-target="dashboard-section">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="9"></rect>
+            <rect x="14" y="3" width="7" height="5"></rect>
+            <rect x="14" y="12" width="7" height="9"></rect>
+            <rect x="3" y="16" width="7" height="5"></rect>
+          </svg>
+          <span>Dashboard</span>
+        </button>
+        <button class="nav-btn" data-target="projects-section">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+          </svg>
+          <span>Projects Hub</span>
+        </button>
+        <button class="nav-btn" data-target="literature-section">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+          </svg>
+          <span>Literature Vault</span>
+        </button>
+        <button class="nav-btn" data-target="journal-section">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 20h9"></path>
+            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+          </svg>
+          <span>Lab Journal</span>
+        </button>
+        <button class="nav-btn" data-target="settings-section">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+          <span>Settings</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button id="themeToggleBtn" class="theme-toggle-btn" aria-label="Toggle Theme">
+          <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <span id="themeToggleText">Light Mode</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Workspace -->
+    <main class="app-main">
+      <!-- DASHBOARD TAB -->
+      <section id="dashboard-section" class="tab-content active">
+        <div class="section-header">
+          <div>
+            <h1>Dashboard</h1>
+            <p class="section-subtitle">Real-time overview of your research projects and academic vault</p>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-primary" id="dashboardAddPaperBtn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              Catalog Paper
+            </button>
+          </div>
+        </div>
+
+        <!-- KPI Grid -->
+        <div class="kpi-grid">
+          <div class="kpi-card info">
+            <div class="kpi-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+              </svg>
+            </div>
+            <div class="kpi-info">
+              <span class="kpi-label">Active Projects</span>
+              <h3 id="kpiActiveProjects" class="kpi-value">0</h3>
+            </div>
+          </div>
+
+          <div class="kpi-card success">
+            <div class="kpi-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+              </svg>
+            </div>
+            <div class="kpi-info">
+              <span class="kpi-label">Literature Cataloged</span>
+              <h3 id="kpiTotalPapers" class="kpi-value">0</h3>
+            </div>
+          </div>
+
+          <div class="kpi-card warning">
+            <div class="kpi-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+            </div>
+            <div class="kpi-info">
+              <span class="kpi-label">Hypotheses Validated</span>
+              <h3 id="kpiHypotheses" class="kpi-value">0</h3>
+            </div>
+          </div>
+
+          <div class="kpi-card danger">
+            <div class="kpi-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 20h9"></path>
+                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+              </svg>
+            </div>
+            <div class="kpi-info">
+              <span class="kpi-label">Journal Logs</span>
+              <h3 id="kpiJournalLogs" class="kpi-value">0</h3>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dashboard Row -->
+        <div class="dashboard-row">
+          <!-- Active Project Overview list -->
+          <div class="panel-card active-projects-panel">
+            <div class="panel-header">
+              <h2>Project Progress Metrics</h2>
+              <span class="panel-tag">Current research status</span>
+            </div>
+            <div class="panel-body flex-column gap-16" id="dashboardProjectsList">
+              <!-- JS Injected -->
+            </div>
+          </div>
+
+          <!-- Literature Read metrics -->
+          <div class="panel-card lit-metrics-panel">
+            <div class="panel-header">
+              <h2>Bibliography Status</h2>
+              <span class="panel-tag">Reading progress</span>
+            </div>
+            <div class="panel-body flex-column justify-center align-center">
+              <div class="radial-gauge-container">
+                <svg viewBox="0 0 100 100">
+                  <circle class="radial-gauge-bg" cx="50" cy="50" r="40"></circle>
+                  <circle id="litGaugePath" class="radial-gauge-fill" cx="50" cy="50" r="40" stroke-dasharray="251.2" stroke-dashoffset="251.2"></circle>
+                </svg>
+                <div class="radial-gauge-label">
+                  <span id="litGaugePct" class="pct-val">0%</span>
+                  <span class="lbl-val" id="litGaugeRatio">0 of 0 papers</span>
+                </div>
+              </div>
+              <p class="goal-help-text" id="litGaugeMessage">Catalog and read papers to hit your literature targets!</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Logs Table -->
+        <div class="panel-card recent-journal-panel">
+          <div class="panel-header">
+            <h2>Recent Journal Entries</h2>
+            <button class="btn btn-secondary btn-sm" id="dashboardGoToJournalBtn">Open Lab Journal</button>
+          </div>
+          <div class="panel-body table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Project</th>
+                  <th>Category</th>
+                  <th>Summary Log</th>
+                  <th class="text-right">Action</th>
+                </tr>
+              </thead>
+              <tbody id="recentLogsTableBody">
+                <!-- JS Injected -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECTS TAB -->
+      <section id="projects-section" class="tab-content">
+        <div class="section-header">
+          <div>
+            <h1>Research Projects Hub</h1>
+            <p class="section-subtitle">Manage methodologies, checklist tasks, and research targets</p>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-primary" id="addNewProjectBtn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              New Project
+            </button>
+          </div>
+        </div>
+
+        <!-- Selector Card for target active project -->
+        <div class="toolbar-card">
+          <div class="project-selector-wrapper">
+            <label for="hubProjectSelect">Select Active Project Scope:</label>
+            <select id="hubProjectSelect" class="select-center">
+              <!-- Loaded by JS -->
+            </select>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-secondary btn-sm" id="editActiveProjectBtn">Edit Project Parameters</button>
+            <button class="btn btn-danger-outline btn-sm" id="deleteActiveProjectBtn">Delete Project</button>
+          </div>
+        </div>
+
+        <div id="projectHubWorkspace" class="project-hub-layout">
+          <!-- Left Column: Scope parameters & hypotheses validation -->
+          <div class="project-workspace-sidebar">
+            <div class="panel-card project-info-card">
+              <div class="panel-header">
+                <h2>Scope Details</h2>
+                <span class="badge" id="hubProjectStatusBadge">ACTIVE</span>
+              </div>
+              <div class="panel-body">
+                <div class="project-scope-item">
+                  <span class="label">Field of Study:</span>
+                  <span class="val" id="hubProjectField">Computer Science</span>
+                </div>
+                <div class="project-scope-item">
+                  <span class="label">Target Publication:</span>
+                  <span class="val" id="hubProjectJournal">IEEE Trans on Shaders</span>
+                </div>
+                <div class="project-scope-item">
+                  <span class="label">Timeline:</span>
+                  <span class="val" id="hubProjectDates">2026-06-01 to 2026-12-31</span>
+                </div>
+                <div class="project-scope-item">
+                  <span class="label">Abstract / Aim:</span>
+                  <p class="val-block" id="hubProjectDesc">Determining render coefficients for raytraced objects in real time.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Hypotheses Checklist panel -->
+            <div class="panel-card hypotheses-card">
+              <div class="panel-header">
+                <h2>Hypotheses &amp; Test Variables</h2>
+                <button class="btn btn-secondary btn-sm" id="addNewHypothesisBtn">+ Add</button>
+              </div>
+              <div class="panel-body">
+                <!-- Variables descriptor -->
+                <div class="hypothesis-vars" id="hypothesisVarsBox">
+                  <div class="var-row">
+                    <span class="var-lbl">Ind. Variable:</span>
+                    <input type="text" id="varIndInput" placeholder="e.g. Light incidence angle">
+                  </div>
+                  <div class="var-row">
+                    <span class="var-lbl">Dep. Variable:</span>
+                    <input type="text" id="varDepInput" placeholder="e.g. Frame render latency">
+                  </div>
+                  <button class="btn btn-secondary btn-sm btn-full" id="saveVariablesBtn" style="margin-top:8px;">Save Variables</button>
+                </div>
+
+                <div class="checklists-container" id="hypothesesChecklist">
+                  <!-- JS Injected items checklist -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Kanban Checklist Task Board -->
+          <div class="project-workspace-board">
+            <div class="board-column">
+              <div class="board-column-header col-todo">
+                <h3>To Do</h3>
+                <span class="col-count" id="countTodo">0</span>
+              </div>
+              <div class="board-card-container" id="boardTodo">
+                <!-- Cards Injected -->
+              </div>
+              <button class="btn btn-secondary btn-sm add-task-trigger" data-status="todo">+ Add Task</button>
+            </div>
+
+            <div class="board-column">
+              <div class="board-column-header col-doing">
+                <h3>In Progress</h3>
+                <span class="col-count" id="countDoing">0</span>
+              </div>
+              <div class="board-card-container" id="boardDoing">
+                <!-- Cards Injected -->
+              </div>
+              <button class="btn btn-secondary btn-sm add-task-trigger" data-status="doing">+ Add Task</button>
+            </div>
+
+            <div class="board-column">
+              <div class="board-column-header col-done">
+                <h3>Completed</h3>
+                <span class="col-count" id="countDone">0</span>
+              </div>
+              <div class="board-card-container" id="boardDone">
+                <!-- Cards Injected -->
+              </div>
+              <button class="btn btn-secondary btn-sm add-task-trigger" data-status="done">+ Add Task</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="projectHubEmptyState" class="empty-state-container hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+          </svg>
+          <h3>No Research Projects</h3>
+          <p>Create your first research scope project outline to initialize checklists and variables.</p>
+        </div>
+      </section>
+
+      <!-- LITERATURE VAULT TAB -->
+      <section id="literature-section" class="tab-content">
+        <div class="section-header">
+          <div>
+            <h1>Academic Literature Vault</h1>
+            <p class="section-subtitle">Compile papers bibliography, write reviews, and copy formatted citations</p>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-primary" id="addNewPaperBtn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              Add Reference
+            </button>
+          </div>
+        </div>
+
+        <div class="literature-vault-layout">
+          <!-- Left side: Table list of papers -->
+          <div class="vault-papers-list-pane">
+            <div class="toolbar-card">
+              <div class="search-box">
+                <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" id="literatureSearchInput" placeholder="Search by paper title, author, year...">
+              </div>
+              <div class="filter-group">
+                <select id="literatureStatusFilter">
+                  <option value="all">All Statuses</option>
+                  <option value="unread">Unread</option>
+                  <option value="reading">Reading</option>
+                  <option value="cited">Cited</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="panel-card">
+              <div class="panel-body table-responsive" style="padding:0;">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th>Authors</th>
+                      <th>Year</th>
+                      <th>Status</th>
+                      <th class="text-right">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="literatureTableBody">
+                    <!-- JS Injected -->
+                  </tbody>
+                </table>
+                <div id="literatureEmptyState" class="empty-state-container hidden">
+                  <p>No paper references found matching search requirements.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right side: Citation Viewer Card & Review Notes -->
+          <div class="vault-citation-preview-pane">
+            <div class="panel-card citation-card" id="paperDetailViewerBox">
+              <div class="panel-header">
+                <h2>Reference Inspector</h2>
+                <span class="badge badge-pulse" id="selectedPaperStatusBadge">SELECT A PAPER</span>
+              </div>
+              <div class="panel-body flex-column gap-16">
+                <!-- Dynamic text overview -->
+                <div class="inspector-details">
+                  <h3 id="selectedPaperTitle" class="inspector-title">No Paper Selected</h3>
+                  <p id="selectedPaperAuthors" class="inspector-meta">Select a reference entry from the literature table list to evaluate details.</p>
+                  <p id="selectedPaperJournal" class="inspector-meta"></p>
+                  <div id="selectedPaperUrlBox" class="inspector-url hidden">
+                    <a id="selectedPaperUrlLink" href="" target="_blank">Open DOI / URL Link</a>
+                  </div>
+                </div>
+
+                <!-- Generated Citation formatting tags -->
+                <div class="citations-generator-box">
+                  <div class="citation-tab-headers">
+                    <button class="citation-tab active" data-format="apa">APA</button>
+                    <button class="citation-tab" data-format="ieee">IEEE</button>
+                    <button class="citation-tab" data-format="harvard">Harvard</button>
+                    <button class="citation-tab" data-format="bibtex">BibTeX</button>
+                  </div>
+                  <div class="citation-tab-body">
+                    <pre id="citationTextContainer">Select a paper to review references.</pre>
+                  </div>
+                  <button class="btn btn-secondary btn-sm btn-full" id="copyCitationBtn" disabled>
+                    Copy Citation Template
+                  </button>
+                </div>
+
+                <!-- Review / Citation Notes text box -->
+                <div class="form-group" style="margin-bottom:0;">
+                  <label for="selectedPaperNotes">My Reading Notes / Critical Review Summary</label>
+                  <textarea id="selectedPaperNotes" rows="5" placeholder="Enter findings, arguments, methodologies described in the paper, or limitations..." disabled></textarea>
+                  <button class="btn btn-primary btn-sm" id="savePaperNotesBtn" style="margin-top:10px;" disabled>Save Review Notes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- WRITING JOURNAL TAB -->
+      <section id="journal-section" class="tab-content">
+        <div class="section-header">
+          <div>
+            <h1>Writing &amp; Lab Journal</h1>
+            <p class="section-subtitle">Log daily experiment entries, research thoughts, and observation tags</p>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-primary" id="addNewJournalBtn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              Add Journal Entry
+            </button>
+          </div>
+        </div>
+
+        <div class="journal-layout">
+          <!-- Sidebar: Timeline list of dates -->
+          <div class="journal-timeline-sidebar" id="journalTimelineList">
+            <!-- Dynamic elements loaded by JS -->
+          </div>
+
+          <!-- Main editor / viewer box -->
+          <div class="journal-workspace-editor">
+            <div class="panel-card journal-entry-card" id="journalEntryInspector">
+              <div class="panel-header">
+                <h2>Journal Reader</h2>
+                <div class="header-actions">
+                  <button class="btn btn-secondary btn-sm" id="editJournalEntryBtn" disabled>Edit Entry</button>
+                  <button class="btn btn-danger-outline btn-sm" id="deleteJournalEntryBtn" disabled>Delete Entry</button>
+                </div>
+              </div>
+              <div class="panel-body flex-column gap-16">
+                <div class="journal-detail-header">
+                  <h3 id="journalDetailTitle">Select a Journal Entry</h3>
+                  <div class="journal-detail-meta" style="margin-top:6px;">
+                    <span id="journalDetailDate" style="color:var(--text-secondary); font-size:13px; font-weight:500;">Choose an entry from the left timeline menu to read logs.</span>
+                    <span id="journalDetailProject" class="badge badge-reading hidden" style="margin-left:12px;">Project name</span>
+                  </div>
+                  <div class="journal-tags-list" id="journalDetailTags" style="margin-top:10px;">
+                    <!-- Tags dynamic -->
+                  </div>
+                </div>
+
+                <div class="journal-detail-content-block">
+                  <p id="journalDetailContent" style="white-space: pre-line; line-height: 1.6; color: var(--text-primary);">Observations text...</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SETTINGS TAB -->
+      <section id="settings-section" class="tab-content">
+        <div class="section-header">
+          <div>
+            <h1>Settings &amp; Workspace Config</h1>
+            <p class="section-subtitle">Set research targets, export datasets, and reset database keys</p>
+          </div>
+        </div>
+
+        <div class="settings-grid">
+          <!-- Config Goal targets -->
+          <div class="panel-card">
+            <div class="panel-header">
+              <h2>Target Goals</h2>
+            </div>
+            <div class="panel-body">
+              <form id="goalsConfigForm" class="settings-form">
+                <div class="form-group">
+                  <label for="settingsLiteratureGoal">Target Papers to Read &amp; Review</label>
+                  <input type="number" id="settingsLiteratureGoal" min="1" max="1000" value="10" required>
+                  <p class="form-help-text" style="font-size:12.5px; color:var(--text-secondary); margin-top:6px;">
+                    Sets the literature threshold dial scale on the main dashboard tab.
+                  </p>
+                </div>
+                <button type="submit" class="btn btn-primary">Save Targets</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Portability actions -->
+          <div class="panel-card">
+            <div class="panel-header">
+              <h2>Workspace Backups &amp; Database</h2>
+            </div>
+            <div class="panel-body">
+              <p class="settings-help-text">Download your complete ScholarFlow database, containing research projects, literature DOI libraries, copyable citations, and lab journals.</p>
+              
+              <div class="settings-portability-actions" style="margin-top: 16px;">
+                <button id="exportBackupBtn" class="btn btn-secondary btn-full">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                  Export Workspace Backup
+                </button>
+                
+                <label for="importBackupInput" class="btn btn-secondary btn-full file-upload-label">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                  Import Workspace Backup
+                </label>
+                <input type="file" id="importBackupInput" class="hidden-file-input" accept=".json">
+                
+                <button id="resetDatabaseBtn" class="btn btn-danger-outline btn-full" style="margin-top: 8px;">
+                  Reset Database to Seeds
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ADD / EDIT PROJECT MODAL -->
+  <div id="projectModal" class="modal-backdrop hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 id="projectModalTitle">Add Project</h2>
+        <button id="closeProjectModalBtn" class="btn-icon" aria-label="Close modal">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="projectForm">
+          <input type="hidden" id="projectModalIndex" value="">
+          
+          <div class="form-group">
+            <label for="projectTitleInput">Project Title / Theme</label>
+            <input type="text" id="projectTitleInput" required placeholder="e.g. Deep Neural Net Latencies">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-6">
+              <label for="projectFieldInput">Field of Study</label>
+              <input type="text" id="projectFieldInput" required placeholder="Computer Science, Physics...">
+            </div>
+            <div class="form-group col-6">
+              <label for="projectJournalInput">Target Journal / conference</label>
+              <input type="text" id="projectJournalInput" required placeholder="e.g. Nature, IEEE CVPR">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-6">
+              <label for="projectStartDate">Start Date</label>
+              <input type="date" id="projectStartDate" required>
+            </div>
+            <div class="form-group col-6">
+              <label for="projectEndDate">Target Finish Date</label>
+              <input type="date" id="projectEndDate" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-6">
+              <label for="projectStatusSelect">Current Phase</label>
+              <select id="projectStatusSelect">
+                <option value="planning">Planning Phase</option>
+                <option value="active">Active Bench Experiments</option>
+                <option value="writing">Writing Manuscript</option>
+                <option value="peer-review">Peer Review Cycles</option>
+                <option value="published">Final Published Paper</option>
+              </select>
+            </div>
+            <div class="form-group col-6">
+              <label>Accent Color Theme</label>
+              <div class="theme-picker-group">
+                <input type="radio" name="projTheme" id="th-blue" value="blue" checked class="hidden-radio">
+                <label for="th-blue" class="theme-pill th-blue" title="Cobalt Blue"></label>
+
+                <input type="radio" name="projTheme" id="th-teal" value="teal" class="hidden-radio">
+                <label for="th-teal" class="theme-pill th-teal" title="Teal Green"></label>
+
+                <input type="radio" name="projTheme" id="th-orange" value="orange" class="hidden-radio">
+                <label for="th-orange" class="theme-pill th-orange" title="Amber Orange"></label>
+
+                <input type="radio" name="projTheme" id="th-purple" value="purple" class="hidden-radio">
+                <label for="th-purple" class="theme-pill th-purple" title="Royal Purple"></label>
+
+                <input type="radio" name="projTheme" id="th-rose" value="rose" class="hidden-radio">
+                <label for="th-rose" class="theme-pill th-rose" title="Ruby Rose"></label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="projectDescInput">Scope Description / Abstract Summary</label>
+            <textarea id="projectDescInput" rows="3" placeholder="Describe main methodology, hardware variables, literature bounds..."></textarea>
+          </div>
+
+          <div class="modal-footer-actions">
+            <button type="button" id="cancelProjectBtn" class="btn btn-secondary">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Project</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD / EDIT REFERENCE PAPER MODAL -->
+  <div id="paperModal" class="modal-backdrop hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 id="paperModalTitle">Catalog Paper Reference</h2>
+        <button id="closePaperModalBtn" class="btn-icon" aria-label="Close modal">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="paperForm">
+          <input type="hidden" id="paperModalIndex" value="">
+          
+          <div class="form-group">
+            <label for="paperTitleInput">Paper Title</label>
+            <input type="text" id="paperTitleInput" required placeholder="e.g. Attention Is All You Need">
+          </div>
+
+          <div class="form-group">
+            <label for="paperAuthorsInput">Authors (Comma separated, e.g. Vaswani, A., Shazeer, N.)</label>
+            <input type="text" id="paperAuthorsInput" required placeholder="Vaswani, A., Shazeer, N.">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-6">
+              <label for="paperJournalInput">Journal Name / conference Proceedings</label>
+              <input type="text" id="paperJournalInput" required placeholder="Advances in Neural Information Systems">
+            </div>
+            <div class="form-group col-6">
+              <label for="paperYearInput">Publication Year</label>
+              <input type="number" id="paperYearInput" min="1000" max="2100" required placeholder="2017">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-4">
+              <label for="paperVolumeInput">Volume / Issue (Optional)</label>
+              <input type="text" id="paperVolumeInput" placeholder="Vol. 30">
+            </div>
+            <div class="form-group col-4">
+              <label for="paperPagesInput">Pages range (Optional)</label>
+              <input type="text" id="paperPagesInput" placeholder="5998-6008">
+            </div>
+            <div class="form-group col-4">
+              <label for="paperStatusSelect">Reading Status</label>
+              <select id="paperStatusSelect">
+                <option value="unread">Unread</option>
+                <option value="reading">Reading</option>
+                <option value="cited">Cited &amp; Annotated</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="paperUrlInput">Paper DOI / URL Link</label>
+            <input type="url" id="paperUrlInput" placeholder="https://doi.org/10.1145/3065386">
+          </div>
+
+          <div class="modal-footer-actions">
+            <button type="button" id="cancelPaperBtn" class="btn btn-secondary">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Reference</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD CHECKLIST KANBAN TASK MODAL -->
+  <div id="taskModal" class="modal-backdrop hidden">
+    <div class="modal-card modal-sm">
+      <div class="modal-header">
+        <h2>Add Task Card</h2>
+        <button id="closeTaskModalBtn" class="btn-icon" aria-label="Close modal">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="taskForm">
+          <input type="hidden" id="taskModalStatus" value="todo">
+          
+          <div class="form-group">
+            <label for="taskTitleInput">Task description</label>
+            <input type="text" id="taskTitleInput" required placeholder="e.g. Conduct literature review">
+          </div>
+
+          <div class="form-group">
+            <label for="taskPrioritySelect">Priority Rank</label>
+            <select id="taskPrioritySelect">
+              <option value="low">Low Priority</option>
+              <option value="medium" selected>Medium Priority</option>
+              <option value="high">High Priority</option>
+            </select>
+          </div>
+
+          <div class="modal-footer-actions">
+            <button type="button" id="cancelTaskBtn" class="btn btn-secondary">Cancel</button>
+            <button type="submit" class="btn btn-primary">Add Card</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD HYPOTHESIS MODAL -->
+  <div id="hypothesisModal" class="modal-backdrop hidden">
+    <div class="modal-card modal-sm">
+      <div class="modal-header">
+        <h2>Add Hypothesis</h2>
+        <button id="closeHypothesisModalBtn" class="btn-icon" aria-label="Close modal">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="hypothesisForm">
+          <div class="form-group">
+            <label for="hypothesisTextInput">Statement (e.g. Increasing variable A will decrease parameter B)</label>
+            <textarea id="hypothesisTextInput" required rows="3" placeholder="Increasing GPU core frequencies scales rendering FPS linearly..."></textarea>
+          </div>
+          
+          <div class="modal-footer-actions">
+            <button type="button" id="cancelHypothesisBtn" class="btn btn-secondary">Cancel</button>
+            <button type="submit" class="btn btn-primary">Add Statement</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD / EDIT JOURNAL ENTRY MODAL -->
+  <div id="journalModal" class="modal-backdrop hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 id="journalModalTitle">Add Lab Log Entry</h2>
+        <button id="closeJournalModalBtn" class="btn-icon" aria-label="Close modal">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="journalForm">
+          <input type="hidden" id="journalModalIndex" value="">
+          
+          <div class="form-group">
+            <label for="journalTitleInput">Entry Title / Log Subject</label>
+            <input type="text" id="journalTitleInput" required placeholder="e.g. Simulation Run #12 Results">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-6">
+              <label for="journalProjectSelect">Linked Project</label>
+              <select id="journalProjectSelect" required>
+                <!-- Filled dynamically -->
+              </select>
+            </div>
+            <div class="form-group col-6">
+              <label for="journalDateInput">Log Date</label>
+              <input type="date" id="journalDateInput" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="journalTagsInput">Category Tags (Comma separated, e.g. experiment, code, literature)</label>
+            <input type="text" id="journalTagsInput" placeholder="experiment, calculation, hypothesis">
+          </div>
+
+          <div class="form-group">
+            <label for="journalContentInput">observations &amp; Critical Notes details</label>
+            <textarea id="journalContentInput" required rows="5" placeholder="Include metrics, error exceptions, or literature ideas..."></textarea>
+          </div>
+
+          <div class="modal-footer-actions">
+            <button type="button" id="cancelJournalBtn" class="btn btn-secondary">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Entry</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

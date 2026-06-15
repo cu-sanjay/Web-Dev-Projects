@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <rect width="400" height="300" fill="#f2f5f9" rx="20" ry="20" />
+  <!-- canvas mockup -->
+  <rect x="15" y="15" width="370" height="200" fill="#ffffff" rx="16" stroke="#cfdfed" stroke-width="1.5" />
+  <!-- principal axis dotted -->
+  <line x1="15" y1="115" x2="385" y2="115" stroke="#9bb1ca" stroke-dasharray="4 4" stroke-width="1" />
+  <!-- mirror icon (concave) -->
+  <path d="M 260 40 Q 280 115 260 190" fill="none" stroke="#2c6280" stroke-width="2.5" />
+  <!-- torch (circle+flame) -->
+  <circle cx="100" cy="115" r="10" fill="#eab308" />
+  <text x="94" y="120" font-size="12" fill="#b45309">🔥</text>
+  <!-- ray from torch to mirror -->
+  <line x1="112" y1="115" x2="255" y2="115" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="3 2" />
+  <!-- reflected ray -->
+  <line x1="260" y1="115" x2="320" y2="80" stroke="#f97316" stroke-width="1.5" />
+  <!-- label texts -->
+  <text x="45" y="250" font-family="Arial" font-size="9" fill="#3b5e7e">Object distance: 160cm</text>
+  <text x="45" y="268" font-family="Arial" font-size="9" fill="#3b5e7e">Image: virtual, m=0.6</text>
+  <rect x="45" y="278" width="60" height="14" fill="#eef3fc" rx="12" stroke="#bfd6ea" />
+  <text x="75" y="289" font-family="Arial" font-size="7" fill="#1f4e79" text-anchor="middle">Mirror</text>
+</svg>

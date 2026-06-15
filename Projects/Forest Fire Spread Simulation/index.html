@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forest Fire Spread Simulation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="app-header">
+    <div class="header-brand">
+      <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M12 2C9 7 3 9 3 14c0 4 4 6 9 6s9-2 9-6c0-5-6-7-9-12z" stroke-linejoin="round"/>
+        <path d="M12 8l-2 5h4l-2 5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div>
+        <h1 class="brand-title">Forest Fire Spread</h1>
+        <span class="brand-sub">Containment Operations Deck v1.0</span>
+      </div>
+      <span class="brand-badge">CANVAS · ES6+</span>
+    </div>
+  </header>
+
+  <main class="app-main">
+
+    <!-- Parameters Drawer -->
+    <section class="params-drawer">
+      <div class="param-group">
+        <span class="param-label">Wind Velocity</span>
+        <div class="slider-row">
+          <input type="range" class="slider" id="sliderWind" min="0" max="100" value="40">
+          <span class="slider-val" id="valWind">40%</span>
+        </div>
+      </div>
+      <div class="param-group">
+        <span class="param-label">Moisture Coefficient</span>
+        <div class="slider-row">
+          <input type="range" class="slider" id="sliderMoisture" min="0" max="100" value="30">
+          <span class="slider-val" id="valMoisture">30%</span>
+        </div>
+      </div>
+      <div class="param-group">
+        <span class="param-label">Wind Direction</span>
+        <div class="compass-box" id="compassBox">
+          <button class="compass-btn" data-dir="N">N</button>
+          <button class="compass-btn" data-dir="W">W</button>
+          <button class="compass-btn active" data-dir="S">S</button>
+          <button class="compass-btn" data-dir="E">E</button>
+        </div>
+      </div>
+      <div class="param-group">
+        <span class="param-label">Step Delay</span>
+        <div class="slider-row">
+          <input type="range" class="slider" id="sliderDelay" min="1" max="10" value="5">
+          <span class="slider-val" id="valDelay">5ms</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Workspace -->
+    <section class="workspace">
+      <div class="grid-card">
+        <div class="grid-header">
+          <span class="grid-title">Forest Canopy Grid</span>
+          <span class="grid-badge" id="tickDisplay">TICK 0</span>
+        </div>
+        <div class="grid-wrap" id="gridWrap">
+          <canvas id="forestCanvas"></canvas>
+        </div>
+        <div class="grid-legend">
+          <span><span class="l-dot" style="background:#1a3a2a"></span> Healthy</span>
+          <span><span class="l-dot" style="background:#ff4500"></span> Fire</span>
+          <span><span class="l-dot" style="background:#2a2a2a"></span> Ash</span>
+          <span><span class="l-dot" style="background:#05060b"></span> Firebreak</span>
+        </div>
+      </div>
+
+      <!-- Telemetry -->
+      <div class="telemetry-card">
+        <div class="telemetry-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16" style="color:#ff4500">
+            <rect x="2" y="2" width="20" height="20" rx="2"/>
+            <path d="M2 12h20M12 2v20"/>
+            <circle cx="12" cy="12" r="2" fill="#ff4500"/>
+          </svg>
+          <span class="telemetry-title">Damage Assessment</span>
+        </div>
+        <div class="telemetry-body">
+          <div class="t-item">
+            <span class="t-label">Unburned Canopy</span>
+            <span class="t-value" id="valHealthy">0</span>
+          </div>
+          <div class="t-item">
+            <span class="t-label">Active Blazes</span>
+            <span class="t-value fire" id="valFire">0</span>
+          </div>
+          <div class="t-item">
+            <span class="t-label">Carbonized Acreage</span>
+            <span class="t-value ash" id="valAsh">0</span>
+          </div>
+          <div class="t-item">
+            <span class="t-label">Destruction Rate</span>
+            <span class="t-value pct" id="valPct">0%</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Controls -->
+    <section class="control-deck">
+      <button class="ctrl-btn ctrl-danger" id="btnIgnite">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M12 2L8 12h4l-2 10 6-12h-4z"/></svg>
+        Ignite Random Spark
+      </button>
+      <button class="ctrl-btn" id="btnContain">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><rect x="4" y="4" width="16" height="16" rx="2"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+        Containment Burn
+      </button>
+      <button class="ctrl-btn" id="btnHalt">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+        <span id="haltLabel">Halt</span>
+      </button>
+      <button class="ctrl-btn" id="btnReseed">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="8"/></svg>
+        Re-Seed Forest
+      </button>
+    </section>
+
+  </main>
+
+  <footer class="app-footer">
+    Forest Fire Spread Simulation &copy; 2026 &mdash; Canvas API &mdash; Web-Dev-Projects
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

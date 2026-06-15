@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reverse Dictionary — The Lexicon Game</title>
+<Link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="desk">
+        <div class="book">
+            <div id="start-overlay" class="overlay">
+                <h2 style="font-family: 'Playfair Display'; font-size: 3rem; margin: 0;">Lexicon</h2>
+                <p style="font-size: 1.2rem; margin: 20px 0 40px;">I give you the meaning. You give me the word.</p>
+                <button onclick="startGame()">Open Book</button>
+            </div>
+
+            <div class="page left">
+                <h1>The Definition</h1>
+                <div class="meaning-text" id="meaning-display">...</div>
+                <div class="stats">Entry <span id="current-entry">1</span> of 8</div>
+            </div>
+
+            <div class="page right">
+                <h1>The Word</h1>
+                <div class="input-group">
+                    <input type="text" id="word-input" placeholder="Type here..." autocomplete="off" onkeydown="if(event.key==='Enter') checkAnswer()">
+                </div>
+                <button onclick="checkAnswer()">Identify</button>
+                <div id="feedback" class="feedback"></div>
+            </div>
+        </div>
+    </div>
+<script src="script.js"></script>
+</body>
+</html>

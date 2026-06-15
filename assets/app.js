@@ -862,10 +862,30 @@ async function boot() {
     if (statUpdated) statUpdated.textContent = "—";
     console.warn("projects.json not available.", err);
   }
-
+  const q = new URL(location.href).searchParams.get("q") || "";
+  if (q) {
+    state.query = q;
+    search.value = q;
+  }
   renderTagbar();
   render();
   renderHallOfFame();
 }
+
+function syncQueryToUrl() {
+  const url = new URL(location.href);
+  if (state.query) {
+    url.searchParams.set("q", state.query);
+  } else {
+    url.searchParams.delete("q");
+  }
+  history.replaceState(null, "", url.href);
+}
+
+search.addEventListener("input", (e) => {
+  state.query = e.target.value;
+  syncQueryToUrl();
+  render();
+});
 
 boot();

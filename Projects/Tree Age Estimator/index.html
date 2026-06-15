@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tree Age Estimator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="app-header">
+    <div class="header-brand">
+      <svg class="brand-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M12 2C9.5 7 4 9 4 14c0 4 4 6 8 6s8-2 8-6c0-5-5.5-7-8-12z" stroke-linejoin="round"/>
+        <path d="M12 22V12" stroke-linecap="round"/>
+        <path d="M9 15s1.5 1 3 1 3-1 3-1" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <h1 class="brand-title">Tree Age Estimator</h1>
+        <span class="brand-sub">Silviculture Diagnostics Workbench v1.0</span>
+      </div>
+      <span class="brand-badge">CANVAS · ES6+</span>
+    </div>
+  </header>
+
+  <main class="app-main">
+
+    <!-- Controls Panel -->
+    <section class="control-panel" id="controlPanel">
+      <div class="panel-section">
+        <span class="section-label">Measurement Standard</span>
+        <div class="toggle-group" id="unitToggle">
+          <button class="toggle-btn active" data-unit="in">Inches</button>
+          <button class="toggle-btn" data-unit="cm">Centimeters</button>
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <span class="section-label">Trunk Circumference</span>
+        <div class="input-wrapper" id="inputWrapper">
+          <input type="text" class="circ-input" id="circInput" placeholder="e.g. 96" autocomplete="off" spellcheck="false">
+          <span class="circ-unit" id="circUnit">in</span>
+        </div>
+        <span class="input-hint" id="inputHint">Enter trunk circumference at breast height</span>
+        <div class="input-error" id="inputError" role="alert">Input out of biological bounds. Please specify a positive numerical circumference asset.</div>
+      </div>
+
+      <div class="panel-section">
+        <span class="section-label">Tree Species</span>
+        <div class="select-wrapper">
+          <select class="species-select" id="speciesSelect">
+            <option value="5.0">White Oak (GF: 5.0)</option>
+            <option value="4.5">Red Maple (GF: 4.5)</option>
+            <option value="1.5">Giant Sequoia (GF: 1.5)</option>
+            <option value="6.0">American Beech (GF: 6.0)</option>
+            <option value="3.0">Pin Oak (GF: 3.0)</option>
+            <option value="5.5">Sugar Maple (GF: 5.5)</option>
+            <option value="2.0">Douglas Fir (GF: 2.0)</option>
+            <option value="5.0">Eastern White Pine (GF: 5.0)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="panel-actions">
+        <button class="btn btn-primary" id="btnGenerate">Generate Full Growth Simulation</button>
+        <button class="btn btn-secondary" id="btnReset">Reset Calculator Specs</button>
+      </div>
+    </section>
+
+    <!-- Canvas Arena -->
+    <section class="canvas-arena">
+      <div class="canvas-card">
+        <div class="canvas-header">
+          <span class="canvas-title">Tree Core Cross-Section</span>
+          <span class="canvas-badge">Growth Rings</span>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="ringsCanvas" width="500" height="500"></canvas>
+        </div>
+      </div>
+
+      <div class="canvas-card">
+        <div class="canvas-header">
+          <span class="canvas-title">Century Growth Timeline</span>
+          <span class="canvas-badge">Diameter Projection</span>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="graphCanvas" width="500" height="500"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- Telemetry Panel -->
+    <section class="telemetry-panel" id="telemetryPanel">
+      <div class="telemetry-header">
+        <svg class="telemetry-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="2" y="2" width="20" height="20" rx="2"/>
+          <path d="M2 12h20M12 2v20" stroke-linecap="round"/>
+          <circle cx="12" cy="12" r="2" fill="currentColor"/>
+        </svg>
+        <span class="telemetry-title">Diagnostic Telemetry</span>
+      </div>
+      <div class="telemetry-grid">
+        <div class="telemetry-card">
+          <span class="telemetry-label">Calculated Diameter</span>
+          <span class="telemetry-value" id="valDiameter">—</span>
+        </div>
+        <div class="telemetry-card">
+          <span class="telemetry-label">Estimated Age</span>
+          <span class="telemetry-value" id="valAge">—</span>
+        </div>
+        <div class="telemetry-card">
+          <span class="telemetry-label">Carbon Sequestration</span>
+          <span class="telemetry-value" id="valCarbon">—</span>
+        </div>
+        <div class="telemetry-card">
+          <span class="telemetry-label">Lifecycle Stage</span>
+          <span class="telemetry-value" id="valStage">—</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="app-footer">
+    <p>Tree Age Estimator &copy; 2026 &mdash; Powered by Canvas API &mdash; Web-Dev-Projects</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

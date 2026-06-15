@@ -1,0 +1,676 @@
+/* ==========================================================================
+   DESIGN SYSTEM TOKENS & RETRO SYSTEM VARIABLES (Linux Command Playground)
+   ========================================================================== */
+:root {
+  /* Fonts */
+  --font-header: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'Fira Code', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+
+  /* Transitions */
+  --transition-fast: 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Radius */
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 14px;
+  --border-radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 10px 24px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.65);
+}
+
+/* Default Dark Cyber Theme */
+[data-theme="dark"] {
+  --bg-app: #020306;
+  --bg-sidebar: #06070d;
+  --bg-glass: rgba(8, 9, 17, 0.75);
+  --border-glass: rgba(255, 255, 255, 0.05);
+  --border-glass-focus: rgba(255, 255, 255, 0.14);
+
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #475569;
+
+  --accent: #22d3ee;             /* Cyber Cyan */
+  --accent-hover: #0891b2;
+  --accent-bg: rgba(34, 211, 238, 0.12);
+
+  --success: #4ade80;            /* Cyber Terminal Green */
+  --success-bg: rgba(74, 222, 128, 0.12);
+  --success-border: rgba(74, 222, 128, 0.25);
+
+  --danger: #f87171;             /* Red Alert */
+  --danger-bg: rgba(248, 113, 113, 0.12);
+  --danger-border: rgba(248, 113, 113, 0.25);
+
+  --warning: #fbbf24;
+  --warning-bg: rgba(251, 191, 36, 0.12);
+
+  --input-bg: rgba(0, 0, 0, 0.4);
+}
+
+/* Light Theme Setup (Optional Fallback) */
+[data-theme="light"] {
+  --bg-app: #f1f3f6;
+  --bg-sidebar: #ffffff;
+  --bg-glass: rgba(255, 255, 255, 0.85);
+  --border-glass: rgba(0, 0, 0, 0.08);
+  --border-glass-focus: rgba(0, 0, 0, 0.18);
+
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+
+  --accent: #0284c7;
+  --accent-hover: #0369a1;
+  --accent-bg: rgba(2, 132, 199, 0.08);
+
+  --success: #16a34a;
+  --success-bg: rgba(22, 163, 74, 0.08);
+  --success-border: rgba(22, 163, 74, 0.18);
+
+  --danger: #dc2626;
+  --danger-bg: rgba(220, 38, 38, 0.08);
+  --danger-border: rgba(220, 38, 38, 0.18);
+
+  --warning: #d97706;
+  --warning-bg: rgba(217, 119, 6, 0.08);
+
+  --input-bg: rgba(255, 255, 255, 0.95);
+}
+
+/* ==========================================================================
+   RESET & FOUNDATIONS
+   ========================================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font-body);
+}
+
+body {
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow: hidden;
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+/* Glowing background decor orbs */
+.decor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.glow-orb {
+  position: absolute;
+  border-radius: var(--border-radius-full);
+  filter: blur(120px);
+  opacity: 0.04;
+}
+
+.orb-1 {
+  top: -10%;
+  right: 15%;
+  width: 500px;
+  height: 500px;
+  background: var(--accent);
+}
+
+.orb-2 {
+  bottom: -10%;
+  left: 15%;
+  width: 450px;
+  height: 450px;
+  background: var(--success);
+}
+
+[data-theme="light"] .glow-orb {
+  opacity: 0.015;
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-glass);
+  border-radius: var(--border-radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* Glass card utilities */
+.bg-glass {
+  background-color: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--border-radius-lg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-sm);
+}
+
+.border-bottom {
+  border-bottom: 1px solid var(--border-glass);
+}
+
+.border-glass {
+  border: 1px solid var(--border-glass);
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Buttons styling */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: var(--border-radius-md);
+  border: 1px solid transparent;
+  font-weight: 500;
+  font-size: 0.8rem;
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: all var(--transition-fast) ease;
+}
+
+.btn-primary {
+  background-color: var(--accent);
+  color: #000000;
+  font-weight: 700;
+}
+
+.btn-primary:hover {
+  background-color: #22d3ee;
+  box-shadow: 0 0 12px rgba(34, 211, 238, 0.3);
+}
+
+.btn-secondary {
+  background-color: var(--accent-bg);
+  border-color: var(--border-glass);
+  color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+  background-color: var(--border-glass);
+  border-color: var(--text-secondary);
+}
+
+.btn-sm {
+  font-size: 0.725rem;
+  padding: 4px 10px;
+}
+
+/* ==========================================================================
+   APP HEADER & PROGRESS BAR
+   ========================================================================== */
+.playground-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 16px;
+  gap: 16px;
+}
+
+.app-header {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  flex-shrink: 0;
+  border-radius: var(--border-radius-lg);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-logo {
+  width: 34px;
+  height: 34px;
+  background-color: var(--accent-bg);
+  border: 1.5px solid var(--accent);
+  color: var(--accent);
+  border-radius: var(--border-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+
+.brand-text h1 {
+  font-family: var(--font-header);
+  font-weight: 800;
+  font-size: 1.15rem;
+  line-height: 1.1;
+}
+
+.brand-text span {
+  font-size: 0.65rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Progress bar gauge */
+.progress-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.progress-bar-wrapper {
+  width: 140px;
+  height: 6px;
+  background-color: rgba(255, 255, 255, 0.06);
+  border-radius: var(--border-radius-full);
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background-color: var(--success);
+  border-radius: var(--border-radius-full);
+  transition: width var(--transition-normal) ease;
+}
+
+.progress-status {
+  font-size: 0.725rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+/* ==========================================================================
+   WORKSPACE GRID LAYOUT
+   ========================================================================== */
+.grid-container {
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: 290px 1fr;
+  gap: 16px;
+  min-height: 0;
+}
+
+/* ==========================================================================
+   COLUMN 1: SIDEBAR (Missions & VFS Explorer)
+   ========================================================================== */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: 100%;
+}
+
+.sidebar-section {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  min-height: 0;
+}
+
+.section-header {
+  margin-bottom: 12px;
+  flex-shrink: 0;
+}
+
+.section-header h3 {
+  font-family: var(--font-header);
+  font-weight: 700;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.text-accent { color: var(--accent) !important; }
+.text-success { color: var(--success) !important; }
+.text-danger { color: var(--danger) !important; }
+
+/* Missions Checklist list styling */
+.missions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex-shrink: 0;
+  margin-bottom: 12px;
+}
+
+.mission-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background-color: rgba(255, 255, 255, 0.015);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.mission-item:hover {
+  background-color: rgba(255, 255, 255, 0.035);
+  border-color: var(--text-secondary);
+}
+
+.mission-item.active {
+  border-color: var(--accent);
+  background-color: var(--accent-bg);
+}
+
+.mission-item.locked {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.mission-item-title {
+  font-size: 0.725rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.mission-item.active .mission-item-title {
+  color: #ffffff;
+}
+
+.mission-item-icon {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.mission-item.passed .mission-item-icon {
+  color: var(--success);
+}
+
+/* Mission briefing details box */
+.mission-briefing {
+  padding: 12px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--border-radius-md);
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow-y: auto;
+}
+
+.mission-briefing h4 {
+  font-family: var(--font-header);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.mission-briefing p {
+  font-size: 0.725rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* VFS Graphic Explorer Tree visual representation */
+.vfs-tree-container {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.tree-folder-node {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 4px;
+}
+
+.tree-node-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 3px 6px;
+  border-radius: var(--border-radius-sm);
+  color: var(--text-primary);
+  transition: background-color var(--transition-fast);
+}
+
+.tree-node-title:hover {
+  background-color: var(--border-glass);
+}
+
+.tree-node-title i {
+  width: 14px;
+  text-align: center;
+}
+
+.tree-node-title i.fa-folder, .tree-node-title i.fa-folder-open {
+  color: var(--warning);
+}
+
+.tree-node-title i.fa-file {
+  color: var(--accent);
+}
+
+.tree-node-children {
+  padding-left: 14px;
+  border-left: 1px dashed rgba(255, 255, 255, 0.08);
+  margin-left: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.tree-file-node {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 6px;
+  border-radius: var(--border-radius-sm);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.tree-file-node:hover {
+  background-color: var(--border-glass);
+  color: var(--text-primary);
+}
+
+/* ==========================================================================
+   COLUMN 2: RETRO UNIX TERMINAL PLAYGROUND
+   ========================================================================== */
+.terminal-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: var(--border-radius-lg);
+  position: relative;
+  background-color: rgba(5, 6, 12, 0.93) !important; /* Retain terminal opacity */
+}
+
+/* Header bar controls */
+.terminal-header {
+  padding: 10px 18px;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid var(--border-glass);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.terminal-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.terminal-controls circle {
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  border-radius: var(--border-radius-full);
+}
+
+.ctrl-red { fill: #ef4444; }
+.ctrl-yellow { fill: #f59e0b; }
+.ctrl-green { fill: #10b981; }
+
+.terminal-header span {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  margin-left: 12px;
+}
+
+/* Terminal Screen Viewport scroll buffer area */
+.terminal-body {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 20px;
+  font-family: var(--font-mono);
+  font-size: 0.825rem;
+  line-height: 1.6;
+  color: var(--success); /* Glowing terminal green default */
+  cursor: text;
+  text-shadow: 0 0 4px rgba(74, 222, 128, 0.4);
+}
+
+/* CRT scanline grids effect overlay */
+.terminal-body::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+  background-size: 100% 4px, 6px 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.terminal-log-row {
+  white-space: pre-wrap;
+  word-break: break-all;
+  margin-bottom: 4px;
+}
+
+/* Prompt Line components layout */
+.terminal-prompt-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.prompt-prefix {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  user-select: none;
+}
+
+.prompt-user {
+  color: var(--success);
+  font-weight: 700;
+}
+
+.prompt-colon {
+  color: var(--text-primary);
+}
+
+.prompt-dir {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.prompt-char {
+  color: var(--text-primary);
+}
+
+/* Standard transparent input field overlay custom visual blinking caret */
+.prompt-input-wrapper {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+#terminal-stdin-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  padding: 0;
+  caret-color: transparent; /* Hide browser default cursor */
+  z-index: 2;
+}
+
+/* Visual cursor custom blinking block */
+.cursor-visual {
+  position: absolute;
+  width: 8px;
+  height: 15px;
+  background-color: var(--success);
+  display: inline-block;
+  pointer-events: none;
+  z-index: 1;
+  animation: blink 1s step-end infinite;
+  box-shadow: 0 0 6px var(--success);
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Color styles overrides for commands results */
+.terminal-error {
+  color: var(--danger) !important;
+  text-shadow: 0 0 4px rgba(248, 113, 113, 0.4);
+}
+
+.terminal-info {
+  color: var(--accent) !important;
+  text-shadow: 0 0 4px rgba(34, 211, 238, 0.4);
+}
+
+.terminal-white {
+  color: var(--text-primary) !important;
+  text-shadow: 0 0 4px rgba(255, 255, 255, 0.2);
+}
+
+.terminal-dim {
+  color: var(--text-muted) !important;
+  text-shadow: none;
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Quest — Global XP Dashboard</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="dashboard">
+        <header>
+            <div class="avatar">👤</div>
+            <div class="user-info">
+                <span class="rank-tag" id="rank-name">Novice Scholar</span>
+                <h1 id="user-name">Gamer_01</h1>
+                <div class="progress-track" style="margin-top: 10px; height: 4px;"><div id="global-bar" class="progress-fill" style="background: var(--xp-color); width: 40%;"></div></div>
+            </div>
+            <div class="global-xp-container">
+                <div class="level-badge">LV <span id="global-lv">1</span></div>
+            </div>
+        </header>
+
+        <div class="skills-grid" id="skill-container">
+            <!-- Skill cards will be generated here -->
+        </div>
+
+        <div class="activity-section">
+            <h2>Recent Achievements</h2>
+            <div class="log-list" id="activity-log">
+                <div class="log-item"><span>Dashboard initialized</span><span style="color: var(--accent)">+0 XP</span></div>
+            </div>
+        </div>
+
+        <button class="gain-xp-btn" onclick="simulateGain()">Simulate XP Gain</button>
+    </div>
+<script src="script.js"></script>
+</body>
+</html>

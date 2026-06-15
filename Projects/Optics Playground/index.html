@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Optics Playground | Mirrors & Lenses Simulator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-wrapper">
+    <header class="app-header">
+      <h1>🔦 Optics Playground</h1>
+      <p>Drag the torch → see real‑time reflection / refraction & calculations</p>
+    </header>
+
+    <div class="sim-container">
+      <canvas id="opticsCanvas" width="900" height="500" class="main-canvas"></canvas>
+      
+      <div class="controls-panel">
+        <div class="element-type-group">
+          <label class="radio-label">
+            <input type="radio" name="opticsType" value="mirror" checked> Mirror
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="opticsType" value="lens"> Lens
+          </label>
+        </div>
+        
+        <div id="mirrorOptions" class="sub-options">
+          <label>Mirror type:</label>
+          <select id="mirrorTypeSelect">
+            <option value="concave">Concave (converging)</option>
+            <option value="convex">Convex (diverging)</option>
+          </select>
+        </div>
+        
+        <div id="lensOptions" class="sub-options hidden">
+          <label>Lens type:</label>
+          <select id="lensTypeSelect">
+            <option value="converging">Converging (convex)</option>
+            <option value="diverging">Diverging (concave)</option>
+          </select>
+        </div>
+        
+        <div class="info-panel">
+          <div class="info-row"><span>🔆 Object distance (u):</span> <strong id="objDistance">--</strong> cm</div>
+          <div class="info-row"><span>📐 Image distance (v):</span> <strong id="imgDistance">--</strong> cm</div>
+          <div class="info-row"><span>🔍 Magnification (m):</span> <strong id="magnification">--</strong></div>
+          <div class="info-row"><span>🖼️ Image nature:</span> <strong id="imageNature">--</strong></div>
+          <div class="info-row"><span>⚡ Focal length (f):</span> <strong id="focalLen">--</strong> cm</div>
+        </div>
+        <button id="resetObjectBtn" class="reset-btn">⟳ Reset object position</button>
+      </div>
+    </div>
+    <footer class="credits-footer">Real‑time ray optics • drag torch • physics formulas (mirror/lens equation)</footer>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

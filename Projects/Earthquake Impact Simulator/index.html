@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Earthquake Impact · Simulator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="top-profile">
+    <div class="profile-brand">
+      <svg class="profile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M12 2L4 10h4l-2 8h12l-2-8h4l-8-8z" stroke="#ffb800"/>
+        <path d="M12 10v6M9 13h6" stroke="#ff6d00"/>
+      </svg>
+      <div>
+        <h1 class="profile-title">Earthquake Impact · Simulator</h1>
+        <span class="profile-sub">Geophysics Laboratory · Seismology v1.0</span>
+      </div>
+      <span class="profile-badge">MAGNITUDE · WAVES · INTENSITY</span>
+    </div>
+    <div class="profile-state">
+      <span class="state-dot" id="stateDot"></span>
+      <span class="state-label" id="stateLabel">STANDBY</span>
+    </div>
+  </header>
+
+  <main class="workspace">
+
+    <!-- TOP CONTROLS -->
+    <section class="controls-deck">
+      <div class="ctrl-group">
+        <label class="ctrl-label">Richter Mag <span class="ctrl-val" id="valMag">5.0</span></label>
+        <input type="range" class="ctrl-slider" id="sliderMag" min="1" max="10" step="0.1" value="5">
+      </div>
+      <div class="ctrl-group">
+        <label class="ctrl-label">Focal Depth <span class="ctrl-val" id="valDepth">30 km</span></label>
+        <input type="range" class="ctrl-slider" id="sliderDepth" min="5" max="150" step="1" value="30">
+      </div>
+      <div class="ctrl-group">
+        <label class="ctrl-label">Soil Type</label>
+        <div class="select-wrap">
+          <select id="selectSoil">
+            <option value="0.5">Solid Granite</option>
+            <option value="1.0" selected>Dense Sediment</option>
+            <option value="1.8">Soft Alluvium Silt</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIN GRID -->
+    <section class="main-grid">
+      <div class="seismic-card">
+        <div class="card-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M2 12h20M12 2v20" stroke-width="0.5"/></svg>
+          <span>Seismic Cross-Section Arena</span>
+          <span class="card-badge">CLICK TO SET EPICENTER</span>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="seismicCanvas"></canvas>
+        </div>
+      </div>
+
+      <div class="telemetry-card">
+        <div class="card-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 8h10M7 12h6M7 16h8"/></svg>
+          <span>Seismic Telemetry</span>
+          <span class="card-badge">LIVE</span>
+        </div>
+        <div class="tm-body" id="tmBody">
+          <div class="tm-item"><span class="tm-label">Peak Ground Accel</span><span class="tm-val" id="tmPGA">—</span></div>
+          <div class="tm-item"><span class="tm-label">Shockwave Radius</span><span class="tm-val" id="tmRadius">—</span></div>
+          <div class="tm-item"><span class="tm-label">Mercalli Intensity</span><span class="tm-val mercalli" id="tmMercalli">—</span></div>
+          <div class="tm-item"><span class="tm-label">Structural Integrity</span><span class="tm-val integrity" id="tmIntegrity">—</span></div>
+        </div>
+        <div class="tm-foot">
+          <div class="gauge-row">
+            <div class="gauge-mini"><span class="gm-label">P-Wave</span><div class="gm-track"><div class="gm-fill" id="gmP" style="width:0%"></div></div></div>
+            <div class="gauge-mini"><span class="gm-label">S-Wave</span><div class="gm-track"><div class="gm-fill" id="gmS" style="width:0%"></div></div></div>
+            <div class="gauge-mini"><span class="gm-label">Buildings</span><div class="gm-track"><div class="gm-fill" id="gmBuild" style="width:0%"></div></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTROLS -->
+    <footer class="action-deck">
+      <button class="ctrl-btn ctrl-primary" id="btnTrigger">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><circle cx="12" cy="12" r="10"/><path d="M12 4v16M4 12h16"/></svg>
+        Trigger Tectonic Rupture Spark
+      </button>
+      <button class="ctrl-btn ctrl-amber" id="btnRetrofit">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>
+        Deploy Base-Isolation Structural Retrofits
+      </button>
+      <button class="ctrl-btn ctrl-danger" id="btnPurge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg>
+        Purge Shockwaves & Stabilize Fault
+      </button>
+    </footer>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
