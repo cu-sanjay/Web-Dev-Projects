@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Digital Forensics Lab</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="app-container">
+  <header><div class="brand"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 12h6M12 9v6"/></svg><div><h1>DIGITAL FORENSICS LAB</h1><p>Evidence Analysis · File Recovery · Timeline Reconstruction</p></div></div></header>
+  <div class="main-layout">
+    <aside class="tools-panel">
+      <h3>Forensic Tools</h3>
+      <button class="tool-btn" data-tool="hex">Hex Viewer 🔍</button>
+      <button class="tool-btn" data-tool="timeline">Timeline ⏱️</button>
+      <button class="tool-btn" data-tool="metadata">Metadata 📋</button>
+      <button class="tool-btn" data-tool="recover">Recovery ♻️</button>
+      <hr class="divider">
+      <h3>Evidence Files</h3>
+      <div class="file-list" id="file-list">
+        <div class="file-item active" data-file="image1"><span class="file-icon">🖼️</span><span>evidence.img</span><span class="file-size">256KB</span></div>
+        <div class="file-item" data-file="log1"><span class="file-icon">📄</span><span>access.log</span><span class="file-size">12KB</span></div>
+        <div class="file-item" data-file="mem1"><span class="file-icon">🧠</span><span>memory.dump</span><span class="file-size">1.2GB</span></div>
+        <div class="file-item" data-file="usb1"><span class="file-icon">💾</span><span>usb_drive.img</span><span class="file-size">8MB</span></div>
+      </div>
+      <div class="case-info"><span class="case-label">Case:</span><span id="case-id">DF-2024-0042</span></div>
+    </aside>
+    <main class="analysis-area">
+      <div class="toolbar"><span id="active-tool">Hex Viewer</span><button id="btn-export" class="btn">Export Report</button></div>
+      <div class="analysis-view" id="analysis-view">
+        <div class="hex-view" id="hex-view">
+          <div class="hex-header"><span>Offset</span><span>00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F</span><span>ASCII</span></div>
+          <div class="hex-rows" id="hex-rows"></div>
+          <div class="hex-analysis"><h4>Analysis</h4><p id="hex-analysis-text">File signature: 89 50 4E 47 → PNG image. No corruption detected. EXIF metadata present.</p></div>
+        </div>
+        <div class="timeline-view hidden" id="timeline-view">
+          <div class="timeline-events" id="timeline-events"></div>
+        </div>
+        <div class="metadata-view hidden" id="metadata-view">
+          <div class="meta-grid" id="meta-grid"></div>
+        </div>
+        <div class="recovery-view hidden" id="recovery-view">
+          <div class="recovery-status"><div class="recovery-bar"><div class="recovery-fill" id="recovery-fill" style="width:45%"></div></div><span>45% recoverable</span></div>
+          <div class="recovered-files" id="recovered-files"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
