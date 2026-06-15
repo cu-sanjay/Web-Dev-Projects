@@ -1,0 +1,213 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1220"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="accent-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+    <linearGradient id="green-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#22c55e"/>
+      <stop offset="100%" stop-color="#16a34a"/>
+    </linearGradient>
+    <linearGradient id="red-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ef4444"/>
+      <stop offset="100%" stop-color="#dc2626"/>
+    </linearGradient>
+    <linearGradient id="amber-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <linearGradient id="ring-grad-svg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#dc2626"/>
+      <stop offset="33%" stop-color="#f59e0b"/>
+      <stop offset="66%" stop-color="#84cc16"/>
+      <stop offset="100%" stop-color="#22c55e"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <rect width="1280" height="720" fill="url(#bg-grad)"/>
+
+  <g opacity="0.03">
+    <line x1="0" y1="80" x2="1280" y2="80" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" y1="160" x2="1280" y2="160" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" y1="240" x2="1280" y2="240" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" y1="320" x2="1280" y2="320" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" y1="400" x2="1280" y2="400" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" y1="480" x2="1280" y2="480" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" y1="560" x2="1280" y2="560" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" y1="640" x2="1280" y2="640" stroke="#fff" stroke-width="0.5"/>
+  </g>
+
+  <text x="60" y="50" font-family="ui-monospace, monospace" font-size="22" font-weight="800" fill="#f8fafc" letter-spacing="1.5">
+    RESUME ATS SCANNER
+  </text>
+  <text x="60" y="72" font-family="ui-monospace, monospace" font-size="12" fill="#64748b" letter-spacing="0.5">
+    Applicant Tracking System Compatibility Simulator
+  </text>
+
+  <!-- Left Panel - Resume Input -->
+  <rect x="60" y="95" width="420" height="290" rx="10" fill="#111827" stroke="#334155" stroke-width="1" filter="url(#shadow)"/>
+  <rect x="60" y="95" width="420" height="34" rx="10" fill="#1f2937"/>
+  <rect x="60" y="115" width="420" height="14" fill="#1f2937"/>
+  <text x="80" y="117" font-family="ui-monospace, monospace" font-size="10" font-weight="600" fill="#cbd5e1" letter-spacing="0.5">RESUME</text>
+  <text x="420" y="117" font-family="ui-monospace, monospace" font-size="9" fill="#64748b" text-anchor="end">42 lines | 1842 chars</text>
+
+  <g font-family="ui-monospace, monospace" font-size="9.5" color="#cbd5e1">
+    <text x="80" y="150" fill="#64748b">1</text>
+    <text x="95" y="150" fill="#f8fafc" font-weight="700">Alex Chen</text>
+    <text x="80" y="165" fill="#64748b">2</text>
+    <text x="95" y="165" fill="#94a3b8">alex.chen@email.com | (555) 234-5678</text>
+    <text x="80" y="183" fill="#64748b">4</text>
+    <text x="95" y="183" fill="#38bdf8" font-weight="600">PROFESSIONAL SUMMARY</text>
+    <text x="80" y="198" fill="#64748b">5</text>
+    <text x="95" y="198" fill="#cbd5e1">Senior Software Engineer with 6+ years</text>
+    <text x="80" y="213" fill="#64748b">6</text>
+    <text x="95" y="213" fill="#cbd5e1">of experience building scalable web</text>
+    <text x="80" y="228" fill="#64748b">7</text>
+    <text x="95" y="228" fill="#cbd5e1">applications and microservices...</text>
+    <text x="80" y="246" fill="#64748b">9</text>
+    <text x="95" y="246" fill="#38bdf8" font-weight="600">WORK EXPERIENCE</text>
+    <text x="80" y="261" fill="#64748b">10</text>
+    <text x="95" y="261" fill="#f8fafc">Senior Software Engineer | TechCorp</text>
+    <text x="80" y="276" fill="#64748b">11</text>
+    <text x="95" y="276" fill="#cbd5e1">• Led migration to microservices</text>
+    <text x="80" y="291" fill="#64748b">12</text>
+    <text x="95" y="291" fill="#cbd5e1">• Designed RESTful APIs (10M req/d)</text>
+    <text x="80" y="306" fill="#64748b">13</text>
+    <text x="95" y="306" fill="#cbd5e1">• Built data pipeline with AWS Lambda</text>
+    <text x="80" y="321" fill="#64748b">14</text>
+    <text x="95" y="321" fill="#cbd5e1">• Mentored 4 junior engineers</text>
+    <text x="80" y="339" fill="#64748b">16</text>
+    <text x="95" y="339" fill="#22c55e" font-weight="600">EDUCATION</text>
+    <text x="80" y="354" fill="#64748b">17</text>
+    <text x="95" y="354" fill="#cbd5e1">B.S. Computer Science, UC Berkeley</text>
+  </g>
+
+  <!-- Left Panel - JD Input -->
+  <rect x="60" y="400" width="420" height="220" rx="10" fill="#111827" stroke="#334155" stroke-width="1" filter="url(#shadow)"/>
+  <rect x="60" y="400" width="420" height="34" rx="10" fill="#1f2937"/>
+  <rect x="60" y="420" width="420" height="14" fill="#1f2937"/>
+  <text x="80" y="422" font-family="ui-monospace, monospace" font-size="10" font-weight="600" fill="#cbd5e1" letter-spacing="0.5">JOB DESCRIPTION</text>
+  <text x="420" y="422" font-family="ui-monospace, monospace" font-size="9" fill="#64748b" text-anchor="end">18 lines | 876 chars</text>
+
+  <g font-family="ui-monospace, monospace" font-size="9.5">
+    <text x="80" y="455" fill="#f8fafc" font-weight="700">Senior Software Engineer</text>
+    <text x="80" y="473" fill="#cbd5e1">We are looking for an experienced Senior</text>
+    <text x="80" y="488" fill="#cbd5e1">Software Engineer to join our platform team.</text>
+    <text x="80" y="510" fill="#38bdf8" font-weight="600">Requirements:</text>
+    <text x="80" y="528" fill="#cbd5e1">• 5+ years software development experience</text>
+    <text x="80" y="543" fill="#22c55e">• Strong proficiency in JavaScript, TypeScript</text>
+    <text x="80" y="558" fill="#22c55e">• Experience with React</text>
+    <text x="80" y="573" fill="#22c55e">• Deep understanding of AWS services</text>
+    <text x="80" y="588" fill="#ef4444">• Experience with Docker, Kubernetes</text>
+    <text x="80" y="603" fill="#ef4444">• Knowledge of Terraform or IaC</text>
+  </g>
+
+  <!-- Right Panel - Score Ring -->
+  <rect x="510" y="95" width="710" height="525" rx="10" fill="#111827" stroke="#334155" stroke-width="1" filter="url(#shadow)"/>
+
+  <text x="540" y="125" font-family="ui-monospace, monospace" font-size="14" font-weight="700" fill="#f8fafc">ATS Compatibility Report</text>
+
+  <!-- Score ring -->
+  <svg x="545" y="140" width="180" height="180">
+    <circle cx="90" cy="90" r="75" fill="none" stroke="#1f2937" stroke-width="10"/>
+    <circle cx="90" cy="90" r="75" fill="none" stroke="url(#ring-grad-svg)" stroke-width="10" stroke-linecap="round" stroke-dasharray="424" stroke-dashoffset="127" transform="rotate(-90 90 90)"/>
+    <text x="90" y="88" text-anchor="middle" font-family="ui-monospace, monospace" font-size="44" font-weight="700" fill="#f8fafc">70</text>
+    <text x="90" y="110" text-anchor="middle" font-family="ui-monospace, monospace" font-size="11" fill="#64748b">ATS SCORE</text>
+  </svg>
+
+  <!-- Detail scores -->
+  <g transform="translate(740, 145)">
+    <rect x="0" y="0" width="145" height="60" rx="6" fill="#1f2937" stroke="#334155" stroke-width="1"/>
+    <text x="12" y="20" font-family="ui-monospace, monospace" font-size="9" fill="#64748b" text-transform="uppercase">Keyword Match</text>
+    <text x="12" y="46" font-family="ui-monospace, monospace" font-size="24" font-weight="700" fill="#22c55e">68%</text>
+
+    <rect x="160" y="0" width="145" height="60" rx="6" fill="#1f2937" stroke="#334155" stroke-width="1"/>
+    <text x="172" y="20" font-family="ui-monospace, monospace" font-size="9" fill="#64748b" text-transform="uppercase">Sections</text>
+    <text x="172" y="46" font-family="ui-monospace, monospace" font-size="24" font-weight="700" fill="#84cc16">75%</text>
+
+    <rect x="0" y="72" width="145" height="60" rx="6" fill="#1f2937" stroke="#334155" stroke-width="1"/>
+    <text x="12" y="92" font-family="ui-monospace, monospace" font-size="9" fill="#64748b" text-transform="uppercase">Format Quality</text>
+    <text x="12" y="118" font-family="ui-monospace, monospace" font-size="24" font-weight="700" fill="#f59e0b">65%</text>
+
+    <rect x="160" y="72" width="145" height="60" rx="6" fill="#1f2937" stroke="#334155" stroke-width="1"/>
+    <text x="172" y="92" font-family="ui-monospace, monospace" font-size="9" fill="#64748b" text-transform="uppercase">Experience</text>
+    <text x="172" y="118" font-family="ui-monospace, monospace" font-size="24" font-weight="700" fill="#22c55e">72%</text>
+  </g>
+
+  <!-- Keywords -->
+  <g transform="translate(540, 325)">
+    <text font-family="ui-monospace, monospace" font-size="11" font-weight="700" fill="#f8fafc">Matching Keywords</text>
+    <rect x="150" y="0" width="28" height="16" rx="8" fill="rgba(34,197,94,0.12)" stroke="rgba(34,197,94,0.2)" stroke-width="1"/>
+    <text x="164" y="12" font-family="ui-monospace, monospace" font-size="9" fill="#22c55e" text-anchor="middle">12</text>
+
+    <rect x="0" y="22" height="24" rx="4" fill="rgba(34,197,94,0.1)" width="0" id="kw1"/>
+    <text x="8" y="37" font-family="ui-monospace, monospace" font-size="10" fill="#22c55e">javascript</text>
+    <rect x="85" y="22" height="24" rx="4" fill="rgba(34,197,94,0.1)" width="76"/>
+    <text x="93" y="37" font-family="ui-monospace, monospace" font-size="10" fill="#22c55e">typescript</text>
+    <rect x="170" y="22" height="24" rx="4" fill="rgba(34,197,94,0.1)" width="56"/>
+    <text x="178" y="37" font-family="ui-monospace, monospace" font-size="10" fill="#22c55e">react</text>
+    <rect x="234" y="22" height="24" rx="4" fill="rgba(34,197,94,0.1)" width="40"/>
+    <text x="242" y="37" font-family="ui-monospace, monospace" font-size="10" fill="#22c55e">node.js</text>
+    <rect x="290" y="22" height="24" rx="4" fill="rgba(34,197,94,0.1)" width="56"/>
+    <text x="298" y="37" font-family="ui-monospace, monospace" font-size="10" fill="#22c55e">aws</text>
+    <rect x="340" y="22" height="24" rx="4" fill="rgba(34,197,94,0.1)" width="80"/>
+    <text x="348" y="37" font-family="ui-monospace, monospace" font-size="10" fill="#22c55e">docker</text>
+    <rect x="428" y="22" height="24" rx="4" fill="rgba(34,197,94,0.1)" width="100"/>
+    <text x="436" y="37" font-family="ui-monospace, monospace" font-size="10" fill="#22c55e">kubernetes</text>
+    <rect x="0" y="52" height="24" rx="4" fill="rgba(34,197,94,0.1)" width="90"/>
+    <text x="8" y="67" font-family="ui-monospace, monospace" font-size="10" fill="#22c55e">microservices</text>
+    <rect x="100" y="52" height="24" rx="4" fill="rgba(34,197,94,0.1)" width="110"/>
+    <text x="108" y="67" font-family="ui-monospace, monospace" font-size="10" fill="#22c55e">ci/cd</text>
+    <rect x="165" y="52" height="24" rx="4" fill="rgba(34,197,94,0.1)" width="100"/>
+    <text x="173" y="67" font-family="ui-monospace, monospace" font-size="10" fill="#22c55e">postgresql</text>
+    <rect x="265" y="52" height="24" rx="4" fill="rgba(34,197,94,0.1)" width="90"/>
+    <text x="273" y="67" font-family="ui-monospace, monospace" font-size="10" fill="#22c55e">mentoring</text>
+  </g>
+
+  <g transform="translate(540, 410)">
+    <text font-family="ui-monospace, monospace" font-size="11" font-weight="700" fill="#f8fafc">Missing Keywords</text>
+    <rect x="150" y="0" width="24" height="16" rx="8" fill="rgba(239,68,68,0.12)" stroke="rgba(239,68,68,0.2)" stroke-width="1"/>
+    <text x="162" y="12" font-family="ui-monospace, monospace" font-size="9" fill="#ef4444" text-anchor="middle">4</text>
+
+    <rect x="0" y="22" height="24" rx="4" fill="rgba(239,68,68,0.08)" width="100"/>
+    <text x="8" y="37" font-family="ui-monospace, monospace" font-size="10" fill="#ef4444" text-decoration="line-through">terraform</text>
+    <rect x="108" y="22" height="24" rx="4" fill="rgba(239,68,68,0.08)" width="80"/>
+    <text x="116" y="37" font-family="ui-monospace, monospace" font-size="10" fill="#ef4444" text-decoration="line-through">graphql</text>
+    <rect x="196" y="22" height="24" rx="4" fill="rgba(239,68,68,0.08)" width="70"/>
+    <text x="204" y="37" font-family="ui-monospace, monospace" font-size="10" fill="#ef4444" text-decoration="line-through">rest api</text>
+
+    <rect x="0" y="52" height="24" rx="4" fill="rgba(239,68,68,0.08)" width="100"/>
+    <text x="8" y="67" font-family="ui-monospace, monospace" font-size="10" fill="#ef4444" text-decoration="line-through">real-time</text>
+  </g>
+
+  <!-- Suggestions -->
+  <g transform="translate(540, 485)">
+    <text font-family="ui-monospace, monospace" font-size="11" font-weight="700" fill="#f8fafc">Top Suggestions</text>
+    <rect x="145" y="0" width="24" height="16" rx="8" fill="rgba(56,189,248,0.12)" stroke="rgba(56,189,248,0.2)" stroke-width="1"/>
+    <text x="157" y="12" font-family="ui-monospace, monospace" font-size="9" fill="#38bdf8" text-anchor="middle">5</text>
+
+    <rect x="0" y="24" width="610" height="26" rx="4" fill="#1f2937"/>
+    <rect x="0" y="24" width="3" height="26" rx="2" fill="#ef4444"/>
+    <text x="14" y="41" font-family="ui-monospace, monospace" font-size="9" fill="#ef4444">⚠</text>
+    <text x="32" y="41" font-family="ui-monospace, monospace" font-size="10" fill="#cbd5e1">Critical missing: terraform, graphql — highly valued for this role</text>
+
+    <rect x="0" y="55" width="610" height="26" rx="4" fill="#1f2937"/>
+    <rect x="0" y="55" width="3" height="26" rx="2" fill="#f59e0b"/>
+    <text x="14" y="72" font-family="ui-monospace, monospace" font-size="9" fill="#f59e0b">⚠</text>
+    <text x="32" y="72" font-family="ui-monospace, monospace" font-size="10" fill="#cbd5e1">Missing section: Certifications — add AWS/cloud certs</text>
+
+    <rect x="0" y="86" width="610" height="26" rx="4" fill="#1f2937"/>
+    <rect x="0" y="86" width="3" height="26" rx="2" fill="#38bdf8"/>
+    <text x="14" y="103" font-family="ui-monospace, monospace" font-size="9" fill="#38bdf8">i</text>
+    <text x="32" y="103" font-family="ui-monospace, monospace" font-size="10" fill="#cbd5e1">Add a Technical Skills section with specific JD technologies</text>
+  </g>
+
+  <rect x="0" y="718" width="1280" height="2" fill="url(#accent-grad)" opacity="0.4"/>
+</svg>
