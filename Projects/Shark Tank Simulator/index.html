@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Shark Tank Simulator — Pitch your startup to investors and negotiate deals.">
+  <title>Shark Tank Simulator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <h1><span aria-hidden="true">&#x1F988;</span> Shark Tank Simulator</h1>
+      <p class="subtitle">Startup Pitches &middot; Investor Decisions</p>
+    </header>
+
+    <div class="stats-row">
+      <div class="stat-card"><span class="stat-label">Cash</span><span class="stat-value gold" id="cashVal">$0</span></div>
+      <div class="stat-card"><span class="stat-label">Portfolio Value</span><span class="stat-value" id="portfolioVal">$0</span></div>
+      <div class="stat-card"><span class="stat-label">Deals Made</span><span class="stat-value" id="dealsVal">0</span></div>
+      <div class="stat-card"><span class="stat-label">Episodes</span><span class="stat-value" id="episodeVal">1</span></div>
+    </div>
+
+    <div class="main-grid">
+      <div class="panel">
+        <h2>Startup Pitches</h2>
+        <div class="pitch-list" id="pitchList"></div>
+      </div>
+
+      <div class="panel">
+        <h2>The Tank</h2>
+        <div id="tankContent">
+          <div class="tank-placeholder" id="tankPlaceholder">
+            <p>Select a startup pitch to enter the tank. Listen to the pitch, then decide whether to invest.</p>
+          </div>
+          <div id="pitchDetail" style="display:none">
+            <h3 class="pitch-title" id="pitchName"></h3>
+            <p class="pitch-desc" id="pitchDesc"></p>
+            <div class="pitch-metrics">
+              <div class="metric"><span class="label">Asking</span><span class="val" id="pitchAsk"></span></div>
+              <div class="metric"><span class="label">Equity</span><span class="val" id="pitchEquity"></span></div>
+              <div class="metric"><span class="label">Revenue</span><span class="val" id="pitchRevenue"></span></div>
+              <div class="metric"><span class="label">Valuation</span><span class="val" id="pitchValuation"></span></div>
+            </div>
+            <div class="pitch-founder">
+              <p id="pitchStory"></p>
+            </div>
+            <div class="invest-area">
+              <p class="invest-label">Your offer determines if the deal closes.</p>
+              <div class="invest-inputs">
+                <div><label>Offer ($)</label><input type="number" id="offerAmount" placeholder="Amount"></div>
+                <div><label>Equity (%)</label><input type="number" id="offerEquity" placeholder="Equity" step="0.5"></div>
+              </div>
+              <div class="invest-actions">
+                <button class="btn invest" id="investBtn">Make Offer</button>
+                <button class="btn pass" id="passBtn">Pass</button>
+              </div>
+              <div id="dealResult" class="deal-result"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel wide">
+        <h2>Deal Log</h2>
+        <div class="log-entries" id="logEntries"><p class="empty-state">Investors ready. Select a pitch to begin.</p></div>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
