@@ -1,0 +1,188 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <!-- Color Gradients -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050e0a"/>
+      <stop offset="50%" stop-color="#0b1c14"/>
+      <stop offset="100%" stop-color="#050e0c"/>
+    </linearGradient>
+    
+    <linearGradient id="forestGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#14532d"/>
+      <stop offset="100%" stop-color="#22c55e"/>
+    </linearGradient>
+
+    <linearGradient id="lossGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#dc2626"/>
+      <stop offset="100%" stop-color="#78350f"/>
+    </linearGradient>
+
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#34d399"/>
+      <stop offset="100%" stop-color="#0f766e"/>
+    </linearGradient>
+
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#34d399" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#34d399" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="alertGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#dc2626" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#dc2626" stop-opacity="0"/>
+    </radialGradient>
+
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+
+    <filter id="glowFilter">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bgGrad)"/>
+  
+  <!-- Map Coordinate Grid Lines -->
+  <g stroke="#163124" stroke-width="0.75" fill="none" opacity="0.3">
+    <line x1="0" y1="100" x2="800" y2="100"/>
+    <line x1="0" y1="200" x2="800" y2="200"/>
+    <line x1="0" y1="300" x2="800" y2="300"/>
+    <line x1="0" y1="400" x2="800" y2="400"/>
+    <line x1="160" y1="0" x2="160" y2="500"/>
+    <line x1="320" y1="0" x2="320" y2="500"/>
+    <line x1="480" y1="0" x2="480" y2="500"/>
+    <line x1="640" y1="0" x2="640" y2="500"/>
+  </g>
+
+  <!-- Dynamic Map Viewport Group -->
+  <g transform="translate(10, 50)" opacity="0.75">
+    <!-- Continents Silhouettes -->
+    <g fill="#10251c" stroke="#1d4232" stroke-width="1.2">
+      <!-- North America -->
+      <path d="M 85 40 L 115 35 L 155 38 L 180 45 L 195 55 L 200 70 L 195 85 L 185 95 L 190 110 L 195 125 L 190 140 L 180 148 L 170 155 L 155 158 L 140 155 L 130 160 L 120 155 L 110 145 L 100 140 L 90 130 L 82 115 L 78 100 L 75 80 L 78 60 Z"/>
+      <path d="M 195 20 L 215 18 L 235 22 L 240 35 L 235 50 L 220 55 L 205 52 L 195 42 Z"/> <!-- Greenland -->
+      <!-- South America -->
+      <path d="M 170 165 L 185 162 L 200 168 L 212 178 L 220 195 L 225 215 L 228 235 L 225 255 L 218 270 L 208 285 L 195 295 L 185 300 L 178 295 L 172 280 L 168 260 L 165 240 L 163 220 L 162 200 L 165 185 Z"/>
+      <!-- Europe -->
+      <path d="M 355 40 L 370 35 L 385 32 L 400 35 L 415 40 L 425 48 L 430 58 L 435 68 L 432 78 L 425 88 L 415 95 L 405 100 L 395 102 L 385 100 L 375 95 L 365 88 L 358 78 L 352 65 L 350 52 Z"/>
+      <!-- Africa -->
+      <path d="M 365 105 L 380 100 L 395 98 L 410 100 L 425 105 L 435 115 L 440 130 L 442 150 L 440 170 L 435 190 L 425 210 L 412 225 L 398 235 L 385 240 L 375 235 L 368 220 L 362 200 L 358 180 L 355 155 L 355 135 L 358 118 Z"/>
+      <!-- Asia -->
+      <path d="M 415 35 L 440 30 L 470 28 L 500 30 L 530 35 L 560 40 L 590 48 L 615 55 L 635 65 L 648 78 L 655 95 L 652 110 L 645 125 L 635 135 L 620 140 L 600 142 L 580 140 L 560 135 L 540 130 L 520 128 L 500 125 L 480 120 L 460 115 L 445 105 L 432 95 L 425 80 L 418 65 L 415 50 Z"/>
+      <!-- SE Asia & Australia -->
+      <path d="M 510 140 L 530 138 L 550 142 L 565 150 L 570 160 L 560 168 L 545 170 L 530 165 L 518 158 L 512 148 Z"/>
+      <path d="M 540 172 L 555 170 L 570 175 L 580 182 L 575 190 L 560 192 L 548 185 L 540 178 Z"/>
+      <path d="M 640 230 L 660 225 L 680 228 L 695 235 L 705 248 L 708 265 L 700 278 L 688 288 L 672 292 L 658 290 L 648 282 L 640 270 L 635 255 Z"/>
+    </g>
+
+    <!-- Forest coverage cell clusters -->
+    <!-- Boreal Zones -->
+    <circle cx="120" cy="50" r="5" fill="#22c55e"/>
+    <circle cx="140" cy="55" r="4.5" fill="#14532d"/>
+    <circle cx="480" cy="45" r="5" fill="#22c55e"/>
+    <circle cx="510" cy="50" r="4" fill="#14532d"/>
+    <circle cx="550" cy="48" r="5" fill="#22c55e"/>
+    <circle cx="580" cy="52" r="4.5" fill="#14532d"/>
+
+    <!-- North America & Europe -->
+    <circle cx="130" cy="90" r="4" fill="#86efac"/>
+    <circle cx="150" cy="95" r="4.5" fill="#22c55e"/>
+    <circle cx="380" cy="70" r="4" fill="#22c55e"/>
+    <circle cx="400" cy="72" r="5" fill="#86efac"/>
+
+    <!-- Tropical Forests (Amazon - Loss Zones) -->
+    <circle cx="185" cy="185" r="5" fill="#22c55e"/>
+    <circle cx="195" cy="190" r="5" fill="#78350f"/>
+    <circle cx="205" cy="195" r="5" fill="#dc2626"/> <!-- Hotspot -->
+    <circle cx="215" cy="205" r="4" fill="#dc2626"/> <!-- Hotspot -->
+    <circle cx="190" cy="200" r="4.5" fill="#78350f"/>
+    <circle cx="200" cy="210" r="4" fill="#dc2626"/>
+
+    <!-- Congo Basin -->
+    <circle cx="390" cy="150" r="5" fill="#22c55e"/>
+    <circle cx="400" cy="155" r="5.5" fill="#78350f"/>
+    <circle cx="410" cy="160" r="4.5" fill="#dc2626"/>
+    
+    <!-- Southeast Asia -->
+    <circle cx="530" cy="150" r="4.5" fill="#dc2626"/>
+    <circle cx="545" cy="155" r="4" fill="#78350f"/>
+    <circle cx="560" cy="165" r="5" fill="#22c55e"/>
+
+    <!-- Australia -->
+    <circle cx="670" cy="260" r="4" fill="#86efac"/>
+    <circle cx="685" cy="265" r="4.5" fill="#22c55e"/>
+
+    <!-- Heatmap alerts glowing -->
+    <circle cx="205" cy="195" r="24" fill="url(#alertGlow)" pointer-events="none"/>
+    <circle cx="410" cy="160" r="20" fill="url(#alertGlow)" pointer-events="none"/>
+    <circle cx="530" cy="150" r="22" fill="url(#alertGlow)" pointer-events="none"/>
+  </g>
+
+  <!-- Foreground Interface Overlays (Glassmorphic Panels) -->
+  
+  <!-- Left Side Title Block -->
+  <g transform="translate(40, 50)" filter="url(#shadow)">
+    <rect width="320" height="90" rx="10" fill="#111827" fill-opacity="0.9" stroke="#334155" stroke-width="1.5"/>
+    <text x="20" y="38" font-family="system-ui, sans-serif" font-weight="900" font-size="16" fill="#f8fafc" letter-spacing="1">DEFORESTATION IMPACT MAP</text>
+    <text x="20" y="58" font-family="system-ui, sans-serif" font-weight="600" font-size="10" fill="#34d399" letter-spacing="0.5">GLOBAL FOREST COVERAGE INTELLIGENCE</text>
+    <!-- Status badge -->
+    <rect x="20" y="68" width="85" height="15" rx="7.5" fill="#14532d" stroke="#34d399" stroke-width="0.5"/>
+    <text x="62.5" y="79" font-family="ui-monospace, monospace" font-size="7.5" font-weight="700" fill="#34d399" text-anchor="middle">GIS PLATFORM</text>
+  </g>
+
+  <!-- Right Side Statistics Overlay Card -->
+  <g transform="translate(480, 50)" filter="url(#shadow)">
+    <rect width="280" height="150" rx="10" fill="#111827" fill-opacity="0.9" stroke="#334155" stroke-width="1.5"/>
+    
+    <!-- Title -->
+    <text x="20" y="30" font-family="system-ui, sans-serif" font-weight="800" font-size="11" fill="#cbd5e1" letter-spacing="0.5">ANALYTICS MONITOR (2025)</text>
+    <line x1="20" y1="40" x2="260" y2="40" stroke="#334155" stroke-width="1"/>
+    
+    <!-- Stat 1 -->
+    <text x="20" y="62" font-family="system-ui, sans-serif" font-size="9" fill="#64748b" font-weight="700">GLOBAL COVERAGE</text>
+    <text x="20" y="82" font-family="ui-monospace, Consolas, monospace" font-weight="700" font-size="18" fill="#34d399">58.2%</text>
+    
+    <!-- Stat 2 -->
+    <text x="150" y="62" font-family="system-ui, sans-serif" font-size="9" fill="#64748b" font-weight="700">TOTAL FOREST LOST</text>
+    <text x="150" y="82" font-family="ui-monospace, Consolas, monospace" font-weight="700" font-size="16" fill="#dc2626">-14.2%</text>
+
+    <!-- Progress slider bar graphic -->
+    <text x="20" y="108" font-family="system-ui, sans-serif" font-size="8.5" fill="#64748b" font-weight="700">TIMELINE ANALYSIS</text>
+    <line x1="20" y1="124" x2="260" y2="124" stroke="#1f2937" stroke-width="6" stroke-linecap="round"/>
+    <line x1="20" y1="124" x2="210" y2="124" stroke="url(#accentGrad)" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="210" cy="124" r="7" fill="#f8fafc" stroke="#34d399" stroke-width="2"/>
+    <text x="20" y="140" font-family="ui-monospace, monospace" font-size="7.5" fill="#64748b">1990</text>
+    <text x="202" y="140" font-family="ui-monospace, monospace" font-size="8" fill="#34d399" font-weight="700">2025</text>
+    <text x="245" y="140" font-family="ui-monospace, monospace" font-size="7.5" fill="#64748b">2030</text>
+  </g>
+
+  <!-- Bottom Conservation Achievements and Chart Overlay -->
+  <g transform="translate(40, 370)" filter="url(#shadow)">
+    <rect width="720" height="90" rx="10" fill="#111827" fill-opacity="0.85" stroke="#334155" stroke-width="1.5"/>
+    
+    <!-- Shield nature protection icon -->
+    <g transform="translate(25, 25)">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="#14532d" stroke="#34d399" stroke-width="1.5"/>
+      <path d="M12 6l-3.5 6h7L12 6z" fill="#34d399"/>
+      <line x1="12" y1="12" x2="12" y2="17" stroke="#34d399" stroke-width="1.5"/>
+    </g>
+
+    <text x="65" y="38" font-family="system-ui, sans-serif" font-weight="800" font-size="12" fill="#f8fafc">ECOLOGICAL PROTECTION TARGETS</text>
+    <text x="65" y="55" font-family="system-ui, sans-serif" font-size="9.5" fill="#cbd5e1">Active monitoring covers 7 global biomes. Reforestation tracking system active.</text>
+    <text x="65" y="70" font-family="ui-monospace, monospace" font-size="8.5" fill="#34d399">Satellite Feeds: ONLINE | Reforestation Rebounds Detected: Europe, Australia</text>
+
+    <!-- Mini line chart graphic -->
+    <path d="M 520 65 L 550 60 L 580 52 L 610 58 L 640 45 L 670 48 L 700 32" fill="none" stroke="#dc2626" stroke-width="2.5" filter="url(#glowFilter)"/>
+    <path d="M 520 65 L 550 58 L 580 48 L 610 38 L 640 28 L 670 20 L 700 12" fill="none" stroke="#34d399" stroke-width="2" stroke-dasharray="3,3"/>
+    <circle cx="700" cy="32" r="3" fill="#dc2626"/>
+    <circle cx="700" cy="12" r="3" fill="#34d399"/>
+    <text x="710" y="35" font-family="ui-monospace, monospace" font-size="8" fill="#dc2626">Loss</text>
+    <text x="710" y="15" font-family="ui-monospace, monospace" font-size="8" fill="#34d399">Goal</text>
+  </g>
+</svg>

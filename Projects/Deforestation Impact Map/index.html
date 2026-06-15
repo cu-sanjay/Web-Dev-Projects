@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deforestation Impact Map — Global Forest Coverage Intelligence</title>
+  <meta name="description" content="An interactive environmental intelligence platform that visualizes global forest coverage changes over time, compares historical deforestation trends, and calculates ecological impacts.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Left Panel: Deforestation Analytics Center -->
+    <aside class="panel panel--left" aria-label="Deforestation Analytics Center">
+      <header class="panel-header">
+        <h1 class="logo">
+          <span class="logo-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#34d399" stroke-width="2">
+              <path d="M12 2L2 22h20L12 2z"/>
+              <path d="M12 6l-6 12h12L12 6z"/>
+              <path d="M12 18v4M9 22h6"/>
+            </svg>
+          </span>
+          <span class="logo-text">DEFORESTATION IMPACT MAP</span>
+        </h1>
+        <p class="panel-subtitle">Global Forest Coverage Intelligence Platform</p>
+      </header>
+
+      <!-- Section: Controls -->
+      <section class="control-section" aria-label="Region and Time Controls">
+        <div class="form-group">
+          <label for="regionSelect" class="section-label-inline">Select Region</label>
+          <div class="select-wrapper">
+            <select id="regionSelect" class="control-select" aria-label="Select global forest region">
+              <option value="global">Global Overview</option>
+              <option value="amazon">Amazon Rainforest</option>
+              <option value="congo">Congo Basin</option>
+              <option value="southeast_asia">Southeast Asia</option>
+              <option value="boreal">Boreal Forests</option>
+              <option value="north_america">North America</option>
+              <option value="europe">Europe</option>
+              <option value="australia">Australia</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="timeline-container">
+          <div class="timeline-header">
+            <span class="section-label-inline">Active Year: <strong id="currentYearDisplay" class="mono text-accent">2025</strong></span>
+            <div class="playback-controls">
+              <button id="prevYearBtn" class="playback-btn" aria-label="Previous Year" title="Previous Year">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+              </button>
+              <button id="playBtn" class="playback-btn play-pause-btn" aria-label="Play timeline animation" title="Play Timeline">
+                <svg class="icon-play" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                <svg class="icon-pause" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+              </button>
+              <button id="nextYearBtn" class="playback-btn" aria-label="Next Year" title="Next Year">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
+            </div>
+          </div>
+          
+          <input type="range" id="yearSlider" class="timeline-slider" min="1990" max="2025" step="1" value="2025" aria-label="Select year slider">
+          
+          <div class="slider-labels mono">
+            <span>1990</span>
+            <span>2000</span>
+            <span>2010</span>
+            <span>2020</span>
+            <span>2025</span>
+          </div>
+
+          <div class="speed-control-wrapper">
+            <span class="small-muted">Speed:</span>
+            <div class="speed-buttons" role="radiogroup" aria-label="Playback speed">
+              <button class="speed-btn" data-speed="1500" role="radio" aria-checked="false">Slow</button>
+              <button class="speed-btn active" data-speed="800" role="radio" aria-checked="true">Normal</button>
+              <button class="speed-btn" data-speed="300" role="radio" aria-checked="false">Fast</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Comparison System -->
+      <section class="comparison-section" aria-label="Yearly Comparison System">
+        <h2 class="section-label">Coverage Comparison</h2>
+        <div class="comparison-mode-toggle">
+          <label class="switch">
+            <input type="checkbox" id="compareModeCheck">
+            <span class="slider round"></span>
+          </label>
+          <span class="switch-label">Enable Compare Mode</span>
+        </div>
+        
+        <div id="comparisonSelectorWrapper" class="comparison-selectors" style="display:none;">
+          <div class="form-group-inline">
+            <label for="compareYearSelect">Compare against:</label>
+            <select id="compareYearSelect" class="control-select select-sm mono">
+              <option value="prev">Previous Year</option>
+              <option value="1990">Year 1990</option>
+              <option value="2000">Year 2000</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Statistics Dashboard -->
+      <section class="stats-section" aria-label="Environmental Statistics Dashboard">
+        <h2 class="section-label">Metrics Dashboard</h2>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-label">Forest Coverage</span>
+            <span class="stat-value mono" id="statCoverage">—</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Forest Area</span>
+            <span class="stat-value mono" id="statArea">—</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Lost Cover (Cumulative)</span>
+            <span class="stat-value mono text-danger" id="statLost">—</span>
+          </div>
+          <div class="stat-card" title="Gigatonnes of Carbon stored in biomass">
+            <span class="stat-label">Carbon Storage</span>
+            <span class="stat-value mono text-blue" id="statCarbon">—</span>
+          </div>
+        </div>
+
+        <div class="biodiversity-monitor">
+          <div class="bio-header">
+            <span class="stat-label">Biodiversity Impact Index</span>
+            <span class="mono text-highlight" id="statBiodiversity">—</span>
+          </div>
+          <div class="bio-progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+            <div id="bioProgressFill" class="bio-progress-fill" style="width: 0%"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Deforestation Risk Monitor -->
+      <section class="risk-section" aria-label="Deforestation Risk Monitor">
+        <h2 class="section-label">Risk Assessment</h2>
+        <div class="risk-card">
+          <div class="risk-indicator" id="riskIndicator">
+            <span class="risk-dot"></span>
+            <span id="riskLabel" class="risk-text mono">STABLE</span>
+          </div>
+          <p class="risk-description" id="riskDescription">Forest loss is negligible. Ecosystem services are in a highly stable condition.</p>
+        </div>
+      </section>
+
+      <!-- Section: Bookmarked Regions -->
+      <section class="bookmark-section" aria-label="Bookmarked Regions">
+        <div class="section-header-row">
+          <h2 class="section-label">Bookmarked Views</h2>
+          <button id="addBookmarkBtn" class="action-btn-sm" aria-label="Bookmark current view">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span>Save View</span>
+          </button>
+        </div>
+        <div class="bookmarks-list" id="bookmarksList">
+          <span class="empty-text">No saved views yet.</span>
+        </div>
+      </section>
+
+      <!-- Section: Activity Feed -->
+      <section class="activity-section" aria-label="System activity feed">
+        <h2 class="section-label">Activity Feed</h2>
+        <div class="activity-feed" id="activityFeed" role="log" aria-live="polite">
+          <div class="activity-item">
+            <span class="activity-time mono">11:56</span>
+            <span class="activity-text">System initialized. Forest Atlas online.</span>
+          </div>
+        </div>
+      </section>
+    </aside>
+
+    <!-- Right Panel: Interactive Forest Coverage Map -->
+    <main class="panel panel--right" aria-label="Interactive Forest Coverage Map">
+      <!-- Map Header -->
+      <header class="map-header">
+        <div class="map-header-cell">
+          <span class="map-header-label">Selected Region</span>
+          <span class="map-header-value" id="mapHeaderRegion">Global Overview</span>
+        </div>
+        <div class="map-header-cell">
+          <span class="map-header-label">Timeline Year</span>
+          <span class="map-header-value mono text-accent" id="mapHeaderYear">2025</span>
+        </div>
+        <div class="map-header-cell">
+          <span class="map-header-label">Forest Coverage</span>
+          <span class="map-header-value mono" id="mapHeaderCoverage">68.2%</span>
+        </div>
+        <div class="map-header-cell">
+          <span class="map-header-label">Ecological Risk</span>
+          <span class="map-header-value text-warning" id="mapHeaderRisk">MODERATE LOSS</span>
+        </div>
+      </header>
+
+      <!-- GIS Map Container -->
+      <div class="map-workspace" id="mapWorkspace">
+        <div class="map-container" id="mapContainer">
+          <svg class="world-map" id="worldMap" viewBox="0 0 800 400" aria-label="Interactive world forest coverage map" role="application">
+            <defs>
+              <!-- Gradients for styling -->
+              <radialGradient id="denseForestGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#14532d" stop-opacity="0.5"/>
+                <stop offset="100%" stop-color="#14532d" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="impactGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#dc2626" stop-opacity="0.6"/>
+                <stop offset="100%" stop-color="#dc2626" stop-opacity="0"/>
+              </radialGradient>
+              <filter id="shadow">
+                <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#000000" flood-opacity="0.4"/>
+              </filter>
+            </defs>
+
+            <!-- Grid ocean background -->
+            <rect x="0" y="0" width="800" height="400" class="ocean-bg"/>
+            
+            <!-- Viewport Group for Zooming/Panning -->
+            <g id="mapViewportGroup" style="transform-origin: 0 0; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);">
+              <!-- Lat/Lng Grid -->
+              <g class="map-grid" stroke="#1e293b" stroke-width="0.5" fill="none" opacity="0.35">
+                <line x1="0" y1="50" x2="800" y2="50"/>
+                <line x1="0" y1="100" x2="800" y2="100"/>
+                <line x1="0" y1="150" x2="800" y2="150"/>
+                <line x1="0" y1="200" x2="800" y2="200"/>
+                <line x1="0" y1="250" x2="800" y2="250"/>
+                <line x1="0" y1="300" x2="800" y2="300"/>
+                <line x1="0" y1="350" x2="800" y2="350"/>
+                <line x1="100" y1="0" x2="100" y2="400"/>
+                <line x1="200" y1="0" x2="200" y2="400"/>
+                <line x1="300" y1="0" x2="300" y2="400"/>
+                <line x1="400" y1="0" x2="400" y2="400"/>
+                <line x1="500" y1="0" x2="500" y2="400"/>
+                <line x1="600" y1="0" x2="600" y2="400"/>
+                <line x1="700" y1="0" x2="700" y2="400"/>
+              </g>
+
+              <!-- Continents base layers -->
+              <g class="continents" filter="url(#shadow)">
+                <!-- North America -->
+                <path class="continent" id="cont-na" d="M 85 40 L 115 35 L 155 38 L 180 45 L 195 55 L 200 70 L 195 85 L 185 95 L 190 110 L 195 125 L 190 140 L 180 148 L 170 155 L 155 158 L 140 155 L 130 160 L 120 155 L 110 145 L 100 140 L 90 130 L 82 115 L 78 100 L 75 80 L 78 60 Z"/>
+                <!-- Greenland -->
+                <path class="continent" id="cont-greenland" d="M 195 20 L 215 18 L 235 22 L 240 35 L 235 50 L 220 55 L 205 52 L 195 42 Z"/>
+                <!-- South America -->
+                <path class="continent" id="cont-sa" d="M 170 165 L 185 162 L 200 168 L 212 178 L 220 195 L 225 215 L 228 235 L 225 255 L 218 270 L 208 285 L 195 295 L 185 300 L 178 295 L 172 280 L 168 260 L 165 240 L 163 220 L 162 200 L 165 185 Z"/>
+                <!-- Europe -->
+                <path class="continent" id="cont-europe" d="M 355 40 L 370 35 L 385 32 L 400 35 L 415 40 L 425 48 L 430 58 L 435 68 L 432 78 L 425 88 L 415 95 L 405 100 L 395 102 L 385 100 L 375 95 L 365 88 L 358 78 L 352 65 L 350 52 Z"/>
+                <!-- Africa -->
+                <path class="continent" id="cont-africa" d="M 365 105 L 380 100 L 395 98 L 410 100 L 425 105 L 435 115 L 440 130 L 442 150 L 440 170 L 435 190 L 425 210 L 412 225 L 398 235 L 385 240 L 375 235 L 368 220 L 362 200 L 358 180 L 355 155 L 355 135 L 358 118 Z"/>
+                <!-- Asia -->
+                <path class="continent" id="cont-asia" d="M 415 35 L 440 30 L 470 28 L 500 30 L 530 35 L 560 40 L 590 48 L 615 55 L 635 65 L 648 78 L 655 95 L 652 110 L 645 125 L 635 135 L 620 140 L 600 142 L 580 140 L 560 135 L 540 130 L 520 128 L 500 125 L 480 120 L 460 115 L 445 105 L 432 95 L 425 80 L 418 65 L 415 50 Z"/>
+                <!-- India -->
+                <path class="continent" id="cont-india" d="M 450 120 L 465 118 L 478 125 L 485 140 L 480 158 L 470 168 L 458 165 L 450 152 L 445 138 Z"/>
+                <!-- Indonesia / Southeast Asia -->
+                <path class="continent" id="cont-seasia-1" d="M 510 140 L 530 138 L 550 142 L 565 150 L 570 160 L 560 168 L 545 170 L 530 165 L 518 158 L 512 148 Z"/>
+                <path class="continent" id="cont-seasia-2" d="M 540 172 L 555 170 L 570 175 L 580 182 L 575 190 L 560 192 L 548 185 L 540 178 Z"/>
+                <!-- Australia -->
+                <path class="continent" id="cont-australia" d="M 640 230 L 660 225 L 680 228 L 695 235 L 705 248 L 708 265 L 700 278 L 688 288 L 672 292 L 658 290 L 648 282 L 640 270 L 635 255 Z"/>
+                <!-- Antarctica -->
+                <path class="continent" id="cont-antarctica" d="M 60 370 L 120 365 L 200 362 L 300 360 L 400 358 L 500 360 L 600 362 L 680 365 L 740 370 L 750 380 L 740 390 L 680 395 L 600 398 L 500 400 L 400 400 L 300 398 L 200 395 L 120 390 L 60 385 Z"/>
+                <!-- Madagascar -->
+                <path class="continent" id="cont-madagascar" d="M 447 192 L 455 188 L 460 198 L 458 212 L 452 220 L 445 215 L 442 205 Z"/>
+              </g>
+
+              <!-- Forest GIS Grid Cells Layer -->
+              <g id="forestCellsGroup" aria-label="Ecosystem forest cover cells"></g>
+
+              <!-- Selection highlight rings -->
+              <g id="selectionHighlights" pointer-events="none"></g>
+            </g>
+          </svg>
+
+          <!-- Floating Map Mode Controls -->
+          <div class="floating-controls">
+            <div class="control-group-title">MAP MODE</div>
+            <button id="mapModeStandard" class="floating-btn active" title="Standard Forest Coverage View">Standard</button>
+            <button id="mapModeHeatmap" class="floating-btn" title="Deforestation Loss Density Heatmap">Heatmap</button>
+            <button id="mapModeRecovery" class="floating-btn" title="Forest Recovery vs Loss View">Loss/Recovery</button>
+          </div>
+
+          <!-- GIS Zoom Panel -->
+          <div class="map-zoom-controls">
+            <button id="zoomInBtn" class="zoom-btn" aria-label="Zoom in" title="Zoom In">+</button>
+            <button id="zoomResetBtn" class="zoom-btn text-xs" aria-label="Reset zoom" title="Reset Zoom">Reset</button>
+            <button id="zoomOutBtn" class="zoom-btn" aria-label="Zoom out" title="Zoom Out">−</button>
+          </div>
+
+          <!-- Active Region Hotspot Indicator Badge -->
+          <div id="activeRegionIndicator" class="active-region-card glass" hidden>
+            <div class="active-region-header">
+              <span id="activeRegionTitle">Amazon Rainforest</span>
+              <button id="activeRegionClose" class="close-btn-xs" aria-label="Clear region selection">&times;</button>
+            </div>
+            <p class="text-xs text-muted" id="activeRegionType">Tropical Rainforest</p>
+          </div>
+        </div>
+
+        <!-- Legend Overlay -->
+        <div class="map-legend">
+          <div class="legend-group" id="legendStandard">
+            <span class="legend-item"><span class="legend-dot bg-dense"></span>Dense</span>
+            <span class="legend-item"><span class="legend-dot bg-mod"></span>Moderate</span>
+            <span class="legend-item"><span class="legend-dot bg-sparse"></span>Sparse</span>
+            <span class="legend-item"><span class="legend-dot bg-deforested"></span>Deforested</span>
+          </div>
+          <div class="legend-group" id="legendHeatmap" style="display:none;">
+            <span class="legend-item"><span class="legend-dot bg-heat-critical"></span>Critical Loss</span>
+            <span class="legend-item"><span class="legend-dot bg-heat-high"></span>High Loss</span>
+            <span class="legend-item"><span class="legend-dot bg-heat-moderate"></span>Moderate Loss</span>
+            <span class="legend-item"><span class="legend-dot bg-heat-stable"></span>Stable</span>
+          </div>
+          <div class="legend-group" id="legendRecovery" style="display:none;">
+            <span class="legend-item"><span class="legend-dot bg-diff-lost"></span>Lost Forest</span>
+            <span class="legend-item"><span class="legend-dot bg-diff-stable"></span>Stable / No Change</span>
+            <span class="legend-item"><span class="legend-dot bg-diff-recovered"></span>Recovered Forest</span>
+            <span class="legend-item"><span class="legend-dot bg-diff-atrisk"></span>At-Risk</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Action Navigation bar at the bottom -->
+      <nav class="action-bar" aria-label="Quick Actions">
+        <button class="action-bar-btn" id="openQuizBtn" aria-label="Start ecology quiz">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <span>Ecology Quiz</span>
+        </button>
+        <button class="action-bar-btn" id="openCalculatorBtn" aria-label="Open Carbon and Land Calculator">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
+          <span>Carbon Calculator</span>
+        </button>
+        <button class="action-bar-btn" id="openSuccessBtn" aria-label="View conservation success stories">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <span>Success Stories</span>
+        </button>
+        <button class="action-bar-btn" id="randomFactBtn" aria-label="Show random environmental fact">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <span>Eco Fact</span>
+        </button>
+        <button class="action-bar-btn" id="exportDataBtn" aria-label="Export statistics as JSON">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span>Export JSON</span>
+        </button>
+      </nav>
+    </main>
+  </div>
+
+  <!-- REGION DETAIL POPUP MODAL -->
+  <div id="regionDetailModal" class="modal-overlay" hidden aria-hidden="true">
+    <div class="modal-content glass" role="dialog" aria-modal="true" aria-labelledby="modalRegionTitle">
+      <button class="modal-close" id="closeDetailModal" aria-label="Close detailed analytics panel">&times;</button>
+      <div class="modal-body">
+        <header class="modal-header">
+          <h2 id="modalRegionTitle" class="modal-title">Amazon Rainforest</h2>
+          <span class="badge" id="modalRegionBadge">Tropical Rainforest</span>
+        </header>
+
+        <div class="modal-grid">
+          <!-- Column 1: Info and Metrics -->
+          <div class="modal-col">
+            <section class="modal-section">
+              <h3 class="modal-section-title">Region Overview</h3>
+              <table class="metrics-table text-sm">
+                <tr>
+                  <td>Continent:</td>
+                  <td id="modalContinent" class="mono text-right font-semibold">South America</td>
+                </tr>
+                <tr>
+                  <td>Total Area:</td>
+                  <td id="modalTotalArea" class="mono text-right font-semibold">5,500,000 km²</td>
+                </tr>
+                <tr>
+                  <td>Tree Density:</td>
+                  <td id="modalTreeDensity" class="mono text-right font-semibold">120 trees/hectare</td>
+                </tr>
+                <tr>
+                  <td>Rainfall Dependency:</td>
+                  <td id="modalRainfall" class="mono text-right font-semibold">High (2200mm/yr)</td>
+                </tr>
+              </table>
+            </section>
+
+            <section class="modal-section">
+              <h3 class="modal-section-title">Biodiversity & Species</h3>
+              <div class="biodiversity-stats-grid">
+                <div class="bio-stat">
+                  <span class="bio-stat-val mono text-accent" id="modalBioTotal">3,000,000+</span>
+                  <span class="bio-stat-lbl">Species Count</span>
+                </div>
+                <div class="bio-stat">
+                  <span class="bio-stat-val mono text-danger" id="modalBioThreatened">1,240</span>
+                  <span class="bio-stat-lbl">Threatened Species</span>
+                </div>
+                <div class="bio-stat">
+                  <span class="bio-stat-val mono text-blue" id="modalBioEndemic">60%</span>
+                  <span class="bio-stat-lbl">Endemic Species</span>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <!-- Column 2: Drivers and Programs -->
+          <div class="modal-col">
+            <section class="modal-section">
+              <h3 class="modal-section-title">Deforestation Drivers</h3>
+              <div id="modalDriversList" class="drivers-container">
+                <!-- Javascript will insert drivers progress bars -->
+              </div>
+            </section>
+
+            <section class="modal-section">
+              <h3 class="modal-section-title">Conservation Efforts</h3>
+              <ul class="modal-list" id="modalConservationList">
+                <li>Protected Areas System (ARPA program)</li>
+                <li>Reforestation projects in Pará and Amazonas</li>
+                <li>Satellite monitoring system (PRODES/DETER)</li>
+              </ul>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ECOLOGY QUIZ CHALLENGE MODAL -->
+  <div id="quizModal" class="modal-overlay" hidden aria-hidden="true">
+    <div class="modal-content modal-md glass" role="dialog" aria-modal="true" aria-labelledby="quizModalTitle">
+      <button class="modal-close" id="closeQuizModal" aria-label="Close quiz">&times;</button>
+      <div class="modal-body">
+        <header class="modal-header">
+          <h2 id="quizModalTitle" class="modal-title">Ecology & Conservation Quiz</h2>
+          <span class="score-display text-sm">Score: <strong id="quizScore" class="mono text-accent">0</strong> | High Score: <strong id="quizHighScore" class="mono">0</strong></span>
+        </header>
+
+        <div id="quizSetup" class="quiz-step-panel">
+          <p class="margin-bottom-md">Test your environmental intelligence! Answer questions about global forests, carbon cycles, and conservation. Get consecutive correct answers to unlock achievements.</p>
+          <button id="startQuizBtn" class="primary-btn">Start Quiz Challenge</button>
+        </div>
+
+        <div id="quizQuestionPanel" class="quiz-step-panel" style="display:none;">
+          <div class="quiz-progress-bar">
+            <div id="quizProgressFill" class="quiz-progress-fill" style="width: 10%"></div>
+          </div>
+          <div class="quiz-question-info text-xs text-muted margin-bottom-sm">
+            Question <span id="currentQuestionNum" class="mono">1</span>/5
+          </div>
+          <h3 id="quizQuestionText" class="quiz-question margin-bottom-md">Which region is home to the largest continuous rainforest on Earth?</h3>
+          <div id="quizOptionsList" class="quiz-options-grid margin-bottom-md">
+            <!-- Render options dynamically -->
+          </div>
+          <div id="quizFeedback" class="quiz-feedback-box margin-bottom-md" style="display:none;">
+            <p id="quizFeedbackText"></p>
+          </div>
+          <button id="quizNextBtn" class="primary-btn" style="display:none;">Next Question</button>
+        </div>
+
+        <div id="quizResultPanel" class="quiz-step-panel" style="display:none;">
+          <h3 class="margin-bottom-sm">Quiz Completed!</h3>
+          <p class="margin-bottom-md">You scored <span id="finalScore" class="mono text-accent font-semibold">0</span> out of 5 questions correctly.</p>
+          <div id="quizAchievementNotice" class="achievement-card margin-bottom-md" style="display:none;">
+            <span class="achievement-icon">🏆</span>
+            <div class="achievement-details">
+              <span class="achievement-title">Achievement Unlocked!</span>
+              <span id="achievementName" class="achievement-desc">Forest Guardian</span>
+            </div>
+          </div>
+          <button id="quizRestartBtn" class="primary-btn">Try Again</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARBON CALCULATOR MODAL -->
+  <div id="calculatorModal" class="modal-overlay" hidden aria-hidden="true">
+    <div class="modal-content modal-md glass" role="dialog" aria-modal="true" aria-labelledby="calcModalTitle">
+      <button class="modal-close" id="closeCalculatorModal" aria-label="Close calculator">&times;</button>
+      <div class="modal-body">
+        <header class="modal-header">
+          <h2 id="calcModalTitle" class="modal-title">Carbon & Land Impact Calculator</h2>
+        </header>
+
+        <p class="margin-bottom-md text-sm text-muted">Estimate the carbon footprint offset, biodiversity protection value, and oxygen contribution of protecting specific sizes of forest land.</p>
+        
+        <div class="calc-grid">
+          <div class="calc-inputs">
+            <div class="form-group">
+              <label for="calcAreaInput" class="small-label">Land Area to Project (in km²):</label>
+              <input type="number" id="calcAreaInput" class="control-input mono" min="1" max="10000000" value="100" aria-label="Area to calculate in square kilometers">
+            </div>
+            
+            <div class="form-group">
+              <label for="calcRegionSelect" class="small-label">Target Forest Type:</label>
+              <select id="calcRegionSelect" class="control-select">
+                <option value="amazon">Tropical Rainforest (e.g. Amazon)</option>
+                <option value="boreal">Boreal Forest (e.g. Canada/Siberia)</option>
+                <option value="europe">Temperate Forest (e.g. Europe)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="calc-results">
+            <h3 class="text-xs text-muted uppercase tracking-wider margin-bottom-sm">Estimated Ecological Offsets</h3>
+            <div class="calc-result-row">
+              <span class="calc-lbl">Carbon Sequestered:</span>
+              <span class="calc-val mono text-accent" id="calcCarbon">12,000 t CO₂eq</span>
+            </div>
+            <div class="calc-result-row">
+              <span class="calc-lbl">Equivalent Car Emissions Offset:</span>
+              <span class="calc-val mono text-highlight" id="calcCars">2,600 cars/year</span>
+            </div>
+            <div class="calc-result-row">
+              <span class="calc-lbl">Estimated Species Protected:</span>
+              <span class="calc-val mono text-blue" id="calcSpecies">48,000 species</span>
+            </div>
+            <div class="calc-result-row">
+              <span class="calc-lbl">Economic Ecosystem Value:</span>
+              <span class="calc-val mono text-warning" id="calcValue">$1.2M / year</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUCCESS STORIES / CONSERVATION SUCCESS MODAL -->
+  <div id="successModal" class="modal-overlay" hidden aria-hidden="true">
+    <div class="modal-content modal-md glass" role="dialog" aria-modal="true" aria-labelledby="successModalTitle">
+      <button class="modal-close" id="closeSuccessModal" aria-label="Close success stories">&times;</button>
+      <div class="modal-body">
+        <header class="modal-header">
+          <h2 id="successModalTitle" class="modal-title">Conservation Success Stories</h2>
+        </header>
+        
+        <p class="margin-bottom-md text-sm text-muted">Deforestation is critical, but active restoration campaigns have achieved remarkable recoveries. Explore inspiring reforestation campaigns below:</p>
+
+        <div class="success-stories-container">
+          <div class="success-card glass">
+            <h3 class="success-title text-accent">Costa Rica's Forest Doubling</h3>
+            <p class="success-text text-sm">Through payments for ecosystem services (PES) and national reserves, Costa Rica became the first tropical country to reverse deforestation, doubling its forest cover from 26% in the 1980s to over 52% today.</p>
+            <div class="success-stats text-xs mono">
+              <span>Reforestation: +26% Cover</span>
+              <span>Impact: Ecotourism Leader</span>
+            </div>
+          </div>
+
+          <div class="success-card glass">
+            <h3 class="success-title text-accent">The Loess Plateau Restoration (China)</h3>
+            <p class="success-text text-sm">One of the largest ecological rehabilitation programs in the world transformed an arid, heavily eroded plateau the size of Belgium into a thriving agricultural and forested landscape, lifting 2.5 million people out of poverty.</p>
+            <div class="success-stats text-xs mono">
+              <span>Restored Land: 35,000 km²</span>
+              <span>Impact: 100M+ tons sediment runoff reduced</span>
+            </div>
+          </div>
+
+          <div class="success-card glass">
+            <h3 class="success-title text-accent">Africa's Great Green Wall</h3>
+            <p class="success-text text-sm">An ambitious land restoration project running across the entire width of Africa's Sahel region, aiming to restore 100 million hectares of degraded land, capture 250 million tonnes of carbon, and create millions of green jobs.</p>
+            <div class="success-stats text-xs mono">
+              <span>Goal: 100M hectares restored</span>
+              <span>Timeline: Target 2030 completion</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RANDOM ENVIRONMENTAL FACT PANEL (TOAST-STYLE NOTIFICATION) -->
+  <div id="factToast" class="fact-toast glass" style="display:none;">
+    <div class="fact-toast-header">
+      <span class="fact-icon">💡</span>
+      <strong class="text-xs uppercase tracking-wider text-accent">Did You Know?</strong>
+      <button id="closeFactToast" class="close-btn-xs" aria-label="Dismiss fact">&times;</button>
+    </div>
+    <p class="fact-toast-text text-sm" id="factToastText">The Amazon Rainforest is so large that it creates its own weather system, generating its own rainfall through transpiration.</p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
