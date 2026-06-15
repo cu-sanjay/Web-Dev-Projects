@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Spy Mission Planner</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<div class="app-container">
+  <header><div class="brand"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M12 6v6l4 2"/></svg><div><h1>SPY MISSION PLANNER</h1><p>Plan Missions · Equip Gadgets · Assess Risk</p></div></div></header>
+  <div class="main-layout">
+    <aside class="briefing-panel">
+      <h3>Available Missions</h3>
+      <div class="mission-list">
+        <button class="mission-btn active" data-mission="0">Operation Echo 🎯</button>
+        <button class="mission-btn" data-mission="1">Nightfall Protocol 🌙</button>
+        <button class="mission-btn" data-mission="2">Ghost Wire 📡</button>
+        <button class="mission-btn" data-mission="3">Iron Shadow ⚡</button>
+      </div>
+      <h3>Gadgets</h3>
+      <div class="gadget-list">
+        <label class="gadget-item"><input type="checkbox" class="gadget-cb" data-gadget="drone"><span>🛸 Spy Drone</span></label>
+        <label class="gadget-item"><input type="checkbox" class="gadget-cb" data-gadget="wire"><span>🎧 Wiretap</span></label>
+        <label class="gadget-item"><input type="checkbox" class="gadget-cb" data-gadget="cam"><span>📷 Hidden Cam</span></label>
+        <label class="gadget-item"><input type="checkbox" class="gadget-cb" data-gadget="lock"><span>🔓 Lockpick Set</span></label>
+        <label class="gadget-item"><input type="checkbox" class="gadget-cb" data-gadget="jammer"><span>📡 Signal Jammer</span></label>
+      </div>
+    </aside>
+    <main class="mission-area">
+      <div class="mission-header"><h2 id="mission-name">Operation Echo</h2><span class="mission-badge" id="mission-location">📍 Istanbul</span></div>
+      <div class="mission-stats"><div class="m-stat"><span class="m-label">Risk</span><span class="m-value risk-high" id="risk-value">75%</span></div><div class="m-stat"><span class="m-label">Success</span><span class="m-value" id="success-value">60%</span></div><div class="m-stat"><span class="m-label">Reward</span><span class="m-value reward" id="reward-value">$500K</span></div><div class="m-stat"><span class="m-label">Duration</span><span class="m-value" id="duration-value">72h</span></div></div>
+      <div class="mission-details"><h3>Briefing</h3><p id="briefing-text">Infiltrate a secure facility to extract classified documents from a foreign intelligence operative.</p></div>
+      <div class="risk-section"><h3>Risk Assessment</h3>
+        <div class="risk-bars">
+          <div class="risk-bar"><span>Detection</span><div class="r-track"><div class="r-fill" id="risk-detection" style="width:70%"></div></div></div>
+          <div class="risk-bar"><span>Comms</span><div class="r-track"><div class="r-fill" id="risk-comms" style="width:40%"></div></div></div>
+          <div class="risk-bar"><span>Extraction</span><div class="r-track"><div class="r-fill" id="risk-extraction" style="width:60%"></div></div></div>
+        </div>
+      </div>
+      <button id="btn-launch" class="btn btn-primary">Launch Mission 🚀</button>
+      <div class="mission-log" id="mission-log"><div class="log-entry">Mission planner ready. Select gadgets and launch.</div></div>
+    </main>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

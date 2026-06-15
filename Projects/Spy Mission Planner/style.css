@@ -1,0 +1,41 @@
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0b1220;--surface:#111827;--secondary:#1f2937;--border:#334155;--primary:#f8fafc;--sec:#cbd5e1;--muted:#64748b;--accent:#22c55e;--radius:10px;--font-code:ui-monospace,Consolas,monospace;--font-ui:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+html{font-size:14px}
+body{font-family:var(--font-ui);background:var(--bg);color:var(--primary);height:100vh;overflow:hidden}
+.app-container{max-width:1500px;margin:0 auto;display:flex;flex-direction:column;height:100vh;padding:14px 18px;gap:10px}
+header{flex-shrink:0}
+.brand{display:flex;align-items:center;gap:10px}
+.brand h1{font-size:14px;font-weight:700;letter-spacing:.8px}
+.brand p{font-size:10px;color:var(--muted)}
+.main-layout{display:grid;grid-template-columns:200px 1fr;gap:12px;flex:1;min-height:0}
+@media(max-width:850px){.main-layout{grid-template-columns:1fr}}
+.briefing-panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;display:flex;flex-direction:column;gap:8px;overflow-y:auto}
+.briefing-panel h3{font-size:11px;font-weight:600;color:var(--sec);text-transform:uppercase;letter-spacing:.5px}
+.mission-list{display:flex;flex-direction:column;gap:4px}
+.mission-btn{padding:8px 10px;border:1px solid var(--border);border-radius:6px;background:var(--secondary);color:var(--sec);font-size:11px;cursor:pointer;text-align:left;font-family:var(--font-ui);transition:all .3s}
+.mission-btn.active,.mission-btn:hover{background:var(--surface);border-color:var(--accent);color:var(--accent)}
+.gadget-list{display:flex;flex-direction:column;gap:5px}
+.gadget-item{display:flex;align-items:center;gap:8px;padding:6px 8px;background:var(--secondary);border-radius:4px;font-size:11px;color:var(--sec);cursor:pointer}
+.gadget-item input{accent-color:var(--accent)}
+.mission-area{display:flex;flex-direction:column;gap:10px;overflow-y:auto}
+.mission-header{display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px 16px}
+.mission-header h2{font-size:15px;color:var(--primary)}
+.mission-badge{padding:3px 10px;border-radius:8px;font-size:10px;background:var(--secondary);border:1px solid var(--accent);color:var(--accent)}
+.mission-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.m-stat{text-align:center;padding:12px;background:var(--surface);border:1px solid var(--border);border-radius:6px}
+.m-label{display:block;font-size:9px;color:var(--muted);text-transform:uppercase}
+.m-value{font-size:16px;font-weight:700;color:var(--sec);font-family:var(--font-code)}
+.m-value.risk-high{color:#ef4444}.m-value.risk-med{color:#eab308}.m-value.reward{color:#22c55e}
+.mission-details,.risk-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px}
+.mission-details h3,.risk-section h3{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.mission-details p{font-size:12px;color:var(--sec);line-height:1.5}
+.risk-bars{display:flex;flex-direction:column;gap:8px}
+.risk-bar{display:flex;align-items:center;gap:10px}
+.risk-bar span{width:65px;font-size:10px;color:var(--muted)}
+.r-track{flex:1;height:8px;background:var(--secondary);border-radius:4px;overflow:hidden}
+.r-fill{height:100%;border-radius:4px;transition:width .5s}
+#risk-detection{background:#ef4444}#risk-comms{background:#eab308}#risk-extraction{background:#ef4444}
+.btn{padding:10px 20px;border:1px solid var(--border);border-radius:6px;background:var(--secondary);color:var(--sec);font-size:11px;cursor:pointer;font-family:var(--font-ui);text-align:center;transition:all .3s}
+.btn-primary{background:var(--accent);color:#000;border-color:var(--accent);font-weight:700}
+.btn-primary:hover{background:#16a34a}
+.mission-log{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:8px 12px;max-height:60px;overflow-y:auto;font-size:10px;color:var(--muted);font-family:var(--font-code)}
