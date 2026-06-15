@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>B2B Wholesale Marketplace</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <nav class="global-nav">
+    <div class="brand">
+      <i class="ph-fill ph-package text-primary"></i> <span>TradeHub</span>
+    </div>
+    
+    <div class="nav-links">
+      <button class="nav-tab active" data-tab="catalog">Wholesale Catalog</button>
+      <button class="nav-tab" data-tab="orders">My Orders</button>
+      <button class="nav-tab" data-tab="supplier" style="display: none;" id="supplier-tab-btn">Supplier Portal</button>
+    </div>
+
+    <div class="nav-actions">
+      <!-- Role Switcher -->
+      <div class="role-selector">
+        <select id="role-select">
+          <option value="buyer">Retail Buyer</option>
+          <option value="supplier">Wholesale Supplier</option>
+        </select>
+      </div>
+
+      <button class="icon-btn"><i class="ph ph-shopping-cart"></i><span class="cart-badge">3</span></button>
+      <img src="https://ui-avatars.com/api/?name=Retail+Buyer&background=f97316&color=fff" alt="Avatar" id="user-avatar" class="avatar">
+    </div>
+  </nav>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav">
+    <button class="nav-tab active" data-tab="catalog"><i class="ph ph-storefront"></i></button>
+    <button class="nav-tab" data-tab="orders"><i class="ph ph-receipt"></i></button>
+    <button class="nav-tab" data-tab="supplier" id="mobile-supplier-tab-btn" style="display: none;"><i class="ph ph-truck"></i></button>
+  </div>
+
+  <main class="main-content">
+    
+    <!-- ================= CATALOG TAB (BUYER) ================= -->
+    <section id="catalog" class="tab-content active">
+      <div class="hero-banner">
+        <div>
+          <h1>Source Products in Bulk</h1>
+          <p>Connect with verified global suppliers and negotiate wholesale pricing instantly.</p>
+        </div>
+        <div class="search-box">
+          <i class="ph ph-magnifying-glass"></i>
+          <input type="text" placeholder="Search for products, categories, or suppliers...">
+          <button class="btn primary-btn">Search</button>
+        </div>
+      </div>
+
+      <div class="section-header mt-3">
+        <h2>Featured Wholesale Categories</h2>
+        <div class="filter-pills">
+          <span class="pill active">Electronics</span>
+          <span class="pill">Apparel</span>
+          <span class="pill">Home Goods</span>
+          <span class="pill">Industrial</span>
+        </div>
+      </div>
+
+      <div class="product-grid" id="product-grid">
+        <!-- Injected via JS -->
+      </div>
+    </section>
+
+    <!-- ================= MY ORDERS TAB (BUYER) ================= -->
+    <section id="orders" class="tab-content hidden">
+      <div class="page-heading">
+        <h1>Purchase Orders</h1>
+        <p class="text-muted">Track your incoming bulk shipments and view past invoices.</p>
+      </div>
+
+      <div class="split-layout mt-3">
+        <div class="panel col-span-2">
+          <div class="panel-header">
+            <h3>Active Shipments</h3>
+          </div>
+          <div class="panel-body p-0">
+            <table class="custom-table">
+              <thead>
+                <tr><th>PO Number</th><th>Supplier</th><th>Items</th><th>Total Cost</th><th>Status</th></tr>
+              </thead>
+              <tbody id="buyer-orders-tbody">
+                <!-- Injected via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <h3>Buying Stats</h3>
+          </div>
+          <div class="panel-body">
+            <div class="stat-card mb-2">
+              <div class="text-muted">YTD Spend</div>
+              <div class="text-2xl font-bold text-primary">$142,500</div>
+            </div>
+            <div class="stat-card mb-2">
+              <div class="text-muted">Active Suppliers</div>
+              <div class="text-2xl font-bold">8</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SUPPLIER PORTAL TAB ================= -->
+    <section id="supplier" class="tab-content hidden">
+      <div class="page-heading flex-between">
+        <div>
+          <h1>Supplier Portal</h1>
+          <p class="text-muted">Manage your catalog, fulfill orders, and monitor wholesale revenue.</p>
+        </div>
+        <button class="btn primary-btn"><i class="ph ph-plus"></i> Add Product</button>
+      </div>
+
+      <div class="metrics-grid mt-2">
+        <div class="metric-card">
+          <div class="metric-icon bg-orange-light text-orange"><i class="ph-fill ph-package"></i></div>
+          <div class="metric-data"><h3>Pending Orders</h3><h2>24</h2></div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon bg-blue-light text-blue"><i class="ph-fill ph-users"></i></div>
+          <div class="metric-data"><h3>Retail Partners</h3><h2>156</h2></div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon bg-green-light text-green"><i class="ph-fill ph-currency-dollar"></i></div>
+          <div class="metric-data"><h3>Monthly Revenue</h3><h2>$89,200</h2></div>
+        </div>
+      </div>
+
+      <div class="split-layout mt-3">
+        <div class="panel col-span-2">
+          <div class="panel-header flex-between">
+            <h3>Incoming Purchase Orders</h3>
+            <button class="btn outline-btn btn-sm">Export CSV</button>
+          </div>
+          <div class="panel-body p-0">
+            <table class="custom-table">
+              <thead>
+                <tr><th>Order ID</th><th>Retailer</th><th>Quantity</th><th>Total Amount</th><th>Status</th><th>Action</th></tr>
+              </thead>
+              <tbody id="supplier-orders-tbody">
+                 <!-- Injected via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
