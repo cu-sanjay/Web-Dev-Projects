@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#020306" />
+      <stop offset="100%" stop-color="#080a14" />
+    </linearGradient>
+    
+    <!-- Accent Cyan Gradient -->
+    <linearGradient id="accent-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22d3ee" />
+      <stop offset="100%" stop-color="#0891b2" />
+    </linearGradient>
+
+    <!-- Success Green Gradient -->
+    <linearGradient id="green-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4ade80" />
+      <stop offset="100%" stop-color="#16a34a" />
+    </linearGradient>
+
+    <!-- Glow Filter -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="5" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="320" height="200" rx="16" fill="url(#bg-grad)" />
+  <rect width="320" height="200" rx="16" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="2" />
+
+  <!-- Background decor glows -->
+  <circle cx="270" cy="50" r="50" fill="#4ade80" opacity="0.08" filter="url(#glow)" />
+  <circle cx="50" cy="150" r="45" fill="#22d3ee" opacity="0.06" filter="url(#glow)" />
+
+  <!-- LEFT CARD: VFS Folder Explorer & Checklist -->
+  <g transform="translate(20, 25)">
+    <!-- Card Frame -->
+    <rect width="115" height="120" rx="8" fill="rgba(8, 9, 17, 0.6)" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1" />
+    
+    <!-- Header tabs -->
+    <circle cx="10" cy="10" r="3" fill="#ef4444" opacity="0.8" />
+    <circle cx="18" cy="10" r="3" fill="#f59e0b" opacity="0.8" />
+    <circle cx="26" cy="10" r="3" fill="#10b981" opacity="0.8" />
+    <rect x="75" y="6" width="30" height="8" rx="3" fill="rgba(34, 211, 238, 0.15)" stroke="rgba(34, 211, 238, 0.3)" stroke-width="0.5" />
+    <text x="90" y="12" font-family="'Inter', sans-serif" font-size="5" fill="#22d3ee" text-anchor="middle" font-weight="700">EXPLORER</text>
+
+    <!-- Visual tree file hierarchy -->
+    <!-- / (Root) -->
+    <path d="M10,25 L14,21 L18,25" fill="none" stroke="#22d3ee" stroke-width="1.2" /> <!-- folder open arrow -->
+    <text x="24" y="27" font-family="'Courier New', monospace" font-size="7.5" fill="#e2e8f0" font-weight="700">root</text>
+
+    <!-- Branch lines -->
+    <path d="M14,32 L14,95" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+
+    <!-- home folder -->
+    <path d="M14,44 L22,44" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+    <text x="26" y="47" font-family="'Courier New', monospace" font-size="7" font-weight="700" fill="#fbbf24">home/</text>
+
+    <!-- user folder (nested) -->
+    <path d="M26,52 L26,75" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+    <path d="M26,62 L32,62" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+    <text x="36" y="65" font-family="'Courier New', monospace" font-size="7" font-weight="700" fill="#fbbf24">user/</text>
+
+    <!-- welcome.txt (file nested under user) -->
+    <path d="M38,70 L38,88" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+    <path d="M38,80 L44,80" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+    <text x="48" y="83" font-family="'Courier New', monospace" font-size="6.5" font-weight="600" fill="#22d3ee">welcome.txt</text>
+
+    <!-- etc folder -->
+    <path d="M14,94 L22,94" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+    <text x="26" y="97" font-family="'Courier New', monospace" font-size="7" font-weight="700" fill="#fbbf24">etc/</text>
+  </g>
+
+  <!-- MIDDLE CONNECTIVE ELEMENT: Compile compiler -->
+  <g transform="translate(142, 80)">
+    <path d="M-2,10 L30,10" fill="none" stroke="rgba(255, 255, 255, 0.08)" stroke-width="2" stroke-dasharray="3 3" />
+    <path d="M10,-10 L13,-4 L19,-1 L13,2 L10,8 L7,2 L1,-1 L7,-4 Z" fill="url(#green-grad)" filter="url(#glow)" opacity="0.8" />
+  </g>
+
+  <!-- RIGHT CARD: Retro Terminal Console Screen -->
+  <g transform="translate(185, 25)">
+    <!-- Card Frame -->
+    <rect width="115" height="120" rx="8" fill="#05060c" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1" />
+    
+    <!-- Header tabs -->
+    <circle cx="10" cy="10" r="3" fill="#ef4444" opacity="0.8" />
+    <circle cx="18" cy="10" r="3" fill="#f59e0b" opacity="0.8" />
+    <circle cx="26" cy="10" r="3" fill="#10b981" opacity="0.8" />
+    <rect x="75" y="6" width="30" height="8" rx="3" fill="rgba(74, 222, 128, 0.15)" stroke="rgba(74, 222, 128, 0.3)" stroke-width="0.5" />
+    <text x="90" y="12" font-family="'Inter', sans-serif" font-size="5" fill="#4ade80" text-anchor="middle" font-weight="700">SHELL</text>
+
+    <!-- Simulated CRT terminal screens text -->
+    <!-- Log 1: Welcome to Linuxtry -->
+    <text x="8" y="28" font-family="'Courier New', monospace" font-size="5" fill="#4ade80" opacity="0.7">Linuxtry terminal v1.0.2</text>
+    
+    <!-- Log 2: user@linuxbox:~$ ls -->
+    <text x="8" y="42" font-family="'Courier New', monospace" font-size="6" font-weight="700" fill="#4ade80">user@linuxbox:~$ <tspan fill="#e2e8f0">ls</tspan></text>
+    
+    <!-- Log 3: welcome.txt   notes.md -->
+    <text x="8" y="52" font-family="'Courier New', monospace" font-size="5.5" fill="#22d3ee">welcome.txt   notes.md</text>
+
+    <!-- Log 4: user@linuxbox:~$ cd /var/log -->
+    <text x="8" y="66" font-family="'Courier New', monospace" font-size="6" font-weight="700" fill="#4ade80">user@linuxbox:~$ <tspan fill="#e2e8f0">cd /var/log</tspan></text>
+
+    <!-- Log 5: user@linuxbox:/var/log$ pwd -->
+    <text x="8" y="80" font-family="'Courier New', monospace" font-size="6" font-weight="700" fill="#4ade80">user@linuxbox:<tspan fill="#22d3ee">/var/log</tspan>$ <tspan fill="#e2e8f0">pwd</tspan></text>
+
+    <!-- Log 6: /var/log -->
+    <text x="8" y="90" font-family="'Courier New', monospace" font-size="6" fill="#e2e8f0">/var/log</text>
+
+    <!-- Prompt line with blinking cursor -->
+    <text x="8" y="104" font-family="'Courier New', monospace" font-size="6" font-weight="700" fill="#4ade80">user@linuxbox:<tspan fill="#22d3ee">/var/log</tspan>$ </text>
+    
+    <!-- Blinking block caret -->
+    <rect x="94" y="98" width="4" height="7" fill="#4ade80" filter="url(#glow)">
+      <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite" />
+    </rect>
+
+    <!-- Mission Checklist Complete Tag -->
+    <rect x="70" y="24" width="38" height="9" rx="2" fill="url(#green-grad)" filter="url(#glow)" />
+    <text x="89" y="31" font-family="'Inter', sans-serif" font-size="4.5" font-weight="800" fill="#ffffff" text-anchor="middle">LEVELS COMPLETED</text>
+  </g>
+
+  <!-- BRANDING / TEXT LABELS -->
+  <g transform="translate(160, 172)">
+    <text font-family="'Outfit', 'Inter', sans-serif" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff" letter-spacing="0.5">
+      Linux<tspan fill="#22d3ee">try</tspan>
+    </text>
+    <text y="12" font-family="'Inter', sans-serif" font-size="7" font-weight="600" text-anchor="middle" fill="#94a3b8" letter-spacing="1" opacity="0.8">
+      LINUX TERMINAL PLAYGROUND
+    </text>
+  </g>
+</svg>
