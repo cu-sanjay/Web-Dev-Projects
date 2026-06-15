@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DEMO-OS // Population Growth Analyzer - Premium geodemographics terminal for age-gender pyramids, cohort projections, and demographic transition dynamics.">
+  <title>DEMO-OS // Population Growth Analyzer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="demo-os-theme">
+  <!-- Demography HUD grid background -->
+  <div class="hud-grid-overlay"></div>
+
+  <div class="app-container" id="shake-envelope">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="logo-area">
+        <span class="logo-icon">📊</span>
+        <div>
+          <h1>DEMO-OS <span class="logo-sub">// POPULATION GROWTH ANALYZER</span></h1>
+          <p class="subtitle">Cohort Component Projection Solver & Demographic Transition Workbench</p>
+        </div>
+      </div>
+      
+      <div class="header-status-bar">
+        <div class="control-group">
+          <label for="demography-preset">Demographic Profile:</label>
+          <select id="demography-preset" class="glass-input">
+            <option value="expansive">Expansive Stage 2 (High Growth)</option>
+            <option value="stable">Stable Stage 4 (Zero Growth)</option>
+            <option value="contracting">Contractive Stage 5 (Declining)</option>
+            <option value="baby_boom">Post-War Baby Boom (Bulge Wave)</option>
+          </select>
+        </div>
+        
+        <div class="time-hud font-mono">
+          <span class="label">TIMELINE:</span> <span id="telemetry-year">Year 0</span>
+        </div>
+
+        <div class="growth-hud">
+          <span class="label">ANNUAL GROWTH:</span>
+          <div class="growth-bar-outer">
+            <div id="telemetry-growth-fill" class="growth-fill" style="width: 50%"></div>
+          </div>
+          <span id="telemetry-growth-val" class="font-mono">+1.2%</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Layout Grid -->
+    <main class="main-grid">
+
+      <!-- Left Column: Demography Modifiers -->
+      <section class="controls-column">
+        <!-- Cohort Modifiers -->
+        <div class="glass-card modifiers-card">
+          <div class="card-header">
+            <h3>Demographic Modifiers</h3>
+            <span class="badge tech-badge">LESLIE ENGINE</span>
+          </div>
+
+          <div class="control-sliders">
+            <!-- Total Fertility Rate (TFR) -->
+            <div class="slider-group">
+              <div class="slider-header">
+                <span class="label">Total Fertility Rate (TFR)</span>
+                <span class="value" id="val-tfr">2.1</span>
+              </div>
+              <input type="range" id="slider-tfr" min="5" max="80" value="21" class="glass-range">
+            </div>
+
+            <!-- Life Expectancy (years) -->
+            <div class="slider-group">
+              <div class="slider-header">
+                <span class="label">Life Expectancy</span>
+                <span class="value" id="val-lifespan">76 yrs</span>
+              </div>
+              <input type="range" id="slider-lifespan" min="40" max="95" value="76" class="glass-range">
+            </div>
+
+            <!-- Infant Mortality Rate -->
+            <div class="slider-group">
+              <div class="slider-header">
+                <span class="label">Infant Mortality Rate</span>
+                <span class="value" id="val-infant-mortality">0.5%</span>
+              </div>
+              <input type="range" id="slider-infant-mortality" min="0" max="150" value="5" class="glass-range">
+            </div>
+
+            <!-- Net Migration Rate -->
+            <div class="slider-group">
+              <div class="slider-header">
+                <span class="label">Net Migration (per gen)</span>
+                <span class="value" id="val-migration">+0k</span>
+              </div>
+              <input type="range" id="slider-migration" min="-500" max="500" value="0" class="glass-range">
+            </div>
+          </div>
+        </div>
+
+        <!-- Simulation Operations -->
+        <div class="glass-card operations-card">
+          <div class="card-header">
+            <h3>Simulation controls</h3>
+          </div>
+          
+          <div class="operation-controls">
+            <div class="slider-group">
+              <div class="slider-header">
+                <span class="label">Projection Velocity</span>
+                <span class="value" id="val-speed">1.0s / step</span>
+              </div>
+              <input type="range" id="slider-speed" min="2" max="25" value="10" class="glass-range">
+            </div>
+
+            <div class="operation-buttons font-mono">
+              <button id="btn-play" class="glow-button" title="Start/Pause projection simulation">▶ Play Projector</button>
+              <button id="btn-step" class="glow-button secondary" title="Step forward 10 years (1 generation)">Step Gen ❯</button>
+              <button id="btn-reset" class="glow-button danger" title="Reset population profile">Reset Profile</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Center Column: Viewports -->
+      <section class="viewport-column">
+        <!-- Age-Gender Pyramid Viewport -->
+        <div class="glass-card pyramid-card">
+          <div class="card-header">
+            <h3>Age-Gender Cohort Pyramid</h3>
+            <span class="badge live-badge" id="pyramid-structure-badge">STABLE STRUCTURE</span>
+          </div>
+
+          <div class="canvas-container pyramid-container">
+            <canvas id="pyramid-canvas"></canvas>
+            
+            <div class="pyramid-labels font-mono">
+              <div>Total Population: <span id="telemetry-pop">330.2M</span></div>
+              <div>Median Age: <span id="telemetry-median-age">38.2 yrs</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Demographic Transition Model Viewport -->
+        <div class="glass-card dtm-card">
+          <div class="card-header">
+            <h3>Demographic Transition Model (DTM)</h3>
+            <span class="badge tech-badge" id="dtm-stage-badge">STAGE 4</span>
+          </div>
+
+          <div class="canvas-container dtm-container">
+            <canvas id="dtm-canvas"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Column: Charts & Telemetry readouts -->
+      <section class="telemetry-column">
+        <!-- Projections Chart -->
+        <div class="glass-card chart-card">
+          <div class="card-header">
+            <h3>Projections Timeline (100 Years)</h3>
+            <span class="badge tech-badge">METRICS TRENDS</span>
+          </div>
+
+          <div class="canvas-container chart-container">
+            <canvas id="chart-canvas"></canvas>
+          </div>
+        </div>
+
+        <!-- Vital Telemetry readouts -->
+        <div class="glass-card telemetry-card">
+          <div class="card-header">
+            <h3>Cohort Analytics Dashboard</h3>
+          </div>
+          
+          <div class="vital-metrics-deck font-mono">
+            <div class="vital-item">
+              <span class="label">CRUDE BIRTH RATE:</span>
+              <span class="value text-success" id="telemetry-cbr">12.5 / 1k</span>
+            </div>
+            <div class="vital-item">
+              <span class="label">CRUDE DEATH RATE:</span>
+              <span class="value text-danger" id="telemetry-cdr">8.3 / 1k</span>
+            </div>
+            <div class="vital-item">
+              <span class="label">DEPENDENCY RATIO:</span>
+              <span class="value text-warning" id="telemetry-dependency">52.8%</span>
+            </div>
+            <div class="vital-item">
+              <span class="label">CHILD DEPENDENTS (0-19):</span>
+              <span class="value" id="telemetry-child-pct">24.2%</span>
+            </div>
+            <div class="vital-item">
+              <span class="label">RETIREE DEPENDENTS (60+):</span>
+              <span class="value" id="telemetry-retiree-pct">18.6%</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <div class="footer-left">
+        <span>DEMO-OS // COHORT ANALYSIS</span>
+        <span class="dot-separator">•</span>
+        <span>LESLIE MATRIX COMPONENT PROJECTION SOLVER</span>
+      </div>
+      <div class="footer-right">
+        <span>Vital Rates & Demographic Transitions</span>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
