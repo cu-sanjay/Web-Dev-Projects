@@ -1,13 +1,117 @@
-// Game State
-let stats = {
-  academics: 50,
-  social: 50,
-  health: 50
-};
+// --- Auth & Session Logic ---
+const authScreen = document.getElementById('auth-screen');
+const appScreen = document.getElementById('app-screen');
+const loginForm = document.getElementById('login-form');
+const registerForm = document.getElementById('register-form');
+
+document.getElementById('go-to-register').addEventListener('click', (e) => {
+  e.preventDefault();
+  loginForm.classList.add('hidden');
+  registerForm.classList.remove('hidden');
+});
+
+document.getElementById('go-to-login').addEventListener('click', (e) => {
+  e.preventDefault();
+  registerForm.classList.add('hidden');
+  loginForm.classList.remove('hidden');
+});
+
+function handleAuth(e, type) {
+  e.preventDefault();
+  
+  let name = "Student";
+  let email = "";
+
+  if (type === 'login') {
+    email = document.getElementById('login-email').value;
+  } else {
+    name = document.getElementById('reg-name').value;
+    email = document.getElementById('reg-email').value;
+  }
+
+  // Mock setting user session
+  localStorage.setItem('collegeUser', JSON.stringify({ name, email }));
+  
+  initApp();
+}
+
+loginForm.addEventListener('submit', (e) => handleAuth(e, 'login'));
+registerForm.addEventListener('submit', (e) => handleAuth(e, 'register'));
+
+document.getElementById('logout-btn').addEventListener('click', () => {
+  localStorage.removeItem('collegeUser');
+  appScreen.classList.add('hidden');
+  authScreen.classList.remove('hidden');
+  loginForm.reset();
+  registerForm.reset();
+});
+
+
+// --- Navigation Logic ---
+const navLinks = document.querySelectorAll('.nav-links li');
+const appSections = document.querySelectorAll('.app-section');
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+const sidebar = document.querySelector('.sidebar');
+
+navLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    // Update Active Nav Link
+    navLinks.forEach(l => l.classList.remove('active'));
+    link.classList.add('active');
+
+    // Show correct section
+    const targetId = link.getAttribute('data-target');
+    appSections.forEach(sec => {
+      sec.classList.remove('active-section');
+      if (sec.id === targetId) {
+        sec.classList.add('active-section');
+      }
+    });
+
+    // Close mobile menu if open
+    if (window.innerWidth <= 768) {
+      sidebar.classList.remove('mobile-open');
+    }
+  });
+});
+
+mobileMenuBtn.addEventListener('click', () => {
+  sidebar.classList.toggle('mobile-open');
+});
+
+
+// --- Profile Initialization ---
+function initApp() {
+  const user = JSON.parse(localStorage.getItem('collegeUser'));
+  if (!user) {
+    appScreen.classList.add('hidden');
+    authScreen.classList.remove('hidden');
+    return;
+  }
+
+  // Hide Auth, Show App
+  authScreen.classList.add('hidden');
+  appScreen.classList.remove('hidden');
+
+  // Populate User Info
+  document.getElementById('topbar-user-name').textContent = user.name || user.email.split('@')[0];
+  document.getElementById('profile-name').textContent = user.name || user.email.split('@')[0];
+  document.getElementById('profile-email').textContent = user.email;
+  
+  const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name || user.email)}&background=random`;
+  document.getElementById('topbar-avatar').src = avatarUrl;
+  document.getElementById('profile-avatar').src = avatarUrl + "&size=128";
+
+  // Init game if not started
+  startGame();
+}
+
+
+// --- Simulator Game Logic ---
+let stats = { academics: 50, social: 50, health: 50 };
 let currentWeek = 1;
 const MAX_WEEKS = 15;
 
-// DOM Elements
 const barAcademics = document.getElementById('bar-academics');
 const barSocial = document.getElementById('bar-social');
 const barHealth = document.getElementById('bar-health');
@@ -22,8 +126,7 @@ const endTitle = document.getElementById('end-title');
 const endMessage = document.getElementById('end-message');
 const restartBtn = document.getElementById('restart-btn');
 
-// Events Database
-const events = [
+const gameEvents = [
   {
     title: "Midterm Season",
     desc: "Exams are piling up. What's your strategy?",
@@ -60,18 +163,15 @@ const events = [
 ];
 
 function updateUI() {
-  // Clamp stats between 0 and 100
   for (let key in stats) {
     if (stats[key] > 100) stats[key] = 100;
     if (stats[key] < 0) stats[key] = 0;
   }
 
-  // Update bars
   barAcademics.style.width = `${stats.academics}%`;
   barSocial.style.width = `${stats.social}%`;
   barHealth.style.width = `${stats.health}%`;
   
-  // Color warnings
   barAcademics.style.backgroundColor = stats.academics < 20 ? 'red' : 'var(--academics)';
   barSocial.style.backgroundColor = stats.social < 20 ? 'red' : 'var(--social)';
   barHealth.style.backgroundColor = stats.health < 20 ? 'red' : 'var(--health)';
@@ -85,7 +185,7 @@ function checkGameOver() {
     return true;
   }
   if (stats.social <= 0) {
-    endGame("Total Isolation", "You became completely burnt out and isolated. You decided to go home.");
+    endGame("Total Isolation", "You became completely burnt out and isolated.");
     return true;
   }
   if (stats.health <= 0) {
@@ -121,14 +221,12 @@ function handleChoice(effects) {
 }
 
 function loadNextEvent() {
-  // Pick random event
-  const event = events[Math.floor(Math.random() * events.length)];
-  
-  eventTitle.textContent = event.title;
-  eventDesc.textContent = event.desc;
+  const ev = gameEvents[Math.floor(Math.random() * gameEvents.length)];
+  eventTitle.textContent = ev.title;
+  eventDesc.textContent = ev.desc;
   
   choicesBox.innerHTML = '';
-  event.choices.forEach(choice => {
+  ev.choices.forEach(choice => {
     const btn = document.createElement('button');
     btn.className = 'btn';
     btn.textContent = choice.text;
@@ -143,7 +241,6 @@ function startGame() {
   gameOverScreen.classList.add('hidden');
   updateUI();
   
-  // Set first hardcoded event
   eventTitle.textContent = "Welcome to College!";
   eventDesc.textContent = "It's your first day. How do you want to kick off the semester?";
   
@@ -165,5 +262,7 @@ function startGame() {
 
 restartBtn.addEventListener('click', startGame);
 
-// Init
-startGame();
+// Check Session on Load
+if (localStorage.getItem('collegeUser')) {
+  initApp();
+}
