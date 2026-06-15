@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BST Playground // Interactive Tree Laboratory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Sidebar Control Panel -->
+    <aside id="sidebar">
+      <div class="brand">
+        <svg class="brand-icon" viewBox="0 0 32 32" width="32" height="32">
+          <circle cx="16" cy="6" r="4" fill="none" stroke="var(--primary)" stroke-width="2"/>
+          <circle cx="8" cy="18" r="4" fill="none" stroke="var(--secondary)" stroke-width="2"/>
+          <circle cx="24" cy="18" r="4" fill="none" stroke="var(--secondary)" stroke-width="2"/>
+          <line x1="14" y1="9.5" x2="10" y2="14.5" stroke="var(--border)" stroke-width="1.5"/>
+          <line x1="18" y1="9.5" x2="22" y2="14.5" stroke="var(--border)" stroke-width="1.5"/>
+        </svg>
+        <div class="brand-text">
+          <span class="brand-name">BST PLAYGROUND</span>
+          <span class="brand-sub">// Tree Lab Visualizer</span>
+        </div>
+      </div>
+
+      <!-- Section: Presets -->
+      <div class="panel-section">
+        <div class="section-title">Seed Tree Generator</div>
+        <div class="preset-controls">
+          <select id="preset-select" class="form-control">
+            <option value="balanced">Balanced Tree Preset</option>
+            <option value="skewed-left">Left Skewed Tree</option>
+            <option value="skewed-right">Right Skewed Tree</option>
+            <option value="random">Random Binary Tree</option>
+            <option value="custom">Custom Input Array</option>
+          </select>
+          <div id="custom-array-group" class="form-group hidden">
+            <input type="text" id="custom-array-input" class="form-control text-input" placeholder="e.g. 15, 10, 20, 8, 12, 17, 25">
+          </div>
+          <button id="btn-seed" class="btn btn-secondary btn-full">Generate Tree Structure</button>
+        </div>
+      </div>
+
+      <!-- Section: Core Operations -->
+      <div class="panel-section">
+        <div class="section-title">Standard Tree Operations</div>
+        <div class="operation-tabs">
+          <div class="op-row">
+            <div class="input-with-btn">
+              <input type="number" id="insert-val" class="form-control num-input" placeholder="Value" min="1" max="999">
+              <button id="btn-insert" class="btn btn-primary">Insert</button>
+            </div>
+          </div>
+          <div class="op-row">
+            <div class="input-with-btn">
+              <input type="number" id="delete-val" class="form-control num-input" placeholder="Value" min="1" max="999">
+              <button id="btn-delete" class="btn btn-danger">Delete</button>
+            </div>
+            <div class="delete-strategy">
+              <label class="radio-label">
+                <input type="radio" name="del-strategy" value="successor" checked> Successor
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="del-strategy" value="predecessor"> Predecessor
+              </label>
+            </div>
+          </div>
+          <div class="op-row">
+            <div class="input-with-btn">
+              <input type="number" id="find-val" class="form-control num-input" placeholder="Value" min="1" max="999">
+              <button id="btn-find" class="btn btn-accent">Find</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: Advanced Operations -->
+      <div class="panel-section">
+        <div class="section-title">Advanced Operations</div>
+        <div class="adv-controls">
+          <!-- LCA -->
+          <div class="form-group">
+            <div class="label-row">
+              <span class="input-label">Lowest Common Ancestor (LCA)</span>
+            </div>
+            <div class="input-pair">
+              <input type="number" id="lca-val-1" class="form-control num-input" placeholder="Val A" min="1" max="999">
+              <input type="number" id="lca-val-2" class="form-control num-input" placeholder="Val B" min="1" max="999">
+              <button id="btn-lca" class="btn btn-info">Trace</button>
+            </div>
+          </div>
+          <!-- Rotations -->
+          <div class="form-group">
+            <div class="label-row">
+              <span class="input-label">Tree Rotations (Select Node Value)</span>
+            </div>
+            <div class="input-pair">
+              <input type="number" id="rotate-val" class="form-control num-input" placeholder="Node" min="1" max="999">
+              <button id="btn-rotate-left" class="btn btn-secondary">Left ⟳</button>
+              <button id="btn-rotate-right" class="btn btn-secondary">Right ⟲</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: Traversals -->
+      <div class="panel-section">
+        <div class="section-title">Traversal Laboratory</div>
+        <div class="traversal-controls">
+          <select id="traversal-select" class="form-control">
+            <option value="inorder">Inorder Traversal (L -> Root -> R)</option>
+            <option value="preorder">Preorder Traversal (Root -> L -> R)</option>
+            <option value="postorder">Postorder Traversal (L -> R -> Root)</option>
+            <option value="levelorder">Breadth-First / Level Order</option>
+          </select>
+          <div class="playback-controls">
+            <button id="btn-play" class="btn btn-success play-btn">
+              <span class="btn-icon">▶</span> Play
+            </button>
+            <button id="btn-step" class="btn btn-secondary">Step ⏭</button>
+            <button id="btn-reset-anim" class="btn btn-secondary">Reset</button>
+          </div>
+          <div class="slider-group">
+            <span class="slider-label">Speed</span>
+            <input type="range" id="speed-slider" min="200" max="2500" value="1000" step="100">
+            <span id="speed-val">1000ms</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Theme & Help -->
+      <div class="sidebar-footer">
+        <button id="btn-theme-toggle" class="btn btn-secondary btn-half">🌓 Theme</button>
+        <button id="btn-clear-tree" class="btn btn-danger btn-half">🗑 Clear Tree</button>
+      </div>
+    </aside>
+
+    <!-- Main Workspace -->
+    <main id="workspace">
+      <!-- Telemetry Dashboard -->
+      <header class="telemetry-bar">
+        <div class="metric-card">
+          <span class="metric-label">Node Count</span>
+          <span class="metric-value" id="val-nodes">0</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Tree Height</span>
+          <span class="metric-value" id="val-height">-1</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Is Balanced?</span>
+          <span class="metric-value status-badge" id="val-balanced">Empty</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Leaf Count</span>
+          <span class="metric-value" id="val-leaves">0</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Root Value</span>
+          <span class="metric-value" id="val-root">None</span>
+        </div>
+      </header>
+
+      <!-- Visualization Canvas -->
+      <div class="canvas-container">
+        <div class="canvas-toolbar">
+          <span class="canvas-title">Interactive Structural Tree Canvas</span>
+          <div class="canvas-actions">
+            <button id="btn-zoom-in" class="btn-tool" title="Zoom In">➕</button>
+            <button id="btn-zoom-out" class="btn-tool" title="Zoom Out">➖</button>
+            <button id="btn-zoom-reset" class="btn-tool" title="Fit to Canvas">🎯</button>
+            <button id="btn-balance-avl" class="btn btn-success btn-sm" title="Rebalance Tree using AVL conversions">Balance Tree</button>
+          </div>
+        </div>
+        <div class="svg-wrapper" id="svg-wrapper">
+          <svg id="tree-svg" width="100%" height="100%">
+            <defs>
+              <marker id="arrow" viewBox="0 0 10 10" refX="22" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="var(--border)" />
+              </marker>
+              <marker id="arrow-highlight" viewBox="0 0 10 10" refX="22" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="var(--accent)" />
+              </marker>
+              <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="5" result="blur" />
+                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+              </filter>
+            </defs>
+            <!-- SVG Groups for rendering lines and nodes -->
+            <g id="svg-pan-group">
+              <g id="links-group"></g>
+              <g id="nodes-group"></g>
+            </g>
+          </svg>
+          <!-- Hover/Click Node Inspector Drawer -->
+          <div id="node-inspector" class="inspector-card hidden">
+            <div class="inspector-header">
+              <span class="inspector-title">Node Properties</span>
+              <button id="btn-close-inspector" class="btn-close">×</button>
+            </div>
+            <div class="inspector-body">
+              <table class="inspector-table">
+                <tr>
+                  <td>Node Value</td>
+                  <td id="inspect-val" class="highlight-text">-</td>
+                </tr>
+                <tr>
+                  <td>Node Depth</td>
+                  <td id="inspect-depth">-</td>
+                </tr>
+                <tr>
+                  <td>Node Height</td>
+                  <td id="inspect-height">-</td>
+                </tr>
+                <tr>
+                  <td>Balance Factor</td>
+                  <td id="inspect-bf">-</td>
+                </tr>
+                <tr>
+                  <td>Parent Node</td>
+                  <td id="inspect-parent">-</td>
+                </tr>
+                <tr>
+                  <td>Children Nodes</td>
+                  <td id="inspect-children">-</td>
+                </tr>
+                <tr>
+                  <td>Path from Root</td>
+                  <td id="inspect-path" class="code-text">-</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Execution Panel: Log + Pseudocode -->
+      <footer class="execution-panel">
+        <div class="log-panel">
+          <div class="panel-header">
+            <span class="panel-title">Trace Action Logs</span>
+            <span id="log-counter" class="badge">0 entries</span>
+          </div>
+          <div class="log-table-container">
+            <table id="log-table">
+              <thead>
+                <tr>
+                  <th width="80">Step</th>
+                  <th width="120">Operation</th>
+                  <th>Action Log Description</th>
+                  <th width="150">Node Target</th>
+                </tr>
+              </thead>
+              <tbody id="log-body">
+                <tr>
+                  <td colspan="4" class="empty-log">Awaiting operation parameters...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="code-panel">
+          <div class="panel-header">
+            <span class="panel-title">Algorithmic Pseudocode</span>
+            <span id="code-algo-title" class="badge">None</span>
+          </div>
+          <div class="code-container">
+            <pre><code id="pseudocode-display">// Select an operation or traversal to see its pseudocode tracking.</code></pre>
+          </div>
+        </div>
+      </footer>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

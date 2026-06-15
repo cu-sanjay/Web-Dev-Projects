@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <!-- Background Grid Pattern -->
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ffffff" stroke-width="1" stroke-opacity="0.03" />
+    </pattern>
+    
+    <!-- Glowing Filters -->
+    <filter id="glow-primary" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <filter id="glow-secondary" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <!-- Node Gradients -->
+    <linearGradient id="grad-root" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8b5cf6" />
+      <stop offset="100%" stop-color="#3b82f6" />
+    </linearGradient>
+    <linearGradient id="grad-child" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#06b6d4" />
+    </linearGradient>
+    <linearGradient id="grad-active" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+
+    <!-- Edge Markers -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="28" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#4b5563" />
+    </marker>
+    <marker id="arrow-active" viewBox="0 0 10 10" refX="28" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#10b981" />
+    </marker>
+  </defs>
+
+  <!-- Deep Slate Background -->
+  <rect width="100%" height="100%" fill="#0b0f19" />
+  
+  <!-- Subtle Grid -->
+  <rect width="100%" height="100%" fill="url(#grid)" />
+
+  <!-- Title Card Mockup -->
+  <text x="400" y="70" text-anchor="middle" fill="#ffffff" font-family="'Outfit', sans-serif" font-size="28" font-weight="800" letter-spacing="3">BINARY SEARCH TREE</text>
+  <text x="400" y="100" text-anchor="middle" fill="#6b7280" font-family="'Fira Code', monospace" font-size="12" font-weight="600" letter-spacing="1.5">// DYNAMIC REBALANCE &amp; ROTATION PLAYGROUND</text>
+
+  <!-- Connection Edges -->
+  <!-- Layer 0 to 1 -->
+  <line x1="400" y1="180" x2="250" y2="270" stroke="#10b981" stroke-width="4" marker-end="url(#arrow-active)" filter="url(#glow-secondary)" />
+  <line x1="400" y1="180" x2="550" y2="270" stroke="#4b5563" stroke-width="2.5" marker-end="url(#arrow)" />
+
+  <!-- Layer 1 to 2 -->
+  <line x1="250" y1="270" x2="160" y2="360" stroke="#4b5563" stroke-width="2.5" marker-end="url(#arrow)" />
+  <line x1="250" y1="270" x2="340" y2="360" stroke="#10b981" stroke-width="4" marker-end="url(#arrow-active)" filter="url(#glow-secondary)" />
+  
+  <line x1="550" y1="270" x2="460" y2="360" stroke="#4b5563" stroke-width="2.5" marker-end="url(#arrow)" />
+  <line x1="550" y1="270" x2="640" y2="360" stroke="#4b5563" stroke-width="2.5" marker-end="url(#arrow)" />
+
+  <!-- Nodes -->
+  <!-- Level 0 (Root) -->
+  <g transform="translate(400, 180)">
+    <circle r="28" fill="url(#grad-root)" stroke="#ffffff" stroke-width="2" filter="url(#glow-primary)" />
+    <text text-anchor="middle" dominant-baseline="central" fill="#ffffff" font-family="'Outfit', sans-serif" font-weight="800" font-size="18">50</text>
+  </g>
+
+  <!-- Level 1 (Children) -->
+  <g transform="translate(250, 270)">
+    <circle r="25" fill="url(#grad-child)" stroke="#ffffff" stroke-width="1.5" />
+    <text text-anchor="middle" dominant-baseline="central" fill="#ffffff" font-family="'Outfit', sans-serif" font-weight="700" font-size="16">30</text>
+  </g>
+  <g transform="translate(550, 270)">
+    <circle r="25" fill="url(#grad-child)" stroke="#ffffff" stroke-width="1.5" />
+    <text text-anchor="middle" dominant-baseline="central" fill="#ffffff" font-family="'Outfit', sans-serif" font-weight="700" font-size="16">70</text>
+  </g>
+
+  <!-- Level 2 (Grandchildren) -->
+  <g transform="translate(160, 360)">
+    <circle r="22" fill="url(#grad-child)" stroke="#ffffff" stroke-width="1" />
+    <text text-anchor="middle" dominant-baseline="central" fill="#ffffff" font-family="'Outfit', sans-serif" font-weight="700" font-size="14">20</text>
+  </g>
+  <!-- Active Search/Insert Target -->
+  <g transform="translate(340, 360)">
+    <circle r="22" fill="url(#grad-active)" stroke="#ffffff" stroke-width="2" filter="url(#glow-primary)" />
+    <text text-anchor="middle" dominant-baseline="central" fill="#ffffff" font-family="'Outfit', sans-serif" font-weight="800" font-size="14">40</text>
+    <circle r="28" fill="none" stroke="#10b981" stroke-width="1.5" stroke-dasharray="4" />
+  </g>
+
+  <g transform="translate(460, 360)">
+    <circle r="22" fill="url(#grad-child)" stroke="#ffffff" stroke-width="1" />
+    <text text-anchor="middle" dominant-baseline="central" fill="#ffffff" font-family="'Outfit', sans-serif" font-weight="700" font-size="14">60</text>
+  </g>
+  <g transform="translate(640, 360)">
+    <circle r="22" fill="url(#grad-child)" stroke="#ffffff" stroke-width="1" />
+    <text text-anchor="middle" dominant-baseline="central" fill="#ffffff" font-family="'Outfit', sans-serif" font-weight="700" font-size="14">85</text>
+  </g>
+
+  <!-- UI Mockup Overlay elements -->
+  <!-- Left Side Stats Mockup -->
+  <rect x="30" y="410" width="160" height="60" rx="8" fill="#111827" fill-opacity="0.6" stroke="#ffffff" stroke-opacity="0.08" stroke-width="1" />
+  <text x="45" y="432" fill="#9ca3af" font-family="'Outfit', sans-serif" font-size="11" font-weight="600">IS BALANCED?</text>
+  <text x="45" y="456" fill="#10b981" font-family="'Outfit', sans-serif" font-size="18" font-weight="800">TRUE (AVL)</text>
+
+  <!-- Right Side Stats Mockup -->
+  <rect x="610" y="410" width="160" height="60" rx="8" fill="#111827" fill-opacity="0.6" stroke="#ffffff" stroke-opacity="0.08" stroke-width="1" />
+  <text x="625" y="432" fill="#9ca3af" font-family="'Outfit', sans-serif" font-size="11" font-weight="600">TREE HEIGHT</text>
+  <text x="625" y="456" fill="#3b82f6" font-family="'Outfit', sans-serif" font-size="18" font-weight="800">2 LEVELS</text>
+</svg>
