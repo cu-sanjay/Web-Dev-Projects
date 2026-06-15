@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>API Response Formatter</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app-container">
+
+  <!-- ─── TITLE BAR ─── -->
+  <div class="title-bar">
+    <span class="title-label">API RESPONSE FORMATTER</span>
+    <span class="title-version">v3.0.1 — [ STRUCTURAL VALIDATION COMMAND DECK ]</span>
+  </div>
+
+  <!-- ─── FORMAT RIBBON ─── -->
+  <div class="format-ribbon">
+    <button class="format-btn active" data-format="json">JSON PAYLOAD SOURCE</button>
+    <button class="format-btn" data-format="xml">XML MARKUP SCHEMA</button>
+  </div>
+
+  <!-- ─── ACTION BAR ─── -->
+  <div class="action-bar">
+    <button class="action-btn" id="btnBeautify">✦ BEAUTIFY &amp; RENDER CODE TREE</button>
+    <button class="action-btn" id="btnMinify">⦿ MINIFY DATA PAYLOAD</button>
+    <button class="action-btn" id="btnExpand">▸ EXPAND ALL ACTIVE NODES</button>
+    <button class="action-btn" id="btnCollapse">◂ COLLAPSE ALL ACTIVE NODES</button>
+    <button class="action-btn" id="btnCopy">◎ COPY RAW CODE TO CLIPBOARD</button>
+  </div>
+
+  <!-- ─── MAIN GRID ─── -->
+  <div class="main-grid">
+
+    <!-- LEFT: INPUT TEXTAREA -->
+    <div class="input-panel">
+      <div class="panel-header">INPUT RAW API RESPONSE STREAM</div>
+      <textarea class="input-area" id="inputArea" spellcheck="false" placeholder='Paste JSON or XML payload here…&#10;&#10;Example:&#10;{&#10;  "user": {&#10;    "id": 42,&#10;    "name": "Jane Doe"&#10;  }&#10;}'></textarea>
+    </div>
+
+    <!-- CENTER: SYNTAX VIEWPORT -->
+    <div class="viewport-panel">
+      <div class="panel-header">COLLAPSIBLE SYNTAX NODE MATRIX VIEWPORT</div>
+      <div class="viewport-content" id="viewportContent">
+        <div class="viewport-placeholder">AWAITING PARSED DATA STRUCTURE — EXECUTE LEXICAL COMPILATION</div>
+      </div>
+    </div>
+
+    <!-- RIGHT: TELEMETRY -->
+    <div class="telemetry-panel">
+      <div class="panel-header">PARSING TELEMETRY DASHBOARD</div>
+
+      <div class="tele-card">
+        <div class="tele-label">INPUT DATA TYPE SCHEME</div>
+        <div class="tele-val" id="tType">--</div>
+      </div>
+      <div class="tele-card">
+        <div class="tele-label">ABSOLUTE BYTE FOOTPRINT</div>
+        <div class="tele-val" id="tBytes">-- <span class="tele-unit">bytes</span></div>
+      </div>
+      <div class="tele-card">
+        <div class="tele-label">TOTAL KEY / ELEMENT COUNT</div>
+        <div class="tele-val" id="tKeys">--</div>
+      </div>
+      <div class="tele-card">
+        <div class="tele-label">MAXIMUM NODE NESTING DEPTH</div>
+        <div class="tele-val" id="tDepth">--</div>
+      </div>
+      <div class="tele-card">
+        <div class="tele-label">ACTIVE COMPILATION BADGE</div>
+        <div class="tele-badge" id="tBadge">STANDBY</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ─── ADMIN FOOTER ─── -->
+  <div class="admin-footer">
+    <button class="admin-btn execute" id="btnExecute">⚡ EXECUTE ASYNCHRONOUS LEXICAL COMPILATION RUN</button>
+    <button class="admin-btn inject" id="btnInject">⤚ INJECT COMPLEX NESTED DATA MOCK TEMPLATE</button>
+    <button class="admin-btn flush" id="btnFlush">✦ FLUSH FORMATTING CHANNELS &amp; RE-ZERO MATRICES</button>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
