@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nature Explorer · Quiz Adventure</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="top-bar">
+    <div class="top-brand">
+      <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M12 2L2 7l10 5 10-5-10-5z" stroke="#00e676"/>
+        <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="#00e676" stroke-opacity="0.6"/>
+        <circle cx="12" cy="12" r="2" fill="#00e676" stroke="none"/>
+      </svg>
+      <div>
+        <h1 class="top-title">Nature Explorer · Quiz Adventure</h1>
+        <span class="top-sub">biome discovery terminal v2.0</span>
+      </div>
+      <span class="top-badge">ECOSYSTEM · BIODIVERSITY · CONSERVATION</span>
+    </div>
+    <div class="top-metrics">
+      <span class="metric-chip" id="chipBiomes">BIOMES <strong>1/4</strong></span>
+      <span class="metric-chip" id="chipLevel">LVL <strong>Seedling</strong></span>
+      <span class="metric-chip" id="chipScore">PTS <strong id="scoreDisplay">0</strong></span>
+      <span class="metric-chip accent" id="chipBadge">✦ <span id="badgeDisplay">Seedling Explorer</span></span>
+    </div>
+  </header>
+
+  <main class="workspace">
+
+    <div class="split-pane">
+
+      <!-- LEFT: BIOME MAP -->
+      <section class="map-panel">
+        <div class="panel-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="10" height="10"><circle cx="12" cy="12" r="10"/><path d="M12 2v20M2 12h20"/></svg>
+          <span>World Biome · Cartographic Grid</span>
+          <span class="panel-hint">select an unlocked zone</span>
+        </div>
+        <div class="map-grid" id="mapGrid">
+          <!-- biome nodes injected by script -->
+        </div>
+      </section>
+
+      <!-- RIGHT: QUIZ PANEL -->
+      <section class="quiz-panel">
+        <div class="panel-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="10" height="10"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          <span>Central Expedition · Question Slate</span>
+          <span class="panel-hint" id="quizHint">awaiting deployment</span>
+        </div>
+
+        <div class="quiz-body" id="quizBody">
+          <div class="quiz-idle" id="quizIdle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" width="32" height="32">
+              <path d="M12 2L2 7l10 5 10-5-10-5z" stroke="#4a5268"/>
+              <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="#4a5268" stroke-opacity="0.4"/>
+              <circle cx="12" cy="12" r="2" fill="#4a5268" stroke="none"/>
+            </svg>
+            <p class="idle-text">Select an unlocked biome from the cartographic grid to begin your expedition.</p>
+          </div>
+
+          <div class="quiz-active hidden" id="quizActive">
+            <div class="quiz-progress" id="quizProgress"></div>
+            <div class="q-counter" id="qCounter">Question 1 / 6</div>
+            <p class="q-text" id="qText"></p>
+            <div class="q-options" id="qOptions"></div>
+            <div class="q-feedback hidden" id="qFeedback"></div>
+            <div class="q-actions">
+              <button class="q-btn q-btn-secondary" id="btnPrev">◂ Back</button>
+              <button class="q-btn q-btn-primary" id="btnSubmit">Submit Answer</button>
+              <button class="q-btn q-btn-primary" id="btnNext">Next ▸</button>
+            </div>
+          </div>
+
+          <div class="quiz-result hidden" id="quizResult">
+            <div class="result-icon" id="resultIcon">🏆</div>
+            <h2 class="result-title" id="resultTitle">Expedition Complete</h2>
+            <p class="result-score" id="resultScore">Score: 0/0</p>
+            <p class="result-msg" id="resultMsg"></p>
+            <div class="result-badge hidden" id="resultBadge"></div>
+            <div class="result-actions">
+              <button class="q-btn q-btn-secondary" id="btnRetry">Re-Attempt Biome</button>
+              <button class="q-btn q-btn-primary" id="btnReturn">Return to Map</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <footer class="action-bar">
+      <button class="foot-btn foot-danger" id="btnAbort">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><path d="M18.36 6.64a9 9 0 11-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>
+        Abort Active Expedition
+      </button>
+      <button class="foot-btn foot-critical" id="btnPurge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6"/><path d="M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+        Purge Progress &amp; Re-Seed Map Sockets
+      </button>
+    </footer>
+
+  </main>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
