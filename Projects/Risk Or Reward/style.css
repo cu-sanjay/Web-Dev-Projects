@@ -1,0 +1,111 @@
+ @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap');
+
+        body {
+            background-color: #ff00ff;
+            background-image: linear-gradient(45deg, #ff00ff 25%, #00ffff 25%, #00ffff 50%, #ff00ff 50%, #ff00ff 75%, #00ffff 75%, #00ffff 100%);
+            background-size: 100px 100px;
+            font-family: 'Comic Neue', 'Comic Sans MS', cursive;
+            color: #ffff00;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .container {
+            background: #ffffff;
+            border: 10px solid #00ff00;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 20px 20px 0px #000000;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        h1 {
+            font-size: 3rem;
+            text-shadow: 5px 5px #ff0000;
+            margin: 0;
+            animation: bounce 0.5s infinite alternate;
+        }
+
+        @keyframes bounce {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
+        }
+
+        .stats {
+            background: #000;
+            color: #0f0;
+            padding: 10px;
+            margin: 20px 0;
+            font-size: 1.5rem;
+            border: 5px dashed #ff00ff;
+        }
+
+        .choices {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            border: 5px solid black;
+            transition: 0.1s;
+        }
+
+        .btn-safe {
+            background: #00ffff;
+            color: #000;
+        }
+
+        .btn-risky {
+            background: #ff0000;
+            color: #fff;
+            animation: shake 0.2s infinite;
+        }
+
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+
+        .btn:hover {
+            transform: scale(1.2);
+            z-index: 10;
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 1.5rem;
+            min-height: 2em;
+            color: #000;
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .hidden { display: none; }
