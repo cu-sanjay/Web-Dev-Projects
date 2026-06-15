@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scholarship & Aid Portal</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+
+  <!-- Sidebar Navigation -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="logo-box">
+        <i class="ph-fill ph-graduation-cap"></i>
+      </div>
+      <h2>ScholarFund</h2>
+    </div>
+    
+    <nav class="sidebar-menu">
+      <ul>
+        <li class="active" data-tab="dashboard">
+          <i class="ph ph-squares-four"></i> Dashboard
+        </li>
+        <li data-tab="directory">
+          <i class="ph ph-magnifying-glass"></i> Find Scholarships
+        </li>
+        <li data-tab="applications">
+          <i class="ph ph-file-text"></i> My Applications
+        </li>
+        <li data-tab="finances">
+          <i class="ph ph-piggy-bank"></i> Financial Aid
+        </li>
+      </ul>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-profile">
+        <img src="https://ui-avatars.com/api/?name=Vishwa+Mistry&background=059669&color=fff" alt="User Avatar" class="avatar">
+        <div class="user-info">
+          <strong>Vishwa Mistry</strong>
+          <span>Undergraduate</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content Wrapper -->
+  <main class="main-content">
+    
+    <!-- Top Header -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <button id="mobile-menu-btn" class="icon-btn"><i class="ph ph-list"></i></button>
+        <div class="search-input">
+          <i class="ph ph-magnifying-glass"></i>
+          <input type="text" placeholder="Search by name, category, or amount...">
+        </div>
+      </div>
+      <div class="topbar-right">
+        <button class="icon-btn notification-btn"><i class="ph ph-bell"></i><span class="badge">3</span></button>
+        <button class="btn primary-btn"><i class="ph ph-user-circle"></i> Profile</button>
+      </div>
+    </header>
+
+    <!-- Scrollable Body Area -->
+    <div class="body-area">
+      
+      <!-- ================= DASHBOARD TAB ================= -->
+      <section id="dashboard" class="tab-content active">
+        
+        <div class="welcome-card">
+          <div class="welcome-text">
+            <h1>Good morning, Vishwa! 👋</h1>
+            <p>You have 2 upcoming application deadlines this week. Make sure your essays are ready!</p>
+          </div>
+          <button class="btn secondary-btn" onclick="document.querySelector('[data-tab=\\'directory\\']').click()">Browse New Funds</button>
+        </div>
+
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-icon bg-blue-light text-blue"><i class="ph-fill ph-check-circle"></i></div>
+            <div class="metric-data">
+              <h3>Awarded Funds</h3>
+              <h2>$4,500</h2>
+            </div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon bg-orange-light text-orange"><i class="ph-fill ph-hourglass-high"></i></div>
+            <div class="metric-data">
+              <h3>Pending Review</h3>
+              <h2>$12,000</h2>
+            </div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon bg-green-light text-green"><i class="ph-fill ph-paper-plane-tilt"></i></div>
+            <div class="metric-data">
+              <h3>Active Applications</h3>
+              <h2>5</h2>
+            </div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon bg-purple-light text-purple"><i class="ph-fill ph-star"></i></div>
+            <div class="metric-data">
+              <h3>Saved Scholarships</h3>
+              <h2>14</h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="split-layout">
+          <!-- Upcoming Deadlines -->
+          <div class="panel">
+            <div class="panel-header">
+              <h3>Urgent Deadlines</h3>
+            </div>
+            <div class="panel-body">
+              <ul class="deadline-list">
+                <li class="deadline-item critical">
+                  <div class="date-box">
+                    <span class="month">OCT</span>
+                    <span class="day">15</span>
+                  </div>
+                  <div class="deadline-info">
+                    <h4>National STEM Excellence Award</h4>
+                    <p>Requires 2 recommendation letters</p>
+                  </div>
+                  <button class="btn outline-btn btn-sm">Resume</button>
+                </li>
+                <li class="deadline-item warning">
+                  <div class="date-box">
+                    <span class="month">OCT</span>
+                    <span class="day">18</span>
+                  </div>
+                  <div class="deadline-info">
+                    <h4>First-Gen Scholars Grant</h4>
+                    <p>Drafting personal essay</p>
+                  </div>
+                  <button class="btn outline-btn btn-sm">Resume</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Quick Breakdown -->
+          <div class="panel">
+            <div class="panel-header">
+              <h3>Aid Breakdown (2026-2027)</h3>
+            </div>
+            <div class="panel-body flex-center column">
+              <div class="radial-chart">
+                <i class="ph ph-chart-donut text-green" style="font-size: 6rem; opacity: 0.8"></i>
+              </div>
+              <div class="legend-box mt-3">
+                <div class="legend-item"><span class="dot bg-green"></span> Scholarships (60%)</div>
+                <div class="legend-item"><span class="dot bg-blue"></span> State Grants (30%)</div>
+                <div class="legend-item"><span class="dot bg-orange"></span> Work-Study (10%)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ================= DIRECTORY TAB ================= -->
+      <section id="directory" class="tab-content hidden">
+        <div class="page-heading flex-between">
+          <div>
+            <h1>Scholarship Directory</h1>
+            <p class="text-muted">Discover matching opportunities based on your profile.</p>
+          </div>
+          <div class="filter-group">
+            <select class="form-select">
+              <option>All Categories</option>
+              <option>Merit-Based</option>
+              <option>Need-Based</option>
+              <option>Diversity</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="scholarship-grid" id="scholarship-grid">
+          <!-- Injected via JavaScript -->
+        </div>
+      </section>
+
+      <!-- ================= APPLICATIONS TAB ================= -->
+      <section id="applications" class="tab-content hidden">
+        <div class="page-heading">
+          <h1>My Applications</h1>
+          <p class="text-muted">Track the status of your submitted and drafted applications.</p>
+        </div>
+
+        <div class="panel">
+          <div class="panel-body p-0">
+             <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Opportunity Name</th>
+                    <th>Type</th>
+                    <th>Amount</th>
+                    <th>Deadline</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="applications-tbody">
+                  <!-- Injected via JavaScript -->
+                </tbody>
+              </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= FINANCES TAB ================= -->
+      <section id="finances" class="tab-content hidden">
+        <div class="page-heading">
+          <h1>Financial Aid Overview</h1>
+          <p class="text-muted">Manage your awarded funds, disbursements, and requirements.</p>
+        </div>
+
+        <div class="split-layout">
+          <div class="panel col-span-2">
+            <div class="panel-header">
+              <h3>Awarded Funds Timeline</h3>
+            </div>
+            <div class="panel-body">
+              <div class="timeline-container" id="funds-timeline">
+                <!-- Injected via JavaScript -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
