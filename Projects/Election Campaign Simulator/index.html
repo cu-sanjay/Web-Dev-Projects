@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Election Campaign Simulator — Manage your campaign budget, deliver speeches, and track voter sentiment.">
+  <title>Election Campaign Simulator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <h1><span aria-hidden="true">&#x1F3DB;</span> Election Campaign Simulator</h1>
+      <p class="subtitle">Budget &middot; Speeches &middot; Voter Sentiment</p>
+    </header>
+
+    <div class="dashboard">
+      <div class="stats-row">
+        <div class="stat-card"><span class="stat-label">Budget</span><span class="stat-value gold" id="budgetVal">$1,000,000</span></div>
+        <div class="stat-card"><span class="stat-label">Approval</span><span class="stat-value" id="approvalVal">50%</span></div>
+        <div class="stat-card"><span class="stat-label">Day</span><span class="stat-value" id="dayVal">1 / 30</span></div>
+        <div class="stat-card"><span class="stat-label">Votes</span><span class="stat-value" id="votesVal">0</span></div>
+      </div>
+
+      <div class="main-grid">
+        <div class="panel">
+          <h2>Campaign Actions</h2>
+          <div class="actions" id="actionsList"></div>
+        </div>
+
+        <div class="panel">
+          <h2>Speech Writer</h2>
+          <div class="speech-area">
+            <select id="speechTopic" aria-label="Speech topic">
+              <option value="economy">Economy & Jobs</option>
+              <option value="healthcare">Healthcare</option>
+              <option value="education">Education</option>
+              <option value="security">National Security</option>
+              <option value="environment">Environment</option>
+            </select>
+            <textarea id="speechText" rows="4" placeholder="Write your campaign speech..." aria-label="Speech content"></textarea>
+            <button class="btn" id="deliverSpeech">Deliver Speech</button>
+          </div>
+          <div class="speech-log" id="speechLog"><p class="empty-state">No speeches delivered yet.</p></div>
+        </div>
+
+        <div class="panel">
+          <h2>Voter Sentiment</h2>
+          <div class="sentiment-gauge" id="sentimentGauge">
+            <div class="gauge-bar"><div class="gauge-fill" id="sentimentFill" style="width:50%"></div></div>
+            <div class="gauge-labels"><span>Hostile</span><span id="sentimentLabel">Neutral</span><span>Adoring</span></div>
+          </div>
+          <div class="demographics" id="demographics"></div>
+        </div>
+      </div>
+
+      <div class="event-log" id="eventLog">
+        <h3>Campaign Trail Log</h3>
+        <div class="log-entries" id="logEntries"><p class="empty-state">Your campaign begins today. Make every decision count.</p></div>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
