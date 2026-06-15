@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Markdown Documentation Studio</title>
+  <!-- Google Fonts: Outfit and Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons for Dashboard aesthetics -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-background"></div>
+  
+  <!-- HEADER -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="logo">
+        <i class="fa-solid fa-file-invoice glow-icon"></i>
+        <h1>Docu<span>Studio</span></h1>
+        <span class="badge">Markdown Studio</span>
+      </div>
+
+      <div class="top-controls">
+        <div class="select-wrapper">
+          <label for="template-select" class="sr-only">Templates</label>
+          <select id="template-select">
+            <option value="api">Template: API Documentation</option>
+            <option value="guide">Template: Installation Guide</option>
+            <option value="changelog">Template: Release Notes</option>
+          </select>
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+
+        <div class="select-wrapper">
+          <label for="theme-select" class="sr-only">Preview Theme</label>
+          <select id="theme-select">
+            <option value="github">Theme: GitHub Light</option>
+            <option value="gitbook">Theme: GitBook Dark</option>
+            <option value="solarized">Theme: Solarized Paper</option>
+          </select>
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+
+        <button id="btn-export-md" class="btn btn-secondary btn-sm" title="Save file as .md">
+          <i class="fa-solid fa-download"></i> Export MD
+        </button>
+        <button id="btn-export-pdf" class="btn btn-primary btn-sm" title="Open print preview to save PDF">
+          <i class="fa-solid fa-print"></i> Export PDF
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN WINDOW -->
+  <main class="main-container">
+    
+    <!-- LEFT SIDEBAR: DYNAMIC TOC & STATS -->
+    <aside class="sidebar sidebar-left" aria-labelledby="toc-heading">
+      
+      <!-- Table of Contents -->
+      <section class="toc-section">
+        <div class="sidebar-header">
+          <i class="fa-solid fa-list-ol"></i>
+          <h2 id="toc-heading">Table of Contents</h2>
+        </div>
+        <p class="section-help-text">Dynamic index of headings. Click to jump to the preview section.</p>
+        <nav class="toc-navigation" id="toc-nav">
+          <ul id="toc-list">
+            <!-- Dynamic TOC list items -->
+            <li class="text-muted" style="font-size:0.8rem; font-style:italic;">No headings detected</li>
+          </ul>
+        </nav>
+      </section>
+
+      <!-- Document Stats -->
+      <section class="stats-section">
+        <div class="sidebar-header">
+          <i class="fa-solid fa-chart-simple"></i>
+          <h2>Document Stats</h2>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-val" id="stat-words">0</span>
+            <span class="stat-lbl">Words</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-val" id="stat-chars">0</span>
+            <span class="stat-lbl">Characters</span>
+          </div>
+          <div class="stat-card" style="grid-column: span 2;">
+            <span class="stat-val" id="stat-read-time">0 min</span>
+            <span class="stat-lbl">Estimated Read Time</span>
+          </div>
+        </div>
+      </section>
+      
+    </aside>
+
+    <!-- RIGHT SPLITWORKSPACE: EDITOR & PREVIEW -->
+    <section class="workspace-panel" aria-labelledby="editor-title-heading">
+      <h2 class="sr-only" id="editor-title-heading">Document Editing workspace</h2>
+      
+      <!-- FORMATTING TOOLBAR -->
+      <div class="formatting-toolbar">
+        <button class="toolbar-btn" data-tag="h1" title="Heading 1"><i class="fa-solid fa-heading"></i>1</button>
+        <button class="toolbar-btn" data-tag="h2" title="Heading 2"><i class="fa-solid fa-heading"></i>2</button>
+        <button class="toolbar-btn" data-tag="bold" title="Bold Text"><i class="fa-solid fa-bold"></i></button>
+        <button class="toolbar-btn" data-tag="italic" title="Italic Text"><i class="fa-solid fa-italic"></i></button>
+        <span class="divider"></span>
+        <button class="toolbar-btn" data-tag="code" title="Code Block"><i class="fa-solid fa-code"></i></button>
+        <button class="toolbar-btn" data-tag="link" title="Insert Link"><i class="fa-solid fa-link"></i></button>
+        <button class="toolbar-btn" data-tag="table" title="Insert Table"><i class="fa-solid fa-table"></i></button>
+        <span class="divider"></span>
+        <button class="toolbar-btn" data-tag="list" title="Unordered List"><i class="fa-solid fa-list-ul"></i></button>
+        <button class="toolbar-btn" data-tag="checklist" title="Task List"><i class="fa-solid fa-list-check"></i></button>
+        <button class="toolbar-btn" data-tag="rule" title="Horizontal Rule"><i class="fa-solid fa-minus"></i></button>
+      </div>
+
+      <!-- DUAL PANE EDITOR -->
+      <div class="split-editor-container">
+        
+        <!-- Left Pane: Source Code Editor -->
+        <div class="editor-pane">
+          <div class="pane-header">
+            <span><i class="fa-solid fa-keyboard"></i> Markdown Editor</span>
+            <span class="indicator-saved" id="indicator-saved"><i class="fa-solid fa-circle-check"></i> Auto-Saved</span>
+          </div>
+          <div class="editor-area">
+            <div class="line-numbers" id="editor-line-numbers">
+              <!-- Dynamic line counts -->
+            </div>
+            <textarea id="markdown-textarea" spellcheck="false" autocomplete="off" placeholder="# Write documentation here..." aria-label="Markdown Editor"></textarea>
+          </div>
+        </div>
+
+        <!-- Right Pane: HTML Preview -->
+        <div class="preview-pane">
+          <div class="pane-header">
+            <span><i class="fa-solid fa-eye"></i> Live Preview</span>
+          </div>
+          <div class="preview-area github-theme" id="preview-area">
+            <!-- Compiled HTML injected here -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="app-footer">
+    <div class="footer-container">
+      <p>&copy; 2026 DocuStudio Workspace. Clean markdown layout engine.</p>
+      <div class="footer-links">
+        <button id="btn-reset-app-storage" class="footer-btn"><i class="fa-solid fa-trash-can"></i> Reset Studio Data</button>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

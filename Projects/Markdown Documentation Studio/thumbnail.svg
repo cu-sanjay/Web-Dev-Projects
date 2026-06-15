@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <radialGradient id="bg-grad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#111625" stop-opacity="1" />
+      <stop offset="100%" stop-color="#080a13" stop-opacity="1" />
+    </radialGradient>
+    
+    <!-- Markdown Blue Gradient -->
+    <linearGradient id="md-blue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#6366f1" />
+    </linearGradient>
+
+    <filter id="neon-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background Card -->
+  <rect width="512" height="512" rx="32" fill="url(#bg-grad)" stroke="rgba(255, 255, 255, 0.08)" stroke-width="4"/>
+
+  <!-- Dotted Grid overlay -->
+  <g fill="rgba(255, 255, 255, 0.03)" stroke="none">
+    <circle cx="40" cy="40" r="1.5" /><circle cx="80" cy="40" r="1.5" /><circle cx="120" cy="40" r="1.5" /><circle cx="160" cy="40" r="1.5" /><circle cx="200" cy="40" r="1.5" /><circle cx="240" cy="40" r="1.5" /><circle cx="280" cy="40" r="1.5" /><circle cx="320" cy="40" r="1.5" /><circle cx="360" cy="40" r="1.5" /><circle cx="400" cy="40" r="1.5" /><circle cx="440" cy="40" r="1.5" /><circle cx="480" cy="40" r="1.5" />
+    <circle cx="40" cy="100" r="1.5" /><circle cx="80" cy="100" r="1.5" /><circle cx="120" cy="100" r="1.5" /><circle cx="160" cy="100" r="1.5" /><circle cx="200" cy="100" r="1.5" /><circle cx="240" cy="100" r="1.5" /><circle cx="280" cy="100" r="1.5" /><circle cx="320" cy="100" r="1.5" /><circle cx="360" cy="100" r="1.5" /><circle cx="400" cy="100" r="1.5" /><circle cx="440" cy="100" r="1.5" /><circle cx="480" cy="100" r="1.5" />
+    <circle cx="40" cy="160" r="1.5" /><circle cx="80" cy="160" r="1.5" /><circle cx="120" cy="160" r="1.5" /><circle cx="160" cy="160" r="1.5" /><circle cx="200" cy="160" r="1.5" /><circle cx="240" cy="160" r="1.5" /><circle cx="280" cy="160" r="1.5" /><circle cx="320" cy="160" r="1.5" /><circle cx="360" cy="160" r="1.5" /><circle cx="400" cy="160" r="1.5" /><circle cx="440" cy="160" r="1.5" /><circle cx="480" cy="160" r="1.5" />
+    <circle cx="40" cy="220" r="1.5" /><circle cx="80" cy="220" r="1.5" /><circle cx="120" cy="220" r="1.5" /><circle cx="160" cy="220" r="1.5" /><circle cx="200" cy="220" r="1.5" /><circle cx="240" cy="220" r="1.5" /><circle cx="280" cy="220" r="1.5" /><circle cx="320" cy="220" r="1.5" /><circle cx="360" cy="220" r="1.5" /><circle cx="400" cy="220" r="1.5" /><circle cx="440" cy="220" r="1.5" /><circle cx="480" cy="220" r="1.5" />
+    <circle cx="40" cy="280" r="1.5" /><circle cx="80" cy="280" r="1.5" /><circle cx="120" cy="280" r="1.5" /><circle cx="160" cy="280" r="1.5" /><circle cx="200" cy="280" r="1.5" /><circle cx="240" cy="280" r="1.5" /><circle cx="280" cy="280" r="1.5" /><circle cx="320" cy="280" r="1.5" /><circle cx="360" cy="280" r="1.5" /><circle cx="400" cy="280" r="1.5" /><circle cx="440" cy="280" r="1.5" /><circle cx="480" cy="280" r="1.5" />
+    <circle cx="40" cy="340" r="1.5" /><circle cx="80" cy="340" r="1.5" /><circle cx="120" cy="340" r="1.5" /><circle cx="160" cy="340" r="1.5" /><circle cx="200" cy="340" r="1.5" /><circle cx="240" cy="340" r="1.5" /><circle cx="280" cy="340" r="1.5" /><circle cx="320" cy="340" r="1.5" /><circle cx="360" cy="340" r="1.5" /><circle cx="400" cy="340" r="1.5" /><circle cx="440" cy="340" r="1.5" /><circle cx="480" cy="340" r="1.5" />
+    <circle cx="40" cy="400" r="1.5" /><circle cx="80" cy="400" r="1.5" /><circle cx="120" cy="400" r="1.5" /><circle cx="160" cy="400" r="1.5" /><circle cx="200" cy="400" r="1.5" /><circle cx="240" cy="400" r="1.5" /><circle cx="280" cy="400" r="1.5" /><circle cx="320" cy="400" r="1.5" /><circle cx="360" cy="400" r="1.5" /><circle cx="400" cy="400" r="1.5" /><circle cx="440" cy="400" r="1.5" /><circle cx="480" cy="400" r="1.5" />
+    <circle cx="40" cy="460" r="1.5" /><circle cx="80" cy="460" r="1.5" /><circle cx="120" cy="460" r="1.5" /><circle cx="160" cy="460" r="1.5" /><circle cx="200" cy="460" r="1.5" /><circle cx="240" cy="460" r="1.5" /><circle cx="280" cy="460" r="1.5" /><circle cx="320" cy="460" r="1.5" /><circle cx="360" cy="460" r="1.5" /><circle cx="400" cy="460" r="1.5" /><circle cx="440" cy="460" r="1.5" /><circle cx="480" cy="460" r="1.5" />
+  </g>
+
+  <!-- Split Workspace Frames layout -->
+  <g transform="translate(48, 80)">
+    <!-- Main Window outline -->
+    <rect width="416" height="352" rx="16" fill="#03060c" stroke="rgba(255, 255, 255, 0.08)" stroke-width="2" />
+    
+    <!-- Top toolbar wrapper -->
+    <rect width="416" height="36" rx="16" fill="rgba(255, 255, 255, 0.02)" />
+    <!-- Toolbar mock items buttons -->
+    <circle cx="24" cy="18" r="5" fill="#ef4444" />
+    <circle cx="40" cy="18" r="5" fill="#fbbf24" />
+    <circle cx="56" cy="18" r="5" fill="#10b981" />
+    <rect x="330" y="10" width="60" height="16" rx="4" fill="rgba(56, 189, 248, 0.15)" />
+
+    <!-- Split-pane line -->
+    <line x1="208" y1="36" x2="208" y2="352" stroke="rgba(255, 255, 255, 0.05)" stroke-width="2" />
+
+    <!-- Left Editor Pane (Markdown source) -->
+    <g transform="translate(16, 56)" fill="none" stroke-linecap="round" stroke-width="4">
+      <!-- Line 1: # API Documentation -->
+      <line x1="10" y1="15" x2="30" y2="15" stroke="url(#md-blue)" stroke-width="6" />
+      <line x1="38" y1="15" x2="160" y2="15" stroke="url(#md-blue)" stroke-width="6" />
+      
+      <!-- Line 2: Paragraph text -->
+      <line x1="10" y1="38" x2="150" y2="38" stroke="rgba(255,255,255,0.3)" />
+      <line x1="10" y1="52" x2="110" y2="52" stroke="rgba(255,255,255,0.3)" />
+
+      <!-- Line 3: ## Setup Prerequisites -->
+      <line x1="10" y1="75" x2="40" y2="75" stroke="url(#md-blue)" stroke-width="5" />
+      <line x1="48" y1="75" x2="130" y2="75" stroke="url(#md-blue)" stroke-width="5" />
+
+      <!-- Line 4: Checklist items -->
+      <!-- - [x] Install Node -->
+      <line x1="10" y1="100" x2="16" y2="100" stroke="rgba(255,255,255,0.4)" />
+      <rect x="22" y="94" width="10" height="10" rx="2" fill="rgba(56, 189, 248, 0.2)" stroke="#38bdf8" stroke-width="1.5" />
+      <line x1="38" y1="100" x2="120" y2="100" stroke="rgba(255,255,255,0.3)" />
+
+      <!-- - [ ] Run server -->
+      <line x1="10" y1="120" x2="16" y2="120" stroke="rgba(255,255,255,0.4)" />
+      <rect x="22" y="114" width="10" height="10" rx="2" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" />
+      <line x1="38" y1="120" x2="100" y2="120" stroke="rgba(255,255,255,0.3)" />
+
+      <!-- Line 5: Code blocks -->
+      <rect x="10" y="140" width="160" height="60" rx="6" fill="#040810" />
+      <line x1="22" y1="156" x2="80" y2="156" stroke="url(#md-blue)" stroke-width="3" />
+      <line x1="22" y1="168" x2="120" y2="168" stroke="rgba(255,255,255,0.2)" stroke-width="3" />
+      <line x1="22" y1="180" x2="60" y2="180" stroke="rgba(255,255,255,0.2)" stroke-width="3" />
+    </g>
+
+    <!-- Right Preview Pane (Rendered HTML) -->
+    <!-- Mimic clean light/dark paper block -->
+    <g transform="translate(224, 56)">
+      <!-- Rendered header -->
+      <rect x="10" y="8" width="120" height="16" rx="3" fill="#ffffff" opacity="0.9" filter="url(#neon-glow)" />
+      <line x1="10" y1="32" x2="170" y2="32" stroke="rgba(255,255,255,0.1)" stroke-width="2" />
+      
+      <!-- Rendered body blocks -->
+      <rect x="10" y="44" width="160" height="6" rx="2" fill="rgba(255,255,255,0.4)" />
+      <rect x="10" y="56" width="110" height="6" rx="2" fill="rgba(255,255,255,0.4)" />
+      
+      <rect x="10" y="76" width="90" height="10" rx="2" fill="#ffffff" opacity="0.9" />
+
+      <!-- Checklist checked mock -->
+      <circle cx="16" cy="106" r="6" fill="#10b981" />
+      <path d="M13 106 L15 108 L19 104" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" />
+      <rect x="28" y="103" width="90" height="6" rx="2" fill="rgba(255,255,255,0.4)" />
+
+      <!-- Checklist unchecked mock -->
+      <circle cx="16" cy="126" r="5" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" />
+      <rect x="28" y="123" width="70" height="6" rx="2" fill="rgba(255,255,255,0.4)" />
+
+      <!-- Code Block mock -->
+      <rect x="10" y="140" width="160" height="60" rx="6" fill="#1e293b" />
+      <rect x="20" y="152" width="50" height="6" rx="2" fill="url(#md-blue)" />
+      <rect x="20" y="166" width="110" height="6" rx="2" fill="rgba(255,255,255,0.3)" />
+      <rect x="20" y="180" width="70" height="6" rx="2" fill="rgba(255,255,255,0.3)" />
+    </g>
+
+    <!-- Floating Classic Markdown "M" Badge Symbol at top center -->
+    <g transform="translate(180, 16)">
+      <rect width="56" height="32" rx="6" fill="#080a13" stroke="url(#md-blue)" stroke-width="2.5" filter="url(#neon-glow)" />
+      <!-- M letter -->
+      <path d="M12 22 V10 L18 16 L24 10 V22" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+      <!-- Down Arrow -->
+      <path d="M34 10 V22 M30 18 L34 22 L38 18" fill="none" stroke="#6366f1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+    </g>
+  </g>
+</svg>
