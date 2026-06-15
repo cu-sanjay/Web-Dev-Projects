@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexus HRMS</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+
+  <!-- Dynamic Background -->
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-orb orb-3"></div>
+
+  <div class="app-container glass-panel">
+    
+    <!-- Sidebar -->
+    <aside class="sidebar border-right">
+      <div class="brand">
+        <i class="ph-fill ph-hexagon"></i> <span>Nexus HRMS</span>
+      </div>
+
+      <nav class="sidebar-menu">
+        <button class="nav-btn active" data-target="dashboard"><i class="ph ph-squares-four"></i> Dashboard</button>
+        <button class="nav-btn" data-target="directory"><i class="ph ph-users"></i> Directory</button>
+        <button class="nav-btn" data-target="leaves"><i class="ph ph-calendar-x"></i> Leave Requests</button>
+        <button class="nav-btn" data-target="payroll"><i class="ph ph-currency-circle-dollar"></i> Payroll</button>
+      </nav>
+
+      <div class="user-profile border-top mt-auto">
+        <img src="https://ui-avatars.com/api/?name=HR+Admin&background=1e293b&color=fff" alt="User">
+        <div>
+          <div class="user-name">Alex Mercer</div>
+          <div class="user-status text-primary">HR Director</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      
+      <!-- Topbar -->
+      <header class="topbar border-bottom flex-between">
+        <div class="search-box glass-input">
+          <i class="ph ph-magnifying-glass"></i>
+          <input type="text" placeholder="Search employees, ID, or departments...">
+        </div>
+        <div class="flex-center gap-1">
+          <button class="icon-btn"><i class="ph ph-bell"></i></button>
+          <button class="icon-btn"><i class="ph ph-gear"></i></button>
+          <button class="primary-btn"><i class="ph ph-plus"></i> Add Employee</button>
+        </div>
+      </header>
+
+      <div class="scroll-area">
+        
+        <!-- Dashboard View -->
+        <section id="dashboard" class="view active">
+          <div class="page-heading mb-3">
+            <h1>Overview</h1>
+            <p class="text-muted">Company HR metrics for the current month.</p>
+          </div>
+
+          <div class="metrics-grid mb-3">
+            <div class="metric-card glass-panel">
+              <div class="metric-icon text-blue"><i class="ph-fill ph-users-three"></i></div>
+              <div>
+                <div class="metric-title">Total Employees</div>
+                <div class="metric-val">1,248</div>
+              </div>
+            </div>
+            <div class="metric-card glass-panel">
+              <div class="metric-icon text-orange"><i class="ph-fill ph-calendar-x"></i></div>
+              <div>
+                <div class="metric-title">On Leave Today</div>
+                <div class="metric-val">42</div>
+              </div>
+            </div>
+            <div class="metric-card glass-panel">
+              <div class="metric-icon text-green"><i class="ph-fill ph-user-plus"></i></div>
+              <div>
+                <div class="metric-title">New Hires (YTD)</div>
+                <div class="metric-val">156</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="split-layout">
+            <div class="glass-panel col-span-2">
+              <div class="panel-header border-bottom"><h3>Recent Onboarding</h3></div>
+              <div class="panel-body p-0">
+                <table class="custom-table">
+                  <thead>
+                    <tr><th>Name</th><th>Role</th><th>Department</th><th>Start Date</th><th>Status</th></tr>
+                  </thead>
+                  <tbody id="onboarding-tbody">
+                    <!-- JS Injected -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Directory View -->
+        <section id="directory" class="view hidden">
+          <div class="page-heading flex-between mb-3">
+            <div>
+              <h1>Employee Directory</h1>
+              <p class="text-muted">Manage active personnel records.</p>
+            </div>
+            <div class="flex-center gap-1">
+              <select class="glass-input p-sm">
+                <option>All Departments</option>
+                <option>Engineering</option>
+                <option>Design</option>
+                <option>Marketing</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="directory-grid" id="directory-grid">
+             <!-- JS Injected -->
+          </div>
+        </section>
+
+        <!-- Leave Requests View -->
+        <section id="leaves" class="view hidden">
+          <div class="page-heading mb-3">
+            <h1>Leave Requests</h1>
+            <p class="text-muted">Approve or reject pending time-off.</p>
+          </div>
+
+          <div class="glass-panel">
+            <div class="panel-body p-0">
+              <table class="custom-table">
+                <thead>
+                  <tr><th>Employee</th><th>Type</th><th>Duration</th><th>Reason</th><th>Action</th></tr>
+                </thead>
+                <tbody id="leaves-tbody">
+                  <!-- JS Injected -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Payroll View (Placeholder) -->
+        <section id="payroll" class="view hidden">
+          <div class="page-heading mb-3 flex-center flex-column" style="height: 400px;">
+            <i class="ph ph-lock-key text-muted" style="font-size: 4rem; margin-bottom: 1rem;"></i>
+            <h1>Payroll Module Locked</h1>
+            <p class="text-muted">You require higher admin privileges to access financial records.</p>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
