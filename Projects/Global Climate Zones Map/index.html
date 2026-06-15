@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Global Climate Zones Map — Earth Climate Classification Explorer</title>
+  <meta name="description" content="Explore Earth's major climate zones through an interactive world map, visualize climate distributions with dynamic overlays, compare environmental conditions across regions, and learn climate science through engaging educational content.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="app" class="app">
+    <aside class="panel panel--left" aria-label="Climate Intelligence Center">
+      <header class="panel-header">
+        <h1 class="logo">
+          <span class="logo-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#38bdf8" stroke-width="1.5">
+              <path d="M12 2a10 10 0 0 1 10 10c0 4-2.5 7.5-6 9"/>
+              <path d="M12 2a10 10 0 0 0-10 10c0 4 2.5 7.5 6 9"/>
+              <path d="M2 12h20"/><path d="M12 22V2"/>
+              <circle cx="12" cy="12" r="3" opacity="0.5"/>
+            </svg>
+          </span>
+          <span class="logo-text">Global Climate Zones</span>
+        </h1>
+        <p class="panel-subtitle">Earth Climate Classification Explorer</p>
+      </header>
+
+      <section class="zones-filter" aria-label="Climate zone filter">
+        <h2 class="section-label">Climate Zones</h2>
+        <div class="zone-cards" id="zoneCards" role="tablist" aria-label="Select climate zone">
+          <button class="zone-card zone-card--active" data-zone="all" role="tab" aria-selected="true" tabindex="0">
+            <span class="zone-card-dot" style="--dot-color:#38bdf8"></span>
+            <span class="zone-card-label">All Zones</span>
+          </button>
+          <button class="zone-card" data-zone="tropical" role="tab" aria-selected="false" tabindex="-1">
+            <span class="zone-card-dot" style="--dot-color:#22c55e"></span>
+            <span class="zone-card-label">Tropical</span>
+          </button>
+          <button class="zone-card" data-zone="desert" role="tab" aria-selected="false" tabindex="-1">
+            <span class="zone-card-dot" style="--dot-color:#f59e0b"></span>
+            <span class="zone-card-label">Desert</span>
+          </button>
+          <button class="zone-card" data-zone="temperate" role="tab" aria-selected="false" tabindex="-1">
+            <span class="zone-card-dot" style="--dot-color:#38bdf8"></span>
+            <span class="zone-card-label">Temperate</span>
+          </button>
+          <button class="zone-card" data-zone="polar" role="tab" aria-selected="false" tabindex="-1">
+            <span class="zone-card-dot" style="--dot-color:#e0f2fe"></span>
+            <span class="zone-card-label">Polar</span>
+          </button>
+          <button class="zone-card" data-zone="mountain" role="tab" aria-selected="false" tabindex="-1">
+            <span class="zone-card-dot" style="--dot-color:#64748b"></span>
+            <span class="zone-card-label">Mountain</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="stats-section" aria-label="Climate statistics">
+        <h2 class="section-label">Climate Statistics</h2>
+        <div class="stats-grid" id="statsGrid">
+          <div class="stat-card">
+            <span class="stat-value" id="statRegions">5</span>
+            <span class="stat-label">Climate Zones</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value" id="statTemp">14.8°C</span>
+            <span class="stat-label">Avg Temperature</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value" id="statRainfall">990 mm</span>
+            <span class="stat-label">Avg Rainfall</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value" id="statBiodiversity">82%</span>
+            <span class="stat-label">Biodiversity</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="overlay-section" aria-label="Climate overlay controls">
+        <h2 class="section-label">Overlay Layers</h2>
+        <div class="overlay-controls" id="overlayControls" role="toolbar" aria-label="Map overlay toggles">
+          <button class="overlay-btn overlay-btn--active" data-overlay="temperature" aria-pressed="true">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M12 12v10"/></svg>
+            Temperature
+          </button>
+          <button class="overlay-btn" data-overlay="rainfall" aria-pressed="false">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8 6 4 10 4 14c0 4.4 3.6 8 8 8s8-3.6 8-8c0-4-4-8-8-12z"/></svg>
+            Rainfall
+          </button>
+          <button class="overlay-btn" data-overlay="vegetation" aria-pressed="false">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L9 9l-7 1 5 5-1 7 6-3 6 3-1-7 5-5-7-1z"/></svg>
+            Vegetation
+          </button>
+          <button class="overlay-btn" data-overlay="population" aria-pressed="false">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Population
+          </button>
+          <button class="overlay-btn" data-overlay="biodiversity" aria-pressed="false">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20.94c1.5-1.1 3-2.5 3-4.94 0-2-1.5-3-3-5-1.5 2-3 3-3 5 0 2.44 1.5 3.84 3 4.94z"/><path d="M12 2C8 6 4 10 4 14c0 4.4 3.6 8 8 8s8-3.6 8-8c0-4-4-8-8-12z"/></svg>
+            Biodiversity
+          </button>
+        </div>
+      </section>
+
+      <section class="clim-char-section" aria-label="Climate characteristics">
+        <h2 class="section-label">Climate Characteristics</h2>
+        <div class="char-panel" id="charPanel">
+          <div class="char-row">
+            <span class="char-label">Temperature Range</span>
+            <span class="char-value" id="charTemp">—</span>
+          </div>
+          <div class="char-row">
+            <span class="char-label">Humidity Level</span>
+            <span class="char-value" id="charHumidity">—</span>
+          </div>
+          <div class="char-row">
+            <span class="char-label">Rainfall Amount</span>
+            <span class="char-value" id="charRainfall">—</span>
+          </div>
+          <div class="char-row">
+            <span class="char-label">Seasonal Variation</span>
+            <span class="char-value" id="charSeasonal">—</span>
+          </div>
+          <div class="char-row">
+            <span class="char-label">Vegetation Density</span>
+            <span class="char-value" id="charVegDensity">—</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="learning-feed" aria-label="Learning activity feed">
+        <h2 class="section-label">Learning Feed</h2>
+        <div class="feed-container" id="feedContainer" role="log" aria-live="polite" aria-relevant="additions">
+          <p class="feed-empty">Select a region to begin learning about Earth's climate systems.</p>
+        </div>
+      </section>
+    </aside>
+
+    <main class="panel panel--right" aria-label="Interactive Climate Map">
+      <div class="map-toolbar" id="mapToolbar">
+        <div class="toolbar-group">
+          <span class="toolbar-label">Zone</span>
+          <span class="toolbar-value" id="tbZone">All Zones</span>
+        </div>
+        <div class="toolbar-group">
+          <span class="toolbar-label">Region</span>
+          <span class="toolbar-value" id="tbRegion">—</span>
+        </div>
+        <div class="toolbar-group">
+          <span class="toolbar-label">Avg Temp</span>
+          <span class="toolbar-value" id="tbTemp">14.8°C</span>
+        </div>
+        <div class="toolbar-group">
+          <span class="toolbar-label">Category</span>
+          <span class="toolbar-value" id="tbCategory">—</span>
+        </div>
+        <div class="toolbar-actions">
+          <button class="tb-btn" id="btnSeasonal" aria-label="Toggle seasonal mode" title="Seasonal Mode">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          </button>
+          <button class="tb-btn" id="btnCompare" aria-label="Open comparison tool" title="Compare Regions">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="7" height="18"/><rect x="15" y="3" width="7" height="18"/><path d="M12 3v18"/></svg>
+          </button>
+          <button class="tb-btn" id="btnQuiz" aria-label="Open climate quiz" title="Climate Quiz">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+          </button>
+          <button class="tb-btn" id="btnExport" aria-label="Export climate data" title="Export JSON">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="map-workspace">
+        <div class="map-container" id="mapContainer">
+          <svg class="climate-map" id="climateMap" viewBox="0 0 800 400" aria-label="Global climate zones interactive map" role="application">
+            <defs>
+              <!-- Zone gradient fills -->
+              <linearGradient id="gradTropical" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#22c55e" stop-opacity="0.3"/><stop offset="100%" stop-color="#16a34a" stop-opacity="0.3"/></linearGradient>
+              <linearGradient id="gradDesert" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#f59e0b" stop-opacity="0.3"/><stop offset="100%" stop-color="#d97706" stop-opacity="0.3"/></linearGradient>
+              <linearGradient id="gradTemperate" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#38bdf8" stop-opacity="0.25"/><stop offset="100%" stop-color="#0ea5e9" stop-opacity="0.25"/></linearGradient>
+              <linearGradient id="gradPolar" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#e0f2fe" stop-opacity="0.2"/><stop offset="100%" stop-color="#93c5fd" stop-opacity="0.2"/></linearGradient>
+              <linearGradient id="gradMountain" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#64748b" stop-opacity="0.25"/><stop offset="100%" stop-color="#475569" stop-opacity="0.25"/></linearGradient>
+
+              <!-- Overlay gradients -->
+              <linearGradient id="tempHot" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ef4444"/><stop offset="100%" stop-color="#f97316"/></linearGradient>
+              <linearGradient id="tempCold" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#e0f2fe"/></linearGradient>
+              <linearGradient id="rainHigh" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1d4ed8" stop-opacity="0.5"/><stop offset="100%" stop-color="#3b82f6" stop-opacity="0.3"/></linearGradient>
+              <linearGradient id="rainLow" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fcd34d" stop-opacity="0.3"/><stop offset="100%" stop-color="#f59e0b" stop-opacity="0.2"/></linearGradient>
+              <linearGradient id="vegDense" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#15803d" stop-opacity="0.5"/><stop offset="100%" stop-color="#16a34a" stop-opacity="0.3"/></linearGradient>
+              <linearGradient id="vegSparse" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#a16207" stop-opacity="0.3"/><stop offset="100%" stop-color="#ca8a04" stop-opacity="0.2"/></linearGradient>
+              <radialGradient id="popDense"><stop offset="0%" stop-color="#dc2626" stop-opacity="0.4"/><stop offset="100%" stop-color="#dc2626" stop-opacity="0"/></radialGradient>
+              <radialGradient id="bioRich"><stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.4"/><stop offset="100%" stop-color="#8b5cf6" stop-opacity="0"/></radialGradient>
+
+              <filter id="mapShadow"><feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#000" flood-opacity="0.3"/></filter>
+              <filter id="glow"><feGaussianBlur stdDeviation="3"/></filter>
+            </defs>
+
+            <rect x="0" y="0" width="800" height="400" fill="#07111f"/>
+
+            <!-- Grid lines -->
+            <g class="map-grid" stroke="#1e3a5f" stroke-width="0.4" fill="none" opacity="0.35">
+              <line x1="0" y1="50" x2="800" y2="50"/><line x1="0" y1="100" x2="800" y2="100"/>
+              <line x1="0" y1="150" x2="800" y2="150"/><line x1="0" y1="200" x2="800" y2="200"/>
+              <line x1="0" y1="250" x2="800" y2="250"/><line x1="0" y1="300" x2="800" y2="300"/>
+              <line x1="0" y1="350" x2="800" y2="350"/>
+              <line x1="100" y1="0" x2="100" y2="400"/><line x1="200" y1="0" x2="200" y2="400"/>
+              <line x1="300" y1="0" x2="300" y2="400"/><line x1="400" y1="0" x2="400" y2="400"/>
+              <line x1="500" y1="0" x2="500" y2="400"/><line x1="600" y1="0" x2="600" y2="400"/>
+              <line x1="700" y1="0" x2="700" y2="400"/>
+            </g>
+
+            <!-- Continents (rendered by JS) -->
+            <g id="continentsGroup" aria-label="Continents"></g>
+
+            <!-- Climate regions (rendered by JS) -->
+            <g id="regionsGroup" aria-label="Climate regions" filter="url(#mapShadow)"></g>
+
+            <!-- Region markers (rendered by JS) -->
+            <g id="markersGroup" aria-label="Region markers"></g>
+
+            <!-- Overlay layers (rendered by JS) -->
+            <g id="overlayGroup" aria-label="Map overlays"></g>
+          </svg>
+
+          <div class="map-legend" id="mapLegend">
+            <span class="legend-label">Legend:</span>
+            <span class="legend-item" style="--item-color:#22c55e">Tropical</span>
+            <span class="legend-item" style="--item-color:#f59e0b">Desert</span>
+            <span class="legend-item" style="--item-color:#38bdf8">Temperate</span>
+            <span class="legend-item" style="--item-color:#e0f2fe">Polar</span>
+            <span class="legend-item" style="--item-color:#64748b">Mountain</span>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Region Info Modal -->
+  <div class="modal-overlay" id="infoModal" hidden aria-hidden="true">
+    <div class="modal modal--wide" role="dialog" aria-modal="true" aria-labelledby="infoModalTitle">
+      <div class="modal-header">
+        <h2 id="infoModalTitle">Region Details</h2>
+        <button class="modal-close" id="infoModalClose" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body" id="infoModalBody"></div>
+    </div>
+  </div>
+
+  <!-- Comparison Modal -->
+  <div class="modal-overlay" id="compareModal" hidden aria-hidden="true">
+    <div class="modal modal--wide" role="dialog" aria-modal="true" aria-labelledby="compareModalTitle">
+      <div class="modal-header">
+        <h2 id="compareModalTitle">Climate Zone Comparison</h2>
+        <button class="modal-close" id="compareModalClose" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body" id="compareModalBody"></div>
+    </div>
+  </div>
+
+  <!-- Quiz Modal -->
+  <div class="modal-overlay" id="quizModal" hidden aria-hidden="true">
+    <div class="modal modal--narrow" role="dialog" aria-modal="true" aria-labelledby="quizModalTitle">
+      <div class="modal-header">
+        <h2 id="quizModalTitle">Climate Knowledge Quiz</h2>
+        <button class="modal-close" id="quizModalClose" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body" id="quizModalBody"></div>
+    </div>
+  </div>
+
+  <!-- Bookmark Modal -->
+  <div class="modal-overlay" id="bookmarkModal" hidden aria-hidden="true">
+    <div class="modal modal--narrow" role="dialog" aria-modal="true" aria-labelledby="bookmarkModalTitle">
+      <div class="modal-header">
+        <h2 id="bookmarkModalTitle">Saved Regions</h2>
+        <button class="modal-close" id="bookmarkModalClose" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body" id="bookmarkModalBody"></div>
+    </div>
+  </div>
+
+  <!-- Climate Change Modal -->
+  <div class="modal-overlay" id="climateModal" hidden aria-hidden="true">
+    <div class="modal modal--narrow" role="dialog" aria-modal="true" aria-labelledby="climateModalTitle">
+      <div class="modal-header">
+        <h2 id="climateModalTitle">Climate Change Scenario</h2>
+        <button class="modal-close" id="climateModalClose" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body" id="climateModalBody"></div>
+    </div>
+  </div>
+
+  <!-- Achievement Toast -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
