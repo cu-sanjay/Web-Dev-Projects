@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dumpling Match — Connect the Pairs</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <div id="start-screen" class="overlay">
+            <h1>Dumpling Match 🥟</h1>
+            <p>Draw lines to connect the related dumplings!</p>
+            <button class="btn-cute" onclick="startGame()">Start Game</button>
+        </div>
+
+        <div id="win-screen" class="overlay hidden">
+            <h1 style="font-size: 4rem;">✨ Delicious! ✨</h1>
+            <p id="level-msg">You matched them all!</p>
+            <button class="btn-cute" onclick="nextLevel()">Next Level 🥟</button>
+        </div>
+
+        <div class="stats">
+            <div>Level: <span id="level-val">1</span></div>
+            <div>Matches: <span id="match-val">0</span>/4</div>
+        </div>
+
+        <div class="game-area" id="game-area">
+            <svg id="line-svg"></svg>
+            <div class="column" id="left-col"></div>
+            <div class="column" id="right-col"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

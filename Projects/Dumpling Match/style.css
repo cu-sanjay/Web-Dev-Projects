@@ -1,0 +1,140 @@
+  @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap');
+
+        :root {
+            --bg: #fffcf2;
+            --primary: #ff85a2;
+            --secondary: #ffc2d1;
+            --accent: #b2f2bb;
+            --text: #5e4d52;
+            --line-correct: #4ade80;
+            --line-wrong: #fb7185;
+            --dumpling-skin: #fff;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Fredoka', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+            touch-action: none;
+        }
+
+        .container {
+            width: 95%;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+        }
+
+        h1 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin: 0 0 5px;
+            text-shadow: 3px 3px 0px white;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .game-area {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 0;
+            z-index: 5;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 140px;
+        }
+
+        .dumpling {
+            background: var(--dumpling-skin);
+            border: 3px solid var(--secondary);
+            border-radius: 50% 50% 40% 40% / 60% 60% 40% 40%;
+            padding: 15px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 6px 0 var(--secondary);
+            transition: all 0.2s;
+            user-select: none;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 50px;
+        }
+
+        .dumpling:active {
+            transform: translateY(3px);
+            box-shadow: 0 3px 0 var(--secondary);
+        }
+
+        .dumpling.selected {
+            border-color: var(--primary);
+            background: #fff0f3;
+        }
+
+        .dumpling.matched {
+            background: #f0fdf4;
+            border-color: var(--line-correct);
+            color: var(--line-correct);
+            pointer-events: none;
+            box-shadow: none;
+            transform: translateY(3px);
+        }
+
+        #line-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            transition: opacity 0.3s;
+        }
+
+        .btn-cute {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 6px 0px #d81b60;
+            transition: 0.1s;
+            margin-top: 20px;
+        }
+
+        .btn-cute:active { transform: translateY(3px); box-shadow: 0 3px 0px #d81b60; }
+
+        .hidden { display: none !important; }
