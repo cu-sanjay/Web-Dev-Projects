@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Finance Management</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+
+  <!-- Sidebar Navigation -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="logo-box">
+        <i class="ph-fill ph-wallet"></i>
+      </div>
+      <h2>FinTrack</h2>
+    </div>
+    
+    <nav class="sidebar-menu">
+      <ul>
+        <li class="active" data-tab="dashboard">
+          <i class="ph ph-squares-four"></i> Dashboard
+        </li>
+        <li data-tab="transactions">
+          <i class="ph ph-list-dashes"></i> Transactions
+        </li>
+        <li data-tab="budgets">
+          <i class="ph ph-chart-pie-slice"></i> Budgets
+        </li>
+        <li data-tab="goals">
+          <i class="ph ph-target"></i> Goals
+        </li>
+      </ul>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-profile">
+        <img src="https://ui-avatars.com/api/?name=Vishwa+Mistry&background=6366f1&color=fff" alt="User Avatar" class="avatar">
+        <div class="user-info">
+          <strong>Vishwa Mistry</strong>
+          <span>Free Plan</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content Wrapper -->
+  <main class="main-content">
+    
+    <!-- Top Header -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <button id="mobile-menu-btn" class="icon-btn"><i class="ph ph-list"></i></button>
+        <div class="search-input">
+          <i class="ph ph-magnifying-glass"></i>
+          <input type="text" placeholder="Search transactions, categories...">
+        </div>
+      </div>
+      <div class="topbar-right">
+        <button class="icon-btn notification-btn"><i class="ph ph-bell"></i><span class="badge">1</span></button>
+        <button class="btn primary-btn"><i class="ph ph-plus"></i> Add Expense</button>
+      </div>
+    </header>
+
+    <!-- Scrollable Body Area -->
+    <div class="body-area">
+      
+      <!-- ================= DASHBOARD TAB ================= -->
+      <section id="dashboard" class="tab-content active">
+        
+        <div class="welcome-card">
+          <div class="welcome-text">
+            <h1>Welcome back, Vishwa! 👋</h1>
+            <p>Your financial summary for October 2026. You're staying well within your budget limits.</p>
+          </div>
+          <button class="btn secondary-btn" onclick="document.querySelector('[data-tab=\\'goals\\']').click()"><i class="ph ph-arrow-right"></i> View Goals</button>
+        </div>
+
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-icon bg-indigo-light text-indigo"><i class="ph-fill ph-bank"></i></div>
+            <div class="metric-data">
+              <h3>Total Balance</h3>
+              <h2>$12,450.00</h2>
+            </div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon bg-green-light text-green"><i class="ph-fill ph-trend-up"></i></div>
+            <div class="metric-data">
+              <h3>Monthly Income</h3>
+              <h2>$4,200.00</h2>
+            </div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon bg-red-light text-red"><i class="ph-fill ph-trend-down"></i></div>
+            <div class="metric-data">
+              <h3>Monthly Expenses</h3>
+              <h2>$1,840.50</h2>
+            </div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon bg-orange-light text-orange"><i class="ph-fill ph-piggy-bank"></i></div>
+            <div class="metric-data">
+              <h3>Total Savings</h3>
+              <h2>$6,300.00</h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="split-layout">
+          <!-- Recent Transactions Preview -->
+          <div class="panel col-span-2">
+            <div class="panel-header flex-between">
+              <h3>Recent Transactions</h3>
+              <button class="text-btn" onclick="document.querySelector('[data-tab=\\'transactions\\']').click()">View All</button>
+            </div>
+            <div class="panel-body p-0">
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Date</th>
+                    <th>Amount</th>
+                  </tr>
+                </thead>
+                <tbody id="recent-transactions-tbody">
+                  <!-- Injected via JavaScript -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Quick Spend Breakdown -->
+          <div class="panel">
+            <div class="panel-header">
+              <h3>Spend Breakdown</h3>
+            </div>
+            <div class="panel-body flex-center column">
+              <div class="radial-chart">
+                <i class="ph-fill ph-chart-pie-slice text-indigo" style="font-size: 6rem; opacity: 0.9"></i>
+              </div>
+              <div class="legend-box mt-3">
+                <div class="legend-item"><span class="dot bg-indigo"></span> Housing (45%)</div>
+                <div class="legend-item"><span class="dot bg-orange"></span> Food (25%)</div>
+                <div class="legend-item"><span class="dot bg-red"></span> Transport (15%)</div>
+                <div class="legend-item"><span class="dot bg-green"></span> Utilities (15%)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ================= TRANSACTIONS TAB ================= -->
+      <section id="transactions" class="tab-content hidden">
+        <div class="page-heading flex-between">
+          <div>
+            <h1>All Transactions</h1>
+            <p class="text-muted">A complete history of your income and expenses.</p>
+          </div>
+          <div class="filter-group">
+            <select class="form-select">
+              <option>All Types</option>
+              <option>Income</option>
+              <option>Expense</option>
+            </select>
+            <select class="form-select">
+              <option>This Month</option>
+              <option>Last Month</option>
+              <option>This Year</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-body p-0">
+             <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Type</th>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="all-transactions-tbody">
+                  <!-- Injected via JavaScript -->
+                </tbody>
+              </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= BUDGETS TAB ================= -->
+      <section id="budgets" class="tab-content hidden">
+        <div class="page-heading">
+          <h1>Budget Categories</h1>
+          <p class="text-muted">Monitor your spending limits and see where your money goes.</p>
+        </div>
+
+        <div class="budget-grid" id="budget-grid">
+          <!-- Injected via JavaScript -->
+        </div>
+      </section>
+
+      <!-- ================= GOALS TAB ================= -->
+      <section id="goals" class="tab-content hidden">
+        <div class="page-heading flex-between">
+          <div>
+            <h1>Financial Goals</h1>
+            <p class="text-muted">Track progress towards your long-term savings targets.</p>
+          </div>
+          <button class="btn primary-btn"><i class="ph ph-plus"></i> New Goal</button>
+        </div>
+
+        <div class="split-layout">
+          <div class="panel col-span-2">
+            <div class="panel-body">
+              <div class="goal-list" id="goal-list">
+                <!-- Injected via JavaScript -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
