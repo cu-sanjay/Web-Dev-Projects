@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lens Optics Simulator - Refraction Ray Tracer & Prism Dispersion Emitter</title>
+  <meta name="description" content="Explore paraxial light refraction in convex/concave lenses and Cauchy spectrum dispersion inside a glass triangular prism with real-time vector ray tracing.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-title-wrapper">
+        <div class="pulse-indicator"></div>
+        <h1>LENS OPTICS SIMULATOR</h1>
+        <span class="version-tag">v2.4.0-REFRACT</span>
+      </div>
+      <p class="header-subtitle">Interactive Geometric Ray Tracer & Snell's Law Refraction Sandbox</p>
+    </header>
+
+    <!-- Main Workspace Dashboard Grid -->
+    <main class="dashboard-grid">
+      
+      <!-- Left Panel: Parameters & Lens Settings -->
+      <section class="panel panel-left" aria-labelledby="controls-heading">
+        <h2 id="controls-heading" class="panel-title">OPTICS CONTROL DECK</h2>
+        
+        <!-- Mode Toggle -->
+        <div class="control-group">
+          <label class="control-label">SIMULATION RAY MODE</label>
+          <div class="mode-selector">
+            <button id="btn-mode-rays" class="mode-btn active" data-mode="rays">
+              <span class="mode-icon">🏹</span>
+              <span class="mode-text">Lens Ray Tracer</span>
+            </button>
+            <button id="btn-mode-prism" class="mode-btn" data-mode="prism">
+              <span class="mode-icon">💎</span>
+              <span class="mode-text">Refraction Sandbox</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Optical Component Geometry Selector -->
+        <div class="control-group" id="optical-component-group">
+          <label class="control-label">OPTICAL ELEMENT BOUNDARY</label>
+          <div class="select-wrapper">
+            <select id="select-component" aria-label="Select optical refraction component">
+              <option value="convex">Double Convex Lens (Converging)</option>
+              <option value="concave">Double Concave Lens (Diverging)</option>
+              <option value="prism">Triangular Glass Prism</option>
+              <option value="slab">Parallel Glass Slab</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Lens / Component Specs Sliders -->
+        <div class="control-group">
+          <label class="control-label">REFRACTIVE SPECS</label>
+          
+          <!-- Focal Length slider -->
+          <div class="slider-wrapper" id="group-focal-length">
+            <div class="slider-label-row">
+              <label for="slider-focal-length" id="lbl-focal-length">Focal Length (f)</label>
+              <span id="val-focal-length" class="slider-val">120 px</span>
+            </div>
+            <input type="range" id="slider-focal-length" min="50" max="220" step="5" value="120" aria-labelledby="lbl-focal-length">
+          </div>
+
+          <!-- Glass Index of Refraction slider -->
+          <div class="slider-wrapper" id="group-refractive-index">
+            <div class="slider-label-row">
+              <label for="slider-index" id="lbl-index">Glass Refraction Index (n)</label>
+              <span id="val-index" class="slider-val">1.50</span>
+            </div>
+            <input type="range" id="slider-index" min="1.10" max="2.00" step="0.02" value="1.50" aria-labelledby="lbl-index">
+          </div>
+
+          <!-- Aperture Height slider -->
+          <div class="slider-wrapper" id="group-aperture-size">
+            <div class="slider-label-row">
+              <label for="slider-aperture" id="lbl-aperture">Aperture Size</label>
+              <span id="val-aperture" class="slider-val">240 px</span>
+            </div>
+            <input type="range" id="slider-aperture" min="100" max="320" step="10" value="240" aria-labelledby="lbl-aperture">
+          </div>
+        </div>
+
+        <!-- Ray Source Configuration -->
+        <div class="control-group" id="light-source-group">
+          <div class="group-header">
+            <label class="control-label">LIGHT SOURCE CONFIG</label>
+            <button id="btn-reset-params" class="text-btn">Reset Defaults</button>
+          </div>
+
+          <div class="select-wrapper">
+            <select id="select-source-type" aria-label="Select light source type">
+              <option value="object">Draggable Arrow Object</option>
+              <option value="beam">Collimated Beam (Parallel Rays)</option>
+              <option value="point">Radial Point Source (Divergent)</option>
+              <option value="laser">Single Laser Pointer</option>
+            </select>
+          </div>
+
+          <!-- Beam incidence angle -->
+          <div class="slider-wrapper margin-top" id="group-source-angle">
+            <div class="slider-label-row">
+              <label for="slider-source-angle" id="lbl-source-angle">Beam Tilt Angle</label>
+              <span id="val-source-angle" class="slider-val">0°</span>
+            </div>
+            <input type="range" id="slider-source-angle" min="-50" max="50" step="1" value="0" aria-labelledby="lbl-source-angle">
+          </div>
+
+          <!-- Ray density -->
+          <div class="slider-wrapper" id="group-ray-count">
+            <div class="slider-label-row">
+              <label for="slider-ray-count" id="lbl-ray-count">Ray Density</label>
+              <span id="val-ray-count" class="slider-val">12 rays</span>
+            </div>
+            <input type="range" id="slider-ray-count" min="3" max="35" step="1" value="12" aria-labelledby="lbl-ray-count">
+          </div>
+
+          <!-- White light spectrum toggle -->
+          <div class="checkbox-wrapper" id="group-white-light">
+            <label class="checkbox-label" for="chk-white-light">
+              <input type="checkbox" id="chk-white-light">
+              <span class="checkbox-custom"></span>
+              Enable White Light (Cauchy Rainbow Dispersion)
+            </label>
+          </div>
+        </div>
+
+        <!-- Instruction Help Panel -->
+        <div class="panel-info">
+          <h3>📌 Quick Operator Guide</h3>
+          <div id="guide-text" class="guide-scroll">
+            Set "Double Convex Lens" and "Draggable Arrow Object" to study paraxial refraction. Drag the green arrow object to adjust distances. Watch principal rays converge to form a real/virtual image.
+          </div>
+        </div>
+      </section>
+
+      <!-- Center Panel: Interactive Viewport Canvas -->
+      <section class="panel panel-center" aria-labelledby="canvas-heading">
+        <div class="canvas-header-row">
+          <h2 id="canvas-heading" class="panel-title">INTERACTIVE OPTICS VIEWPORT</h2>
+          <div id="sim-status-badge" class="status-badge live">LENS RAY</div>
+        </div>
+
+        <!-- Canvas Container -->
+        <div class="canvas-container">
+          <canvas id="sim-canvas" width="600" height="400"></canvas>
+          
+          <!-- Floating Interactive HUD indicators -->
+          <div class="canvas-hud">
+            <div class="hud-item">
+              <span class="hud-label">Object (d<sub>o</sub>):</span>
+              <span id="hud-do" class="hud-value">180.0px</span>
+            </div>
+            <div class="hud-item">
+              <span class="hud-label">Image (d<sub>i</sub>):</span>
+              <span id="hud-di" class="hud-value">360.0px</span>
+            </div>
+            <div class="hud-item">
+              <span class="hud-label">Magnification (m):</span>
+              <span id="hud-mag" class="hud-value">-2.00x</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Playback timeline Scrubbers -->
+        <div class="playback-controls">
+          <button id="btn-play-pause" class="playback-btn primary" title="Play/Pause simulation">
+            <span id="play-icon">⏸️</span> <span id="play-text">Pause</span>
+          </button>
+          <button id="btn-reset-positions" class="playback-btn" title="Reset object coordinates">
+            <span>🔄</span> Reset Objects
+          </button>
+          
+          <div class="speed-control">
+            <span class="speed-label">TIME WARP:</span>
+            <div class="speed-options">
+              <button class="speed-btn" data-speed="0.25">0.25x</button>
+              <button class="speed-btn" data-speed="0.5">0.5x</button>
+              <button class="speed-btn active" data-speed="1.0">1.0x</button>
+              <button class="speed-btn" data-speed="2.0">2.0x</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Panel: Presets & Optics Intersect Ledger -->
+      <section class="panel panel-right" aria-labelledby="telemetry-heading">
+        <h2 id="telemetry-heading" class="panel-title">PRESETS & DATA LEDGER</h2>
+
+        <!-- Scenario presets -->
+        <div class="control-group">
+          <label class="control-label">OPTICAL PHENOMENON PRESETS</label>
+          <div class="presets-grid">
+            <button class="preset-btn active" data-preset="preset-magnifier">Virtual Magnifier</button>
+            <button class="preset-btn" data-preset="preset-projector">Real Image Projector</button>
+            <button class="preset-btn" data-preset="preset-concave">Diverging Lens (Concave)</button>
+            <button class="preset-btn" data-preset="preset-prism">Prism Rainbow Dispersion</button>
+            <button class="preset-btn" data-preset="preset-slab">Glass Slab Displacement</button>
+            <button class="preset-btn" data-preset="preset-tir">Critical Angle TIR</button>
+          </div>
+        </div>
+
+        <!-- Telemetry Data Ledger Card -->
+        <div class="ledger-container">
+          <div class="ledger-header">
+            <span>📊 LENS CONJUGATION LEDGER</span>
+            <span id="lbl-image-type" class="green-glow">REAL & INVERTED</span>
+          </div>
+          <div class="ledger-body">
+            <div class="ledger-row">
+              <span>Focal Length (f):</span>
+              <strong id="led-f">120.0 px</strong>
+            </div>
+            <div class="ledger-row">
+              <span>Object Distance (d<sub>o</sub>):</span>
+              <strong id="led-do">180.0 px</strong>
+            </div>
+            <div class="ledger-row">
+              <span>Image Distance (d<sub>i</sub>):</span>
+              <strong id="led-di">360.0 px</strong>
+            </div>
+            <div class="ledger-row">
+              <span>Magnification (m):</span>
+              <strong id="led-m">-2.00x</strong>
+            </div>
+            <div class="ledger-row">
+              <span>Incident Angle (&theta;<sub>1</sub>):</span>
+              <strong id="led-incident">N/A</strong>
+            </div>
+            <div class="ledger-row">
+              <span>Refracted Angle (&theta;<sub>2</sub>):</span>
+              <strong id="led-refracted">N/A</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Observatory CRT Logs -->
+        <div class="logger-container">
+          <div class="logger-header">
+            <span>📟 OPTICS FLIGHT LOGS</span>
+            <button id="btn-clear-logs" class="text-btn">Clear Logs</button>
+          </div>
+          <div id="logger-console" class="logger-console-body">
+            <div class="log-entry log-sys">[SYS] Optics lens workbench online. Snell solvers operational.</div>
+            <div class="log-entry log-phys">[PHYSICS] Converging Lens active. Focal length: 120px. Index of Refraction: 1.50.</div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p>Lens Optics Simulator • Drag object arrow or laser emitters. Ray refraction is calculated dynamically at interfaces using vector Snell formulation.</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
