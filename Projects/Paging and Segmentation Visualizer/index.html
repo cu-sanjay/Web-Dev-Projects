@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paging and Segmentation Visualizer Virtual Memory Management</title>
+  <meta name="description" content="An interactive simulator for memory management address translations showing TLB lookups, page tables, page faults, segment limit checks, and segmentation faults.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-logo">
+        <a href="../../" class="back-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        </a>
+        <div class="logo-text">
+          <h1>Paging &amp; Segmentation <span class="accent-text">Visualizer</span></h1>
+          <p class="subtitle">Virtual Memory Address Translation Simulator</p>
+        </div>
+      </div>
+      
+      <div class="mode-toggles">
+        <button id="toggle-paging" class="mode-btn active" onclick="switchMode('paging')">Paging Mode</button>
+        <button id="toggle-segmentation" class="mode-btn" onclick="switchMode('segmentation')">Segmentation Mode</button>
+      </div>
+    </header>
+
+    <!-- Main Dashboard Grid -->
+    <main class="dashboard-grid">
+      
+      <!-- Left Column: Configurations & Address Decode -->
+      <section class="left-column">
+        
+        <!-- PAGING CONFIGURATION CARD -->
+        <div class="card config-card" id="card-config-paging">
+          <h2 class="card-title">Paging Memory Settings</h2>
+          
+          <div class="config-grid">
+            <div class="config-item">
+              <label for="page-size">Page Size</label>
+              <select id="page-size" class="custom-select-small">
+                <option value="1024">1 KB</option>
+                <option value="2048" selected>2 KB</option>
+                <option value="4096">4 KB</option>
+              </select>
+            </div>
+            
+            <div class="config-item">
+              <label for="ram-frames">Physical RAM Frames</label>
+              <select id="ram-frames" class="custom-select-small">
+                <option value="4">4 Frames</option>
+                <option value="8" selected>8 Frames</option>
+                <option value="16">16 Frames</option>
+              </select>
+            </div>
+
+            <div class="config-item">
+              <label for="tlb-entries">TLB Entries (Capacity)</label>
+              <select id="tlb-entries" class="custom-select-small">
+                <option value="2">2 Entries</option>
+                <option value="4" selected>4 Entries</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="page-table-editor mt-16">
+            <label>Page Table Frame Mapping Configuration:</label>
+            <div class="page-table-editor-scroll">
+              <table class="editor-table" id="editor-page-table">
+                <thead>
+                  <tr>
+                    <th>Page #</th>
+                    <th>Frame #</th>
+                    <th>Valid Bit</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Filled dynamically in script -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <button id="btn-apply-paging" class="btn btn-primary btn-full mt-12">Apply Paging Settings</button>
+        </div>
+
+        <!-- SEGMENTATION CONFIGURATION CARD -->
+        <div class="card config-card hidden" id="card-config-segmentation">
+          <h2 class="card-title">Segmentation Settings</h2>
+          
+          <div class="segmentation-editor">
+            <label>Segment Boundaries Configuration:</label>
+            <div class="table-container">
+              <table class="editor-table" id="editor-segment-table">
+                <thead>
+                  <tr>
+                    <th>Segment</th>
+                    <th>Base Address (KB)</th>
+                    <th>Limit Size (KB)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Code (0)</td>
+                    <td><input type="number" id="seg-base-0" min="0" max="999" value="12" class="cell-input"></td>
+                    <td><input type="number" id="seg-limit-0" min="1" max="999" value="6" class="cell-input"></td>
+                  </tr>
+                  <tr>
+                    <td>Data (1)</td>
+                    <td><input type="number" id="seg-base-1" min="0" max="999" value="20" class="cell-input"></td>
+                    <td><input type="number" id="seg-limit-1" min="1" max="999" value="4" class="cell-input"></td>
+                  </tr>
+                  <tr>
+                    <td>Stack (2)</td>
+                    <td><input type="number" id="seg-base-2" min="0" max="999" value="2" class="cell-input"></td>
+                    <td><input type="number" id="seg-limit-2" min="1" max="999" value="3" class="cell-input"></td>
+                  </tr>
+                  <tr>
+                    <td>Heap (3)</td>
+                    <td><input type="number" id="seg-base-3" min="0" max="999" value="35" class="cell-input"></td>
+                    <td><input type="number" id="seg-limit-3" min="1" max="999" value="8" class="cell-input"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="alert-info-message mt-8">
+              Adjust base locations and limits (in KB). Verify limits do not overlap with other segment addresses.
+            </p>
+          </div>
+
+          <button id="btn-apply-segmentation" class="btn btn-primary btn-full mt-12">Apply Segmentation Boundaries</button>
+        </div>
+
+        <!-- Address translation inputs -->
+        <div class="card address-translation-card">
+          <h2 class="card-title">Virtual Address Translation Pipeline</h2>
+          
+          <div class="translator-input-bar">
+            <!-- Paging Inputs -->
+            <div class="input-group-grid" id="input-paging-addr-wrapper">
+              <div class="input-item">
+                <label for="paging-virtual-addr">Logical Decimal Address</label>
+                <input type="number" id="paging-virtual-addr" min="0" value="4500" class="custom-input">
+              </div>
+              <div class="input-item display-only">
+                <label>Binary Breakdown</label>
+                <div class="binary-breakdown-box" id="paging-binary-txt">00000000000000</div>
+              </div>
+            </div>
+
+            <!-- Segmentation Inputs -->
+            <div class="input-group-grid hidden" id="input-seg-addr-wrapper">
+              <div class="input-item">
+                <label for="seg-number-select">Select Segment</label>
+                <select id="seg-number-select" class="custom-select-small">
+                  <option value="0">Code [Segment 0]</option>
+                  <option value="1">Data [Segment 1]</option>
+                  <option value="2">Stack [Segment 2]</option>
+                  <option value="3">Heap [Segment 3]</option>
+                </select>
+              </div>
+              <div class="input-item">
+                <label for="seg-offset-input">Offset (d) in KB</label>
+                <input type="number" id="seg-offset-input" min="0" value="3" class="custom-input">
+              </div>
+            </div>
+
+            <button id="btn-translate" class="btn btn-primary btn-full mt-16">Translate &amp; Animate Lookup</button>
+          </div>
+
+          <!-- Bit Slice Breakdown visualization -->
+          <div class="bit-breakdown-display mt-16" id="paging-bit-visual">
+            <div class="bit-box page-slice">
+              <span class="lbl">Page Number (p)</span>
+              <span id="txt-page-num" class="val">2</span>
+              <span id="txt-page-binary" class="bin">0010</span>
+            </div>
+            <div class="bit-box offset-slice">
+              <span class="lbl">Page Offset (d)</span>
+              <span id="txt-page-offset" class="val">404</span>
+              <span id="txt-page-offset-bin" class="bin">00110010100</span>
+            </div>
+          </div>
+
+          <!-- Segment bounds Visual breakdown -->
+          <div class="bit-breakdown-display mt-16 hidden" id="seg-bounds-visual">
+            <div class="bit-box page-slice" id="seg-check-box-1">
+              <span class="lbl">Offset (d)</span>
+              <span id="txt-seg-offset-check" class="val">3 KB</span>
+            </div>
+            <div class="comparison-sign" id="seg-check-sign">&lt;</div>
+            <div class="bit-box offset-slice" id="seg-check-box-2">
+              <span class="lbl">Segment Limit Size</span>
+              <span id="txt-seg-limit-check" class="val">6 KB</span>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Right Column: Visual Memory Maps and Analytics -->
+      <section class="right-column">
+        
+        <!-- Performance stats telemetry card -->
+        <div id="stats-panel" class="stats-panel-card card blue-gradient">
+          <div class="stats-header">
+            <span class="stats-lbl">Translation Statistics</span>
+            <div id="status-badge" class="badge">Safe</div>
+          </div>
+          
+          <!-- Paging Telemetry -->
+          <div class="stats-grid mt-12" id="stats-paging-grid">
+            <div class="stat-box">
+              <span class="stat-label">Total lookups</span>
+              <span id="stat-paging-total" class="stat-num">0</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">TLB Hits</span>
+              <span id="stat-tlb-hits" class="stat-num text-success">0</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">TLB Hit Rate</span>
+              <span id="stat-tlb-rate" class="stat-num text-cyan">0%</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">Page Faults</span>
+              <span id="stat-page-faults" class="stat-num text-danger">0</span>
+            </div>
+          </div>
+
+          <!-- Segmentation Telemetry -->
+          <div class="stats-grid mt-12 hidden" id="stats-seg-grid">
+            <div class="stat-box">
+              <span class="stat-label">Total lookups</span>
+              <span id="stat-seg-total" class="stat-num">0</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">Access Safe</span>
+              <span id="stat-seg-safe" class="stat-num text-success">0</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">Seg Faults</span>
+              <span id="stat-seg-faults" class="stat-num text-danger">0</span>
+            </div>
+          </div>
+
+          <div class="progress-bar-container">
+            <div id="tlb-progress-bar" class="progress-bar-fill" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <!-- PAGING PIPELINE VISUAL CONTAINER -->
+        <div class="paging-visual-container" id="visual-paging-wrapper">
+          
+          <!-- TLB cache table -->
+          <div class="card tlb-card">
+            <h3 class="card-title">TLB (Translation Lookaside Buffer)</h3>
+            <div class="table-container">
+              <table id="tlb-table" class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Slot</th>
+                    <th>Page Number</th>
+                    <th>Frame Number</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Dynamic TLB rows -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Memory mapping panels -->
+          <div class="memory-grid-panels">
+            <!-- Logical page listings -->
+            <div class="card mem-panel-card">
+              <h3 class="card-title-small">Logical Pages</h3>
+              <div id="logical-pages-list" class="block-items-scroll">
+                <!-- Dynamically populated page blocks -->
+              </div>
+            </div>
+            
+            <!-- Page Table -->
+            <div class="card mem-panel-card">
+              <h3 class="card-title-small">Page Table</h3>
+              <div id="page-table-list" class="block-items-scroll">
+                <!-- Dynamically populated page table rows -->
+              </div>
+            </div>
+
+            <!-- Physical frames list -->
+            <div class="card mem-panel-card">
+              <h3 class="card-title-small">Physical RAM</h3>
+              <div id="physical-frames-list" class="block-items-scroll">
+                <!-- Dynamically populated frames blocks -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SEGMENTATION PIPELINE VISUAL CONTAINER -->
+        <div class="segmentation-visual-container hidden" id="visual-segmentation-wrapper">
+          
+          <!-- Segment Table -->
+          <div class="card segment-table-card">
+            <h3 class="card-title">Segment Table</h3>
+            <div class="table-container">
+              <table id="segment-table" class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Segment ID</th>
+                    <th>Segment Name</th>
+                    <th>Base Address (KB)</th>
+                    <th>Limit Size (KB)</th>
+                    <th>Access Permissions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Dynamically populated segment table rows -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Physical memory layout blocks list -->
+          <div class="card ram-card">
+            <h3 class="card-title">Physical Memory Allocation Map (64 KB RAM)</h3>
+            <div id="segment-physical-bar" class="segment-physical-bar-container">
+              <!-- Grid blocks representing segment placements inside physical memory -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Trace console logs -->
+        <div class="card log-card">
+          <div class="log-header">
+            <h3 class="card-title">Address Translation Log</h3>
+            <button id="btn-clear-logs" class="btn btn-small">Clear Log</button>
+          </div>
+          <div id="log-console" class="console">
+            <!-- Dynamically populated trace logs -->
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Bottom Section: Theory drawer -->
+    <section class="theory-section card">
+      <h3 class="section-title">Educational Resources & Theory</h3>
+      
+      <div class="theory-grid">
+        <div class="theory-card">
+          <h4>Address Translation under Paging</h4>
+          <p>
+            In paging, the CPU generates virtual addresses split into a **Page Number ($p$)** and a **Page Offset ($d$)**:
+          </p>
+          <ul>
+            <li><strong>Page Size:</strong> Determines offset bit lengths ($d = \log_2(\text{Page Size})$).</li>
+            <li><strong>TLB Lookup:</strong> A high-speed hardware cache. If mapping for $p$ is in TLB, it's a **TLB Hit**; Frame $f$ is retrieved immediately. Otherwise (TLB Miss), it queries the Page Table.</li>
+            <li><strong>Page Table Lookup:</strong> Translates Page $p$ to Frame $f$. If the valid bit is `0`, it causes a **Page Fault**, interrupting the CPU to load the page from Disk to RAM.</li>
+            <li><strong>Physical Address Calculation:</strong> $\text{Physical Address} = (f \times \text{Page Size}) + d$.</li>
+          </ul>
+        </div>
+
+        <div class="theory-card">
+          <h4>Address Translation under Segmentation</h4>
+          <p>
+            Segmentation maps virtual memory into logical, variable-sized units (e.g. Code, Stack, Data) matching program structures:
+          </p>
+          <ul>
+            <li><strong>Segment Table:</strong> Stores the **Base Address** (where the segment starts in physical memory) and **Limit** (maximum length/size of the segment).</li>
+            <li><strong>Address Checking:</strong> CPU addresses specify Segment ID $s$ and Offset $d$. The hardware checks:
+              <ul>
+                <li>If $d < \text{Limit}$: Safe. $\text{Physical Address} = \text{Base} + d$.</li>
+                <li>If $d \ge \text{Limit}$: **Segmentation Fault Trap** (access violation error).</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <div class="theory-card">
+          <h4>TLB Replacement Policies</h4>
+          <p>
+            Because TLB cache capacity is small (e.g., 4 slots), loading a new mapping on a TLB Miss requires evicting an entry once slots are full:
+          </p>
+          <ul>
+            <li><strong>FIFO (First-In First-Out):</strong> Discards the oldest mapping entry in the cache.</li>
+            <li><strong>LRU (Least Recently Used):</strong> Tracks usage and discards the mapping that hasn't been referenced for the longest period.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Main JavaScript File -->
+  <script src="script.js"></script>
+</body>
+</html>
