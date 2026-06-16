@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <!-- Background Grid Pattern -->
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ffffff" stroke-width="1" stroke-opacity="0.03" />
+    </pattern>
+    
+    <!-- Glowing Filters -->
+    <filter id="glow-primary" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <filter id="glow-warning" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <!-- Gradients -->
+    <linearGradient id="grad-bar" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8b5cf6" />
+      <stop offset="100%" stop-color="#3b82f6" />
+    </linearGradient>
+  </defs>
+
+  <!-- Deep Slate Background -->
+  <rect width="100%" height="100%" fill="#0b0f19" />
+  
+  <!-- Subtle Grid overlay -->
+  <rect width="100%" height="100%" fill="url(#grid)" />
+
+  <!-- Title Card Mockup -->
+  <text x="400" y="60" text-anchor="middle" fill="#ffffff" font-family="'Outfit', sans-serif" font-size="28" font-weight="800" letter-spacing="3">CODING CHALLENGE TRACKER PRO</text>
+  <text x="400" y="90" text-anchor="middle" fill="#6b7280" font-family="'Fira Code', monospace" font-size="12" font-weight="600" letter-spacing="1.5">// GAMIFIED DEVELOPER ANALYTICS &amp; STATS</text>
+
+  <!-- KPI overview metrics cards -->
+  <g transform="translate(60, 130)">
+    <!-- Solved Problems Card -->
+    <rect x="0" y="0" width="150" height="80" rx="8" fill="#111827" fill-opacity="0.6" stroke="#ffffff" stroke-opacity="0.06" stroke-width="1.5" />
+    <text x="15" y="25" fill="#9ca3af" font-family="'Outfit', sans-serif" font-size="10" font-weight="700">SOLVED PROBLEMS</text>
+    <text x="15" y="60" fill="#ffffff" font-family="'Outfit', sans-serif" font-size="28" font-weight="800">42</text>
+  </g>
+
+  <g transform="translate(230, 130)">
+    <!-- Easy solved problems -->
+    <rect x="0" y="0" width="150" height="80" rx="8" fill="#111827" fill-opacity="0.6" stroke="#ffffff" stroke-opacity="0.06" stroke-width="1.5" />
+    <text x="15" y="25" fill="#9ca3af" font-family="'Outfit', sans-serif" font-size="10" font-weight="700">EASY PROBLEMS</text>
+    <text x="15" y="60" fill="#10b981" font-family="'Outfit', sans-serif" font-size="28" font-weight="800">18</text>
+  </g>
+
+  <g transform="translate(400, 130)">
+    <!-- Medium solved problems -->
+    <rect x="0" y="0" width="150" height="80" rx="8" fill="#111827" fill-opacity="0.6" stroke="#ffffff" stroke-opacity="0.06" stroke-width="1.5" />
+    <text x="15" y="25" fill="#9ca3af" font-family="'Outfit', sans-serif" font-size="10" font-weight="700">MEDIUM PROBLEMS</text>
+    <text x="15" y="60" fill="#f59e0b" font-family="'Outfit', sans-serif" font-size="28" font-weight="800">19</text>
+  </g>
+
+  <g transform="translate(570, 130)">
+    <!-- Streak flame metrics -->
+    <rect x="0" y="0" width="170" height="80" rx="8" fill="#111827" fill-opacity="0.6" stroke="#ffffff" stroke-opacity="0.06" stroke-width="1.5" />
+    <text x="15" y="25" fill="#9ca3af" font-family="'Outfit', sans-serif" font-size="10" font-weight="700">ACTIVE STREAK</text>
+    <text x="15" y="60" fill="#f59e0b" font-family="'Outfit', sans-serif" font-size="28" font-weight="800" filter="url(#glow-warning)">7 DAYS 🔥</text>
+  </g>
+
+  <!-- Platform Distribution Doughnut Chart Visualizer Mockup -->
+  <g transform="translate(60, 240)">
+    <rect x="0" y="0" width="320" height="200" rx="12" fill="#111827" fill-opacity="0.5" stroke="#ffffff" stroke-opacity="0.06" stroke-width="1.5" />
+    <text x="20" y="30" fill="#9ca3af" font-family="'Outfit', sans-serif" font-size="11" font-weight="700">PLATFORM DISTRIBUTION RATIO</text>
+    
+    <!-- Doughnut circles overlay -->
+    <circle cx="90" cy="115" r="50" fill="none" stroke="#e5e7eb" stroke-opacity="0.1" stroke-width="16" />
+    <circle cx="90" cy="115" r="50" fill="none" stroke="#f59e0b" stroke-width="16" stroke-dasharray="140, 314" stroke-dashoffset="0" transform="rotate(-90 90 115)" />
+    <circle cx="90" cy="115" r="50" fill="none" stroke="#ef4444" stroke-width="16" stroke-dasharray="80, 314" stroke-dashoffset="-140" transform="rotate(-90 90 115)" />
+    <circle cx="90" cy="115" r="50" fill="none" stroke="#10b981" stroke-width="16" stroke-dasharray="60, 314" stroke-dashoffset="-220" transform="rotate(-90 90 115)" />
+    <circle cx="90" cy="115" r="50" fill="none" stroke="#8b5cf6" stroke-width="16" stroke-dasharray="34, 314" stroke-dashoffset="-280" transform="rotate(-90 90 115)" />
+    <circle cx="90" cy="115" r="30" fill="#0b0f19" />
+
+    <!-- Doughnut Legend list -->
+    <g transform="translate(170, 55)" font-family="'Outfit', sans-serif" font-size="11" font-weight="600">
+      <circle cx="0" cy="5" r="4" fill="#f59e0b" />
+      <text x="12" y="8" fill="#ffffff">LeetCode (55%)</text>
+
+      <circle cx="0" cy="25" r="4" fill="#ef4444" />
+      <text x="12" y="28" fill="#ffffff">Codeforces (23%)</text>
+
+      <circle cx="0" cy="45" r="4" fill="#10b981" />
+      <text x="12" y="48" fill="#ffffff">HackerRank (16%)</text>
+
+      <circle cx="0" cy="65" r="4" fill="#8b5cf6" />
+      <text x="12" y="68" fill="#ffffff">Others (6%)</text>
+    </g>
+  </g>
+
+  <!-- Level Progress & Milestone achievement badge mockup -->
+  <g transform="translate(400, 240)">
+    <rect x="0" y="0" width="340" height="200" rx="12" fill="#111827" fill-opacity="0.5" stroke="#ffffff" stroke-opacity="0.06" stroke-width="1.5" />
+    <text x="20" y="30" fill="#9ca3af" font-family="'Outfit', sans-serif" font-size="11" font-weight="700">XP MILESTONES &amp; CONSISTENCY</text>
+
+    <!-- User XP Bar -->
+    <text x="20" y="60" fill="#8b5cf6" font-family="'Outfit', sans-serif" font-size="11" font-weight="800">LEVEL 4 CODER</text>
+    <rect x="20" y="70" width="300" height="8" rx="4" fill="#1f2937" />
+    <rect x="20" y="70" width="210" height="8" rx="4" fill="url(#grad-bar)" filter="url(#glow-primary)" />
+    <text x="320" y="60" fill="#9ca3af" font-family="'Fira Code', monospace" font-size="10" text-anchor="end">280 / 400 XP</text>
+
+    <!-- Milestone Badge display list -->
+    <g transform="translate(20, 105)">
+      <!-- Badge 1: Medium Master -->
+      <rect x="0" y="0" width="140" height="65" rx="8" fill="#1f2937" fill-opacity="0.6" stroke="#ffffff" stroke-opacity="0.05" />
+      <text x="12" y="38" font-size="22">🏆</text>
+      <text x="40" y="28" fill="#ffffff" font-family="'Outfit', sans-serif" font-size="11" font-weight="700">Med Master</text>
+      <text x="40" y="45" fill="#9ca3af" font-family="'Outfit', sans-serif" font-size="9">Solved 10 Med</text>
+
+      <!-- Badge 2: Graph Walker -->
+      <rect x="160" y="0" width="140" height="65" rx="8" fill="#1f2937" fill-opacity="0.6" stroke="#ffffff" stroke-opacity="0.05" />
+      <text x="172" y="38" font-size="22">🕸️</text>
+      <text x="200" y="28" fill="#ffffff" font-family="'Outfit', sans-serif" font-size="11" font-weight="700">Graph Walker</text>
+      <text x="200" y="45" fill="#9ca3af" font-family="'Outfit', sans-serif" font-size="9">Solved 3 Graphs</text>
+    </g>
+  </g>
+</svg>

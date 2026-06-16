@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <!-- Background Gradient -->
+    <radialGradient id="bg-glow" cx="50%" cy="50%" r="75%">
+      <stop offset="0%" stop-color="#0b1028"/>
+      <stop offset="60%" stop-color="#040616"/>
+      <stop offset="100%" stop-color="#010208"/>
+    </radialGradient>
+
+    <!-- Glowing effect filter -->
+    <filter id="glow-cyan" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <filter id="glow-pink" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+
+    <!-- Metallic Mirror Shading -->
+    <linearGradient id="mirror-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8e9aa9"/>
+      <stop offset="50%" stop-color="#c9d6df"/>
+      <stop offset="100%" stop-color="#52616b"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bg-glow)"/>
+
+  <!-- High-tech grid background -->
+  <g opacity="0.08" stroke="#00f2fe" stroke-width="1">
+    <path d="M 0,50 L 800,50 M 0,100 L 800,100 M 0,150 L 800,150 M 0,200 L 800,200 M 0,250 L 800,250 M 0,300 L 800,300 M 0,350 L 800,350 M 0,400 L 800,400 M 0,450 L 800,450"/>
+    <path d="M 50,0 L 50,500 M 100,0 L 100,500 M 150,0 L 150,500 M 200,0 L 200,500 M 250,0 L 250,500 M 300,0 L 300,500 M 350,0 L 350,500 M 400,0 L 400,500 M 450,0 L 450,500 M 500,0 L 500,500 M 550,0 L 550,500 M 600,0 L 600,500 M 650,0 L 650,500 M 700,0 L 700,500 M 750,0 L 750,500"/>
+  </g>
+
+  <!-- Principal Axis Reference Line -->
+  <line x1="0" y1="250" x2="800" y2="250" stroke="rgba(255, 255, 255, 0.08)" stroke-width="2"/>
+
+  <!-- Normal lines from center of curvature (C = 150, 250) to intersections -->
+  <g stroke="rgba(255, 215, 0, 0.18)" stroke-width="1.2" stroke-dasharray="4 4">
+    <line x1="150" y1="250" x2="537" y2="150"/>
+    <line x1="150" y1="250" x2="544" y2="180"/>
+    <line x1="150" y1="250" x2="548" y2="210"/>
+    <line x1="150" y1="250" x2="548" y2="290"/>
+    <line x1="150" y1="250" x2="544" y2="320"/>
+    <line x1="150" y1="250" x2="537" y2="350"/>
+  </g>
+
+  <!-- Parallel Light Rays Raytracing paths (Incident -> Focus -> Reflected exit) -->
+  <!-- Ray 1 (y = 150) -->
+  <path d="M 50,150 L 537.3,150 L 350,250 L 256.4,300" fill="none" stroke="#00f2fe" stroke-width="2" filter="url(#glow-cyan)"/>
+  <!-- Ray 2 (y = 180) -->
+  <path d="M 50,180 L 543.8,180 L 350,250 L 253.1,285" fill="none" stroke="#00f2fe" stroke-width="2" filter="url(#glow-cyan)"/>
+  <!-- Ray 3 (y = 210) -->
+  <path d="M 50,210 L 548.0,210 L 350,250 L 251.0,270" fill="none" stroke="#00f2fe" stroke-width="2" filter="url(#glow-cyan)"/>
+  <!-- Ray 4 (y = 290) -->
+  <path d="M 50,290 L 548.0,290 L 350,250 L 251.0,230" fill="none" stroke="#00f2fe" stroke-width="2" filter="url(#glow-cyan)"/>
+  <!-- Ray 5 (y = 320) -->
+  <path d="M 50,320 L 543.8,320 L 350,250 L 253.1,215" fill="none" stroke="#00f2fe" stroke-width="2" filter="url(#glow-cyan)"/>
+  <!-- Ray 6 (y = 350) -->
+  <path d="M 50,350 L 537.3,350 L 350,250 L 256.4,200" fill="none" stroke="#00f2fe" stroke-width="2" filter="url(#glow-cyan)"/>
+
+  <!-- Spherical Concave Mirror (Vertex at 550, Cy = 250, R = 400, Aperture height = 280) -->
+  <!-- Math check: AngleRange = asin(140 / 400) = asin(0.35) = 20.49 deg -->
+  <path d="M 537.3,110 A 400,400 0 0,0 537.3,390" fill="none" stroke="url(#mirror-grad)" stroke-width="6" stroke-linecap="round" filter="drop-shadow(0px 0px 8px rgba(192, 197, 206, 0.45))"/>
+
+  <!-- Mirror back shading hatch lines -->
+  <g stroke="rgba(255, 255, 255, 0.22)" stroke-width="1.5">
+    <line x1="537.3" y1="110" x2="545.1" y2="112.7"/>
+    <line x1="539.8" y1="138" x2="547.4" y2="140.5"/>
+    <line x1="542.0" y1="166" x2="549.4" y2="168.2"/>
+    <line x1="543.8" y1="194" x2="551.1" y2="195.9"/>
+    <line x1="545.2" y1="222" x2="552.3" y2="223.5"/>
+    <line x1="545.9" y1="250" x2="553.0" y2="251.0"/>
+    <line x1="545.2" y1="278" x2="552.3" y2="276.5"/>
+    <line x1="543.8" y1="306" x2="551.1" y2="304.1"/>
+    <line x1="542.0" y1="334" x2="549.4" y2="331.8"/>
+    <line x1="539.8" y1="362" x2="547.4" y2="359.5"/>
+    <line x1="537.3" y1="390" x2="545.1" y2="387.3"/>
+  </g>
+
+  <!-- Point Markers -->
+  <!-- Focal Point (350, 250) -->
+  <circle cx="350" cy="250" r="10" fill="rgba(253, 0, 142, 0.3)" filter="url(#glow-pink)"/>
+  <circle cx="350" cy="250" r="5" fill="#fd008e"/>
+  <text x="350" y="234" font-family="'Orbitron', sans-serif" font-weight="900" font-size="12" fill="#fd008e" text-anchor="middle">FOCUS F</text>
+
+  <!-- Center of Curvature (150, 250) -->
+  <circle cx="150" cy="250" r="4" fill="#00f2fe" filter="url(#glow-cyan)"/>
+  <text x="150" y="234" font-family="'Orbitron', sans-serif" font-weight="900" font-size="12" fill="#00f2fe" text-anchor="middle">CENTER C</text>
+
+  <!-- Telemetry Card Overlay (Top-Left) -->
+  <g transform="translate(45, 45)">
+    <!-- Glass Panel -->
+    <rect width="300" height="130" rx="10" fill="rgba(10, 15, 30, 0.85)" stroke="rgba(0, 242, 254, 0.3)" stroke-width="1.5"/>
+    <text x="15" y="24" font-family="'Orbitron', sans-serif" font-size="11" fill="#00f2fe" font-weight="900" letter-spacing="1.2">OPTICAL INTERSECT LEDGER</text>
+    
+    <line x1="15" y1="36" x2="285" y2="36" stroke="rgba(255, 255, 255, 0.1)" stroke-width="1"/>
+
+    <!-- Data Rows -->
+    <text x="15" y="58" font-family="'JetBrains Mono', monospace" font-size="10" fill="#8a9fc4">Focal Length (f):</text>
+    <text x="210" y="58" font-family="'JetBrains Mono', monospace" font-size="10" fill="#fd008e" font-weight="bold">200.0 px</text>
+
+    <text x="15" y="80" font-family="'JetBrains Mono', monospace" font-size="10" fill="#8a9fc4">Object Distance (do):</text>
+    <text x="210" y="80" font-family="'JetBrains Mono', monospace" font-size="10" fill="#00f2fe" font-weight="bold">Infinity (Parallel)</text>
+
+    <text x="15" y="102" font-family="'JetBrains Mono', monospace" font-size="10" fill="#8a9fc4">Image Distance (di):</text>
+    <text x="210" y="102" font-family="'JetBrains Mono', monospace" font-size="10" fill="#39ff14" font-weight="bold">200.0 px (At Focus)</text>
+  </g>
+</svg>

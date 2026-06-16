@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs><linearGradient id="g" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#0b1220"/><stop offset="100%" stop-color="#1a0a0a"/></linearGradient></defs>
+  <rect width="1280" height="720" fill="url(#g)"/>
+  <!-- battlefield -->
+  <rect x="200" y="200" width="880" height="320" rx="8" fill="#0a0f1a" stroke="#334155" stroke-width="2"/>
+  <!-- terrain band -->
+  <rect x="200" y="340" width="880" height="60" fill="#1a3010" opacity=".5"/>
+  <text x="640" y="378" text-anchor="middle" font-family="monospace" font-size="12" fill="#64748b">🌾 Plains</text>
+  <!-- army A -->
+  <circle cx="350" cy="280" r="6" fill="#3b82f6"/><circle cx="365" cy="280" r="6" fill="#3b82f6"/><circle cx="380" cy="280" r="6" fill="#3b82f6"/>
+  <circle cx="350" cy="265" r="6" fill="#3b82f6"/><circle cx="365" cy="265" r="6" fill="#3b82f6"/><circle cx="380" cy="265" r="6" fill="#3b82f6"/>
+  <text x="365" y="310" text-anchor="middle" font-family="monospace" font-size="14" fill="#3b82f6" font-weight="700">ARMY A</text>
+  <!-- army B -->
+  <circle cx="850" cy="280" r="6" fill="#ef4444"/><circle cx="865" cy="280" r="6" fill="#ef4444"/><circle cx="880" cy="280" r="6" fill="#ef4444"/>
+  <circle cx="850" cy="265" r="6" fill="#ef4444"/><circle cx="865" cy="265" r="6" fill="#ef4444"/><circle cx="880" cy="265" r="6" fill="#ef4444"/>
+  <text x="865" y="310" text-anchor="middle" font-family="monospace" font-size="14" fill="#ef4444" font-weight="700">ARMY B</text>
+  <!-- VS -->
+  <text x="640" y="290" text-anchor="middle" font-family="monospace" font-size="24" fill="#64748b" font-weight="700">⚔️</text>
+  <!-- outcome -->
+  <rect x="400" y="420" width="480" height="50" rx="8" fill="#111827" stroke="#334155" stroke-width="1.5"/>
+  <text x="640" y="445" text-anchor="middle" font-family="monospace" font-size="13" fill="#3b82f6" font-weight="700">🏆 Army A Wins!</text>
+  <text x="640" y="462" text-anchor="middle" font-family="monospace" font-size="10" fill="#64748b">Casualties: 450 — 620</text>
+  <text x="640" y="100" text-anchor="middle" font-family="ui-monospace,monospace" font-size="26" font-weight="800" fill="#f8fafc" letter-spacing="1">HISTORICAL BATTLE SIMULATOR</text>
+  <text x="640" y="125" text-anchor="middle" font-family="ui-monospace,monospace" font-size="13" fill="#64748b">Army Placement · Terrain Effects · Battle Outcomes</text>
+</svg>

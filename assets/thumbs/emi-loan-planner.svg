@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <!-- Background -->
+  <rect width="800" height="500" fill="#080a0f"/>
+
+  <!-- Grid lines overlay -->
+  <g opacity="0.08">
+    <path d="M 0 50 L 800 50 M 0 100 L 800 100 M 0 150 L 800 150 M 0 200 L 800 200 M 0 250 L 800 250 M 0 300 L 800 300 M 0 350 L 800 350 M 0 400 L 800 400 M 0 450 L 800 450" stroke="#3d5afe" stroke-width="1"/>
+    <path d="M 100 0 L 100 500 M 200 0 L 200 500 M 300 0 L 300 500 M 400 0 L 400 500 M 500 0 L 500 500 M 600 0 L 600 500 M 700 0 L 700 500" stroke="#3d5afe" stroke-width="1"/>
+  </g>
+
+  <!-- Glowing gradients -->
+  <defs>
+    <radialGradient id="glow-indigo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#3d5afe" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#3d5afe" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow-gold" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffb300" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#ffb300" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow-savings" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00e676" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#00e676" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <circle cx="580" cy="200" r="220" fill="url(#glow-indigo)"/>
+  <circle cx="280" cy="340" r="180" fill="url(#glow-savings)"/>
+  <circle cx="450" cy="150" r="140" fill="url(#glow-gold)"/>
+
+  <!-- Declining Balance Curves (Baseline vs Prepayment) -->
+  <!-- Baseline Line (Dashed Slate) -->
+  <path d="M 100 150 Q 350 250 500 380 T 700 420" fill="none" stroke="#475569" stroke-width="3" stroke-dasharray="8 8" opacity="0.6"/>
+  <!-- Prepayment Active Line (Solid Indigo Blue - paid early!) -->
+  <path d="M 100 150 Q 300 230 400 320 T 520 420" fill="none" stroke="#3d5afe" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="520" cy="420" r="7" fill="#3d5afe"/>
+  <circle cx="520" cy="420" r="14" fill="none" stroke="#3d5afe" stroke-width="1.5" opacity="0.5"/>
+
+  <!-- Savings Shaded Gap Area -->
+  <path d="M 100 150 Q 300 230 400 320 T 520 420 L 520 390 Q 420 330 330 240 Z" fill="rgba(0, 230, 118, 0.08)"/>
+
+  <!-- Visual balance scales representation -->
+  <g transform="translate(180, 310)" stroke="#ffb300" stroke-width="2.5" fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <!-- Stand -->
+    <line x1="50" y1="90" x2="50" y2="40" stroke="#94a3b8"/>
+    <line x1="30" y1="90" x2="70" y2="90" stroke="#94a3b8"/>
+    <circle cx="50" cy="35" r="5" fill="#ffb300"/>
+    
+    <!-- Beam (balanced) -->
+    <line x1="10" y1="45" x2="90" y2="45"/>
+    
+    <!-- Left Pan (Principal - heavier/higher) -->
+    <line x1="10" y1="45" x2="-5" y2="65"/>
+    <line x1="10" y1="45" x2="25" y2="65"/>
+    <path d="M -15 65 Q 10 75 35 65 Z" fill="rgba(61, 90, 254, 0.2)" stroke="#3d5afe" stroke-width="2"/>
+    
+    <!-- Right Pan (Interest - lighter/saved!) -->
+    <line x1="90" y1="45" x2="75" y2="65"/>
+    <line x1="90" y1="45" x2="105" y2="65"/>
+    <path d="M 65 65 Q 90 75 115 65 Z" fill="rgba(0, 230, 118, 0.2)" stroke="#00e676" stroke-width="2"/>
+  </g>
+
+  <!-- Telemetry HUD indicators overlay -->
+  <rect x="100" y="80" width="180" height="60" fill="rgba(14, 21, 33, 0.9)" stroke="rgba(63, 81, 181, 0.2)" stroke-width="1.5" rx="5"/>
+  <text x="115" y="100" font-family="'Outfit', sans-serif" font-size="9" fill="#94a3b8" font-weight="bold" letter-spacing="1">MONTHLY EMI</text>
+  <text x="115" y="128" font-family="'Outfit', sans-serif" font-size="22" fill="#3d5afe" font-weight="900">$1,755</text>
+
+  <rect x="300" y="80" width="180" height="60" fill="rgba(14, 21, 33, 0.9)" stroke="rgba(63, 81, 181, 0.2)" stroke-width="1.5" rx="5"/>
+  <text x="315" y="100" font-family="'Outfit', sans-serif" font-size="9" fill="#94a3b8" font-weight="bold" letter-spacing="1">INTEREST SAVED</text>
+  <text x="315" y="128" font-family="'Outfit', sans-serif" font-size="22" fill="#00e676" font-weight="900">$73,420</text>
+
+  <!-- Title Badge -->
+  <rect x="500" y="80" width="200" height="34" fill="rgba(63,81,181,0.08)" stroke="#3d5afe" stroke-width="2" rx="5"/>
+  <text x="515" y="102" font-family="'Outfit', sans-serif" font-size="13" fill="#3d5afe" font-weight="900" letter-spacing="1">EMI LOAN PLANNER</text>
+
+  <!-- Frame outline border -->
+  <rect x="15" y="15" width="770" height="470" fill="none" stroke="#3d5afe" stroke-width="2" opacity="0.25"/>
+  <line x1="15" y1="35" x2="35" y2="15" stroke="#3d5afe" stroke-width="3" opacity="0.6"/>
+  <line x1="785" y1="35" x2="765" y2="15" stroke="#3d5afe" stroke-width="3" opacity="0.6"/>
+  <line x1="15" y1="465" x2="35" y2="485" stroke="#3d5afe" stroke-width="3" opacity="0.6"/>
+  <line x1="785" y1="465" x2="765" y2="485" stroke="#3d5afe" stroke-width="3" opacity="0.6"/>
+</svg>

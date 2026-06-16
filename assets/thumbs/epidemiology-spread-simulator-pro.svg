@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <!-- Background -->
+  <rect width="800" height="500" fill="#0a0d12"/>
+  
+  <!-- Cyber grid overlay -->
+  <g opacity="0.12">
+    <path d="M 0 50 L 800 50 M 0 100 L 800 100 M 0 150 L 800 150 M 0 200 L 800 200 M 0 250 L 800 250 M 0 300 L 800 300 M 0 350 L 800 350 M 0 400 L 800 400 M 0 450 L 800 450" stroke="#39ff14" stroke-width="1"/>
+    <path d="M 100 0 L 100 500 M 200 0 L 200 500 M 300 0 L 300 500 M 400 0 L 400 500 M 500 0 L 500 500 M 600 0 L 600 500 M 700 0 L 700 500" stroke="#39ff14" stroke-width="1"/>
+  </g>
+
+  <!-- Glowing background blobs -->
+  <defs>
+    <radialGradient id="glow-lime" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#39ff14" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#39ff14" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow-danger" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ff3838" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#ff3838" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow-cyan" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00f0ff" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#00f0ff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <circle cx="250" cy="220" r="180" fill="url(#glow-danger)"/>
+  <circle cx="580" cy="180" r="150" fill="url(#glow-lime)"/>
+  <circle cx="400" cy="300" r="140" fill="url(#glow-cyan)"/>
+
+  <!-- Epidemic Curve Wave (Background) -->
+  <path d="M 50 420 Q 250 420 350 420 T 500 200 Q 580 80 640 250 T 750 420" fill="none" stroke="#ff3838" stroke-width="4" stroke-linecap="round" opacity="0.6" stroke-dasharray="2000" stroke-dashoffset="0"/>
+  <path d="M 50 420 Q 250 420 350 420 T 500 380 Q 580 300 640 400 T 750 420" fill="none" stroke="#00f0ff" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+  <path d="M 50 420 Q 250 400 350 380 T 500 320 Q 580 250 640 150 T 750 120" fill="none" stroke="#39ff14" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
+
+  <!-- Hospital Capacity Limit Line -->
+  <line x1="50" y1="280" x2="750" y2="280" stroke="#00f0ff" stroke-width="2" stroke-dasharray="6 6" opacity="0.4"/>
+  <text x="60" y="272" font-family="'Outfit', sans-serif" font-size="12" fill="#00f0ff" font-weight="bold" opacity="0.7">ICU CAPACITY THRESHOLD</text>
+
+  <!-- Network Connection Lines -->
+  <g stroke="rgba(255,255,255,0.15)" stroke-width="1.5">
+    <line x1="180" y1="260" x2="250" y2="180"/>
+    <line x1="250" y1="180" x2="330" y2="210"/>
+    <line x1="330" y1="210" x2="290" y2="300"/>
+    <line x1="290" y1="300" x2="180" y2="260"/>
+    <line x1="250" y1="180" x2="290" y2="300"/>
+    <line x1="330" y1="210" x2="420" y2="160"/>
+    <line x1="420" y1="160" x2="480" y2="240"/>
+    <line x1="480" y1="240" x2="560" y2="200"/>
+    <line x1="560" y1="200" x2="620" y2="270"/>
+    <line x1="480" y1="240" x2="620" y2="270"/>
+  </g>
+
+  <!-- Network Nodes -->
+  <!-- Susceptible (Lime) -->
+  <circle cx="180" cy="260" r="10" fill="#39ff14" stroke="#0a0d12" stroke-width="2"/>
+  <circle cx="180" cy="260" r="18" fill="none" stroke="#39ff14" stroke-width="1.5" opacity="0.4"/>
+  <circle cx="560" cy="200" r="10" fill="#39ff14" stroke="#0a0d12" stroke-width="2"/>
+
+  <!-- Exposed (Amber) -->
+  <circle cx="420" cy="160" r="10" fill="#ffa500" stroke="#0a0d12" stroke-width="2"/>
+
+  <!-- Infected (Red) -->
+  <circle cx="250" cy="180" r="12" fill="#ff3838" stroke="#0a0d12" stroke-width="2"/>
+  <circle cx="250" cy="180" r="22" fill="none" stroke="#ff3838" stroke-width="2" opacity="0.5"/>
+  <circle cx="480" cy="240" r="12" fill="#ff3838" stroke="#0a0d12" stroke-width="2"/>
+  <circle cx="480" cy="240" r="22" fill="none" stroke="#ff3838" stroke-width="2" opacity="0.5"/>
+
+  <!-- Critical ICU (Cyan) -->
+  <circle cx="330" cy="210" r="11" fill="#00f0ff" stroke="#0a0d12" stroke-width="2"/>
+  <rect x="325" y="202" width="10" height="16" fill="none" stroke="#00f0ff" stroke-width="1.5" opacity="0.6"/>
+
+  <!-- Vaccinated (Purple) -->
+  <circle cx="290" cy="300" r="10" fill="#b600ff" stroke="#0a0d12" stroke-width="2"/>
+  <circle cx="290" cy="300" r="16" fill="none" stroke="#b600ff" stroke-width="1.5" opacity="0.6"/>
+  <circle cx="620" cy="270" r="10" fill="#b600ff" stroke="#0a0d12" stroke-width="2"/>
+  <circle cx="620" cy="270" r="16" fill="none" stroke="#b600ff" stroke-width="1.5" opacity="0.6"/>
+
+  <!-- Decorative HUD details -->
+  <!-- Top Title HUD -->
+  <rect x="50" y="30" width="300" height="30" fill="rgba(57,255,20,0.08)" stroke="#39ff14" stroke-width="1.5" rx="5"/>
+  <text x="65" y="50" font-family="'Outfit', sans-serif" font-size="14" fill="#39ff14" font-weight="900" letter-spacing="1">EPI-SPREAD SIMULATOR PRO</text>
+  <rect x="360" y="30" width="60" height="30" fill="rgba(255,56,56,0.15)" stroke="#ff3838" stroke-width="1.5" rx="5"/>
+  <text x="376" y="50" font-family="'Outfit', sans-serif" font-size="12" fill="#ff3838" font-weight="bold">SEIR</text>
+
+  <!-- Frame border of visualizer -->
+  <rect x="15" y="15" width="770" height="470" fill="none" stroke="#39ff14" stroke-width="2" opacity="0.25"/>
+  <line x1="15" y1="35" x2="35" y2="15" stroke="#39ff14" stroke-width="3" opacity="0.6"/>
+  <line x1="785" y1="35" x2="765" y2="15" stroke="#39ff14" stroke-width="3" opacity="0.6"/>
+  <line x1="15" y1="465" x2="35" y2="485" stroke="#39ff14" stroke-width="3" opacity="0.6"/>
+  <line x1="785" y1="465" x2="765" y2="485" stroke="#39ff14" stroke-width="3" opacity="0.6"/>
+</svg>

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0a0a0a"/><stop offset="100%" stop-color="#001a00"/></linearGradient></defs>
+  <rect width="1280" height="720" fill="url(#g)"/>
+  <!-- terminal window -->
+  <rect x="140" y="140" width="1000" height="440" rx="8" fill="#0d1117" stroke="#30363d" stroke-width="2"/>
+  <rect x="140" y="140" width="1000" height="35" rx="8" fill="#161b22"/>
+  <circle cx="165" cy="158" r="6" fill="#ef4444"/>
+  <circle cx="185" cy="158" r="6" fill="#eab308"/>
+  <circle cx="205" cy="158" r="6" fill="#22c55e"/>
+  <text x="640" y="163" text-anchor="middle" font-family="monospace" font-size="13" fill="#8b949e">hacker@escape-room:~$</text>
+  <!-- terminal lines -->
+  <text x="170" y="210" font-family="monospace" font-size="14" fill="#22c55e">$ Welcome to the Hacker Escape Room.</text>
+  <text x="170" y="235" font-family="monospace" font-size="14" fill="#8b949e">$ Complete all 5 challenges to escape.</text>
+  <text x="170" y="270" font-family="monospace" font-size="14" fill="#22c55e">$ scan 192.168.1.1</text>
+  <text x="170" y="295" font-family="monospace" font-size="14" fill="#8b949e">Port 22: OPEN</text>
+  <text x="170" y="315" font-family="monospace" font-size="14" fill="#8b949e">Port 80: OPEN</text>
+  <text x="170" y="335" font-family="monospace" font-size="14" fill="#8b949e">Port 443: OPEN</text>
+  <text x="170" y="370" font-family="monospace" font-size="14" fill="#22c55e">$ decode cGFzc3dvcmQxMjM=</text>
+  <text x="170" y="395" font-family="monospace" font-size="14" fill="#8b949e">Decoded: password123</text>
+  <text x="170" y="430" font-family="monospace" font-size="14" fill="#22c55e">$ inject ' OR 1=1 --</text>
+  <text x="170" y="455" font-family="monospace" font-size="14" fill="#8b949e">Login Bypassed. Access granted.</text>
+  <!-- cursor blink -->
+  <text x="170" y="500" font-family="monospace" font-size="14" fill="#22c55e">$ <tspan fill="#22c55e">█</tspan></text>
+  <text x="640" y="100" text-anchor="middle" font-family="ui-monospace,monospace" font-size="26" font-weight="800" fill="#f8fafc" letter-spacing="1">HACKER ESCAPE ROOM</text>
+  <text x="640" y="125" text-anchor="middle" font-family="ui-monospace,monospace" font-size="13" fill="#64748b">Crack the Code · Escape the System</text>
+</svg>

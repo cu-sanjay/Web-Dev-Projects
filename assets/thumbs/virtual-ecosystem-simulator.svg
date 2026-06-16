@@ -1,0 +1,144 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#020306"/>
+      <stop offset="50%" stop-color="#060914"/>
+      <stop offset="100%" stop-color="#090b16"/>
+    </linearGradient>
+    <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00ff88"/>
+      <stop offset="100%" stop-color="#00d4ff"/>
+    </linearGradient>
+    <filter id="panelGlow">
+      <feDropShadow dx="0" dy="12" stdDeviation="20" flood-color="#000" flood-opacity="0.8"/>
+    </filter>
+    <pattern id="gridP" width="14" height="14" patternUnits="userSpaceOnUse">
+      <path d="M14 0L0 0 0 14" fill="none" stroke="rgba(148,163,184,0.01)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="500" fill="url(#bgGrad)"/>
+  <rect width="800" height="500" fill="url(#gridP)"/>
+  <circle cx="680" cy="80" r="150" fill="#00ff88" opacity="0.02" filter="blur(50px)"/>
+  <circle cx="100" cy="450" r="140" fill="#ff2d78" opacity="0.02" filter="blur(45px)"/>
+
+  <g transform="translate(25,20)" filter="url(#panelGlow)">
+    <rect width="750" height="460" rx="14" fill="#0f172a" stroke="rgba(148,163,184,0.06)" stroke-width="1"/>
+
+    <circle cx="14" cy="14" r="4" fill="#ef4444" opacity="0.6"/>
+    <circle cx="28" cy="14" r="4" fill="#f59e0b" opacity="0.6"/>
+    <circle cx="42" cy="14" r="4" fill="#10b981" opacity="0.6"/>
+
+    <g transform="translate(580,6)">
+      <rect x="0" y="0" width="14" height="12" rx="3" fill="url(#brandGrad)"/>
+      <text x="20" y="10" font-family="'Orbitron',monospace" font-size="9" font-weight="900" fill="#e0e4ec" letter-spacing="0.08em">ECO_SIM</text>
+    </g>
+
+    <rect x="20" y="32" width="710" height="40" rx="8" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.04)" stroke-width="0.6"/>
+    <text x="34" y="44" font-family="monospace" font-size="6" fill="#4a5268" font-weight="600">SUNLIGHT</text>
+    <rect x="34" y="50" width="100" height="3" rx="2" fill="rgba(255,255,255,0.06)"/>
+    <rect x="34" y="50" width="70" height="3" rx="2" fill="#00ff88" opacity="0.7"/>
+    <text x="140" y="54" font-family="monospace" font-size="7" fill="#00ff88" font-weight="600">60%</text>
+
+    <text x="190" y="44" font-family="monospace" font-size="6" fill="#4a5268" font-weight="600">WATER</text>
+    <rect x="190" y="50" width="100" height="3" rx="2" fill="rgba(255,255,255,0.06)"/>
+    <rect x="190" y="50" width="60" height="3" rx="2" fill="#00d4ff" opacity="0.7"/>
+    <text x="296" y="54" font-family="monospace" font-size="7" fill="#00d4ff" font-weight="600">60%</text>
+
+    <text x="346" y="44" font-family="monospace" font-size="6" fill="#4a5268" font-weight="600">MUTATION</text>
+    <rect x="346" y="50" width="100" height="3" rx="2" fill="rgba(255,255,255,0.06)"/>
+    <rect x="346" y="50" width="10" height="3" rx="2" fill="#ffb800" opacity="0.7"/>
+    <text x="452" y="54" font-family="monospace" font-size="7" fill="#ffb800" font-weight="600">10%</text>
+
+    <text x="502" y="44" font-family="monospace" font-size="6" fill="#4a5268" font-weight="600">SPEED</text>
+    <rect x="502" y="50" width="100" height="3" rx="2" fill="rgba(255,255,255,0.06)"/>
+    <rect x="502" y="50" width="50" height="3" rx="2" fill="#00ff88" opacity="0.7"/>
+    <text x="608" y="54" font-family="monospace" font-size="7" fill="#00ff88" font-weight="600">5x</text>
+
+    <!-- Ecosystem Arena -->
+    <rect x="20" y="82" width="370" height="240" rx="8" fill="#080b16" stroke="rgba(255,255,255,0.04)" stroke-width="0.6"/>
+    <circle cx="220" cy="200" r="80" fill="none" stroke="rgba(0,255,136,0.3)" stroke-width="0.3"/>
+    <circle cx="220" cy="200" r="55" fill="none" stroke="rgba(0,255,136,0.15)" stroke-width="0.3"/>
+
+    <circle cx="180" cy="180" r="4" fill="#00ff88" opacity="0.6"/>
+    <circle cx="210" cy="165" r="3" fill="#00ff88" opacity="0.5"/>
+    <circle cx="240" cy="190" r="3.5" fill="#00ff88" opacity="0.55"/>
+    <circle cx="170" cy="210" r="3" fill="#00ff88" opacity="0.45"/>
+    <circle cx="260" cy="175" r="2.5" fill="#00ff88" opacity="0.5"/>
+    <circle cx="195" cy="220" r="3.5" fill="#00ff88" opacity="0.6"/>
+    <circle cx="250" cy="215" r="3" fill="#00ff88" opacity="0.5"/>
+    <circle cx="225" cy="155" r="3" fill="#00ff88" opacity="0.4"/>
+    <circle cx="155" cy="195" r="2.5" fill="#00ff88" opacity="0.55"/>
+
+    <!-- Herbivore triangles -->
+    <polygon points="300,175 306,184 294,184" fill="#00d4ff" opacity="0.7"/>
+    <polygon points="280,220 286,229 274,229" fill="#00d4ff" opacity="0.6"/>
+    <polygon points="320,195 326,204 314,204" fill="#00d4ff" opacity="0.5"/>
+    <polygon points="265,240 271,249 259,249" fill="#00d4ff" opacity="0.4"/>
+
+    <!-- Carnivore rings -->
+    <circle cx="130" cy="160" r="5" fill="none" stroke="#ff2d78" stroke-width="1.5" opacity="0.7"/>
+    <circle cx="130" cy="160" r="2.5" fill="none" stroke="#ff2d78" stroke-width="1" opacity="0.4"/>
+    <circle cx="290" cy="240" r="4.5" fill="none" stroke="#ff2d78" stroke-width="1.5" opacity="0.6"/>
+    <circle cx="290" cy="240" r="2.2" fill="none" stroke="#ff2d78" stroke-width="1" opacity="0.3"/>
+
+    <text x="205" y="310" font-family="monospace" font-size="6" fill="#4a5268" text-anchor="middle">ECOSYSTEM ARENA</text>
+
+    <!-- Chart -->
+    <rect x="410" y="82" width="320" height="240" rx="8" fill="#080b16" stroke="rgba(255,255,255,0.04)" stroke-width="0.6"/>
+    <line x1="428" y1="300" x2="712" y2="300" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+    <text x="440" y="308" font-family="monospace" font-size="5" fill="#4a5268" text-anchor="middle">0</text>
+    <text x="555" y="308" font-family="monospace" font-size="5" fill="#4a5268" text-anchor="middle">300</text>
+    <text x="670" y="308" font-family="monospace" font-size="5" fill="#4a5268" text-anchor="middle">600</text>
+    <line x1="428" y1="100" x2="428" y2="300" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+    <text x="420" y="300" font-family="monospace" font-size="5" fill="#4a5268" text-anchor="end">0</text>
+    <text x="420" y="200" font-family="monospace" font-size="5" fill="#4a5268" text-anchor="end">40</text>
+    <text x="420" y="108" font-family="monospace" font-size="5" fill="#4a5268" text-anchor="end">80</text>
+
+    <polyline points="428,280 440,270 460,250 480,240 500,220 520,200 540,185 560,175 580,170 600,168 620,170 640,175 660,178 680,180 700,182" fill="none" stroke="#00ff88" stroke-width="1.5" opacity="0.7"/>
+    <polyline points="428,290 440,278 460,260 480,245 500,235 520,225 540,215 560,210 580,212 600,208 620,215 640,220 660,218 680,225 700,230" fill="none" stroke="#00d4ff" stroke-width="1.5" opacity="0.6"/>
+    <polyline points="428,295 440,285 460,275 480,265 500,255 520,250 540,248 560,245 580,250 600,252 620,248 640,255 660,260 680,258 700,262" fill="none" stroke="#ff2d78" stroke-width="1.5" opacity="0.6"/>
+
+    <text x="570" y="310" font-family="monospace" font-size="6" fill="#4a5268" text-anchor="middle">POPULATION TRENDS</text>
+
+    <!-- Telemetry -->
+    <rect x="20" y="336" width="710" height="36" rx="6" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.6"/>
+    <circle cx="38" cy="354" r="4" fill="#00ff88"/>
+    <text x="48" y="348" font-family="monospace" font-size="6" fill="#4a5268">FLORA</text>
+    <text x="48" y="362" font-family="'Orbitron',monospace" font-size="11" fill="#00ff88" font-weight="700">32</text>
+    <rect x="120" y="338" width="0.5" height="32" fill="rgba(255,255,255,0.04)"/>
+    <circle cx="140" cy="354" r="4" fill="#00d4ff"/>
+    <text x="150" y="348" font-family="monospace" font-size="6" fill="#4a5268">HERB</text>
+    <text x="150" y="362" font-family="'Orbitron',monospace" font-size="11" fill="#00d4ff" font-weight="700">14</text>
+    <rect x="222" y="338" width="0.5" height="32" fill="rgba(255,255,255,0.04)"/>
+    <circle cx="242" cy="354" r="4" fill="#ff2d78"/>
+    <text x="252" y="348" font-family="monospace" font-size="6" fill="#4a5268">CARN</text>
+    <text x="252" y="362" font-family="'Orbitron',monospace" font-size="11" fill="#ff2d78" font-weight="700">5</text>
+    <rect x="324" y="338" width="0.5" height="32" fill="rgba(255,255,255,0.04)"/>
+    <circle cx="344" cy="354" r="4" fill="#ffb800"/>
+    <text x="354" y="348" font-family="monospace" font-size="6" fill="#4a5268">STABILITY</text>
+    <text x="354" y="362" font-family="'Orbitron',monospace" font-size="11" fill="#ffb800" font-weight="700">82.4%</text>
+
+    <!-- Control buttons -->
+    <rect x="450" y="390" width="130" height="22" rx="4" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="0.6"/>
+    <rect x="454" y="394" width="6" height="14" rx="1" fill="#8892a8"/>
+    <rect x="464" y="394" width="6" height="14" rx="1" fill="#8892a8"/>
+    <text x="486" y="404" font-family="monospace" font-size="7" fill="#8892a8">PAUSE</text>
+    <rect x="590" y="390" width="130" height="22" rx="4" fill="rgba(255,45,120,0.08)" stroke="rgba(255,45,120,0.2)" stroke-width="0.6"/>
+    <circle cx="610" cy="401" r="4" fill="none" stroke="#ff2d78" stroke-width="1.2"/>
+    <line x1="612" y1="401" x2="614" y2="401" stroke="#ff2d78" stroke-width="1.2"/>
+    <text x="626" y="404" font-family="monospace" font-size="7" fill="#ff2d78">VIRUS</text>
+    <rect x="340" y="390" width="100" height="22" rx="4" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="0.6"/>
+    <text x="390" y="404" font-family="monospace" font-size="7" fill="#8892a8" text-anchor="middle">RE-SEED</text>
+
+    <rect x="20" y="426" width="710" height="1" fill="rgba(255,255,255,0.02)"/>
+    <rect x="20" y="436" width="50" height="14" rx="3" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+    <text x="45" y="445" font-family="monospace" font-size="5" fill="#4a5268" text-anchor="middle">HTML5</text>
+    <rect x="74" y="436" width="44" height="14" rx="3" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+    <text x="96" y="445" font-family="monospace" font-size="5" fill="#4a5268" text-anchor="middle">CSS3</text>
+    <rect x="122" y="436" width="44" height="14" rx="3" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+    <text x="144" y="445" font-family="monospace" font-size="5" fill="#4a5268" text-anchor="middle">ES6+</text>
+    <rect x="170" y="436" width="50" height="14" rx="3" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+    <text x="195" y="445" font-family="monospace" font-size="5" fill="#4a5268" text-anchor="middle">CANVAS</text>
+    <text x="730" y="445" font-family="monospace" font-size="5" fill="#4a5268" text-anchor="end">ECO_SIM v1.0</text>
+  </g>
+</svg>

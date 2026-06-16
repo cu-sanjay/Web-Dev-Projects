@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs><linearGradient id="g" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#0b1220"/><stop offset="100%" stop-color="#1a1510"/></linearGradient></defs>
+  <rect width="1280" height="720" fill="url(#g)"/>
+  <!-- nodes -->
+  <rect x="200" y="200" width="130" height="55" rx="6" fill="rgba(59,130,246,0.12)" stroke="#3b82f6" stroke-width="2"/>
+  <text x="265" y="234" text-anchor="middle" font-family="monospace" font-size="12" fill="#3b82f6" font-weight="700">📱 Client</text>
+  <rect x="500" y="200" width="130" height="55" rx="6" fill="rgba(236,72,153,0.12)" stroke="#ec4899" stroke-width="2"/>
+  <text x="565" y="234" text-anchor="middle" font-family="monospace" font-size="12" fill="#ec4899" font-weight="700">⚖️ Load Balancer</text>
+  <rect x="200" y="320" width="130" height="55" rx="6" fill="rgba(249,115,22,0.12)" stroke="#f97316" stroke-width="2"/>
+  <text x="265" y="354" text-anchor="middle" font-family="monospace" font-size="12" fill="#f97316" font-weight="700">🖥️ Server</text>
+  <rect x="200" y="440" width="130" height="55" rx="6" fill="rgba(34,197,94,0.12)" stroke="#22c55e" stroke-width="2"/>
+  <text x="265" y="474" text-anchor="middle" font-family="monospace" font-size="12" fill="#22c55e" font-weight="700">🗄️ Database</text>
+  <rect x="500" y="320" width="130" height="55" rx="6" fill="rgba(234,179,8,0.12)" stroke="#eab308" stroke-width="2"/>
+  <text x="565" y="354" text-anchor="middle" font-family="monospace" font-size="12" fill="#eab308" font-weight="700">⚡ Cache</text>
+  <rect x="500" y="440" width="130" height="55" rx="6" fill="rgba(167,139,250,0.12)" stroke="#a78bfa" stroke-width="2"/>
+  <text x="565" y="474" text-anchor="middle" font-family="monospace" font-size="12" fill="#a78bfa" font-weight="700">📨 Queue</text>
+  <!-- arrows -->
+  <line x1="330" y1="227" x2="490" y2="227" stroke="#334155" stroke-width="2"/>
+  <polygon points="490,222 500,227 490,232" fill="#334155"/>
+  <line x1="265" y1="255" x2="265" y2="315" stroke="#334155" stroke-width="2"/>
+  <polygon points="260,315 265,325 270,315" fill="#334155"/>
+  <line x1="265" y1="375" x2="265" y2="435" stroke="#334155" stroke-width="2"/>
+  <polygon points="260,435 265,445 270,435" fill="#334155"/>
+  <line x1="565" y1="255" x2="565" y2="315" stroke="#334155" stroke-width="2"/>
+  <polygon points="560,315 565,325 570,315" fill="#334155"/>
+  <!-- side panel -->
+  <rect x="800" y="180" width="180" height="340" rx="8" fill="#111827" stroke="#334155" stroke-width="1.5"/>
+  <text x="890" y="210" text-anchor="middle" font-family="monospace" font-size="10" fill="#cbd5e1" font-weight="600">COMPONENTS</text>
+  <rect x="820" y="225" width="140" height="25" rx="4" fill="#1f2937" stroke="#334155" stroke-width="1"/>
+  <text x="855" y="242" font-family="monospace" font-size="10" fill="#64748b">📱 Client</text>
+  <rect x="820" y="255" width="140" height="25" rx="4" fill="#1f2937" stroke="#334155" stroke-width="1"/>
+  <text x="855" y="272" font-family="monospace" font-size="10" fill="#64748b">🖥️ Server</text>
+  <rect x="820" y="285" width="140" height="25" rx="4" fill="#1f2937" stroke="#334155" stroke-width="1"/>
+  <text x="855" y="302" font-family="monospace" font-size="10" fill="#64748b">🗄️ Database</text>
+  <text x="640" y="100" text-anchor="middle" font-family="ui-monospace,monospace" font-size="26" font-weight="800" fill="#f8fafc" letter-spacing="1">SYSTEM DESIGN INTERVIEW PLAYGROUND</text>
+  <text x="640" y="125" text-anchor="middle" font-family="ui-monospace,monospace" font-size="13" fill="#64748b">Design Systems · Visualize Architecture</text>
+</svg>

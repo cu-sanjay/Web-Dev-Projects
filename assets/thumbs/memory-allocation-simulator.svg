@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0f1d" />
+      <stop offset="100%" stop-color="#141b2d" />
+    </linearGradient>
+    
+    <!-- Pattern for Fragmentation (Hatch lines) -->
+    <pattern id="hatch" width="6" height="6" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#ef4444" stroke-width="1.2" opacity="0.4" />
+    </pattern>
+
+    <!-- Accent Gradients -->
+    <linearGradient id="green-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+    
+    <linearGradient id="cyan-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4" />
+      <stop offset="100%" stop-color="#3b82f6" />
+    </linearGradient>
+
+    <!-- Glow Filter -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="320" height="200" rx="16" fill="url(#bg-grad)" />
+  <rect width="320" height="200" rx="16" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="2" />
+
+  <!-- Background glows -->
+  <circle cx="280" cy="40" r="50" fill="#06b6d4" opacity="0.1" filter="url(#glow)" />
+  <circle cx="50" cy="150" r="45" fill="#10b981" opacity="0.08" filter="url(#glow)" />
+
+  <!-- Memory Bar Visual -->
+  <g transform="translate(15, 60)">
+    <!-- Base Board -->
+    <rect x="0" y="0" width="290" height="32" rx="6" fill="#0f172a" stroke="rgba(255,255,255,0.08)" stroke-width="1.5" />
+    
+    <!-- Partition 1: Allocated (P1) -->
+    <rect x="2" y="2" width="90" height="28" rx="4" fill="url(#green-grad)" />
+    <text x="47" y="19" font-family="'Inter', sans-serif" font-size="8.5" font-weight="700" fill="#ffffff" text-anchor="middle">P₁ (90 KB)</text>
+
+    <!-- Partition 2: Internal Fragmentation (Wasted inside block) -->
+    <rect x="94" y="2" width="55" height="28" rx="3" fill="url(#cyan-grad)" />
+    <text x="121.5" y="19" font-family="'Inter', sans-serif" font-size="8" font-weight="700" fill="#ffffff" text-anchor="middle">P₂ (55K)</text>
+    
+    <rect x="149" y="2" width="25" height="28" rx="3" fill="url(#hatch)" stroke="#ef4444" stroke-opacity="0.3" stroke-width="0.5" />
+    <text x="161.5" y="19" font-family="'Inter', sans-serif" font-size="7" font-weight="600" fill="#f87171" text-anchor="middle">FRAG</text>
+
+    <!-- Partition 3: Free Hole -->
+    <rect x="176" y="2" width="112" height="28" rx="4" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)" stroke-dasharray="3 3" stroke-width="1" />
+    <text x="232" y="19" font-family="'Inter', sans-serif" font-size="8.5" font-weight="700" fill="#64748b" text-anchor="middle">FREE (112 KB)</text>
+
+    <!-- Search Pointer Arrow -->
+    <g transform="translate(176, -18)" filter="url(#glow)">
+      <path d="M 0 0 L 10 0 L 5 8 Z" fill="#06b6d4" />
+      <text x="24" y="2" font-family="'Inter', sans-serif" font-size="6.5" font-weight="700" fill="#06b6d4" text-anchor="start">ALLOC PTR</text>
+    </g>
+  </g>
+
+  <!-- Allocation Metrics labels -->
+  <g transform="translate(20, 128)">
+    <text font-family="'Inter', sans-serif" font-size="7" font-weight="600" fill="#94a3b8">ALLOCATION SYSTEM</text>
+    <text y="14" font-family="'Inter', sans-serif" font-size="12" font-weight="800" fill="#10b981">62.8% <tspan font-size="7.5" font-weight="500" fill="#64748b">USED MEMORY</tspan></text>
+  </g>
+
+  <g transform="translate(175, 128)">
+    <text font-family="'Inter', sans-serif" font-size="7" font-weight="600" fill="#94a3b8">INTERNAL WASTE</text>
+    <text y="14" font-family="'Inter', sans-serif" font-size="12" font-weight="800" fill="#ef4444">25 KB <tspan font-size="7.5" font-weight="500" fill="#64748b">FRAGMENTATION</tspan></text>
+  </g>
+
+  <!-- Title & Branding -->
+  <g transform="translate(160, 172)">
+    <text font-family="'Inter', sans-serif" font-size="13" font-weight="800" text-anchor="middle" fill="#ffffff">
+      MEMORY <tspan fill="#10b981">ALLOCATOR</tspan>
+    </text>
+    <text y="11" font-family="'Inter', sans-serif" font-size="6.5" font-weight="500" text-anchor="middle" fill="#94a3b8" letter-spacing="1">
+      FIT ALGORITHMS &amp; FRAGMENTATION
+    </text>
+  </g>
+</svg>

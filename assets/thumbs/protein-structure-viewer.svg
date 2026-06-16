@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs><radialGradient id="g"><stop offset="0%" stop-color="#0b1220"/><stop offset="100%" stop-color="#061a10"/></radialGradient></defs>
+  <rect width="1280" height="720" fill="url(#g)"/>
+  <!-- helix ribbons -->
+  <path d="M500 400 Q520 340 540 380 Q560 420 580 360 Q600 300 620 350 Q640 400 660 340 Q680 280 700 330 Q720 380 740 320 Q760 260 780 310" fill="none" stroke="#22c55e" stroke-width="8" stroke-linecap="round" opacity=".7"/>
+  <path d="M460 450 Q490 400 520 420 Q550 440 570 390 Q590 340 620 380 Q650 420 670 360 Q690 300 720 350 Q750 400 770 340" fill="none" stroke="#3b82f6" stroke-width="6" stroke-linecap="round" opacity=".5"/>
+  <path d="M540 500 Q560 460 580 480 Q600 500 620 460 Q640 420 660 460 Q680 500 700 460 Q720 420 740 470" fill="none" stroke="#22c55e" stroke-width="5" stroke-linecap="round" opacity=".6"/>
+  <!-- beta sheets -->
+  <path d="M430 380 L450 400 L470 380 L490 400" fill="none" stroke="#f97316" stroke-width="4" stroke-linecap="round" opacity=".5"/>
+  <path d="M750 420 L770 440 L790 420 L810 440" fill="none" stroke="#f97316" stroke-width="4" stroke-linecap="round" opacity=".5"/>
+  <!-- floating spheres -->
+  <circle cx="400" cy="350" r="5" fill="#22c55e" opacity=".3"/>
+  <circle cx="420" cy="330" r="4" fill="#3b82f6" opacity=".3"/>
+  <circle cx="830" cy="380" r="5" fill="#22c55e" opacity=".3"/>
+  <circle cx="810" cy="400" r="4" fill="#a78bfa" opacity=".3"/>
+  <text x="640" y="100" text-anchor="middle" font-family="ui-monospace,monospace" font-size="26" font-weight="800" fill="#f8fafc" letter-spacing="1">PROTEIN STRUCTURE VIEWER</text>
+  <text x="640" y="125" text-anchor="middle" font-family="ui-monospace,monospace" font-size="13" fill="#64748b">3D Protein Visualization · Amino Acid Explorer</text>
+</svg>

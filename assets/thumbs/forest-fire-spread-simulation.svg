@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#020306"/>
+      <stop offset="50%" stop-color="#060914"/>
+      <stop offset="100%" stop-color="#090b16"/>
+    </linearGradient>
+    <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff4500"/>
+      <stop offset="100%" stop-color="#ffb800"/>
+    </linearGradient>
+    <filter id="panelGlow">
+      <feDropShadow dx="0" dy="10" stdDeviation="18" flood-color="#000" flood-opacity="0.8"/>
+    </filter>
+    <pattern id="gridP" width="12" height="12" patternUnits="userSpaceOnUse">
+      <path d="M12 0L0 0 0 12" fill="none" stroke="rgba(148,163,184,0.01)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="500" fill="url(#bgGrad)"/>
+  <rect width="800" height="500" fill="url(#gridP)"/>
+  <circle cx="650" cy="80" r="140" fill="#ff4500" opacity="0.025" filter="blur(50px)"/>
+
+  <g transform="translate(20,18)" filter="url(#panelGlow)">
+    <rect width="760" height="464" rx="14" fill="#0f172a" stroke="rgba(148,163,184,0.05)" stroke-width="0.8"/>
+
+    <circle cx="12" cy="12" r="3.5" fill="#ef4444" opacity="0.6"/>
+    <circle cx="24" cy="12" r="3.5" fill="#f59e0b" opacity="0.6"/>
+    <circle cx="36" cy="12" r="3.5" fill="#10b981" opacity="0.6"/>
+
+    <g transform="translate(600,4)">
+      <rect x="0" y="0" width="12" height="11" rx="2" fill="url(#brandGrad)"/>
+      <text x="18" y="9" font-family="'Orbitron',monospace" font-size="8" font-weight="900" fill="#e0e4ec" letter-spacing="0.06em">FIRE_SIM</text>
+    </g>
+
+    <!-- Sliders row -->
+    <rect x="16" y="28" width="728" height="32" rx="6" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+    <text x="28" y="36" font-family="monospace" font-size="5" fill="#4a5268" font-weight="600">WIND</text>
+    <rect x="28" y="44" width="60" height="2" rx="1" fill="rgba(255,255,255,0.06)"/>
+    <rect x="28" y="44" width="30" height="2" rx="1" fill="#ff4500" opacity="0.7"/>
+    <text x="92" y="47" font-family="monospace" font-size="6" fill="#ff4500">40%</text>
+
+    <text x="128" y="36" font-family="monospace" font-size="5" fill="#4a5268" font-weight="600">MOIST</text>
+    <rect x="128" y="44" width="60" height="2" rx="1" fill="rgba(255,255,255,0.06)"/>
+    <rect x="128" y="44" width="20" height="2" rx="1" fill="#00e673" opacity="0.7"/>
+    <text x="192" y="47" font-family="monospace" font-size="6" fill="#00e673">30%</text>
+
+    <text x="228" y="36" font-family="monospace" font-size="5" fill="#4a5268" font-weight="600">DIR</text>
+    <rect x="224" y="42" width="18" height="16" rx="2" fill="rgba(255,69,0,0.12)" stroke="#ff4500" stroke-width="0.5"/>
+    <text x="233" y="53" font-family="monospace" font-size="6" fill="#ff4500" text-anchor="middle" font-weight="700">S</text>
+    <rect x="244" y="42" width="18" height="16" rx="2" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+    <text x="253" y="53" font-family="monospace" font-size="6" fill="#4a5268" text-anchor="middle">N</text>
+
+    <text x="290" y="36" font-family="monospace" font-size="5" fill="#4a5268" font-weight="600">DELAY</text>
+    <rect x="290" y="44" width="60" height="2" rx="1" fill="rgba(255,255,255,0.06)"/>
+    <rect x="290" y="44" width="30" height="2" rx="1" fill="#ffb800" opacity="0.7"/>
+    <text x="354" y="47" font-family="monospace" font-size="6" fill="#ffb800">50ms</text>
+
+    <!-- Forest Grid Canvas -->
+    <rect x="16" y="66" width="520" height="310" rx="6" fill="#080b16" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+
+    <!-- Simulated grid cells (simplified) -->
+    <g opacity="0.6">
+      <!-- Healthy trees -->
+      <rect x="20" y="70" width="10" height="8" fill="#1a3a2a"/><rect x="34" y="70" width="10" height="8" fill="#1a3a2a"/>
+      <rect x="48" y="70" width="10" height="8" fill="#1a3a2a"/><rect x="62" y="70" width="10" height="8" fill="#1a3a2a"/>
+      <rect x="76" y="70" width="10" height="8" fill="#1a3a2a"/><rect x="90" y="70" width="10" height="8" fill="#1a3a2a"/>
+      <rect x="104" y="70" width="10" height="8" fill="#1a3a2a"/><rect x="118" y="70" width="10" height="8" fill="#1a3a2a"/>
+      <rect x="132" y="70" width="10" height="8" fill="#1a3a2a"/><rect x="146" y="70" width="10" height="8" fill="#1a3a2a"/>
+      <rect x="160" y="70" width="10" height="8" fill="#ff4500"/><rect x="174" y="70" width="10" height="8" fill="#ff4500"/>
+      <rect x="188" y="70" width="10" height="8" fill="#ff4500"/><rect x="202" y="70" width="10" height="8" fill="#2a2a2a"/>
+      <rect x="216" y="70" width="10" height="8" fill="#2a2a2a"/>
+
+      <rect x="20" y="82" width="10" height="8" fill="#1a3a2a"/><rect x="34" y="82" width="10" height="8" fill="#1a3a2a"/>
+      <rect x="48" y="82" width="10" height="8" fill="#1a3a2a"/><rect x="62" y="82" width="10" height="8" fill="#1a3a2a"/>
+      <rect x="76" y="82" width="10" height="8" fill="#1a3a2a"/><rect x="90" y="82" width="10" height="8" fill="#1a3a2a"/>
+      <rect x="104" y="82" width="10" height="8" fill="#1a3a2a"/><rect x="118" y="82" width="10" height="8" fill="#ff4500"/>
+      <rect x="132" y="82" width="10" height="8" fill="#ff4500"/><rect x="146" y="82" width="10" height="8" fill="#ff4500"/>
+      <rect x="160" y="82" width="10" height="8" fill="#ff4500"/><rect x="174" y="82" width="10" height="8" fill="#2a2a2a"/>
+      <rect x="188" y="82" width="10" height="8" fill="#2a2a2a"/><rect x="202" y="82" width="10" height="8" fill="#2a2a2a"/>
+      <rect x="216" y="82" width="10" height="8" fill="#2a2a2a"/>
+
+      <rect x="20" y="94" width="10" height="8" fill="#1a3a2a"/><rect x="34" y="94" width="10" height="8" fill="#1a3a2a"/>
+      <rect x="48" y="94" width="10" height="8" fill="#1a3a2a"/><rect x="62" y="94" width="10" height="8" fill="#1a3a2a"/>
+      <rect x="76" y="94" width="10" height="8" fill="#ff4500"/><rect x="90" y="94" width="10" height="8" fill="#ff4500"/>
+      <rect x="104" y="94" width="10" height="8" fill="#ff4500"/><rect x="118" y="94" width="10" height="8" fill="#ff4500"/>
+      <rect x="132" y="94" width="10" height="8" fill="#2a2a2a"/><rect x="146" y="94" width="10" height="8" fill="#2a2a2a"/>
+      <rect x="160" y="94" width="10" height="8" fill="#2a2a2a"/><rect x="174" y="94" width="10" height="8" fill="#2a2a2a"/>
+      <rect x="188" y="94" width="10" height="8" fill="#2a2a2a"/><rect x="202" y="94" width="10" height="8" fill="#05060b"/>
+      <rect x="216" y="94" width="10" height="8" fill="#05060b"/>
+    </g>
+
+    <text x="276" y="98" font-family="monospace" font-size="6" fill="#4a5268">TICK 47</text>
+
+    <!-- Telemetry panel right -->
+    <rect x="550" y="66" width="206" height="310" rx="6" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+
+    <rect x="560" y="78" width="186" height="50" rx="4" fill="rgba(255,255,255,0.015)" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+    <text x="570" y="90" font-family="monospace" font-size="6" fill="#4a5268">UNBURNED CANOPY</text>
+    <text x="570" y="112" font-family="'Orbitron',monospace" font-size="16" fill="#00e673" font-weight="700">486</text>
+
+    <rect x="560" y="136" width="186" height="50" rx="4" fill="rgba(255,255,255,0.015)" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+    <text x="570" y="148" font-family="monospace" font-size="6" fill="#4a5268">ACTIVE BLAZES</text>
+    <text x="570" y="170" font-family="'Orbitron',monospace" font-size="16" fill="#ff4500" font-weight="700">23</text>
+
+    <rect x="560" y="194" width="186" height="50" rx="4" fill="rgba(255,255,255,0.015)" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+    <text x="570" y="206" font-family="monospace" font-size="6" fill="#4a5268">CARBONIZED ACREAGE</text>
+    <text x="570" y="228" font-family="'Orbitron',monospace" font-size="14" fill="#6a6a6a" font-weight="700">182.3 ac</text>
+
+    <rect x="560" y="252" width="186" height="50" rx="4" fill="rgba(255,255,255,0.015)" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+    <text x="570" y="264" font-family="monospace" font-size="6" fill="#4a5268">DESTRUCTION RATE</text>
+    <text x="570" y="286" font-family="'Orbitron',monospace" font-size="16" fill="#ffb800" font-weight="700">38.2%</text>
+
+    <!-- Control buttons -->
+    <rect x="16" y="388" width="160" height="22" rx="4" fill="rgba(255,69,0,0.1)" stroke="rgba(255,69,0,0.2)" stroke-width="0.5"/>
+    <text x="96" y="402" font-family="monospace" font-size="7" fill="#ff4500" text-anchor="middle" font-weight="700">IGNITE SPARK</text>
+
+    <rect x="184" y="388" width="140" height="22" rx="4" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+    <text x="254" y="402" font-family="monospace" font-size="7" fill="#8892a8" text-anchor="middle">CONTAINMENT</text>
+
+    <rect x="332" y="388" width="100" height="22" rx="4" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+    <text x="382" y="402" font-family="monospace" font-size="7" fill="#8892a8" text-anchor="middle">PAUSE</text>
+
+    <rect x="440" y="388" width="120" height="22" rx="4" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+    <text x="500" y="402" font-family="monospace" font-size="7" fill="#8892a8" text-anchor="middle">RE-SEED</text>
+
+    <!-- Footer badges -->
+    <rect x="16" y="424" width="728" height="1" fill="rgba(255,255,255,0.02)"/>
+    <rect x="16" y="434" width="44" height="12" rx="2" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="0.4"/>
+    <text x="38" y="442" font-family="monospace" font-size="5" fill="#4a5268" text-anchor="middle">HTML5</text>
+    <rect x="64" y="434" width="38" height="12" rx="2" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="0.4"/>
+    <text x="83" y="442" font-family="monospace" font-size="5" fill="#4a5268" text-anchor="middle">CSS3</text>
+    <rect x="106" y="434" width="38" height="12" rx="2" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="0.4"/>
+    <text x="125" y="442" font-family="monospace" font-size="5" fill="#4a5268" text-anchor="middle">ES6+</text>
+    <rect x="148" y="434" width="44" height="12" rx="2" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="0.4"/>
+    <text x="170" y="442" font-family="monospace" font-size="5" fill="#4a5268" text-anchor="middle">CANVAS</text>
+    <text x="744" y="442" font-family="monospace" font-size="5" fill="#4a5268" text-anchor="end">FIRE_SIM v1.0</text>
+  </g>
+</svg>

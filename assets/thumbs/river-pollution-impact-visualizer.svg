@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#020306"/><stop offset="50%" stop-color="#060914"/><stop offset="100%" stop-color="#090b16"/></linearGradient>
+    <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#00e5ff"/><stop offset="100%" stop-color="#7c4dff"/></linearGradient>
+    <filter id="panelGlow"><feDropShadow dx="0" dy="10" stdDeviation="18" flood-color="#000" flood-opacity="0.8"/></filter>
+    <pattern id="gridP" width="12" height="12" patternUnits="userSpaceOnUse"><path d="M12 0L0 0 0 12" fill="none" stroke="rgba(148,163,184,0.01)" stroke-width="1"/></pattern>
+  </defs>
+  <rect width="800" height="500" fill="url(#bgGrad)"/><rect width="800" height="500" fill="url(#gridP)"/>
+  <circle cx="650" cy="80" r="140" fill="#00e5ff" opacity="0.02" filter="blur(50px)"/>
+
+  <g transform="translate(18,16)" filter="url(#panelGlow)">
+    <rect width="764" height="468" rx="14" fill="#0f172a" stroke="rgba(148,163,184,0.05)" stroke-width="0.8"/>
+    <circle cx="10" cy="10" r="3.5" fill="#ef4444" opacity="0.6"/>
+    <circle cx="22" cy="10" r="3.5" fill="#f59e0b" opacity="0.6"/>
+    <circle cx="34" cy="10" r="3.5" fill="#10b981" opacity="0.6"/>
+
+    <g transform="translate(590,3)">
+      <rect x="0" y="0" width="12" height="11" rx="2" fill="url(#brandGrad)"/>
+      <text x="18" y="9" font-family="'Orbitron',monospace" font-size="8" font-weight="900" fill="#e0e4ec" letter-spacing="0.06em">RIVER_SIM</text>
+    </g>
+
+    <!-- Config bar -->
+    <rect x="14" y="26" width="736" height="30" rx="6" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+    <rect x="20" y="32" width="140" height="18" rx="3" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+    <text x="90" y="44" font-family="monospace" font-size="6" fill="#8892a8" text-anchor="middle">Organic Sewage ▾</text>
+    <text x="180" y="38" font-family="monospace" font-size="5" fill="#4a5268" font-weight="600">DUMP</text>
+    <rect x="190" y="38" width="60" height="2" rx="1" fill="rgba(255,255,255,0.06)"/>
+    <rect x="190" y="38" width="20" height="2" rx="1" fill="#ffb800" opacity="0.7"/>
+    <text x="254" y="41" font-family="monospace" font-size="6" fill="#ffb800">30%</text>
+    <text x="290" y="38" font-family="monospace" font-size="5" fill="#4a5268" font-weight="600">FLOW</text>
+    <rect x="300" y="38" width="60" height="2" rx="1" fill="rgba(255,255,255,0.06)"/>
+    <rect x="300" y="38" width="30" height="2" rx="1" fill="#00e5ff" opacity="0.7"/>
+    <text x="364" y="41" font-family="monospace" font-size="6" fill="#00e5ff">5x</text>
+
+    <!-- River Canvas -->
+    <rect x="14" y="62" width="520" height="292" rx="6" fill="#0a1628" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+
+    <!-- Water surface shimmer lines -->
+    <line x1="20" y1="72" x2="50" y2="72" stroke="rgba(0,229,255,0.04)" stroke-width="1"/>
+    <line x1="60" y1="78" x2="90" y2="78" stroke="rgba(0,229,255,0.03)" stroke-width="1"/>
+    <line x1="120" y1="70" x2="150" y2="70" stroke="rgba(0,229,255,0.04)" stroke-width="1"/>
+
+    <!-- Pollution plume -->
+    <circle cx="160" cy="200" r="40" fill="rgba(255,184,0,0.08)"/>
+    <circle cx="160" cy="200" r="25" fill="rgba(255,184,0,0.12)"/>
+    <circle cx="250" cy="190" r="35" fill="rgba(255,184,0,0.06)"/>
+    <circle cx="250" cy="190" r="20" fill="rgba(255,184,0,0.09)"/>
+    <circle cx="340" cy="210" r="30" fill="rgba(255,184,0,0.04)"/>
+
+    <!-- Fish -->
+    <g transform="translate(120,160)scale(0.8)"><ellipse cx="0" cy="0" rx="6" ry="3" fill="rgba(180,210,240,0.7)"/><polygon points="-5,0 -10,-3 -10,3" fill="rgba(180,210,240,0.6)"/><circle cx="2.5" cy="-0.8" r="1.2" fill="#fff"/><circle cx="2.8" cy="-0.8" r="0.5" fill="#111"/></g>
+    <g transform="translate(200,140)scale(0.7)"><ellipse cx="0" cy="0" rx="6" ry="3" fill="rgba(160,200,230,0.7)"/><polygon points="-5,0 -10,-3 -10,3" fill="rgba(160,200,230,0.6)"/><circle cx="2.5" cy="-0.8" r="1.2" fill="#fff"/><circle cx="2.8" cy="-0.8" r="0.5" fill="#111"/></g>
+    <g transform="translate(300,170)scale(0.9)"><ellipse cx="0" cy="0" rx="6" ry="3" fill="rgba(140,180,220,0.5)"/><polygon points="-5,0 -10,-3 -10,3" fill="rgba(140,180,220,0.4)"/><circle cx="2.5" cy="-0.8" r="1.2" fill="#fff"/><circle cx="2.8" cy="-0.8" r="0.5" fill="#111"/></g>
+
+    <!-- Plants -->
+    <line x1="80" y1="348" x2="78" y2="325" stroke="rgba(100,200,80,0.6)" stroke-width="2"/>
+    <line x1="160" y1="348" x2="163" y2="320" stroke="rgba(80,180,60,0.6)" stroke-width="2"/>
+    <line x1="240" y1="348" x2="237" y2="330" stroke="rgba(70,160,50,0.5)" stroke-width="2"/>
+    <line x1="320" y1="348" x2="322" y2="318" stroke="rgba(90,190,70,0.6)" stroke-width="2"/>
+    <line x1="400" y1="348" x2="398" y2="328" stroke="rgba(60,150,40,0.5)" stroke-width="2"/>
+    <line x1="480" y1="348" x2="483" y2="322" stroke="rgba(100,200,80,0.6)" stroke-width="2"/>
+
+    <!-- River bottom text -->
+    <text x="274" y="340" font-family="monospace" font-size="6" fill="#4a5268" text-anchor="middle">SEWAGE PLUME · TICK 142</text>
+
+    <!-- Telemetry right -->
+    <rect x="548" y="62" width="202" height="292" rx="6" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+
+    <rect x="558" y="74" width="182" height="48" rx="4" fill="rgba(255,255,255,0.015)" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+    <text x="568" y="86" font-family="monospace" font-size="6" fill="#4a5268">DISSOLVED OXYGEN</text>
+    <text x="568" y="108" font-family="'Orbitron',monospace" font-size="15" fill="#ffb800" font-weight="700">5.2 mg/L</text>
+
+    <rect x="558" y="130" width="182" height="48" rx="4" fill="rgba(255,255,255,0.015)" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+    <text x="568" y="142" font-family="monospace" font-size="6" fill="#4a5268">TOXICITY INDEX</text>
+    <text x="568" y="164" font-family="'Orbitron',monospace" font-size="15" fill="#ffb800" font-weight="700">24.3%</text>
+
+    <rect x="558" y="186" width="182" height="48" rx="4" fill="rgba(255,255,255,0.015)" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+    <text x="568" y="198" font-family="monospace" font-size="6" fill="#4a5268">BIOMASS SURVIVAL</text>
+    <text x="568" y="220" font-family="'Orbitron',monospace" font-size="15" fill="#ffb800" font-weight="700">73.3%</text>
+
+    <rect x="558" y="242" width="182" height="48" rx="4" fill="rgba(255,255,255,0.015)" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+    <text x="568" y="254" font-family="monospace" font-size="6" fill="#4a5268">ECO-HEALTH</text>
+    <text x="568" y="276" font-family="'Orbitron',monospace" font-size="14" fill="#ffb800" font-weight="700">DEGRADED</text>
+
+    <!-- Controls -->
+    <rect x="14" y="366" width="170" height="22" rx="4" fill="rgba(255,184,0,0.1)" stroke="rgba(255,184,0,0.2)" stroke-width="0.5"/>
+    <text x="99" y="381" font-family="monospace" font-size="7" fill="#ffb800" text-anchor="middle" font-weight="700">DEPLOY SPILL</text>
+    <rect x="192" y="366" width="150" height="22" rx="4" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+    <text x="267" y="381" font-family="monospace" font-size="7" fill="#8892a8" text-anchor="middle">ACTIVATE CLEANUP</text>
+    <rect x="350" y="366" width="160" height="22" rx="4" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+    <text x="430" y="381" font-family="monospace" font-size="7" fill="#8892a8" text-anchor="middle">PURGE &amp; RESTORE</text>
+
+    <!-- Footer -->
+    <rect x="14" y="402" width="736" height="1" fill="rgba(255,255,255,0.02)"/>
+    <rect x="14" y="412" width="44" height="12" rx="2" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="0.4"/>
+    <text x="36" y="420" font-family="monospace" font-size="5" fill="#4a5268" text-anchor="middle">HTML5</text>
+    <rect x="62" y="412" width="38" height="12" rx="2" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="0.4"/>
+    <text x="81" y="420" font-family="monospace" font-size="5" fill="#4a5268" text-anchor="middle">CSS3</text>
+    <rect x="104" y="412" width="38" height="12" rx="2" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="0.4"/>
+    <text x="123" y="420" font-family="monospace" font-size="5" fill="#4a5268" text-anchor="middle">ES6+</text>
+    <rect x="146" y="412" width="44" height="12" rx="2" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)" stroke-width="0.4"/>
+    <text x="168" y="420" font-family="monospace" font-size="5" fill="#4a5268" text-anchor="middle">CANVAS</text>
+    <text x="748" y="420" font-family="monospace" font-size="5" fill="#4a5268" text-anchor="end">RIVER_SIM v1.0</text>
+  </g>
+</svg>

@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1220"/><stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#22c55e"/><stop offset="100%" stop-color="#16a34a"/>
+    </linearGradient>
+    <linearGradient id="amber" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b"/><stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <linearGradient id="red" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ef4444"/><stop offset="100%" stop-color="#dc2626"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.3"/></filter>
+  </defs>
+  <rect width="1280" height="720" fill="url(#bg)"/>
+
+  <text x="60" y="50" font-family="ui-monospace, monospace" font-size="22" font-weight="800" fill="#f8fafc" letter-spacing="1.5">INTERVIEW SIMULATOR</text>
+  <text x="60" y="72" font-family="ui-monospace, monospace" font-size="12" fill="#64748b">AI-Powered Interview Practice Platform</text>
+
+  <!-- Left panel -->
+  <rect x="60" y="95" width="400" height="570" rx="10" fill="#111827" stroke="#334155" stroke-width="1" filter="url(#shadow)"/>
+
+  <!-- Interviewer card -->
+  <rect x="60" y="95" width="400" height="70" rx="10" fill="#1f2937"/>
+  <rect x="60" y="130" width="400" height="35" fill="#1f2937"/>
+  <circle cx="95" cy="130" r="22" fill="#0b1220" stroke="#334155" stroke-width="2"/>
+  <path d="M95 120a6 6 0 100-12 6 6 0 000 12z" fill="none" stroke="#38bdf8" stroke-width="1.5"/>
+  <path d="M82 145a13 13 0 0126 0" fill="none" stroke="#38bdf8" stroke-width="1.5"/>
+  <text x="128" y="128" font-family="ui-monospace, monospace" font-size="14" font-weight="600" fill="#f8fafc">AI Interviewer</text>
+  <text x="128" y="145" font-family="ui-monospace, monospace" font-size="10" fill="#64748b">Technical Interview</text>
+  <text x="410" y="132" font-family="ui-monospace, monospace" font-size="13" font-weight="700" fill="#38bdf8" text-anchor="end">3 / 8</text>
+
+  <!-- Timer -->
+  <svg x="80" y="185" width="70" height="70">
+    <circle cx="35" cy="35" r="28" fill="none" stroke="#1f2937" stroke-width="5"/>
+    <circle cx="35" cy="35" r="28" fill="none" stroke="#38bdf8" stroke-width="5" stroke-linecap="round" stroke-dasharray="176" stroke-dashoffset="44" transform="rotate(-90 35 35)"/>
+    <text x="35" y="40" text-anchor="middle" font-family="ui-monospace, monospace" font-size="18" font-weight="700" fill="#f8fafc">1:30</text>
+  </svg>
+  <text x="165" y="220" font-family="ui-monospace, monospace" font-size="11" fill="#64748b" font-weight="600">Question 3 of 8</text>
+  <text x="165" y="238" font-family="ui-monospace, monospace" font-size="10" fill="#22c55e">On track — good pace</text>
+
+  <!-- Question -->
+  <rect x="80" y="270" width="360" height="120" rx="8" fill="#1f2937" stroke="#334155" stroke-width="1"/>
+  <rect x="80" y="270" width="80" height="22" rx="4" fill="rgba(56,189,248,0.08)" stroke="rgba(56,189,248,0.2)" stroke-width="1"/>
+  <text x="88" y="285" font-family="ui-monospace, monospace" font-size="9" fill="#38bdf8" font-weight="600">TECHNICAL</text>
+  <text x="96" y="312" font-family="ui-monospace, monospace" font-size="12" fill="#cbd5e1">Explain how the event loop works</text>
+  <text x="96" y="330" font-family="ui-monospace, monospace" font-size="12" fill="#cbd5e1">in JavaScript. What are microtasks</text>
+  <text x="96" y="348" font-family="ui-monospace, monospace" font-size="12" fill="#cbd5e1">and macrotasks?</text>
+
+  <!-- Progress dots -->
+  <g transform="translate(80, 410)">
+    <circle cx="12" cy="12" r="10" fill="#22c55e" stroke="#22c55e" stroke-width="2"/><text x="12" y="16" text-anchor="middle" font-size="9" font-weight="700" fill="#fff" font-family="ui-monospace, monospace">1</text>
+    <circle cx="44" cy="12" r="10" fill="#22c55e" stroke="#22c55e" stroke-width="2"/><text x="44" y="16" text-anchor="middle" font-size="9" font-weight="700" fill="#fff" font-family="ui-monospace, monospace">2</text>
+    <circle cx="76" cy="12" r="10" fill="none" stroke="#38bdf8" stroke-width="2"/><text x="76" y="16" text-anchor="middle" font-size="9" font-weight="700" fill="#38bdf8" font-family="ui-monospace, monospace">3</text>
+    <circle cx="108" cy="12" r="10" fill="none" stroke="#334155" stroke-width="2"/><text x="108" y="16" text-anchor="middle" font-size="9" font-weight="700" fill="#64748b" font-family="ui-monospace, monospace">4</text>
+    <circle cx="140" cy="12" r="10" fill="none" stroke="#334155" stroke-width="2"/><text x="140" y="16" text-anchor="middle" font-size="9" font-weight="700" fill="#64748b" font-family="ui-monospace, monospace">5</text>
+    <circle cx="172" cy="12" r="10" fill="none" stroke="#334155" stroke-width="2"/><text x="172" y="16" text-anchor="middle" font-size="9" fill="#64748b" font-family="ui-monospace, monospace">6</text>
+    <circle cx="204" cy="12" r="10" fill="none" stroke="#334155" stroke-width="2"/><text x="204" y="16" text-anchor="middle" font-size="9" fill="#64748b" font-family="ui-monospace, monospace">7</text>
+    <circle cx="236" cy="12" r="10" fill="none" stroke="#334155" stroke-width="2"/><text x="236" y="16" text-anchor="middle" font-size="9" fill="#64748b" font-family="ui-monospace, monospace">8</text>
+  </g>
+
+  <!-- Right panel -->
+  <rect x="490" y="95" width="730" height="325" rx="10" fill="#111827" stroke="#334155" stroke-width="1" filter="url(#shadow)"/>
+
+  <!-- Answer area -->
+  <text x="510" y="122" font-family="ui-monospace, monospace" font-size="11" font-weight="600" fill="#cbd5e1" letter-spacing="0.5" text-transform="uppercase">Your Answer</text>
+  <text x="720" y="122" font-family="ui-monospace, monospace" font-size="10" fill="#64748b">Be specific and include technical details</text>
+
+  <rect x="510" y="132" width="690" height="140" rx="6" fill="#0a0f1a" stroke="#334155" stroke-width="1"/>
+  <text x="522" y="155" font-family="ui-monospace, monospace" font-size="11" fill="#cbd5e1">The event loop is a core concept in JavaScript</text>
+  <text x="522" y="172" font-family="ui-monospace, monospace" font-size="11" fill="#cbd5e1">that enables asynchronous execution. It works by</text>
+  <text x="522" y="189" font-family="ui-monospace, monospace" font-size="11" fill="#cbd5e1">continuously checking the call stack and...</text>
+  <text x="522" y="215" font-family="ui-monospace, monospace" font-size="11" fill="#64748b">Microtasks (Promise.then, MutationObserver)</text>
+  <text x="522" y="232" font-family="ui-monospace, monospace" font-size="11" fill="#64748b">are processed before macrotasks (setTimeout)...</text>
+  <text x="522" y="258" font-family="ui-monospace, monospace" font-size="10" fill="#64748b">42 words</text>
+
+  <!-- Evaluation -->
+  <rect x="490" y="435" width="730" height="230" rx="10" fill="#111827" stroke="#334155" stroke-width="1" filter="url(#shadow)"/>
+  <text x="510" y="462" font-family="ui-monospace, monospace" font-size="12" font-weight="700" fill="#f8fafc">Evaluation</text>
+  <text x="740" y="462" font-family="ui-monospace, monospace" font-size="26" font-weight="700" fill="#22c55e">82</text>
+
+  <g transform="translate(510, 480)">
+    <text font-family="ui-monospace, monospace" font-size="9" fill="#64748b">Relevance</text>
+    <rect x="0" y="12" width="320" height="4" rx="2" fill="#1f2937"/>
+    <rect x="0" y="12" width="260" height="4" rx="2" fill="#22c55e"/>
+    <text font-family="ui-monospace, monospace" font-size="9" fill="#64748b" x="335" y="16">81%</text>
+
+    <text y="30" font-family="ui-monospace, monospace" font-size="9" fill="#64748b">Depth</text>
+    <rect x="0" y="42" width="320" height="4" rx="2" fill="#1f2937"/>
+    <rect x="0" y="42" width="220" height="4" rx="2" fill="#84cc16"/>
+    <text y="46" font-family="ui-monospace, monospace" font-size="9" fill="#64748b" x="335">69%</text>
+
+    <text y="60" font-family="ui-monospace, monospace" font-size="9" fill="#64748b">Keywords</text>
+    <rect x="0" y="72" width="320" height="4" rx="2" fill="#1f2937"/>
+    <rect x="0" y="72" width="280" height="4" rx="2" fill="#22c55e"/>
+    <text y="76" font-family="ui-monospace, monospace" font-size="9" fill="#64748b" x="335">88%</text>
+
+    <text y="90" font-family="ui-monospace, monospace" font-size="9" fill="#64748b">Clarity</text>
+    <rect x="0" y="102" width="320" height="4" rx="2" fill="#1f2937"/>
+    <rect x="0" y="102" width="240" height="4" rx="2" fill="#22c55e"/>
+    <text y="106" font-family="ui-monospace, monospace" font-size="9" fill="#64748b" x="335">75%</text>
+  </g>
+
+  <rect x="845" y="478" width="355" height="55" rx="6" fill="#1f2937" stroke="#334155" stroke-width="1"/>
+  <text x="857" y="498" font-family="ui-monospace, monospace" font-size="10" fill="#cbd5e1">Strong answer. You covered the event loop</text>
+  <text x="857" y="515" font-family="ui-monospace, monospace" font-size="10" fill="#cbd5e1">cycle well. Consider adding more detail on</text>
+  <text x="857" y="532" font-family="ui-monospace, monospace" font-size="10" fill="#cbd5e1">microtask/macrotask ordering with examples.</text>
+
+  <!-- Report bar -->
+  <g transform="translate(845, 548)">
+    <rect x="0" y="0" width="115" height="50" rx="6" fill="#1f2937" stroke="#334155" stroke-width="1"/>
+    <text x="15" y="18" font-family="ui-monospace, monospace" font-size="8" fill="#64748b">QUESTIONS</text>
+    <text x="15" y="40" font-family="ui-monospace, monospace" font-size="16" font-weight="700" fill="#38bdf8">3 / 8</text>
+
+    <rect x="125" y="0" width="115" height="50" rx="6" fill="#1f2937" stroke="#334155" stroke-width="1"/>
+    <text x="140" y="18" font-family="ui-monospace, monospace" font-size="8" fill="#64748b">AVERAGE</text>
+    <text x="140" y="40" font-family="ui-monospace, monospace" font-size="16" font-weight="700" fill="#22c55e">74</text>
+
+    <rect x="250" y="0" width="105" height="50" rx="6" fill="#1f2937" stroke="#334155" stroke-width="1"/>
+    <text x="265" y="18" font-family="ui-monospace, monospace" font-size="8" fill="#64748b">STREAK</text>
+    <text x="265" y="40" font-family="ui-monospace, monospace" font-size="16" font-weight="700" fill="#f59e0b">2</text>
+  </g>
+
+  <rect x="0" y="718" width="1280" height="2" fill="url(#accent)" opacity="0.4"/>
+</svg>

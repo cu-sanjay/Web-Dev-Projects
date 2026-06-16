@@ -1,0 +1,208 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <!-- Definitions for Gradients and Filters -->
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#04060f" />
+      <stop offset="100%" stop-color="#0c1125" />
+    </linearGradient>
+
+    <!-- Species Colors Gradients -->
+    <linearGradient id="prodGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34d399" />
+      <stop offset="100%" stop-color="#10b981" />
+    </linearGradient>
+    <linearGradient id="herbGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#60a5fa" />
+      <stop offset="100%" stop-color="#3b82f6" />
+    </linearGradient>
+    <linearGradient id="predGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24" />
+      <stop offset="100%" stop-color="#f59e0b" />
+    </linearGradient>
+    <linearGradient id="apexGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f87171" />
+      <stop offset="100%" stop-color="#ef4444" />
+    </linearGradient>
+
+    <!-- Neon Glow Filter -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bgGrad)" />
+
+  <!-- Grid overlay -->
+  <g opacity="0.06">
+    <line x1="0" y1="50" x2="800" y2="50" stroke="#00e5ff" stroke-width="1" />
+    <line x1="0" y1="100" x2="800" y2="100" stroke="#00e5ff" stroke-width="1" />
+    <line x1="0" y1="150" x2="800" y2="150" stroke="#00e5ff" stroke-width="1" />
+    <line x1="0" y1="200" x2="800" y2="200" stroke="#00e5ff" stroke-width="1" />
+    <line x1="0" y1="250" x2="800" y2="250" stroke="#00e5ff" stroke-width="1" />
+    <line x1="0" y1="300" x2="800" y2="300" stroke="#00e5ff" stroke-width="1" />
+    <line x1="0" y1="350" x2="800" y2="350" stroke="#00e5ff" stroke-width="1" />
+    <line x1="0" y1="400" x2="800" y2="400" stroke="#00e5ff" stroke-width="1" />
+    <line x1="0" y1="450" x2="800" y2="450" stroke="#00e5ff" stroke-width="1" />
+    
+    <line x1="100" y1="0" x2="100" y2="500" stroke="#00e5ff" stroke-width="1" />
+    <line x1="200" y1="0" x2="200" y2="500" stroke="#00e5ff" stroke-width="1" />
+    <line x1="300" y1="0" x2="300" y2="500" stroke="#00e5ff" stroke-width="1" />
+    <line x1="400" y1="0" x2="400" y2="500" stroke="#00e5ff" stroke-width="1" />
+    <line x1="500" y1="0" x2="500" y2="500" stroke="#00e5ff" stroke-width="1" />
+    <line x1="600" y1="0" x2="600" y2="500" stroke="#00e5ff" stroke-width="1" />
+    <line x1="700" y1="0" x2="700" y2="500" stroke="#00e5ff" stroke-width="1" />
+  </g>
+
+  <!-- Glowing background blobs -->
+  <circle cx="220" cy="250" r="120" fill="#00e5ff" opacity="0.04" filter="url(#glow)" />
+  <circle cx="580" cy="220" r="110" fill="#ef4444" opacity="0.03" filter="url(#glow)" />
+
+  <!-- Force-directed Food Web (Left side) -->
+  <g transform="translate(60, 60)">
+    <!-- Boundary Box -->
+    <rect x="0" y="0" width="340" height="350" rx="12" fill="rgba(10, 17, 33, 0.4)" stroke="rgba(255, 255, 255, 0.08)" stroke-width="2" />
+    
+    <!-- Links (Directed Energy Arrows) -->
+    <g stroke="rgba(255,255,255,0.08)" stroke-width="1.5">
+      <!-- T1 -> T2 -->
+      <line x1="70" y1="280" x2="90" y2="200" />
+      <line x1="170" y1="300" x2="90" y2="200" stroke="rgba(245, 158, 11, 0.5)" stroke-width="2.5" />
+      <line x1="170" y1="300" x2="180" y2="210" />
+      <line x1="270" y1="290" x2="180" y2="210" />
+      <line x1="170" y1="300" x2="260" y2="190" />
+      
+      <!-- T2 -> T3 -->
+      <line x1="90" y1="200" x2="100" y2="120" />
+      <line x1="90" y1="200" x2="180" y2="120" stroke="rgba(245, 158, 11, 0.5)" stroke-width="2.5" />
+      <line x1="180" y1="210" x2="180" y2="120" />
+      <line x1="260" y1="190" x2="250" y2="130" />
+      
+      <!-- T3 -> T4 -->
+      <line x1="100" y1="120" x2="130" y2="50" />
+      <line x1="180" y1="120" x2="130" y2="50" stroke="rgba(239, 68, 68, 0.5)" stroke-width="2.5" />
+      <line x1="180" y1="120" x2="220" y2="55" />
+      <line x1="250" y1="130" x2="220" y2="55" />
+    </g>
+
+    <!-- Node circles by Trophic Levels -->
+    <!-- T1: Producers (Green) -->
+    <circle cx="70" cy="280" r="16" fill="url(#prodGrad)" filter="url(#glow)" />
+    <circle cx="170" cy="300" r="18" fill="url(#prodGrad)" filter="url(#glow)" />
+    <circle cx="270" cy="290" r="15" fill="url(#prodGrad)" filter="url(#glow)" />
+    
+    <!-- T2: Herbivores (Blue) -->
+    <!-- Rabbit node is active selection -->
+    <circle cx="90" cy="200" r="13" fill="url(#herbGrad)" filter="url(#glow)" />
+    <circle cx="180" cy="210" r="15" fill="url(#herbGrad)" filter="url(#glow)" stroke="#00e5ff" stroke-width="2" />
+    <circle cx="260" cy="190" r="14" fill="url(#herbGrad)" filter="url(#glow)" />
+
+    <!-- T3: Predators (Yellow) -->
+    <circle cx="100" cy="120" r="13" fill="url(#predGrad)" filter="url(#glow)" />
+    <circle cx="180" cy="120" r="14" fill="url(#predGrad)" filter="url(#glow)" />
+    <circle cx="250" cy="130" r="12.5" fill="url(#predGrad)" filter="url(#glow)" />
+
+    <!-- T4: Apex Predators (Red) -->
+    <circle cx="130" cy="50" r="16" fill="url(#apexGrad)" filter="url(#glow)" />
+    <circle cx="220" cy="55" r="17" fill="url(#apexGrad)" filter="url(#glow)" />
+
+    <!-- Emojis Inside Nodes -->
+    <text x="70" y="284" font-size="16" text-anchor="middle">🌱</text>
+    <text x="170" y="304" font-size="18" text-anchor="middle">🌳</text>
+    <text x="270" y="294" font-size="15" text-anchor="middle">🍓</text>
+    <text x="90" y="204" font-size="13" text-anchor="middle">🦗</text>
+    <text x="180" y="215" font-size="15" text-anchor="middle">🐇</text>
+    <text x="260" y="194" font-size="14" text-anchor="middle">🦌</text>
+    <text x="100" y="124" font-size="13" text-anchor="middle">🐸</text>
+    <text x="180" y="124" font-size="14" text-anchor="middle">🐍</text>
+    <text x="250" y="134" font-size="12.5" text-anchor="middle">🐦</text>
+    <text x="130" y="55" font-size="16" text-anchor="middle">🦅</text>
+    <text x="220" y="60" font-size="17" text-anchor="middle">🐺</text>
+
+    <!-- Warning / Cascade label overlay -->
+    <rect x="195" y="14" width="135" height="18" rx="4" fill="rgba(239, 68, 68, 0.15)" stroke="rgba(239, 68, 68, 0.4)" stroke-width="1" />
+    <text x="262" y="26" fill="#ef4444" font-family="'Fira Code', monospace" font-size="8" font-weight="700" text-anchor="middle">ALARM: PLAGUE SPREADING</text>
+  </g>
+
+  <!-- Technical Dashboard (Right side) -->
+  <g transform="translate(450, 70)">
+    <text x="0" y="20" fill="#ffffff" font-family="'Inter', sans-serif" font-size="28" font-weight="900" letter-spacing="1">FOOD-NET</text>
+    <text x="150" y="20" fill="#00e5ff" font-family="'Inter', sans-serif" font-size="18" font-weight="500" letter-spacing="0.5">// TROPHIC WEB</text>
+
+    <!-- Lindeman's 10% energy pyramid -->
+    <g transform="translate(0, 45)">
+      <rect x="0" y="0" width="270" height="165" rx="8" fill="rgba(11, 17, 33, 0.6)" stroke="rgba(255,255,255,0.06)" stroke-width="1.5" />
+      
+      <text x="15" y="22" fill="#00e5ff" font-family="'Inter', sans-serif" font-size="10" font-weight="700" letter-spacing="0.5">LINDEMAN'S ENERGY TRANSFER</text>
+      <line x1="15" y1="30" x2="255" y2="30" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+
+      <!-- Pyramid Visual Stack -->
+      <g transform="translate(15, 40)">
+        <!-- Trophic 4 -->
+        <polygon points="110,10 130,10 145,24 95,24" fill="rgba(239, 68, 68, 0.2)" stroke="#ef4444" stroke-width="1.5" filter="url(#glow)" />
+        <text x="120" y="20" fill="#fff" font-family="'Fira Code', monospace" font-size="8" font-weight="700" text-anchor="middle">10 J</text>
+
+        <!-- Trophic 3 -->
+        <polygon points="95,26 145,26 165,40 75,40" fill="rgba(245, 158, 11, 0.2)" stroke="#f59e0b" stroke-width="1.5" filter="url(#glow)" />
+        <text x="120" y="36" fill="#fff" font-family="'Fira Code', monospace" font-size="8" font-weight="700" text-anchor="middle">100 J</text>
+
+        <!-- Trophic 2 -->
+        <polygon points="75,42 165,42 185,56 55,56" fill="rgba(59, 130, 246, 0.2)" stroke="#3b82f6" stroke-width="1.5" filter="url(#glow)" />
+        <text x="120" y="52" fill="#fff" font-family="'Fira Code', monospace" font-size="8" font-weight="700" text-anchor="middle">1,000 J</text>
+
+        <!-- Trophic 1 -->
+        <polygon points="55,58 185,58 205,72 35,72" fill="rgba(16, 185, 129, 0.2)" stroke="#10b981" stroke-width="1.5" filter="url(#glow)" />
+        <text x="120" y="68" fill="#fff" font-family="'Fira Code', monospace" font-size="8" font-weight="700" text-anchor="middle">10,000 J</text>
+
+        <!-- Respiration escape arrows -->
+        <path d="M 190 65 Q 210 50 205 35" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" stroke-dasharray="2 2" />
+        <text x="210" y="30" fill="var(--text-secondary)" font-family="'Inter', sans-serif" font-size="8">Respiration Loss (90%)</text>
+      </g>
+    </g>
+
+    <!-- Bio-accumulation log chart panel -->
+    <g transform="translate(0, 225)">
+      <rect x="0" y="0" width="270" height="115" rx="8" fill="rgba(11, 17, 33, 0.6)" stroke="rgba(255,255,255,0.06)" stroke-width="1.5" />
+      <text x="15" y="20" fill="#00e5ff" font-family="'Inter', sans-serif" font-size="10" font-weight="700" letter-spacing="0.5">BIOMAGNIFICATION INDEX</text>
+      <line x1="15" y1="28" x2="255" y2="28" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+
+      <!-- Columns Bar Chart -->
+      <g transform="translate(25, 40)" stroke-width="1">
+        <!-- Bar 1 (T1) -->
+        <rect x="15" y="44" width="20" height="12" rx="2" fill="#10b981" />
+        <text x="25" y="38" fill="#fff" font-family="'Fira Code', monospace" font-size="7" text-anchor="middle">0.05</text>
+        <text x="25" y="66" fill="#94a3b8" font-family="'Inter', sans-serif" font-size="8" text-anchor="middle">Tier 1</text>
+
+        <!-- Bar 2 (T2) -->
+        <rect x="65" y="36" width="20" height="20" rx="2" fill="#3b82f6" />
+        <text x="75" y="30" fill="#fff" font-family="'Fira Code', monospace" font-size="7" text-anchor="middle">0.48</text>
+        <text x="75" y="66" fill="#94a3b8" font-family="'Inter', sans-serif" font-size="8" text-anchor="middle">Tier 2</text>
+
+        <!-- Bar 3 (T3) -->
+        <rect x="115" y="20" width="20" height="36" rx="2" fill="#f59e0b" />
+        <text x="125" y="14" fill="#fff" font-family="'Fira Code', monospace" font-size="7" text-anchor="middle">4.50</text>
+        <text x="125" y="66" fill="#94a3b8" font-family="'Inter', sans-serif" font-size="8" text-anchor="middle">Tier 3</text>
+
+        <!-- Bar 4 (T4) -->
+        <rect x="165" y="2" width="20" height="54" rx="2" fill="#ef4444" />
+        <text x="175" y="-4" fill="#fff" font-family="'Fira Code', monospace" font-size="7" text-anchor="middle">42.8</text>
+        <text x="175" y="66" fill="#94a3b8" font-family="'Inter', sans-serif" font-size="8" text-anchor="middle">Tier 4</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Glowing HUD borders -->
+  <rect x="15" y="15" width="770" height="470" rx="12" fill="none" stroke="rgba(0, 229, 255, 0.12)" stroke-width="2" />
+  
+  <!-- Corner Tech Details -->
+  <line x1="15" y1="35" x2="15" y2="65" stroke="#00e5ff" stroke-width="3" />
+  <line x1="15" y1="35" x2="45" y2="35" stroke="#00e5ff" stroke-width="3" />
+
+  <line x1="785" y1="465" x2="785" y2="435" stroke="#00e5ff" stroke-width="3" />
+  <line x1="785" y1="465" x2="755" y2="465" stroke="#00e5ff" stroke-width="3" />
+</svg>

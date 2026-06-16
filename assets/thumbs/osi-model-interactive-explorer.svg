@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <!-- Background -->
+  <rect width="400" height="300" fill="#04060f"/>
+  
+  <!-- Stack Layers -->
+  <!-- Layer 7: Application -->
+  <rect x="80" y="50" width="240" height="20" rx="4" fill="rgba(236, 72, 153, 0.15)" stroke="#ec4899" stroke-width="1.5"/>
+  <text x="200" y="64" font-family="'Outfit', sans-serif" font-size="10" font-weight="bold" fill="#ec4899" text-anchor="middle">7. APPLICATION</text>
+  
+  <!-- Layer 6: Presentation -->
+  <rect x="80" y="75" width="240" height="20" rx="4" fill="rgba(168, 85, 247, 0.15)" stroke="#a855f7" stroke-width="1.5"/>
+  <text x="200" y="89" font-family="'Outfit', sans-serif" font-size="10" font-weight="bold" fill="#a855f7" text-anchor="middle">6. PRESENTATION</text>
+  
+  <!-- Layer 5: Session -->
+  <rect x="80" y="100" width="240" height="20" rx="4" fill="rgba(99, 102, 241, 0.15)" stroke="#6366f1" stroke-width="1.5"/>
+  <text x="200" y="114" font-family="'Outfit', sans-serif" font-size="10" font-weight="bold" fill="#6366f1" text-anchor="middle">5. SESSION</text>
+
+  <!-- Layer 4: Transport -->
+  <rect x="80" y="125" width="240" height="20" rx="4" fill="rgba(59, 130, 246, 0.15)" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="200" y="139" font-family="'Outfit', sans-serif" font-size="10" font-weight="bold" fill="#3b82f6" text-anchor="middle">4. TRANSPORT</text>
+
+  <!-- Layer 3: Network -->
+  <rect x="80" y="150" width="240" height="20" rx="4" fill="rgba(16, 185, 129, 0.15)" stroke="#10b981" stroke-width="1.5"/>
+  <text x="200" y="164" font-family="'Outfit', sans-serif" font-size="10" font-weight="bold" fill="#10b981" text-anchor="middle">3. NETWORK</text>
+
+  <!-- Layer 2: Data Link -->
+  <rect x="80" y="175" width="240" height="20" rx="4" fill="rgba(245, 158, 11, 0.15)" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="200" y="189" font-family="'Outfit', sans-serif" font-size="10" font-weight="bold" fill="#f59e0b" text-anchor="middle">2. DATA LINK</text>
+
+  <!-- Layer 1: Physical -->
+  <rect x="80" y="200" width="240" height="20" rx="4" fill="rgba(239, 68, 68, 0.15)" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="200" y="214" font-family="'Outfit', sans-serif" font-size="10" font-weight="bold" fill="#ef4444" text-anchor="middle">1. PHYSICAL</text>
+  
+  <!-- Flow Arrows -->
+  <g stroke="#06b6d4" stroke-width="2" fill="none">
+    <!-- Down Arrow (Encapsulation) -->
+    <path d="M50,60 L50,210" stroke-dasharray="4 4"/>
+    <polyline points="46,204 50,210 54,204"/>
+    
+    <!-- Up Arrow (Decapsulation) -->
+    <path d="M350,210 L350,60" stroke-dasharray="4 4"/>
+    <polyline points="346,66 350,60 354,66"/>
+  </g>
+  
+  <text x="50" y="44" font-family="'Outfit', sans-serif" font-size="8" fill="#06b6d4" text-anchor="middle" font-weight="bold">ENCAP</text>
+  <text x="350" y="44" font-family="'Outfit', sans-serif" font-size="8" fill="#06b6d4" text-anchor="middle" font-weight="bold">DECAP</text>
+  
+  <!-- Bottom wire connection -->
+  <path d="M50,250 L350,250" stroke="rgba(255,255,255,0.15)" stroke-width="3"/>
+  <circle cx="200" cy="250" r="6" fill="#06b6d4" opacity="0.8"/>
+  <path d="M50,210 L50,250 M350,210 L350,250" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-dasharray="2 2"/>
+</svg>

@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#090d16" />
+      <stop offset="100%" stop-color="#111827" />
+    </linearGradient>
+
+    <!-- Header Gradient -->
+    <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#0ea5e9" />
+    </linearGradient>
+
+    <!-- Glowing Lines Filter -->
+    <filter id="glow-cyan" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="320" height="200" rx="12" fill="url(#bg-grad)" />
+  <rect width="318" height="198" x="1" y="1" rx="11" fill="none" stroke="#1f2937" stroke-width="2" />
+
+  <!-- Grid overlay -->
+  <g opacity="0.05">
+    <path d="M0,40 H320 M0,80 H320 M0,120 H320 M0,160 H320" stroke="#ffffff" stroke-width="1"/>
+    <path d="M64,0 V200 M128,0 V200 M192,0 V200 M256,0 V200" stroke="#ffffff" stroke-width="1"/>
+  </g>
+
+  <!-- Header -->
+  <g transform="translate(15, 12)">
+    <!-- Chart Line Icon -->
+    <path d="M0,8 L4,4 L8,6 L12,1 L14,3 L18,0 M0,9 H19 M19,9" stroke="#0ea5e9" stroke-width="1.5" stroke-linecap="round" fill="none" transform="scale(0.8) translate(0, 1)" />
+    <!-- Logo Text -->
+    <text x="18" y="9" font-family="'Outfit', sans-serif" font-weight="800" font-size="10" fill="url(#logo-grad)">Runway<tspan font-weight="400" fill="#9ca3af">Sync</tspan></text>
+    <!-- Badge -->
+    <rect x="78" y="1" width="38" height="9" rx="3" fill="#1f2937" stroke="#374151" stroke-width="0.5" />
+    <text x="97" y="7" font-family="'Inter', sans-serif" font-weight="600" font-size="5" fill="#9ca3af" text-anchor="middle" letter-spacing="0.5">FORECAST</text>
+  </g>
+
+  <!-- Alive status badge -->
+  <g transform="translate(245, 12)">
+    <rect x="0" y="0" width="60" height="10" rx="3" fill="rgba(16, 185, 129, 0.1)" stroke="rgba(16, 185, 129, 0.2)" stroke-width="0.5" />
+    <circle cx="5" cy="5" r="2.5" fill="#10b981" />
+    <text x="11" y="7.2" font-family="'Inter', sans-serif" font-weight="700" font-size="5.5" fill="#10b981" letter-spacing="0.2">DEFAULT ALIVE</text>
+  </g>
+
+  <!-- Metrics row summary -->
+  <g transform="translate(15, 30)">
+    <!-- Metric 1: Runway -->
+    <rect x="0" y="0" width="68" height="28" rx="5" fill="#111827" stroke="#374151" stroke-width="0.5" />
+    <text x="6" y="8" font-family="'Inter', sans-serif" font-weight="500" font-size="5" fill="#9ca3af" letter-spacing="0.2">RUNWAY REMAINING</text>
+    <text x="6" y="21" font-family="'Outfit', sans-serif" font-weight="800" font-size="11" fill="#10b981">18.4 mo</text>
+
+    <!-- Metric 2: Net Burn -->
+    <rect x="74" y="0" width="68" height="28" rx="5" fill="#111827" stroke="#374151" stroke-width="0.5" />
+    <text x="80" y="8" font-family="'Inter', sans-serif" font-weight="500" font-size="5" fill="#9ca3af" letter-spacing="0.2">MONTHLY BURN</text>
+    <text x="80" y="21" font-family="'Outfit', sans-serif" font-weight="800" font-size="11" fill="#ef4444">$27,000</text>
+
+    <!-- Metric 3: Cash balance -->
+    <rect x="148" y="0" width="74" height="28" rx="5" fill="#111827" stroke="#374151" stroke-width="0.5" />
+    <text x="154" y="8" font-family="'Inter', sans-serif" font-weight="500" font-size="5" fill="#9ca3af" letter-spacing="0.2">CASH BALANCE</text>
+    <text x="154" y="21" font-family="'Outfit', sans-serif" font-weight="800" font-size="11" fill="#ffffff">$500,000</text>
+
+    <!-- Metric 4: Growth -->
+    <rect x="228" y="0" width="62" height="28" rx="5" fill="#111827" stroke="#374151" stroke-width="0.5" />
+    <text x="234" y="8" font-family="'Inter', sans-serif" font-weight="500" font-size="5" fill="#9ca3af" letter-spacing="0.2">REV GROWTH</text>
+    <text x="234" y="21" font-family="'Outfit', sans-serif" font-weight="800" font-size="11" fill="#0ea5e9">+5.0%</text>
+  </g>
+
+  <!-- Chart Board Area -->
+  <g transform="translate(15, 68)">
+    <rect width="200" height="116" rx="6" fill="#111827" stroke="rgba(255,255,255,0.02)" stroke-width="1" />
+    <text x="8" y="12" font-family="'Outfit', sans-serif" font-weight="700" font-size="7" fill="#ffffff">24-Month Forecast</text>
+    
+    <!-- Legend -->
+    <circle cx="160" cy="10" r="1.5" fill="#0ea5e9" />
+    <text x="164" y="12" font-family="'Inter', sans-serif" font-size="4.5" fill="#9ca3af">Cash</text>
+    <circle cx="184" cy="10" r="1.5" fill="#10b981" />
+    <text x="188" y="12" font-family="'Inter', sans-serif" font-size="4.5" fill="#9ca3af">Rev</text>
+
+    <!-- Chart Grid Inside -->
+    <g stroke="rgba(255,255,255,0.03)" stroke-width="0.5">
+      <line x1="10" y1="30" x2="190" y2="30" />
+      <line x1="10" y1="50" x2="190" y2="50" />
+      <line x1="10" y1="70" x2="190" y2="70" />
+      <line x1="10" y1="90" x2="190" y2="90" />
+      
+      <line x1="46" y1="20" x2="46" y2="105" />
+      <line x1="82" y1="20" x2="82" y2="105" />
+      <line x1="118" y1="20" x2="118" y2="105" />
+      <line x1="154" y1="20" x2="154" y2="105" />
+    </g>
+
+    <!-- Axis borders -->
+    <line x1="10" y1="105" x2="190" y2="105" stroke="#374151" stroke-width="0.8" />
+    <line x1="10" y1="20" x2="10" y2="105" stroke="#374151" stroke-width="0.8" />
+
+    <!-- Revenue Curve (Growing dash) -->
+    <path d="M 10 92 L 46 88 L 82 82 L 118 75 L 154 68 L 190 60" fill="none" stroke="#10b981" stroke-width="1.5" stroke-dasharray="2,2" stroke-linecap="round" />
+
+    <!-- Cash Decay Curve (Glowing Cyan) -->
+    <path d="M 10 32 C 46 45, 82 65, 118 90 C 132 100, 140 105, 150 105 L 190 105" fill="none" stroke="#0ea5e9" stroke-width="2" filter="url(#glow-cyan)" stroke-linecap="round" />
+
+    <!-- Zero Cash Depletion Node -->
+    <circle cx="150" cy="105" r="3" fill="#ef4444" stroke="#ffffff" stroke-width="1" />
+    
+    <!-- Timeline dates -->
+    <text x="10" y="112" font-family="'Inter', sans-serif" font-size="4.5" fill="#4b5563">Jun '26</text>
+    <text x="150" y="112" font-family="'Inter', sans-serif" font-size="4.5" fill="#ef4444" text-anchor="middle">Dec '27</text>
+    <text x="190" y="112" font-family="'Inter', sans-serif" font-size="4.5" fill="#4b5563" text-anchor="end">May '28</text>
+  </g>
+
+  <!-- Right side scenario vault preview -->
+  <g transform="translate(225, 68)">
+    <rect width="80" height="116" rx="6" fill="#111827" stroke="rgba(255,255,255,0.02)" stroke-width="1" />
+    <text x="8" y="12" font-family="'Outfit', sans-serif" font-weight="700" font-size="7" fill="#ffffff">Scenario Vault</text>
+    
+    <!-- List of active configurations -->
+    <g transform="translate(6, 20)">
+      <rect width="68" height="18" rx="3" fill="rgba(16, 185, 129, 0.05)" stroke="#10b981" stroke-width="0.5" />
+      <text x="6" y="11" font-family="'Inter', sans-serif" font-weight="700" font-size="5" fill="#6ee7b7">★ Baseline Plan</text>
+      
+      <g transform="translate(0, 23)">
+        <rect width="68" height="18" rx="3" fill="rgba(255,255,255,0.02)" stroke="#374151" stroke-width="0.5" />
+        <text x="6" y="11" font-family="'Inter', sans-serif" font-weight="500" font-size="5" fill="#9ca3af">Slow Burn</text>
+      </g>
+
+      <g transform="translate(0, 46)">
+        <rect width="68" height="18" rx="3" fill="rgba(255,255,255,0.02)" stroke="#374151" stroke-width="0.5" />
+        <text x="6" y="11" font-family="'Inter', sans-serif" font-weight="500" font-size="5" fill="#9ca3af">Growth Push</text>
+      </g>
+    </g>
+
+    <!-- Advisory quick footer tip -->
+    <g transform="translate(6, 95)">
+      <rect width="68" height="15" rx="3" fill="rgba(14, 165, 233, 0.05)" />
+      <text x="6" y="9" font-family="'Inter', sans-serif" font-weight="600" font-size="4.5" fill="#0ea5e9">💡 Runways stable.</text>
+    </g>
+  </g>
+</svg>

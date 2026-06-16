@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <!-- Background Gradient -->
+    <radialGradient id="bg-glow" cx="50%" cy="50%" r="75%">
+      <stop offset="0%" stop-color="#090e25"/>
+      <stop offset="60%" stop-color="#040615"/>
+      <stop offset="100%" stop-color="#010207"/>
+    </radialGradient>
+
+    <!-- Glowing effects -->
+    <filter id="glow-orange" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <filter id="glow-cyan" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    
+    <radialGradient id="jet-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ff9d00" stop-opacity="1"/>
+      <stop offset="35%" stop-color="#ff5500" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#ff3300" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bg-glow)"/>
+
+  <!-- High-tech grid mesh background -->
+  <g opacity="0.08" stroke="#00f2fe" stroke-width="1">
+    <path d="M 0,50 L 800,50 M 0,100 L 800,100 M 0,150 L 800,150 M 0,200 L 800,200 M 0,250 L 800,250 M 0,300 L 800,300 M 0,350 L 800,350 M 0,400 L 800,400 M 0,450 L 800,450"/>
+    <path d="M 50,0 L 50,500 M 100,0 L 100,500 M 150,0 L 150,500 M 200,0 L 200,500 M 250,0 L 250,500 M 300,0 L 300,500 M 350,0 L 350,500 M 400,0 L 400,500 M 450,0 L 450,500 M 500,0 L 500,500 M 550,0 L 550,500 M 600,0 L 600,500 M 650,0 L 650,500 M 700,0 L 700,500 M 750,0 L 750,500"/>
+  </g>
+
+  <!-- Mach shockwave envelope lines (tangents to circles) -->
+  <!-- Mach Angle is 30 degrees (vs = 2.0v) -->
+  <g stroke="#ff8c00" stroke-width="3.5" filter="url(#glow-orange)" opacity="0.85">
+    <line x1="520" y1="250" x2="20" y2="40" stroke-dasharray="10 4"/>
+    <line x1="520" y1="250" x2="20" y2="460" stroke-dasharray="10 4"/>
+  </g>
+
+  <!-- Supersonic overlapping sound circles (centers shifted left) -->
+  <g stroke="#00f2fe" fill="none" opacity="0.6">
+    <!-- Center: 420, Radius: 50 -->
+    <circle cx="420" cy="250" r="50" stroke-width="2"/>
+    <!-- Center: 320, Radius: 100 -->
+    <circle cx="320" cy="250" r="100" stroke-width="2.5"/>
+    <!-- Center: 220, Radius: 150 -->
+    <circle cx="220" cy="250" r="150" stroke-width="3" opacity="0.85"/>
+    <!-- Center: 120, Radius: 200 -->
+    <circle cx="120" cy="250" r="200" stroke-width="3" opacity="0.7"/>
+    <!-- Center: 20, Radius: 250 -->
+    <circle cx="20" cy="250" r="250" stroke-width="3" opacity="0.5"/>
+  </g>
+
+  <!-- Observer Node (Acoustic Ear Icon) -->
+  <g transform="translate(680, 380)">
+    <circle cx="0" cy="0" r="24" fill="rgba(253, 0, 142, 0.25)" stroke="#fd008e" stroke-width="2"/>
+    <circle cx="0" cy="0" r="14" fill="#fd008e"/>
+    <text x="0" y="0" font-family="Inter" font-size="16" fill="#ffffff" text-anchor="middle" dominant-baseline="central">👂</text>
+    <text x="0" y="-34" font-family="'Orbitron', sans-serif" font-weight="bold" font-size="11" fill="#fd008e" text-anchor="middle">OBSERVER</text>
+  </g>
+
+  <!-- Source Node (Supersonic Jet) -->
+  <circle cx="520" cy="250" r="60" fill="url(#jet-glow)"/>
+  <g transform="translate(520, 250)">
+    <circle cx="0" cy="0" r="16" fill="#ffd700" stroke="#ffffff" stroke-width="2" filter="url(#glow-orange)"/>
+    <text x="0" y="0" font-family="Inter" font-size="16" fill="#000000" text-anchor="middle" dominant-baseline="central">🚨</text>
+    <text x="0" y="-26" font-family="'Orbitron', sans-serif" font-weight="bold" font-size="12" fill="#ffd700" text-anchor="middle">MACH 2.0 JET</text>
+    
+    <!-- Vector Velocity arrow -->
+    <line x1="16" y1="0" x2="60" y2="0" stroke="#39ff14" stroke-width="3" marker-end="url(#arrow)"/>
+    <polygon points="60,-6 72,0 60,6" fill="#39ff14"/>
+  </g>
+
+  <!-- Telemetry Dashboard Card in bottom-left corner -->
+  <g transform="translate(45, 330)">
+    <!-- Glass Panel -->
+    <rect width="320" height="130" rx="12" fill="rgba(10, 15, 30, 0.9)" stroke="rgba(0, 242, 254, 0.35)" stroke-width="1.8"/>
+    
+    <!-- Telemetry Header -->
+    <text x="15" y="26" font-family="'Orbitron', sans-serif" font-size="11" fill="#00f2fe" font-weight="900" letter-spacing="1">DOPPLER FLIGHT ANALYZER</text>
+    <rect x="230" y="14" width="75" height="16" rx="4" fill="rgba(253, 0, 142, 0.2)" stroke="#fd008e" stroke-width="1"/>
+    <text x="267" y="26" font-family="'Orbitron', sans-serif" font-size="9" fill="#fd008e" font-weight="bold" text-anchor="middle">SUPERSONIC</text>
+
+    <!-- Divider -->
+    <line x1="15" y1="40" x2="305" y2="40" stroke="rgba(255, 255, 255, 0.1)" stroke-width="1"/>
+
+    <!-- Dynamic Waveform Trace (High frequency -> Shock -> Quiet) -->
+    <path d="M 20,75 
+             Q 30,55 40,75 
+             T 60,75 
+             T 80,75 
+             T 100,75
+             Q 115,35 130,75
+             L 160,75
+             Q 185,95 210,75
+             Q 235,55 260,75
+             Q 285,95 300,75" 
+          fill="none" stroke="#39ff14" stroke-width="2.5" filter="url(#glow-cyan)"/>
+
+    <text x="20" y="114" font-family="'JetBrains Mono', monospace" font-size="10" fill="#8a9fc4">M: 2.00</text>
+    <text x="110" y="114" font-family="'JetBrains Mono', monospace" font-size="10" fill="#8a9fc4">v_s: 680 m/s</text>
+    <text x="225" y="114" font-family="'JetBrains Mono', monospace" font-size="10" fill="#8a9fc4">f' / f: 3.50x</text>
+  </g>
+</svg>

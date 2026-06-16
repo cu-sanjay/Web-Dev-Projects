@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <!-- Background Gradient -->
+    <radialGradient id="bg-glow" cx="50%" cy="50%" r="75%">
+      <stop offset="0%" stop-color="#0c102a"/>
+      <stop offset="60%" stop-color="#040616"/>
+      <stop offset="100%" stop-color="#010207"/>
+    </radialGradient>
+
+    <!-- Glowing effect filters -->
+    <filter id="glow-white" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <filter id="glow-rainbow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+
+    <!-- Glass Prism Gradient -->
+    <linearGradient id="prism-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="rgba(0, 242, 254, 0.2)"/>
+      <stop offset="35%" stop-color="rgba(255, 255, 255, 0.05)"/>
+      <stop offset="100%" stop-color="rgba(253, 0, 142, 0.15)"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bg-glow)"/>
+
+  <!-- High-tech grid background -->
+  <g opacity="0.08" stroke="#00f2fe" stroke-width="1">
+    <path d="M 0,50 L 800,50 M 0,100 L 800,100 M 0,150 L 800,150 M 0,200 L 800,200 M 0,250 L 800,250 M 0,300 L 800,300 M 0,350 L 800,350 M 0,400 L 800,400 M 0,450 L 800,450"/>
+    <path d="M 50,0 L 50,500 M 100,0 L 100,500 M 150,0 L 150,500 M 200,0 L 200,500 M 250,0 L 250,500 M 300,0 L 300,500 M 350,0 L 350,500 M 400,0 L 400,500 M 450,0 L 450,500 M 500,0 L 500,500 M 550,0 L 550,500 M 600,0 L 600,500 M 650,0 L 650,500 M 700,0 L 700,500 M 750,0 L 750,500"/>
+  </g>
+
+  <!-- Incident White Light Beam -->
+  <line x1="80" y1="210" x2="350" y2="210" stroke="#ffffff" stroke-width="5.5" filter="url(#glow-white)"/>
+  
+  <!-- Laser Emitter Head -->
+  <g transform="translate(80, 210)">
+    <rect x="-40" y="-12" width="40" height="24" rx="4" fill="#1b2234" stroke="rgba(0, 242, 254, 0.4)" stroke-width="1.5"/>
+    <rect x="-10" y="-8" width="10" height="16" fill="#00f2fe"/>
+    <circle cx="-25" cy="0" r="4" fill="#39ff14"/>
+  </g>
+
+  <!-- Triangular Glass Prism (Centered, Top Vertex at 400,100, Base 300,320 to 500,320) -->
+  <polygon points="300,320 400,100 500,320" fill="url(#prism-grad)" stroke="rgba(0, 242, 254, 0.45)" stroke-width="2.5" filter="drop-shadow(0px 0px 10px rgba(0, 242, 254, 0.2))"/>
+
+  <!-- Normal Line at Entry (Left face normal) -->
+  <!-- Left Face: (300,320) to (400,100). Normal goes up-left (-0.91, -0.41) -->
+  <line x1="350" y1="210" x2="259" y2="169" stroke="rgba(255, 215, 0, 0.25)" stroke-width="1.5" stroke-dasharray="4 4"/>
+
+  <!-- Spectral Dispersion Lines inside glass (Refracted paths) -->
+  <!-- Entering at (350, 210) -->
+  <line x1="350" y1="210" x2="450" y2="220" stroke="#ff3333" stroke-width="2.2" opacity="0.8"/> <!-- Red -->
+  <line x1="350" y1="210" x2="450" y2="223" stroke="#ff9900" stroke-width="2.2" opacity="0.8"/> <!-- Orange -->
+  <line x1="350" y1="210" x2="450" y2="226" stroke="#ffff00" stroke-width="2.2" opacity="0.8"/> <!-- Yellow -->
+  <line x1="350" y1="210" x2="450" y2="229" stroke="#33ff33" stroke-width="2.2" opacity="0.8"/> <!-- Green -->
+  <line x1="350" y1="210" x2="450" y2="232" stroke="#3333ff" stroke-width="2.2" opacity="0.8"/> <!-- Blue -->
+  <line x1="350" y1="210" x2="450" y2="235" stroke="#4b0082" stroke-width="2.2" opacity="0.8"/> <!-- Indigo -->
+  <line x1="350" y1="210" x2="450" y2="238" stroke="#9400d3" stroke-width="2.2" opacity="0.8"/> <!-- Violet -->
+
+  <!-- Spectral Dispersion Rays exiting right face (Diverging Rainbow fan) -->
+  <g filter="url(#glow-rainbow)" stroke-width="3" stroke-linecap="round" opacity="0.9">
+    <line x1="450" y1="220" x2="740" y2="140" stroke="#ff3333"/> <!-- Red -->
+    <line x1="450" y1="223" x2="740" y2="175" stroke="#ff9900"/> <!-- Orange -->
+    <line x1="450" y1="226" x2="740" y2="210" stroke="#ffff00"/> <!-- Yellow -->
+    <line x1="450" y1="229" x2="740" y2="245" stroke="#33ff33"/> <!-- Green -->
+    <line x1="450" y1="232" x2="740" y2="280" stroke="#3333ff"/> <!-- Blue -->
+    <line x1="450" y1="235" x2="740" y2="315" stroke="#4b0082"/> <!-- Indigo -->
+    <line x1="450" y1="238" x2="740" y2="350" stroke="#9400d3"/> <!-- Violet -->
+  </g>
+
+  <!-- Telemetry Spectrometer Card (Top-Left) -->
+  <g transform="translate(45, 45)">
+    <!-- Glass Card -->
+    <rect width="280" height="120" rx="10" fill="rgba(10, 15, 30, 0.85)" stroke="rgba(0, 242, 254, 0.35)" stroke-width="1.5"/>
+    <text x="15" y="24" font-family="'Orbitron', sans-serif" font-size="11" fill="#00f2fe" font-weight="900" letter-spacing="1">DISPERSION SPECTROGRAPH</text>
+    
+    <line x1="15" y1="36" x2="265" y2="36" stroke="rgba(255, 255, 255, 0.1)" stroke-width="1"/>
+
+    <!-- Data Rows -->
+    <text x="15" y="58" font-family="'JetBrains Mono', monospace" font-size="9.5" fill="#8a9fc4">Prism Angle:</text>
+    <text x="190" y="58" font-family="'JetBrains Mono', monospace" font-size="9.5" fill="#ffd700" font-weight="bold">60.0°</text>
+
+    <text x="15" y="80" font-family="'JetBrains Mono', monospace" font-size="9.5" fill="#8a9fc4">Refractive Index n(λ):</text>
+    <text x="190" y="80" font-family="'JetBrains Mono', monospace" font-size="9.5" fill="#00f2fe" font-weight="bold">1.50 - 1.53</text>
+
+    <text x="15" y="102" font-family="'JetBrains Mono', monospace" font-size="9.5" fill="#8a9fc4">Angular Spread δ:</text>
+    <text x="190" y="102" font-family="'JetBrains Mono', monospace" font-size="9.5" fill="#39ff14" font-weight="bold">14.6°</text>
+  </g>
+</svg>

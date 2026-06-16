@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0b1220"/><stop offset="100%" stop-color="#0a1a20"/></linearGradient></defs>
+  <rect width="1280" height="720" fill="url(#g)"/>
+  <!-- hex-like grid -->
+  <text x="200" y="220" font-family="monospace" font-size="11" fill="#64748b">00000000</text>
+  <text x="290" y="220" font-family="monospace" font-size="11" fill="#06b6d4">89 50 4E 47 0D 0A 1A 0A</text>
+  <text x="200" y="240" font-family="monospace" font-size="11" fill="#64748b">00000010</text>
+  <text x="290" y="240" font-family="monospace" font-size="11" fill="#cbd5e1">00 00 00 0D 49 48 44 52</text>
+  <text x="200" y="260" font-family="monospace" font-size="11" fill="#64748b">00000020</text>
+  <text x="290" y="260" font-family="monospace" font-size="11" fill="#cbd5e1">00 00 01 90 00 00 00 C8</text>
+  <text x="200" y="280" font-family="monospace" font-size="11" fill="#64748b">00000030</text>
+  <text x="290" y="280" font-family="monospace" font-size="11" fill="#cbd5e1">08 02 00 00 00 7C 4B 3F</text>
+  <text x="200" y="300" font-family="monospace" font-size="11" fill="#64748b">00000040</text>
+  <text x="290" y="300" font-family="monospace" font-size="11" fill="#cbd5e1">FF D8 FF E0 00 10 4A 46</text>
+  <!-- timeline line -->
+  <line x1="850" y1="200" x2="850" y2="450" stroke="#334155" stroke-width="2"/>
+  <circle cx="850" cy="230" r="5" fill="#06b6d4"/>
+  <text x="870" y="235" font-family="monospace" font-size="10" fill="#64748b">2024-01-15 14:23</text>
+  <text x="870" y="255" font-family="monospace" font-size="10" fill="#cbd5e1">Suspicious login detected</text>
+  <circle cx="850" cy="300" r="5" fill="#06b6d4"/>
+  <text x="870" y="305" font-family="monospace" font-size="10" fill="#64748b">2024-01-15 14:25</text>
+  <text x="870" y="325" font-family="monospace" font-size="10" fill="#cbd5e1">Brute force attempt</text>
+  <circle cx="850" cy="370" r="5" fill="#06b6d4"/>
+  <text x="870" y="375" font-family="monospace" font-size="10" fill="#64748b">2024-01-15 14:30</text>
+  <text x="870" y="395" font-family="monospace" font-size="10" fill="#cbd5e1">Access granted</text>
+  <text x="640" y="100" text-anchor="middle" font-family="ui-monospace,monospace" font-size="26" font-weight="800" fill="#f8fafc" letter-spacing="1">DIGITAL FORENSICS LAB</text>
+  <text x="640" y="125" text-anchor="middle" font-family="ui-monospace,monospace" font-size="13" fill="#64748b">Evidence Analysis · File Recovery · Timeline Reconstruction</text>
+</svg>

@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="100%" height="100%">
+  <!-- Definitions of gradients and filters -->
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06090e" />
+      <stop offset="50%" stop-color="#121827" />
+      <stop offset="100%" stop-color="#05070a" />
+    </linearGradient>
+    <linearGradient id="cyan-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f2fe" />
+      <stop offset="100%" stop-color="#4facfe" />
+    </linearGradient>
+    <linearGradient id="red-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ef4444" />
+      <stop offset="100%" stop-color="#ff8a8a" />
+    </linearGradient>
+    <linearGradient id="glow-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="400" fill="url(#bg-grad)" />
+
+  <!-- Background Grid lines for tech vibe -->
+  <path d="M 0,50 L 600,50 M 0,100 L 600,100 M 0,150 L 600,150 M 0,200 L 600,200 M 0,250 L 600,250 M 0,300 L 600,300 M 0,350 L 600,350" stroke="rgba(255,255,255,0.02)" stroke-width="1" />
+  <path d="M 50,0 L 50,400 M 100,0 L 100,400 M 150,0 L 150,400 M 200,0 L 200,400 M 250,0 L 250,400 M 300,0 L 300,400 M 350,0 L 350,400 M 400,0 L 400,400 M 450,0 L 450,400 M 500,0 L 500,400 M 550,0 L 550,400" stroke="rgba(255,255,255,0.02)" stroke-width="1" />
+
+  <!-- Title Text -->
+  <text x="300" y="75" fill="#ffffff" font-family="'Outfit', sans-serif" font-size="28" font-weight="800" text-anchor="middle" letter-spacing="-0.5">MAG<tspan fill="url(#cyan-grad)">KRAFT</tspan></text>
+  <text x="300" y="100" fill="#9ca3af" font-family="'Outfit', sans-serif" font-size="14" font-weight="500" text-anchor="middle" letter-spacing="1">MAGNETIC FIELD SIMULATOR</text>
+
+  <!-- Dipole Field lines visual paths -->
+  <!-- Upper field curves -->
+  <path d="M 270,200 C 270,120 330,120 330,200" fill="none" stroke="rgba(0, 242, 254, 0.2)" stroke-width="1.5" />
+  <path d="M 250,200 C 250,80 350,80 350,200" fill="none" stroke="rgba(0, 242, 254, 0.2)" stroke-width="1.5" />
+  <path d="M 230,200 C 230,40 370,40 370,200" fill="none" stroke="rgba(0, 242, 254, 0.15)" stroke-width="1.5" />
+  
+  <!-- Lower field curves -->
+  <path d="M 270,200 C 270,280 330,280 330,200" fill="none" stroke="rgba(0, 242, 254, 0.2)" stroke-width="1.5" />
+  <path d="M 250,200 C 250,320 350,320 350,200" fill="none" stroke="rgba(0, 242, 254, 0.2)" stroke-width="1.5" />
+  
+  <!-- Vector Grid Arrows mockup around magnet -->
+  <!-- Vectors on left -->
+  <path d="M 170,140 L 190,120" stroke="rgba(0, 242, 254, 0.3)" stroke-width="1" />
+  <polygon points="187,118 190,125 183,123" fill="rgba(0, 242, 254, 0.3)" />
+
+  <path d="M 150,200 L 180,200" stroke="rgba(0, 242, 254, 0.3)" stroke-width="1" />
+  <polygon points="177,197 180,200 177,203" fill="rgba(0, 242, 254, 0.3)" />
+
+  <!-- Vectors on right -->
+  <path d="M 430,120 L 410,140" stroke="rgba(0, 242, 254, 0.3)" stroke-width="1" />
+  <polygon points="413,143 410,136 417,138" fill="rgba(0, 242, 254, 0.3)" />
+
+  <!-- Bar Magnet block in center -->
+  <g transform="translate(300, 200)">
+    <!-- Magnet Box -->
+    <rect x="-60" y="-16" width="60" height="32" rx="4" fill="url(#red-grad)" stroke="rgba(255,255,255,0.2)" />
+    <rect x="0" y="-16" width="60" height="32" rx="4" fill="url(#cyan-grad)" stroke="rgba(255,255,255,0.2)" />
+    
+    <!-- Boundary outline selection -->
+    <rect x="-63" y="-19" width="126" height="38" rx="6" fill="none" stroke="rgba(0, 242, 254, 0.6)" stroke-width="2" filter="url(#glow)" />
+    
+    <!-- Labels -->
+    <text x="-30" y="4" fill="#ffffff" font-family="'Outfit', sans-serif" font-size="12" font-weight="bold" text-anchor="middle">S</text>
+    <text x="30" y="4" fill="#080b11" font-family="'Outfit', sans-serif" font-size="12" font-weight="bold" text-anchor="middle">N</text>
+  </g>
+
+  <!-- Glowing Charged Particle Deflection Path (Lorentz curve) -->
+  <path d="M 80,350 Q 200,340 220,180 T 120,60" fill="none" stroke="url(#glow-grad)" stroke-width="3.5" filter="url(#glow)" />
+  <!-- Particle bead -->
+  <circle cx="220" cy="180" r="6" fill="#10b981" stroke="#ffffff" stroke-width="1.5" filter="url(#glow)" />
+  <text x="232" y="184" fill="#10b981" font-family="'Outfit', sans-serif" font-size="10" font-weight="bold">Proton (q = +1)</text>
+
+  <!-- Dynamic Compass Sensor Probe visual -->
+  <g transform="translate(450, 290)">
+    <circle cx="0" cy="0" r="24" fill="rgba(10, 14, 23, 0.9)" stroke="rgba(0, 242, 254, 0.4)" stroke-width="1.5" />
+    <g transform="rotate(125)">
+      <!-- North needle -->
+      <polygon points="0,-4 20,0 0,4" fill="#00f2fe" />
+      <!-- South needle -->
+      <polygon points="0,-4 -20,0 0,4" fill="#ef4444" />
+    </g>
+    <!-- Crosshair probe indicator -->
+    <circle cx="0" cy="0" r="2" fill="#ffffff" />
+  </g>
+
+  <!-- Current-carrying Wire mini component -->
+  <g transform="translate(100, 150)">
+    <circle cx="0" cy="0" r="16" fill="#ffb86c" stroke="rgba(255,255,255,0.4)" stroke-width="1" />
+    <circle cx="0" cy="0" r="3" fill="#080b11" />
+    <text x="0" y="27" fill="#ffb86c" font-family="'Outfit', sans-serif" font-size="8" font-weight="bold" text-anchor="middle">WIRE (I &gt; 0)</text>
+    <!-- Concentric wire field lines -->
+    <circle cx="0" cy="0" r="28" fill="none" stroke="rgba(255, 184, 108, 0.15)" stroke-width="1" stroke-dasharray="3,3" />
+  </g>
+</svg>

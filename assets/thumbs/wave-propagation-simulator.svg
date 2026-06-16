@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <!-- Background Gradient -->
+    <radialGradient id="bg-glow" cx="50%" cy="50%" r="75%">
+      <stop offset="0%" stop-color="#0c112b"/>
+      <stop offset="60%" stop-color="#050817"/>
+      <stop offset="100%" stop-color="#020309"/>
+    </radialGradient>
+
+    <!-- Source Glow Gradients -->
+    <radialGradient id="cyan-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00f2fe" stop-opacity="1"/>
+      <stop offset="40%" stop-color="#00f2fe" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#00f2fe" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="magenta-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fd008e" stop-opacity="1"/>
+      <stop offset="40%" stop-color="#fd008e" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#fd008e" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Metallic Wall Shading -->
+    <linearGradient id="wall-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#434c5e"/>
+      <stop offset="50%" stop-color="#64728d"/>
+      <stop offset="100%" stop-color="#2e3440"/>
+    </linearGradient>
+
+    <!-- Interference Fringes Shading -->
+    <linearGradient id="fringe-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00f2fe" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#00f2fe" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#00f2fe" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bg-glow)"/>
+
+  <!-- High-tech Grid Mesh -->
+  <g opacity="0.12">
+    <path d="M 0,50 L 800,50 M 0,100 L 800,100 M 0,150 L 800,150 M 0,200 L 800,200 M 0,250 L 800,250 M 0,300 L 800,300 M 0,350 L 800,350 M 0,400 L 800,400 M 0,450 L 800,450" stroke="#00f2fe" stroke-width="1"/>
+    <path d="M 50,0 L 50,500 M 100,0 L 100,500 M 150,0 L 150,500 M 200,0 L 200,500 M 250,0 L 250,500 M 300,0 L 300,500 M 350,0 L 350,500 M 400,0 L 400,500 M 450,0 L 450,500 M 500,0 L 500,500 M 550,0 L 550,500 M 600,0 L 600,500 M 650,0 L 650,500 M 700,0 L 700,500 M 750,0 L 750,500" stroke="#00f2fe" stroke-width="1"/>
+  </g>
+
+  <!-- Left: Incident Plane Waves (Diffracting towards barrier) -->
+  <g opacity="0.35">
+    <path d="M 40,0 L 40,500" stroke="#00f2fe" stroke-width="6" stroke-dasharray="1 10"/>
+    <path d="M 80,0 L 80,500" stroke="#00f2fe" stroke-width="8" opacity="0.8"/>
+    <path d="M 120,0 L 120,500" stroke="#00f2fe" stroke-width="8" opacity="0.65"/>
+    <path d="M 160,0 L 160,500" stroke="#00f2fe" stroke-width="8" opacity="0.5"/>
+    <path d="M 200,0 L 200,500" stroke="#00f2fe" stroke-width="8" opacity="0.35"/>
+    <path d="M 240,0 L 240,500" stroke="#00f2fe" stroke-width="8" opacity="0.2"/>
+  </g>
+
+  <!-- Slit Barrier Wall (Double Slit) -->
+  <!-- Upper Barrier -->
+  <rect x="280" y="0" width="25" height="180" rx="4" fill="url(#wall-grad)" stroke="#4c566a" stroke-width="1.5"/>
+  <!-- Middle Barrier -->
+  <rect x="280" y="220" width="25" height="60" rx="4" fill="url(#wall-grad)" stroke="#4c566a" stroke-width="1.5"/>
+  <!-- Lower Barrier -->
+  <rect x="280" y="320" width="25" height="180" rx="4" fill="url(#wall-grad)" stroke="#4c566a" stroke-width="1.5"/>
+
+  <!-- Secondary Wave Diffracting Sources (Apertures) -->
+  <circle cx="292" cy="200" r="25" fill="url(#cyan-glow)" opacity="0.75"/>
+  <circle cx="292" cy="300" r="25" fill="url(#magenta-glow)" opacity="0.75"/>
+
+  <!-- Slit 1 (Upper) Secondary Wave Fronts (Cyan ripples) -->
+  <g stroke="#00f2fe" fill="none" opacity="0.7" stroke-linecap="round">
+    <path d="M 310,180 A 25,25 0 0,1 310,220" stroke-width="3"/>
+    <path d="M 325,165 A 50,50 0 0,1 325,235" stroke-width="3.5" opacity="0.9"/>
+    <path d="M 345,145 A 80,80 0 0,1 345,255" stroke-width="4" opacity="0.8"/>
+    <path d="M 370,120 A 120,120 0 0,1 370,280" stroke-width="4.5" opacity="0.7"/>
+    <path d="M 400,90 A 170,170 0 0,1 400,310" stroke-width="5" opacity="0.55"/>
+    <path d="M 440,50 A 230,230 0 0,1 440,350" stroke-width="5" opacity="0.4"/>
+    <path d="M 490,10 A 300,300 0 0,1 490,390" stroke-width="5" opacity="0.25"/>
+    <path d="M 550,-30 A 380,380 0 0,1 550,430" stroke-width="5" opacity="0.12"/>
+  </g>
+
+  <!-- Slit 2 (Lower) Secondary Wave Fronts (Magenta ripples) -->
+  <g stroke="#fd008e" fill="none" opacity="0.7" stroke-linecap="round">
+    <path d="M 310,280 A 25,25 0 0,1 310,320" stroke-width="3"/>
+    <path d="M 325,265 A 50,50 0 0,1 325,335" stroke-width="3.5" opacity="0.9"/>
+    <path d="M 345,245 A 80,80 0 0,1 345,355" stroke-width="4" opacity="0.8"/>
+    <path d="M 370,220 A 120,120 0 0,1 370,380" stroke-width="4.5" opacity="0.7"/>
+    <path d="M 400,190 A 170,170 0 0,1 400,410" stroke-width="5" opacity="0.55"/>
+    <path d="M 440,150 A 230,230 0 0,1 440,450" stroke-width="5" opacity="0.4"/>
+    <path d="M 490,110 A 300,300 0 0,1 490,490" stroke-width="5" opacity="0.25"/>
+  </g>
+
+  <!-- Interference Fringe Rays (Highlight constructive overlaps) -->
+  <!-- Center Maxima Line -->
+  <line x1="292" y1="250" x2="800" y2="250" stroke="#ffd700" stroke-width="2.5" stroke-dasharray="8 6" opacity="0.45"/>
+  <line x1="292" y1="250" x2="800" y2="120" stroke="#ffd700" stroke-width="2" stroke-dasharray="8 6" opacity="0.35"/>
+  <line x1="292" y1="250" x2="800" y2="380" stroke="#ffd700" stroke-width="2" stroke-dasharray="8 6" opacity="0.35"/>
+
+  <!-- Telemetry Oscilloscope Graph in bottom-right corner -->
+  <g transform="translate(480, 360)">
+    <!-- Glass Panel -->
+    <rect width="280" height="110" rx="10" fill="rgba(10, 15, 30, 0.85)" stroke="rgba(0, 242, 254, 0.3)" stroke-width="1.5"/>
+    
+    <!-- Oscilloscope Grid -->
+    <line x1="10" y1="55" x2="270" y2="55" stroke="rgba(0, 242, 254, 0.1)" stroke-width="1"/>
+    <line x1="70" y1="10" x2="70" y2="100" stroke="rgba(0, 242, 254, 0.1)" stroke-width="1"/>
+    <line x1="140" y1="10" x2="140" y2="100" stroke="rgba(0, 242, 254, 0.1)" stroke-width="1"/>
+    <line x1="210" y1="10" x2="210" y2="100" stroke="rgba(0, 242, 254, 0.1)" stroke-width="1"/>
+
+    <!-- Dynamic Trace Waveform -->
+    <path d="M 10,55 
+             Q 30,15 50,55 
+             T 90,55 
+             T 130,55 
+             T 170,55 
+             T 210,55 
+             T 250,55 
+             L 270,55" 
+          fill="none" stroke="#39ff14" stroke-width="2.5" filter="drop-shadow(0px 0px 4px rgba(57, 255, 20, 0.6))"/>
+          
+    <circle cx="250" cy="55" r="4" fill="#39ff14"/>
+    <text x="15" y="24" font-family="'Orbitron', sans-serif" font-size="10" fill="#00f2fe" font-weight="bold">TELEMETRY PROBE</text>
+    <text x="210" y="24" font-family="'Orbitron', sans-serif" font-size="9" fill="#8a9fc4">60.0 FPS</text>
+  </g>
+
+  <!-- Glowing Source Points -->
+  <circle cx="292" cy="200" r="4" fill="#00f2fe" filter="drop-shadow(0px 0px 6px #00f2fe)"/>
+  <circle cx="292" cy="300" r="4" fill="#fd008e" filter="drop-shadow(0px 0px 6px #fd008e)"/>
+
+  <!-- Laboratory Target Crosshair -->
+  <g transform="translate(480, 160)">
+    <circle cx="0" cy="0" r="15" fill="none" stroke="#00f2fe" stroke-width="1" opacity="0.6"/>
+    <line x1="-25" y1="0" x2="25" y2="0" stroke="#00f2fe" stroke-width="1.2" opacity="0.6"/>
+    <line x1="0" y1="-25" x2="0" y2="25" stroke="#00f2fe" stroke-width="1.2" opacity="0.6"/>
+    <circle cx="0" cy="0" r="3" fill="#39ff14"/>
+  </g>
+</svg>

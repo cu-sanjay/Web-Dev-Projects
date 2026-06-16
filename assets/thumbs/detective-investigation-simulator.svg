@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0b1220"/><stop offset="100%" stop-color="#1a0f0f"/></linearGradient></defs>
+  <rect width="1280" height="720" fill="url(#g)"/>
+  <rect x="190" y="150" width="900" height="420" rx="10" fill="none" stroke="#334155" stroke-width="2"/>
+  <text x="640" y="180" text-anchor="middle" font-family="monospace" font-size="14" fill="#64748b">Crime Scene: Grand Ballroom</text>
+  <!-- window -->
+  <rect x="250" y="220" width="80" height="120" rx="4" fill="#1a2040" stroke="#3b82f6" stroke-width="2"/><line x1="290" y1="220" x2="290" y2="340" stroke="#334155" stroke-width="1"/><line x1="250" y1="280" x2="330" y2="280" stroke="#334155" stroke-width="1"/>
+  <!-- door -->
+  <rect x="800" y="220" width="70" height="120" rx="4" fill="#1a1420" stroke="#22c55e" stroke-width="2"/><circle cx="855" cy="280" r="4" fill="#eab308"/>
+  <!-- table -->
+  <rect x="520" y="360" width="140" height="70" rx="4" fill="#1e1a14" stroke="#f97316" stroke-width="2"/>
+  <!-- rug -->
+  <ellipse cx="420" cy="420" rx="90" ry="35" fill="#5a1a1a" stroke="#ef4444" stroke-width="1.5" opacity=".5"/>
+  <!-- magnifying glass -->
+  <circle cx="1000" cy="250" r="40" fill="none" stroke="#3b82f6" stroke-width="3" opacity=".5"/>
+  <line x1="1030" y1="280" x2="1060" y2="310" stroke="#3b82f6" stroke-width="4" opacity=".4"/>
+  <text x="640" y="100" text-anchor="middle" font-family="ui-monospace,monospace" font-size="26" font-weight="800" fill="#f8fafc" letter-spacing="1">DETECTIVE INVESTIGATION SIMULATOR</text>
+  <text x="640" y="125" text-anchor="middle" font-family="ui-monospace,monospace" font-size="13" fill="#64748b">Solve Crimes · Gather Clues · Find the Truth</text>
+</svg>

@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070914" />
+      <stop offset="100%" stop-color="#0d1025" />
+    </linearGradient>
+    
+    <!-- Accent Gradient -->
+    <linearGradient id="accent-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#4f46e5" />
+    </linearGradient>
+
+    <!-- Glow Filter -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background base -->
+  <rect width="320" height="200" rx="16" fill="url(#bg-grad)" />
+  <rect width="320" height="200" rx="16" fill="none" stroke="rgba(255, 255, 255, 0.05)" stroke-width="1.5" />
+
+  <!-- Background decorative glows -->
+  <circle cx="50" cy="160" r="50" fill="#10b981" opacity="0.1" filter="url(#glow)" />
+  <circle cx="270" cy="40" r="60" fill="#6366f1" opacity="0.12" filter="url(#glow)" />
+
+  <!-- Graphic 1: Request Header Row Mock -->
+  <g transform="translate(30, 24)">
+    <rect width="260" height="30" rx="8" fill="rgba(18, 22, 50, 0.75)" stroke="rgba(99, 102, 241, 0.25)" stroke-width="1.2" filter="url(#glow)" />
+    <!-- GET Badge -->
+    <rect x="8" y="7" width="36" height="16" rx="4" fill="rgba(16, 185, 129, 0.12)" stroke="rgba(16, 185, 129, 0.2)" stroke-width="1" />
+    <text x="26" y="18" fill="#10b981" font-family="'Outfit', sans-serif" font-weight="800" font-size="7.5" text-anchor="middle">GET</text>
+    
+    <!-- URL text -->
+    <text x="50" y="18" fill="#f3f4f6" font-family="monospace" font-size="8">https://api.mockbin/v1/users</text>
+    
+    <!-- Send Button mockup -->
+    <rect x="214" y="6" width="38" height="18" rx="4" fill="url(#accent-grad)" />
+    <text x="233" y="17" fill="#ffffff" font-family="'Outfit', sans-serif" font-size="7.5" font-weight="700" text-anchor="middle">SEND</text>
+  </g>
+
+  <!-- Graphic 2: HTTP Badges stack (Left) -->
+  <g transform="translate(30, 68)">
+    <rect width="70" height="106" rx="10" fill="rgba(18, 22, 50, 0.5)" stroke="rgba(255,255,255,0.03)" stroke-width="1" />
+    
+    <!-- POST Badge -->
+    <g transform="translate(10, 12)">
+      <rect width="50" height="18" rx="4" fill="rgba(99, 102, 241, 0.12)" stroke="rgba(99, 102, 241, 0.2)" stroke-width="1" />
+      <text x="25" y="12" fill="#6366f1" font-family="'Outfit', sans-serif" font-weight="800" font-size="7.5" text-anchor="middle">POST</text>
+    </g>
+    
+    <!-- PUT Badge -->
+    <g transform="translate(10, 36)">
+      <rect width="50" height="18" rx="4" fill="rgba(234, 88, 12, 0.12)" stroke="rgba(234, 88, 12, 0.2)" stroke-width="1" />
+      <text x="25" y="12" fill="#ea580c" font-family="'Outfit', sans-serif" font-weight="800" font-size="7.5" text-anchor="middle">PUT</text>
+    </g>
+
+    <!-- DELETE Badge -->
+    <g transform="translate(10, 60)">
+      <rect width="50" height="18" rx="4" fill="rgba(239, 68, 68, 0.12)" stroke="rgba(239, 68, 68, 0.2)" stroke-width="1" />
+      <text x="25" y="12" fill="#ef4444" font-family="'Outfit', sans-serif" font-weight="800" font-size="7.5" text-anchor="middle">DELETE</text>
+    </g>
+
+    <!-- PATCH Badge -->
+    <g transform="translate(10, 84)">
+      <rect width="50" height="18" rx="4" fill="rgba(217, 119, 6, 0.12)" stroke="rgba(217, 119, 6, 0.2)" stroke-width="1" />
+      <text x="25" y="12" fill="#d97706" font-family="'Outfit', sans-serif" font-weight="800" font-size="7" text-anchor="middle">PATCH</text>
+    </g>
+  </g>
+
+  <!-- Graphic 3: Response Pretty Code Inspector (Right) -->
+  <g transform="translate(112, 68)">
+    <rect width="178" height="106" rx="10" fill="rgba(0, 0, 0, 0.35)" stroke="rgba(255, 255, 255, 0.04)" stroke-width="1" />
+    <rect width="178" height="20" rx="10" fill="rgba(255,255,255,0.01)" />
+    <circle cx="12" cy="10" r="3.5" fill="#ef4444" />
+    <circle cx="22" cy="10" r="3.5" fill="#f59e0b" />
+    <circle cx="32" cy="10" r="3.5" fill="#10b981" />
+    
+    <text x="170" y="13" fill="#9ca3af" font-family="'Outfit', sans-serif" font-size="7" font-weight="600" text-anchor="end">200 OK • 12ms</text>
+    
+    <!-- Code lines mock -->
+    <g transform="translate(12, 34)">
+      <!-- Line 1: { -->
+      <text x="0" y="0" fill="#f3f4f6" font-family="monospace" font-size="8">{</text>
+      
+      <!-- Line 2: "status": "success", -->
+      <text x="8" y="11" fill="#a78bfa" font-family="monospace" font-size="8">"status"</text>
+      <text x="48" y="11" fill="#f3f4f6" font-family="monospace" font-size="8">:</text>
+      <text x="56" y="11" fill="#34d399" font-family="monospace" font-size="8">"success"</text>
+      <text x="96" y="11" fill="#f3f4f6" font-family="monospace" font-size="8">,</text>
+
+      <!-- Line 3: "results": 4, -->
+      <text x="8" y="22" fill="#a78bfa" font-family="monospace" font-size="8">"records"</text>
+      <text x="52" y="22" fill="#f3f4f6" font-family="monospace" font-size="8">:</text>
+      <text x="60" y="22" fill="#f59e0b" font-family="monospace" font-size="8">4</text>
+      <text x="66" y="22" fill="#f3f4f6" font-family="monospace" font-size="8">,</text>
+
+      <!-- Line 4: "online": true -->
+      <text x="8" y="33" fill="#a78bfa" font-family="monospace" font-size="8">"online"</text>
+      <text x="48" y="33" fill="#f3f4f6" font-family="monospace" font-size="8">:</text>
+      <text x="56" y="33" fill="#60a5fa" font-family="monospace" font-size="8">true</text>
+
+      <!-- Line 5: } -->
+      <text x="0" y="44" fill="#f3f4f6" font-family="monospace" font-size="8">}</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+    
+    <!-- Neon Red/Orange (Deadlock) Gradient -->
+    <linearGradient id="red-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ef4444" />
+      <stop offset="100%" stop-color="#f97316" />
+    </linearGradient>
+
+    <!-- Neon Cyan (Safe Edge) Gradient -->
+    <linearGradient id="cyan-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4" />
+      <stop offset="100%" stop-color="#3b82f6" />
+    </linearGradient>
+    
+    <!-- Glow Filter -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="320" height="200" rx="16" fill="url(#bg-grad)" />
+  <rect width="320" height="200" rx="16" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="2" />
+
+  <!-- Background Decorative Glows -->
+  <circle cx="80" cy="80" r="50" fill="#ef4444" opacity="0.12" filter="url(#glow)" />
+  <circle cx="240" cy="120" r="60" fill="#06b6d4" opacity="0.1" filter="url(#glow)" />
+
+  <!-- Resource Allocation Graph (RAG) Visual -->
+  <g transform="translate(10, 0)">
+    <!-- Process Node P0 -->
+    <circle cx="70" cy="50" r="14" fill="#1e293b" stroke="#06b6d4" stroke-width="2.5" />
+    <text x="70" y="54" font-family="'Inter', sans-serif" font-size="10" font-weight="700" fill="#ffffff" text-anchor="middle">P₀</text>
+
+    <!-- Resource Node R0 (Single unit) -->
+    <rect x="146" y="38" width="24" height="24" rx="4" fill="#1e293b" stroke="#ef4444" stroke-width="2.5" filter="url(#glow)" />
+    <!-- Instance dot -->
+    <circle cx="158" cy="50" r="3" fill="#ef4444" />
+    <text x="158" y="32" font-family="'Inter', sans-serif" font-size="8" font-weight="600" fill="#94a3b8" text-anchor="middle">R₀</text>
+
+    <!-- Process Node P1 -->
+    <circle cx="158" cy="120" r="14" fill="#1e293b" stroke="#ef4444" stroke-width="2.5" filter="url(#glow)" />
+    <text x="158" y="124" font-family="'Inter', sans-serif" font-size="10" font-weight="700" fill="#ffffff" text-anchor="middle">P₁</text>
+
+    <!-- Resource Node R1 -->
+    <rect x="58" y="108" width="24" height="24" rx="4" fill="#1e293b" stroke="#06b6d4" stroke-width="2.5" />
+    <!-- Instance dot -->
+    <circle cx="70" cy="120" r="3" fill="#06b6d4" />
+    <text x="70" y="142" font-family="'Inter', sans-serif" font-size="8" font-weight="600" fill="#94a3b8" text-anchor="middle">R₁</text>
+
+    <!-- Edges forming a cycle -->
+    <!-- P0 Requests R0 (Request Edge: Process -> Resource) -->
+    <path d="M84,50 L140,50" fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="3 2" marker-end="url(#arrow-red)" />
+    <!-- R0 Allocated to P1 (Allocation Edge: Resource -> Process) -->
+    <path d="M158,62 L158,100" fill="none" stroke="#ef4444" stroke-width="2" marker-end="url(#arrow-red)" filter="url(#glow)" />
+    <!-- P1 Requests R1 -->
+    <path d="M144,120 L88,120" fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="3 2" marker-end="url(#arrow-red)" filter="url(#glow)" />
+    <!-- R1 Allocated to P0 -->
+    <path d="M70,108 L70,70" fill="none" stroke="#06b6d4" stroke-width="2" marker-end="url(#arrow-cyan)" />
+  </g>
+
+  <!-- Markers for arrows -->
+  <defs>
+    <marker id="arrow-cyan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 2 L 6 5 L 0 8 z" fill="#06b6d4" />
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 2 L 6 5 L 0 8 z" fill="#ef4444" />
+    </marker>
+  </defs>
+
+  <!-- Side Panel: Matrix Mockup -->
+  <g transform="translate(200, 35)">
+    <!-- Matrix Header -->
+    <text x="0" y="10" font-family="'Inter', sans-serif" font-size="9" font-weight="700" fill="#94a3b8">MATRIX CHECK</text>
+    
+    <!-- Matrix box -->
+    <rect x="0" y="18" width="100" height="76" rx="6" fill="#0f172a" fill-opacity="0.6" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1.5" />
+    
+    <!-- Rows representing Matrix -->
+    <!-- Row 1 -->
+    <rect x="6" y="24" width="25" height="10" rx="2" fill="rgba(6, 182, 212, 0.15)" stroke="rgba(6, 182, 212, 0.3)" stroke-width="1" />
+    <rect x="37" y="24" width="25" height="10" rx="2" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.05)" stroke-width="1" />
+    <rect x="68" y="24" width="25" height="10" rx="2" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.05)" stroke-width="1" />
+
+    <!-- Row 2 (Deadlocked highlighted) -->
+    <rect x="6" y="38" width="25" height="10" rx="2" fill="rgba(239, 68, 68, 0.15)" stroke="#ef4444" stroke-width="1" />
+    <rect x="37" y="38" width="25" height="10" rx="2" fill="rgba(239, 68, 68, 0.15)" stroke="#ef4444" stroke-width="1" />
+    <rect x="68" y="38" width="25" height="10" rx="2" fill="rgba(239, 68, 68, 0.15)" stroke="#ef4444" stroke-width="1" />
+    
+    <!-- Row 3 -->
+    <rect x="6" y="52" width="25" height="10" rx="2" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.05)" stroke-width="1" />
+    <rect x="37" y="52" width="25" height="10" rx="2" fill="rgba(6, 182, 212, 0.15)" stroke="rgba(6, 182, 212, 0.3)" stroke-width="1" />
+    <rect x="68" y="52" width="25" height="10" rx="2" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.05)" stroke-width="1" />
+
+    <!-- Available Vector row -->
+    <text x="0" y="78" font-family="'Inter', sans-serif" font-size="7.5" font-weight="600" fill="#64748b">WORK [ 1, 0, 0 ]</text>
+    <rect x="0" y="82" width="100" height="4" rx="2" fill="#ef4444" filter="url(#glow)" />
+  </g>
+
+  <!-- Title & Branding -->
+  <g transform="translate(160, 168)">
+    <text font-family="'Inter', sans-serif" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">
+      DEADLOCK <tspan fill="#ef4444">DETECTOR</tspan>
+    </text>
+    <text y="12" font-family="'Inter', sans-serif" font-size="7" font-weight="500" text-anchor="middle" fill="#94a3b8" letter-spacing="1">
+      RAG &amp; BANKER'S SIMULATOR
+    </text>
+  </g>
+</svg>

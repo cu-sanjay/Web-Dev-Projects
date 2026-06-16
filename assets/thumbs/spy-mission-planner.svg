@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0b1220"/><stop offset="100%" stop-color="#0a1a10"/></linearGradient></defs>
+  <rect width="1280" height="720" fill="url(#g)"/>
+  <!-- mission card -->
+  <rect x="180" y="180" width="400" height="160" rx="8" fill="#111827" stroke="#22c55e" stroke-width="2"/>
+  <text x="210" y="215" font-family="ui-monospace,monospace" font-size="16" font-weight="700" fill="#f8fafc">Operation Echo</text>
+  <rect x="430" y="200" width="80" height="20" rx="8" fill="none" stroke="#22c55e" stroke-width="1"/>
+  <text x="470" y="214" text-anchor="middle" font-family="monospace" font-size="9" fill="#22c55e">📍 Istanbul</text>
+  <text x="210" y="245" font-family="monospace" font-size="11" fill="#cbd5e1">Risk: <tspan fill="#ef4444">75%</tspan></text>
+  <text x="320" y="245" font-family="monospace" font-size="11" fill="#cbd5e1">Success: <tspan fill="#22c55e">60%</tspan></text>
+  <text x="210" y="270" font-family="monospace" font-size="11" fill="#cbd5e1">Reward: <tspan fill="#22c55e">$500K</tspan></text>
+  <text x="320" y="270" font-family="monospace" font-size="11" fill="#cbd5e1">Duration: 72h</text>
+  <text x="210" y="310" font-family="monospace" font-size="10" fill="#64748b">Infiltrate a secure facility to extract classified documents...</text>
+  <!-- gadgets -->
+  <rect x="640" y="180" width="180" height="200" rx="8" fill="#111827" stroke="#334155" stroke-width="1.5"/>
+  <text x="730" y="210" text-anchor="middle" font-family="monospace" font-size="10" fill="#cbd5e1" font-weight="600">GADGETS</text>
+  <rect x="660" y="225" width="140" height="25" rx="4" fill="#1f2937" stroke="#22c55e" stroke-width="1"/>
+  <text x="690" y="242" font-family="monospace" font-size="10" fill="#22c55e">✓ 🛸 Spy Drone</text>
+  <rect x="660" y="255" width="140" height="25" rx="4" fill="#1f2937" stroke="#334155" stroke-width="1"/>
+  <text x="690" y="272" font-family="monospace" font-size="10" fill="#64748b">🎧 Wiretap</text>
+  <rect x="660" y="285" width="140" height="25" rx="4" fill="#1f2937" stroke="#334155" stroke-width="1"/>
+  <text x="690" y="302" font-family="monospace" font-size="10" fill="#64748b">📷 Hidden Cam</text>
+  <!-- risk bars -->
+  <rect x="180" y="380" width="600" height="130" rx="8" fill="#111827" stroke="#334155" stroke-width="1.5"/>
+  <text x="210" y="410" font-family="monospace" font-size="10" fill="#cbd5e1">Detection</text>
+  <rect x="310" y="400" width="400" height="10" rx="5" fill="#1f2937"/>
+  <rect x="310" y="400" width="280" height="10" rx="5" fill="#ef4444"/>
+  <text x="210" y="440" font-family="monospace" font-size="10" fill="#cbd5e1">Extraction</text>
+  <rect x="310" y="430" width="400" height="10" rx="5" fill="#1f2937"/>
+  <rect x="310" y="430" width="240" height="10" rx="5" fill="#ef4444"/>
+  <text x="640" y="100" text-anchor="middle" font-family="ui-monospace,monospace" font-size="26" font-weight="800" fill="#f8fafc" letter-spacing="1">SPY MISSION PLANNER</text>
+  <text x="640" y="125" text-anchor="middle" font-family="ui-monospace,monospace" font-size="13" fill="#64748b">Plan Missions · Equip Gadgets · Assess Risk</text>
+</svg>

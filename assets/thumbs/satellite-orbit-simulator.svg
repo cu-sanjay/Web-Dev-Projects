@@ -1,0 +1,161 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <!-- Deep Space Background Gradient -->
+    <radialGradient id="spaceBg" cx="50%" cy="50%" r="75%">
+      <stop offset="0%" stop-color="#050a1e" />
+      <stop offset="60%" stop-color="#02040b" />
+      <stop offset="100%" stop-color="#000002" />
+    </radialGradient>
+
+    <!-- Blue/Cyan Nebula Glow -->
+    <radialGradient id="nebulaBlue" cx="25%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#00f2fe" stop-opacity="0.12" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Fuchsia Nebula Glow -->
+    <radialGradient id="nebulaFuchsia" cx="80%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="#ff007f" stop-opacity="0.1" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Earth Atmosphere Glow -->
+    <radialGradient id="earthAtmosphere" cx="50%" cy="50%" r="50%">
+      <stop offset="80%" stop-color="#0b1a38" />
+      <stop offset="92%" stop-color="#0066ff" stop-opacity="0.85" />
+      <stop offset="97%" stop-color="#00f2fe" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#00f2fe" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Earth Ocean & Continent Gradients -->
+    <linearGradient id="earthOcean" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+
+    <!-- Neon Glow Filter -->
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Space Canvas Background -->
+  <rect width="800" height="500" fill="url(#spaceBg)" />
+  <rect width="800" height="500" fill="url(#nebulaBlue)" />
+  <rect width="800" height="500" fill="url(#nebulaFuchsia)" />
+
+  <!-- Stars Field -->
+  <g fill="#ffffff">
+    <circle cx="75" cy="80" r="1.2" opacity="0.8" />
+    <circle cx="180" cy="140" r="0.8" opacity="0.5" />
+    <circle cx="290" cy="70" r="1.5" opacity="0.9" />
+    <circle cx="430" cy="110" r="0.7" opacity="0.4" />
+    <circle cx="560" cy="55" r="1.2" opacity="0.7" />
+    <circle cx="680" cy="120" r="1" opacity="0.6" />
+    <circle cx="730" cy="65" r="1.6" opacity="0.8" />
+
+    <circle cx="110" cy="380" r="1.2" opacity="0.7" />
+    <circle cx="210" cy="290" r="0.7" opacity="0.4" />
+    <circle cx="340" cy="420" r="1" opacity="0.6" />
+    <circle cx="520" cy="350" r="1.5" opacity="0.9" />
+    <circle cx="640" cy="410" r="0.8" opacity="0.5" />
+    <circle cx="760" cy="340" r="1.3" opacity="0.8" />
+
+    <!-- Cross twinkles -->
+    <path d="M 290,65 L 290,75 M 285,70 L 295,70" stroke="#ffffff" stroke-width="0.8" opacity="0.8" />
+    <path d="M 520,345 L 520,355 M 515,350 L 525,350" stroke="#ffffff" stroke-width="0.8" opacity="0.8" />
+  </g>
+
+  <!-- Orbit Trails Group -->
+  <g fill="none" opacity="0.75">
+    <!-- Inner LEO Orbit (Cyan, Circular) -->
+    <circle cx="400" cy="250" r="115" stroke="#00f2fe" stroke-width="1.5" filter="url(#glow)" />
+    
+    <!-- Outer GEO Orbit (Gold, Circular) -->
+    <circle cx="400" cy="250" r="215" stroke="#ffcc00" stroke-width="1.2" stroke-dasharray="6 4" opacity="0.5" />
+    
+    <!-- Tilted Elliptical HEO/Molniya Orbit (Fuchsia) -->
+    <ellipse cx="330" cy="210" rx="190" ry="110" stroke="#ff007f" stroke-width="1.8" transform="rotate(-28, 400, 250)" filter="url(#glow)" />
+    
+    <!-- Orbit Kepler Area Wedge highlight (visual representation of equal areas) -->
+    <path d="M 400,250 L 320,165 A 115 115 0 0 1 370,140 Z" fill="#10b981" fill-opacity="0.12" stroke="#10b981" stroke-width="1" opacity="0.7" />
+  </g>
+
+  <!-- Central Earth Sphere -->
+  <g>
+    <!-- Atmosphere Outer Glow -->
+    <circle cx="400" cy="250" r="82" fill="url(#earthAtmosphere)" />
+    
+    <!-- Base Oceans Sphere -->
+    <circle cx="400" cy="250" r="70" fill="url(#earthOcean)" />
+    
+    <!-- Earth landmasses silhouettes -->
+    <path d="M 360,215 Q 370,205 385,210 T 400,200 T 425,210 Q 435,225 420,235 T 390,245 Z" fill="#10b981" opacity="0.9" />
+    <path d="M 345,260 Q 360,250 375,265 T 390,280 Q 375,295 360,290 Z" fill="#10b981" opacity="0.9" />
+    <path d="M 430,265 Q 445,255 455,270 Q 450,285 435,280 Z" fill="#10b981" opacity="0.9" />
+
+    <!-- Clouds layer -->
+    <ellipse cx="380" cy="230" rx="25" ry="6" fill="#ffffff" fill-opacity="0.35" />
+    <ellipse cx="425" cy="265" rx="30" ry="7" fill="#ffffff" fill-opacity="0.35" />
+  </g>
+
+  <!-- Active Orbiting Satellites -->
+  <!-- 1. LEO Satellite (Cyan) -->
+  <g transform="translate(481, 168)">
+    <circle cx="0" cy="0" r="5" fill="#00f2fe" filter="url(#glow)" />
+    <!-- Velocity vector arrow -->
+    <line x1="0" y1="0" x2="-25" y2="25" stroke="#00f2fe" stroke-width="2" />
+    <path d="M -25,25 L -20,20 L -21,26 Z" fill="#00f2fe" />
+    <text x="8" y="-4" fill="#94a3b8" font-family="Share Tech Mono" font-size="9">LEO-SAT</text>
+  </g>
+
+  <!-- 2. HEO Molniya Satellite (Fuchsia) -->
+  <g transform="translate(195, 230)">
+    <circle cx="0" cy="0" r="6" fill="#ff007f" filter="url(#glow)" />
+    <!-- Gravity force vector arrow pointing to center -->
+    <line x1="0" y1="0" x2="35" y2="3" stroke="#ff007f" stroke-width="2" />
+    <path d="M 35,3 L 29,7 L 29,-1 Z" fill="#ff007f" />
+    <text x="-12" y="-12" fill="#94a3b8" font-family="Share Tech Mono" font-size="9">HEO-UNIT</text>
+  </g>
+
+  <!-- 3. GEO Satellite (Gold) -->
+  <g transform="translate(400, 35)">
+    <circle cx="0" cy="0" r="5" fill="#ffcc00" filter="url(#glow)" />
+    <line x1="0" y1="0" x2="-35" y2="0" stroke="#ffcc00" stroke-width="1.5" />
+    <path d="M -35,0 L -29,3 L -29,-3 Z" fill="#ffcc00" />
+    <text x="8" y="-4" fill="#94a3b8" font-family="Share Tech Mono" font-size="9">GEO-STATIC</text>
+  </g>
+
+  <!-- Kepler Elliptical Focus 2 Marker (F1 is Earth Center) -->
+  <g transform="translate(320, 210)">
+    <circle cx="0" cy="0" r="4" fill="none" stroke="#a855f7" stroke-width="1.5" />
+    <line x1="-8" y1="0" x2="8" y2="0" stroke="#a855f7" stroke-width="1" />
+    <line x1="0" y1="-8" x2="0" y2="8" stroke="#a855f7" stroke-width="1" />
+    <text x="8" y="-10" fill="#a855f7" font-family="Share Tech Mono" font-size="8">Focus 2 (Foci)</text>
+  </g>
+
+  <!-- Dashboard Telemetry Overlay Card (Bottom-Left Glassmorphic style) -->
+  <g transform="translate(25, 395)" opacity="0.9">
+    <rect width="210" height="80" rx="8" fill="#030712" fill-opacity="0.8" stroke="#1e293b" stroke-width="1.5" />
+    <text x="14" y="22" fill="#94a3b8" font-family="Outfit" font-size="9" font-weight="600" letter-spacing="0.5">TELEMETRY ANALYTICS</text>
+    <text x="14" y="42" fill="#00f2fe" font-family="Share Tech Mono" font-size="12" font-weight="bold">ALTITUDE: 20,200 KM</text>
+    <text x="14" y="60" fill="#10b981" font-family="Share Tech Mono" font-size="12" font-weight="bold">VELOCITY: 3.87 KM/S</text>
+    <!-- Active preset label -->
+    <rect x="142" y="10" width="56" height="15" rx="3" fill="#ff007f" fill-opacity="0.2" stroke="#ff007f" stroke-width="0.8" />
+    <text x="170" y="21" fill="#ff007f" font-family="Share Tech Mono" font-size="8" text-anchor="middle" font-weight="bold">STABLE</text>
+  </g>
+
+  <!-- Simulation State Info (Top-Left Badge) -->
+  <g transform="translate(25, 25)" opacity="0.9">
+    <rect width="130" height="28" rx="4" fill="#030712" fill-opacity="0.8" stroke="#1e293b" stroke-width="1" />
+    <circle cx="14" cy="14" r="3" fill="#10b981" filter="url(#glow)" />
+    <text x="25" y="17" fill="#f8fafc" font-family="Share Tech Mono" font-size="9" font-weight="bold">TIME ACCEL: 10X</text>
+  </g>
+
+  <!-- Space Grid overlay borders -->
+  <path d="M 0,0 L 800,0 L 800,500 L 0,500 Z" fill="none" stroke="#1e293b" stroke-width="2" />
+</svg>

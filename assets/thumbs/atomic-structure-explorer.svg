@@ -1,0 +1,165 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <!-- Background Gradient -->
+    <radialGradient id="bgGrad" cx="50%" cy="50%" r="75%">
+      <stop offset="0%" stop-color="#181d3a"/>
+      <stop offset="100%" stop-color="#05070e"/>
+    </radialGradient>
+    
+    <!-- Proton Gradient -->
+    <radialGradient id="protonGrad" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#ff9eb0"/>
+      <stop offset="40%" stop-color="#ff1744"/>
+      <stop offset="100%" stop-color="#b2102f"/>
+    </radialGradient>
+
+    <!-- Neutron Gradient -->
+    <radialGradient id="neutronGrad" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#f1f5f9"/>
+      <stop offset="50%" stop-color="#94a3b8"/>
+      <stop offset="100%" stop-color="#475569"/>
+    </radialGradient>
+
+    <!-- Electron Gradient -->
+    <radialGradient id="electronGrad" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="30%" stop-color="#00e5ff"/>
+      <stop offset="100%" stop-color="#00838f"/>
+    </radialGradient>
+
+    <!-- Photon Gradient (Fuchsia) -->
+    <linearGradient id="photonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="50%" stop-color="#df49ff"/>
+      <stop offset="100%" stop-color="#7a0099"/>
+    </linearGradient>
+
+    <!-- Glow Filter for Electrons -->
+    <filter id="glowCyan" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Glow Filter for Photon/Transitions -->
+    <filter id="glowFuchsia" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Arrow marker -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#ffea00"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bgGrad)"/>
+  
+  <!-- Technical Grid Overlay (Faint) -->
+  <g stroke="rgba(255, 255, 255, 0.02)" stroke-width="1">
+    <line x1="0" y1="250" x2="800" y2="250"/>
+    <line x1="400" y1="0" x2="400" y2="500"/>
+    <circle cx="400" cy="250" r="120" fill="none" stroke-dasharray="2, 8"/>
+    <circle cx="400" cy="250" r="210" fill="none" stroke-dasharray="2, 8"/>
+  </g>
+
+  <!-- Bohr Orbit Shells -->
+  <!-- Shell 1 (K) -->
+  <circle cx="400" cy="250" r="60" fill="none" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1.5" stroke-dasharray="4, 6"/>
+  <!-- Shell 2 (L) -->
+  <circle cx="400" cy="250" r="130" fill="none" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1.5" stroke-dasharray="4, 6"/>
+  <!-- Shell 3 (M) -->
+  <circle cx="400" cy="250" r="200" fill="none" stroke="rgba(0, 229, 255, 0.18)" stroke-width="1.8" stroke-dasharray="6, 8"/>
+
+  <!-- Orbits Labels -->
+  <text x="445" y="215" fill="rgba(255, 255, 255, 0.3)" font-family="'JetBrains Mono', monospace" font-size="10">n=1 (K)</text>
+  <text x="495" y="165" fill="rgba(255, 255, 255, 0.3)" font-family="'JetBrains Mono', monospace" font-size="10">n=2 (L)</text>
+  <text x="545" y="115" fill="rgba(0, 229, 255, 0.5)" font-family="'JetBrains Mono', monospace" font-size="10">n=3 (M)</text>
+
+  <!-- Electron Transition Path (Dotted arrow showing n=3 -> n=2 drop) -->
+  <path d="M 541.4 108.6 A 200 200 0 0 1 491.9 158.1" fill="none" stroke="#ffea00" stroke-width="2" stroke-dasharray="3, 3" marker-end="url(#arrow)"/>
+  
+  <!-- Emitted Photon Wave Packet (Fuchsia ripple propagating outward) -->
+  <path d="M 491.9 158.1 
+           Q 504 150, 510 160
+           T 528 162
+           T 546 164
+           T 564 166
+           T 582 168
+           T 600 170
+           L 630 173" 
+        fill="none" stroke="url(#photonGrad)" stroke-width="3.5" filter="url(#glowFuchsia)"/>
+  
+  <!-- Photon symbol tag -->
+  <g transform="translate(560, 130)">
+    <text x="0" y="0" fill="#df49ff" font-family="'Orbitron', sans-serif" font-weight="bold" font-size="12" filter="url(#glowFuchsia)">hν (Photon)</text>
+    <text x="0" y="15" fill="rgba(223, 73, 255, 0.7)" font-family="'JetBrains Mono', monospace" font-size="10">λ = 656.3 nm</text>
+  </g>
+
+  <!-- Ground State Orbiting Electrons -->
+  <!-- Shell 1 (K): 2 electrons -->
+  <circle cx="442.4" cy="207.6" r="6" fill="url(#electronGrad)" filter="url(#glowCyan)"/>
+  <circle cx="357.6" cy="292.4" r="6" fill="url(#electronGrad)" filter="url(#glowCyan)"/>
+
+  <!-- Shell 2 (L): 3 stable electrons remaining -->
+  <circle cx="270" cy="250" r="6" fill="url(#electronGrad)" filter="url(#glowCyan)"/>
+  <circle cx="400" cy="120" r="6" fill="url(#electronGrad)" filter="url(#glowCyan)"/>
+  <circle cx="491.9" cy="341.9" r="6" fill="url(#electronGrad)" filter="url(#glowCyan)"/>
+  
+  <!-- Transitioning Electron (Decaying, highlighted yellow-orange) -->
+  <circle cx="491.9" cy="158.1" r="8" fill="#ffea00" filter="url(#glowFuchsia)"/>
+  
+  <!-- Shell 3 (M): 1 electron (source of decay) -->
+  <circle cx="400" cy="50" r="6" fill="url(#electronGrad)" filter="url(#glowCyan)"/>
+
+  <!-- Nucleus: 12-particle packed sphere at center (6 Protons, 6 Neutrons) -->
+  <g id="nucleusGroup">
+    <!-- Back layer particles -->
+    <circle cx="394" cy="242" r="9" fill="url(#neutronGrad)"/>
+    <circle cx="406" cy="242" r="9" fill="url(#protonGrad)"/>
+    <circle cx="394" cy="258" r="9" fill="url(#protonGrad)"/>
+    <circle cx="406" cy="258" r="9" fill="url(#neutronGrad)"/>
+    
+    <!-- Middle layer particles -->
+    <circle cx="386" cy="250" r="9" fill="url(#protonGrad)"/>
+    <circle cx="414" cy="250" r="9" fill="url(#neutronGrad)"/>
+    <circle cx="400" cy="235" r="9" fill="url(#neutronGrad)"/>
+    <circle cx="400" cy="265" r="9" fill="url(#protonGrad)"/>
+    
+    <!-- Front layer particles -->
+    <circle cx="390" cy="244" r="9" fill="url(#neutronGrad)"/>
+    <circle cx="410" cy="244" r="9" fill="url(#protonGrad)"/>
+    <circle cx="393" cy="254" r="9" fill="url(#protonGrad)"/>
+    <circle cx="407" cy="254" r="9" fill="url(#neutronGrad)"/>
+  </g>
+  
+  <!-- HUD overlay text decorations -->
+  <rect x="25" y="25" width="220" height="75" rx="6" fill="rgba(10, 13, 30, 0.75)" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1"/>
+  <text x="40" y="48" fill="#f1f5f9" font-family="'Orbitron', sans-serif" font-weight="bold" font-size="13" letter-spacing="1">CARBON-12 (Z=6)</text>
+  <text x="40" y="66" fill="#00e676" font-family="'Orbitron', sans-serif" font-weight="bold" font-size="10" letter-spacing="0.5">STABLE ISOTOPE</text>
+  <text x="40" y="82" fill="rgba(148, 163, 184, 0.8)" font-family="'JetBrains Mono', monospace" font-size="9">Mass: 12 | Charge: 0</text>
+
+  <rect x="25" y="415" width="240" height="60" rx="6" fill="rgba(10, 13, 30, 0.75)" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1"/>
+  <text x="40" y="435" fill="rgba(0, 229, 255, 0.8)" font-family="'Orbitron', sans-serif" font-weight="bold" font-size="11" letter-spacing="1">QUANTUM TRANSITION ENGINE</text>
+  <text x="40" y="452" fill="#f1f5f9" font-family="'JetBrains Mono', monospace" font-size="9.5">Transition: n_i=3 → n_f=2</text>
+  <text x="40" y="465" fill="#f1f5f9" font-family="'JetBrains Mono', monospace" font-size="9.5">Energy Change: ΔE = 1.89 eV</text>
+
+  <!-- Spectrometer simulation bar at top right -->
+  <g transform="translate(540, 25)">
+    <rect width="235" height="35" rx="4" fill="#000" stroke="rgba(255, 255, 255, 0.1)"/>
+    <!-- Balmer line markings -->
+    <line x1="20" y1="0" x2="20" y2="35" stroke="#d500f9" stroke-width="1" opacity="0.4"/>
+    <line x1="55" y1="0" x2="55" y2="35" stroke="#2979ff" stroke-width="1" opacity="0.4"/>
+    <line x1="105" y1="0" x2="105" y2="35" stroke="#00e5ff" stroke-width="1" opacity="0.4"/>
+    <!-- Exmitted line -->
+    <line x1="190" y1="0" x2="190" y2="35" stroke="#ff1744" stroke-width="2.5" filter="url(#glowCyan)"/>
+    <text x="180" y="47" fill="#ff1744" font-family="'JetBrains Mono', monospace" font-size="8" font-weight="bold">656nm</text>
+    <text x="5" y="47" fill="rgba(255, 255, 255, 0.4)" font-family="'Orbitron', sans-serif" font-size="8">BALMER SERIES</text>
+  </g>
+</svg>

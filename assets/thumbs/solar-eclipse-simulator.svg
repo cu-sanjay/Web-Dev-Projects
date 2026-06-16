@@ -1,0 +1,177 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <!-- Deep Cosmic Space Gradient -->
+    <radialGradient id="spaceBg" cx="50%" cy="50%" r="75%">
+      <stop offset="0%" stop-color="#040614" />
+      <stop offset="50%" stop-color="#020308" />
+      <stop offset="100%" stop-color="#000002" />
+    </radialGradient>
+
+    <!-- Solar Corona Outer Glow -->
+    <radialGradient id="coronaCore" cx="50%" cy="50%" r="50%">
+      <stop offset="70%" stop-color="#ffffff" />
+      <stop offset="85%" stop-color="#e0f2fe" stop-opacity="0.8" />
+      <stop offset="95%" stop-color="#0284c7" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Earth Atmosphere Glow -->
+    <radialGradient id="earthAtmo" cx="50%" cy="50%" r="50%">
+      <stop offset="85%" stop-color="#0b1e45" />
+      <stop offset="95%" stop-color="#38bdf8" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Glowing filters -->
+    <filter id="neonGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter id="flareGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background Space Canvas -->
+  <rect width="800" height="500" fill="url(#spaceBg)" />
+
+  <!-- Stars Field -->
+  <g fill="#ffffff">
+    <circle cx="80" cy="90" r="1" opacity="0.6" />
+    <circle cx="210" cy="130" r="1.3" opacity="0.8" />
+    <circle cx="340" cy="60" r="0.8" opacity="0.4" />
+    <circle cx="480" cy="110" r="1.5" opacity="0.8" />
+    <circle cx="620" cy="55" r="0.7" opacity="0.5" />
+    <circle cx="730" cy="100" r="1.2" opacity="0.6" />
+    
+    <circle cx="120" cy="410" r="0.8" opacity="0.5" />
+    <circle cx="260" cy="350" r="1.2" opacity="0.7" />
+    <circle cx="580" cy="420" r="1.5" opacity="0.8" />
+    <circle cx="690" cy="380" r="1" opacity="0.6" />
+    <circle cx="770" cy="310" r="0.6" opacity="0.3" />
+  </g>
+
+  <!-- Nebulous backlighting -->
+  <circle cx="500" cy="220" r="240" fill="#0284c7" opacity="0.08" filter="url(#flareGlow)" />
+  <circle cx="250" cy="250" r="180" fill="#ff007f" opacity="0.05" filter="url(#flareGlow)" />
+
+  <!-- ================= PANE VIEW: ECLIPSE GEOMETRY LAYOUT ================= -->
+  <!-- Left Side: Sunlight rays cast from Sun to Earth past Moon (Geometric View) -->
+  <g transform="translate(0, 0)">
+    <!-- Sun representation on left edge -->
+    <path d="M -80,50 C -40,150 -40,350 -80,450 L -100,450 L -100,50 Z" fill="#ffcc00" fill-opacity="0.1" stroke="#ffcc00" stroke-width="1.5" />
+    
+    <!-- Earth on right-middle -->
+    <g transform="translate(260, 250)">
+      <!-- Atmosphere -->
+      <circle cx="0" cy="0" r="46" fill="url(#earthAtmo)" />
+      <!-- Oceans base -->
+      <circle cx="0" cy="0" r="38" fill="#1e3a8a" />
+      <!-- Continents -->
+      <path d="M -15,-20 Q -5,-25 10,-15 T 25,-10 Q 15,10 0,5 T -15,-10 Z" fill="#10b981" opacity="0.8" />
+      <path d="M -25,10 Q -10,0 5,15 T 15,25 Q -10,35 -20,20 Z" fill="#10b981" opacity="0.8" />
+      
+      <!-- Observer location point (Totality path) -->
+      <circle cx="-38" cy="0" r="2.5" fill="#ff007f" filter="url(#flareGlow)" />
+    </g>
+
+    <!-- Moon in the middle casting shadows -->
+    <g transform="translate(140, 250)">
+      <circle cx="0" cy="0" r="12" fill="#64748b" stroke="#94a3b8" stroke-width="0.8" />
+    </g>
+
+    <!-- Ray lines tracing shadow cones -->
+    <!-- Penumbra Rays -->
+    <line x1="-40" y1="120" x2="260" y2="295" stroke="rgba(56, 189, 248, 0.2)" stroke-width="1" />
+    <line x1="-40" y1="380" x2="260" y2="205" stroke="rgba(56, 189, 248, 0.2)" stroke-width="1" />
+    
+    <!-- Umbra Rays -->
+    <line x1="-40" y1="120" x2="260" y2="238" stroke="rgba(255, 0, 127, 0.2)" stroke-width="1" />
+    <line x1="-40" y1="380" x2="260" y2="262" stroke="rgba(255, 0, 127, 0.2)" stroke-width="1" />
+
+    <!-- Shaded Umbra Cone polygon -->
+    <polygon points="140,238 140,262 260,256 260,244" fill="rgba(2, 6, 23, 0.75)" />
+    <!-- Shaded Penumbra Cones -->
+    <polygon points="140,238 140,262 260,295 260,205" fill="rgba(56, 189, 248, 0.05)" />
+  </g>
+
+  <!-- ================= SKY VIEW: TOTAL ECLIPSE (Right Side) ================= -->
+  <g transform="translate(560, 230)">
+    <!-- Animated wispy corona loops -->
+    <circle cx="0" cy="0" r="140" fill="url(#coronaCore)" />
+    
+    <!-- Corona flare wisps paths -->
+    <g stroke="#ffffff" stroke-width="1.2" opacity="0.65" filter="url(#flareGlow)">
+      <!-- Custom solar flares extensions -->
+      <line x1="0" y1="-80" x2="0" y2="-125" />
+      <line x1="0" y1="80" x2="0" y2="130" />
+      <line x1="-80" y1="0" x2="-130" y2="0" />
+      <line x1="80" y1="0" x2="125" y2="0" />
+      
+      <line x1="-56" y1="-56" x2="-95" y2="-95" />
+      <line x1="56" y1="-56" x2="98" y2="-98" />
+      <line x1="-56" y1="56" x2="-92" y2="92" />
+      <line x1="56" y1="56" x2="94" y2="94" />
+      
+      <!-- Random wispy curls -->
+      <path d="M 0,-80 Q 20,-100 10,-135" fill="none" />
+      <path d="M 80,0 Q 100,20 120,35" fill="none" />
+      <path d="M -80,0 Q -110,-15 -130,-5" fill="none" />
+      <path d="M 0,80 Q -20,110 -15,128" fill="none" />
+    </g>
+
+    <!-- Transiting Moon disk silhouette (obscuring Sun) -->
+    <circle cx="0" cy="0" r="80" fill="#020204" stroke="rgba(56, 189, 248, 0.4)" stroke-width="1.5" />
+    
+    <!-- Baily's Beads (sparkles stream at contact edge) -->
+    <g fill="#fffbd6" filter="url(#flareGlow)">
+      <circle cx="-57" cy="-57" r="2.5" />
+      <circle cx="-62" cy="-51" r="3" />
+      <circle cx="-51" cy="-62" r="2" />
+      <circle cx="-66" cy="-44" r="1.5" />
+    </g>
+    
+    <!-- Diamond Ring Flare Burst (top left edge) -->
+    <g transform="translate(-57, -57)">
+      <!-- Giant glowing flare starburst -->
+      <circle cx="0" cy="0" r="38" fill="url(#coronaCore)" filter="url(#neonGlow)" />
+      <circle cx="0" cy="0" r="6" fill="#ffffff" />
+      
+      <!-- Star spikes -->
+      <line x1="-30" y1="0" x2="30" y2="0" stroke="#ffffff" stroke-width="2.5" />
+      <line x1="0" y1="-30" x2="0" y2="30" stroke="#ffffff" stroke-width="2.5" />
+      <line x1="-20" y1="-20" x2="20" y2="20" stroke="#ffffff" stroke-width="1.5" />
+      <line x1="-20" y1="20" x2="20" y2="-20" stroke="#ffffff" stroke-width="1.5" />
+    </g>
+
+    <text x="0" y="-95" fill="#94a3b8" font-family="Share Tech Mono" font-size="9" text-anchor="middle" letter-spacing="0.5">SKY VISUALIZATION</text>
+  </g>
+
+  <!-- Interactive Telemetry dossiers (Glassmorphic Overlay) -->
+  <g transform="translate(285, 395)" opacity="0.9">
+    <rect width="230" height="80" rx="8" fill="#030712" fill-opacity="0.8" stroke="#1e293b" stroke-width="1.5" />
+    <text x="14" y="22" fill="#94a3b8" font-family="Outfit" font-size="9" font-weight="600" letter-spacing="0.5">OBSERVATORY TELEMETRY</text>
+    <text x="14" y="42" fill="#00f2fe" font-family="Share Tech Mono" font-size="12" font-weight="bold">OBSCURATION: 100.00%</text>
+    <text x="14" y="60" fill="#ff007f" font-family="Share Tech Mono" font-size="12" font-weight="bold">SKY LIGHT: 0.05% (TOTALITY)</text>
+    <!-- State status tag -->
+    <rect x="165" y="10" width="50" height="15" rx="3" fill="#ff5500" fill-opacity="0.2" stroke="#ff5500" stroke-width="0.8" />
+    <text x="190" y="21" fill="#ff5500" font-family="Share Tech Mono" font-size="8" text-anchor="middle" font-weight="bold">ALIGN</text>
+  </g>
+
+  <!-- Top-Left Simulation clock overlay -->
+  <g transform="translate(25, 25)" opacity="0.9">
+    <rect width="130" height="28" rx="4" fill="#030712" fill-opacity="0.8" stroke="#1e293b" stroke-width="1" />
+    <circle cx="14" cy="14" r="3" fill="#ff007f" filter="url(#flareGlow)" />
+    <text x="24" y="17" fill="#f8fafc" font-family="Share Tech Mono" font-size="9" font-weight="bold">T-MINUS 00:00 (MID)</text>
+  </g>
+
+  <path d="M 0,0 L 800,0 L 800,500 L 0,500 Z" fill="none" stroke="#1e293b" stroke-width="2" />
+</svg>

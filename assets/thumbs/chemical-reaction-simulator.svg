@@ -1,0 +1,174 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <!-- Definitions for Gradients and Filters -->
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#04060f" />
+      <stop offset="100%" stop-color="#0b0f21" />
+    </linearGradient>
+
+    <!-- Beaker fluid fills -->
+    <linearGradient id="liquidGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="rgba(16, 185, 129, 0.2)" />
+      <stop offset="60%" stop-color="rgba(59, 130, 246, 0.15)" />
+      <stop offset="100%" stop-color="rgba(239, 68, 68, 0.05)" />
+    </linearGradient>
+
+    <!-- Particle Gradients -->
+    <radialGradient id="aGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ff6b6b" />
+      <stop offset="100%" stop-color="#ef4444" />
+    </radialGradient>
+    <radialGradient id="bGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#60a5fa" />
+      <stop offset="100%" stop-color="#3b82f6" />
+    </radialGradient>
+    <radialGradient id="cGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#34d399" />
+      <stop offset="100%" stop-color="#10b981" />
+    </radialGradient>
+
+    <!-- Glowing filters -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bgGrad)" />
+
+  <!-- Grid overlay -->
+  <g opacity="0.06">
+    <line x1="0" y1="50" x2="800" y2="50" stroke="#00e5ff" stroke-width="1" />
+    <line x1="0" y1="100" x2="800" y2="100" stroke="#00e5ff" stroke-width="1" />
+    <line x1="0" y1="150" x2="800" y2="150" stroke="#00e5ff" stroke-width="1" />
+    <line x1="0" y1="200" x2="800" y2="200" stroke="#00e5ff" stroke-width="1" />
+    <line x1="0" y1="250" x2="800" y2="250" stroke="#00e5ff" stroke-width="1" />
+    <line x1="0" y1="300" x2="800" y2="300" stroke="#00e5ff" stroke-width="1" />
+    <line x1="0" y1="350" x2="800" y2="350" stroke="#00e5ff" stroke-width="1" />
+    <line x1="0" y1="400" x2="800" y2="400" stroke="#00e5ff" stroke-width="1" />
+    <line x1="0" y1="450" x2="800" y2="450" stroke="#00e5ff" stroke-width="1" />
+    
+    <line x1="100" y1="0" x2="100" y2="500" stroke="#00e5ff" stroke-width="1" />
+    <line x1="200" y1="0" x2="200" y2="500" stroke="#00e5ff" stroke-width="1" />
+    <line x1="300" y1="0" x2="300" y2="500" stroke="#00e5ff" stroke-width="1" />
+    <line x1="400" y1="0" x2="400" y2="500" stroke="#00e5ff" stroke-width="1" />
+    <line x1="500" y1="0" x2="500" y2="500" stroke="#00e5ff" stroke-width="1" />
+    <line x1="600" y1="0" x2="600" y2="500" stroke="#00e5ff" stroke-width="1" />
+    <line x1="700" y1="0" x2="700" y2="500" stroke="#00e5ff" stroke-width="1" />
+  </g>
+
+  <!-- Glowing background blobs -->
+  <circle cx="230" cy="270" r="130" fill="#3b82f6" opacity="0.04" filter="url(#glow)" />
+  <circle cx="580" cy="230" r="110" fill="#ffb800" opacity="0.03" filter="url(#glow)" />
+
+  <!-- Beaker Representation (Left side) -->
+  <g transform="translate(100, 70)">
+    <!-- Fluid level inside beaker -->
+    <path d="M 30 110 L 220 110 L 220 310 C 220 325, 205 340, 190 340 L 60 340 C 45 340, 30 325, 30 310 Z" fill="url(#liquidGrad)" />
+    
+    <!-- Beaker Glass Outline -->
+    <path d="M 30 50 L 30 310 C 30 325, 45 340, 60 340 L 190 340 C 205 340, 220 325, 220 310 L 220 50" fill="none" stroke="rgba(255, 255, 255, 0.25)" stroke-width="6" stroke-linecap="round" />
+    <!-- Beaker Lip Rim -->
+    <rect x="18" y="44" width="214" height="8" rx="4" fill="rgba(255, 255, 255, 0.35)" />
+    
+    <!-- Measurement Ticks -->
+    <line x1="36" y1="120" x2="55" y2="120" stroke="rgba(255,255,255,0.2)" stroke-width="2.5" />
+    <line x1="36" y1="180" x2="65" y2="180" stroke="rgba(255,255,255,0.2)" stroke-width="2.5" />
+    <line x1="36" y1="240" x2="55" y2="240" stroke="rgba(255,255,255,0.2)" stroke-width="2.5" />
+    <line x1="36" y1="300" x2="65" y2="300" stroke="rgba(255,255,255,0.2)" stroke-width="2.5" />
+
+    <!-- Reactant / Product Particles -->
+    <!-- Reactants (A) Red -->
+    <circle cx="80" cy="180" r="10" fill="url(#aGrad)" filter="url(#glow)" />
+    <circle cx="160" cy="140" r="10" fill="url(#aGrad)" filter="url(#glow)" />
+    <circle cx="110" cy="270" r="10" fill="url(#aGrad)" filter="url(#glow)" />
+    <circle cx="180" cy="220" r="10" fill="url(#aGrad)" filter="url(#glow)" />
+
+    <!-- Reactants (B) Blue -->
+    <circle cx="140" cy="190" r="10" fill="url(#bGrad)" filter="url(#glow)" />
+    <circle cx="70" cy="240" r="10" fill="url(#bGrad)" filter="url(#glow)" />
+    <circle cx="190" cy="280" r="10" fill="url(#bGrad)" filter="url(#glow)" />
+    <circle cx="95" cy="130" r="10" fill="url(#bGrad)" filter="url(#glow)" />
+
+    <!-- Products (C) Green -->
+    <circle cx="130" cy="230" r="10" fill="url(#cGrad)" filter="url(#glow)" />
+    <circle cx="150" cy="290" r="10" fill="url(#cGrad)" filter="url(#glow)" />
+    
+    <!-- Bubble sparks / gas escaping -->
+    <circle cx="100" cy="80" r="4.5" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" />
+    <circle cx="155" cy="65" r="3.5" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" />
+    <circle cx="130" cy="95" r="5" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" />
+    <circle cx="170" cy="100" r="4" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" />
+
+    <!-- Reaction Flash (Collision Spark) -->
+    <circle cx="135" cy="160" r="14" fill="rgba(255, 229, 0, 0.4)" filter="url(#glow)" />
+    <circle cx="135" cy="160" r="7" fill="#fff" />
+  </g>
+
+  <!-- Technical Dashboard & Analytics (Right side) -->
+  <g transform="translate(460, 80)">
+    <text x="0" y="20" fill="#ffffff" font-family="'Inter', sans-serif" font-size="28" font-weight="900" letter-spacing="1">CHEM-LAB</text>
+    <text x="165" y="20" fill="#00e5ff" font-family="'Inter', sans-serif" font-size="18" font-weight="500" letter-spacing="0.5">// SIMULATOR</text>
+    
+    <!-- Chemical Equation Display -->
+    <g transform="translate(0, 50)" fill="#e2e8f0" font-family="'Fira Code', monospace" font-size="14" font-weight="700">
+      <rect x="0" y="0" width="280" height="42" rx="6" fill="rgba(0,0,0,0.3)" stroke="rgba(255,255,255,0.06)" stroke-width="1.5" />
+      <text x="20" y="26">HCl + NaOH <tspan fill="#00e5ff">→</tspan> NaCl + H₂O</text>
+    </g>
+
+    <!-- Potential Energy Curve Graphic overlay -->
+    <g transform="translate(0, 120)">
+      <!-- Panel Boundary -->
+      <rect x="0" y="0" width="280" height="230" rx="8" fill="rgba(10, 17, 34, 0.55)" stroke="rgba(255,255,255,0.05)" stroke-width="1.5" />
+      
+      <!-- Panel Title -->
+      <text x="15" y="25" fill="#00e5ff" font-family="'Inter', sans-serif" font-size="11" font-weight="700" letter-spacing="0.5">POTENTIAL ENERGY PROFILE</text>
+      <line x1="15" y1="35" x2="265" y2="35" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+
+      <!-- Potential Energy Curve Graph -->
+      <g transform="translate(15, 50)">
+        <!-- Axes -->
+        <line x1="10" y1="120" x2="240" y2="120" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
+        <line x1="10" y1="10" x2="10" y2="120" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
+        
+        <!-- Exothermic Potential energy curve -->
+        <path d="M 10 90 C 70 90, 85 20, 120 20 C 155 20, 170 110, 230 110" fill="none" stroke="#ff2a5f" stroke-width="3" filter="url(#glow)" />
+        <!-- Catalyzed Curve -->
+        <path d="M 10 90 C 70 90, 85 55, 120 55 C 155 55, 170 110, 230 110" fill="none" stroke="#00e5ff" stroke-width="2" stroke-dasharray="3 3" />
+
+        <!-- Labels -->
+        <text x="15" y="80" fill="#94a3b8" font-family="'Inter', sans-serif" font-size="9">Reactants</text>
+        <text x="180" y="102" fill="#00e575" font-family="'Inter', sans-serif" font-size="9">Products</text>
+        
+        <!-- Ea label -->
+        <line x1="120" y1="20" x2="120" y2="90" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="2 2" />
+        <text x="126" y="45" fill="#ffffff" font-family="'Fira Code', monospace" font-size="9" font-weight="700">Ea</text>
+        <text x="126" y="58" fill="#00e5ff" font-family="'Fira Code', monospace" font-size="8">Catalyzed</text>
+      </g>
+
+      <!-- Thermo statistics indicators -->
+      <g transform="translate(15, 190)" fill="#94a3b8" font-family="'Inter', sans-serif" font-size="10.5">
+        <text x="0" y="10">Reaction Type:</text>
+        <text x="250" y="10" fill="#ff2a5f" font-family="'Fira Code', monospace" font-weight="700" text-anchor="end">EXOTHERMIC</text>
+
+        <text x="0" y="25">Enthalpy ΔH:</text>
+        <text x="250" y="25" fill="#ffffff" font-family="'Fira Code', monospace" font-weight="700" text-anchor="end">-57.1 kJ/mol</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Glowing HUD borders -->
+  <rect x="15" y="15" width="770" height="470" rx="12" fill="none" stroke="rgba(0, 229, 255, 0.12)" stroke-width="2" />
+  
+  <!-- Corner Tech Details -->
+  <line x1="15" y1="35" x2="15" y2="65" stroke="#00e5ff" stroke-width="3" />
+  <line x1="15" y1="35" x2="45" y2="35" stroke="#00e5ff" stroke-width="3" />
+
+  <line x1="785" y1="465" x2="785" y2="435" stroke="#00e5ff" stroke-width="3" />
+  <line x1="785" y1="465" x2="755" y2="465" stroke="#00e5ff" stroke-width="3" />
+</svg>

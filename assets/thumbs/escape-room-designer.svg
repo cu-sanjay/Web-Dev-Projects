@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs><linearGradient id="g" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#0b1220"/><stop offset="100%" stop-color="#1a1020"/></linearGradient></defs>
+  <rect width="1280" height="720" fill="url(#g)"/>
+  <!-- puzzle grid -->
+  <rect x="200" y="180" width="380" height="200" rx="8" fill="#111827" stroke="#a78bfa" stroke-width="2" stroke-dasharray="8 4"/>
+  <text x="390" y="240" text-anchor="middle" font-family="monospace" font-size="14" fill="#a78bfa">🧩 Riddle</text>
+  <text x="390" y="265" text-anchor="middle" font-family="monospace" font-size="10" fill="#64748b">I speak without a mouth...</text>
+  <rect x="620" y="180" width="380" height="200" rx="8" fill="#111827" stroke="#a78bfa" stroke-width="2" stroke-dasharray="8 4"/>
+  <text x="810" y="240" text-anchor="middle" font-family="monospace" font-size="14" fill="#a78bfa">🔐 Number Lock</text>
+  <text x="810" y="265" text-anchor="middle" font-family="monospace" font-size="10" fill="#64748b">Find the 3-digit code...</text>
+  <rect x="200" y="410" width="380" height="160" rx="8" fill="#111827" stroke="#334155" stroke-width="2" stroke-dasharray="8 4"/>
+  <text x="390" y="480" text-anchor="middle" font-family="monospace" font-size="14" fill="#64748b">+ Add Puzzle</text>
+  <rect x="620" y="410" width="380" height="160" rx="8" fill="#111827" stroke="#334155" stroke-width="2" stroke-dasharray="8 4"/>
+  <text x="810" y="480" text-anchor="middle" font-family="monospace" font-size="14" fill="#64748b">+ Add Puzzle</text>
+  <!-- sidebar -->
+  <rect x="20" y="180" width="140" height="300" rx="8" fill="#111827" stroke="#334155" stroke-width="1.5"/>
+  <text x="90" y="210" text-anchor="middle" font-family="monospace" font-size="10" fill="#cbd5e1" font-weight="600">PUZZLES</text>
+  <rect x="35" y="225" width="110" height="25" rx="4" fill="#1f2937" stroke="#a78bfa" stroke-width="1"/>
+  <text x="90" y="242" text-anchor="middle" font-family="monospace" font-size="10" fill="#a78bfa">🧩 Riddle</text>
+  <rect x="35" y="255" width="110" height="25" rx="4" fill="#1f2937" stroke="#334155" stroke-width="1"/>
+  <text x="90" y="272" text-anchor="middle" font-family="monospace" font-size="10" fill="#64748b">🔐 Number Lock</text>
+  <rect x="35" y="285" width="110" height="25" rx="4" fill="#1f2937" stroke="#334155" stroke-width="1"/>
+  <text x="90" y="302" text-anchor="middle" font-family="monospace" font-size="10" fill="#64748b">🗝️ Hidden Key</text>
+  <rect x="35" y="315" width="110" height="25" rx="4" fill="#1f2937" stroke="#334155" stroke-width="1"/>
+  <text x="90" y="332" text-anchor="middle" font-family="monospace" font-size="10" fill="#64748b">🔲 Pattern Match</text>
+  <rect x="35" y="345" width="110" height="25" rx="4" fill="#1f2937" stroke="#334155" stroke-width="1"/>
+  <text x="90" y="362" text-anchor="middle" font-family="monospace" font-size="10" fill="#64748b">🔡 Cipher</text>
+  <text x="640" y="100" text-anchor="middle" font-family="ui-monospace,monospace" font-size="26" font-weight="800" fill="#f8fafc" letter-spacing="1">ESCAPE ROOM DESIGNER</text>
+  <text x="640" y="125" text-anchor="middle" font-family="ui-monospace,monospace" font-size="13" fill="#64748b">Create Puzzles · Design Rooms · Test Solutions</text>
+</svg>

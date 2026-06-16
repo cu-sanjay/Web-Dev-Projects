@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080b14" />
+      <stop offset="100%" stop-color="#121727" />
+    </linearGradient>
+    
+    <!-- Accent Gradients -->
+    <linearGradient id="blue-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#1d4ed8" />
+    </linearGradient>
+
+    <linearGradient id="cyan-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4" />
+      <stop offset="100%" stop-color="#0891b2" />
+    </linearGradient>
+
+    <linearGradient id="purple-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8b5cf6" />
+      <stop offset="100%" stop-color="#7c3aed" />
+    </linearGradient>
+    
+    <!-- Glow Filter -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="5" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="320" height="200" rx="16" fill="url(#bg-grad)" />
+  <rect width="320" height="200" rx="16" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="2" />
+
+  <!-- Background glows -->
+  <circle cx="280" cy="50" r="50" fill="#06b6d4" opacity="0.1" filter="url(#glow)" />
+  <circle cx="50" cy="150" r="45" fill="#8b5cf6" opacity="0.08" filter="url(#glow)" />
+
+  <!-- 5-Stage Blocks Visual -->
+  <g transform="translate(10, 30)">
+    <!-- IF -->
+    <rect x="10" y="10" width="45" height="26" rx="4" fill="url(#blue-grad)" />
+    <text x="32.5" y="27" font-family="'Inter', sans-serif" font-size="10" font-weight="800" fill="#ffffff" text-anchor="middle">IF</text>
+    
+    <!-- ID -->
+    <rect x="70" y="10" width="45" height="26" rx="4" fill="url(#purple-grad)" />
+    <text x="92.5" y="27" font-family="'Inter', sans-serif" font-size="10" font-weight="800" fill="#ffffff" text-anchor="middle">ID</text>
+
+    <!-- EX -->
+    <rect x="130" y="10" width="45" height="26" rx="4" fill="url(#cyan-grad)" />
+    <text x="152.5" y="27" font-family="'Inter', sans-serif" font-size="10" font-weight="800" fill="#ffffff" text-anchor="middle">EX</text>
+
+    <!-- MEM -->
+    <rect x="190" y="10" width="45" height="26" rx="4" fill="#10b981" />
+    <text x="212.5" y="27" font-family="'Inter', sans-serif" font-size="10" font-weight="800" fill="#ffffff" text-anchor="middle">MEM</text>
+
+    <!-- WB -->
+    <rect x="250" y="10" width="45" height="26" rx="4" fill="#f59e0b" />
+    <text x="272.5" y="27" font-family="'Inter', sans-serif" font-size="10" font-weight="800" fill="#ffffff" text-anchor="middle">WB</text>
+
+    <!-- Connecting Arrows -->
+    <path d="M 55,23 L 70,23" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" marker-end="url(#arrow)" />
+    <path d="M 115,23 L 130,23" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" marker-end="url(#arrow)" />
+    <path d="M 175,23 L 190,23" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" marker-end="url(#arrow)" />
+    <path d="M 235,23 L 250,23" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" marker-end="url(#arrow)" />
+
+    <!-- Forwarding Path (Bypass Loop) -->
+    <path d="M 212.5,36 L 212.5,50 Q 212.5,56 202.5,56 L 162.5,56 Q 152.5,56 152.5,50 L 152.5,36" fill="none" stroke="#06b6d4" stroke-width="1.8" marker-end="url(#arrow-cyan)" filter="url(#glow)" />
+    <text x="182.5" y="52" font-family="'Inter', sans-serif" font-size="6.5" font-weight="700" fill="#06b6d4" text-anchor="middle">BYPASS</text>
+  </g>
+
+  <!-- Space-time diagram representation (Lower Panel) -->
+  <g transform="translate(30, 110)">
+    <rect width="260" height="42" rx="4" fill="#0b0f19" fill-opacity="0.7" stroke="rgba(255,255,255,0.06)" stroke-width="1" />
+    
+    <!-- Row 1: ADD -->
+    <text x="10" y="16" font-family="'Fira Code', monospace" font-size="7" fill="#94a3b8">ADD R1</text>
+    <rect x="52" y="9" width="16" height="10" rx="1.5" fill="rgba(59, 130, 246, 0.2)" stroke="#3b82f6" stroke-width="0.5" />
+    <text x="60" y="17" font-family="'Inter', sans-serif" font-size="6.5" font-weight="700" fill="#3b82f6" text-anchor="middle">IF</text>
+
+    <rect x="72" y="9" width="16" height="10" rx="1.5" fill="rgba(139, 92, 246, 0.2)" stroke="#8b5cf6" stroke-width="0.5" />
+    <text x="80" y="17" font-family="'Inter', sans-serif" font-size="6.5" font-weight="700" fill="#8b5cf6" text-anchor="middle">ID</text>
+
+    <rect x="92" y="9" width="16" height="10" rx="1.5" fill="rgba(6, 182, 212, 0.2)" stroke="#06b6d4" stroke-width="0.5" />
+    <text x="100" y="17" font-family="'Inter', sans-serif" font-size="6.5" font-weight="700" fill="#06b6d4" text-anchor="middle">EX</text>
+
+    <!-- Row 2: SUB (with Hazard stall) -->
+    <text x="10" y="32" font-family="'Fira Code', monospace" font-size="7" fill="#94a3b8">SUB R2</text>
+    <rect x="72" y="25" width="16" height="10" rx="1.5" fill="rgba(59, 130, 246, 0.1)" stroke="rgba(59,130,246,0.3)" stroke-width="0.5" />
+    <text x="80" y="33" font-family="'Inter', sans-serif" font-size="6.5" fill="#64748b" text-anchor="middle">IF</text>
+
+    <!-- Stall bubble -->
+    <rect x="92" y="25" width="16" height="10" rx="1.5" fill="rgba(239, 68, 68, 0.15)" stroke="#ef4444" stroke-width="0.5" filter="url(#glow)" />
+    <text x="100" y="33" font-family="'Inter', sans-serif" font-size="6" font-weight="700" fill="#ef4444" text-anchor="middle">STL</text>
+
+    <rect x="112" y="25" width="16" height="10" rx="1.5" fill="rgba(139, 92, 246, 0.2)" stroke="#8b5cf6" stroke-width="0.5" />
+    <text x="120" y="33" font-family="'Inter', sans-serif" font-size="6.5" font-weight="700" fill="#8b5cf6" text-anchor="middle">ID</text>
+  </g>
+
+  <!-- Markers -->
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M 0 2 L 6 5 L 0 8 z" fill="rgba(255,255,255,0.2)" />
+    </marker>
+    <marker id="arrow-cyan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M 0 2 L 6 5 L 0 8 z" fill="#06b6d4" />
+    </marker>
+  </defs>
+
+  <!-- Title & Branding -->
+  <g transform="translate(160, 172)">
+    <text font-family="'Inter', sans-serif" font-size="13" font-weight="800" text-anchor="middle" fill="#ffffff">
+      CPU PIPELINE <tspan fill="#06b6d4">SIMULATOR</tspan>
+    </text>
+    <text y="11" font-family="'Inter', sans-serif" font-size="6.5" font-weight="500" text-anchor="middle" fill="#94a3b8" letter-spacing="1">
+      5-STAGE PIPELINING &amp; HAZARDS CONTROL
+    </text>
+  </g>
+</svg>

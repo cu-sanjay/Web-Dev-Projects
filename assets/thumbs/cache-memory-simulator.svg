@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1329" />
+      <stop offset="100%" stop-color="#161f38" />
+    </linearGradient>
+    
+    <!-- Accent Gradients -->
+    <linearGradient id="cyan-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4" />
+      <stop offset="100%" stop-color="#3b82f6" />
+    </linearGradient>
+    
+    <linearGradient id="green-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+
+    <linearGradient id="orange-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f97316" />
+      <stop offset="100%" stop-color="#ea580c" />
+    </linearGradient>
+    
+    <!-- Glow Filter -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="320" height="200" rx="16" fill="url(#bg-grad)" />
+  <rect width="320" height="200" rx="16" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="2" />
+
+  <!-- Background glows -->
+  <circle cx="260" cy="50" r="50" fill="#06b6d4" opacity="0.1" filter="url(#glow)" />
+  <circle cx="60" cy="140" r="45" fill="#10b981" opacity="0.08" filter="url(#glow)" />
+
+  <!-- CPU Address Decoding Block -->
+  <g transform="translate(15, 25)">
+    <text x="0" y="8" font-family="'Inter', sans-serif" font-size="7.5" font-weight="700" fill="#94a3b8" letter-spacing="0.5">CPU ADDRESS: 0x2C</text>
+    <!-- Binary breakdown block -->
+    <rect x="0" y="14" width="115" height="18" rx="4" fill="#0f172a" stroke="rgba(255,255,255,0.1)" stroke-width="1" />
+    
+    <!-- Fields: Tag, Index, Offset -->
+    <!-- Tag -->
+    <rect x="2" y="16" width="45" height="14" rx="2" fill="rgba(6, 182, 212, 0.15)" />
+    <text x="245" y="0" font-family="'Inter', sans-serif" font-size="7.5" font-weight="700" fill="#06b6d4" text-anchor="middle" transform="translate(-221, 26)">TAG</text>
+    <!-- Index -->
+    <rect x="50" y="16" width="35" height="14" rx="2" fill="rgba(249, 115, 22, 0.15)" />
+    <text x="67" y="26" font-family="'Inter', sans-serif" font-size="7.5" font-weight="700" fill="#f97316" text-anchor="middle">INDEX</text>
+    <!-- Offset -->
+    <rect x="88" y="16" width="25" height="14" rx="2" fill="rgba(255, 255, 255, 0.05)" />
+    <text x="100" y="26" font-family="'Inter', sans-serif" font-size="6.5" font-weight="700" fill="#64748b" text-anchor="middle">OFF</text>
+  </g>
+
+  <!-- Cache Lines Grid -->
+  <g transform="translate(145, 20)">
+    <!-- Header -->
+    <text x="0" y="10" font-family="'Inter', sans-serif" font-size="8" font-weight="700" fill="#94a3b8">CACHE MEMORY</text>
+    
+    <!-- Cache Grid -->
+    <rect x="0" y="16" width="160" height="110" rx="6" fill="#0f172a" fill-opacity="0.7" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1.5" />
+    
+    <!-- Table Header labels -->
+    <text x="8" y="28" font-family="'Inter', sans-serif" font-size="6.5" font-weight="700" fill="#64748b">IDX</text>
+    <text x="32" y="28" font-family="'Inter', sans-serif" font-size="6.5" font-weight="700" fill="#64748b">V</text>
+    <text x="56" y="28" font-family="'Inter', sans-serif" font-size="6.5" font-weight="700" fill="#64748b">TAG</text>
+    <text x="105" y="28" font-family="'Inter', sans-serif" font-size="6.5" font-weight="700" fill="#64748b">DATA BLOCKS</text>
+    <line x1="0" y1="33" x2="160" y2="33" stroke="rgba(255, 255, 255, 0.06)" stroke-width="1" />
+
+    <!-- Line 0 (Standard state) -->
+    <text x="8" y="47" font-family="'Inter', sans-serif" font-size="7" font-weight="600" fill="#64748b">00</text>
+    <circle cx="32" cy="45" r="3.5" fill="#10b981" /> <!-- Valid = 1 -->
+    <rect x="46" y="39" width="24" height="12" rx="2" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+    <text x="58" y="48" font-family="'Inter', sans-serif" font-size="7" fill="#94a3b8" text-anchor="middle">0x0F</text>
+    <!-- Data blocks visual -->
+    <rect x="76" y="39" width="36" height="12" rx="2" fill="rgba(255,255,255,0.02)" />
+    <rect x="116" y="39" width="36" height="12" rx="2" fill="rgba(255,255,255,0.02)" />
+
+    <!-- Line 1 (Hit visual state - highlighted) -->
+    <rect x="2" y="55" width="156" height="20" rx="3" fill="rgba(16, 185, 129, 0.1)" stroke="#10b981" stroke-width="1" filter="url(#glow)" />
+    
+    <text x="8" y="68" font-family="'Inter', sans-serif" font-size="7" font-weight="700" fill="#10b981">01</text>
+    <circle cx="32" cy="65" r="3.5" fill="#10b981" />
+    <rect x="46" y="59" width="24" height="12" rx="2" fill="rgba(16, 185, 129, 0.15)" stroke="#10b981" stroke-width="0.5" />
+    <text x="58" y="68" font-family="'Inter', sans-serif" font-size="7" fill="#ffffff" font-weight="700" text-anchor="middle">0x0A</text>
+    <rect x="76" y="59" width="36" height="12" rx="2" fill="#10b981" fill-opacity="0.2" />
+    <text x="94" y="68" font-family="'Inter', sans-serif" font-size="6.5" fill="#ffffff" text-anchor="middle">Mem[0x2C]</text>
+    <rect x="116" y="59" width="36" height="12" rx="2" fill="rgba(255,255,255,0.02)" />
+
+    <!-- Line 2 (Empty state) -->
+    <text x="8" y="89" font-family="'Inter', sans-serif" font-size="7" font-weight="600" fill="#64748b">02</text>
+    <circle cx="32" cy="87" r="3.5" fill="#475569" /> <!-- Valid = 0 -->
+    <rect x="46" y="81" width="24" height="12" rx="2" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.03)" stroke-width="1" />
+    <text x="58" y="90" font-family="'Inter', sans-serif" font-size="7" fill="#475569" text-anchor="middle">--</text>
+
+    <!-- Line 3 (Dirty state) -->
+    <text x="8" y="110" font-family="'Inter', sans-serif" font-size="7" font-weight="600" fill="#64748b">03</text>
+    <circle cx="32" cy="108" r="3.5" fill="#10b981" /> <!-- Valid = 1 -->
+    <!-- Dirty marker -->
+    <rect x="46" y="102" width="24" height="12" rx="2" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+    <text x="58" y="111" font-family="'Inter', sans-serif" font-size="7" fill="#94a3b8" text-anchor="middle">0x04</text>
+    <rect x="76" y="102" width="36" height="12" rx="2" fill="rgba(255,255,255,0.02)" />
+    <circle cx="150" cy="108" r="3" fill="#ef4444" />
+  </g>
+
+  <!-- Connection pointer showing hit -->
+  <path d="M 60,43 Q 100,43 143,65" fill="none" stroke="#10b981" stroke-width="1.5" stroke-dasharray="3 2" marker-end="url(#arrow-green)" filter="url(#glow)" />
+
+  <!-- Markers -->
+  <defs>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M 0 2 L 6 5 L 0 8 z" fill="#10b981" />
+    </marker>
+  </defs>
+
+  <!-- Big HIT Badge -->
+  <g transform="translate(18, 80)" filter="url(#glow)">
+    <rect width="64" height="24" rx="12" fill="url(#green-grad)" />
+    <text x="32" y="16" font-family="'Inter', sans-serif" font-size="11" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="1">HIT!</text>
+  </g>
+
+  <!-- Cache Stat Dashboard Info -->
+  <g transform="translate(18, 122)">
+    <text font-family="'Inter', sans-serif" font-size="7.5" font-weight="600" fill="#94a3b8">STATISTICS</text>
+    <text y="14" font-family="'Inter', sans-serif" font-size="13" font-weight="800" fill="#10b981">85.3%<tspan font-size="7.5" font-weight="500" fill="#64748b"> HIT RATE</tspan></text>
+  </g>
+
+  <!-- Brand Title / Branding -->
+  <g transform="translate(160, 168)">
+    <text font-family="'Inter', sans-serif" font-size="14" font-weight="800" text-anchor="middle" fill="#ffffff">
+      CACHE <tspan fill="#06b6d4">SIMULATOR</tspan>
+    </text>
+    <text y="12" font-family="'Inter', sans-serif" font-size="7" font-weight="500" text-anchor="middle" fill="#94a3b8" letter-spacing="1">
+      DIRECT &amp; ASSOCIATIVE PLAYGROUND
+    </text>
+  </g>
+</svg>

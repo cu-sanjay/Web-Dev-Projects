@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#05070e"/>
+      <stop offset="100%" stop-color="#0b1122"/>
+    </linearGradient>
+
+    <!-- Node Gradients -->
+    <linearGradient id="clientGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <linearGradient id="resolverGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#6d28d9"/>
+    </linearGradient>
+    <linearGradient id="rootGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#0891b2"/>
+    </linearGradient>
+    <linearGradient id="tldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ec4899"/>
+      <stop offset="100%" stop-color="#db2777"/>
+    </linearGradient>
+    <linearGradient id="authGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+
+    <!-- Glowing filters -->
+    <filter id="glowCyan" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <filter id="glowPurple" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="url(#bgGrad)"/>
+  
+  <!-- Subtle network background grid -->
+  <g opacity="0.04" stroke="#ffffff" stroke-width="1">
+    <line x1="0" y1="50" x2="800" y2="50"/>
+    <line x1="0" y1="100" x2="800" y2="100"/>
+    <line x1="0" y1="150" x2="800" y2="150"/>
+    <line x1="0" y1="200" x2="800" y2="200"/>
+    <line x1="0" y1="250" x2="800" y2="250"/>
+    <line x1="0" y1="300" x2="800" y2="300"/>
+    <line x1="0" y1="350" x2="800" y2="350"/>
+    <line x1="400" y1="0" x2="400" y2="500"/>
+    <line x1="100" y1="0" x2="100" y2="500"/>
+    <line x1="200" y1="0" x2="200" y2="500"/>
+    <line x1="300" y1="0" x2="300" y2="500"/>
+    <line x1="500" y1="0" x2="500" y2="500"/>
+    <line x1="600" y1="0" x2="600" y2="500"/>
+    <line x1="700" y1="0" x2="700" y2="500"/>
+  </g>
+
+  <!-- Title & Subtitle -->
+  <text x="40" y="70" font-family="'Outfit', 'Inter', sans-serif" font-size="28" font-weight="800" fill="#ffffff">
+    DNS LOOKUP <tspan fill="#06b6d4">SIMULATOR</tspan>
+  </text>
+  <text x="40" y="100" font-family="'Inter', sans-serif" font-size="14" font-weight="500" fill="#94a3b8" letter-spacing="1">
+    NAMESERVER HIERARCHY &amp; CACHE RESOLUTION
+  </text>
+
+  <!-- Hierarchical tree connections -->
+  <g opacity="0.4" stroke="#6366f1" stroke-width="2.5" stroke-dasharray="4 3">
+    <!-- Resolver to Root -->
+    <path d="M 230,360 V 160 H 510"/>
+    <!-- Root to TLD -->
+    <path d="M 510,160 V 230 H 640"/>
+    <!-- TLD to Auth -->
+    <path d="M 640,230 V 360 H 640"/>
+  </g>
+
+  <!-- Links -->
+  <path d="M 120,380 H 170" stroke="#3b82f6" stroke-width="3" fill="none"/>
+
+  <!-- 1. Client Browser / OS Node -->
+  <g transform="translate(40, 345)" filter="url(#glowCyan)">
+    <rect width="80" height="70" rx="10" fill="url(#clientGrad)" stroke="#60a5fa" stroke-width="1.5"/>
+    <text x="40" y="35" font-family="'Outfit', sans-serif" font-weight="700" font-size="13" fill="#ffffff" text-anchor="middle">CLIENT</text>
+    <text x="40" y="52" font-family="'Fira Code', monospace" font-size="9" fill="#93c5fd" text-anchor="middle">Browser / OS</text>
+  </g>
+
+  <!-- 2. Local DNS Resolver (ISP) Node -->
+  <g transform="translate(170, 345)" filter="url(#glowPurple)">
+    <rect width="80" height="70" rx="10" fill="url(#resolverGrad)" stroke="#c084fc" stroke-width="1.5"/>
+    <text x="40" y="35" font-family="'Outfit', sans-serif" font-weight="700" font-size="12" fill="#ffffff" text-anchor="middle">RESOLVER</text>
+    <text x="40" y="52" font-family="'Fira Code', monospace" font-size="9" fill="#e9d5ff" text-anchor="middle">8.8.8.8</text>
+  </g>
+
+  <!-- 3. Root Name Server (.) Node -->
+  <g transform="translate(470, 125)">
+    <rect width="80" height="70" rx="10" fill="url(#rootGrad)" stroke="#67e8f9" stroke-width="1.5"/>
+    <text x="40" y="35" font-family="'Outfit', sans-serif" font-weight="700" font-size="13" fill="#ffffff" text-anchor="middle">ROOT (.)</text>
+    <text x="40" y="52" font-family="'Fira Code', monospace" font-size="9" fill="#a5f3fc" text-anchor="middle">198.41.0.4</text>
+  </g>
+
+  <!-- 4. TLD Name Server (.com) Node -->
+  <g transform="translate(600, 195)">
+    <rect width="80" height="70" rx="10" fill="url(#tldGrad)" stroke="#f472b6" stroke-width="1.5"/>
+    <text x="40" y="35" font-family="'Outfit', sans-serif" font-weight="700" font-size="13" fill="#ffffff" text-anchor="middle">TLD (.com)</text>
+    <text x="40" y="52" font-family="'Fira Code', monospace" font-size="9" fill="#fbcfe8" text-anchor="middle">192.5.6.30</text>
+  </g>
+
+  <!-- 5. Authoritative Nameserver (google.com) Node -->
+  <g transform="translate(600, 345)">
+    <rect width="80" height="70" rx="10" fill="url(#authGrad)" stroke="#34d399" stroke-width="1.5"/>
+    <text x="40" y="30" font-family="'Outfit', sans-serif" font-weight="700" font-size="11" fill="#ffffff" text-anchor="middle">AUTH SERVER</text>
+    <text x="40" y="45" font-family="'Fira Code', monospace" font-size="9" fill="#34d399" text-anchor="middle">google.com</text>
+    <text x="40" y="58" font-family="'Fira Code', monospace" font-weight="bold" font-size="8" fill="#ffffff" text-anchor="middle">A: 142.250.x.x</text>
+  </g>
+
+  <!-- Dynamic database record overlay -->
+  <g transform="translate(290, 240)" opacity="0.95">
+    <rect width="200" height="80" rx="8" fill="#0c1020" stroke="#8b5cf6" stroke-width="1.5" filter="url(#glowPurple)"/>
+    <text x="15" y="25" font-family="'Outfit', sans-serif" font-weight="700" font-size="11" fill="#8b5cf6">RESOLVER CACHE ENTRY:</text>
+    
+    <rect x="15" y="38" width="170" height="18" rx="3" fill="#1e293b"/>
+    <text x="22" y="51" font-family="'Fira Code', monospace" font-size="9" fill="#38bdf8">google.com A 142.250.190.46</text>
+    
+    <text x="15" y="70" font-family="'Inter', sans-serif" font-size="9" fill="#94a3b8">TTL Countdown: <tspan fill="#ec4899" font-weight="bold">28s</tspan></text>
+  </g>
+</svg>

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs><linearGradient id="g" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#0b1220"/><stop offset="100%" stop-color="#1a1020"/></linearGradient></defs>
+  <rect width="1280" height="720" fill="url(#g)"/>
+  <!-- paper cards -->
+  <rect x="100" y="180" width="340" height="160" rx="8" fill="#111827" stroke="#334155" stroke-width="1.5"/>
+  <text x="120" y="210" font-family="ui-monospace,monospace" font-size="13" font-weight="600" fill="#f8fafc">Attention Is All You Need</text>
+  <text x="120" y="230" font-family="monospace" font-size="10" fill="#64748b">Vaswani et al. · NeurIPS 2017</text>
+  <text x="120" y="265" font-family="monospace" font-size="10" fill="#cbd5e1">Proposed the Transformer architecture...</text>
+  <rect x="100" y="285" width="60" height="20" rx="8" fill="none" stroke="#a78bfa" stroke-width="1"/><text x="130" y="299" text-anchor="middle" font-size="9" fill="#a78bfa">nlp</text>
+  <rect x="165" y="285" width="60" height="20" rx="8" fill="none" stroke="#a78bfa" stroke-width="1"/><text x="195" y="299" text-anchor="middle" font-size="9" fill="#a78bfa">theory</text>
+  <!-- card 2 -->
+  <rect x="460" y="180" width="300" height="160" rx="8" fill="#111827" stroke="#334155" stroke-width="1.5"/>
+  <text x="480" y="210" font-family="ui-monospace,monospace" font-size="13" font-weight="600" fill="#f8fafc">BERT: Pre-training...</text>
+  <text x="480" y="230" font-family="monospace" font-size="10" fill="#64748b">Devlin et al. · NAACL 2019</text>
+  <!-- card 3 -->
+  <rect x="780" y="180" width="400" height="160" rx="8" fill="#111827" stroke="#334155" stroke-width="1.5"/>
+  <text x="800" y="210" font-family="ui-monospace,monospace" font-size="13" font-weight="600" fill="#f8fafc">High-Resolution Image Synthesis...</text>
+  <text x="800" y="230" font-family="monospace" font-size="10" fill="#64748b">Rombach et al. · CVPR 2022</text>
+  <!-- category pills -->
+  <rect x="120" y="380" width="80" height="30" rx="15" fill="#1f2937" stroke="#a78bfa" stroke-width="1"/>
+  <text x="160" y="400" text-anchor="middle" font-family="monospace" font-size="11" fill="#a78bfa">All</text>
+  <rect x="210" y="380" width="70" height="30" rx="15" fill="#1f2937" stroke="#334155" stroke-width="1"/>
+  <text x="245" y="400" text-anchor="middle" font-family="monospace" font-size="11" fill="#64748b">NLP</text>
+  <rect x="290" y="380" width="100" height="30" rx="15" fill="#1f2937" stroke="#334155" stroke-width="1"/>
+  <text x="340" y="400" text-anchor="middle" font-family="monospace" font-size="11" fill="#64748b">Computer Vision</text>
+  <rect x="400" y="380" width="90" height="30" rx="15" fill="#1f2937" stroke="#334155" stroke-width="1"/>
+  <text x="445" y="400" text-anchor="middle" font-family="monospace" font-size="11" fill="#64748b">Gen AI</text>
+  <!-- search bar -->
+  <rect x="400" y="460" width="480" height="36" rx="6" fill="#111827" stroke="#334155" stroke-width="1.5"/>
+  <text x="420" y="483" font-family="monospace" font-size="11" fill="#64748b">Search papers by title, author, or keyword...</text>
+  <rect x="890" y="460" width="70" height="36" rx="6" fill="#1f2937" stroke="#334155" stroke-width="1"/>
+  <text x="925" y="483" text-anchor="middle" font-family="monospace" font-size="11" fill="#cbd5e1">Search</text>
+  <text x="640" y="100" text-anchor="middle" font-family="ui-monospace,monospace" font-size="26" font-weight="800" fill="#f8fafc" letter-spacing="1">AI RESEARCH PAPER EXPLORER</text>
+  <text x="640" y="125" text-anchor="middle" font-family="ui-monospace,monospace" font-size="13" fill="#64748b">Browse · Search · Discover AI Research</text>
+</svg>

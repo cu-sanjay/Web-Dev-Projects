@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <!-- Background -->
+  <rect width="400" height="300" fill="#04060f"/>
+  
+  <!-- Client Browser (Left) -->
+  <rect x="35" y="80" width="90" height="140" rx="6" fill="rgba(6, 182, 212, 0.08)" stroke="#06b6d4" stroke-width="2"/>
+  <rect x="35" y="80" width="90" height="20" fill="rgba(6, 182, 212, 0.2)"/>
+  <circle cx="45" cy="90" r="3" fill="#ef4444"/>
+  <circle cx="53" cy="90" r="3" fill="#f59e0b"/>
+  <circle cx="61" cy="90" r="3" fill="#10b981"/>
+  <rect x="70" y="85" width="45" height="10" rx="3" fill="#04060f" opacity="0.5"/>
+  <text x="80" y="145" font-family="'Outfit', sans-serif" font-size="10" font-weight="bold" fill="#06b6d4" text-anchor="middle">BROWSER</text>
+  <rect x="45" y="170" width="70" height="30" rx="4" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)"/>
+  <text x="80" y="188" font-family="'Outfit', sans-serif" font-size="8" fill="#94a3b8" text-anchor="middle">Live View</text>
+  
+  <!-- Server (Right) -->
+  <rect x="275" y="80" width="90" height="140" rx="6" fill="rgba(139, 92, 246, 0.08)" stroke="#8b5cf6" stroke-width="2"/>
+  <rect x="285" y="95" width="70" height="25" rx="3" fill="#04060f" stroke="rgba(139,92,246,0.3)"/>
+  <circle cx="295" cy="1075" r="3" fill="#10b981"/>
+  <line x1="310" y1="107" x2="345" y2="107" stroke="#94a3b8" stroke-width="2"/>
+  <rect x="285" y="135" width="70" height="25" rx="3" fill="#04060f" stroke="rgba(139,92,246,0.3)"/>
+  <rect x="285" y="175" width="70" height="25" rx="3" fill="#04060f" stroke="rgba(139,92,246,0.3)"/>
+  <text x="320" y="212" font-family="'Outfit', sans-serif" font-size="8" font-weight="bold" fill="#8b5cf6" text-anchor="middle">WEB SERVER</text>
+
+  <!-- Request / Response arrows -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Request (Top) -->
+    <path d="M140,115 L260,115" stroke="#06b6d4" stroke-width="2"/>
+    <polyline points="252,110 260,115 252,120" fill="none" stroke="#06b6d4" stroke-width="2"/>
+    <text x="200" y="105" font-family="'Outfit', sans-serif" font-size="8" font-weight="bold" fill="#06b6d4" text-anchor="middle">GET /index.html</text>
+
+    <!-- Response (Bottom) -->
+    <path d="M260,165 L140,165" stroke="#10b981" stroke-width="2"/>
+    <polyline points="148,160 140,165 148,170" fill="none" stroke="#10b981" stroke-width="2"/>
+    <text x="200" y="185" font-family="'Outfit', sans-serif" font-size="8" font-weight="bold" fill="#10b981" text-anchor="middle">HTTP 200 OK</text>
+  </g>
+  
+  <text x="200" y="40" font-family="'Outfit', sans-serif" font-size="16" font-weight="800" fill="#f3f4f6" text-anchor="middle" letter-spacing="0.5">HTTP PROTOCOL LAB</text>
+</svg>
